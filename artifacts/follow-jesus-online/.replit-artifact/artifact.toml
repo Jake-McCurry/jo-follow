@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Follow Jesus Online"
+description = "A welcoming discipleship destination for people taking their first steps with Jesus, starting with an accessible NET Bible reader built for focused, shareable Scripture reading."
+version = "1.0.0"
+id = "artifacts/follow-jesus-online"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25342
+
+[services.development]
+run = "pnpm --filter @workspace/follow-jesus-online run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/follow-jesus-online", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/follow-jesus-online/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25342"
+BASE_PATH = "/"

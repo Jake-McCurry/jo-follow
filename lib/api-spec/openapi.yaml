@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: bible
+    description: NET Bible reader operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,49 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /bible/books:
+    get:
+      operationId: listBibleBooks
+      tags: [bible]
+      summary: List Bible books
+      description: Returns the canonical book catalog used by the Bible reader.
+      responses:
+        "200":
+          description: Bible books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BibleBook"
+  /bible/passage:
+    get:
+      operationId: getBiblePassage
+      tags: [bible]
+      summary: Get a NET Bible passage
+      description: Retrieves a passage from the official NET Bible service as safe plain text.
+      parameters:
+        - name: passage
+          in: query
+          required: true
+          description: A human-readable Bible reference such as John 3 or Romans 8:1-11.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      responses:
+        "200":
+          description: NET Bible passage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BiblePassage"
+        "400":
+          description: Invalid passage reference
+        "404":
+          description: Passage not found
+        "502":
+          description: Upstream Bible service unavailable
 components:
   schemas:
     HealthStatus:
@@ -33,4 +78,70 @@ components:
           type: string
       required:
         - status
+    BibleBook:
+      type: object
+      required:
+        - id
+        - name
+        - testament
+        - chapters
+      properties:
+        id:
+          type: string
+          example: john
+        name:
+          type: string
+          example: John
+        testament:
+          type: string
+          enum: [Old Testament, New Testament]
+        chapters:
+          type: number
+          minimum: 1
+          example: 21
+    BibleVerse:
+      type: object
+      required:
+        - bookName
+        - chapter
+        - verse
+        - text
+      properties:
+        bookName:
+          type: string
+          example: John
+        chapter:
+          type: number
+          minimum: 1
+          example: 3
+        verse:
+          type: number
+          minimum: 1
+          example: 16
+        text:
+          type: string
+        type:
+          type: string
+          example: verse
+    BiblePassage:
+      type: object
+      required:
+        - reference
+        - version
+        - verses
+        - copyright
+      properties:
+        reference:
+          type: string
+          example: John 3
+        version:
+          type: string
+          example: NET
+        verses:
+          type: array
+          items:
+            $ref: "#/components/schemas/BibleVerse"
+        copyright:
+          type: string
+          description: Required NET Bible copyright acknowledgement.
 

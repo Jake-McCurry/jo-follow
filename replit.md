@@ -1,15 +1,13 @@
-# [Project name]
+# Follow Jesus Online
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Follow Jesus Online is a discipleship destination in the JesusOnline family, beginning with a secure, accessible NET Bible reader.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/api-server run dev` — run the shared API server
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
@@ -30,11 +28,14 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- A Scripture reader with direct, shareable book-and-chapter URLs.
+- The NET Bible is retrieved through the official Bible.org service; it is not hosted as a local Bible-text database.
+- The reader must retain the NET attribution and outbound netbible.org link.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Never publish or deploy this project.
+- Never push, commit, open a pull request, or otherwise write to Git remotes. The user handles staging and production promotion.
 
 ## Gotchas
 
