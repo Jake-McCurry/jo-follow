@@ -1,0 +1,1 @@
+- [Portable pnpm overrides](portable-pnpm-overrides.md) — Keep Cloudflare-facing overrides minimal and validate the lockfile with Cloudflare's pnpm version.
