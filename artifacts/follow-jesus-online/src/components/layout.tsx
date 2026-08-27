@@ -1,6 +1,5 @@
 import { type ReactNode, useState } from "react"
 import { Link } from "wouter"
-import { Menu, X } from "lucide-react"
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -14,33 +13,36 @@ export function Layout({ children }: { children: ReactNode }) {
         Skip to Scripture
       </a>
       <header className="sticky top-0 z-40 w-full bg-[#0095ff] shadow-sm">
-        <div className="mx-auto flex h-[70px] max-w-[1800px] items-center justify-between px-6 sm:px-10">
+        <div className="mx-auto flex h-16 max-w-[1800px] items-center justify-between px-5 sm:px-8 md:h-[70px]">
           <Link
             href="/"
-            className="flex items-center gap-3 rounded-sm p-1 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0095ff]"
-            aria-label="Follow Jesus Online home"
+            className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0095ff]"
+            aria-label="JesusOnline home"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full border-[3px] border-white font-serif text-2xl font-bold leading-none" aria-hidden="true">
-              J
-            </span>
-            <span className="text-[25px] font-light tracking-[0.035em] sm:text-[27px]">
-              JESUSONLINE
-            </span>
+            <img
+              src="https://jesusonline.org/jesusonline-wordmark.png"
+              alt="JesusOnline"
+              width="320"
+              height="57"
+              className="h-8 w-auto sm:h-11"
+            />
           </Link>
           <button
             type="button"
             onClick={() => setIsMenuOpen((open) => !open)}
-            className="rounded-sm p-2 text-white transition-colors hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             aria-expanded={isMenuOpen}
             aria-controls="site-menu"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+            <span className={`block h-0.5 w-6 rounded-full bg-white transition-all duration-200 origin-center ${isMenuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
+            <span className={`block h-0.5 w-6 rounded-full bg-white transition-all duration-200 ${isMenuOpen ? "opacity-0" : ""}`} />
+            <span className={`block h-0.5 w-6 rounded-full bg-white transition-all duration-200 origin-center ${isMenuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
           </button>
         </div>
         {isMenuOpen && (
           <nav id="site-menu" className="border-t border-white/25 bg-[#0095ff]" aria-label="Main navigation">
-            <div className="mx-auto flex max-w-[1800px] flex-col px-6 py-5 sm:px-10">
+            <div className="mx-auto flex max-w-[1800px] flex-col px-5 py-5 sm:px-8">
               <a
                 href="https://jesusonline.org"
                 className="border-b border-white/20 py-3 text-base font-semibold text-white hover:text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"

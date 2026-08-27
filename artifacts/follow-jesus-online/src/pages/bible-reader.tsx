@@ -174,11 +174,6 @@ export function BibleReaderPage() {
 
               <div className="mt-16 pt-8 border-t border-border/50 text-sm text-muted-foreground text-center space-y-2">
                 <p className="max-w-xl mx-auto leading-relaxed opacity-80">{passage.copyright}</p>
-                <p>
-                  <a href="https://netbible.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium inline-flex items-center gap-1">
-                    Read more on NETBible.org
-                  </a>
-                </p>
               </div>
             </article>
           ) : null}
