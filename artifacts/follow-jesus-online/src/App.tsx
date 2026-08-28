@@ -11,7 +11,14 @@ import {
   Router as WouterRouter,
 } from 'wouter';
 import { Home } from '@/pages/home';
+import { BibleLandingPage } from '@/pages/bible-landing';
 import { BibleReaderPage } from '@/pages/bible-reader';
+import { XPChooserPage } from '@/pages/xp-chooser';
+import { XPPage } from '@/pages/xp-page';
+import { ExploreArticlesPage } from '@/pages/explore-articles';
+import { RewatchPage } from '@/pages/rewatch';
+import { MessagePage } from '@/pages/message';
+import { ArticlePlaceholder } from '@/pages/article-placeholder';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,16 +33,33 @@ const siteUrl = import.meta.env.VITE_PUBLIC_SITE_URL ?? 'https://follow.jesusonl
 
 function PageMetadata() {
   const [location] = useLocation();
-  const isReader = location.startsWith('/bible/');
-  const routeReference = isReader
-    ? decodeURIComponent(location.replace(/^\/bible\//, '').replace('/', ' '))
-    : null;
-  const title = routeReference
-    ? `${routeReference} NET Bible | Follow Jesus Online`
-    : 'NET Bible Reader | Follow Jesus Online';
-  const description = routeReference
-    ? `Read ${routeReference} in the NET Bible with Follow Jesus Online.`
-    : 'Read the NET Bible online and take your next step in following Jesus.';
+  
+  // Extract robust page titles for routing
+  let title = 'Follow Jesus Online';
+  let description = 'Take your next step in following Jesus.';
+
+  if (location.startsWith('/bible/')) {
+    const routeReference = decodeURIComponent(location.replace(/^\/bible\//, '').replace('/', ' '));
+    title = `${routeReference} NET Bible | Follow Jesus Online`;
+    description = `Read ${routeReference} in the NET Bible with Follow Jesus Online.`;
+  } else if (location === '/bible') {
+    title = 'Read the NET Bible | Follow Jesus Online';
+    description = 'Read the NET Bible online and explore Scripture.';
+  } else if (location.startsWith('/xp/')) {
+    title = 'Next Steps | Follow Jesus Online';
+    description = 'Find clear, steady next steps for walking with Jesus.';
+  } else if (location === '/xp-pages') {
+    title = 'Where Did You Start? | Follow Jesus Online';
+  } else if (location === '/explore-articles') {
+    title = 'Explore Articles | Follow Jesus Online';
+    description = 'Resources and guides to help you understand your faith.';
+  } else if (location.startsWith('/adv-') || location.startsWith('/deeper-') || location.startsWith('/more-')) {
+    title = 'Guide | Follow Jesus Online';
+  } else if (location === '/rewatch' || location === '/rewatch-video') {
+    title = 'How God Sees You Now | Follow Jesus Online';
+  } else if (location === '/message') {
+    title = 'Send a Message | Follow Jesus Online';
+  }
 
   useEffect(() => {
     document.title = title;
@@ -49,8 +73,17 @@ function PageMetadata() {
       .querySelector('meta[property="og:description"]')
       ?.setAttribute('content', description);
 
+    // Apply noindex globally for all routes
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.setAttribute('name', 'robots');
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute('content', 'noindex,nofollow');
+
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    canonical?.setAttribute('href', `${siteUrl}${location}`);
+    canonical?.setAttribute('href', `${siteUrl}${location === '/rewatch-video' ? '/rewatch' : location}`);
   }, [description, location, title]);
 
   return null;
@@ -62,7 +95,18 @@ function Router() {
       <PageMetadata />
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/xp-pages" component={XPChooserPage} />
+        <Route path="/xp/:type" component={XPPage} />
+        <Route path="/explore-articles" component={ExploreArticlesPage} />
+        <Route path="/rewatch" component={RewatchPage} />
+        <Route path="/rewatch-video" component={RewatchPage} />
+        <Route path="/message" component={MessagePage} />
+        <Route path="/bible" component={BibleLandingPage} />
         <Route path="/bible/:book/:chapter" component={BibleReaderPage} />
+        
+        {/* Unpublished Article Routes */}
+        <Route path="/:slug" component={ArticlePlaceholder} />
+        
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>
