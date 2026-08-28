@@ -11,25 +11,25 @@ const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
 
 type XPType = "received" | "rededicated" | "believer" | "did-not-pray";
 
-const QUESTION_ROUTES: Partial<Record<XPType, string[]>> = {
-  received: [
-    "/more-received-how-do-i-know-this-is-real",
-    "/more-received-i-am-afraid",
-    "/more-received-how-should-i-handle-my-current-relationships",
-    "/more-received-what-do-i-do-now",
-    "/more-received-i-have-questions-about-church",
-    "/more-received-i-want-to-know-jesus-better",
-    "/more-received-other-questions",
-  ],
-  rededicated: [
-    "/more-rededicated-how-do-i-start-walking-closely-with-him-again",
-    "/more-rededicated-i-feel-ashamed-or-distant",
-    "/more-rededicated-how-should-i-handle-the-relationships-and-patterns-i-left-behind",
-    "/more-rededicated-what-practical-steps-can-i-take-right-now",
-    "/more-rededicated-i-have-questions-about-getting-connected-again",
-    "/more-rededicated-i-want-to-know-jesus-more-deeply",
-    "/more-rededicated-other-questions",
-  ],
+const XP_ARTICLE_LINKS: Partial<Record<XPType, Record<string, string>>> = {
+  received: {
+    "How do I know this is real?": "more-received-how-do-i-know-this-is-real",
+    "I’m afraid…": "more-received-i-am-afraid",
+    "How should I handle my current relationships?": "more-received-how-should-i-handle-my-current-relationships",
+    "What do I do now?": "more-received-what-do-i-do-now",
+    "I have questions about church": "more-received-i-have-questions-about-church",
+    "I want to know Jesus more": "more-received-i-want-to-know-jesus-better",
+    "More questions?": "more-received-other-questions",
+  },
+  rededicated: {
+    "How do I start walking closely with Him again?": "more-returning-how-do-i-start-walking-closely-with-him-again",
+    "I feel ashamed or distant…": "more-returning-i-feel-ashamed-or-distant",
+    "How should I handle the relationships and patterns I left behind?": "more-returning-how-should-i-handle-the-relationships-and-patterns-i-left-behind",
+    "What practical steps can I take right now?": "more-returning-what-practical-steps-can-i-take-right-now",
+    "I have questions about getting connected again": "more-returning-i-have-questions-about-getting-connected-again",
+    "I want to know Jesus more deeply": "more-returning-i-want-to-know-jesus-more-deeply",
+    "More questions?": "more-returning-other-questions",
+  },
 };
 
 const XP_CONTENT: Record<XPType, {
@@ -189,10 +189,10 @@ export function XPPage() {
             {content.questions.map((q, i) => (
               <div key={i} className="bg-background border border-border/50 rounded-xl p-6 flex items-start gap-4">
                 <Heart className="w-5 h-5 text-primary/40 shrink-0 mt-0.5" />
-                {QUESTION_ROUTES[type]?.[i] ? (
+                {XP_ARTICLE_LINKS[type]?.[q] ? (
                   <Link
-                    href={QUESTION_ROUTES[type]![i]}
-                    className="text-foreground/90 font-medium hover:text-primary underline-offset-4 hover:underline"
+                    href={`/${XP_ARTICLE_LINKS[type][q]}`}
+                    className="text-left font-medium text-foreground/90 underline decoration-primary/25 underline-offset-4 transition-colors hover:text-primary"
                   >
                     {q}
                   </Link>

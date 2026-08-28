@@ -1,9 +1,9 @@
 import { Layout } from "@/components/layout";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Compass, Shield, User, Heart, Footprints, Book, MessageCircle, Users, Target, RefreshCw, Library } from "lucide-react";
+import { ArrowRight, Compass, Shield, User, Heart, Footprints, Book, MessageCircle, Users, Target, RefreshCw, BookOpen, HelpCircle } from "lucide-react";
 import { useTrackRecentPage } from "@/hooks/use-recent-page";
-import { ARTICLES as LIBRARY_ARTICLES, type ArticleRecord } from "@/content/articles";
+import { getArticlesInGroup } from "@/data/article-library";
 
 const ARTICLES = [
   {
@@ -23,14 +23,12 @@ const ARTICLES = [
     title: "Your New Identity in Christ",
     desc: "See yourself the way God now sees you—and watch how that new identity changes everything.",
     link: "/adv-your-new-identity-christ",
-    deeper: { label: "Embracing Your New Identity in Christ", link: "/deeper-embracing-your-new-identity-in-christ" },
     icon: User
   },
   {
     title: "The Holy Spirit – Your Constant Companion",
     desc: "Meet the personal presence of God who walks with you, guides you, and never leaves your side.",
     link: "/adv-the-holy-spirit",
-    deeper: { label: "Who Is the Holy Spirit?", link: "/more-the-holy-spirit" },
     icon: Heart
   },
   {
@@ -44,28 +42,24 @@ const ARTICLES = [
     title: "God’s Word – Your Road Map",
     desc: "Let Scripture become the clear, trustworthy guide that keeps you on the right path.",
     link: "/adv-gods-word",
-    deeper: { label: "What the Bible Says", link: "/more-the-bible" },
     icon: Book
   },
   {
     title: "Prayer – Your Ongoing Conversation with God",
     desc: "Turn prayer from a duty into a natural, ongoing conversation with the One who loves you most.",
     link: "/adv-prayer",
-    deeper: { label: "The Lord’s Prayer Guide Overview", link: "/deeper-the-lords-prayer-guide-overview" },
     icon: MessageCircle
   },
   {
     title: "Belonging to God’s Family",
     desc: "Step into the rich community of believers who walk beside you as true family.",
     link: "/adv-belonging-to-gods-family",
-    deeper: { label: "Connecting with God’s Family", link: "/deeper-connecting-with-gods-family" },
     icon: Users
   },
   {
     title: "Living a Life of Purpose",
     desc: "Uncover the unique design God has for your life and begin living it with confidence.",
     link: "/adv-living-a-life-of-purpose",
-    deeper: { label: "God’s Plan for You", link: "/deeper-gods-plan-for-you" },
     icon: Target
   },
   {
@@ -74,28 +68,14 @@ const ARTICLES = [
     link: "/adv-continuing-with-jesus",
     icon: RefreshCw
   },
-  {
-    title: "Additional Resources",
-    desc: "Find practical tools and next steps to help you keep moving forward on the journey.",
-    link: "/adv-resources",
-    icon: Library
-  }
 ];
-
-const LIBRARY_GROUPS = ["Go Deeper", "Questions & Answers", "Additional Resource"]
-  .map((category) => ({
-    category,
-    articles: LIBRARY_ARTICLES.filter((article) => article.category === category),
-  }))
-  .filter((group) => group.articles.length > 0);
-
-function articleExcerpt(article: ArticleRecord) {
-  const text = article.blocks.find((block) => block.kind === "paragraph")?.text ?? "";
-  return text.length > 180 ? `${text.slice(0, 177).trimEnd()}…` : text;
-}
 
 export function ExploreArticlesPage() {
   useTrackRecentPage();
+  const deeperArticles = getArticlesInGroup("deeper");
+  const resourceArticles = getArticlesInGroup("resources");
+  const receivedArticles = getArticlesInGroup("received");
+  const rededicatedArticles = getArticlesInGroup("rededicated");
   
   return (
     <Layout>
@@ -125,7 +105,7 @@ export function ExploreArticlesPage() {
                       {article.desc}
                     </p>
                     <div className="mt-auto flex items-center text-primary font-semibold text-sm">
-                      Read article <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      View topic <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
                   
@@ -148,44 +128,93 @@ export function ExploreArticlesPage() {
           })}
         </div>
 
-        <div className="mt-20 space-y-14">
-          {LIBRARY_GROUPS.map((group) => (
-            <section key={group.category} aria-labelledby={`library-${group.category.toLowerCase().replace(/\s+/g, "-")}`}>
-              <div className="flex items-center gap-3 mb-7">
-                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                  <Library className="w-5 h-5" aria-hidden="true" />
+        <section className="mt-20" aria-labelledby="go-deeper-heading">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-primary">Keep growing</p>
+              <h2 id="go-deeper-heading" className="text-3xl font-bold text-foreground">Go Deeper</h2>
+            </div>
+            <BookOpen className="h-8 w-8 text-primary/50" aria-hidden="true" />
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {deeperArticles.map((article) => (
+              <Link
+                key={article.slug}
+                href={`/${article.slug}`}
+                className="group rounded-xl border border-border/60 bg-card p-5 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
+              >
+                <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary">{article.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{article.excerpt}</p>
+                <span className="mt-4 inline-flex items-center text-sm font-semibold text-primary">
+                  Read study <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-20" aria-labelledby="questions-heading">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-primary">Questions are welcome</p>
+              <h2 id="questions-heading" className="text-3xl font-bold text-foreground">Next-step questions</h2>
+            </div>
+            <HelpCircle className="h-8 w-8 text-primary/50" aria-hidden="true" />
+          </div>
+          <div className="grid gap-8 lg:grid-cols-2">
+            <QuestionGroup title="After you begin following Jesus" articles={receivedArticles} />
+            <QuestionGroup title="When you are returning to Jesus" articles={rededicatedArticles} />
+          </div>
+        </section>
+
+        <section className="mt-20" aria-labelledby="more-resources-heading">
+          <div className="mb-8">
+            <p className="mb-2 text-sm font-bold uppercase tracking-wider text-primary">More to explore</p>
+            <h2 id="more-resources-heading" className="text-3xl font-bold text-foreground">Additional discipleship resources</h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {resourceArticles.map((article) => (
+              <Link
+                key={article.slug}
+                href={`/${article.slug}`}
+                className="group flex items-start justify-between gap-4 rounded-xl border border-border/60 bg-card p-5 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
+              >
+                <div>
+                  <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary">{article.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{article.excerpt}</p>
                 </div>
-                <h2
-                  id={`library-${group.category.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="text-3xl font-bold text-foreground"
-                >
-                  {group.category}
-                </h2>
-              </div>
-              <div className="grid md:grid-cols-2 gap-5">
-                {group.articles.map((article) => (
-                  <Link
-                    key={article.route}
-                    href={article.route}
-                    className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm hover:border-primary/30 hover:shadow-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                  >
-                    <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors mb-2">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                      {articleExcerpt(article)}
-                    </p>
-                    <span className="inline-flex items-center text-sm font-semibold text-primary">
-                      Read article
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
+                <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
     </Layout>
+  );
+}
+
+function QuestionGroup({
+  title,
+  articles,
+}: {
+  title: string;
+  articles: ReturnType<typeof getArticlesInGroup>;
+}) {
+  return (
+    <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
+      <h3 className="mb-5 text-xl font-bold text-card-foreground">{title}</h3>
+      <div className="space-y-3">
+        {articles.map((article) => (
+          <Link
+            key={article.slug}
+            href={`/${article.slug}`}
+            className="group flex items-start justify-between gap-3 rounded-lg border border-border/50 px-4 py-3 transition-colors hover:border-primary/30 hover:bg-muted/40"
+          >
+            <span className="font-medium leading-snug text-foreground group-hover:text-primary">{article.title}</span>
+            <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }

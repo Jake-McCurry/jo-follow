@@ -17,16 +17,17 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
   const [isHovered, setIsHovered] = useState(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const normalizedReference = reference.replace(/[–—]/g, "-");
 
   // We want to fetch if the popover is open, OR if we prefetch on hover
   const shouldFetch = isOpen || isHovered;
 
   const { data, isLoading, error } = useGetBiblePassage(
-    { passage: reference },
+    { passage: normalizedReference },
     { 
       query: { 
         enabled: shouldFetch,
-        queryKey: getGetBiblePassageQueryKey({ passage: reference }),
+        queryKey: getGetBiblePassageQueryKey({ passage: normalizedReference }),
         staleTime: 1000 * 60 * 60 * 24 // 24 hours caching
       } 
     }
@@ -55,7 +56,6 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
           type="button"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onFocus={() => setIsOpen(true)}
           className="inline-flex font-medium text-primary hover:text-primary/80 underline decoration-primary/30 underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm px-1 -mx-1"
           aria-expanded={isOpen}
         >
