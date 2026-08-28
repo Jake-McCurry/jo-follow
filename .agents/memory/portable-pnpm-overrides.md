@@ -9,4 +9,6 @@ Keep cross-platform dependency overrides minimal and define meaningful overrides
 
 Do not pin pnpm with the root `packageManager` field in this Replit workspace; the local pnpm shim may repeatedly attempt to self-install that version and prevent managed workflows from starting.
 
-**How to apply:** After changing override configuration, regenerate the lockfile with Cloudflare's pnpm version via Corepack and verify both `install --frozen-lockfile` and the targeted production build.
+Keep a project-local Wrangler configuration checked in for Cloudflare deployments from a workspace package. Without it, Wrangler's automatic Vite setup invokes npm, which cannot resolve pnpm `catalog:` dependencies.
+
+**How to apply:** After changing override configuration, regenerate the lockfile with Cloudflare's pnpm version via Corepack and verify both `install --frozen-lockfile` and the targeted production build. Run Wrangler with `--cwd` pointing to the artifact directory.
