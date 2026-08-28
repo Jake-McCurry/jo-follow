@@ -16,6 +16,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // We want to fetch if the popover is open, OR if we prefetch on hover
   const shouldFetch = isOpen || isHovered;
@@ -32,6 +33,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
   );
 
   const handleMouseEnter = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     setIsHovered(true);
     hoverTimeoutRef.current = setTimeout(() => {
       setIsOpen(true);
@@ -42,7 +44,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
-    setIsOpen(false);
+    closeTimeoutRef.current = setTimeout(() => setIsOpen(false), 150);
     setTimeout(() => setIsHovered(false), 300); // Delay disabling fetch
   };
 
@@ -54,11 +56,6 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onFocus={() => setIsOpen(true)}
-          onBlur={() => setIsOpen(false)}
-          onClick={(e) => {
-            e.preventDefault();
-            setIsOpen(!isOpen);
-          }}
           className="inline-flex font-medium text-primary hover:text-primary/80 underline decoration-primary/30 underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm px-1 -mx-1"
           aria-expanded={isOpen}
         >
@@ -70,6 +67,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
         className="w-[340px] max-w-[calc(100vw-2rem)] p-5 shadow-lg max-h-[300px] overflow-y-auto" 
         onMouseEnter={() => {
           if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+          if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
           setIsOpen(true);
         }}
         onMouseLeave={handleMouseLeave}

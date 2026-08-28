@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Compass, Shield, User, Heart, Footprints, Book, MessageCircle, Users, Target, RefreshCw, Library } from "lucide-react";
 import { useTrackRecentPage } from "@/hooks/use-recent-page";
+import { ARTICLES as LIBRARY_ARTICLES, type ArticleRecord } from "@/content/articles";
 
 const ARTICLES = [
   {
@@ -29,7 +30,7 @@ const ARTICLES = [
     title: "The Holy Spirit – Your Constant Companion",
     desc: "Meet the personal presence of God who walks with you, guides you, and never leaves your side.",
     link: "/adv-the-holy-spirit",
-    deeper: { label: "Who Is the Holy Spirit?", link: "/deeper-who-is-the-holy-spirit" },
+    deeper: { label: "Who Is the Holy Spirit?", link: "/more-the-holy-spirit" },
     icon: Heart
   },
   {
@@ -43,7 +44,7 @@ const ARTICLES = [
     title: "God’s Word – Your Road Map",
     desc: "Let Scripture become the clear, trustworthy guide that keeps you on the right path.",
     link: "/adv-gods-word",
-    deeper: { label: "Renewing the Mind for Transformation", link: "/deeper-renewing-the-mind-for-transformation" },
+    deeper: { label: "What the Bible Says", link: "/more-the-bible" },
     icon: Book
   },
   {
@@ -81,6 +82,18 @@ const ARTICLES = [
   }
 ];
 
+const LIBRARY_GROUPS = ["Go Deeper", "Questions & Answers", "Additional Resource"]
+  .map((category) => ({
+    category,
+    articles: LIBRARY_ARTICLES.filter((article) => article.category === category),
+  }))
+  .filter((group) => group.articles.length > 0);
+
+function articleExcerpt(article: ArticleRecord) {
+  const text = article.blocks.find((block) => block.kind === "paragraph")?.text ?? "";
+  return text.length > 180 ? `${text.slice(0, 177).trimEnd()}…` : text;
+}
+
 export function ExploreArticlesPage() {
   useTrackRecentPage();
   
@@ -112,7 +125,7 @@ export function ExploreArticlesPage() {
                       {article.desc}
                     </p>
                     <div className="mt-auto flex items-center text-primary font-semibold text-sm">
-                      View topic <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      Read article <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
                   
@@ -133,6 +146,44 @@ export function ExploreArticlesPage() {
               </Card>
             );
           })}
+        </div>
+
+        <div className="mt-20 space-y-14">
+          {LIBRARY_GROUPS.map((group) => (
+            <section key={group.category} aria-labelledby={`library-${group.category.toLowerCase().replace(/\s+/g, "-")}`}>
+              <div className="flex items-center gap-3 mb-7">
+                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                  <Library className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <h2
+                  id={`library-${group.category.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="text-3xl font-bold text-foreground"
+                >
+                  {group.category}
+                </h2>
+              </div>
+              <div className="grid md:grid-cols-2 gap-5">
+                {group.articles.map((article) => (
+                  <Link
+                    key={article.route}
+                    href={article.route}
+                    className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm hover:border-primary/30 hover:shadow-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  >
+                    <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors mb-2">
+                      {article.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                      {articleExcerpt(article)}
+                    </p>
+                    <span className="inline-flex items-center text-sm font-semibold text-primary">
+                      Read article
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
       </div>
     </Layout>

@@ -11,6 +11,27 @@ const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
 
 type XPType = "received" | "rededicated" | "believer" | "did-not-pray";
 
+const QUESTION_ROUTES: Partial<Record<XPType, string[]>> = {
+  received: [
+    "/more-received-how-do-i-know-this-is-real",
+    "/more-received-i-am-afraid",
+    "/more-received-how-should-i-handle-my-current-relationships",
+    "/more-received-what-do-i-do-now",
+    "/more-received-i-have-questions-about-church",
+    "/more-received-i-want-to-know-jesus-better",
+    "/more-received-other-questions",
+  ],
+  rededicated: [
+    "/more-rededicated-how-do-i-start-walking-closely-with-him-again",
+    "/more-rededicated-i-feel-ashamed-or-distant",
+    "/more-rededicated-how-should-i-handle-the-relationships-and-patterns-i-left-behind",
+    "/more-rededicated-what-practical-steps-can-i-take-right-now",
+    "/more-rededicated-i-have-questions-about-getting-connected-again",
+    "/more-rededicated-i-want-to-know-jesus-more-deeply",
+    "/more-rededicated-other-questions",
+  ],
+};
+
 const XP_CONTENT: Record<XPType, {
   title: string;
   subtitle?: string;
@@ -168,7 +189,16 @@ export function XPPage() {
             {content.questions.map((q, i) => (
               <div key={i} className="bg-background border border-border/50 rounded-xl p-6 flex items-start gap-4">
                 <Heart className="w-5 h-5 text-primary/40 shrink-0 mt-0.5" />
-                <span className="text-foreground/90 font-medium">{q}</span>
+                {QUESTION_ROUTES[type]?.[i] ? (
+                  <Link
+                    href={QUESTION_ROUTES[type]![i]}
+                    className="text-foreground/90 font-medium hover:text-primary underline-offset-4 hover:underline"
+                  >
+                    {q}
+                  </Link>
+                ) : (
+                  <span className="text-foreground/90 font-medium">{q}</span>
+                )}
               </div>
             ))}
           </div>

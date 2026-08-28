@@ -19,6 +19,7 @@ import { ExploreArticlesPage } from '@/pages/explore-articles';
 import { RewatchPage } from '@/pages/rewatch';
 import { MessagePage } from '@/pages/message';
 import { ArticlePlaceholder } from '@/pages/article-placeholder';
+import { findArticle } from '@/content/articles';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,7 +55,11 @@ function PageMetadata() {
     title = 'Explore Articles | Follow Jesus Online';
     description = 'Resources and guides to help you understand your faith.';
   } else if (location.startsWith('/adv-') || location.startsWith('/deeper-') || location.startsWith('/more-')) {
-    title = 'Guide | Follow Jesus Online';
+    const article = findArticle(location);
+    title = article ? `${article.title} | Follow Jesus Online` : 'Guide | Follow Jesus Online';
+    description = article
+      ? `Read ${article.title} on Follow Jesus Online.`
+      : 'Read guides and resources for following Jesus.';
   } else if (location === '/rewatch' || location === '/rewatch-video') {
     title = 'How God Sees You Now | Follow Jesus Online';
   } else if (location === '/message') {
