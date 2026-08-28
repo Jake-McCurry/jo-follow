@@ -74,6 +74,12 @@ export function Layout({ children }: { children: ReactNode }) {
       <footer className="mt-12 border-t bg-[#122B49] py-9 text-white">
         <div className="mx-auto max-w-4xl px-6 text-center text-sm text-white/80">
           <p>© {new Date().getFullYear()} JesusOnline Ministries. All rights reserved.</p>
+          <a
+            href="https://jesusonlineministries.org/privacy-policy/"
+            className="mt-3 inline-block underline underline-offset-4 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#122B49]"
+          >
+            Privacy Policy
+          </a>
         </div>
       </footer>
     </div>
