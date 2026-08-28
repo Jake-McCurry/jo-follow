@@ -1,0 +1,47 @@
+2026-08-28T17:30:54.008Z	Done in 13.7s
+2026-08-28T17:30:56.574Z	Executing user build command: pnpm run build
+2026-08-28T17:30:57.063Z	
+2026-08-28T17:30:57.063Z	> workspace@0.0.0 build /opt/buildhome/repo
+2026-08-28T17:30:57.063Z	> pnpm run typecheck && pnpm -r --if-present run build
+2026-08-28T17:30:57.063Z	
+2026-08-28T17:30:57.479Z	
+2026-08-28T17:30:57.480Z	> workspace@0.0.0 typecheck /opt/buildhome/repo
+2026-08-28T17:30:57.480Z	> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+2026-08-28T17:30:57.482Z	
+2026-08-28T17:30:58.042Z	
+2026-08-28T17:30:58.043Z	> workspace@0.0.0 typecheck:libs /opt/buildhome/repo
+2026-08-28T17:30:58.043Z	> tsc --build
+2026-08-28T17:30:58.043Z	
+2026-08-28T17:31:02.243Z	(node:730) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-08-28T17:31:02.247Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-28T17:31:02.256Z	Scope: 4 of 9 workspace projects
+2026-08-28T17:31:02.260Z	artifacts/api-server typecheck$ tsc -p tsconfig.json --noEmit
+2026-08-28T17:31:02.276Z	artifacts/follow-jesus-online typecheck$ tsc -p tsconfig.json --noEmit
+2026-08-28T17:31:02.287Z	artifacts/mockup-sandbox typecheck$ tsc -p tsconfig.json --noEmit
+2026-08-28T17:31:02.287Z	scripts typecheck$ tsc -p tsconfig.json --noEmit
+2026-08-28T17:31:08.921Z	scripts typecheck: Done
+2026-08-28T17:31:09.389Z	artifacts/api-server typecheck: Done
+2026-08-28T17:31:18.191Z	artifacts/mockup-sandbox typecheck: Done
+2026-08-28T17:31:18.570Z	artifacts/follow-jesus-online typecheck: Done
+2026-08-28T17:31:19.155Z	(node:797) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-08-28T17:31:19.155Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-28T17:31:19.168Z	Scope: 8 of 9 workspace projects
+2026-08-28T17:31:19.170Z	artifacts/mockup-sandbox build$ vite build
+2026-08-28T17:31:19.677Z	artifacts/mockup-sandbox build: failed to load config from /opt/buildhome/repo/artifacts/mockup-sandbox/vite.config.ts
+2026-08-28T17:31:19.678Z	artifacts/mockup-sandbox build: error during build:
+2026-08-28T17:31:19.679Z	artifacts/mockup-sandbox build: Error: PORT environment variable is required but was not provided.
+2026-08-28T17:31:19.681Z	artifacts/mockup-sandbox build:     at file:///opt/buildhome/repo/artifacts/mockup-sandbox/node_modules/.vite-temp/vite.config.ts.timestamp-1787938279388-7aa694f2d9b2.mjs:145:9
+2026-08-28T17:31:19.681Z	artifacts/mockup-sandbox build:     at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+2026-08-28T17:31:19.681Z	artifacts/mockup-sandbox build:     at async node:internal/modules/esm/loader:643:26
+2026-08-28T17:31:19.681Z	artifacts/mockup-sandbox build:     at async loadConfigFromBundledFile (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35996:12)
+2026-08-28T17:31:19.682Z	artifacts/mockup-sandbox build:     at async bundleAndLoadConfigFile (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35884:17)
+2026-08-28T17:31:19.683Z	artifacts/mockup-sandbox build:     at async loadConfigFromFile (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35851:42)
+2026-08-28T17:31:19.684Z	artifacts/mockup-sandbox build:     at async resolveConfig (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35500:22)
+2026-08-28T17:31:19.684Z	artifacts/mockup-sandbox build:     at async createBuilder (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:33955:19)
+2026-08-28T17:31:19.684Z	artifacts/mockup-sandbox build:     at async CAC.<anonymous> (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/cli.js:629:10)
+2026-08-28T17:31:19.695Z	artifacts/mockup-sandbox build: Failed
+2026-08-28T17:31:19.696Z	/opt/buildhome/repo/artifacts/mockup-sandbox:
+2026-08-28T17:31:19.697Z	 ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/mockup-sandbox@2.0.0 build: `vite build`
+2026-08-28T17:31:19.697Z	Exit status 1
+2026-08-28T17:31:19.719Z	 ELIFECYCLE  Command failed with exit code 1.
+2026-08-28T17:31:19.745Z	Failed: error occurred while running build command
