@@ -13,6 +13,7 @@ import {
 import { Home } from '@/pages/home';
 import { BibleLandingPage } from '@/pages/bible-landing';
 import { BibleReaderPage } from '@/pages/bible-reader';
+import { BibleSavedPage } from '@/pages/bible-saved';
 import { XPChooserPage } from '@/pages/xp-chooser';
 import { XPPage } from '@/pages/xp-page';
 import { ExploreArticlesPage } from '@/pages/explore-articles';
@@ -43,7 +44,10 @@ function PageMetadata() {
   let title = 'Follow Jesus Online';
   let description = 'Take your next step in following Jesus.';
 
-  if (location.startsWith('/bible/')) {
+  if (location === '/bible/saved') {
+    title = 'Saved Bible Items | Follow Jesus Online';
+    description = 'Reopen your locally saved Bible bookmarks, highlights, and notes.';
+  } else if (location.startsWith('/bible/')) {
     const routeReference = decodeURIComponent(location.replace(/^\/bible\//, '').replace('/', ' '));
     title = `${routeReference} NET Bible | Follow Jesus Online`;
     description = `Read ${routeReference} in the NET Bible with Follow Jesus Online.`;
@@ -138,6 +142,7 @@ function Router() {
         <Route path="/rewatch-video" component={RewatchPage} />
         <Route path="/message" component={MessagePage} />
         <Route path="/bible" component={BibleLandingPage} />
+        <Route path="/bible/saved" component={BibleSavedPage} />
         <Route path="/bible/:book/:chapter" component={BibleReaderPage} />
         
         {/* Unpublished Article Routes */}

@@ -91,6 +91,13 @@ export function Layout({ children }: { children: ReactNode }) {
                 Read the NET Bible
               </button>
               <Link
+                href="/bible/saved"
+                onClick={() => setIsMenuOpen(false)}
+                className="border-b border-[#e7eef6] px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+              >
+                Saved Bible Items
+              </Link>
+              <Link
                 href="/adv-prayer"
                 onClick={() => setIsMenuOpen(false)}
                 className="border-b border-[#e7eef6] px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
