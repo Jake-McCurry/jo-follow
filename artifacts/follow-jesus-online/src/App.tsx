@@ -16,10 +16,14 @@ import { BibleReaderPage } from '@/pages/bible-reader';
 import { XPChooserPage } from '@/pages/xp-chooser';
 import { XPPage } from '@/pages/xp-page';
 import { ExploreArticlesPage } from '@/pages/explore-articles';
+import { GoFurtherPage } from '@/pages/gf/index';
+import { GFBookPage } from '@/pages/gf/book';
+import { GFReadingPage } from '@/pages/gf/reading';
 import { RewatchPage } from '@/pages/rewatch';
 import { MessagePage } from '@/pages/message';
 import { ArticlePlaceholder } from '@/pages/article-placeholder';
 import { getArticleBySlug } from '@/data/article-library';
+import { getGFBook } from '@/data/go-further-library';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,6 +58,25 @@ function PageMetadata() {
   } else if (location === '/explore-articles') {
     title = 'Explore Articles | Follow Jesus Online';
     description = 'Resources and guides to help you understand your faith.';
+  } else if (location === '/gf' || location === '/gf/') {
+    title = 'Go Further | Follow Jesus Online';
+    description = 'The short guide showed you the path. These books walk it with you for a longer stretch.';
+  } else if (location.startsWith('/gf/')) {
+    const parts = location.split('/').filter(Boolean);
+    if (parts.length === 2) {
+      // /gf/:book
+      const bookSlug = parts[1];
+      const book = getGFBook(bookSlug);
+      title = `${book?.title ?? bookSlug.replace(/-/g, ' ')} | Go Further`;
+      description = book?.desc ?? 'Discipleship readings from Follow Jesus Online.';
+    } else if (parts.length === 3) {
+      // /gf/:book/:reading
+      const book = getGFBook(parts[1]);
+      const reading = book?.readings.find((item) => item.slug === parts[2]);
+      const readingSlug = parts[2];
+      title = `${reading?.title ?? readingSlug.replace(/-/g, ' ')} | Go Further`;
+      description = reading?.desc ?? 'A Go Further reading from Follow Jesus Online.';
+    }
   } else if (location.startsWith('/adv-') || location.startsWith('/deeper-') || location.startsWith('/more-')) {
     const article = getArticleBySlug(location.slice(1));
     if (article) {
@@ -88,7 +111,12 @@ function PageMetadata() {
     robotsMeta.setAttribute('content', 'noindex,nofollow');
 
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    canonical?.setAttribute('href', `${siteUrl}${location === '/rewatch-video' ? '/rewatch' : location}`);
+    const canonicalPath = location === '/rewatch-video'
+      ? '/rewatch'
+      : location === '/gf'
+        ? '/gf/'
+        : location;
+    canonical?.setAttribute('href', `${siteUrl}${canonicalPath}`);
   }, [description, location, title]);
 
   return null;
@@ -103,6 +131,9 @@ function Router() {
         <Route path="/xp-pages" component={XPChooserPage} />
         <Route path="/xp/:type" component={XPPage} />
         <Route path="/explore-articles" component={ExploreArticlesPage} />
+        <Route path="/gf" component={GoFurtherPage} />
+        <Route path="/gf/:slug" component={GFBookPage} />
+        <Route path="/gf/:bookSlug/:readingSlug" component={GFReadingPage} />
         <Route path="/rewatch" component={RewatchPage} />
         <Route path="/rewatch-video" component={RewatchPage} />
         <Route path="/message" component={MessagePage} />

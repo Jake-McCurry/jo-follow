@@ -54,18 +54,18 @@ export function Layout({ children }: { children: ReactNode }) {
                 Begin the Guide
               </Link>
               <Link
+                href="/gf/"
+                onClick={() => setIsMenuOpen(false)}
+                className="border-b border-white/20 py-3 text-base font-semibold text-white hover:text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                Go Further
+              </Link>
+              <Link
                 href="/adv-citizen-of-heaven"
                 onClick={() => setIsMenuOpen(false)}
                 className="border-b border-white/20 py-3 text-base font-semibold text-white hover:text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Going to Heaven?
-              </Link>
-              <Link
-                href="/explore-articles"
-                onClick={() => setIsMenuOpen(false)}
-                className="border-b border-white/20 py-3 text-base font-semibold text-white hover:text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              >
-                Explore Articles
               </Link>
               <Link
                 href="/rewatch"
@@ -80,6 +80,13 @@ export function Layout({ children }: { children: ReactNode }) {
                 className="border-b border-white/20 py-3 text-base font-semibold text-white hover:text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Read the NET Bible
+              </Link>
+              <Link
+                href="/adv-prayer"
+                onClick={() => setIsMenuOpen(false)}
+                className="border-b border-white/20 py-3 text-base font-semibold text-white hover:text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                Connect with God
               </Link>
               <Link
                 href="/message"

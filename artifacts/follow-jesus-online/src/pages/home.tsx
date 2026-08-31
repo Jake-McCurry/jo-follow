@@ -160,9 +160,9 @@ export function Home() {
               <PlayCircle className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
               <span className="font-semibold text-card-foreground">Rewatch the video</span>
             </Link>
-            <Link href="/explore-articles" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
+            <Link href="/gf/" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
               <Search className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-              <span className="font-semibold text-card-foreground">Explore Articles</span>
+              <span className="font-semibold text-card-foreground">Go Further</span>
             </Link>
             <Link href="/bible" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
               <BookOpen className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
