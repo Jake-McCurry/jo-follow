@@ -1,8 +1,10 @@
 import { type ReactNode, useState } from "react"
 import { Link } from "wouter"
+import { BibleStartDialog } from "@/components/bible-start-dialog"
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isBibleDialogOpen, setIsBibleDialogOpen] = useState(false)
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background selection:bg-primary/20">
@@ -74,13 +76,16 @@ export function Layout({ children }: { children: ReactNode }) {
               >
                 Rewatch the Video
               </Link>
-              <Link
-                href="/bible"
-                onClick={() => setIsMenuOpen(false)}
-                className="border-b border-white/20 py-3 text-base font-semibold text-white hover:text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMenuOpen(false)
+                  setIsBibleDialogOpen(true)
+                }}
+                className="border-b border-white/20 py-3 text-left text-base font-semibold text-white hover:text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Read the NET Bible
-              </Link>
+              </button>
               <Link
                 href="/adv-prayer"
                 onClick={() => setIsMenuOpen(false)}
@@ -105,6 +110,7 @@ export function Layout({ children }: { children: ReactNode }) {
             </div>
           </nav>
         )}
+        <BibleStartDialog open={isBibleDialogOpen} onOpenChange={setIsBibleDialogOpen} />
       </header>
 
       <main id="main-content" className="flex-1 w-full animate-in fade-in duration-500">

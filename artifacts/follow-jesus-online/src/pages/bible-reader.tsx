@@ -4,9 +4,8 @@ import { useListBibleBooks, useGetBiblePassage, getGetBiblePassageQueryKey } fro
 import { SelectNative } from "@/components/ui/select-native"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ChevronLeft, ChevronRight, Loader2, AlertCircle, Search, ArrowLeft } from "lucide-react"
+import { ChevronLeft, ChevronRight, Loader2, AlertCircle, Search } from "lucide-react"
 import { useState, useMemo, useEffect, FormEvent } from "react"
-import { Link } from "wouter"
 import { useTrackRecentPage } from "@/hooks/use-recent-page"
 
 export function BibleReaderPage() {
@@ -99,14 +98,6 @@ export function BibleReaderPage() {
   return (
     <Layout>
       <div className="container mx-auto max-w-3xl px-4 py-8">
-        <div className="mb-6 animate-in fade-in slide-in-from-left-4 duration-500">
-          <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground -ml-4">
-            <Link href="/bible">
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back to Bible Menu
-            </Link>
-          </Button>
-        </div>
-        
         {/* Navigation Toolbar */}
         <div className="bg-card border rounded-xl p-3 sm:p-4 shadow-sm mb-8 flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="flex items-center gap-2 w-full sm:w-auto">
