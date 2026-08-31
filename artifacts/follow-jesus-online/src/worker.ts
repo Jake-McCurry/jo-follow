@@ -18,6 +18,7 @@ const API_HEADERS = {
   "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "X-Content-Type-Options": "nosniff",
+  "X-Robots-Tag": "noindex, nofollow",
 } as const;
 
 function json(data: unknown, status = 200, extraHeaders?: HeadersInit): Response {
@@ -88,6 +89,9 @@ export default {
       return handleBibleApi(request, url);
     }
 
-    return env.ASSETS.fetch(request);
+    const assetResponse = await env.ASSETS.fetch(request);
+    const response = new Response(assetResponse.body, assetResponse);
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    return response;
   },
 };
