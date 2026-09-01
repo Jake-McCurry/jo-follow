@@ -7,6 +7,7 @@ import {
   parseImportedBibleStudyData,
   type BibleStudyData,
 } from "../src/hooks/use-bible-study.ts"
+import { getBibleStudyBackupPreviewSummary } from "../src/components/bible-study-backup-preview.tsx"
 
 const verse = {
   id: getVerseKey("John", 3, 16),
@@ -64,6 +65,43 @@ function backupWith(change: (backup: Record<string, unknown>) => void): string {
 
 test("accepts a valid exported version-1 backup", () => {
   assert.deepEqual(parseImportedBibleStudyData(JSON.stringify(validBackup)), validBackup)
+})
+
+test("preserves empty and small backup preview states", () => {
+  const emptyBackup = parseImportedBibleStudyData(
+    JSON.stringify({
+      version: BIBLE_STUDY_DATA_VERSION,
+      bookmarks: [],
+      highlights: {},
+      notes: {},
+      lastRead: null,
+    }),
+  )
+  assert.ok(emptyBackup)
+  assert.deepEqual(getBibleStudyBackupPreviewSummary(emptyBackup), {
+    bookmarks: 0,
+    highlights: 0,
+    notes: 0,
+    total: 0,
+    status: "Empty backup",
+  })
+
+  const smallBackup = parseImportedBibleStudyData(
+    JSON.stringify({
+      ...validBackup,
+      bookmarks: [verseBookmark],
+      highlights: {},
+      notes: {},
+    }),
+  )
+  assert.ok(smallBackup)
+  assert.deepEqual(getBibleStudyBackupPreviewSummary(smallBackup), {
+    bookmarks: 1,
+    highlights: 0,
+    notes: 0,
+    total: 1,
+    status: "Small backup",
+  })
 })
 
 test("rejects incomplete backups", () => {

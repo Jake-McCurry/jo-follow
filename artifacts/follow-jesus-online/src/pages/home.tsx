@@ -71,7 +71,7 @@ export function Home() {
                   Something real has started. Here are simple next steps to help you understand what happened and walk forward with confidence.
                 </p>
                 <Button asChild className="w-full group-hover:bg-primary/90">
-                  <Link href="/xp/received">
+                  <Link href="/xp/received?journey=received&entry=landing&step=xp">
                     Begin Here <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
@@ -88,7 +88,7 @@ export function Home() {
                   Turning toward Him again matters. These pages will help you renew your walk and move forward with clarity.
                 </p>
                 <Button asChild className="w-full group-hover:bg-primary/90">
-                  <Link href="/xp/rededicated">
+                  <Link href="/xp/rededicated?journey=rededicated&entry=landing&step=xp">
                     Welcome Back <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>

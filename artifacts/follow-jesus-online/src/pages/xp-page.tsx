@@ -115,6 +115,22 @@ export function XPPage() {
   
   if (!content) return <NotFound />;
 
+  const inboundParams = new URLSearchParams(
+    typeof window === "undefined" ? "" : window.location.search,
+  );
+  const journey = type === "rededicated" ? "rededicated" : "received";
+  const entry = inboundParams.get("entry") || "direct";
+  const articleHref = (slug: string) => {
+    const journeyParams = new URLSearchParams({
+      journey,
+      entry,
+      from: "xp",
+      step: "faq",
+    });
+
+    return `/${slug}?${journeyParams.toString()}`;
+  };
+
   const videoUrl = "https://www.youtube.com/watch?v=psw_5rn9WFY&list=PLyI_AdjR33H3yAO7F9M4tJoq9EwU7Afmc&index=2";
 
   return (
@@ -191,7 +207,7 @@ export function XPPage() {
                 <Heart className="w-5 h-5 text-primary/40 shrink-0 mt-0.5" />
                 {XP_ARTICLE_LINKS[type]?.[q] ? (
                   <Link
-                    href={`/${XP_ARTICLE_LINKS[type][q]}`}
+                    href={articleHref(XP_ARTICLE_LINKS[type][q])}
                     className="text-left font-medium text-foreground/90 underline decoration-primary/25 underline-offset-4 transition-colors hover:text-primary"
                   >
                     {q}
