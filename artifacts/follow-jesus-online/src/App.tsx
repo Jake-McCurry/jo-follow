@@ -39,34 +39,35 @@ const siteUrl = import.meta.env.VITE_PUBLIC_SITE_URL ?? 'https://follow.jesusonl
 
 function PageMetadata() {
   const [location] = useLocation();
+  const pathname = location.split('?')[0];
   
   // Extract robust page titles for routing
   let title = 'Follow Jesus Online';
   let description = 'Take your next step in following Jesus.';
 
-  if (location === '/bible/saved') {
+  if (pathname === '/bible/saved') {
     title = 'Saved Bible Items | Follow Jesus Online';
     description = 'Reopen your locally saved Bible bookmarks, highlights, and notes.';
-  } else if (location.startsWith('/bible/')) {
-    const routeReference = decodeURIComponent(location.replace(/^\/bible\//, '').replace('/', ' '));
+  } else if (pathname.startsWith('/bible/')) {
+    const routeReference = decodeURIComponent(pathname.replace(/^\/bible\//, '').replace('/', ' '));
     title = `${routeReference} NET Bible | Follow Jesus Online`;
     description = `Read ${routeReference} in the NET Bible with Follow Jesus Online.`;
-  } else if (location === '/bible') {
+  } else if (pathname === '/bible') {
     title = 'Read the NET Bible | Follow Jesus Online';
     description = 'Read the NET Bible online and explore Scripture.';
-  } else if (location.startsWith('/xp/')) {
+  } else if (pathname.startsWith('/xp/')) {
     title = 'Next Steps | Follow Jesus Online';
     description = 'Find clear, steady next steps for walking with Jesus.';
-  } else if (location === '/xp-pages') {
+  } else if (pathname === '/xp-pages') {
     title = 'Where Did You Start? | Follow Jesus Online';
-  } else if (location === '/explore-articles') {
+  } else if (pathname === '/explore-articles') {
     title = 'Explore Articles | Follow Jesus Online';
     description = 'Resources and guides to help you understand your faith.';
-  } else if (location === '/gf' || location === '/gf/') {
+  } else if (pathname === '/gf' || pathname === '/gf/') {
     title = 'Go Further | Follow Jesus Online';
     description = 'The short guide showed you the path. These books walk it with you for a longer stretch.';
-  } else if (location.startsWith('/gf/')) {
-    const parts = location.split('/').filter(Boolean);
+  } else if (pathname.startsWith('/gf/')) {
+    const parts = pathname.split('/').filter(Boolean);
     if (parts.length === 2) {
       // /gf/:book
       const bookSlug = parts[1];
@@ -81,15 +82,15 @@ function PageMetadata() {
       title = `${reading?.title ?? readingSlug.replace(/-/g, ' ')} | Go Further`;
       description = reading?.desc ?? 'A Go Further reading from Follow Jesus Online.';
     }
-  } else if (location.startsWith('/adv-') || location.startsWith('/deeper-') || location.startsWith('/more-')) {
-    const article = getArticleBySlug(location.slice(1));
+  } else if (pathname.startsWith('/adv-') || pathname.startsWith('/deeper-') || pathname.startsWith('/more-')) {
+    const article = getArticleBySlug(pathname.slice(1));
     if (article) {
       title = `${article.title} | Follow Jesus Online`;
       description = article.excerpt;
     }
-  } else if (location === '/rewatch' || location === '/rewatch-video') {
+  } else if (pathname === '/rewatch' || pathname === '/rewatch-video') {
     title = 'How God Sees You Now | Follow Jesus Online';
-  } else if (location === '/message') {
+  } else if (pathname === '/message') {
     title = 'Send a Message | Follow Jesus Online';
   }
 
@@ -115,13 +116,13 @@ function PageMetadata() {
     robotsMeta.setAttribute('content', 'noindex,nofollow');
 
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    const canonicalPath = location === '/rewatch-video'
+    const canonicalPath = pathname === '/rewatch-video'
       ? '/rewatch'
-      : location === '/gf'
+      : pathname === '/gf'
         ? '/gf/'
-        : location;
+        : pathname;
     canonical?.setAttribute('href', `${siteUrl}${canonicalPath}`);
-  }, [description, location, title]);
+  }, [description, pathname, title]);
 
   return null;
 }
