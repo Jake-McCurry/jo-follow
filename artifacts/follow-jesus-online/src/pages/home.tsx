@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
+import { BibleStartDialog } from "@/components/bible-start-dialog";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -160,14 +161,16 @@ export function Home() {
               <PlayCircle className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
               <span className="font-semibold text-card-foreground">Rewatch the video</span>
             </Link>
-            <Link href="/explore-articles" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
+            <Link href="/gf/" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
               <Search className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-              <span className="font-semibold text-card-foreground">Explore Articles</span>
+              <span className="font-semibold text-card-foreground">Go Further</span>
             </Link>
-            <Link href="/bible" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
-              <BookOpen className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-              <span className="font-semibold text-card-foreground">Read the Bible</span>
-            </Link>
+            <BibleStartDialog>
+              <button type="button" className="group flex w-full flex-col items-center rounded-xl border border-border/60 bg-card p-6 text-center transition-all hover:border-primary/30 hover:bg-muted/50">
+                <BookOpen className="w-8 h-8 text-primary mb-4 transition-transform group-hover:scale-110" />
+                <span className="font-semibold text-card-foreground">Read the Bible</span>
+              </button>
+            </BibleStartDialog>
             <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
               <Compass className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
               <span className="font-semibold text-card-foreground">About JesusOnline</span>
