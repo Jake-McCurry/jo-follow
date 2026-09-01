@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { ShareButton } from "@/components/share-button"
+import { BibleStudyBackupPreview } from "@/components/bible-study-backup-preview"
 import { useToast } from "@/hooks/use-toast"
 import {
   BIBLE_STUDY_DATA_VERSION,
@@ -345,6 +346,7 @@ export function BibleStudyTools({
               Merge keeps your current items and adds the backup. Replace removes current items first.
             </DialogDescription>
           </DialogHeader>
+          {pendingImport && <BibleStudyBackupPreview data={pendingImport} />}
           <DialogFooter className="gap-2 sm:justify-between">
             <Button
               type="button"

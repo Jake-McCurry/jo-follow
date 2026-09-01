@@ -12,6 +12,7 @@ import {
 } from "lucide-react"
 import { Layout } from "@/components/layout"
 import { Button } from "@/components/ui/button"
+import { BibleStudyBackupPreview } from "@/components/bible-study-backup-preview"
 import {
   Dialog,
   DialogContent,
@@ -318,6 +319,7 @@ export function BibleSavedPage() {
               Merge keeps your current items and adds the backup. Replace removes current items first.
             </DialogDescription>
           </DialogHeader>
+          {pendingImport && <BibleStudyBackupPreview data={pendingImport} />}
           <DialogFooter className="gap-2 sm:justify-between">
             <Button
               type="button"
