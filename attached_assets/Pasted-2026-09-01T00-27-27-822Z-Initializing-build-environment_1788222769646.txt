@@ -1,0 +1,104 @@
+2026-09-01T00:27:27.822Z	Initializing build environment...
+2026-09-01T00:27:30.507Z	Success: Finished initializing build environment
+2026-09-01T00:27:31.262Z	Cloning repository...
+2026-09-01T00:27:34.049Z	Restoring from dependencies cache
+2026-09-01T00:27:34.051Z	Restoring from build output cache
+2026-09-01T00:27:34.055Z	Detected the following tools from environment: pnpm@10.11.1, nodejs@24.18.0
+2026-09-01T00:27:41.625Z	Success: Dependencies restored from build cache.
+2026-09-01T00:27:41.627Z	Installing project dependencies: pnpm install --frozen-lockfile
+2026-09-01T00:27:44.438Z	(node:460) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-01T00:27:44.439Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-01T00:27:44.443Z	Scope: all 9 workspace projects
+2026-09-01T00:27:44.552Z	Lockfile is up to date, resolution step is skipped
+2026-09-01T00:27:44.633Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-09-01T00:27:44.688Z	Packages: +473
+2026-09-01T00:27:44.690Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-01T00:27:45.635Z	Progress: resolved 473, reused 303, downloaded 0, added 0
+2026-09-01T00:27:46.640Z	Progress: resolved 473, reused 473, downloaded 0, added 289
+2026-09-01T00:27:47.638Z	Progress: resolved 473, reused 473, downloaded 0, added 385
+2026-09-01T00:27:47.785Z	Progress: resolved 473, reused 473, downloaded 0, added 473, done
+2026-09-01T00:27:49.297Z	
+2026-09-01T00:27:49.297Z	dependencies:
+2026-09-01T00:27:49.297Z	+ @replit/connectors-sdk 0.4.1
+2026-09-01T00:27:49.297Z	
+2026-09-01T00:27:49.297Z	devDependencies:
+2026-09-01T00:27:49.297Z	+ prettier 3.9.6
+2026-09-01T00:27:49.297Z	+ typescript 5.9.3
+2026-09-01T00:27:49.297Z	
+2026-09-01T00:27:49.345Z	. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+2026-09-01T00:27:50.588Z	. preinstall: Done
+2026-09-01T00:27:50.843Z	Done in 7.5s
+2026-09-01T00:27:51.029Z	Executing user build command: pnpm --filter @workspace/follow-jesus-online run build
+2026-09-01T00:27:51.737Z	(node:572) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-01T00:27:51.737Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-01T00:27:51.773Z	
+2026-09-01T00:27:51.774Z	> @workspace/follow-jesus-online@0.0.0 prebuild /opt/buildhome/repo/artifacts/follow-jesus-online
+2026-09-01T00:27:51.774Z	> pnpm run test:articles
+2026-09-01T00:27:51.774Z	
+2026-09-01T00:27:52.333Z	
+2026-09-01T00:27:52.333Z	> @workspace/follow-jesus-online@0.0.0 test:articles /opt/buildhome/repo/artifacts/follow-jesus-online
+2026-09-01T00:27:52.334Z	> node --test scripts/article-links.test.mjs
+2026-09-01T00:27:52.334Z	
+2026-09-01T00:27:52.489Z	✔ article catalog and published article links are internally consistent (13.733839ms)
+2026-09-01T00:27:52.490Z	✔ published article link scanning covers page and layout entry points (0.561591ms)
+2026-09-01T00:27:52.522Z	ℹ tests 2
+2026-09-01T00:27:52.523Z	ℹ suites 0
+2026-09-01T00:27:52.523Z	ℹ pass 2
+2026-09-01T00:27:52.523Z	ℹ fail 0
+2026-09-01T00:27:52.523Z	ℹ cancelled 0
+2026-09-01T00:27:52.524Z	ℹ skipped 0
+2026-09-01T00:27:52.524Z	ℹ todo 0
+2026-09-01T00:27:52.524Z	ℹ duration_ms 130.974048
+2026-09-01T00:27:52.550Z	
+2026-09-01T00:27:52.551Z	> @workspace/follow-jesus-online@0.0.0 build /opt/buildhome/repo/artifacts/follow-jesus-online
+2026-09-01T00:27:52.551Z	> vite build --config vite.config.ts
+2026-09-01T00:27:52.551Z	
+2026-09-01T00:27:52.993Z	vite v7.3.6 building client environment for production...
+2026-09-01T00:27:53.102Z	transforming...
+2026-09-01T00:27:54.587Z	src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+2026-09-01T00:27:57.893Z	✓ 1843 modules transformed.
+2026-09-01T00:27:58.364Z	rendering chunks...
+2026-09-01T00:27:58.386Z	computing gzip size...
+2026-09-01T00:27:58.449Z	dist/public/index.html                   1.89 kB │ gzip:   0.71 kB
+2026-09-01T00:27:58.450Z	dist/public/assets/index-Ccq1XI_S.css  138.53 kB │ gzip:  21.55 kB
+2026-09-01T00:27:58.450Z	dist/public/assets/index-NTXuTXSM.js   637.96 kB │ gzip: 193.58 kB
+2026-09-01T00:27:58.450Z	✓ built in 5.42s
+2026-09-01T00:27:58.451Z	
+2026-09-01T00:27:58.451Z	(!) Some chunks are larger than 500 kB after minification. Consider:
+2026-09-01T00:27:58.451Z	- Using dynamic import() to code-split the application
+2026-09-01T00:27:58.451Z	- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2026-09-01T00:27:58.451Z	- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2026-09-01T00:27:58.575Z	Success: Build command completed
+2026-09-01T00:27:58.717Z	Executing user deploy command: npx wrangler deploy --cwd artifacts/follow-jesus-online
+2026-09-01T00:27:59.762Z	npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+2026-09-01T00:27:59.762Z	npm warn Unknown project config "strict-peer-dependencies". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+2026-09-01T00:28:02.488Z	
+2026-09-01T00:28:02.488Z	 ⛅️ wrangler 4.127.1
+2026-09-01T00:28:02.488Z	────────────────────
+2026-09-01T00:28:03.642Z	🌀 Building list of assets...
+2026-09-01T00:28:03.643Z	✨ Read 7 files from the assets directory /opt/buildhome/repo/artifacts/follow-jesus-online/dist/public
+2026-09-01T00:28:03.665Z	🌀 Starting asset upload...
+2026-09-01T00:28:05.013Z	🌀 Found 3 new or modified static assets to upload. Proceeding with upload...
+2026-09-01T00:28:05.014Z	+ /index.html
+2026-09-01T00:28:05.014Z	+ /assets/index-Ccq1XI_S.css
+2026-09-01T00:28:05.014Z	+ /assets/index-NTXuTXSM.js
+2026-09-01T00:28:05.630Z	Uploaded 1 of 3 assets
+2026-09-01T00:28:06.316Z	Uploaded 2 of 3 assets
+2026-09-01T00:28:06.557Z	Uploaded 3 of 3 assets
+2026-09-01T00:28:06.557Z	✨ Success! Uploaded 3 files (3 already uploaded) (1.54 sec)
+2026-09-01T00:28:06.557Z	
+2026-09-01T00:28:06.642Z	Total Upload: 9.06 KiB / gzip: 3.04 KiB
+2026-09-01T00:28:08.123Z	Worker Startup Time: 5 ms
+2026-09-01T00:28:08.124Z	Your Worker has access to the following bindings:
+2026-09-01T00:28:08.124Z	Binding            Resource      
+2026-09-01T00:28:08.124Z	env.ASSETS         Assets        
+2026-09-01T00:28:08.124Z	
+2026-09-01T00:28:08.124Z	Uploaded jo-follow-staging (4.62 sec)
+2026-09-01T00:28:08.649Z	Deployed jo-follow-staging triggers (0.52 sec)
+2026-09-01T00:28:08.650Z	  https://jo-follow-staging.jom-master.workers.dev
+2026-09-01T00:28:08.650Z	Current Version ID: 91ea8aef-e10e-41f4-9ecc-4cd536047095
+2026-09-01T00:28:08.654Z	
+2026-09-01T00:28:08.654Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2026-09-01T00:28:08.794Z	Success: Deploy command completed
+2026-09-01T00:28:08.796Z	Skipping build output cache as it's not supported for your project
+2026-09-01T00:28:08.916Z	✨ Success! Build completed.
