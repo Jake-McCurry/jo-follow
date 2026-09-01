@@ -5,15 +5,30 @@ interface BibleStudyBackupPreviewProps {
   data: BibleStudyData
 }
 
+export function getBibleStudyBackupPreviewSummary(data: BibleStudyData) {
+  const bookmarks = data.bookmarks.length
+  const highlights = Object.keys(data.highlights).length
+  const notes = Object.keys(data.notes).length
+  const total = bookmarks + highlights + notes
+
+  return {
+    bookmarks,
+    highlights,
+    notes,
+    total,
+    status: total === 0 ? "Empty backup" : total <= 2 ? "Small backup" : `${total} saved items`,
+  }
+}
+
 export function BibleStudyBackupPreview({ data }: BibleStudyBackupPreviewProps) {
+  const summary = getBibleStudyBackupPreviewSummary(data)
   const counts = [
-    { label: "Bookmarks", count: data.bookmarks.length, icon: Bookmark },
-    { label: "Highlights", count: Object.keys(data.highlights).length, icon: Highlighter },
-    { label: "Notes", count: Object.keys(data.notes).length, icon: NotebookPen },
+    { label: "Bookmarks", count: summary.bookmarks, icon: Bookmark },
+    { label: "Highlights", count: summary.highlights, icon: Highlighter },
+    { label: "Notes", count: summary.notes, icon: NotebookPen },
   ]
-  const total = counts.reduce((sum, item) => sum + item.count, 0)
-  const isEmpty = total === 0
-  const isSmall = total > 0 && total <= 2
+  const isEmpty = summary.status === "Empty backup"
+  const isSmall = summary.status === "Small backup"
 
   return (
     <section
@@ -29,7 +44,7 @@ export function BibleStudyBackupPreview({ data }: BibleStudyBackupPreviewProps) 
               : "rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary"
           }
         >
-          {isEmpty ? "Empty backup" : isSmall ? "Small backup" : `${total} saved items`}
+          {summary.status}
         </span>
       </div>
       <div className="mt-3 grid grid-cols-3 divide-x rounded-lg border bg-background">
