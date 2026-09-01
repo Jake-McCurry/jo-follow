@@ -1,3 +1,4 @@
 - [Portable pnpm overrides](portable-pnpm-overrides.md) — Keep Cloudflare-facing overrides minimal and validate the lockfile with Cloudflare's pnpm version.
 - [Bible.org Worker TLS checks](bible-org-worker-tls.md) — Local workerd may reject Bible.org's certificate even when host HTTPS succeeds; verify passage fetches on staging.
 - [Article link validation](article-link-validation.md) — Catalog link guards must cover every frontend source, not only article index pages.
+- [Workspace test runner dependencies](workspace-test-runner-dependencies.md) — Node test loaders must be declared by the package that runs them, not assumed from another workspace package.
