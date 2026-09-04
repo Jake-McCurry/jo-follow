@@ -30,6 +30,20 @@ const XP_ARTICLE_LINKS: Partial<Record<XPType, Record<string, string>>> = {
     "I want to know Jesus more deeply": "more-returning-i-want-to-know-jesus-more-deeply",
     "More questions?": "more-returning-other-questions",
   },
+  believer: {
+    "Refresh the foundations of your own walk with Jesus": "more-believer-refresh-the-foundation",
+    "Find clear language for conversations with others": "more-believer-find-clear-language-for-conversations-with-others",
+    "Help someone who is new in their faith": "more-believer-help-someone-new-in-faith",
+    "Revisit a specific area (identity, prayer, Scripture, purpose)": "more-believer-revisit-a-specific-area-of-spiritual-growth",
+    "More options?": "more-believer-more-options",
+  },
+  "did-not-pray": {
+    "I have questions about what I heard": "more-no-decision-i-have-questions-about-what-i-heard",
+    "I’d like to understand the Christian message more clearly": "more-no-decision-id-like-to-understand-the-christian-message-more-clearly",
+    "I already follow Jesus and want to go deeper": "more-no-decision-i-already-follow-jesus-and-want-to-go-deeper",
+    "I want to help someone else explore these things": "more-no-decision-i-want-to-help-someone-else-explore-these-things",
+    "More options?": "more-no-decision-more-options",
+  },
 };
 
 const XP_CONTENT: Record<XPType, {
@@ -118,7 +132,7 @@ export function XPPage() {
   const inboundParams = new URLSearchParams(
     typeof window === "undefined" ? "" : window.location.search,
   );
-  const journey = type === "rededicated" ? "rededicated" : "received";
+  const journey = type;
   const entry = inboundParams.get("entry") || "direct";
   const articleHref = (slug: string) => {
     const journeyParams = new URLSearchParams({

@@ -4244,6 +4244,136 @@
           "text": "When we have tried resisting temptation and it still seems too strong, it is time to ask for help. We can pray with someone, ask others to pray for us, even calling or texting someone takes you out of the isolation of the tempting moment and connects you to the body of Christ, the Church."
         }
       ]
+    },
+    {
+      "slug": "more-believer-refresh-the-foundation",
+      "title": "Refresh the Foundation",
+      "group": "believer",
+      "order": 0,
+      "excerpt": "Thank you for visiting our site!",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Thank you for visiting our site!"
+        }
+      ]
+    },
+    {
+      "slug": "more-believer-find-clear-language-for-conversations-with-others",
+      "title": "Find Clear Language for Conversations with Others",
+      "group": "believer",
+      "order": 1,
+      "excerpt": "We are JesusOnline Ministries, a Protestant Christian group providing free online resources to help people around the world know and share Jesus.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "We are JesusOnline Ministries, a Protestant Christian group providing free online resources to help people around the world know and share Jesus."
+        }
+      ]
+    },
+    {
+      "slug": "more-believer-help-someone-new-in-faith",
+      "title": "Help Someone New in Faith",
+      "group": "believer",
+      "order": 2,
+      "excerpt": "Jesus commands His followers to go and make disciples of all nations.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Jesus commands His followers to go and make disciples of all nations."
+        }
+      ]
+    },
+    {
+      "slug": "more-believer-revisit-a-specific-area-of-spiritual-growth",
+      "title": "Revisit a specific area of spiritual growth",
+      "group": "believer",
+      "order": 3,
+      "excerpt": "Revisit focused areas of spiritual growth, including biblical perspective, identity, the Holy Spirit, God’s Word, obedience, church life, and purpose.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Revisit focused areas of spiritual growth, including biblical perspective, identity, the Holy Spirit, God’s Word, obedience, church life, and purpose."
+        }
+      ]
+    },
+    {
+      "slug": "more-believer-more-options",
+      "title": "More options",
+      "group": "believer",
+      "order": 4,
+      "excerpt": "Explore more free JesusOnline resources for disciples and disciple-makers.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Explore more free JesusOnline resources for disciples and disciple-makers."
+        }
+      ]
+    },
+    {
+      "slug": "more-no-decision-i-have-questions-about-what-i-heard",
+      "title": "I have questions about what I heard",
+      "group": "no-decision",
+      "order": 0,
+      "excerpt": "Thank you for visiting our site.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Thank you for visiting our site."
+        }
+      ]
+    },
+    {
+      "slug": "more-no-decision-id-like-to-understand-the-christian-message-more-clearly",
+      "title": "I'd like to understand the Christian message more clearly",
+      "group": "no-decision",
+      "order": 1,
+      "excerpt": "Thank you for visiting our site and for your interest in the Christian message of hope and freedom.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Thank you for visiting our site and for your interest in the Christian message of hope and freedom."
+        }
+      ]
+    },
+    {
+      "slug": "more-no-decision-i-already-follow-jesus-and-want-to-go-deeper",
+      "title": "I already follow Jesus and want to go deeper",
+      "group": "no-decision",
+      "order": 2,
+      "excerpt": "That’s great that you already know and follow Jesus.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "That’s great that you already know and follow Jesus."
+        }
+      ]
+    },
+    {
+      "slug": "more-no-decision-i-want-to-help-someone-else-explore-these-things",
+      "title": "I want to help someone else explore these things",
+      "group": "no-decision",
+      "order": 3,
+      "excerpt": "Thank you for visiting our site.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Thank you for visiting our site."
+        }
+      ]
+    },
+    {
+      "slug": "more-no-decision-more-options",
+      "title": "More Options",
+      "group": "no-decision",
+      "order": 4,
+      "excerpt": "Before you leave, we want you to know one thing: God sees you.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Before you leave, we want you to know one thing: God sees you."
+        }
+      ]
     }
   ]
 }

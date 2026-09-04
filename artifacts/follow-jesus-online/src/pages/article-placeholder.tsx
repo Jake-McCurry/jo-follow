@@ -118,6 +118,8 @@ function groupLabel(group: ArticleBlock["type"] | string) {
   if (group === "resources") return "More Resources";
   if (group === "received") return "Questions after following Jesus";
   if (group === "rededicated") return "Questions for returning to Jesus";
+  if (group === "believer") return "Resources for existing believers";
+  if (group === "no-decision") return "Questions before a decision";
   return "Adventure Guide";
 }
 
@@ -135,6 +137,21 @@ export function ArticlePlaceholder() {
   const isLead = articleIndex === 0;
   const blocks = article.blocks;
   const firstParagraphIndex = blocks.findIndex((block) => block.type === "paragraph");
+  const currentSearch = new URLSearchParams(
+    typeof window === "undefined" ? "" : window.location.search,
+  );
+  const articleHref = (slug: string) => {
+    const journey = currentSearch.get("journey");
+    if (!journey) return `/${slug}`;
+
+    const journeyParams = new URLSearchParams({
+      journey,
+      entry: currentSearch.get("entry") || "direct",
+      from: "faq",
+      step: "faq",
+    });
+    return `/${slug}?${journeyParams.toString()}`;
+  };
 
   return (
     <Layout>
@@ -201,7 +218,7 @@ export function ArticlePlaceholder() {
             <div className="mt-8 rounded-2xl border border-primary/20 bg-primary/[0.04] p-6 sm:p-8">
               <p className="mb-2 text-sm font-bold uppercase tracking-wider text-primary">Continue exploring</p>
               <Link
-                href={`/${article.relatedSlug}`}
+                href={articleHref(article.relatedSlug)}
                 className="inline-flex items-center text-xl font-semibold text-foreground hover:text-primary"
               >
                 {getArticleBySlug(article.relatedSlug)?.title}
@@ -219,7 +236,7 @@ export function ArticlePlaceholder() {
           <nav aria-label="Article navigation" className="mt-8 grid gap-3 sm:grid-cols-2">
             {previous ? (
               <Link
-                href={`/${previous.slug}`}
+                href={articleHref(previous.slug)}
                 className="group rounded-xl border border-border/60 bg-card p-5 hover:border-primary/40"
               >
                 <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">Previous</span>
@@ -230,7 +247,7 @@ export function ArticlePlaceholder() {
             ) : <span aria-hidden="true" />}
             {next ? (
               <Link
-                href={`/${next.slug}`}
+                href={articleHref(next.slug)}
                 className="group rounded-xl border border-border/60 bg-card p-5 text-left hover:border-primary/40 sm:text-right"
               >
                 <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">Next</span>

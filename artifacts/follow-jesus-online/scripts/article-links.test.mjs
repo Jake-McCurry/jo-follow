@@ -12,7 +12,14 @@ const sourceRoot = path.join(projectRoot, "src");
 const xpPagePath = path.join(projectRoot, "src/pages/xp-page.tsx");
 
 const articleRoutePattern = /^(?:adv|deeper|more)-[a-z0-9-]+$/;
-const sequenceGroups = ["adventure", "deeper", "received", "rededicated"];
+const sequenceGroups = [
+  "adventure",
+  "deeper",
+  "received",
+  "rededicated",
+  "believer",
+  "no-decision",
+];
 const allowedGroups = new Set([...sequenceGroups, "resources"]);
 
 function readJson(filePath) {

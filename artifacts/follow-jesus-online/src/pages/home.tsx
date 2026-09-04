@@ -105,7 +105,7 @@ export function Home() {
                   Whether you want to be refreshed in the foundations or find clear ways to help others, you are in the right place.
                 </p>
                 <Button asChild className="w-full group-hover:bg-primary/90">
-                  <Link href="/xp/believer">
+                  <Link href="/xp/believer?journey=believer&entry=landing&step=xp">
                     Continue Growing <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
