@@ -37,7 +37,7 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 - Use Playfair Display sparingly as the hero font: primarily hero H1/H2 treatments at weight 600–700.
 - A short phrase may use Playfair Display italic, but avoid setting whole titles in italic.
 - Never use Playfair Display for navigation, menus, labels, buttons, H3 headings, or general interface text.
-- Use Inter for navigation, menus, labels, buttons, H3 headings, and body copy. Navigation should generally use weight 500–600 for clarity.
+- Use Source Sans 3 for navigation, menus, labels, buttons, H3 headings, and body copy. Navigation should generally use weight 500–600 for clarity.
 - Treat the supplied typography role sheet as the visual model for future work.
 
 ## User preferences
