@@ -1,0 +1,106 @@
+Additional items:
+
+- Add bible
+- add hover / click on reference to popup view scripture
+- can we bring people back to their last page when they return?
+- add a button for users to share the page with themselves with no friction
+
+IT Director | JesusOnline Ministries
+jake@jesusonline.com
+903-431-0718
+
+Begin forwarded message:
+
+From:
+Helmut <helmut@jesusonline.com>
+
+Subject:
+JOLF subdomain menu and links
+
+Date:
+August 21, 2026 at 12:56:52 PM PDT
+
+To:
+Jake McCurry <Jake@jesusonline.com>
+
+Cc:
+Jonathan <jonathan@jesusonline.com>
+
+No indexing or crawling any pages on follow.jesusonline.com
+
+URL categories:
+
+URL: follow.jesusonline.com/adv-[name]
+Links to the adventure of living with Jesus articles
+
+URL: follow.jesusonline.com/deeper-[name]    Links to Going Deeper articles
+
+URL: follow.jesusonline.com/more-[name]    Links to more articles from Going Deeper articles
+
+https://follow.jesusonline.com/ <https://follow.jesusonline.com/>
+
+The top banner at follow.jesusonline.com must look identical to the top banner at JOLO & JOLC except the hamburger menu will change to the following:
+
+JOLF MENU:
+
+• Begin the Guide > Links to: follow.jesusonline.com/adv-
+
+• Going to Heaven? > Links to: follow.jesusonline.com/adv-
+
+• Explore Articles > Links to: follow.jesusonline.com/explore-articles
+
+• Rewatch the Video > Links to: follow.jesusonline.com/rewatch
+
+• Read the NET Bible > Links to: follow.jesusonline.com/bible
+
+• Send a Message > Links to: follow.jesusonline.com/message
+
+• Return to Start Page > Links to: follow.jesusonline.com/xp-pages
+
+Begin the Adventure
+
+Links to: follow.jesusonline.com/adv-begin-the-adventure
+
+Citizen of Heaven
+
+Links to: follow.jesusonline.com/adv-citizen-of-heaven
+
+Your New Identity in Christ
+
+Links to: follow.jesusonline.com/adv-your-new-identity-christ
+
+The Holy Spirit – Your Constant Companion
+
+Links to: follow.jesusonline.com/adv-the-holy-spirit
+
+Walking by Faith, Not by Feelings
+
+Links to: follow.jesusonline.com/adv-walking-by-faith
+
+God’s Word – Your Road Map
+
+Links to: follow.jesusonline.com/adv-gods-word
+
+Prayer – Your Ongoing Conversation with God
+
+Links to: follow.jesusonline.com/adv-prayer
+
+Belonging to God’s Family
+
+Links to: follow.jesusonline.com/adv-belonging-to-gods-family
+
+Living a Life of Purpose
+
+Links to: follow.jesusonline.com/adv-living-a-life-of-purpose
+
+Continuing with Jesus
+
+Links to: follow.jesusonline.com/adv-continuing-with-jesus
+
+Additional Resources
+Links to: follow.jesusonline.com/adv-resources
+
+Subject: JOLF subdomain menu and links
+From: Jake McCurry <Jake@jesusonline.com>
+To: "x@mail.asana.com" <x@mail.asana.com>
+Created: Aug 21, 2026 at 9:02pm UTC
