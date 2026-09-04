@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Follow Jesus Online — Color Standards</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+    :root {
+      --navy:#003A66; --blue-900:#004E8A; --blue-800:#006BB3; --blue-700:#007AE0;
+      --blue-600:#0084E6; --blue-500:#0095FF; --blue-400:#33ADFF; --blue-300:#66C2FF;
+      --blue-200:#99D6FF; --blue-100:#CCEBFF; --blue-50:#E6F5FF;
+      --warm-900:#662B00; --warm-800:#994000; --warm-700:#C45100; --warm-600:#E66000;
+      --warm-500:#E87722; --warm-400:#EE9C5D; --warm-300:#FFB580; --warm-200:#FFD2B3;
+      --warm-100:#FFEADB; --warm-50:#FFF6F0;
+      --slate:#2E5A7A; --steel:#4A90B8; --border:#5B9BC4; --paper:#FFFDFB; --white:#FFFFFF;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#dce6ed; color:var(--navy); font-family:"Source Sans 3",sans-serif; font-size:14px; line-height:1.45; }
+    .page { width:210mm; height:297mm; margin:12mm auto; background:var(--paper); padding:18mm; position:relative; overflow:hidden; box-shadow:0 16px 48px rgba(0,58,102,.16); page-break-after:always; }
+    .page:last-child { page-break-after:auto; }
+    .folio { position:absolute; bottom:10mm; left:18mm; right:18mm; display:flex; justify-content:space-between; color:var(--slate); font-size:9px; letter-spacing:.08em; text-transform:uppercase; }
+    .eyebrow { color:var(--warm-700); font-weight:700; letter-spacing:.16em; text-transform:uppercase; font-size:10px; }
+    h1,h2 { font-family:"Playfair Display",serif; margin:0; line-height:1.05; }
+    h1 { font-size:41px; letter-spacing:-.02em; }
+    h2 { font-size:28px; letter-spacing:-.01em; }
+    h3 { margin:0 0 5px; font-size:15px; line-height:1.2; }
+    p { margin:0 0 10px; }
+    .lede { max-width:132mm; font-size:17px; line-height:1.5; color:var(--slate); }
+    .rule { width:30mm; height:4px; background:var(--warm-500); margin:8mm 0; border-radius:99px; }
+    .cover { background:var(--navy); color:white; display:flex; flex-direction:column; justify-content:center; }
+    .cover:before { content:""; position:absolute; width:150mm; height:150mm; border:28mm solid var(--blue-500); border-radius:50%; right:-76mm; top:-53mm; opacity:.95; }
+    .cover:after { content:""; position:absolute; width:92mm; height:92mm; border:18mm solid var(--warm-500); border-radius:50%; left:-52mm; bottom:-42mm; opacity:.96; }
+    .cover .eyebrow { color:var(--blue-200); }
+    .cover h1 { font-size:52px; max-width:135mm; z-index:1; }
+    .cover .lede { color:var(--blue-100); margin-top:8mm; max-width:118mm; z-index:1; }
+    .cover-meta { display:flex; gap:18mm; margin-top:22mm; z-index:1; }
+    .cover-meta div { border-top:1px solid rgba(255,255,255,.35); padding-top:4mm; min-width:43mm; }
+    .cover-meta strong { display:block; font-size:18px; color:white; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:16mm; padding-bottom:8mm; border-bottom:1px solid var(--blue-100); margin-bottom:8mm; }
+    .section-head p { max-width:72mm; color:var(--slate); margin:0; }
+    .swatch-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:4mm; }
+    .swatch { border:1px solid rgba(0,58,102,.12); border-radius:8px; overflow:hidden; background:white; break-inside:avoid; }
+    .chip { height:30mm; padding:4mm; display:flex; align-items:flex-end; font-weight:700; }
+    .swatch-info { padding:3.5mm 4mm 4mm; }
+    .swatch-info strong { display:block; font-size:13px; }
+    .swatch-info span { display:block; color:var(--slate); font-size:9px; line-height:1.5; }
+    .primary-swatch { grid-column:span 2; }
+    .primary-swatch .chip { height:38mm; }
+    .callout { margin-top:7mm; padding:6mm; background:var(--blue-50); border-left:4px solid var(--blue-500); border-radius:0 8px 8px 0; }
+    .callout.warm { background:var(--warm-50); border-color:var(--warm-500); }
+    .callout strong { font-size:15px; display:block; margin-bottom:2mm; }
+    .cols { display:grid; grid-template-columns:1fr 1fr; gap:8mm; }
+    .panel { padding:6mm; background:white; border:1px solid var(--blue-100); border-radius:10px; break-inside:avoid; }
+    .panel h3 { color:var(--blue-900); }
+    .pair { display:grid; grid-template-columns:30mm 1fr; gap:5mm; align-items:center; margin-top:5mm; }
+    .pair-demo { height:22mm; border-radius:7px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px; }
+    .ratio-bar { display:flex; height:24mm; overflow:hidden; border-radius:9px; margin:5mm 0 3mm; color:white; font-weight:700; }
+    .ratio-bar span { display:flex; align-items:center; justify-content:center; }
+    .principles { display:grid; grid-template-columns:repeat(2,1fr); gap:5mm; margin-top:8mm; counter-reset:item; }
+    .principle { padding:6mm; background:white; border:1px solid var(--blue-100); border-radius:9px; min-height:38mm; }
+    .principle:before { counter-increment:item; content:"0" counter(item); color:var(--warm-700); font-weight:700; letter-spacing:.08em; font-size:10px; }
+    .principle h3 { margin-top:2mm; }
+    table { width:100%; border-collapse:collapse; margin-top:5mm; font-size:11px; }
+    th { text-align:left; color:var(--slate); font-size:9px; letter-spacing:.08em; text-transform:uppercase; border-bottom:2px solid var(--blue-100); padding:3mm 2mm; }
+    td { border-bottom:1px solid var(--blue-100); padding:3mm 2mm; vertical-align:top; }
+    .pass { color:#0C6746; font-weight:700; }
+    .limit { color:var(--warm-700); font-weight:700; }
+    .token-block { background:#082E49; color:#E6F5FF; border-radius:10px; padding:6mm; font:10px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace; white-space:pre-wrap; }
+    .dont { color:#A33A00; }
+    ul { margin:3mm 0 0; padding-left:5mm; }
+    li { margin-bottom:2mm; }
+    @page { size:A4; margin:0; }
+    @media print {
+      body { background:white; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+      .page { margin:0; box-shadow:none; }
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="eyebrow">JesusOnline family · Visual identity</div>
+    <div class="rule"></div>
+    <h1>Follow Jesus Online<br>Color Standards</h1>
+    <p class="lede">A durable, accessible color system designed to express trust, clarity, welcome, and spiritual warmth across digital products, campaigns, and future brand touchpoints.</p>
+    <div class="cover-meta">
+      <div><span>Core blue</span><strong>#0095FF</strong></div>
+      <div><span>Structural navy</span><strong>#003A66</strong></div>
+      <div><span>Warm accent</span><strong>#E87722</strong></div>
+    </div>
+    <div class="folio"><span>Color standards · 2026</span><span>01</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div><div class="eyebrow">Foundation</div><h2>Design strategy</h2></div>
+      <p>The palette pairs a confident, trustworthy blue architecture with a restrained warm signal for invitation and human connection.</p>
+    </div>
+    <p class="lede">The system is deliberately asymmetric: blue carries the brand; orange creates emphasis. This hierarchy prevents visual competition and gives every screen a calm, recognizable rhythm.</p>
+    <div class="principles">
+      <div class="principle"><h3>Trust before excitement</h3><p>Deep and mid blues establish credibility. Bright blue is a signal, not a surface default.</p></div>
+      <div class="principle"><h3>Warmth with restraint</h3><p>Orange marks invitations, moments of hope, and selected actions. It should feel meaningful because it is used sparingly.</p></div>
+      <div class="principle"><h3>Depth through value</h3><p>Build hierarchy with lightness—from pale atmospheric backgrounds to navy structure—rather than adding unrelated hues.</p></div>
+      <div class="principle"><h3>Accessible by design</h3><p>Text pairings are assigned by measured contrast. Decorative colors never carry essential meaning alone.</p></div>
+    </div>
+    <div class="callout">
+      <strong>Recommended master proportion: 65 / 25 / 10</strong>
+      <div class="ratio-bar"><span style="width:65%;background:#FFFDFB;color:#003A66">65% neutral space</span><span style="width:25%;background:#006BB3">25% blue</span><span style="width:10%;background:#E87722">10% warm</span></div>
+      <p>For editorial and reading experiences, increase neutral space to 75–85%. For campaign moments, blue may rise to 35%, but orange should rarely exceed 10% of the visible composition.</p>
+    </div>
+    <div class="cols" style="margin-top:7mm">
+      <div class="panel"><h3>Brand character</h3><p>Clear · hopeful · grounded · welcoming · enduring</p></div>
+      <div class="panel"><h3>Visual tension</h3><p>Cool structure + warm humanity. Saturated signal + generous quiet space.</p></div>
+    </div>
+    <div class="folio"><span>Follow Jesus Online</span><span>02</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div><div class="eyebrow">Core system</div><h2>Blue palette</h2></div>
+      <p>Eleven perceptually ordered values—from atmospheric pale blue to structural navy—support both expressive branding and long-form reading.</p>
+    </div>
+    <div class="swatch-grid">
+      <div class="swatch primary-swatch"><div class="chip" style="background:#0095FF;color:#003A66">Blue 500 · Brand</div><div class="swatch-info"><strong>#0095FF</strong><span>OKLCH 66.0% 0.188 250.2</span><span>Menus, links, focus, icon accents</span></div></div>
+      <div class="swatch primary-swatch"><div class="chip" style="background:#003A66;color:white">Blue 950 · Navy</div><div class="swatch-info"><strong>#003A66</strong><span>OKLCH 34.1% 0.094 248.8</span><span>Text, footer, premium structure</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#E6F5FF">50</div><div class="swatch-info"><strong>#E6F5FF</strong><span>96.2% 0.021 236.8</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#CCEBFF">100</div><div class="swatch-info"><strong>#CCEBFF</strong><span>92.4% 0.043 236.2</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#99D6FF">200</div><div class="swatch-info"><strong>#99D6FF</strong><span>84.9% 0.085 238.5</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#66C2FF">300</div><div class="swatch-info"><strong>#66C2FF</strong><span>78.2% 0.124 240.0</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#33ADFF">400</div><div class="swatch-info"><strong>#33ADFF</strong><span>72.0% 0.158 243.7</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#0084E6;color:white">600</div><div class="swatch-info"><strong>#0084E6</strong><span>60.7% 0.176 250.8</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#007AE0;color:white">700</div><div class="swatch-info"><strong>#007AE0</strong><span>58.0% 0.179 253.1</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#006BB3;color:white">800 · Hero</div><div class="swatch-info"><strong>#006BB3</strong><span>51.6% 0.140 248.2</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#004E8A;color:white">900</div><div class="swatch-info"><strong>#004E8A</strong><span>41.8% 0.119 250.2</span></div></div>
+    </div>
+    <div class="callout"><strong>Signature combination</strong><p>Use Blue 800 (#006BB3) for large hero fields, Blue 500 (#0095FF) for branded signals, and Navy (#003A66) for type and structure. This creates depth without sacrificing recognition.</p></div>
+    <div class="folio"><span>Blue palette</span><span>03</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div><div class="eyebrow">Human accent</div><h2>Warm palette</h2></div>
+      <p>A focused orange scale adds welcome and energy. Its yellow-red balance feels human and optimistic without becoming playful or juvenile.</p>
+    </div>
+    <div class="swatch-grid">
+      <div class="swatch primary-swatch"><div class="chip" style="background:#E87722;color:#003A66">Warm 500 · Accent</div><div class="swatch-info"><strong>#E87722</strong><span>OKLCH 68.7% 0.166 51.4</span><span>Rules, highlights, decorative emphasis</span></div></div>
+      <div class="swatch primary-swatch"><div class="chip" style="background:#C45100;color:white">Warm 700 · Action</div><div class="swatch-info"><strong>#C45100</strong><span>OKLCH 57.7% 0.164 45.3</span><span>Accessible buttons with white text</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFF6F0">50</div><div class="swatch-info"><strong>#FFF6F0</strong><span>97.8% 0.013 56.3</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFEADB">100</div><div class="swatch-info"><strong>#FFEADB</strong><span>95.0% 0.030 57.9</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFD2B3">200</div><div class="swatch-info"><strong>#FFD2B3</strong><span>89.5% 0.065 56.3</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFB580">300</div><div class="swatch-info"><strong>#FFB580</strong><span>83.1% 0.110 56.2</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#EE9C5D">400</div><div class="swatch-info"><strong>#EE9C5D</strong><span>76.2% 0.126 56.9</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#E66000;color:white">600</div><div class="swatch-info"><strong>#E66000</strong><span>65.0% 0.185 45.2</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#994000;color:white">800</div><div class="swatch-info"><strong>#994000</strong><span>48.4% 0.135 46.7</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#662B00;color:white">900</div><div class="swatch-info"><strong>#662B00</strong><span>36.6% 0.098 49.1</span></div></div>
+    </div>
+    <div class="callout warm">
+      <strong>Critical distinction: accent versus action</strong>
+      <p>Warm 500 is the recognizable orange but reaches only 2.96:1 against white. Use it decoratively or with Navy text. For white text on an orange button, use Warm 700, which reaches 4.64:1 and passes WCAG AA.</p>
+    </div>
+    <div class="folio"><span>Warm palette</span><span>04</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div><div class="eyebrow">Supporting roles</div><h2>Neutrals & pairings</h2></div>
+      <p>These supporting values keep the chromatic palettes disciplined and create an editorial, premium reading environment.</p>
+    </div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#FFFDFB">Warm paper</div><div class="swatch-info"><strong>#FFFDFB</strong><span>Primary editorial canvas</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFFFFF">White</div><div class="swatch-info"><strong>#FFFFFF</strong><span>Cards and clear space</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#2E5A7A;color:white">Slate</div><div class="swatch-info"><strong>#2E5A7A</strong><span>Secondary text</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#5B9BC4;color:#003A66">Border blue</div><div class="swatch-info"><strong>#5B9BC4</strong><span>Dividers and controls</span></div></div>
+    </div>
+    <div class="cols" style="margin-top:8mm">
+      <div class="panel">
+        <h3>Core editorial pairing</h3>
+        <div class="pair"><div class="pair-demo" style="background:#FFFDFB;color:#003A66">Aa</div><div><strong>Navy on warm paper</strong><br>Long-form reading, headings, navigation</div></div>
+        <div class="pair"><div class="pair-demo" style="background:#E6F5FF;color:#003A66">Aa</div><div><strong>Navy on Blue 50</strong><br>Callouts, study tools, gentle panels</div></div>
+        <div class="pair"><div class="pair-demo" style="background:#FFEADB;color:#003A66">Aa</div><div><strong>Navy on Warm 100</strong><br>Invitations and reflective prompts</div></div>
+      </div>
+      <div class="panel">
+        <h3>High-impact pairing</h3>
+        <div class="pair"><div class="pair-demo" style="background:#006BB3;color:white">Aa</div><div><strong>White on Blue 800</strong><br>Hero fields and section banners</div></div>
+        <div class="pair"><div class="pair-demo" style="background:#003A66;color:white">Aa</div><div><strong>White on Navy</strong><br>Footer and premium structure</div></div>
+        <div class="pair"><div class="pair-demo" style="background:#C45100;color:white">Aa</div><div><strong>White on Warm 700</strong><br>Invitational actions</div></div>
+      </div>
+    </div>
+    <h3 style="margin-top:9mm">Color relationship rules</h3>
+    <ul>
+      <li>Place orange near blue to create focus, not across every blue surface.</li>
+      <li>Prefer warm paper over cool gray when a softer, pastoral tone is desired.</li>
+      <li>Use Slate for supporting copy; reserve Navy for essential reading and hierarchy.</li>
+      <li>Use Blue 500 at small-to-medium scale. For large fields, move to Blue 800 or Navy.</li>
+    </ul>
+    <div class="folio"><span>Neutrals and pairings</span><span>05</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div><div class="eyebrow">Inclusive design</div><h2>Contrast standards</h2></div>
+      <p>Contrast is assigned by role. Passing ratios do not automatically make a pairing elegant; hierarchy and restraint still apply.</p>
+    </div>
+    <table>
+      <thead><tr><th>Pairing</th><th>Ratio</th><th>Status</th><th>Approved use</th></tr></thead>
+      <tbody>
+        <tr><td>Navy #003A66 on White</td><td>11.69:1</td><td class="pass">AAA</td><td>All text sizes</td></tr>
+        <tr><td>Slate #2E5A7A on White</td><td>7.34:1</td><td class="pass">AAA</td><td>Body and supporting text</td></tr>
+        <tr><td>White on Blue 800 #006BB3</td><td>5.59:1</td><td class="pass">AA</td><td>Hero copy, buttons, banners</td></tr>
+        <tr><td>White on Blue 900 #004E8A</td><td>8.55:1</td><td class="pass">AAA</td><td>All text sizes</td></tr>
+        <tr><td>White on Warm 700 #C45100</td><td>4.64:1</td><td class="pass">AA</td><td>Buttons and text-bearing actions</td></tr>
+        <tr><td>Navy on Warm 500 #E87722</td><td>3.95:1</td><td class="limit">Large/UI only</td><td>Large labels and graphic elements</td></tr>
+        <tr><td>White on Blue 500 #0095FF</td><td>3.11:1</td><td class="limit">Large/UI only</td><td>Large bold type or non-text controls</td></tr>
+        <tr><td>White on Warm 500 #E87722</td><td>2.96:1</td><td class="dont">Do not use</td><td>Decorative only; switch to Warm 700</td></tr>
+      </tbody>
+    </table>
+    <div class="cols" style="margin-top:9mm">
+      <div class="callout" style="margin:0"><strong>Interaction</strong><p>Maintain a 3:1 boundary contrast for controls and focus indicators. Never use color as the sole signal for errors, selection, or completion.</p></div>
+      <div class="callout warm" style="margin:0"><strong>Typography</strong><p>Body text: minimum 16px. Captions: minimum 12px. Playfair Display is reserved for large hero and page titles; Source Sans 3 handles all interface copy.</p></div>
+    </div>
+    <h3 style="margin-top:10mm">Accessibility operating rule</h3>
+    <p class="lede">When in doubt, move darker—not more saturated. Darker blue preserves the brand while improving legibility; darker orange preserves warmth while supporting white text.</p>
+    <div class="folio"><span>Contrast standards</span><span>06</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div><div class="eyebrow">Application</div><h2>Usage architecture</h2></div>
+      <p>A consistent role assignment is more valuable than using every shade. These rules make the palette scalable across teams and years.</p>
+    </div>
+    <div class="principles">
+      <div class="principle"><h3>Hero surfaces</h3><p>Default to Blue 800. Add subtle Blue 700 or Blue 900 depth. Never use Blue 500 as a full hero field.</p></div>
+      <div class="principle"><h3>Navigation</h3><p>Blue 500 is the recognizable menu signal. Navy may be used for premium or content-dense navigation.</p></div>
+      <div class="principle"><h3>Reading surfaces</h3><p>Warm Paper or White with Navy text. Blue 50 and Warm 50 support low-intensity section changes.</p></div>
+      <div class="principle"><h3>Primary actions</h3><p>Use Blue 800 with white for dependable actions. Use Warm 700 for a single invitational action per view.</p></div>
+      <div class="principle"><h3>Decorative emphasis</h3><p>Warm 500 marks rules, underlines, icons, pull quotes, and moments of hope. Keep areas small.</p></div>
+      <div class="principle"><h3>Borders and states</h3><p>Blue 100 for soft cards, Border Blue for controls, Blue 500 for focus, Blue 50 for selected backgrounds.</p></div>
+    </div>
+    <div class="cols" style="margin-top:8mm">
+      <div class="panel"><h3>Do</h3><ul><li>Create hierarchy through lightness.</li><li>Allow large neutral areas.</li><li>Use one warm focal point.</li><li>Test final color pairs in context.</li></ul></div>
+      <div class="panel"><h3 class="dont">Avoid</h3><ul><li>Equal areas of bright blue and orange.</li><li>Blue 500 as a page-sized background.</li><li>White body copy on Warm 500.</li><li>Unapproved teal, purple, or yellow accents.</li></ul></div>
+    </div>
+    <div class="callout"><strong>Long-term governance</strong><p>New colors should solve a documented functional need, pass contrast review, and fit the existing blue/warm hue families. Do not add colors merely to create novelty.</p></div>
+    <div class="folio"><span>Usage architecture</span><span>07</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-head">
+      <div><div class="eyebrow">Handoff</div><h2>Authoritative tokens</h2></div>
+      <p>Use semantic names in product code. Raw palette values are foundations; semantic tokens preserve intent when themes evolve.</p>
+    </div>
+    <div class="token-block">/* Core palette */
+--blue-50: #E6F5FF;   --blue-100: #CCEBFF;
+--blue-200: #99D6FF;  --blue-300: #66C2FF;
+--blue-400: #33ADFF;  --blue-500: #0095FF;
+--blue-600: #0084E6;  --blue-700: #007AE0;
+--blue-800: #006BB3;  --blue-900: #004E8A;
+--blue-950: #003A66;
+
+--warm-50: #FFF6F0;   --warm-100: #FFEADB;
+--warm-200: #FFD2B3;  --warm-300: #FFB580;
+--warm-400: #EE9C5D;  --warm-500: #E87722;
+--warm-600: #E66000;  --warm-700: #C45100;
+--warm-800: #994000;  --warm-900: #662B00;
+
+/* Semantic roles */
+--color-brand: var(--blue-500);
+--color-hero: var(--blue-800);
+--color-structure: var(--blue-950);
+--color-text: var(--blue-950);
+--color-text-muted: #2E5A7A;
+--color-surface: #FFFDFB;
+--color-surface-soft: var(--blue-50);
+--color-border-soft: var(--blue-100);
+--color-border-control: #5B9BC4;
+--color-focus: var(--blue-500);
+--color-accent: var(--warm-500);
+--color-action-warm: var(--warm-700);</div>
+    <div class="cols" style="margin-top:8mm">
+      <div class="panel"><h3>Typography companion</h3><p><strong>Display:</strong> Playfair Display 600–700<br><strong>Interface & body:</strong> Source Sans 3 400–700</p></div>
+      <div class="panel"><h3>Source of truth</h3><p>Hex values are authoritative for production handoff. OKLCH values in this guide support perceptual review and future ramp extension.</p></div>
+    </div>
+    <div class="callout warm"><strong>Final design principle</strong><p>Blue creates the place; orange creates the moment. Preserve that relationship and the identity will remain coherent across products, platforms, and time.</p></div>
+    <div class="folio"><span>Authoritative tokens</span><span>08</span></div>
+  </section>
+</body>
+</html>

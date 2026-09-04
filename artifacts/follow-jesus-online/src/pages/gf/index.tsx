@@ -15,7 +15,7 @@ export function GoFurtherPage() {
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-8 text-balance">
             The short guide showed you the path. These books walk it with you for a longer stretch.
           </h1>
-          <div className="w-12 h-1 bg-primary/20 mx-auto rounded-full mb-8"></div>
+          <div className="w-12 h-1 bg-warm-accent mx-auto rounded-full mb-8"></div>
           <div className="space-y-4 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             <p>
               Each one takes a single part of your new life and gives it room—your heart, your identity, the greatness of God, the Spirit’s presence, and the habits of growing up in Christ.

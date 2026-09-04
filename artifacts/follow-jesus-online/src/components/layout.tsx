@@ -10,15 +10,15 @@ export function Layout({ children }: { children: ReactNode }) {
     <div className="min-h-[100dvh] flex flex-col bg-background selection:bg-primary/20">
       <a
         href="#main-content"
-        className="sr-only fixed left-4 top-4 z-50 rounded-sm bg-white px-4 py-2 font-semibold text-[#073192] shadow-md focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-[#073192]"
+        className="sr-only fixed left-4 top-4 z-50 rounded-sm bg-white px-4 py-2 font-semibold text-foreground shadow-md focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-primary"
       >
         Skip to main content
       </a>
-      <header className="relative sticky top-0 z-40 w-full bg-[#0095ff] shadow-sm">
+      <header className="relative sticky top-0 z-40 w-full bg-primary shadow-sm">
         <div className="mx-auto flex h-16 max-w-[1800px] items-center justify-between px-5 sm:px-8 md:h-[70px]">
           <Link
             href="/"
-            className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0095ff]"
+            className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
             aria-label="JesusOnline home"
           >
             <img
@@ -32,7 +32,7 @@ export function Layout({ children }: { children: ReactNode }) {
           <button
             type="button"
             onClick={() => setIsMenuOpen((open) => !open)}
-            className="flex items-center gap-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white text-white font-medium tracking-wide"
+            className="flex items-center gap-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white text-white font-medium tracking-wide font-sans"
             aria-expanded={isMenuOpen}
             aria-controls="site-menu"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -48,35 +48,35 @@ export function Layout({ children }: { children: ReactNode }) {
         {isMenuOpen && (
           <nav
             id="site-menu"
-            className="absolute right-5 top-full w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-b-xl border border-[#dbe8f5] bg-white shadow-xl sm:right-8"
+            className="absolute right-5 top-full w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-b-xl border border-border bg-card shadow-xl sm:right-8"
             aria-label="Main navigation"
           >
             <div className="flex flex-col p-2">
               <Link
                 href="/adv-begin-the-adventure"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-[#e7eef6] px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Begin the Guide
               </Link>
               <Link
                 href="/gf/"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-[#e7eef6] px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Go Further
               </Link>
               <Link
                 href="/adv-citizen-of-heaven"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-[#e7eef6] px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Going to Heaven?
               </Link>
               <Link
                 href="/rewatch"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-[#e7eef6] px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Rewatch the Video
               </Link>
@@ -86,35 +86,35 @@ export function Layout({ children }: { children: ReactNode }) {
                   setIsMenuOpen(false)
                   setIsBibleDialogOpen(true)
                 }}
-                className="border-b border-[#e7eef6] px-4 py-3 text-left text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+                className="border-b border-muted px-4 py-3 text-left text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Read the NET Bible
               </button>
               <Link
                 href="/bible/saved"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-[#e7eef6] px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Saved Bible Items
               </Link>
               <Link
                 href="/adv-prayer"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-[#e7eef6] px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Connect with God
               </Link>
               <Link
                 href="/message"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-[#e7eef6] px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Send a Message
               </Link>
               <Link
                 href="/xp-pages"
                 onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 text-base font-semibold text-[#073192] transition-colors hover:bg-[#f1f7ff] hover:text-[#0095ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095ff]"
+                className="px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Return to Start Page
               </Link>
@@ -128,12 +128,12 @@ export function Layout({ children }: { children: ReactNode }) {
         {children}
       </main>
 
-      <footer className="mt-12 border-t bg-[#003a66] py-9 text-white">
-        <div className="mx-auto max-w-4xl px-6 text-center text-sm text-white/80">
+      <footer className="mt-12 border-t border-foreground/10 bg-foreground py-9 text-primary-foreground">
+        <div className="mx-auto max-w-4xl px-6 text-center text-sm text-primary-foreground/80">
           <p>© {new Date().getFullYear()} JesusOnline Ministries. All rights reserved.</p>
           <a
             href="https://jesusonlineministries.org/privacy-policy/"
-            className="mt-3 inline-block underline underline-offset-4 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#003a66]"
+            className="mt-3 inline-block underline underline-offset-4 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-foreground"
           >
             Privacy Policy
           </a>

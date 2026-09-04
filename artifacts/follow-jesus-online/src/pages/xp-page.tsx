@@ -153,7 +153,7 @@ export function XPPage() {
         
         {/* Header Section */}
         <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-6"></div>
+          <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full mb-6"></div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             {content.title}
           </h1>
@@ -241,7 +241,7 @@ export function XPPage() {
           <p className="text-lg opacity-90 max-w-xl mx-auto mb-8">
             {content.contactText}
           </p>
-          <Button asChild size="lg" variant="default" className="shadow-md">
+          <Button asChild size="lg" variant="warm" className="shadow-md">
             <Link href="/message">Send a Message</Link>
           </Button>
         </div>

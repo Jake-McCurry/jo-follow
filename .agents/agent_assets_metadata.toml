@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "7jY_kS2ZBhWuOmjgdj7Yi"
+uri = "file://deliverables/follow-jesus-online-color-standards.pdf"
+type = "pdf"
+title = "Follow Jesus Online Color Standards"
+description = "Eight-page professional color guide covering the complete blue and warm palettes, pairing strategy, accessibility, usage ratios, semantic roles, and production tokens."
+logical_id = "271eb334-5714-491c-89ab-e18f818d84ec"
+content_hash = "sha256:bba48cdba54958f669c2f81066521e12861d4d4e578b6a531c2637bf8ef7f41e"
+size = 448349
+mtime_ms = 1788556943571
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/271eb334-5714-491c-89ab-e18f818d84ec/4b8b164d-66f3-4b3a-8e33-5e432c3b4419"
+storage_version_token = "1788556995131372"
+content_type = "application/pdf"

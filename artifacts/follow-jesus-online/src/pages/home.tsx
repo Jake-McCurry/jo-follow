@@ -20,14 +20,14 @@ export function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative bg-primary text-primary-foreground py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary"></div>
+      <section className="relative bg-[#006BB3] text-white py-16 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#007AE0]/30 to-[#004E8A]/35"></div>
         
         <div className="container relative z-10 px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white text-balance leading-tight">
             Walking with Jesus
           </h1>
-          <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
             Whether you are just beginning, returning, or have followed Him for years, you are welcome here.
           </p>
         </div>
@@ -57,7 +57,7 @@ export function Home() {
         <section className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Where Would You Like to Begin?</h2>
-            <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+            <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
@@ -126,7 +126,7 @@ export function Home() {
               <img src={guideCoverUrl} alt="The Adventure of Living with Jesus Guide" className="w-full max-w-[200px] md:max-w-full rounded-xl shadow-lg border border-border/20 rotate-[-2deg] hover:rotate-0 transition-transform duration-500" />
             </div>
             <div className="flex-1 space-y-4 text-center md:text-left">
-              <div className="inline-block px-3 py-1 bg-secondary-foreground/10 text-secondary-foreground text-xs font-bold uppercase tracking-wider rounded-full mb-2">
+              <div className="inline-block px-3 py-1 bg-warm-accent/15 text-warm-accent text-xs font-bold uppercase tracking-wider rounded-full mb-2">
                 Featured Guide
               </div>
               <h2 className="text-3xl font-bold text-secondary-foreground">The Adventure of Living with Jesus</h2>
@@ -135,7 +135,7 @@ export function Home() {
               </p>
             </div>
             <div className="shrink-0 flex flex-col sm:flex-row gap-4 w-full md:w-auto mt-6 md:mt-0">
-              <Button asChild size="lg" className="px-8 shadow-md">
+              <Button asChild size="lg" variant="warm" className="px-8 shadow-md">
                 <Link href="/adv-begin-the-adventure">Start the Guide</Link>
               </Button>
               <ShareButton
@@ -184,7 +184,7 @@ export function Home() {
           <p className="text-muted-foreground mb-8">
             If something is on your mind or you would simply like help finding the right resource, feel free to reach out.
           </p>
-          <Button asChild size="lg" variant="outline" className="border-primary/20 hover:bg-primary/10 hover:text-primary">
+          <Button asChild size="lg" variant="warm" className="shadow-md">
             <Link href="/message">Send a Message</Link>
           </Button>
         </section>

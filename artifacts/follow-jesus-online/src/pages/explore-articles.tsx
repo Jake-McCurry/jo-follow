@@ -82,7 +82,7 @@ export function ExploreArticlesPage() {
       <div className="container mx-auto px-5 sm:px-8 py-16 max-w-5xl">
         <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Explore Articles</h1>
-          <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+          <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
           <p className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto">
             Resources and guides to help you understand your faith and walk with Jesus every day.
           </p>

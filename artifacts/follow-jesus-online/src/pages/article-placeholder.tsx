@@ -264,7 +264,7 @@ export function ArticlePlaceholder() {
             <p className="mx-auto mt-3 max-w-xl leading-relaxed opacity-90">
               If something is on your heart or you would like help taking your next step, you’re welcome to send a message.
             </p>
-            <Button asChild className="mt-6 shadow-sm">
+            <Button asChild variant="warm" className="mt-6 shadow-sm">
               <Link href="/message">Send a Message</Link>
             </Button>
           </div>

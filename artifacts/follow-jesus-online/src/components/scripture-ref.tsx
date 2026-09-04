@@ -75,7 +75,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
         collisionPadding={16}
       >
         <div className="space-y-3">
-          <h4 className="font-serif font-bold text-lg text-foreground border-b pb-2">
+          <h4 className="font-sans font-bold text-lg text-foreground border-b pb-2">
             {data?.reference || reference}
           </h4>
           
