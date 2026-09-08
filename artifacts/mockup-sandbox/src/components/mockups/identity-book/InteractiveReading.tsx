@@ -245,8 +245,11 @@ export function InteractiveReading() {
               style={{ color: colors.accent }}
             >
               {reflectionSaved ? <Check className="h-4 w-4" /> : null}
-              {reflectionSaved ? "Saved on this device" : "Keep this reflection"}
+              {reflectionSaved ? "Saved only on this device" : "Keep this reflection"}
             </button>
+            <p className="mt-2 text-xs leading-5" style={{ color: colors.muted }}>
+              Not synced or backed up. This reflection can be lost if you clear browser data or change devices.
+            </p>
           </section>
 
           <div className="mt-7 flex items-center justify-between">

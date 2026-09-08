@@ -133,7 +133,7 @@ export function InteractiveContents() {
   const activeReading = activeIndex === null ? null : readings[activeIndex];
   const progress = activeIndex === null ? 0 : ((activeIndex + 1) / readings.length) * 100;
   const visibleReadings = showAll ? readings : readings.slice(0, 4);
-  const statusText = useMemo(() => (saved ? "Saved on this device" : "Private note, saved here"), [saved]);
+  const statusText = useMemo(() => (saved ? "Saved only on this device" : "Private note, stored only here"), [saved]);
 
   const openReading = (index: number) => {
     setActiveIndex(index);
@@ -205,6 +205,7 @@ export function InteractiveContents() {
                 <span className="text-xs text-[var(--slate)]">{statusText}</span>
                 <button onClick={() => setSaved(true)} className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--blue-800)]">{saved ? <Check className="h-4 w-4" /> : <Send className="h-4 w-4" />} {saved ? "Saved" : "Keep this note"}</button>
               </div>
+              <p className="mt-3 text-xs leading-5 text-[var(--slate)]">Not synced or backed up. This note can be lost if you clear browser data or change devices.</p>
             </div>
           </article>
           <nav className="mt-12 grid grid-cols-2 gap-3 border-t border-current/10 pt-6">
