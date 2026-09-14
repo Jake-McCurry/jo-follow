@@ -136,7 +136,7 @@ export function Home() {
             </div>
             <div className="shrink-0 flex flex-col sm:flex-row gap-4 w-full md:w-auto mt-6 md:mt-0">
               <Button asChild size="lg" variant="warm" className="px-8 shadow-md">
-                <Link href="/adv-begin-the-adventure">Start the Guide</Link>
+                <Link href="/adv/begin-the-adventure">Start the Guide</Link>
               </Button>
               <ShareButton
                 title="The Adventure of Living with Jesus"

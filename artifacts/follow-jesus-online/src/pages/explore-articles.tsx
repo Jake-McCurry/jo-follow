@@ -9,63 +9,63 @@ const ARTICLES = [
   {
     title: "Begin the Adventure",
     desc: "Discover the greatest journey of your life—learning to live each day with Jesus.",
-    link: "/adv-begin-the-adventure",
+    link: "/adv/begin-the-adventure",
     icon: Compass
   },
   {
     title: "Citizen of Heaven",
     desc: "The Bible says you can be certain you will go to Heaven when you die.",
-    link: "/adv-citizen-of-heaven",
-    deeper: { label: "Assurance of Your Salvation", link: "/deeper-assurance-of-your-salvation" },
+    link: "/adv/citizen-of-heaven",
+    deeper: { label: "Assurance of Your Salvation", link: "/deeper/assurance-of-your-salvation" },
     icon: Shield
   },
   {
     title: "Your New Identity in Christ",
     desc: "See yourself the way God now sees you—and watch how that new identity changes everything.",
-    link: "/adv-your-new-identity-christ",
+    link: "/adv/your-new-identity-christ",
     icon: User
   },
   {
     title: "The Holy Spirit – Your Constant Companion",
     desc: "Meet the personal presence of God who walks with you, guides you, and never leaves your side.",
-    link: "/adv-the-holy-spirit",
+    link: "/adv/the-holy-spirit",
     icon: Heart
   },
   {
     title: "Walking by Faith, Not by Feelings",
     desc: "Learn to trust God steadily even when your emotions rise and fall like the weather.",
-    link: "/adv-walking-by-faith",
-    deeper: { label: "Faith: Knowing Who You Can Trust", link: "/deeper-faith-knowing-who-you-can-trust" },
+    link: "/adv/walking-by-faith",
+    deeper: { label: "Faith: Knowing Who You Can Trust", link: "/deeper/faith-knowing-who-you-can-trust" },
     icon: Footprints
   },
   {
     title: "God’s Word – Your Road Map",
     desc: "Let Scripture become the clear, trustworthy guide that keeps you on the right path.",
-    link: "/adv-gods-word",
+    link: "/adv/gods-word",
     icon: Book
   },
   {
     title: "Prayer – Your Ongoing Conversation with God",
     desc: "Turn prayer from a duty into a natural, ongoing conversation with the One who loves you most.",
-    link: "/adv-prayer",
+    link: "/adv/prayer",
     icon: MessageCircle
   },
   {
     title: "Belonging to God’s Family",
     desc: "Step into the rich community of believers who walk beside you as true family.",
-    link: "/adv-belonging-to-gods-family",
+    link: "/adv/belonging-to-gods-family",
     icon: Users
   },
   {
     title: "Living a Life of Purpose",
     desc: "Uncover the unique design God has for your life and begin living it with confidence.",
-    link: "/adv-living-a-life-of-purpose",
+    link: "/adv/living-a-life-of-purpose",
     icon: Target
   },
   {
     title: "Continuing with Jesus",
     desc: "Keep growing in your relationship with Jesus so the adventure of following Him never ends.",
-    link: "/adv-continuing-with-jesus",
+    link: "/adv/continuing-with-jesus",
     icon: RefreshCw
   },
 ];
@@ -140,7 +140,7 @@ export function ExploreArticlesPage() {
             {deeperArticles.map((article) => (
               <Link
                 key={article.slug}
-                href={`/${article.slug}`}
+                href={article.slug.replace(/^((?:adv|deeper))-/, "/$1/")}
                 className="group rounded-xl border border-border/60 bg-card p-5 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
               >
                 <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary">{article.title}</h3>

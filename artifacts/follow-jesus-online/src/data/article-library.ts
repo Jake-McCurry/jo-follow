@@ -79,6 +79,20 @@ export function getArticleBySlug(slug: string) {
   return ARTICLE_LIBRARY.find((article) => article.slug === slug);
 }
 
+export function getArticlePath(slug: string) {
+  if (slug.startsWith("adv-")) return `/adv/${slug.slice("adv-".length)}`;
+  if (slug.startsWith("deeper-")) return `/deeper/${slug.slice("deeper-".length)}`;
+  return `/${slug}`;
+}
+
+export function getArticleSlugFromPath(pathname: string) {
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 2 && (segments[0] === "adv" || segments[0] === "deeper")) {
+    return `${segments[0]}-${segments[1]}`;
+  }
+  return segments.length === 1 ? segments[0] : undefined;
+}
+
 export function getArticlesInGroup(group: ArticleGroup) {
   return ARTICLE_LIBRARY
     .filter((article) => article.group === group)

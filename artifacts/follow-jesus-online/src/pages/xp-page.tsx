@@ -188,7 +188,7 @@ export function XPPage() {
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Button asChild size="lg" className="text-base h-14 px-8">
-                  <Link href="/adv-begin-the-adventure">
+                  <Link href="/adv/begin-the-adventure">
                     Begin This Short Guide
                   </Link>
                 </Button>

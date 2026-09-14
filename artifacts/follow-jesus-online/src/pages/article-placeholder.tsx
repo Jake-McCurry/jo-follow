@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
-import { Link, useParams } from "wouter";
+import { Link, useLocation, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, BookOpen, HelpCircle, MessageCircle } from "lucide-react";
 import { ScriptureRef } from "@/components/scripture-ref";
 import { useTrackRecentPage } from "@/hooks/use-recent-page";
@@ -8,6 +8,7 @@ import NotFound from "@/pages/not-found";
 import { ShareButton } from "@/components/share-button";
 import {
   getArticleBySlug,
+  getArticlePath,
   getArticlesInGroup,
   type ArticleBlock,
 } from "@/data/article-library";
@@ -96,7 +97,7 @@ function ArticleBlockView({ block }: { block: ArticleBlock }) {
     return (
       <p className="my-5">
         <Link
-          href={block.href}
+          href={block.href.replace(/^\/(adv|deeper)-/, "/$1/")}
           className="inline-flex items-center font-semibold text-primary underline decoration-primary/30 underline-offset-4 hover:text-primary/80"
         >
           <RichText text={block.text} />
@@ -126,8 +127,14 @@ function groupLabel(group: ArticleBlock["type"] | string) {
 export function ArticlePlaceholder() {
   useTrackRecentPage();
   const params = useParams();
+  const [location] = useLocation();
+  const routeGroup = location.split("?")[0].split("/").filter(Boolean)[0];
+  const articleSlug =
+    routeGroup === "adv" || routeGroup === "deeper"
+      ? `${routeGroup}-${params.slug || ""}`
+      : params.slug || "";
 
-  const article = getArticleBySlug(params.slug || "");
+  const article = getArticleBySlug(articleSlug);
   if (!article) return <NotFound />;
 
   const groupArticles = getArticlesInGroup(article.group);
@@ -142,7 +149,7 @@ export function ArticlePlaceholder() {
   );
   const articleHref = (slug: string) => {
     const journey = currentSearch.get("journey");
-    if (!journey) return `/${slug}`;
+    if (!journey) return getArticlePath(slug);
 
     const journeyParams = new URLSearchParams({
       journey,
@@ -150,7 +157,7 @@ export function ArticlePlaceholder() {
       from: "faq",
       step: "faq",
     });
-    return `/${slug}?${journeyParams.toString()}`;
+    return `${getArticlePath(slug)}?${journeyParams.toString()}`;
   };
 
   return (

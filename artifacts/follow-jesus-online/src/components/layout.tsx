@@ -53,7 +53,7 @@ export function Layout({ children }: { children: ReactNode }) {
           >
             <div className="flex flex-col p-2">
               <Link
-                href="/adv-begin-the-adventure"
+                href="/adv/begin-the-adventure"
                 onClick={() => setIsMenuOpen(false)}
                 className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
@@ -67,7 +67,7 @@ export function Layout({ children }: { children: ReactNode }) {
                 Go Further
               </Link>
               <Link
-                href="/adv-citizen-of-heaven"
+                href="/adv/citizen-of-heaven"
                 onClick={() => setIsMenuOpen(false)}
                 className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
@@ -98,7 +98,7 @@ export function Layout({ children }: { children: ReactNode }) {
                 Saved Bible Items
               </Link>
               <Link
-                href="/adv-prayer"
+                href="/adv/prayer"
                 onClick={() => setIsMenuOpen(false)}
                 className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
