@@ -1,0 +1,102 @@
+[
+  {
+    "file": "0_The_Need_for_a_New_Heart_(Go_Deeper)_v.090926JF_1789422340704.docx",
+    "slug": "deeper-the-need-for-a-new-heart",
+    "title": "The Need for a New Heart",
+    "order": 0,
+    "continuation": {
+      "label": "Continue the Adventure: Citizen of Heaven",
+      "href": "/adv/citizen-of-heaven"
+    }
+  },
+  {
+    "file": "1_The_Gift_of_Eternal_Life_(Go_Deeper)_v.090926JF_1789422343077.docx",
+    "slug": "deeper-the-gift-of-eternal-life",
+    "title": "The Gift of Eternal Life",
+    "order": 1,
+    "continuation": {
+      "label": "Continue the Adventure: Your New Identity in Christ",
+      "href": "/adv/your-new-identity-christ"
+    }
+  },
+  {
+    "file": "2_Embracing_Your_Identity_(Go_Deeper)_v.090926JF_1789422345352.docx",
+    "slug": "deeper-embracing-your-new-identity-in-christ",
+    "title": "Embracing Your New Identity in Christ",
+    "order": 2,
+    "continuation": {
+      "label": "Continue the Adventure: The Holy Spirit—Your Constant Companion",
+      "href": "/adv/the-holy-spirit"
+    }
+  },
+  {
+    "file": "3_Living_an_Empowered_Life_(Go_Deeper)_v.090926JF_1789422347972.docx",
+    "slug": "deeper-living-an-empowered-life",
+    "title": "Living an Empowered Life",
+    "order": 3,
+    "continuation": {
+      "label": "Continue the Adventure: Walking by Faith, Not by Feelings",
+      "href": "/adv/walking-by-faith"
+    }
+  },
+  {
+    "file": "4_Faith_Knowing_God_Who_Is_Trustworthy_(Go_Deeper)_v.090926JF_1789422351578.docx",
+    "slug": "deeper-faith-knowing-god-who-is-trustworthy",
+    "title": "Faith: Knowing God Who Is Trustworthy",
+    "order": 4,
+    "continuation": {
+      "label": "Continue the Adventure: God’s Word—Your Road Map",
+      "href": "/adv/gods-word"
+    }
+  },
+  {
+    "file": "5_Renewing_the_Mind_for_Transformation_(Go_Deeper)_v.090926JF_1789422354696.docx",
+    "slug": "deeper-renewing-the-mind-for-transformation",
+    "title": "Renewing the Mind for Transformation",
+    "order": 5,
+    "continuation": {
+      "label": "Continue the Adventure: Prayer—Your Ongoing Conversation with God",
+      "href": "/adv/prayer"
+    }
+  },
+  {
+    "file": "6_Lord's_Prayer_Guide_Overview_(God_Deeper)_v.090926JF_1789422357358.docx",
+    "slug": "deeper-the-lords-prayer-guide",
+    "title": "The Lord’s Prayer Guide",
+    "order": 6,
+    "continuation": {
+      "label": "Continue the Adventure: Belonging to God’s Family",
+      "href": "/adv/belonging-to-gods-family"
+    }
+  },
+  {
+    "file": "7_Belong_and_Become_(Go_Deeper)_v.090926JF_1789422360009.docx",
+    "slug": "deeper-belong-and-become",
+    "title": "Belong and Become",
+    "order": 7,
+    "continuation": {
+      "label": "Continue the Adventure: Living a Life of Purpose",
+      "href": "/adv/living-a-life-of-purpose"
+    }
+  },
+  {
+    "file": "8_God's_Plan_for_You_(Go_Deeper)_v.090926JF_1789422362790.docx",
+    "slug": "deeper-gods-plan-for-you",
+    "title": "God’s Plan for You",
+    "order": 8,
+    "continuation": {
+      "label": "Continue the Adventure: Continuing with Jesus",
+      "href": "/adv/continuing-with-jesus"
+    }
+  },
+  {
+    "file": "9_Go_Further_(Go_Deeper)_v.090926JF_1789422365102.docx",
+    "slug": "deeper-your-journey-continues",
+    "title": "Your Journey Continues",
+    "order": 9,
+    "continuation": {
+      "label": "Go Further: Begin A Heart After God",
+      "href": "/gf/a-heart-after-god"
+    }
+  }
+]

@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, type Plugin } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
+import importedDeeperArticles from './src/data/imported-deeper-articles.json';
 
 // Vite needs a port for dev/preview, but static production builds do not
 // receive one from CI providers such as Cloudflare Pages.
@@ -46,14 +47,7 @@ function decodeXml(text: string) {
     .replace(/&amp;/g, '&');
 }
 
-function readDocxBlocks(archivePath: string, entryName: string, tempDir: string): ArticleBlock[] {
-  const docxPath = path.join(tempDir, `${slugify(path.basename(entryName))}.docx`);
-  fs.writeFileSync(docxPath, execFileSync('unzip', ['-p', archivePath, entryName]));
-  const documentXml = execFileSync(
-    'unzip',
-    ['-p', docxPath, 'word/document.xml'],
-    { encoding: 'utf8' },
-  );
+function parseDocxBlocks(documentXml: string): ArticleBlock[] {
   const blocks: ArticleBlock[] = [];
   const paragraphPattern = /<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g;
   let match: RegExpExecArray | null;
@@ -90,6 +84,21 @@ function readDocxBlocks(archivePath: string, entryName: string, tempDir: string)
   }
 
   return blocks;
+}
+
+function readDocxFileBlocks(docxPath: string): ArticleBlock[] {
+  const documentXml = execFileSync(
+    'unzip',
+    ['-p', docxPath, 'word/document.xml'],
+    { encoding: 'utf8' },
+  );
+  return parseDocxBlocks(documentXml);
+}
+
+function readDocxBlocks(archivePath: string, entryName: string, tempDir: string): ArticleBlock[] {
+  const docxPath = path.join(tempDir, `${slugify(path.basename(entryName))}.docx`);
+  fs.writeFileSync(docxPath, execFileSync('unzip', ['-p', archivePath, entryName]));
+  return readDocxFileBlocks(docxPath);
 }
 
 function normalizeTitle(title: string) {
@@ -173,7 +182,7 @@ function buildArticleLibrary(): ArticleRecord[] {
 
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'jolf-docx-'));
   try {
-    return [archiveName, ...supplementalArchives].flatMap((currentArchiveName) => {
+    const archivedArticles = [archiveName, ...supplementalArchives].flatMap((currentArchiveName) => {
       const archivePath = path.join(attachedAssetsDir, currentArchiveName);
       const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
         .split('\n')
@@ -197,6 +206,19 @@ function buildArticleLibrary(): ArticleRecord[] {
         };
       });
     });
+    const standaloneDeeperArticles = importedDeeperArticles.map((article) => {
+      const docxPath = path.join(attachedAssetsDir, article.file);
+      if (!fs.existsSync(docxPath)) {
+        throw new Error(`Required Go Deeper article is missing: ${article.file}`);
+      }
+      return {
+        route: `/${article.slug}`,
+        title: article.title,
+        category: 'Go Deeper',
+        blocks: readDocxFileBlocks(docxPath),
+      };
+    });
+    return [...archivedArticles, ...standaloneDeeperArticles];
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }

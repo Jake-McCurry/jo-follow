@@ -10,62 +10,70 @@ const ARTICLES = [
     title: "Begin the Adventure",
     desc: "Discover the greatest journey of your life—learning to live each day with Jesus.",
     link: "/adv/begin-the-adventure",
+    deeper: { label: "The Need for a New Heart", link: "/deeper/the-need-for-a-new-heart" },
     icon: Compass
   },
   {
     title: "Citizen of Heaven",
     desc: "The Bible says you can be certain you will go to Heaven when you die.",
     link: "/adv/citizen-of-heaven",
-    deeper: { label: "Assurance of Your Salvation", link: "/deeper/assurance-of-your-salvation" },
+    deeper: { label: "The Gift of Eternal Life", link: "/deeper/the-gift-of-eternal-life" },
     icon: Shield
   },
   {
     title: "Your New Identity in Christ",
     desc: "See yourself the way God now sees you—and watch how that new identity changes everything.",
     link: "/adv/your-new-identity-christ",
+    deeper: { label: "Embracing Your New Identity in Christ", link: "/deeper/embracing-your-new-identity-in-christ" },
     icon: User
   },
   {
     title: "The Holy Spirit – Your Constant Companion",
     desc: "Meet the personal presence of God who walks with you, guides you, and never leaves your side.",
     link: "/adv/the-holy-spirit",
+    deeper: { label: "Living an Empowered Life", link: "/deeper/living-an-empowered-life" },
     icon: Heart
   },
   {
     title: "Walking by Faith, Not by Feelings",
     desc: "Learn to trust God steadily even when your emotions rise and fall like the weather.",
     link: "/adv/walking-by-faith",
-    deeper: { label: "Faith: Knowing Who You Can Trust", link: "/deeper/faith-knowing-who-you-can-trust" },
+    deeper: { label: "Faith: Knowing God Who Is Trustworthy", link: "/deeper/faith-knowing-god-who-is-trustworthy" },
     icon: Footprints
   },
   {
     title: "God’s Word – Your Road Map",
     desc: "Let Scripture become the clear, trustworthy guide that keeps you on the right path.",
     link: "/adv/gods-word",
+    deeper: { label: "Renewing the Mind for Transformation", link: "/deeper/renewing-the-mind-for-transformation" },
     icon: Book
   },
   {
     title: "Prayer – Your Ongoing Conversation with God",
     desc: "Turn prayer from a duty into a natural, ongoing conversation with the One who loves you most.",
     link: "/adv/prayer",
+    deeper: { label: "The Lord’s Prayer Guide", link: "/deeper/the-lords-prayer-guide" },
     icon: MessageCircle
   },
   {
     title: "Belonging to God’s Family",
     desc: "Step into the rich community of believers who walk beside you as true family.",
     link: "/adv/belonging-to-gods-family",
+    deeper: { label: "Belong and Become", link: "/deeper/belong-and-become" },
     icon: Users
   },
   {
     title: "Living a Life of Purpose",
     desc: "Uncover the unique design God has for your life and begin living it with confidence.",
     link: "/adv/living-a-life-of-purpose",
+    deeper: { label: "God’s Plan for You", link: "/deeper/gods-plan-for-you" },
     icon: Target
   },
   {
     title: "Continuing with Jesus",
     desc: "Keep growing in your relationship with Jesus so the adventure of following Him never ends.",
     link: "/adv/continuing-with-jesus",
+    deeper: { label: "Your Journey Continues", link: "/deeper/your-journey-continues" },
     icon: RefreshCw
   },
 ];

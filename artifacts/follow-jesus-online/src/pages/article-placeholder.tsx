@@ -159,6 +159,18 @@ export function ArticlePlaceholder() {
     });
     return `${getArticlePath(slug)}?${journeyParams.toString()}`;
   };
+  const continuationHref = (href: string) => {
+    const internalArticle = href.match(/^\/(adv|deeper)\/([^/?#]+)$/);
+    if (internalArticle) {
+      return articleHref(`${internalArticle[1]}-${internalArticle[2]}`);
+    }
+    const journey = currentSearch.get("journey");
+    if (!journey) return href;
+    const separator = href.includes("?") ? "&" : "?";
+    return `${href}${separator}journey=${encodeURIComponent(journey)}&entry=${encodeURIComponent(
+      currentSearch.get("entry") || "direct",
+    )}&from=faq&step=faq`;
+  };
 
   return (
     <Layout>
@@ -275,6 +287,21 @@ export function ArticlePlaceholder() {
               <Link href="/message">Send a Message</Link>
             </Button>
           </div>
+
+          {article.continuation && (
+            <div className="mt-8 rounded-2xl border border-warm-accent/30 bg-warm-accent/[0.08] p-6 sm:p-8">
+              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-accent">
+                Your next step
+              </p>
+              <Link
+                href={continuationHref(article.continuation.href)}
+                className="inline-flex items-center text-xl font-semibold text-foreground hover:text-primary"
+              >
+                {article.continuation.label}
+                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+              </Link>
+            </div>
+          )}
         </article>
       </main>
     </Layout>
