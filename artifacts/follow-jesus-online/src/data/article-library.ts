@@ -41,6 +41,12 @@ const generatedFaqRecords = generatedContent.filter((record) => {
   return slug.startsWith(BELIEVER_PREFIX) || slug.startsWith(NO_DECISION_PREFIX);
 });
 
+const generatedAdventureBySlug = new Map(
+  generatedContent
+    .filter((record) => record.category === "Adventure Guide")
+    .map((record) => [record.route.slice(1), record]),
+);
+
 const groupOrders: Record<"believer" | "no-decision", number> = {
   believer: 0,
   "no-decision": 0,
@@ -140,11 +146,26 @@ const importedDeeperRecords: Article[] = generatedContent
 export const ARTICLE_LIBRARY = [
   ...(library.articles as Article[]).filter(
     (article) => !generatedFaqSlugs.has(article.slug),
-  ).map((article) => ({
-    ...article,
-    order: article.group === "deeper" ? article.order + importedDeeperArticles.length : article.order,
-    relatedSlug: adventureCompanions[article.slug] ?? article.relatedSlug,
-  })),
+  ).map((article) => {
+    const generatedAdventure = generatedAdventureBySlug.get(article.slug);
+    return {
+      ...article,
+      ...(generatedAdventure
+        ? {
+            title: generatedAdventure.title,
+            excerpt:
+              generatedAdventure.blocks.find((block) => block.kind === "paragraph")?.text ??
+              article.excerpt,
+            blocks: generatedAdventure.blocks.map((block) => ({
+              type: block.kind,
+              text: block.text,
+            })),
+          }
+        : {}),
+      order: article.group === "deeper" ? article.order + importedDeeperArticles.length : article.order,
+      relatedSlug: adventureCompanions[article.slug] ?? article.relatedSlug,
+    };
+  }),
   ...importedDeeperRecords,
   ...generatedFaqArticles,
 ];
