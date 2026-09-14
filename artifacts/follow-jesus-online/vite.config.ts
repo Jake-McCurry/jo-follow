@@ -24,6 +24,12 @@ const basePath = process.env.BASE_PATH ?? '/';
 const ARTICLE_MODULE_ID = 'virtual:article-content';
 const RESOLVED_ARTICLE_MODULE_ID = `\0${ARTICLE_MODULE_ID}`;
 
+const APPROVED_ARTICLE_TEXT_REPLACEMENTS: Record<string, Record<string, string>> = {
+  'deeper-the-gift-of-eternal-life': {
+    '(Revelation 10:9)': '(Romans 10:9)',
+  },
+};
+
 type ArticleBlock = {
   kind: 'heading' | 'paragraph' | 'list';
   text: string;
@@ -93,6 +99,19 @@ function readDocxFileBlocks(docxPath: string): ArticleBlock[] {
     { encoding: 'utf8' },
   );
   return parseDocxBlocks(documentXml);
+}
+
+function applyApprovedArticleTextReplacements(slug: string, blocks: ArticleBlock[]) {
+  const replacements = APPROVED_ARTICLE_TEXT_REPLACEMENTS[slug];
+  if (!replacements) return blocks;
+
+  return blocks.map((block) => ({
+    ...block,
+    text: Object.entries(replacements).reduce(
+      (text, [source, replacement]) => text.replaceAll(source, replacement),
+      block.text,
+    ),
+  }));
 }
 
 function readDocxBlocks(archivePath: string, entryName: string, tempDir: string): ArticleBlock[] {
@@ -215,7 +234,10 @@ function buildArticleLibrary(): ArticleRecord[] {
         route: `/${article.slug}`,
         title: article.title,
         category: 'Go Deeper',
-        blocks: readDocxFileBlocks(docxPath),
+        blocks: applyApprovedArticleTextReplacements(
+          article.slug,
+          readDocxFileBlocks(docxPath),
+        ),
       };
     });
     return [...archivedArticles, ...standaloneDeeperArticles];
