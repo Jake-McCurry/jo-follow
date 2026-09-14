@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
-import { Link, useParams } from "wouter";
+import { Link, useLocation, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, BookOpen, HelpCircle, MessageCircle } from "lucide-react";
 import { ScriptureRef } from "@/components/scripture-ref";
 import { useTrackRecentPage } from "@/hooks/use-recent-page";
@@ -8,6 +8,7 @@ import NotFound from "@/pages/not-found";
 import { ShareButton } from "@/components/share-button";
 import {
   getArticleBySlug,
+  getArticlePath,
   getArticlesInGroup,
   type ArticleBlock,
 } from "@/data/article-library";
@@ -96,7 +97,7 @@ function ArticleBlockView({ block }: { block: ArticleBlock }) {
     return (
       <p className="my-5">
         <Link
-          href={block.href}
+          href={block.href.replace(/^\/(adv|deeper)-/, "/$1/")}
           className="inline-flex items-center font-semibold text-primary underline decoration-primary/30 underline-offset-4 hover:text-primary/80"
         >
           <RichText text={block.text} />
@@ -118,14 +119,22 @@ function groupLabel(group: ArticleBlock["type"] | string) {
   if (group === "resources") return "More Resources";
   if (group === "received") return "Questions after following Jesus";
   if (group === "rededicated") return "Questions for returning to Jesus";
+  if (group === "believer") return "Resources for existing believers";
+  if (group === "no-decision") return "Questions before a decision";
   return "Adventure Guide";
 }
 
 export function ArticlePlaceholder() {
   useTrackRecentPage();
   const params = useParams();
+  const [location] = useLocation();
+  const routeGroup = location.split("?")[0].split("/").filter(Boolean)[0];
+  const articleSlug =
+    routeGroup === "adv" || routeGroup === "deeper"
+      ? `${routeGroup}-${params.slug || ""}`
+      : params.slug || "";
 
-  const article = getArticleBySlug(params.slug || "");
+  const article = getArticleBySlug(articleSlug);
   if (!article) return <NotFound />;
 
   const groupArticles = getArticlesInGroup(article.group);
@@ -135,6 +144,33 @@ export function ArticlePlaceholder() {
   const isLead = articleIndex === 0;
   const blocks = article.blocks;
   const firstParagraphIndex = blocks.findIndex((block) => block.type === "paragraph");
+  const currentSearch = new URLSearchParams(
+    typeof window === "undefined" ? "" : window.location.search,
+  );
+  const articleHref = (slug: string) => {
+    const journey = currentSearch.get("journey");
+    if (!journey) return getArticlePath(slug);
+
+    const journeyParams = new URLSearchParams({
+      journey,
+      entry: currentSearch.get("entry") || "direct",
+      from: "faq",
+      step: "faq",
+    });
+    return `${getArticlePath(slug)}?${journeyParams.toString()}`;
+  };
+  const continuationHref = (href: string) => {
+    const internalArticle = href.match(/^\/(adv|deeper)\/([^/?#]+)$/);
+    if (internalArticle) {
+      return articleHref(`${internalArticle[1]}-${internalArticle[2]}`);
+    }
+    const journey = currentSearch.get("journey");
+    if (!journey) return href;
+    const separator = href.includes("?") ? "&" : "?";
+    return `${href}${separator}journey=${encodeURIComponent(journey)}&entry=${encodeURIComponent(
+      currentSearch.get("entry") || "direct",
+    )}&from=faq&step=faq`;
+  };
 
   return (
     <Layout>
@@ -201,7 +237,7 @@ export function ArticlePlaceholder() {
             <div className="mt-8 rounded-2xl border border-primary/20 bg-primary/[0.04] p-6 sm:p-8">
               <p className="mb-2 text-sm font-bold uppercase tracking-wider text-primary">Continue exploring</p>
               <Link
-                href={`/${article.relatedSlug}`}
+                href={articleHref(article.relatedSlug)}
                 className="inline-flex items-center text-xl font-semibold text-foreground hover:text-primary"
               >
                 {getArticleBySlug(article.relatedSlug)?.title}
@@ -219,7 +255,7 @@ export function ArticlePlaceholder() {
           <nav aria-label="Article navigation" className="mt-8 grid gap-3 sm:grid-cols-2">
             {previous ? (
               <Link
-                href={`/${previous.slug}`}
+                href={articleHref(previous.slug)}
                 className="group rounded-xl border border-border/60 bg-card p-5 hover:border-primary/40"
               >
                 <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">Previous</span>
@@ -230,7 +266,7 @@ export function ArticlePlaceholder() {
             ) : <span aria-hidden="true" />}
             {next ? (
               <Link
-                href={`/${next.slug}`}
+                href={articleHref(next.slug)}
                 className="group rounded-xl border border-border/60 bg-card p-5 text-left hover:border-primary/40 sm:text-right"
               >
                 <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">Next</span>
@@ -247,10 +283,25 @@ export function ArticlePlaceholder() {
             <p className="mx-auto mt-3 max-w-xl leading-relaxed opacity-90">
               If something is on your heart or you would like help taking your next step, you’re welcome to send a message.
             </p>
-            <Button asChild className="mt-6 shadow-sm">
+            <Button asChild variant="warm" className="mt-6 shadow-sm">
               <Link href="/message">Send a Message</Link>
             </Button>
           </div>
+
+          {article.continuation && (
+            <div className="mt-8 rounded-2xl border border-warm-accent/30 bg-warm-accent/[0.08] p-6 sm:p-8">
+              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-accent">
+                Your next step
+              </p>
+              <Link
+                href={continuationHref(article.continuation.href)}
+                className="inline-flex items-center text-xl font-semibold text-foreground hover:text-primary"
+              >
+                {article.continuation.label}
+                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+              </Link>
+            </div>
+          )}
         </article>
       </main>
     </Layout>

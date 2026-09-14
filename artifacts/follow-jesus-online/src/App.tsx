@@ -8,6 +8,7 @@ import {
   Route,
   Switch,
   useLocation,
+  useParams,
   Router as WouterRouter,
 } from 'wouter';
 import { Home } from '@/pages/home';
@@ -23,7 +24,7 @@ import { GFReadingPage } from '@/pages/gf/reading';
 import { RewatchPage } from '@/pages/rewatch';
 import { MessagePage } from '@/pages/message';
 import { ArticlePlaceholder } from '@/pages/article-placeholder';
-import { getArticleBySlug } from '@/data/article-library';
+import { getArticleBySlug, getArticlePath, getArticleSlugFromPath } from '@/data/article-library';
 import { getGFBook } from '@/data/go-further-library';
 
 const queryClient = new QueryClient({
@@ -82,8 +83,14 @@ function PageMetadata() {
       title = `${reading?.title ?? readingSlug.replace(/-/g, ' ')} | Go Further`;
       description = reading?.desc ?? 'A Go Further reading from Follow Jesus Online.';
     }
-  } else if (pathname.startsWith('/adv-') || pathname.startsWith('/deeper-') || pathname.startsWith('/more-')) {
-    const article = getArticleBySlug(pathname.slice(1));
+  } else if (
+    pathname.startsWith('/adv/') ||
+    pathname.startsWith('/deeper/') ||
+    pathname.startsWith('/adv-') ||
+    pathname.startsWith('/deeper-') ||
+    pathname.startsWith('/more-')
+  ) {
+    const article = getArticleBySlug(getArticleSlugFromPath(pathname) ?? '');
     if (article) {
       title = `${article.title} | Follow Jesus Online`;
       description = article.excerpt;
@@ -116,11 +123,14 @@ function PageMetadata() {
     robotsMeta.setAttribute('content', 'noindex,nofollow');
 
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    const articleSlug = getArticleSlugFromPath(pathname);
     const canonicalPath = pathname === '/rewatch-video'
       ? '/rewatch'
       : pathname === '/gf'
         ? '/gf/'
-        : pathname;
+        : articleSlug && getArticleBySlug(articleSlug)
+          ? getArticlePath(articleSlug)
+          : pathname;
     canonical?.setAttribute('href', `${siteUrl}${canonicalPath}`);
   }, [description, pathname, title]);
 
@@ -145,14 +155,29 @@ function Router() {
         <Route path="/bible" component={BibleLandingPage} />
         <Route path="/bible/saved" component={BibleSavedPage} />
         <Route path="/bible/:book/:chapter" component={BibleReaderPage} />
+        <Route path="/adv/:slug" component={ArticlePlaceholder} />
+        <Route path="/deeper/:slug" component={ArticlePlaceholder} />
         
-        {/* Unpublished Article Routes */}
-        <Route path="/:slug" component={ArticlePlaceholder} />
+        <Route path="/:slug" component={LegacyArticleRoute} />
         
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>
   );
+}
+
+function LegacyArticleRoute() {
+  const { slug = '' } = useParams<{ slug: string }>();
+  const [, setLocation] = useLocation();
+  const canonicalPath = getArticlePath(slug);
+
+  useEffect(() => {
+    if (canonicalPath !== `/${slug}`) {
+      setLocation(`${canonicalPath}${window.location.search}`, { replace: true });
+    }
+  }, [canonicalPath, setLocation, slug]);
+
+  return canonicalPath === `/${slug}` ? <ArticlePlaceholder /> : null;
 }
 
 function RoutedErrorBoundary({ children }: { children: ReactNode }) {

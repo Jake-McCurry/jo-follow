@@ -8,11 +8,22 @@ const articleLibraryPath = path.join(
   projectRoot,
   "src/data/article-library.json",
 );
+const importedDeeperPath = path.join(
+  projectRoot,
+  "src/data/imported-deeper-articles.json",
+);
 const sourceRoot = path.join(projectRoot, "src");
 const xpPagePath = path.join(projectRoot, "src/pages/xp-page.tsx");
 
 const articleRoutePattern = /^(?:adv|deeper|more)-[a-z0-9-]+$/;
-const sequenceGroups = ["adventure", "deeper", "received", "rededicated"];
+const sequenceGroups = [
+  "adventure",
+  "deeper",
+  "received",
+  "rededicated",
+  "believer",
+  "no-decision",
+];
 const allowedGroups = new Set([...sequenceGroups, "resources"]);
 
 function readJson(filePath) {
@@ -27,6 +38,7 @@ function collectPublishedArticleSlugs(source, filePath) {
   const slugs = [];
   const publishedSlugPatterns = [
     /["'`]\/((?:adv|deeper|more)-[a-z0-9-]+)["'`]/g,
+    /["'`]\/(adv|deeper)\/([a-z0-9-]+)["'`]/g,
   ];
 
   if (filePath === xpPagePath) {
@@ -39,7 +51,7 @@ function collectPublishedArticleSlugs(source, filePath) {
     for (const match of source.matchAll(pattern)) {
       const line = source.slice(0, match.index).split("\n").length;
       slugs.push({
-        slug: match[1],
+        slug: match[2] ? `${match[1]}-${match[2]}` : match[1],
         location: `${path.relative(projectRoot, filePath)}:${line}`,
       });
     }
@@ -67,6 +79,7 @@ function findMissingPublishedLinks(catalog, publishedLinks) {
 
 function validateArticleLibrary() {
   const library = readJson(articleLibraryPath);
+  const importedDeeper = readJson(importedDeeperPath);
   const articles = library?.articles;
   const errors = [];
 
@@ -76,6 +89,10 @@ function validateArticleLibrary() {
 
   const slugs = new Set();
   const catalog = new Map();
+
+  for (const article of importedDeeper) {
+    catalog.set(article.slug, article);
+  }
 
   for (const article of articles) {
     if (
@@ -162,6 +179,57 @@ function validateArticleLibrary() {
       errors.push(
         `${article.slug}.relatedSlug points to missing article "${article.relatedSlug}"`,
       );
+    }
+
+    if (article.continuation) {
+      if (typeof article.continuation !== "object") {
+        errors.push(`${article.slug}.continuation must be an object`);
+      } else {
+        if (!isNonEmptyString(article.continuation.label)) {
+          errors.push(`${article.slug}.continuation.label is empty`);
+        }
+        if (!isNonEmptyString(article.continuation.href)) {
+          errors.push(`${article.slug}.continuation.href is empty`);
+        }
+        const canonicalArticleLink = article.continuation.href?.match(
+          /^\/((?:adv|deeper)\/[a-z0-9-]+)(?:[?#].*)?$/,
+        );
+        if (canonicalArticleLink) {
+          const [, route] = canonicalArticleLink;
+          const [group, routeSlug] = route.split("/");
+          if (!catalog.has(`${group}-${routeSlug}`)) {
+            errors.push(
+              `${article.slug}.continuation points to missing article "/${route}"`,
+            );
+          }
+        }
+      }
+    }
+  }
+
+  if (importedDeeper.length !== 10) {
+    errors.push(`expected 10 imported Go Deeper articles; got ${importedDeeper.length}`);
+  }
+  const importedOrders = importedDeeper.map((article) => article.order);
+  if (!assertEqualArrays(importedOrders, importedDeeper.map((_, index) => index))) {
+    errors.push(`imported Go Deeper orders must be 0 through 9; got [${importedOrders.join(", ")}]`);
+  }
+  for (const article of importedDeeper) {
+    if (!fs.existsSync(path.join(projectRoot, "..", "..", "attached_assets", article.file))) {
+      errors.push(`missing imported Go Deeper source "${article.file}"`);
+    }
+    if (!articleRoutePattern.test(article.slug) || !article.slug.startsWith("deeper-")) {
+      errors.push(`invalid imported Go Deeper slug "${article.slug}"`);
+    }
+    if (!isNonEmptyString(article.title)) {
+      errors.push(`${article.slug}.title is empty`);
+    }
+    if (!isNonEmptyString(article.continuation?.label) || !isNonEmptyString(article.continuation?.href)) {
+      errors.push(`${article.slug}.continuation is incomplete`);
+    }
+    const target = article.continuation?.href?.match(/^\/(adv|deeper)\/([a-z0-9-]+)$/);
+    if (target && !catalog.has(`${target[1]}-${target[2]}`)) {
+      errors.push(`${article.slug}.continuation points to missing article "${article.continuation.href}"`);
     }
   }
 

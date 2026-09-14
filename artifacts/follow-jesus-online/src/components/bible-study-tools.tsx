@@ -227,7 +227,7 @@ export function BibleStudyTools({
                     disabled={!study.storageAvailable}
                     className={`h-8 w-8 rounded-full border-2 ${colorClasses[color]} ${
                       selectedHighlight === color
-                        ? "border-[#073192] ring-2 ring-[#073192]/30"
+                        ? "border-primary ring-2 ring-primary/30"
                         : "border-white shadow-sm"
                     } disabled:cursor-not-allowed disabled:opacity-50`}
                     aria-label={`Highlight ${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} ${color}`}
@@ -432,7 +432,7 @@ export function BibleStudyTools({
                   disabled={!study.storageAvailable}
                   className={`h-7 w-7 rounded-full border-2 ${colorClasses[color]} ${
                     selectedHighlight === color
-                      ? "border-[#073192] ring-2 ring-[#073192]/30"
+                      ? "border-primary ring-2 ring-primary/30"
                       : "border-white shadow-sm"
                   } disabled:cursor-not-allowed disabled:opacity-50`}
                   aria-label={`Highlight ${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} ${color}`}

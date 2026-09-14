@@ -10,7 +10,7 @@ export function XPChooserPage() {
       <div className="container mx-auto px-5 sm:px-8 py-16 max-w-5xl">
         <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Where Did You Start?</h1>
-          <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+          <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
         </div>
         
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">

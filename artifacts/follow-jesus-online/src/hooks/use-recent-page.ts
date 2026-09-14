@@ -9,7 +9,7 @@ export function useTrackRecentPage() {
   const [location] = useLocation();
 
   useEffect(() => {
-    if (!EXCLUDED_PATHS.includes(location) && !location.startsWith("/adv-") && !location.startsWith("/deeper-") && !location.startsWith("/more-")) {
+    if (!EXCLUDED_PATHS.includes(location) && !location.startsWith("/adv/") && !location.startsWith("/deeper/") && !location.startsWith("/adv-") && !location.startsWith("/deeper-") && !location.startsWith("/more-")) {
       try {
         localStorage.setItem(RECENT_PAGE_KEY, location);
       } catch (e) {

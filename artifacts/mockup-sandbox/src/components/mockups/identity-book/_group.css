@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Source+Sans+3:ital,wght@0,300..900;1,300..900&display=swap');
+
+.identity-book {
+  --blue-50: #e6f5ff;
+  --blue-100: #ccebff;
+  --blue-500: #0095ff;
+  --blue-800: #006bb3;
+  --blue-900: #004e8a;
+  --navy: #003a66;
+  --slate: #2e5a7a;
+  --warm-50: #fff6f0;
+  --warm-500: #e87722;
+  --warm-700: #c45100;
+  color: var(--navy);
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.identity-book h1 {
+  font-family: "Playfair Display", serif;
+}

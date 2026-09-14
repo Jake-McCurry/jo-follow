@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, type Plugin } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
+import importedDeeperArticles from './src/data/imported-deeper-articles.json';
 
 // Vite needs a port for dev/preview, but static production builds do not
 // receive one from CI providers such as Cloudflare Pages.
@@ -24,7 +25,7 @@ const ARTICLE_MODULE_ID = 'virtual:article-content';
 const RESOLVED_ARTICLE_MODULE_ID = `\0${ARTICLE_MODULE_ID}`;
 
 type ArticleBlock = {
-  kind: 'heading' | 'paragraph';
+  kind: 'heading' | 'paragraph' | 'list';
   text: string;
 };
 
@@ -46,14 +47,7 @@ function decodeXml(text: string) {
     .replace(/&amp;/g, '&');
 }
 
-function readDocxBlocks(archivePath: string, entryName: string, tempDir: string): ArticleBlock[] {
-  const docxPath = path.join(tempDir, `${slugify(path.basename(entryName))}.docx`);
-  fs.writeFileSync(docxPath, execFileSync('unzip', ['-p', archivePath, entryName]));
-  const documentXml = execFileSync(
-    'unzip',
-    ['-p', docxPath, 'word/document.xml'],
-    { encoding: 'utf8' },
-  );
+function parseDocxBlocks(documentXml: string): ArticleBlock[] {
   const blocks: ArticleBlock[] = [];
   const paragraphPattern = /<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g;
   let match: RegExpExecArray | null;
@@ -71,20 +65,40 @@ function readDocxBlocks(archivePath: string, entryName: string, tempDir: string)
 
     if (!text) continue;
 
-    const cleanedText =
+    const cleanedText = (
       paragraphIndex === 0
         ? text.replace(/^\d+(?:\.\d+)+\s*/, '').replace(/^\d+\.\s*/, '')
-        : text.replace(/^\d+(?:\.\d+)+\s*/, '');
+        : text.replace(/^\d+(?:\.\d+)+\s*/, '')
+    ).replace(/\s*>{3}\s*$/, '');
     const style = paragraphXml.match(/<w:pStyle\b[^>]*w:val="([^"]+)"/)?.[1] ?? '';
 
     blocks.push({
-      kind: style.toLowerCase().startsWith('heading') ? 'heading' : 'paragraph',
+      kind: style.toLowerCase().startsWith('heading')
+        ? 'heading'
+        : style.toLowerCase() === 'listparagraph'
+          ? 'list'
+          : 'paragraph',
       text: cleanedText,
     });
     paragraphIndex += 1;
   }
 
   return blocks;
+}
+
+function readDocxFileBlocks(docxPath: string): ArticleBlock[] {
+  const documentXml = execFileSync(
+    'unzip',
+    ['-p', docxPath, 'word/document.xml'],
+    { encoding: 'utf8' },
+  );
+  return parseDocxBlocks(documentXml);
+}
+
+function readDocxBlocks(archivePath: string, entryName: string, tempDir: string): ArticleBlock[] {
+  const docxPath = path.join(tempDir, `${slugify(path.basename(entryName))}.docx`);
+  fs.writeFileSync(docxPath, execFileSync('unzip', ['-p', archivePath, entryName]));
+  return readDocxFileBlocks(docxPath);
 }
 
 function normalizeTitle(title: string) {
@@ -135,15 +149,18 @@ function routeForArticle(entryName: string, title: string) {
 
   if (entry.includes('received faqs')) return `more-received-${slugify(title)}`;
   if (entry.includes('rededicated faqs')) return `more-rededicated-${slugify(title)}`;
+  if (entry.includes('1.5 already faqs')) return `more-believer-${slugify(title)}`;
+  if (entry.includes('1.6 no decision faqs')) return `more-no-decision-${slugify(title)}`;
   return `more-${slugify(title)}`;
 }
 
 function buildArticleLibrary(): ArticleRecord[] {
   const workspaceRoot = path.resolve(import.meta.dirname, '..', '..');
   const attachedAssetsDir = path.join(workspaceRoot, 'attached_assets');
-  const archiveName = fs
+  const availableArchives = fs
     .readdirSync(attachedAssetsDir)
-    .find((name) => name.toLowerCase().endsWith('.zip') && name.startsWith('JOLF_'));
+    .filter((name) => name.toLowerCase().endsWith('.zip'));
+  const archiveName = availableArchives.find((name) => name.startsWith('JOLF_'));
 
   if (!archiveName) {
     throw new Error(
@@ -151,29 +168,57 @@ function buildArticleLibrary(): ArticleRecord[] {
     );
   }
 
-  const archivePath = path.join(attachedAssetsDir, archiveName);
-  const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
-    .split('\n')
-    .filter((entry) => entry.toLowerCase().endsWith('.docx'))
-    .filter((entry) => !entry.toLowerCase().includes('magazine edition'));
+  const supplementalArchivePatterns = [
+    /^(?:alreeady|already)_believer_.*\.zip$/i,
+    /^no_decision_.*\.zip$/i,
+  ];
+  const supplementalArchives = supplementalArchivePatterns.map((pattern) => {
+    const match = availableArchives.filter((name) => pattern.test(name)).sort().at(-1);
+    if (!match) {
+      throw new Error(`A required FAQ archive matching ${pattern} is missing from attached_assets.`);
+    }
+    return match;
+  });
 
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'jolf-docx-'));
   try {
-    return entries.map((entryName) => {
-      const title = titleFromEntry(entryName);
+    const archivedArticles = [archiveName, ...supplementalArchives].flatMap((currentArchiveName) => {
+      const archivePath = path.join(attachedAssetsDir, currentArchiveName);
+      const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
+        .split('\n')
+        .filter((entry) => entry.toLowerCase().endsWith('.docx'))
+        .filter((entry) => !entry.toLowerCase().includes('magazine edition'))
+        .sort();
+
+      return entries.map((entryName) => {
+        const title = titleFromEntry(entryName);
+        return {
+          route: `/${routeForArticle(entryName, title)}`,
+          title,
+          category: entryName.includes('1.10 The Adventure')
+            ? 'Adventure Guide'
+            : entryName.includes('1.20 Go Deepr')
+              ? 'Go Deeper'
+              : entryName.includes('FAQs')
+                ? 'Questions & Answers'
+                : 'Additional Resource',
+          blocks: readDocxBlocks(archivePath, entryName, tempDir),
+        };
+      });
+    });
+    const standaloneDeeperArticles = importedDeeperArticles.map((article) => {
+      const docxPath = path.join(attachedAssetsDir, article.file);
+      if (!fs.existsSync(docxPath)) {
+        throw new Error(`Required Go Deeper article is missing: ${article.file}`);
+      }
       return {
-        route: `/${routeForArticle(entryName, title)}`,
-        title,
-        category: entryName.includes('1.10 The Adventure')
-          ? 'Adventure Guide'
-          : entryName.includes('1.20 Go Deepr')
-            ? 'Go Deeper'
-            : entryName.includes('FAQs')
-              ? 'Questions & Answers'
-              : 'Additional Resource',
-        blocks: readDocxBlocks(archivePath, entryName, tempDir),
+        route: `/${article.slug}`,
+        title: article.title,
+        category: 'Go Deeper',
+        blocks: readDocxFileBlocks(docxPath),
       };
     });
+    return [...archivedArticles, ...standaloneDeeperArticles];
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }

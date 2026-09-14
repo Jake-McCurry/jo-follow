@@ -1,6 +1,6 @@
 declare module "virtual:article-content" {
   export type ArticleBlock = {
-    kind: "heading" | "paragraph";
+    kind: "heading" | "paragraph" | "list";
     text: string;
   };
 
