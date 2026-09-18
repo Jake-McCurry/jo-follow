@@ -24,8 +24,14 @@ const basePath = process.env.BASE_PATH ?? '/';
 const ARTICLE_MODULE_ID = 'virtual:article-content';
 const RESOLVED_ARTICLE_MODULE_ID = `\0${ARTICLE_MODULE_ID}`;
 
+const APPROVED_ARTICLE_TEXT_REPLACEMENTS: Record<string, Record<string, string>> = {
+  'deeper-the-gift-of-eternal-life': {
+    '(Revelation 10:9)': '(Romans 10:9)',
+  },
+};
+
 type ArticleBlock = {
-  kind: 'heading' | 'paragraph' | 'list';
+  kind: 'heading' | 'paragraph' | 'question' | 'list';
   text: string;
 };
 
@@ -35,6 +41,182 @@ type ArticleRecord = {
   category: string;
   blocks: ArticleBlock[];
 };
+
+const ADVENTURE_GUIDE_SOURCE_FILE =
+  'Adventure-Guide-Updated-Visible-Links_1789424679027.pdf';
+
+const ADVENTURE_GUIDE_SECTIONS = [
+  { route: 'adv-begin-the-adventure', title: 'Begin the Adventure', startPage: 3, endPage: 4 },
+  { route: 'adv-citizen-of-heaven', title: 'Citizen of Heaven', startPage: 5, endPage: 7 },
+  { route: 'adv-your-new-identity-christ', title: 'Your New Identity in Christ', startPage: 8, endPage: 9 },
+  { route: 'adv-the-holy-spirit', title: 'The Holy Spirit — Your Constant Companion', startPage: 10, endPage: 14 },
+  { route: 'adv-walking-by-faith', title: 'Walking by Faith, Not by Feelings', startPage: 15, endPage: 17 },
+  { route: 'adv-gods-word', title: 'God’s Word — Your Road Map', startPage: 18, endPage: 21 },
+  { route: 'adv-prayer', title: 'Prayer — Your Ongoing Conversation with God', startPage: 22, endPage: 24 },
+  { route: 'adv-belonging-to-gods-family', title: 'Belonging to God’s Family', startPage: 25, endPage: 27 },
+  { route: 'adv-living-a-life-of-purpose', title: 'Living a Life of Purpose', startPage: 28, endPage: 31 },
+  { route: 'adv-continuing-with-jesus', title: 'Continuing with Jesus', startPage: 32, endPage: 33 },
+] as const;
+
+const ADVENTURE_GUIDE_HEADINGS = new Set([
+  'My Heart, Christ’s Home',
+  'Walking the Path Ahead',
+  'What You Will Discover',
+  'How to Walk This Path',
+  'God’s Free Gift',
+  'If You Are Not Yet Sure You Have Received Him',
+  'Where Are You Going After You Die?',
+  'Your Faithful Friend',
+  'Growth Is God’s Plan for You',
+  'Your Inheritance in Christ',
+  'A New You',
+  'More like Christ',
+  'Ready in Heart, but Not Yet Empowered',
+  'The Indwelling Holy Spirit',
+  'Who Is the Holy Spirit?',
+  'The Battle Within',
+  'The Filling of the Holy Spirit',
+  'A Simple Step of Surrender',
+  'Restoring Fellowship',
+  'Spiritual Breathing',
+  'Bearing Fruit',
+  'Your Daily Power',
+  'Overcoming Doubt',
+  'Victorious Faith',
+  'Examining Your Trust',
+  'Before You Begin',
+  'God’s Road Map for Your Life',
+  'Forming a New Habit',
+  'God’s Viewpoint',
+  'What Fills Your Mind',
+  'Five Ways to Take in God’s Word',
+  'The Power of God’s Word to Transform',
+  'Relationship, Not Rules',
+  'Knowing Your Father',
+  'Praying with Confidence and Humility',
+  'Growing in the Practice of Prayer',
+  'Christ’s Local Body',
+  'The Example of the Early Church',
+  'Why Connection Matters',
+  'Baptism and the Lord’s Table',
+  'Unique Gifts for the Common Good',
+  'Taking Steps to Belong',
+  'Personal Holiness',
+  'Love for Others',
+  'Ambassadors for Christ',
+  'Investing Your Life',
+  'Expanding Your “Territory”',
+  'Accountability and Reward',
+  'Continuing the Journey',
+  'Keep Taking the Next Step',
+  'A Closing Prayer',
+]);
+
+function parseAdventureGuideSection(
+  pages: string[],
+  section: (typeof ADVENTURE_GUIDE_SECTIONS)[number],
+): ArticleBlock[] {
+  const blocks: ArticleBlock[] = [];
+  let currentKind: ArticleBlock['kind'] | undefined;
+  let currentText = '';
+
+  const flush = () => {
+    const text = currentText
+      .replace(/_{5,}/g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/https:\/\/follow\.jesusonline\.com\/\s+/g, 'https://follow.jesusonline.com/')
+      .trim();
+    if (currentKind && text) blocks.push({ kind: currentKind, text });
+    currentKind = undefined;
+    currentText = '';
+  };
+
+  for (const page of pages.slice(section.startPage - 1, section.endPage)) {
+    for (const rawLine of page.split('\n')) {
+      const line = rawLine.trim();
+      if (!line) {
+        flush();
+        continue;
+      }
+      if (/^JesusOnline Ministries\s+·\s+Page \d+$/.test(line)) {
+        flush();
+        continue;
+      }
+      if (
+        line === section.title ||
+        line.replace(/^\d+\.\s*/, '') === section.title
+      ) {
+        flush();
+        continue;
+      }
+      if (line.startsWith('Keep walking. If you want more')) {
+        flush();
+        return blocks;
+      }
+      if (/^_+$/.test(line)) continue;
+      if (ADVENTURE_GUIDE_HEADINGS.has(line)) {
+        flush();
+        blocks.push({ kind: 'heading', text: line });
+        continue;
+      }
+      if (line.startsWith('•')) {
+        flush();
+        currentKind = 'list';
+        currentText = line.replace(/^•\s*/, '');
+        continue;
+      }
+      if (/^(?:Q:|Your thoughts:)/i.test(line)) {
+        flush();
+        currentKind = 'question';
+        currentText = line;
+        continue;
+      }
+      if (!currentKind) currentKind = 'paragraph';
+      currentText += `${currentText ? ' ' : ''}${line}`;
+    }
+    flush();
+  }
+
+  return blocks;
+}
+
+function readAdventureGuidePdf(pdfPath: string): ArticleRecord[] {
+  if (!fs.existsSync(pdfPath)) {
+    throw new Error(`The Adventure guide PDF is required to build: ${pdfPath}`);
+  }
+
+  let pdfText: string;
+  try {
+    pdfText = execFileSync('pdftotext', ['-layout', pdfPath, '-'], {
+      encoding: 'utf8',
+      maxBuffer: 10 * 1024 * 1024,
+    });
+  } catch (error) {
+    throw new Error(
+      `Unable to extract the Adventure guide PDF during the build. Ensure pdftotext is available. ${String(error)}`,
+    );
+  }
+
+  const pages = pdfText.split('\f');
+  if (pages.length < 34) {
+    throw new Error(
+      `The Adventure guide PDF must contain 34 pages; found ${pages.length}.`,
+    );
+  }
+
+  return ADVENTURE_GUIDE_SECTIONS.map((section) => {
+    const blocks = parseAdventureGuideSection(pages, section);
+    if (blocks.length === 0) {
+      throw new Error(`No content was extracted for ${section.route}.`);
+    }
+    return {
+      route: `/${section.route}`,
+      title: section.title,
+      category: 'Adventure Guide',
+      blocks,
+    };
+  });
+}
 
 function decodeXml(text: string) {
   return text
@@ -93,6 +275,19 @@ function readDocxFileBlocks(docxPath: string): ArticleBlock[] {
     { encoding: 'utf8' },
   );
   return parseDocxBlocks(documentXml);
+}
+
+function applyApprovedArticleTextReplacements(slug: string, blocks: ArticleBlock[]) {
+  const replacements = APPROVED_ARTICLE_TEXT_REPLACEMENTS[slug];
+  if (!replacements) return blocks;
+
+  return blocks.map((block) => ({
+    ...block,
+    text: Object.entries(replacements).reduce(
+      (text, [source, replacement]) => text.replaceAll(source, replacement),
+      block.text,
+    ),
+  }));
 }
 
 function readDocxBlocks(archivePath: string, entryName: string, tempDir: string): ArticleBlock[] {
@@ -215,10 +410,23 @@ function buildArticleLibrary(): ArticleRecord[] {
         route: `/${article.slug}`,
         title: article.title,
         category: 'Go Deeper',
-        blocks: readDocxFileBlocks(docxPath),
+        blocks: applyApprovedArticleTextReplacements(
+          article.slug,
+          readDocxFileBlocks(docxPath),
+        ),
       };
     });
-    return [...archivedArticles, ...standaloneDeeperArticles];
+    const adventureGuideArticles = readAdventureGuidePdf(
+      path.join(attachedAssetsDir, ADVENTURE_GUIDE_SOURCE_FILE),
+    );
+    const adventureRoutes = new Set(
+      adventureGuideArticles.map((article) => article.route),
+    );
+    return [
+      ...archivedArticles.filter((article) => !adventureRoutes.has(article.route)),
+      ...adventureGuideArticles,
+      ...standaloneDeeperArticles,
+    ];
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }

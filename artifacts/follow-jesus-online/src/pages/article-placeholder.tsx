@@ -36,7 +36,10 @@ const BIBLE_REFERENCE_PATTERN = new RegExp(
 const NET_COPYRIGHT =
   "Scripture quoted by permission. Quotations designated (NET) are from the NET Bible® copyright ©1996, 2019 by Biblical Studies Press, L.L.C. http://netbible.com All rights reserved.";
 
-function RichText({ text }: { text: string }) {
+const WEB_ADDRESS_PATTERN =
+  /(https?:\/\/[^\s]+|(?:follow\.jesusonline\.com|bible\.com|equip\.jesusonline\.com|app\.jesusonline\.com)(?:\/[^\s]*)?)/g;
+
+function BibleText({ text }: { text: string }) {
   const parts: React.ReactNode[] = [];
   let lastIndex = 0;
 
@@ -53,6 +56,34 @@ function RichText({ text }: { text: string }) {
 
   if (lastIndex < text.length) parts.push(text.slice(lastIndex));
   return <>{parts.length ? parts : text}</>;
+}
+
+function RichText({ text }: { text: string }) {
+  const parts = text.split(WEB_ADDRESS_PATTERN);
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (!part) return null;
+        if (WEB_ADDRESS_PATTERN.test(part)) {
+          WEB_ADDRESS_PATTERN.lastIndex = 0;
+          const href = part.startsWith("http") ? part : `https://${part}`;
+          return (
+            <a
+              key={`${part}-${index}`}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary underline decoration-primary/30 underline-offset-4 hover:text-primary/80"
+            >
+              {part}
+            </a>
+          );
+        }
+        WEB_ADDRESS_PATTERN.lastIndex = 0;
+        return <BibleText key={`${part}-${index}`} text={part} />;
+      })}
+    </>
+  );
 }
 
 function ArticleBlockView({ block }: { block: ArticleBlock }) {
