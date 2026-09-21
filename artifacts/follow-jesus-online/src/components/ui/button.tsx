@@ -13,18 +13,18 @@ export function buttonVariants({
   size = "default",
 }: Pick<ButtonProps, "variant" | "size"> = {}) {
   return cn(
-    "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-sans",
+    "inline-flex items-center justify-center rounded-md text-base font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-sans",
     {
-      "bg-primary text-primary-foreground hover:bg-primary/90": variant === "default",
-      "border border-input bg-background hover:bg-accent hover:text-accent-foreground": variant === "outline",
-      "hover:bg-accent hover:text-accent-foreground": variant === "ghost",
-      "text-primary underline-offset-4 hover:underline": variant === "link",
-      "bg-secondary text-secondary-foreground hover:bg-secondary/80": variant === "secondary",
-      "bg-warm text-warm-foreground hover:bg-warm/90": variant === "warm",
-      "h-10 px-4 py-2": size === "default",
-      "h-9 rounded-md px-3": size === "sm",
-      "h-11 rounded-md px-8": size === "lg",
-      "h-10 w-10": size === "icon",
+      "bg-[#006BB3] text-white hover:bg-[#004E8A]": variant === "default",
+      "border border-[#5B9BC4] bg-white text-[#003A66] hover:bg-warm-50 hover:text-[#003A66]": variant === "outline",
+      "text-[#003A66] hover:bg-warm-50 hover:text-[#003A66]": variant === "ghost",
+      "text-[#006BB3] underline-offset-4 hover:text-[#004E8A] hover:underline": variant === "link",
+      "bg-warm-100 text-[#003A66] hover:bg-warm-200": variant === "secondary",
+      "bg-warm text-white hover:bg-warm-800": variant === "warm",
+      "h-11 px-5 py-2.5": size === "default",
+      "h-10 rounded-md px-4 text-sm": size === "sm",
+      "h-12 rounded-md px-8 text-lg": size === "lg",
+      "h-11 w-11": size === "icon",
     },
   )
 }

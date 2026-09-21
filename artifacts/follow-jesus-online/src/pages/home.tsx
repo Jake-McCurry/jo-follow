@@ -82,7 +82,7 @@ export function Home() {
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   Something real has started. Here are simple next steps to help you understand what happened and walk forward with confidence.
                 </p>
-                <Button asChild className="w-full group-hover:bg-primary/90">
+                <Button asChild className="w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/received?journey=received&entry=landing&step=xp">
                     Begin Here <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
@@ -99,7 +99,7 @@ export function Home() {
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   Turning toward Him again matters. These pages will help you renew your walk and move forward with clarity.
                 </p>
-                <Button asChild className="w-full group-hover:bg-primary/90">
+                <Button asChild className="w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/rededicated?journey=rededicated&entry=landing&step=xp">
                     Welcome Back <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
@@ -116,7 +116,7 @@ export function Home() {
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   Whether you want to be refreshed in the foundations or find clear ways to help others, you are in the right place.
                 </p>
-                <Button asChild className="w-full group-hover:bg-primary/90">
+                <Button asChild className="w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/believer?journey=believer&entry=landing&step=xp">
                     Continue Growing <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
@@ -142,7 +142,7 @@ export function Home() {
               </p>
             </div>
             <div className="mt-6 flex w-full shrink-0 flex-col gap-2 md:mt-0 md:w-auto">
-              <Button asChild size="lg" variant="warm" className="px-8 font-bold shadow-md">
+              <Button asChild size="lg" variant="warm" className="h-14 px-10 text-xl shadow-md">
                 <Link href="/adv/begin-the-adventure">Start the Guide</Link>
               </Button>
               <Button asChild size="sm" variant="outline">
@@ -165,21 +165,21 @@ export function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link href="/rewatch" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <PlayCircle className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-              <span className="font-semibold text-card-foreground">Rewatch the video</span>
+              <span className="text-lg font-bold text-card-foreground">Rewatch the videos</span>
             </Link>
             <Link href="/gf/" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <Search className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-              <span className="font-semibold text-card-foreground">Go Further</span>
+              <span className="text-lg font-bold text-card-foreground">Go Further</span>
             </Link>
             <BibleStartDialog>
               <button type="button" className="group flex w-full flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
                 <BookOpen className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-                <span className="font-semibold text-card-foreground">Read the Bible</span>
+                <span className="text-lg font-bold text-card-foreground">Read the Bible</span>
               </button>
             </BibleStartDialog>
             <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <Compass className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-              <span className="font-semibold text-card-foreground">About JesusOnline</span>
+              <span className="text-lg font-bold text-card-foreground">About JesusOnline</span>
             </a>
           </div>
         </section>
