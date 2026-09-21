@@ -316,35 +316,35 @@ function AdventureArticleView({
                  Keep walking. If you want more on what you just read, pause here first.
                </p>
 
-               <div className="mb-8 grid overflow-hidden rounded-xl border border-border-soft sm:grid-cols-2">
-                 <section className="flex flex-col justify-between bg-white p-5 sm:p-6">
+               <div className="mb-8 grid overflow-hidden rounded-xl border border-warm-200 shadow-sm sm:grid-cols-[1.3fr_0.7fr]">
+                 <section className="flex flex-col justify-between border-t-4 border-warm-500 bg-warm-50 p-5 sm:p-7">
                    <div>
-                     <p className="text-xs font-bold uppercase tracking-wider text-warm-700">Continue the path</p>
-                     <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-navy">
+                     <p className="text-sm font-bold uppercase tracking-wider text-warm-700">Read the next chapter</p>
+                     <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-navy sm:text-3xl">
                        {next ? next.title : article.continuation?.label ?? "You’ve finished the guide"}
                      </h2>
                    </div>
                    {(next || article.continuation) && (
-                     <Button asChild className="mt-5 h-11 w-fit rounded-full bg-blue-700 px-6 text-base font-bold text-white hover:bg-blue-800">
+                     <Button asChild className="mt-6 h-12 w-fit rounded-full bg-blue-700 px-7 text-base font-bold text-white shadow-sm hover:bg-blue-800">
                        <Link href={next ? articleHref(next.slug) : continuationHref(article.continuation!.href)}>
-                         Next <ArrowRight className="ml-2 h-4 w-4" />
+                         Read next <ArrowRight className="ml-2 h-4 w-4" />
                        </Link>
                      </Button>
                    )}
                  </section>
 
                  {deeperArticle && (
-                   <section className="flex flex-col justify-between border-t border-border-soft bg-navy p-5 text-white sm:border-l sm:border-t-0 sm:p-6">
+                   <section className="flex flex-col justify-between border-t border-warm-200 bg-white p-5 text-navy sm:border-l sm:border-t-4 sm:p-6">
                      <div>
-                       <p className="text-xs font-bold uppercase tracking-wider text-warm-300">Go Deeper · Optional</p>
-                       <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-white">
+                       <p className="text-xs font-bold uppercase tracking-wider text-slate">Go Deeper · Optional</p>
+                       <h2 className="mt-2 font-serif text-xl font-bold leading-tight text-navy">
                          {deeperArticle.title}
                        </h2>
-                       <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/80">
+                       <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-slate">
                          {deeperArticle.excerpt}
                        </p>
                      </div>
-                     <Button asChild variant="outline" className="mt-5 h-11 w-fit rounded-full border-white bg-white px-6 text-base font-bold text-navy hover:bg-warm-50 hover:text-navy">
+                     <Button asChild variant="outline" className="mt-5 h-10 w-fit rounded-full border-border-soft bg-white px-5 text-sm font-bold text-navy hover:bg-surface-soft hover:text-navy">
                        <Link href={articleHref(deeperArticle.slug)}>Go deeper</Link>
                      </Button>
                    </section>

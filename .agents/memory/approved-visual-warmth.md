@@ -13,4 +13,4 @@ For the Adventure Guide series specifically, use a warmer chapter-like reading e
 
 **Why:** The user found the standard article treatment too cold for the Adventure series and approved a more engaging guided-journey direction inspired by a warm editorial chapter reference.
 
-**How to apply:** Preserve the distinct Adventure treatment across all current and future Adventure chapters without copying the reference literally or applying the chapter framing to other article groups. Keep opening paragraphs in the article body, sharing visually quiet, reactions to one compact thumbs-up/down row, and the bottom Continue/Go Deeper choices compact and paired.
+**How to apply:** Preserve the distinct Adventure treatment across all current and future Adventure chapters without copying the reference literally or applying the chapter framing to other article groups. Keep opening paragraphs in the article body, sharing visually quiet, reactions to one compact thumbs-up/down row, and the bottom choices compact and paired. “Read the next chapter” is the larger primary CTA; Go Deeper remains visibly optional and secondary.
