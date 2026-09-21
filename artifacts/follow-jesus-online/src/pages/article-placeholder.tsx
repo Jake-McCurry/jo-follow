@@ -311,7 +311,11 @@ function AdventureArticleView({
               </div>
             </div>
 
-            <div id="adventure-next-steps" className="mt-16 scroll-mt-6 border-t border-border-soft pt-8">
+            <div className="mt-16">
+              <ArticleReaction articleSlug={article.slug} compact />
+            </div>
+
+            <div id="adventure-next-steps" className="mt-8 scroll-mt-6">
                <p className="mb-4 text-sm italic text-slate">
                  Keep walking. If you want more on what you just read, pause here first.
                </p>
@@ -350,10 +354,6 @@ function AdventureArticleView({
                </div>
 
                <div className="flex flex-col items-center gap-8">
-                  <div className="w-full">
-                    <ArticleReaction articleSlug={article.slug} compact />
-                  </div>
-
                   <div className="w-full rounded-xl border border-blue-100 bg-blue-50 p-5 text-center text-navy sm:p-6">
                      <div>
                        <h2 className="text-xl font-bold">Questions along the way?</h2>
