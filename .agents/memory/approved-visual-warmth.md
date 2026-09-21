@@ -3,7 +3,7 @@ name: Approved visual warmth
 description: The user-approved visual direction for Follow Jesus Online.
 ---
 
-Use the branding guide’s “cool structure + warm humanity” direction consistently across the project: blue remains the structural brand color, the light page background uses the approved #F7F1E6 paper color, and orange is a restrained invitation/accent rather than a dominant field color. Actions should use bold, larger type and accessible darker blue or orange backgrounds with white text.
+Use the branding guide’s “cool structure + warm humanity” direction consistently across the project: the global navigation uses bright brand blue #0095FF, while deep navy remains the structural and text color. Primary and secondary copy on light surfaces use #003A66 deep navy. The darker #F7F1E6 page paper is reserved for Adventure Guide articles; the rest of the site keeps its lighter warm background. Orange is a restrained invitation/accent rather than a dominant field color. Actions should use bold, larger type and accessible darker blue or orange backgrounds with white text.
 
 **Why:** The user explicitly confirmed that the warm-paper cards and stronger, higher-contrast actions were the right direction and asked for that treatment across the entire site.
 

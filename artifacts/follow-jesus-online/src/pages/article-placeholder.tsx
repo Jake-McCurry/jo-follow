@@ -254,7 +254,7 @@ function AdventureArticleView({
 
   return (
     <Layout>
-      <div className="bg-paper min-h-[100dvh] pb-20">
+      <div className="min-h-[100dvh] bg-[#F7F1E6] pb-20">
         <main className="container mx-auto max-w-3xl px-5 py-8 sm:px-8 md:py-10">
           <nav aria-label="Breadcrumb" className="mb-10 text-sm text-slate">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">

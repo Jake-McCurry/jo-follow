@@ -14,11 +14,11 @@ export function Layout({ children }: { children: ReactNode }) {
       >
         Skip to main content
       </a>
-      <header className="relative sticky top-0 z-40 w-full bg-primary shadow-sm">
+      <header className="relative sticky top-0 z-40 w-full bg-brand shadow-sm">
         <div className="mx-auto flex h-16 max-w-[1800px] items-center justify-between px-5 sm:px-8 md:h-[70px]">
           <Link
             href="/"
-            className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
             aria-label="JesusOnline home"
           >
             <img

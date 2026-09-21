@@ -87,7 +87,7 @@
 }
 
 :root {
-  --background: 38.824 51.515% 93.529%; /* #F7F1E6 Page Paper */
+  --background: 30 50% 99.2%; /* #FFFDFB Warm Paper */
   --foreground: 206 100% 20%; /* #003A66 Deep navy */
   --border: 203 44% 56%; /* #5B9BC4 Borders, dividers */
   --input: 203 44% 56%;
@@ -100,7 +100,7 @@
   --secondary-foreground: 206 100% 20%;
 
   --muted: 25 100% 93%; /* Warm 100 page wash */
-  --muted-foreground: 205 45% 33%; /* #2E5A7A Caption text */
+  --muted-foreground: 206 100% 20%; /* #003A66 Deep navy */
 
   --accent: 25 100% 85%; /* Warm 200 soft hover */
   --accent-foreground: 206 100% 20%; /* #003A66 */
@@ -117,8 +117,8 @@
   --blue-900: 206 100% 27%;
   --blue-950: 206 100% 20%;
 
-  --slate: 205 45% 33%;
-  --paper: 38.824 51.515% 93.529%; /* #F7F1E6 Page Paper */
+  --slate: 206 100% 20%; /* #003A66 Deep navy */
+  --paper: 30 100% 99%;
 
   --warm-50: 25 100% 97%;
   --warm-100: 25 100% 93%;
