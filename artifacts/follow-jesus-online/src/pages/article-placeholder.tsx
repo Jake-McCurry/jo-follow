@@ -91,7 +91,7 @@ function RichText({ text }: { text: string }) {
 function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
   if (block.type === "heading") {
     return (
-      <h2 className="font-serif text-2xl md:text-3xl font-bold text-navy mt-12 mb-4 first:mt-0">
+      <h2 className="text-2xl md:text-3xl font-bold text-navy mt-12 mb-4 first:mt-0">
         <RichText text={block.text} />
       </h2>
     );
@@ -160,7 +160,7 @@ function groupLabel(group: ArticleBlock["type"] | string) {
 function AdventureBlockView({ block }: { block: ArticleBlock }) {
   if (block.type === "heading") {
     return (
-      <h2 className="font-serif text-2xl sm:text-3xl font-bold text-navy mt-14 mb-6 text-center sm:text-left flex flex-col sm:flex-row items-center gap-3">
+      <h2 className="text-2xl sm:text-3xl font-bold text-navy mt-14 mb-6 text-center sm:text-left flex flex-col sm:flex-row items-center gap-3">
         <span className="w-12 h-px bg-warm-300 hidden sm:block"></span>
         <RichText text={block.text} />
       </h2>
@@ -179,7 +179,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
   if (block.type === "question") {
     return (
       <div className="my-5 rounded-lg border-l-4 border-warm-500 bg-warm-50 px-4 py-3 sm:px-5">
-        <p className="font-serif text-lg leading-snug text-navy sm:text-xl">
+        <p className="text-lg leading-snug text-navy sm:text-xl">
           <RichText text={block.text.replace(/^Q:\s*/, "")} />
         </p>
       </div>
@@ -189,7 +189,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
   if (block.type === "table-row") {
     return (
       <div className="my-8 border-l-4 border-warm-500 bg-warm-50/40 px-6 py-5 rounded-r-xl">
-        <p className="font-serif text-lg italic text-navy leading-relaxed">
+        <p className="text-lg italic text-navy leading-relaxed">
           <RichText text={block.text} />
         </p>
       </div>
@@ -218,7 +218,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
            <Quote className="w-6 h-6 sm:w-7 sm:h-7 stroke-1" />
         </div>
         <div className="rounded-xl bg-warm-50/70 p-6 sm:p-8 text-navy flex-1 w-full">
-          <p className="font-serif text-xl sm:text-2xl leading-relaxed text-navy italic">
+          <p className="text-xl sm:text-2xl leading-relaxed text-navy italic">
             <RichText text={block.text} />
           </p>
         </div>
@@ -289,7 +289,7 @@ function AdventureArticleView({
               />
             </header>
 
-            <div className="prose prose-lg max-w-none prose-p:font-sans prose-headings:font-serif">
+            <div className="prose prose-lg max-w-none prose-p:font-sans prose-headings:font-sans">
               <div className="space-y-6">
                 {blocks.map((block, index) => {
                   if (block.type === "list") {
@@ -320,7 +320,7 @@ function AdventureArticleView({
                  <section className="flex flex-col justify-between border-t-4 border-warm-500 bg-warm-50 p-5 sm:p-7">
                    <div>
                      <p className="text-sm font-bold uppercase tracking-wider text-warm-700">Read the next chapter</p>
-                     <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-navy sm:text-3xl">
+                     <h2 className="mt-2 text-2xl font-bold leading-tight text-navy sm:text-3xl">
                        {next ? next.title : article.continuation?.label ?? "You’ve finished the guide"}
                      </h2>
                    </div>
@@ -337,7 +337,7 @@ function AdventureArticleView({
                    <section className="flex flex-col justify-between border-t border-warm-200 bg-white p-5 text-navy sm:border-l sm:border-t-4 sm:p-6">
                      <div>
                        <p className="text-xs font-bold uppercase tracking-wider text-slate">Go Deeper · Optional</p>
-                       <h2 className="mt-2 font-serif text-xl font-bold leading-tight text-navy">
+                       <h2 className="mt-2 text-xl font-bold leading-tight text-navy">
                          {deeperArticle.title}
                        </h2>
                        <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-slate">
@@ -358,7 +358,7 @@ function AdventureArticleView({
 
                   <div className="w-full rounded-xl border border-blue-100 bg-blue-50 p-5 text-center text-navy sm:p-6">
                      <div>
-                       <h2 className="font-serif text-xl font-bold">Questions along the way?</h2>
+                       <h2 className="text-xl font-bold">Questions along the way?</h2>
                        <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-slate">
                         If something is on your heart or you would like help taking your next step, you’re welcome to send a message.
                       </p>

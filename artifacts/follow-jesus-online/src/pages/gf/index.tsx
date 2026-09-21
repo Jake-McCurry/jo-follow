@@ -38,7 +38,7 @@ export function GoFurtherPage() {
               </div>
               <div className="flex-1">
                 <div className="flex flex-col mb-3">
-                  <h2 className="text-2xl sm:text-3xl font-serif font-bold text-navy group-hover:text-brand transition-colors">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-navy group-hover:text-brand transition-colors">
                     {book.title}
                   </h2>
                   <p className="text-sm font-bold uppercase tracking-wider text-slate mt-1">

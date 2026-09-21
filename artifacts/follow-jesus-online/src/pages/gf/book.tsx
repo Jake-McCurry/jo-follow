@@ -33,7 +33,7 @@ export function GFBookPage() {
             <h1 className="text-4xl font-serif font-bold leading-tight text-navy md:text-5xl lg:text-6xl mb-4 text-balance">
               {book.title}
             </h1>
-            <p className="text-xl font-serif italic text-slate mb-8">
+            <p className="text-xl italic text-slate mb-8">
               {book.subtitle}
             </p>
             
@@ -59,7 +59,7 @@ export function GFBookPage() {
           </header>
 
           <div className="mt-16">
-            <h2 className="text-2xl font-serif font-bold text-navy mb-6">
+            <h2 className="text-2xl font-bold text-navy mb-6">
               The {book.readings.length} Readings
             </h2>
             <div className="space-y-4">
@@ -81,7 +81,7 @@ export function GFBookPage() {
           </div>
           
           <div className="mt-16 rounded-2xl bg-surface-soft p-8 sm:p-10 text-center text-navy border border-border-soft shadow-sm">
-            <p className="text-lg italic font-serif max-w-2xl mx-auto mb-8 text-slate">
+            <p className="text-lg italic max-w-2xl mx-auto mb-8 text-slate">
               "{book.closing}"
             </p>
             <Button asChild className="shadow-sm bg-hero hover:bg-structure text-white">

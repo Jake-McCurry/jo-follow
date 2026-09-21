@@ -54,7 +54,7 @@ export function GFReadingPage() {
             <div className="inline-flex w-16 h-16 rounded-full bg-warm-100 text-warm-700 items-center justify-center mb-6">
               <Clock className="w-8 h-8" />
             </div>
-            <h2 className="text-2xl font-serif font-bold text-navy mb-3">Content coming soon</h2>
+            <h2 className="text-2xl font-bold text-navy mb-3">Content coming soon</h2>
             <p className="text-slate max-w-md mx-auto">
               This reading is currently being prepared for the digital library. 
               The complete text will be available in a future update.

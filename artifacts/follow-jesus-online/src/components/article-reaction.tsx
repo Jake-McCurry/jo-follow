@@ -125,7 +125,7 @@ export function ArticleReaction({
 
   return (
     <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm sm:p-8">
-      <h3 className="mb-5 text-center text-xl font-serif font-bold text-foreground">
+      <h3 className="mb-5 text-center text-xl font-bold text-foreground">
         Was this article helpful?
       </h3>
       <div className="flex flex-wrap items-center justify-center gap-3">

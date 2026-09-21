@@ -140,7 +140,7 @@ export function ExploreArticlesPage() {
           <div className="mb-8 flex items-end justify-between gap-4 border-b border-blue-100 pb-4">
             <div>
               <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Keep growing</p>
-              <h2 id="go-deeper-heading" className="font-serif text-3xl font-bold text-navy">Go Deeper</h2>
+              <h2 id="go-deeper-heading" className="text-3xl font-bold text-navy">Go Deeper</h2>
             </div>
             <BookOpen className="h-8 w-8 text-brand" aria-hidden="true" />
           </div>
@@ -165,7 +165,7 @@ export function ExploreArticlesPage() {
           <div className="mb-8 flex items-end justify-between gap-4 border-b border-blue-100 pb-4">
             <div>
               <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Questions are welcome</p>
-              <h2 id="questions-heading" className="font-serif text-3xl font-bold text-navy">Next-step questions</h2>
+              <h2 id="questions-heading" className="text-3xl font-bold text-navy">Next-step questions</h2>
             </div>
             <HelpCircle className="h-8 w-8 text-brand" aria-hidden="true" />
           </div>
@@ -178,7 +178,7 @@ export function ExploreArticlesPage() {
         <section className="mt-20" aria-labelledby="more-resources-heading">
           <div className="mb-8 border-b border-blue-100 pb-4">
             <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">More to explore</p>
-            <h2 id="more-resources-heading" className="font-serif text-3xl font-bold text-navy">Additional discipleship resources</h2>
+            <h2 id="more-resources-heading" className="text-3xl font-bold text-navy">Additional discipleship resources</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {resourceArticles.map((article) => (
