@@ -15,11 +15,11 @@ For the Adventure Guide series specifically, use a warmer chapter-like reading e
 
 **How to apply:** Preserve the distinct Adventure treatment across all current and future Adventure chapters without copying the reference literally or applying the chapter framing to other article groups. Keep opening paragraphs in the article body, sharing visually quiet, reactions to one compact thumbs-up/down row, and the bottom choices compact and paired. “Read the next chapter” is the larger primary CTA; Go Deeper remains visibly optional and secondary.
 
-The 2026 JesusOnline Family Visual Identity kit is the typography authority: use Playfair Display 600–700 only for large hero and page-title H1s. Use Source Sans 3 400–700 for every other heading, card title, quote, interface element, and body copy.
+The 2026 JesusOnline Family Visual Identity kit is the typography authority: use Playfair Display 600–700 for large hero/page-title H1s and the Adventure footer’s next-chapter title. Use Source Sans 3 400–700 everywhere else.
 
 **Why:** The brand kit explicitly reserves Playfair for large hero/page titles, and the user does not want display typography appearing in lower-level headings or bottom-of-page cards.
 
-**How to apply:** Treat semantic H1/page titles as the only Playfair role. H2–H6 and non-heading display copy must remain Source Sans 3, including Adventure article sections and end-of-article cards.
+**How to apply:** Treat semantic H1/page titles as the standard Playfair role. The only approved exception is the next-chapter title inside the Adventure “Read the next chapter” link block; its neighboring Go Deeper title stays Source Sans 3.
 
 The Explore Articles page should remain icon-free; its cards and section links rely on typography, spacing, borders, and restrained color rather than decorative symbols or directional arrows.
 
