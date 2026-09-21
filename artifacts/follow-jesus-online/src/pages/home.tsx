@@ -5,10 +5,11 @@ import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ShareButton } from "@/components/share-button";
-import { ArrowRight, BookOpen, Search, HelpCircle, Compass, PlayCircle } from "lucide-react";
+import { ArrowRight, BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
 import { getRecentPage, clearRecentPage } from "@/hooks/use-recent-page";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
+const guideDownloadUrl = `${import.meta.env.BASE_URL}adventure-guide.pdf`;
 
 export function Home() {
   const [recentPage, setRecentPage] = useState<string | null>(null);
@@ -140,9 +141,15 @@ export function Home() {
                 A clear, steady companion for the first steps—and for the journey that follows.
               </p>
             </div>
-            <div className="shrink-0 flex flex-col sm:flex-row gap-4 w-full md:w-auto mt-6 md:mt-0">
+            <div className="mt-6 flex w-full shrink-0 flex-col gap-2 md:mt-0 md:w-auto">
               <Button asChild size="lg" variant="warm" className="px-8 shadow-md">
                 <Link href="/adv/begin-the-adventure">Start the Guide</Link>
+              </Button>
+              <Button asChild size="sm" variant="outline">
+                <a href={guideDownloadUrl} download="The-Adventure-of-Living-with-Jesus.pdf">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download PDF
+                </a>
               </Button>
             </div>
           </div>
