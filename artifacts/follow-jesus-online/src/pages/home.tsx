@@ -142,7 +142,7 @@ export function Home() {
               </p>
             </div>
             <div className="mt-6 flex w-full shrink-0 flex-col gap-2 md:mt-0 md:w-auto">
-              <Button asChild size="lg" variant="warm" className="px-8 shadow-md">
+              <Button asChild size="lg" variant="warm" className="px-8 font-bold shadow-md">
                 <Link href="/adv/begin-the-adventure">Start the Guide</Link>
               </Button>
               <Button asChild size="sm" variant="outline">
