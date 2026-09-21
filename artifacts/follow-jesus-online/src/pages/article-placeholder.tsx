@@ -91,7 +91,7 @@ function RichText({ text }: { text: string }) {
 function ArticleBlockView({ block }: { block: ArticleBlock }) {
   if (block.type === "heading") {
     return (
-      <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mt-12 mb-4 first:mt-0">
+      <h2 className="font-serif text-2xl md:text-3xl font-bold text-navy mt-12 mb-4 first:mt-0">
         <RichText text={block.text} />
       </h2>
     );
@@ -99,7 +99,7 @@ function ArticleBlockView({ block }: { block: ArticleBlock }) {
 
   if (block.type === "list") {
     return (
-      <li className="ml-5 pl-2 marker:text-primary leading-relaxed">
+      <li className="ml-5 pl-2 marker:text-warm-500 leading-relaxed text-navy">
         <RichText text={block.text} />
       </li>
     );
@@ -107,9 +107,9 @@ function ArticleBlockView({ block }: { block: ArticleBlock }) {
 
   if (block.type === "question") {
     return (
-      <div className="my-6 rounded-xl border border-primary/20 bg-primary/[0.04] p-5 text-card-foreground">
+      <div className="my-6 rounded-xl border border-warm-200 bg-warm-50 p-5 text-navy shadow-sm">
         <div className="flex items-start gap-3">
-          <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+          <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-warm-700" aria-hidden="true" />
           <p className="font-medium leading-relaxed">
             <RichText text={block.text.replace(/^Q:\s*/, "")} />
           </p>
@@ -120,7 +120,7 @@ function ArticleBlockView({ block }: { block: ArticleBlock }) {
 
   if (block.type === "table-row") {
     return (
-      <p className="rounded-lg border border-border/60 bg-muted/30 px-4 py-3">
+      <p className="rounded-lg border border-border-soft bg-surface-soft px-4 py-3 text-navy">
         <RichText text={block.text} />
       </p>
     );
@@ -131,7 +131,7 @@ function ArticleBlockView({ block }: { block: ArticleBlock }) {
       <p className="my-5">
         <Link
           href={block.href.replace(/^\/(adv|deeper)-/, "/$1/")}
-          className="inline-flex items-center font-semibold text-primary underline decoration-primary/30 underline-offset-4 hover:text-primary/80"
+          className="inline-flex items-center font-bold text-brand underline decoration-brand/30 underline-offset-4 hover:text-brand/80"
         >
           <RichText text={block.text} />
           <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
@@ -141,7 +141,7 @@ function ArticleBlockView({ block }: { block: ArticleBlock }) {
   }
 
   return (
-    <p className="leading-relaxed text-card-foreground/90">
+    <p className="leading-relaxed text-slate text-lg mb-5">
       <RichText text={block.text} />
     </p>
   );
@@ -221,14 +221,14 @@ export function ArticlePlaceholder() {
 
         <article className="animate-in fade-in slide-in-from-bottom-6 duration-700">
           <header className="mb-10">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs font-bold uppercase tracking-wider text-secondary-foreground">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
               <BookOpen className="h-3.5 w-3.5" /> {groupLabel(article.group)}
             </div>
-            <h1 className="max-w-3xl text-4xl font-bold leading-tight text-foreground md:text-6xl">
+            <h1 className="max-w-3xl text-4xl font-bold leading-tight text-navy md:text-6xl">
               {article.title}
             </h1>
             {firstParagraphIndex >= 0 && (
-              <p className="mt-6 max-w-3xl text-xl leading-relaxed text-muted-foreground">
+              <p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate">
                 <RichText text={blocks[firstParagraphIndex].text} />
               </p>
             )}
@@ -241,7 +241,7 @@ export function ArticlePlaceholder() {
             </div>
           </header>
 
-          <div className="rounded-2xl border border-border/60 bg-card p-7 shadow-sm sm:p-10 md:p-12">
+          <div className="rounded-2xl border border-border-soft bg-white p-7 shadow-sm sm:p-10 md:p-12">
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <div className="space-y-5">
                 {blocks.map((block, index) => {
@@ -267,11 +267,11 @@ export function ArticlePlaceholder() {
           </div>
 
           {article.relatedSlug && getArticleBySlug(article.relatedSlug) && (
-            <div className="mt-8 rounded-2xl border border-primary/20 bg-primary/[0.04] p-6 sm:p-8">
-              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-primary">Continue exploring</p>
+            <div className="mt-8 rounded-2xl border border-warm-200 bg-warm-50 p-6 sm:p-8">
+              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Continue exploring</p>
               <Link
                 href={articleHref(article.relatedSlug)}
-                className="inline-flex items-center text-xl font-semibold text-foreground hover:text-primary"
+                className="inline-flex items-center text-xl font-semibold text-navy hover:text-brand"
               >
                 {getArticleBySlug(article.relatedSlug)?.title}
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -279,8 +279,8 @@ export function ArticlePlaceholder() {
             </div>
           )}
 
-          <div className="mt-10 border-t border-border/60 pt-8">
-            <p className="text-xs leading-relaxed text-muted-foreground">
+          <div className="mt-10 border-t border-border-soft pt-8">
+            <p className="text-xs leading-relaxed text-slate">
               Scripture references open an accessible NET Bible preview. {NET_COPYRIGHT}
             </p>
           </div>
@@ -293,10 +293,10 @@ export function ArticlePlaceholder() {
             {previous ? (
               <Link
                 href={articleHref(previous.slug)}
-                className="group rounded-xl border border-border/60 bg-card p-5 hover:border-primary/40"
+                className="group rounded-xl border border-border-soft bg-white p-5 hover:border-brand/40 hover:shadow-sm transition-all"
               >
-                <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">Previous</span>
-                <span className="mt-2 flex items-center font-semibold text-foreground group-hover:text-primary">
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate">Previous</span>
+                <span className="mt-2 flex items-center font-semibold text-navy group-hover:text-brand">
                   <ArrowLeft className="mr-2 h-4 w-4" /> {previous.title}
                 </span>
               </Link>
@@ -304,20 +304,20 @@ export function ArticlePlaceholder() {
             {next ? (
               <Link
                 href={articleHref(next.slug)}
-                className="group rounded-xl border border-border/60 bg-card p-5 text-left hover:border-primary/40 sm:text-right"
+                className="group rounded-xl border border-border-soft bg-white p-5 text-left hover:border-brand/40 hover:shadow-sm transition-all sm:text-right"
               >
-                <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">Next</span>
-                <span className="mt-2 flex items-center justify-end font-semibold text-foreground group-hover:text-primary">
+                <span className="block text-xs font-bold uppercase tracking-wider text-slate">Next</span>
+                <span className="mt-2 flex items-center justify-end font-semibold text-navy group-hover:text-brand">
                   {next.title} <ArrowRight className="ml-2 h-4 w-4" />
                 </span>
               </Link>
             ) : <span aria-hidden="true" />}
           </nav>
 
-          <div className="mt-10 rounded-2xl bg-secondary p-7 text-center text-secondary-foreground sm:p-9">
-            <MessageCircle className="mx-auto mb-4 h-9 w-9 opacity-80" />
+          <div className="mt-10 rounded-2xl border border-blue-200 bg-blue-50 p-7 text-center text-navy sm:p-9 shadow-sm">
+            <MessageCircle className="mx-auto mb-4 h-9 w-9 opacity-80 text-brand" />
             <h2 className="text-2xl font-bold">Questions about this article?</h2>
-            <p className="mx-auto mt-3 max-w-xl leading-relaxed opacity-90">
+            <p className="mx-auto mt-3 max-w-xl leading-relaxed text-slate">
               If something is on your heart or you would like help taking your next step, you’re welcome to send a message.
             </p>
             <Button asChild variant="warm" className="mt-6 shadow-sm">
@@ -326,13 +326,13 @@ export function ArticlePlaceholder() {
           </div>
 
           {article.continuation && (
-            <div className="mt-8 rounded-2xl border border-warm-accent/30 bg-warm-accent/[0.08] p-6 sm:p-8">
-              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-accent">
+            <div className="mt-8 rounded-2xl border border-warm-200 bg-warm-50 p-6 sm:p-8">
+              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">
                 Your next step
               </p>
               <Link
                 href={continuationHref(article.continuation.href)}
-                className="inline-flex items-center text-xl font-semibold text-foreground hover:text-primary"
+                className="inline-flex items-center text-xl font-semibold text-navy hover:text-brand"
               >
                 {article.continuation.label}
                 <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />

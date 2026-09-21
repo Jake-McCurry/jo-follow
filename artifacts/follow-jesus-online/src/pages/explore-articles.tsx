@@ -89,9 +89,9 @@ export function ExploreArticlesPage() {
     <Layout>
       <div className="container mx-auto max-w-5xl px-5 py-8 sm:px-8 md:py-10">
         <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Explore Articles</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-navy mb-6">Explore Articles</h1>
           <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
-          <p className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-6 text-xl text-slate max-w-2xl mx-auto">
             Resources and guides to help you understand your faith and walk with Jesus every day.
           </p>
         </div>
@@ -100,30 +100,30 @@ export function ExploreArticlesPage() {
           {ARTICLES.map((article, i) => {
             const Icon = article.icon;
             return (
-              <Card key={i} className="flex flex-col h-full border-border/60 hover:border-primary/30 shadow-sm hover:shadow-md transition-all group overflow-hidden">
+              <Card key={i} className="flex flex-col h-full border-border-soft hover:border-brand/30 shadow-sm hover:shadow-md transition-all group overflow-hidden bg-white">
                 <CardContent className="p-0 flex flex-col h-full">
-                  <Link href={article.link} className="flex-1 p-6 md:p-8 flex flex-col items-start focus-visible:outline-none focus-visible:bg-muted/50">
-                    <div className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Link href={article.link} className="flex-1 p-6 md:p-8 flex flex-col items-start focus-visible:outline-none focus-visible:bg-blue-50">
+                    <div className="w-12 h-12 bg-blue-100 text-brand rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-3 text-card-foreground group-hover:text-primary transition-colors">
+                    <h3 className="text-2xl font-bold mb-3 text-navy group-hover:text-brand transition-colors">
                       {article.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
+                    <p className="text-slate leading-relaxed mb-6">
                       {article.desc}
                     </p>
-                    <div className="mt-auto flex items-center text-primary font-semibold text-sm">
+                    <div className="mt-auto flex items-center text-brand font-bold text-sm">
                       View topic <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
                   
                   {article.deeper && (
-                    <div className="bg-muted/30 border-t border-border/50 px-6 md:px-8 py-4">
+                    <div className="bg-surface-soft border-t border-border-soft px-6 md:px-8 py-4">
                       <Link 
                         href={article.deeper.link} 
-                        className="text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center"
+                        className="text-sm font-semibold text-navy hover:text-brand transition-colors flex items-center"
                       >
-                        <span className="bg-secondary text-secondary-foreground text-xs font-bold px-2 py-0.5 rounded mr-3 uppercase tracking-wide">
+                        <span className="bg-blue-200 text-navy text-xs font-bold px-2 py-0.5 rounded mr-3 uppercase tracking-wide">
                           Go Deeper
                         </span>
                         {article.deeper.label}
@@ -137,23 +137,23 @@ export function ExploreArticlesPage() {
         </div>
 
         <section className="mt-20" aria-labelledby="go-deeper-heading">
-          <div className="mb-8 flex items-end justify-between gap-4">
+          <div className="mb-8 flex items-end justify-between gap-4 border-b border-blue-100 pb-4">
             <div>
-              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-primary">Keep growing</p>
-              <h2 id="go-deeper-heading" className="text-3xl font-bold text-foreground">Go Deeper</h2>
+              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Keep growing</p>
+              <h2 id="go-deeper-heading" className="font-serif text-3xl font-bold text-navy">Go Deeper</h2>
             </div>
-            <BookOpen className="h-8 w-8 text-primary/50" aria-hidden="true" />
+            <BookOpen className="h-8 w-8 text-brand" aria-hidden="true" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {deeperArticles.map((article) => (
               <Link
                 key={article.slug}
                 href={article.slug.replace(/^((?:adv|deeper))-/, "/$1/")}
-                className="group rounded-xl border border-border/60 bg-card p-5 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
+                className="group rounded-xl border border-border-soft bg-white p-5 shadow-sm transition-all hover:border-brand/40 hover:shadow-md"
               >
-                <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary">{article.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{article.excerpt}</p>
-                <span className="mt-4 inline-flex items-center text-sm font-semibold text-primary">
+                <h3 className="text-xl font-bold text-navy group-hover:text-brand">{article.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate">{article.excerpt}</p>
+                <span className="mt-4 inline-flex items-center text-sm font-bold text-brand">
                   Read study <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
@@ -162,12 +162,12 @@ export function ExploreArticlesPage() {
         </section>
 
         <section className="mt-20" aria-labelledby="questions-heading">
-          <div className="mb-8 flex items-end justify-between gap-4">
+          <div className="mb-8 flex items-end justify-between gap-4 border-b border-blue-100 pb-4">
             <div>
-              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-primary">Questions are welcome</p>
-              <h2 id="questions-heading" className="text-3xl font-bold text-foreground">Next-step questions</h2>
+              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Questions are welcome</p>
+              <h2 id="questions-heading" className="font-serif text-3xl font-bold text-navy">Next-step questions</h2>
             </div>
-            <HelpCircle className="h-8 w-8 text-primary/50" aria-hidden="true" />
+            <HelpCircle className="h-8 w-8 text-brand" aria-hidden="true" />
           </div>
           <div className="grid gap-8 lg:grid-cols-2">
             <QuestionGroup title="After you begin following Jesus" articles={receivedArticles} />
@@ -176,22 +176,22 @@ export function ExploreArticlesPage() {
         </section>
 
         <section className="mt-20" aria-labelledby="more-resources-heading">
-          <div className="mb-8">
-            <p className="mb-2 text-sm font-bold uppercase tracking-wider text-primary">More to explore</p>
-            <h2 id="more-resources-heading" className="text-3xl font-bold text-foreground">Additional discipleship resources</h2>
+          <div className="mb-8 border-b border-blue-100 pb-4">
+            <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">More to explore</p>
+            <h2 id="more-resources-heading" className="font-serif text-3xl font-bold text-navy">Additional discipleship resources</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {resourceArticles.map((article) => (
               <Link
                 key={article.slug}
                 href={`/${article.slug}`}
-                className="group flex items-start justify-between gap-4 rounded-xl border border-border/60 bg-card p-5 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
+                className="group flex items-start justify-between gap-4 rounded-xl border border-border-soft bg-white p-5 shadow-sm transition-all hover:border-brand/40 hover:shadow-md"
               >
                 <div>
-                  <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary">{article.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{article.excerpt}</p>
+                  <h3 className="text-xl font-bold text-navy group-hover:text-brand">{article.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate">{article.excerpt}</p>
                 </div>
-                <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-brand transition-transform group-hover:translate-x-1" />
               </Link>
             ))}
           </div>
@@ -209,17 +209,17 @@ function QuestionGroup({
   articles: ReturnType<typeof getArticlesInGroup>;
 }) {
   return (
-    <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
-      <h3 className="mb-5 text-xl font-bold text-card-foreground">{title}</h3>
+    <div className="rounded-2xl border border-border-soft bg-white p-6 shadow-sm">
+      <h3 className="mb-5 text-xl font-bold text-navy">{title}</h3>
       <div className="space-y-3">
         {articles.map((article) => (
           <Link
             key={article.slug}
             href={`/${article.slug}`}
-            className="group flex items-start justify-between gap-3 rounded-lg border border-border/50 px-4 py-3 transition-colors hover:border-primary/30 hover:bg-muted/40"
+            className="group flex items-start justify-between gap-3 rounded-lg border border-border-soft bg-surface-soft px-4 py-3 transition-colors hover:border-brand/40 hover:bg-white"
           >
-            <span className="font-medium leading-snug text-foreground group-hover:text-primary">{article.title}</span>
-            <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
+            <span className="font-semibold leading-snug text-navy group-hover:text-brand">{article.title}</span>
+            <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-brand transition-transform group-hover:translate-x-1" />
           </Link>
         ))}
       </div>

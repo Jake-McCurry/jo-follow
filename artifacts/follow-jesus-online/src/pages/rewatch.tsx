@@ -19,11 +19,11 @@ export function RewatchPage() {
         </div>
 
         <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Rewatch the Video</h1>
-          <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+          <h1 className="text-4xl md:text-5xl font-bold text-navy mb-4">Rewatch the Video</h1>
+          <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
         </div>
 
-        <div className="bg-card rounded-2xl overflow-hidden shadow-lg border border-border/60 aspect-video w-full animate-in fade-in zoom-in-95 duration-700 delay-150 fill-mode-both">
+        <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-border-soft aspect-video w-full animate-in fade-in zoom-in-95 duration-700 delay-150 fill-mode-both">
           <iframe 
             width="100%" 
             height="100%" 
