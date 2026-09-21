@@ -7,7 +7,7 @@ import { ArrowLeft, Mail, Send } from "lucide-react";
 export function MessagePage() {
   return (
     <Layout>
-      <div className="container mx-auto px-5 sm:px-8 py-16 md:py-24 max-w-5xl animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <div className="container mx-auto max-w-5xl px-5 py-8 animate-in fade-in slide-in-from-bottom-8 duration-700 sm:px-8 md:py-10">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div className="pt-2">
             <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-7">

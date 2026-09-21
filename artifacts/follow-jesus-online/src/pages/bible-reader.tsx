@@ -146,7 +146,7 @@ export function BibleReaderPage() {
 
   return (
     <Layout>
-      <div className="container mx-auto max-w-[1600px] px-4 py-8 sm:px-6">
+      <div className="container mx-auto max-w-[1600px] px-4 py-8 sm:px-6 md:py-10">
         <div className="grid items-start gap-6 lg:grid-cols-[250px_minmax(0,1fr)_290px] xl:grid-cols-[270px_minmax(0,760px)_310px] xl:justify-center">
           <BibleStudyTools
             study={study}

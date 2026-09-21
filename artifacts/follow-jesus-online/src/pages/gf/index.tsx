@@ -9,7 +9,7 @@ export function GoFurtherPage() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-5 sm:px-8 py-16 max-w-4xl">
+      <div className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
         <div className="text-center mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <p className="mb-4 text-sm font-bold uppercase tracking-widest text-primary/80">Go Further</p>
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-8 text-balance">

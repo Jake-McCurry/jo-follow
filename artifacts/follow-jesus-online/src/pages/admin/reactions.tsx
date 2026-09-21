@@ -66,7 +66,7 @@ function AdminLoginForm() {
 
   return (
     <Layout>
-      <div className="container mx-auto flex max-w-md flex-col items-center justify-center px-5 py-20">
+      <div className="container mx-auto flex max-w-md flex-col items-center justify-center px-5 py-8 md:py-10">
         <div className="w-full rounded-2xl border border-border/60 bg-card p-8 shadow-sm">
           <h1 className="mb-6 text-2xl font-bold text-foreground">Reaction Report Sign-in</h1>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -116,7 +116,7 @@ function AdminReactionsReport() {
 
   return (
     <Layout>
-      <div className="container mx-auto max-w-5xl px-5 py-10 sm:px-8">
+      <div className="container mx-auto max-w-5xl px-5 py-8 sm:px-8 md:py-10">
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <h1 className="text-3xl font-bold font-serif text-foreground">Reaction Report</h1>

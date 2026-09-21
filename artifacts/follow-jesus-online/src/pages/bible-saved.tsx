@@ -119,7 +119,7 @@ export function BibleSavedPage() {
 
   return (
     <Layout>
-      <div className="container mx-auto max-w-5xl px-5 py-12 sm:px-8">
+      <div className="container mx-auto max-w-5xl px-5 py-8 sm:px-8 md:py-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">Account-free Bible study</p>

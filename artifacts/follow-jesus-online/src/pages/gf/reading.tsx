@@ -25,7 +25,7 @@ export function GFReadingPage() {
 
   return (
     <Layout>
-      <main className="container mx-auto max-w-3xl px-5 py-10 sm:px-8 md:py-16 flex flex-col min-h-[70vh]">
+      <main className="container mx-auto flex min-h-[70vh] max-w-3xl flex-col px-5 py-8 sm:px-8 md:py-10">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
           <Button asChild variant="ghost" className="-ml-4 text-muted-foreground hover:text-foreground">
             <Link href={`/gf/${book.slug}`}>

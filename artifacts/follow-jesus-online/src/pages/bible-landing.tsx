@@ -32,7 +32,7 @@ export function BibleLandingPage() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-5 sm:px-8 py-16 md:py-24 max-w-4xl text-center">
+      <div className="container mx-auto max-w-4xl px-5 py-8 text-center sm:px-8 md:py-10">
         <div className="w-20 h-20 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mx-auto mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <BookOpen className="w-10 h-10" />
         </div>

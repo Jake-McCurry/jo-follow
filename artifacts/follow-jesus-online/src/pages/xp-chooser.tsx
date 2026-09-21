@@ -7,7 +7,7 @@ import { ArrowRight, Compass, HelpCircle, BookOpen } from "lucide-react";
 export function XPChooserPage() {
   return (
     <Layout>
-      <div className="container mx-auto px-5 sm:px-8 py-16 max-w-5xl">
+      <div className="container mx-auto max-w-5xl px-5 py-8 sm:px-8 md:py-10">
         <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Where Did You Start?</h1>
           <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>

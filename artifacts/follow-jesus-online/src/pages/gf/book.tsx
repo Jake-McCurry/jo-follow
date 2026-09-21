@@ -16,7 +16,7 @@ export function GFBookPage() {
 
   return (
     <Layout>
-      <main className="container mx-auto max-w-4xl px-5 py-10 sm:px-8 md:py-16">
+      <main className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
         <div className="mb-8">
           <Button asChild variant="ghost" className="-ml-4 text-muted-foreground hover:text-foreground">
             <Link href="/gf/">

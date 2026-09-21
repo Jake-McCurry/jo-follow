@@ -9,7 +9,7 @@ export function RewatchPage() {
   
   return (
     <Layout>
-      <div className="container mx-auto px-5 sm:px-8 py-12 md:py-20 max-w-4xl">
+      <div className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
         <div className="mb-8 animate-in fade-in slide-in-from-left-4 duration-500">
           <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground -ml-4">
             <Link href="/">

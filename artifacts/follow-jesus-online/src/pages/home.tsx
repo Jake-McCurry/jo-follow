@@ -20,7 +20,7 @@ export function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative bg-[#006BB3] text-white py-16 md:py-24 overflow-hidden">
+      <section className="relative overflow-hidden bg-[#006BB3] py-8 text-white md:py-10">
         <div className="absolute inset-0 bg-gradient-to-b from-[#007AE0]/30 to-[#004E8A]/35"></div>
         
         <div className="container relative z-10 px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
@@ -33,8 +33,8 @@ export function Home() {
         </div>
       </section>
 
-      <div className="border-b border-border/60 bg-background">
-        <div className="container mx-auto flex max-w-4xl justify-center px-5 py-4 sm:justify-end sm:px-8">
+      <section className="border-b border-primary/15 bg-primary/10 py-8 md:py-10">
+        <div className="container mx-auto flex max-w-4xl justify-center px-5 sm:px-8">
           <ShareButton
             title="Walking with Jesus"
             text="Whether you are just beginning, returning, or have followed Him for years, you are welcome here."
@@ -42,7 +42,7 @@ export function Home() {
             variant="outline"
           />
         </div>
-      </div>
+      </section>
 
       {/* Resume Banner */}
       {recentPage && (
@@ -62,7 +62,7 @@ export function Home() {
       )}
 
       {/* Main Content */}
-      <div className="container mx-auto px-5 sm:px-8 py-16 max-w-5xl space-y-24">
+      <div className="container mx-auto max-w-5xl space-y-8 px-5 py-8 sm:px-8 md:space-y-10 md:py-10">
         
         {/* Where to begin */}
         <section className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
@@ -126,7 +126,7 @@ export function Home() {
         </section>
 
         {/* Featured Guide */}
-        <section className="bg-secondary rounded-2xl p-8 md:p-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both relative overflow-hidden">
+        <section className="relative overflow-hidden rounded-2xl bg-secondary p-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both md:p-10">
           <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none">
             <svg width="400" height="400" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2L2 22h20L12 2zm0 4.5l7.5 14h-15L12 6.5z"/>
@@ -183,7 +183,7 @@ export function Home() {
         </section>
 
         {/* Support CTA */}
-        <section className="bg-primary/5 border border-primary/10 rounded-2xl p-8 text-center max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both">
+        <section className="mx-auto max-w-3xl rounded-2xl border border-primary/10 bg-primary/5 p-8 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both md:p-10">
           <h2 className="text-2xl font-bold text-foreground mb-4">We’re Here If You Need Anything</h2>
           <p className="text-muted-foreground mb-8">
             If something is on your mind or you would simply like help finding the right resource, feel free to reach out.
