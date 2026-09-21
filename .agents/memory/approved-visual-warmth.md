@@ -13,7 +13,7 @@ For the Adventure Guide series specifically, use a warmer chapter-like reading e
 
 **Why:** The user found the standard article treatment too cold for the Adventure series and approved a more engaging guided-journey direction inspired by a warm editorial chapter reference.
 
-**How to apply:** Preserve the distinct Adventure treatment across all current and future Adventure chapters without copying the reference literally or applying the chapter framing to other article groups. Keep opening paragraphs in the article body, sharing visually quiet, reactions to one compact thumbs-up/down row, and the bottom choices compact and paired. “Read the next chapter” is the larger primary CTA; Go Deeper remains visibly optional and secondary.
+**How to apply:** Preserve the distinct Adventure treatment across all current and future Adventure chapters without copying the reference literally or applying the chapter framing to other article groups. Keep opening paragraphs in the article body, sharing visually quiet, reactions to one compact thumbs-up/down row, and the bottom choices compact but visibly separate. “Read the next chapter” is the larger dark-blue primary card; Go Deeper remains a distinct optional secondary card.
 
 The 2026 JesusOnline Family Visual Identity kit is the typography authority: use Playfair Display 600–700 for large hero/page-title H1s and the Adventure footer’s next-chapter title. Use Source Sans 3 400–700 everywhere else.
 

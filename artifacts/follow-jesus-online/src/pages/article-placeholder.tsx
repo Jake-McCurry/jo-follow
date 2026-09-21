@@ -316,10 +316,10 @@ function AdventureArticleView({
                  Keep walking. If you want more on what you just read, pause here first.
                </p>
 
-               <div className="mb-8 grid overflow-hidden rounded-xl border border-warm-200 shadow-sm sm:grid-cols-[1.3fr_0.7fr]">
+               <div className="mb-8 grid gap-4 sm:grid-cols-[1.3fr_0.7fr]">
                  <Link
                    href={next ? articleHref(next.slug) : article.continuation ? continuationHref(article.continuation.href) : "/explore-articles"}
-                   className="group block border-t-4 border-warm-500 bg-blue-900 p-5 transition-colors hover:bg-blue-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand sm:p-7"
+                   className="group block rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-7"
                  >
                    <div>
                      <p className="text-sm font-bold uppercase tracking-wider text-blue-100">Read the next chapter</p>
@@ -333,7 +333,7 @@ function AdventureArticleView({
                  {deeperArticle && (
                    <Link
                      href={articleHref(deeperArticle.slug)}
-                     className="group block border-t border-warm-200 bg-white p-5 text-navy transition-colors hover:bg-surface-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand sm:border-l sm:border-t-4 sm:p-6"
+                     className="group block rounded-xl border border-border-soft bg-white p-5 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:bg-surface-soft hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
                    >
                      <div>
                        <p className="text-xs font-bold uppercase tracking-wider text-slate">Go Deeper · Optional</p>
