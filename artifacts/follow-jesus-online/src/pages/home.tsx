@@ -33,7 +33,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="border-b border-primary/15 bg-primary/10 py-8 md:py-10">
+      <section className="border-b border-primary/15 bg-primary/10 py-2">
         <div className="container mx-auto flex max-w-4xl justify-center px-5 sm:px-8">
           <ShareButton
             title="Walking with Jesus"
@@ -127,11 +127,6 @@ export function Home() {
 
         {/* Featured Guide */}
         <section className="relative overflow-hidden rounded-2xl bg-secondary p-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both md:p-10">
-          <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none">
-            <svg width="400" height="400" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L2 22h20L12 2zm0 4.5l7.5 14h-15L12 6.5z"/>
-            </svg>
-          </div>
           <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
             <div className="shrink-0 flex items-center justify-center w-full md:w-48 mb-6 md:mb-0">
               <img src={guideCoverUrl} alt="The Adventure of Living with Jesus Guide" className="w-full max-w-[200px] md:max-w-full rounded-xl shadow-lg border border-border/20 rotate-[-2deg] hover:rotate-0 transition-transform duration-500" />
