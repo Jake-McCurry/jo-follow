@@ -178,8 +178,8 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
 
   if (block.type === "question") {
     return (
-      <div className="my-8 rounded-xl border-l-4 border-warm-500 bg-warm-50 px-5 py-5 sm:px-6">
-        <p className="font-serif text-xl leading-relaxed text-navy sm:text-2xl">
+      <div className="my-5 rounded-lg border-l-4 border-warm-500 bg-warm-50 px-4 py-3 sm:px-5">
+        <p className="font-serif text-lg leading-snug text-navy sm:text-xl">
           <RichText text={block.text.replace(/^Q:\s*/, "")} />
         </p>
       </div>
