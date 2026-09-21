@@ -12,6 +12,8 @@ import {
   getArticlesInGroup,
   type ArticleBlock,
 } from "@/data/article-library";
+import { ArticleReaction } from "@/components/article-reaction";
+
 
 const BIBLE_BOOKS = [
   "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles",
@@ -281,6 +283,10 @@ export function ArticlePlaceholder() {
             <p className="text-xs leading-relaxed text-muted-foreground">
               Scripture references open an accessible NET Bible preview. {NET_COPYRIGHT}
             </p>
+          </div>
+
+          <div className="mt-10">
+            <ArticleReaction articleSlug={article.slug} />
           </div>
 
           <nav aria-label="Article navigation" className="mt-8 grid gap-3 sm:grid-cols-2">

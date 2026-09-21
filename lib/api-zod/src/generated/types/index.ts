@@ -6,9 +6,15 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './articleReactionInput';
+export * from './articleReactionStats';
+export * from './articleReactionSummary';
+export * from './articleReactionType';
 export * from './bibleBook';
 export * from './bibleBookTestament';
 export * from './biblePassage';
 export * from './bibleVerse';
 export * from './getBiblePassageParams';
 export * from './healthStatus';
+export * from './reactionAdminCredentials';
+export * from './reactionAdminSession';

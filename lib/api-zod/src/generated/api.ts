@@ -63,3 +63,119 @@ export const GetBiblePassageResponse = zod.object({
 })
 
 
+/**
+ * @summary Get public article reactions
+ */
+export const getArticleReactionsPathArticleSlugMin = 3;
+export const getArticleReactionsPathArticleSlugMax = 160;
+
+
+export const getArticleReactionsPathArticleSlugRegExp = new RegExp('^[a-z0-9]+(?:-[a-z0-9]+)*$');
+
+
+export const GetArticleReactionsParams = zod.object({
+  "articleSlug": zod.coerce.string().min(getArticleReactionsPathArticleSlugMin).max(getArticleReactionsPathArticleSlugMax).regex(getArticleReactionsPathArticleSlugRegExp)
+})
+
+export const getArticleReactionsResponseHelpfulMin = 5;
+
+export const getArticleReactionsResponseEncouragingMin = 5;
+
+
+
+export const GetArticleReactionsResponse = zod.object({
+  "articleSlug": zod.string(),
+  "helpful": zod.number().min(getArticleReactionsResponseHelpfulMin).nullable().describe('Public total, or null until it reaches five.'),
+  "encouraging": zod.number().min(getArticleReactionsResponseEncouragingMin).nullable().describe('Public total, or null until it reaches five.'),
+  "selected": zod.union([zod.enum(['helpful', 'encouraging', 'disagree']),zod.null()])
+})
+
+
+/**
+ * @summary Set or change the current visitor reaction
+ */
+export const setArticleReactionPathArticleSlugMin = 3;
+export const setArticleReactionPathArticleSlugMax = 160;
+
+
+export const setArticleReactionPathArticleSlugRegExp = new RegExp('^[a-z0-9]+(?:-[a-z0-9]+)*$');
+
+
+export const SetArticleReactionParams = zod.object({
+  "articleSlug": zod.coerce.string().min(setArticleReactionPathArticleSlugMin).max(setArticleReactionPathArticleSlugMax).regex(setArticleReactionPathArticleSlugRegExp)
+})
+
+export const SetArticleReactionBody = zod.object({
+  "reaction": zod.enum(['helpful', 'encouraging', 'disagree'])
+})
+
+export const setArticleReactionResponseHelpfulMin = 5;
+
+export const setArticleReactionResponseEncouragingMin = 5;
+
+
+
+export const SetArticleReactionResponse = zod.object({
+  "articleSlug": zod.string(),
+  "helpful": zod.number().min(setArticleReactionResponseHelpfulMin).nullable().describe('Public total, or null until it reaches five.'),
+  "encouraging": zod.number().min(setArticleReactionResponseEncouragingMin).nullable().describe('Public total, or null until it reaches five.'),
+  "selected": zod.union([zod.enum(['helpful', 'encouraging', 'disagree']),zod.null()])
+})
+
+
+/**
+ * @summary Check the private reaction report session
+ */
+export const GetReactionAdminSessionResponse = zod.object({
+  "authenticated": zod.boolean()
+})
+
+
+/**
+ * @summary Sign in to the private reaction report
+ */
+export const createReactionAdminSessionBodyPasswordMax = 200;
+
+
+
+export const CreateReactionAdminSessionBody = zod.object({
+  "password": zod.string().min(1).max(createReactionAdminSessionBodyPasswordMax)
+})
+
+export const CreateReactionAdminSessionResponse = zod.object({
+  "authenticated": zod.boolean()
+})
+
+
+/**
+ * @summary Sign out of the private reaction report
+ */
+export const DeleteReactionAdminSessionResponse = zod.object({
+  "authenticated": zod.boolean()
+})
+
+
+/**
+ * @summary List private article reaction totals
+ */
+export const listReactionStatsResponseHelpfulMin = 0;
+
+export const listReactionStatsResponseEncouragingMin = 0;
+
+export const listReactionStatsResponseDisagreeMin = 0;
+
+export const listReactionStatsResponseTotalMin = 0;
+
+
+
+export const ListReactionStatsResponseItem = zod.object({
+  "articleSlug": zod.string(),
+  "helpful": zod.number().min(listReactionStatsResponseHelpfulMin),
+  "encouraging": zod.number().min(listReactionStatsResponseEncouragingMin),
+  "disagree": zod.number().min(listReactionStatsResponseDisagreeMin),
+  "total": zod.number().min(listReactionStatsResponseTotalMin),
+  "updatedAt": zod.coerce.date().nullish()
+})
+export const ListReactionStatsResponse = zod.array(ListReactionStatsResponseItem)
+
+

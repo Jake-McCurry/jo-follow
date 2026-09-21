@@ -6,24 +6,33 @@
  * OpenAPI spec version: 0.1.0
  */
 import {
+  useMutation,
   useQuery
 } from '@tanstack/react-query';
 import type {
+  MutationFunction,
   QueryFunction,
   QueryKey,
+  UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult
 } from '@tanstack/react-query';
 
 import type {
+  ArticleReactionInput,
+  ArticleReactionStats,
+  ArticleReactionSummary,
   BibleBook,
   BiblePassage,
   GetBiblePassageParams,
-  HealthStatus
+  HealthStatus,
+  ReactionAdminCredentials,
+  ReactionAdminSession
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
-import type { ErrorType } from '../custom-fetch';
+import type { ErrorType , BodyType } from '../custom-fetch';
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
@@ -278,6 +287,451 @@ export function useGetBiblePassage<TData = Awaited<ReturnType<typeof getBiblePas
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getGetBiblePassageQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getGetArticleReactionsUrl = (articleSlug: string,) => {
+
+
+
+
+  return `/api/articles/${articleSlug}/reactions`
+}
+
+/**
+ * @summary Get public article reactions
+ */
+export const getArticleReactions = async (articleSlug: string, options?: Parameters<typeof customFetch>[1]): Promise<ArticleReactionSummary> => {
+
+  return customFetch<ArticleReactionSummary>(getGetArticleReactionsUrl(articleSlug),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetArticleReactionsQueryKey = (articleSlug: string,) => {
+    return [
+    `/api/articles/${articleSlug}/reactions`
+    ] as const;
+    }
+
+
+export const getGetArticleReactionsQueryOptions = <TData = Awaited<ReturnType<typeof getArticleReactions>>, TError = ErrorType<unknown>>(articleSlug: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getArticleReactions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetArticleReactionsQueryKey(articleSlug);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getArticleReactions>>> = ({ signal }) => getArticleReactions(articleSlug, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: articleSlug !== null && articleSlug !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getArticleReactions>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetArticleReactionsQueryResult = NonNullable<Awaited<ReturnType<typeof getArticleReactions>>>
+export type GetArticleReactionsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get public article reactions
+ */
+
+export function useGetArticleReactions<TData = Awaited<ReturnType<typeof getArticleReactions>>, TError = ErrorType<unknown>>(
+ articleSlug: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getArticleReactions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetArticleReactionsQueryOptions(articleSlug,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getSetArticleReactionUrl = (articleSlug: string,) => {
+
+
+
+
+  return `/api/articles/${articleSlug}/reactions`
+}
+
+/**
+ * @summary Set or change the current visitor reaction
+ */
+export const setArticleReaction = async (articleSlug: string,
+    articleReactionInput: ArticleReactionInput, options?: Parameters<typeof customFetch>[1]): Promise<ArticleReactionSummary> => {
+
+  return customFetch<ArticleReactionSummary>(getSetArticleReactionUrl(articleSlug),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(articleReactionInput)
+  }
+);}
+
+
+
+
+
+export const getSetArticleReactionMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof setArticleReaction>>, TError,{articleSlug: string;data: BodyType<ArticleReactionInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof setArticleReaction>>, TError,{articleSlug: string;data: BodyType<ArticleReactionInput>}, TContext> => {
+
+const mutationKey = ['setArticleReaction'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof setArticleReaction>>, {articleSlug: string;data: BodyType<ArticleReactionInput>}> = (props) => {
+          const {articleSlug,data} = props ?? {};
+
+          return  setArticleReaction(articleSlug,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SetArticleReactionMutationResult = NonNullable<Awaited<ReturnType<typeof setArticleReaction>>>
+    export type SetArticleReactionMutationBody = BodyType<ArticleReactionInput>
+    export type SetArticleReactionMutationError = ErrorType<void>
+
+    /**
+ * @summary Set or change the current visitor reaction
+ */
+export const useSetArticleReaction = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof setArticleReaction>>, TError,{articleSlug: string;data: BodyType<ArticleReactionInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof setArticleReaction>>,
+        TError,
+        {articleSlug: string;data: BodyType<ArticleReactionInput>},
+        TContext
+      > => {
+      return useMutation(getSetArticleReactionMutationOptions(options));
+    }
+
+export const getGetReactionAdminSessionUrl = () => {
+
+
+
+
+  return `/api/reaction-admin/session`
+}
+
+/**
+ * @summary Check the private reaction report session
+ */
+export const getReactionAdminSession = async ( options?: Parameters<typeof customFetch>[1]): Promise<ReactionAdminSession> => {
+
+  return customFetch<ReactionAdminSession>(getGetReactionAdminSessionUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetReactionAdminSessionQueryKey = () => {
+    return [
+    `/api/reaction-admin/session`
+    ] as const;
+    }
+
+
+export const getGetReactionAdminSessionQueryOptions = <TData = Awaited<ReturnType<typeof getReactionAdminSession>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getReactionAdminSession>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetReactionAdminSessionQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getReactionAdminSession>>> = ({ signal }) => getReactionAdminSession({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getReactionAdminSession>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetReactionAdminSessionQueryResult = NonNullable<Awaited<ReturnType<typeof getReactionAdminSession>>>
+export type GetReactionAdminSessionQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Check the private reaction report session
+ */
+
+export function useGetReactionAdminSession<TData = Awaited<ReturnType<typeof getReactionAdminSession>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getReactionAdminSession>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetReactionAdminSessionQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateReactionAdminSessionUrl = () => {
+
+
+
+
+  return `/api/reaction-admin/session`
+}
+
+/**
+ * @summary Sign in to the private reaction report
+ */
+export const createReactionAdminSession = async (reactionAdminCredentials: ReactionAdminCredentials, options?: Parameters<typeof customFetch>[1]): Promise<ReactionAdminSession> => {
+
+  return customFetch<ReactionAdminSession>(getCreateReactionAdminSessionUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(reactionAdminCredentials)
+  }
+);}
+
+
+
+
+
+export const getCreateReactionAdminSessionMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createReactionAdminSession>>, TError,{data: BodyType<ReactionAdminCredentials>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createReactionAdminSession>>, TError,{data: BodyType<ReactionAdminCredentials>}, TContext> => {
+
+const mutationKey = ['createReactionAdminSession'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createReactionAdminSession>>, {data: BodyType<ReactionAdminCredentials>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createReactionAdminSession(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateReactionAdminSessionMutationResult = NonNullable<Awaited<ReturnType<typeof createReactionAdminSession>>>
+    export type CreateReactionAdminSessionMutationBody = BodyType<ReactionAdminCredentials>
+    export type CreateReactionAdminSessionMutationError = ErrorType<void>
+
+    /**
+ * @summary Sign in to the private reaction report
+ */
+export const useCreateReactionAdminSession = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createReactionAdminSession>>, TError,{data: BodyType<ReactionAdminCredentials>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createReactionAdminSession>>,
+        TError,
+        {data: BodyType<ReactionAdminCredentials>},
+        TContext
+      > => {
+      return useMutation(getCreateReactionAdminSessionMutationOptions(options));
+    }
+
+export const getDeleteReactionAdminSessionUrl = () => {
+
+
+
+
+  return `/api/reaction-admin/session`
+}
+
+/**
+ * @summary Sign out of the private reaction report
+ */
+export const deleteReactionAdminSession = async ( options?: Parameters<typeof customFetch>[1]): Promise<ReactionAdminSession> => {
+
+  return customFetch<ReactionAdminSession>(getDeleteReactionAdminSessionUrl(),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteReactionAdminSessionMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteReactionAdminSession>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteReactionAdminSession>>, TError,void, TContext> => {
+
+const mutationKey = ['deleteReactionAdminSession'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteReactionAdminSession>>, void> = () => {
+
+
+          return  deleteReactionAdminSession(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteReactionAdminSessionMutationResult = NonNullable<Awaited<ReturnType<typeof deleteReactionAdminSession>>>
+
+    export type DeleteReactionAdminSessionMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Sign out of the private reaction report
+ */
+export const useDeleteReactionAdminSession = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteReactionAdminSession>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteReactionAdminSession>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getDeleteReactionAdminSessionMutationOptions(options));
+    }
+
+export const getListReactionStatsUrl = () => {
+
+
+
+
+  return `/api/reaction-admin/stats`
+}
+
+/**
+ * @summary List private article reaction totals
+ */
+export const listReactionStats = async ( options?: Parameters<typeof customFetch>[1]): Promise<ArticleReactionStats[]> => {
+
+  return customFetch<ArticleReactionStats[]>(getListReactionStatsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListReactionStatsQueryKey = () => {
+    return [
+    `/api/reaction-admin/stats`
+    ] as const;
+    }
+
+
+export const getListReactionStatsQueryOptions = <TData = Awaited<ReturnType<typeof listReactionStats>>, TError = ErrorType<void>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listReactionStats>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListReactionStatsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listReactionStats>>> = ({ signal }) => listReactionStats({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listReactionStats>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListReactionStatsQueryResult = NonNullable<Awaited<ReturnType<typeof listReactionStats>>>
+export type ListReactionStatsQueryError = ErrorType<void>
+
+
+/**
+ * @summary List private article reaction totals
+ */
+
+export function useListReactionStats<TData = Awaited<ReturnType<typeof listReactionStats>>, TError = ErrorType<void>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listReactionStats>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListReactionStatsQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

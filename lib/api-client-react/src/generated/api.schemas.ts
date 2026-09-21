@@ -43,6 +43,62 @@ export interface BiblePassage {
   copyright: string;
 }
 
+export type ArticleReactionType = typeof ArticleReactionType[keyof typeof ArticleReactionType];
+
+
+export const ArticleReactionType = {
+  helpful: 'helpful',
+  encouraging: 'encouraging',
+  disagree: 'disagree',
+} as const;
+
+export interface ArticleReactionInput {
+  reaction: ArticleReactionType;
+}
+
+export interface ArticleReactionSummary {
+  articleSlug: string;
+  /**
+     * Public total, or null until it reaches five.
+     * @minimum 5
+     * @nullable
+     */
+  helpful: number | null;
+  /**
+     * Public total, or null until it reaches five.
+     * @minimum 5
+     * @nullable
+     */
+  encouraging: number | null;
+  selected: ArticleReactionType | null;
+}
+
+export interface ReactionAdminCredentials {
+  /**
+     * @minLength 1
+     * @maxLength 200
+     */
+  password: string;
+}
+
+export interface ReactionAdminSession {
+  authenticated: boolean;
+}
+
+export interface ArticleReactionStats {
+  articleSlug: string;
+  /** @minimum 0 */
+  helpful: number;
+  /** @minimum 0 */
+  encouraging: number;
+  /** @minimum 0 */
+  disagree: number;
+  /** @minimum 0 */
+  total: number;
+  /** @nullable */
+  updatedAt?: string | null;
+}
+
 export type GetBiblePassageParams = {
 /**
  * A human-readable Bible reference such as John 3 or Romans 8:1-11.

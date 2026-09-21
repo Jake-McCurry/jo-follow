@@ -35,7 +35,7 @@ export function rateLimitPublicApi(
   client.count += 1;
   if (client.count > MAX_REQUESTS_PER_WINDOW) {
     res.setHeader("Retry-After", Math.ceil((client.resetAt - now) / 1_000));
-    res.status(429).json({ error: "Please wait a moment before requesting more passages." });
+    res.status(429).json({ error: "Please wait a moment before making more requests." });
     return;
   }
 
