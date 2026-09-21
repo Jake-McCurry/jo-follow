@@ -178,8 +178,8 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
 
   if (block.type === "question") {
     return (
-      <div className="my-5 rounded-lg border-l-4 border-warm-500 bg-warm-50 px-4 py-3 sm:px-5">
-        <p className="mb-1 text-xs italic text-warm-700">reflect:</p>
+      <div className="my-4 rounded-lg border-l-4 border-warm-500 bg-warm-50 px-4 py-2 sm:px-5">
+        <p className="mb-0.5 text-xs italic leading-none text-warm-700">reflect:</p>
         <p className="text-lg leading-snug text-navy sm:text-xl">
           <RichText text={block.text.replace(/^Q:\s*/, "")} />
         </p>
@@ -312,15 +312,15 @@ function AdventureArticleView({
               </div>
             </div>
 
-            <div className="mt-16">
+            <p className="mt-16 text-lg leading-relaxed text-slate">
+              Keep walking. If you want more on what you just read, pause here first.
+            </p>
+
+            <div className="mt-6">
               <ArticleReaction articleSlug={article.slug} compact />
             </div>
 
             <div id="adventure-next-steps" className="mt-8 scroll-mt-6">
-               <p className="mb-4 text-sm italic text-slate">
-                 Keep walking. If you want more on what you just read, pause here first.
-               </p>
-
                <div className="mb-8 grid gap-4 sm:grid-cols-[1.3fr_0.7fr]">
                  <Link
                    href={next ? articleHref(next.slug) : article.continuation ? continuationHref(article.continuation.href) : "/explore-articles"}
