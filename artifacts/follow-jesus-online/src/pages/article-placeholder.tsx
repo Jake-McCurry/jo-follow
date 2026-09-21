@@ -14,6 +14,7 @@ import {
   type Article,
 } from "@/data/article-library";
 import { ArticleReaction } from "@/components/article-reaction";
+import { useEffect } from "react";
 
 const BIBLE_BOOKS = [
   "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles",
@@ -390,6 +391,10 @@ export function ArticlePlaceholder() {
     routeGroup === "adv" || routeGroup === "deeper"
       ? `${routeGroup}-${params.slug || ""}`
       : params.slug || "";
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [articleSlug]);
 
   const article = getArticleBySlug(articleSlug);
   if (!article) return <NotFound />;
