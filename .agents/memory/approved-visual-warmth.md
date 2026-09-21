@@ -8,3 +8,9 @@ Use the branding guide’s “cool structure + warm humanity” direction consis
 **Why:** The user explicitly confirmed that the warm-paper cards and stronger, higher-contrast actions were the right direction and asked for that treatment across the entire site.
 
 **How to apply:** Carry this direction into new and revised public pages, reading surfaces, supporting screens, and shared components. Preserve generous editorial space and avoid turning every surface orange.
+
+For the Adventure Guide series specifically, use a warmer chapter-like reading experience with visible progress, journey navigation, editorial display headings, warm quote/question callouts, and an inviting next-chapter moment. Keep this treatment isolated from Go Deeper articles.
+
+**Why:** The user found the standard article treatment too cold for the Adventure series and approved a more engaging guided-journey direction inspired by a warm editorial chapter reference.
+
+**How to apply:** Preserve the distinct Adventure treatment across all current and future Adventure chapters without copying the reference literally or applying the chapter framing to other article groups.
