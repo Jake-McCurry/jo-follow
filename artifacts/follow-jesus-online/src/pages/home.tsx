@@ -73,9 +73,9 @@ export function Home() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            <Card className="flex flex-col h-full border-border/60 shadow-sm hover:shadow-md transition-shadow group">
+            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <Compass className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">I Just Began Following Jesus</h3>
@@ -90,9 +90,9 @@ export function Home() {
               </CardContent>
             </Card>
 
-            <Card className="flex flex-col h-full border-border/60 shadow-sm hover:shadow-md transition-shadow group">
+            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <HelpCircle className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">I’m Returning to Jesus</h3>
@@ -107,9 +107,9 @@ export function Home() {
               </CardContent>
             </Card>
 
-            <Card className="flex flex-col h-full border-border/60 shadow-sm hover:shadow-md transition-shadow group">
+            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <BookOpen className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">I Already Walk with Jesus</h3>
@@ -163,22 +163,22 @@ export function Home() {
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/rewatch" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
-              <PlayCircle className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
+            <Link href="/rewatch" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+              <PlayCircle className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
               <span className="font-semibold text-card-foreground">Rewatch the video</span>
             </Link>
-            <Link href="/gf/" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
-              <Search className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
+            <Link href="/gf/" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+              <Search className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
               <span className="font-semibold text-card-foreground">Go Further</span>
             </Link>
             <BibleStartDialog>
-              <button type="button" className="group flex w-full flex-col items-center rounded-xl border border-border/60 bg-card p-6 text-center transition-all hover:border-primary/30 hover:bg-muted/50">
-                <BookOpen className="w-8 h-8 text-primary mb-4 transition-transform group-hover:scale-110" />
+              <button type="button" className="group flex w-full flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+                <BookOpen className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
                 <span className="font-semibold text-card-foreground">Read the Bible</span>
               </button>
             </BibleStartDialog>
-            <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
-              <Compass className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
+            <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+              <Compass className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
               <span className="font-semibold text-card-foreground">About JesusOnline</span>
             </a>
           </div>
