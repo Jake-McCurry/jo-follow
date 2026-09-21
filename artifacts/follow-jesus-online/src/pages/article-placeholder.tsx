@@ -312,7 +312,7 @@ function AdventureArticleView({
               </div>
             </div>
 
-            <p className="mt-16 text-lg leading-relaxed text-slate">
+            <p className="mt-8 text-lg leading-relaxed text-slate">
               Keep walking. If you want more on what you just read, pause here first.
             </p>
 
