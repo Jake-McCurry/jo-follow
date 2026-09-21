@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useParams } from "wouter";
-import { ArrowLeft, ArrowRight, BookOpen, HelpCircle, MessageCircle, Compass, Map, Quote } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, MessageCircle, Quote } from "lucide-react";
 import { ScriptureRef } from "@/components/scripture-ref";
 import { useTrackRecentPage } from "@/hooks/use-recent-page";
 import NotFound from "@/pages/not-found";
@@ -178,15 +178,10 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
 
   if (block.type === "question") {
     return (
-      <div className="my-10 flex flex-col sm:flex-row items-center sm:items-start gap-6">
-        <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-full border border-warm-400 flex items-center justify-center text-warm-600 bg-white shadow-sm sm:mt-2">
-           <HelpCircle className="w-8 h-8 sm:w-10 sm:h-10 stroke-1" />
-        </div>
-        <div className="rounded-xl bg-warm-50 p-6 sm:p-8 text-navy flex-1 border border-warm-100/50 shadow-sm w-full">
-          <p className="font-serif text-xl sm:text-2xl leading-relaxed text-navy">
-            <RichText text={block.text.replace(/^Q:\s*/, "")} />
-          </p>
-        </div>
+      <div className="my-8 rounded-xl border-l-4 border-warm-500 bg-warm-50 px-5 py-5 sm:px-6">
+        <p className="font-serif text-xl leading-relaxed text-navy sm:text-2xl">
+          <RichText text={block.text.replace(/^Q:\s*/, "")} />
+        </p>
       </div>
     );
   }
@@ -242,50 +237,39 @@ function AdventureArticleView({
   article,
   groupArticles,
   articleIndex,
-  firstParagraphIndex,
   articleHref,
   continuationHref,
 }: {
   article: Article;
   groupArticles: Article[];
   articleIndex: number;
-  firstParagraphIndex: number;
   articleHref: (slug: string) => string;
   continuationHref: (href: string) => string;
 }) {
-  const previous = groupArticles[articleIndex - 1];
   const next = groupArticles[articleIndex + 1];
+  const deeperArticle = article.relatedSlug ? getArticleBySlug(article.relatedSlug) : undefined;
   const blocks = article.blocks;
 
   return (
     <Layout>
       <div className="bg-paper min-h-[100dvh] pb-20">
-        <div className="bg-blue-800 text-white flex items-center justify-between px-4 sm:px-8 py-3 text-sm font-medium tracking-wide shadow-sm">
-          <Link href="/explore-articles" className="flex items-center hover:text-blue-200 transition-colors">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            <span className="hidden sm:inline">Follow</span>
-          </Link>
-
-          <div className="flex items-center">
-            <Compass className="w-4 h-4 mr-2 text-blue-300 hidden sm:block" />
-            <span className="hidden sm:inline">Adventure</span>
-            <span className="hidden sm:inline mx-3 text-blue-400">|</span>
-            <span className="text-blue-50 font-bold tracking-widest uppercase text-xs">Chapter {articleIndex + 1}</span>
-          </div>
-
-          {next ? (
-            <Link href={articleHref(next.slug)} className="flex items-center hover:text-blue-200 transition-colors">
-              <span className="hidden sm:inline">Next</span>
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          ) : (
-            <div className="w-16" />
-          )}
-        </div>
-
         <main className="container mx-auto max-w-3xl px-5 py-8 sm:px-8 md:py-10">
+          <nav aria-label="Breadcrumb" className="mb-10 text-sm text-slate">
+            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <li>
+                <Link href="/explore-articles" className="font-medium text-navy hover:text-brand hover:underline">
+                  Adventure Guide
+                </Link>
+              </li>
+              <li aria-hidden="true" className="text-slate/40">/</li>
+              <li aria-current="page" className="text-slate">
+                Chapter {articleIndex + 1}
+              </li>
+            </ol>
+          </nav>
+
           <article className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <div className="text-center mb-16">
+            <header className="mb-12 text-center">
               <div className="flex items-center justify-center gap-4 mb-6">
                 <div className="h-px bg-warm-300 w-12 sm:w-24"></div>
                 <span className="text-warm-700 font-bold tracking-[0.15em] uppercase text-xs sm:text-sm">
@@ -296,17 +280,18 @@ function AdventureArticleView({
               <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] font-serif font-bold text-navy uppercase tracking-tight leading-[1.15] mb-8">
                 {article.title}
               </h1>
-              {firstParagraphIndex >= 0 && (
-                <p className="text-xl sm:text-2xl text-navy leading-relaxed max-w-2xl mx-auto font-serif">
-                  <RichText text={blocks[firstParagraphIndex].text} />
-                </p>
-              )}
-            </div>
+              <ShareButton
+                title={`${article.title} | Follow Jesus Online`}
+                text={`Read “${article.title}” from Follow Jesus Online.`}
+                label="Share this article"
+                variant="ghost"
+                className="h-8 rounded-full px-3 text-xs font-medium text-slate hover:bg-warm-50 hover:text-navy"
+              />
+            </header>
 
             <div className="prose prose-lg max-w-none prose-p:font-sans prose-headings:font-serif">
               <div className="space-y-6">
                 {blocks.map((block, index) => {
-                  if (index === firstParagraphIndex) return null;
                   if (block.type === "list") {
                     const previousBlock = blocks[index - 1];
                     if (previousBlock?.type === "list") return null;
@@ -326,59 +311,58 @@ function AdventureArticleView({
               </div>
             </div>
 
-            <div className="mt-20 pt-12 border-t border-border-soft">
-               <div className="bg-warm-50/50 border border-warm-200 rounded-3xl p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-8 mb-16 relative overflow-hidden shadow-sm">
-                 <div className="absolute -right-10 -top-10 w-40 h-40 bg-warm-200/30 rounded-full blur-2xl pointer-events-none"></div>
+            <div id="adventure-next-steps" className="mt-16 scroll-mt-6 border-t border-border-soft pt-8">
+               <p className="mb-4 text-sm italic text-slate">
+                 Keep walking. If you want more on what you just read, pause here first.
+               </p>
 
-                 <div className="flex items-center gap-6 z-10 w-full sm:w-auto">
-                   <div className="w-16 h-16 rounded-full border border-warm-300 flex items-center justify-center bg-white text-warm-600 shadow-sm shrink-0">
-                     <Map className="w-7 h-7" />
-                   </div>
+               <div className="mb-8 grid overflow-hidden rounded-xl border border-border-soft sm:grid-cols-2">
+                 <section className="flex flex-col justify-between bg-white p-5 sm:p-6">
                    <div>
-                     <h3 className="font-serif font-bold text-navy text-2xl mb-1">Continue the path</h3>
-                     <p className="text-slate text-sm sm:text-base font-medium">
-                       {next ? `Chapter ${articleIndex + 2}: ${next.title}` : "You've finished the guide!"}
-                     </p>
+                     <p className="text-xs font-bold uppercase tracking-wider text-warm-700">Continue the path</p>
+                     <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-navy">
+                       {next ? next.title : article.continuation?.label ?? "You’ve finished the guide"}
+                     </h2>
                    </div>
-                 </div>
+                   {(next || article.continuation) && (
+                     <Button asChild className="mt-5 h-11 w-fit rounded-full bg-blue-700 px-6 text-base font-bold text-white hover:bg-blue-800">
+                       <Link href={next ? articleHref(next.slug) : continuationHref(article.continuation!.href)}>
+                         Next <ArrowRight className="ml-2 h-4 w-4" />
+                       </Link>
+                     </Button>
+                   )}
+                 </section>
 
-                 <div className="z-10 w-full sm:w-auto flex justify-end">
-                   {next ? (
-                     <Button asChild variant="default" className="rounded-full px-8 py-6 text-base font-semibold shadow-md bg-blue-600 hover:bg-blue-700 w-full sm:w-auto">
-                       <Link href={articleHref(next.slug)}>
-                         Next <ArrowRight className="ml-2 w-5 h-5" />
-                       </Link>
+                 {deeperArticle && (
+                   <section className="flex flex-col justify-between border-t border-border-soft bg-navy p-5 text-white sm:border-l sm:border-t-0 sm:p-6">
+                     <div>
+                       <p className="text-xs font-bold uppercase tracking-wider text-warm-300">Go Deeper · Optional</p>
+                       <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-white">
+                         {deeperArticle.title}
+                       </h2>
+                       <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/80">
+                         {deeperArticle.excerpt}
+                       </p>
+                     </div>
+                     <Button asChild variant="outline" className="mt-5 h-11 w-fit rounded-full border-white bg-white px-6 text-base font-bold text-navy hover:bg-warm-50 hover:text-navy">
+                       <Link href={articleHref(deeperArticle.slug)}>Go deeper</Link>
                      </Button>
-                   ) : article.continuation ? (
-                     <Button asChild variant="warm" className="rounded-full px-8 py-6 text-base font-semibold shadow-md w-full sm:w-auto">
-                       <Link href={continuationHref(article.continuation.href)}>
-                         {article.continuation.label} <ArrowRight className="ml-2 w-5 h-5" />
-                       </Link>
-                     </Button>
-                   ) : null}
-                 </div>
+                   </section>
+                 )}
                </div>
 
-               <div className="flex flex-col items-center gap-12">
-                 <ShareButton
-                   title={`${article.title} | Follow Jesus Online`}
-                   text={`Read “${article.title}” from Follow Jesus Online.`}
-                   label="Share this chapter"
-                 />
+               <div className="flex flex-col items-center gap-8">
+                  <div className="w-full">
+                    <ArticleReaction articleSlug={article.slug} compact />
+                  </div>
 
-                 <div className="w-full max-w-xl">
-                   <ArticleReaction articleSlug={article.slug} />
-                 </div>
-
-                 <div className="rounded-3xl border border-blue-100 bg-blue-50 p-8 sm:p-10 text-center text-navy shadow-sm w-full max-w-2xl relative overflow-hidden">
-                    <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-blue-200/30 rounded-full blur-2xl pointer-events-none"></div>
-                    <div className="relative z-10">
-                      <MessageCircle className="mx-auto mb-5 h-10 w-10 text-blue-500" />
-                      <h2 className="text-2xl font-bold font-serif mb-3">Questions along the way?</h2>
-                      <p className="mx-auto max-w-xl leading-relaxed text-slate text-base">
+                  <div className="w-full rounded-xl border border-blue-100 bg-blue-50 p-5 text-center text-navy sm:p-6">
+                     <div>
+                       <h2 className="font-serif text-xl font-bold">Questions along the way?</h2>
+                       <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-slate">
                         If something is on your heart or you would like help taking your next step, you’re welcome to send a message.
                       </p>
-                      <Button asChild variant="outline" className="mt-8 border-blue-200 hover:bg-blue-100 text-blue-900 rounded-full px-8 bg-white/50">
+                       <Button asChild variant="outline" className="mt-4 h-10 rounded-full border-blue-200 bg-white px-5 font-bold text-blue-900 hover:bg-blue-100">
                         <Link href="/message">Send a Message</Link>
                       </Button>
                     </div>
@@ -453,7 +437,6 @@ export function ArticlePlaceholder() {
         article={article}
         groupArticles={groupArticles}
         articleIndex={articleIndex}
-        firstParagraphIndex={firstParagraphIndex}
         articleHref={articleHref}
         continuationHref={continuationHref}
       />

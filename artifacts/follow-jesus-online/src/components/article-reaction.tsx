@@ -10,7 +10,13 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
-export function ArticleReaction({ articleSlug }: { articleSlug: string }) {
+export function ArticleReaction({
+  articleSlug,
+  compact = false,
+}: {
+  articleSlug: string;
+  compact?: boolean;
+}) {
   const { data, isLoading, isError, refetch } = useGetArticleReactions(articleSlug);
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -34,6 +40,13 @@ export function ArticleReaction({ articleSlug }: { articleSlug: string }) {
   });
 
   if (isLoading) {
+    if (compact) {
+      return (
+        <div className="flex h-10 items-center justify-center">
+          <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+        </div>
+      );
+    }
     return (
       <div className="flex h-32 items-center justify-center rounded-2xl border border-border/40 bg-card/30">
         <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
@@ -42,6 +55,14 @@ export function ArticleReaction({ articleSlug }: { articleSlug: string }) {
   }
 
   if (isError || !data) {
+    if (compact) {
+      return (
+        <div className="flex min-h-10 items-center justify-center gap-2 text-sm text-muted-foreground">
+          <span>Reactions are temporarily unavailable.</span>
+          <Button variant="ghost" size="sm" onClick={() => void refetch()}>Try again</Button>
+        </div>
+      );
+    }
     return (
       <div className="rounded-2xl border border-border/60 bg-card p-6 text-center shadow-sm sm:p-8">
         <p className="text-sm text-muted-foreground">
@@ -60,6 +81,47 @@ export function ArticleReaction({ articleSlug }: { articleSlug: string }) {
   };
 
   const isPending = setReaction.isPending;
+
+  if (compact) {
+    return (
+      <div className="flex min-h-11 items-center justify-center gap-3 border-y border-border-soft py-2">
+        <span className="text-sm font-medium text-slate">Was this helpful?</span>
+        <Button
+          variant={data.selected === "helpful" ? "default" : "ghost"}
+          size="icon"
+          className="h-8 w-8 rounded-full"
+          onClick={() => handleReact("helpful" as ArticleReactionType)}
+          disabled={isPending}
+          aria-label="Yes, this was helpful"
+          aria-pressed={data.selected === "helpful"}
+        >
+          {pendingReaction === "helpful" ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <ThumbsUp className="h-4 w-4" />
+          )}
+        </Button>
+        <Button
+          variant={data.selected === "disagree" ? "secondary" : "ghost"}
+          size="icon"
+          className="h-8 w-8 rounded-full"
+          onClick={() => handleReact("disagree" as ArticleReactionType)}
+          disabled={isPending}
+          aria-label="No, this was not helpful"
+          aria-pressed={data.selected === "disagree"}
+        >
+          {pendingReaction === "disagree" ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <ThumbsDown className="h-4 w-4" />
+          )}
+        </Button>
+        <span className="sr-only" aria-live="polite">
+          {data.selected ? "Your response has been saved. You can change it at any time." : "Choose one response."}
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm sm:p-8">
