@@ -33,6 +33,17 @@ export function Home() {
         </div>
       </section>
 
+      <div className="border-b border-border/60 bg-background">
+        <div className="container mx-auto flex max-w-4xl justify-center px-5 py-4 sm:justify-end sm:px-8">
+          <ShareButton
+            title="Walking with Jesus"
+            text="Whether you are just beginning, returning, or have followed Him for years, you are welcome here."
+            label="Send this page to yourself"
+            variant="outline"
+          />
+        </div>
+      </div>
+
       {/* Resume Banner */}
       {recentPage && (
         <div className="bg-secondary text-secondary-foreground py-3 border-b border-secondary-foreground/10">
@@ -138,13 +149,6 @@ export function Home() {
               <Button asChild size="lg" variant="warm" className="px-8 shadow-md">
                 <Link href="/adv/begin-the-adventure">Start the Guide</Link>
               </Button>
-              <ShareButton
-                title="The Adventure of Living with Jesus"
-                text="A clear, steady companion for walking with Jesus."
-                label="Send this page to yourself"
-                variant="outline"
-                className="bg-background/70"
-              />
             </div>
           </div>
         </section>
