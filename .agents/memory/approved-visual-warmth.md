@@ -20,3 +20,9 @@ The 2026 JesusOnline Family Visual Identity kit is the typography authority: use
 **Why:** The brand kit explicitly reserves Playfair for large hero/page titles, and the user does not want display typography appearing in lower-level headings or bottom-of-page cards.
 
 **How to apply:** Treat semantic H1/page titles as the only Playfair role. H2–H6 and non-heading display copy must remain Source Sans 3, including Adventure article sections and end-of-article cards.
+
+The Explore Articles page should remain icon-free; its cards and section links rely on typography, spacing, borders, and restrained color rather than decorative symbols or directional arrows.
+
+**Why:** Repeated icons consumed too much card space and made the article catalog feel busier than its content required.
+
+**How to apply:** Do not reintroduce per-card icons, section-header icons, or arrow icons on Explore Articles. Keep cards compact and text-led.

@@ -1,7 +1,6 @@
 import { Layout } from "@/components/layout";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Compass, Shield, User, Heart, Footprints, Book, MessageCircle, Users, Target, RefreshCw, BookOpen, HelpCircle } from "lucide-react";
 import { useTrackRecentPage } from "@/hooks/use-recent-page";
 import { getArticlesInGroup } from "@/data/article-library";
 
@@ -11,70 +10,60 @@ const ARTICLES = [
     desc: "Discover the greatest journey of your life—learning to live each day with Jesus.",
     link: "/adv/begin-the-adventure",
     deeper: { label: "The Need for a New Heart", link: "/deeper/the-need-for-a-new-heart" },
-    icon: Compass
   },
   {
     title: "Citizen of Heaven",
     desc: "The Bible says you can be certain you will go to Heaven when you die.",
     link: "/adv/citizen-of-heaven",
     deeper: { label: "The Gift of Eternal Life", link: "/deeper/the-gift-of-eternal-life" },
-    icon: Shield
   },
   {
     title: "Your New Identity in Christ",
     desc: "See yourself the way God now sees you—and watch how that new identity changes everything.",
     link: "/adv/your-new-identity-christ",
     deeper: { label: "Embracing Your New Identity in Christ", link: "/deeper/embracing-your-new-identity-in-christ" },
-    icon: User
   },
   {
     title: "The Holy Spirit – Your Constant Companion",
     desc: "Meet the personal presence of God who walks with you, guides you, and never leaves your side.",
     link: "/adv/the-holy-spirit",
     deeper: { label: "Living an Empowered Life", link: "/deeper/living-an-empowered-life" },
-    icon: Heart
   },
   {
     title: "Walking by Faith, Not by Feelings",
     desc: "Learn to trust God steadily even when your emotions rise and fall like the weather.",
     link: "/adv/walking-by-faith",
     deeper: { label: "Faith: Knowing God Who Is Trustworthy", link: "/deeper/faith-knowing-god-who-is-trustworthy" },
-    icon: Footprints
   },
   {
     title: "God’s Word – Your Road Map",
     desc: "Let Scripture become the clear, trustworthy guide that keeps you on the right path.",
     link: "/adv/gods-word",
     deeper: { label: "Renewing the Mind for Transformation", link: "/deeper/renewing-the-mind-for-transformation" },
-    icon: Book
   },
   {
     title: "Prayer – Your Ongoing Conversation with God",
     desc: "Turn prayer from a duty into a natural, ongoing conversation with the One who loves you most.",
     link: "/adv/prayer",
     deeper: { label: "The Lord’s Prayer Guide", link: "/deeper/the-lords-prayer-guide" },
-    icon: MessageCircle
   },
   {
     title: "Belonging to God’s Family",
     desc: "Step into the rich community of believers who walk beside you as true family.",
     link: "/adv/belonging-to-gods-family",
     deeper: { label: "Belong and Become", link: "/deeper/belong-and-become" },
-    icon: Users
   },
   {
     title: "Living a Life of Purpose",
     desc: "Uncover the unique design God has for your life and begin living it with confidence.",
     link: "/adv/living-a-life-of-purpose",
     deeper: { label: "God’s Plan for You", link: "/deeper/gods-plan-for-you" },
-    icon: Target
   },
   {
     title: "Continuing with Jesus",
     desc: "Keep growing in your relationship with Jesus so the adventure of following Him never ends.",
     link: "/adv/continuing-with-jesus",
     deeper: { label: "Your Journey Continues", link: "/deeper/your-journey-continues" },
-    icon: RefreshCw
   },
 ];
 
@@ -97,24 +86,17 @@ export function ExploreArticlesPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
-          {ARTICLES.map((article, i) => {
-            const Icon = article.icon;
-            return (
+          {ARTICLES.map((article, i) => (
               <Card key={i} className="flex flex-col h-full border-border-soft hover:border-brand/30 shadow-sm hover:shadow-md transition-all group overflow-hidden bg-white">
                 <CardContent className="p-0 flex flex-col h-full">
-                  <Link href={article.link} className="flex-1 p-6 md:p-8 flex flex-col items-start focus-visible:outline-none focus-visible:bg-blue-50">
-                    <div className="w-12 h-12 bg-blue-100 text-brand rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                      <Icon className="w-6 h-6" />
-                    </div>
+                  <Link href={article.link} className="flex-1 p-5 md:p-6 flex flex-col items-start focus-visible:outline-none focus-visible:bg-blue-50">
                     <h3 className="text-2xl font-bold mb-3 text-navy group-hover:text-brand transition-colors">
                       {article.title}
                     </h3>
-                    <p className="text-slate leading-relaxed mb-6">
+                    <p className="text-slate leading-relaxed mb-4">
                       {article.desc}
                     </p>
-                    <div className="mt-auto flex items-center text-brand font-bold text-sm">
-                      View topic <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                    <span className="mt-auto text-sm font-bold text-brand">View topic</span>
                   </Link>
                   
                   {article.deeper && (
@@ -132,17 +114,15 @@ export function ExploreArticlesPage() {
                   )}
                 </CardContent>
               </Card>
-            );
-          })}
+          ))}
         </div>
 
         <section className="mt-20" aria-labelledby="go-deeper-heading">
-          <div className="mb-8 flex items-end justify-between gap-4 border-b border-blue-100 pb-4">
+          <div className="mb-8 border-b border-blue-100 pb-4">
             <div>
               <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Keep growing</p>
               <h2 id="go-deeper-heading" className="text-3xl font-bold text-navy">Go Deeper</h2>
             </div>
-            <BookOpen className="h-8 w-8 text-brand" aria-hidden="true" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {deeperArticles.map((article) => (
@@ -153,21 +133,18 @@ export function ExploreArticlesPage() {
               >
                 <h3 className="text-xl font-bold text-navy group-hover:text-brand">{article.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate">{article.excerpt}</p>
-                <span className="mt-4 inline-flex items-center text-sm font-bold text-brand">
-                  Read study <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
+                <span className="mt-4 inline-block text-sm font-bold text-brand">Read study</span>
               </Link>
             ))}
           </div>
         </section>
 
         <section className="mt-20" aria-labelledby="questions-heading">
-          <div className="mb-8 flex items-end justify-between gap-4 border-b border-blue-100 pb-4">
+          <div className="mb-8 border-b border-blue-100 pb-4">
             <div>
               <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Questions are welcome</p>
               <h2 id="questions-heading" className="text-3xl font-bold text-navy">Next-step questions</h2>
             </div>
-            <HelpCircle className="h-8 w-8 text-brand" aria-hidden="true" />
           </div>
           <div className="grid gap-8 lg:grid-cols-2">
             <QuestionGroup title="After you begin following Jesus" articles={receivedArticles} />
@@ -185,13 +162,10 @@ export function ExploreArticlesPage() {
               <Link
                 key={article.slug}
                 href={`/${article.slug}`}
-                className="group flex items-start justify-between gap-4 rounded-xl border border-border-soft bg-white p-5 shadow-sm transition-all hover:border-brand/40 hover:shadow-md"
+                className="group rounded-xl border border-border-soft bg-white p-5 shadow-sm transition-all hover:border-brand/40 hover:shadow-md"
               >
-                <div>
-                  <h3 className="text-xl font-bold text-navy group-hover:text-brand">{article.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate">{article.excerpt}</p>
-                </div>
-                <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-brand transition-transform group-hover:translate-x-1" />
+                <h3 className="text-xl font-bold text-navy group-hover:text-brand">{article.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate">{article.excerpt}</p>
               </Link>
             ))}
           </div>
@@ -216,10 +190,9 @@ function QuestionGroup({
           <Link
             key={article.slug}
             href={`/${article.slug}`}
-            className="group flex items-start justify-between gap-3 rounded-lg border border-border-soft bg-surface-soft px-4 py-3 transition-colors hover:border-brand/40 hover:bg-white"
+            className="group block rounded-lg border border-border-soft bg-surface-soft px-4 py-3 transition-colors hover:border-brand/40 hover:bg-white"
           >
             <span className="font-semibold leading-snug text-navy group-hover:text-brand">{article.title}</span>
-            <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-brand transition-transform group-hover:translate-x-1" />
           </Link>
         ))}
       </div>
