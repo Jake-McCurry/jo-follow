@@ -122,13 +122,13 @@ export function BibleSavedPage() {
       <div className="container mx-auto max-w-5xl px-5 py-8 sm:px-8 md:py-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand">Account-free Bible study</p>
-            <h1 className="mt-2 text-4xl font-bold text-navy">Saved Bible Items</h1>
-            <p className="mt-3 max-w-2xl leading-relaxed text-slate">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-warm-700">Account-free Bible study</p>
+            <h1 className="mt-2 text-4xl font-bold text-foreground">Saved Bible Items</h1>
+            <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
               Reopen your bookmarked chapters and verses, highlights, and private notes from this browser.
             </p>
           </div>
-          <Button asChild className="bg-hero hover:bg-structure text-white">
+          <Button asChild variant="warm">
             <Link href={study.data.lastRead ? biblePath(study.data.lastRead.bookName, study.data.lastRead.chapter) : "/bible/John/1"}>
               <History className="mr-2 h-4 w-4" />
               {study.data.lastRead ? `Continue ${study.data.lastRead.reference}` : "Start reading"}
@@ -137,7 +137,7 @@ export function BibleSavedPage() {
         </div>
 
         <div
-          className="mt-8 rounded-2xl border-2 border-warm-200 bg-warm-50 p-5 text-sm leading-relaxed text-navy shadow-sm"
+          className="mt-8 rounded-2xl border-2 border-warm-300 bg-warm-100 p-5 text-sm leading-relaxed text-warm-900 shadow-sm"
           role="note"
         >
           <strong className="block font-bold">Your saved study is only on this device.</strong>
@@ -177,31 +177,31 @@ export function BibleSavedPage() {
         </div>
 
         {!hasSavedItems ? (
-          <div className="mt-10 rounded-2xl border border-dashed border-border-soft bg-white p-10 text-center">
-            <BookOpen className="mx-auto h-10 w-10 text-brand" />
-            <h2 className="mt-4 text-2xl font-bold text-navy">Nothing saved yet</h2>
-            <p className="mx-auto mt-2 max-w-lg text-slate">
+          <div className="mt-10 rounded-2xl border border-dashed border-warm-300 bg-warm-50 p-10 text-center shadow-sm">
+            <BookOpen className="mx-auto h-10 w-10 text-warm-700" />
+            <h2 className="mt-4 text-2xl font-bold">Nothing saved yet</h2>
+            <p className="mx-auto mt-2 max-w-lg text-muted-foreground">
               Open a Bible chapter, select a verse, and use the study tools to bookmark, highlight, or add a note.
             </p>
-            <Button asChild className="mt-6 bg-hero hover:bg-structure text-white">
+            <Button asChild variant="warm" className="mt-6">
               <Link href="/bible/John/1">Read the Bible</Link>
             </Button>
           </div>
         ) : (
           <div className="mt-10 space-y-10">
             <SavedSection
-              icon={<Bookmark className="h-5 w-5 text-brand" />}
+              icon={<Bookmark className="h-5 w-5 text-warm-700" />}
               title={`Bookmarks (${chapterBookmarks.length + verseBookmarks.length})`}
               emptyText="No bookmarked chapters or verses yet."
             >
               {chapterBookmarks.map((bookmark) => (
                 <SavedRow key={bookmark.id}>
                   <div>
-                    <p className="font-bold text-navy">{bookmark.reference}</p>
-                    <p className="mt-1 text-sm text-slate">Saved chapter</p>
+                    <p className="font-bold">{bookmark.reference}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">Saved chapter</p>
                   </div>
                   <div className="flex gap-2">
-                    <Button asChild size="sm" variant="outline" className="border-border-control text-navy hover:bg-blue-50">
+                    <Button asChild size="sm" variant="outline">
                       <Link href={biblePath(bookmark.bookName, bookmark.chapter)}>Open</Link>
                     </Button>
                     <Button
@@ -210,7 +210,6 @@ export function BibleSavedPage() {
                       variant="ghost"
                       onClick={() => study.removeBookmark(bookmark.id)}
                       aria-label={`Remove ${bookmark.reference} bookmark`}
-                      className="text-slate hover:text-navy hover:bg-blue-50"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -220,11 +219,11 @@ export function BibleSavedPage() {
               {verseBookmarks.map((bookmark) => (
                 <SavedRow key={bookmark.id}>
                   <div className="min-w-0">
-                    <p className="font-bold text-navy">{bookmark.reference}</p>
-                    <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-slate">{bookmark.text}</p>
+                    <p className="font-bold">{bookmark.reference}</p>
+                    <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{bookmark.text}</p>
                   </div>
                   <div className="flex shrink-0 gap-2">
-                    <Button asChild size="sm" variant="outline" className="border-border-control text-navy hover:bg-blue-50">
+                    <Button asChild size="sm" variant="outline">
                       <Link href={biblePath(bookmark.bookName, bookmark.chapter, bookmark.verse)}>Open</Link>
                     </Button>
                     <ShareButton
@@ -232,8 +231,7 @@ export function BibleSavedPage() {
                       text={`${bookmark.text}\n\nScripture quoted from the NET Bible.`}
                       url={bibleShareUrl(bookmark.bookName, bookmark.chapter, bookmark.verse)}
                       label="Share"
-                      className="h-9 px-3 border-border-control text-navy hover:bg-blue-50"
-                      variant="outline"
+                      className="h-9 px-3"
                     />
                     <Button
                       type="button"
@@ -241,7 +239,6 @@ export function BibleSavedPage() {
                       variant="ghost"
                       onClick={() => study.removeBookmark(bookmark.id)}
                       aria-label={`Remove ${bookmark.reference} bookmark`}
-                      className="text-slate hover:text-navy hover:bg-blue-50"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -251,7 +248,7 @@ export function BibleSavedPage() {
             </SavedSection>
 
             <SavedSection
-              icon={<Highlighter className="h-5 w-5 text-brand" />}
+              icon={<Highlighter className="h-5 w-5 text-warm-700" />}
               title={`Highlights (${highlights.length})`}
               emptyText="No highlighted verses yet."
             >
@@ -260,12 +257,12 @@ export function BibleSavedPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <span className={`h-4 w-4 rounded-full ${colorClasses[highlight.color]}`} aria-hidden="true" />
-                      <p className="font-bold text-navy">{highlight.bookName} {highlight.chapter}:{highlight.verse}</p>
+                      <p className="font-bold">{highlight.bookName} {highlight.chapter}:{highlight.verse}</p>
                     </div>
-                    <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-slate">{highlight.text}</p>
+                    <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{highlight.text}</p>
                   </div>
                   <div className="flex shrink-0 gap-2">
-                    <Button asChild size="sm" variant="outline" className="border-border-control text-navy hover:bg-blue-50">
+                    <Button asChild size="sm" variant="outline">
                       <Link href={biblePath(highlight.bookName, highlight.chapter, highlight.verse)}>Open</Link>
                     </Button>
                     <Button
@@ -274,7 +271,6 @@ export function BibleSavedPage() {
                       variant="ghost"
                       onClick={() => study.removeHighlight(highlight.id)}
                       aria-label={`Remove highlight from ${highlight.bookName} ${highlight.chapter}:${highlight.verse}`}
-                      className="text-slate hover:text-navy hover:bg-blue-50"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -284,18 +280,18 @@ export function BibleSavedPage() {
             </SavedSection>
 
             <SavedSection
-              icon={<NotebookPen className="h-5 w-5 text-brand" />}
+              icon={<NotebookPen className="h-5 w-5 text-warm-700" />}
               title={`Notes (${notes.length})`}
               emptyText="No verse notes yet."
             >
               {notes.map((note) => (
                 <SavedRow key={note.id}>
                   <div className="min-w-0">
-                    <p className="font-bold text-navy">{note.bookName} {note.chapter}:{note.verse}</p>
-                    <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-slate">{note.note}</p>
+                    <p className="font-bold">{note.bookName} {note.chapter}:{note.verse}</p>
+                    <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">{note.note}</p>
                   </div>
                   <div className="flex shrink-0 gap-2">
-                    <Button asChild size="sm" variant="outline" className="border-border-control text-navy hover:bg-blue-50">
+                    <Button asChild size="sm" variant="outline">
                       <Link href={biblePath(note.bookName, note.chapter, note.verse)}>Open</Link>
                     </Button>
                     <Button
@@ -304,7 +300,6 @@ export function BibleSavedPage() {
                       variant="ghost"
                       onClick={() => study.removeNote(note.id)}
                       aria-label={`Remove note for ${note.bookName} ${note.chapter}:${note.verse}`}
-                      className="text-slate hover:text-navy hover:bg-blue-50"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -317,10 +312,10 @@ export function BibleSavedPage() {
       </div>
 
       <Dialog open={isImportOpen} onOpenChange={setIsImportOpen}>
-        <DialogContent className="sm:max-w-lg bg-white border-border-soft">
+        <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle className="text-navy">Import Bible study backup</DialogTitle>
-            <DialogDescription className="text-slate">
+            <DialogTitle>Import Bible study backup</DialogTitle>
+            <DialogDescription>
               Merge keeps your current items and adds the backup. Replace removes current items first.
             </DialogDescription>
           </DialogHeader>
@@ -334,7 +329,7 @@ export function BibleSavedPage() {
             >
               Replace current data
             </Button>
-            <Button type="button" onClick={() => finishImport("merge")} className="bg-hero hover:bg-structure text-white">
+            <Button type="button" onClick={() => finishImport("merge")}>
               Merge saved data
             </Button>
           </DialogFooter>
@@ -361,10 +356,10 @@ function SavedSection({
     <section>
       <div className="flex items-center gap-2">
         {icon}
-        <h2 className="text-2xl font-bold text-navy">{title}</h2>
+        <h2 className="text-2xl font-bold">{title}</h2>
       </div>
       <div className="mt-4 space-y-3">
-        {items.length ? items : <p className="rounded-xl border border-dashed border-border-control p-5 text-sm text-slate">{emptyText}</p>}
+        {items.length ? items : <p className="rounded-xl border border-dashed border-warm-200 bg-warm-50 p-5 text-sm text-muted-foreground shadow-sm">{emptyText}</p>}
       </div>
     </section>
   )
@@ -372,7 +367,7 @@ function SavedSection({
 
 function SavedRow({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-border-soft bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col gap-4 rounded-xl border border-warm-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
       {children}
     </div>
   )

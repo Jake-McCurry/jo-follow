@@ -37,25 +37,26 @@ function toError(value: unknown): Error {
 
 function DefaultFallback({ error, resetError }: ErrorFallbackProps) {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 p-6">
-      <div className="max-w-lg w-full text-center">
-        <h1 className="text-xl font-semibold text-gray-900">
+    <div className="flex min-h-screen w-full items-center justify-center bg-background p-6">
+      <div className="w-full max-w-lg rounded-2xl border border-warm-200 bg-white p-8 text-center shadow-sm">
+        <div className="mx-auto mb-5 h-1 w-16 rounded-full bg-warm-500" />
+        <h1 className="text-xl font-semibold text-foreground">
           Something went wrong
         </h1>
-        <p className="mt-2 text-sm text-gray-600">
+        <p className="mt-2 text-sm text-muted-foreground">
           This part of the app hit an error. The rest of the app is still
           running.
         </p>
         {/* Dev only: messages can carry API responses and other internals. */}
         {import.meta.env.DEV ? (
-          <pre className="mt-4 overflow-x-auto rounded bg-gray-100 p-3 text-left text-xs text-gray-800">
+          <pre className="mt-4 overflow-x-auto rounded-lg border border-warm-200 bg-warm-50 p-3 text-left text-xs text-foreground">
             {error.message || String(error)}
           </pre>
         ) : null}
         <button
           type="button"
           onClick={resetError}
-          className="mt-4 rounded bg-gray-900 px-4 py-2 text-sm text-white hover:bg-gray-700"
+          className="mt-4 rounded-md bg-[#006BB3] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#004E8A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0095FF] focus-visible:ring-offset-2"
         >
           Try again
         </button>

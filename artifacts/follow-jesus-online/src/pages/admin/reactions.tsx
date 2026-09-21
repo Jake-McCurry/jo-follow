@@ -67,8 +67,8 @@ function AdminLoginForm() {
   return (
     <Layout>
       <div className="container mx-auto flex max-w-md flex-col items-center justify-center px-5 py-8 md:py-10">
-        <div className="w-full rounded-2xl border border-border-soft bg-white p-8 shadow-sm">
-          <h1 className="mb-6 text-2xl font-bold text-navy">Reaction Report Sign-in</h1>
+        <div className="w-full rounded-2xl border border-warm-200 bg-white p-8 shadow-sm">
+          <h1 className="mb-6 text-2xl font-bold text-foreground">Reaction Report Sign-in</h1>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
               type="text"
@@ -81,7 +81,7 @@ function AdminLoginForm() {
               className="sr-only"
             />
             <div>
-              <label htmlFor="password" className="mb-2 block text-sm font-bold text-navy">
+              <label htmlFor="password" className="mb-2 block text-sm font-medium text-foreground">
                 Password
               </label>
               <input
@@ -90,7 +90,7 @@ function AdminLoginForm() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg border border-border-control bg-white px-4 py-2 text-navy focus:outline-none focus:ring-2 focus:ring-brand"
+                className="w-full rounded-lg border border-warm-200 bg-white px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-warm-500"
                 placeholder="Enter password"
                 required
               />
@@ -101,7 +101,7 @@ function AdminLoginForm() {
                 {error}
               </div>
             )}
-            <Button type="submit" disabled={login.isPending} className="mt-2 w-full h-11 bg-hero hover:bg-structure text-white">
+            <Button type="submit" variant="warm" disabled={login.isPending} className="mt-2 w-full h-11">
               {login.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
               Sign In
             </Button>
@@ -129,8 +129,8 @@ function AdminReactionsReport() {
       <div className="container mx-auto max-w-5xl px-5 py-8 sm:px-8 md:py-10">
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <h1 className="text-3xl font-bold font-serif text-navy">Reaction Report</h1>
-            <p className="mt-2 text-slate">
+            <h1 className="text-3xl font-bold font-serif text-foreground">Reaction Report</h1>
+            <p className="mt-2 text-muted-foreground">
               Private summary of article reactions.
             </p>
           </div>
@@ -138,7 +138,6 @@ function AdminReactionsReport() {
             variant="outline"
             onClick={() => logout.mutate()}
             disabled={logout.isPending}
-            className="border-border-control text-navy hover:bg-blue-50"
           >
             {logout.isPending ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -150,60 +149,60 @@ function AdminReactionsReport() {
         </div>
 
         {isLoading ? (
-          <div className="flex h-40 items-center justify-center rounded-2xl border border-border-soft bg-surface-soft">
-            <Loader2 className="h-6 w-6 animate-spin text-slate" />
+          <div className="flex h-40 items-center justify-center rounded-2xl border border-warm-200 bg-warm-50/50">
+            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
           </div>
         ) : !stats || stats.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-border-soft bg-white p-12 text-center shadow-sm">
-            <CheckCircle2 className="mb-4 h-12 w-12 text-slate/50" />
-            <h2 className="text-xl font-bold text-navy">No reactions yet</h2>
-            <p className="mt-2 text-slate">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-warm-200 bg-white p-12 text-center shadow-sm">
+            <CheckCircle2 className="mb-4 h-12 w-12 text-muted-foreground/50" />
+            <h2 className="text-xl font-semibold text-foreground">No reactions yet</h2>
+            <p className="mt-2 text-muted-foreground">
               When visitors react to articles, the totals will appear here.
             </p>
           </div>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-border-soft bg-white shadow-sm">
+          <div className="overflow-hidden rounded-2xl border border-warm-200 bg-white shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b border-border-soft bg-surface-soft">
-                    <th className="p-4 font-semibold text-slate">Article</th>
-                    <th className="p-4 font-semibold text-slate">Helpful</th>
-                    <th className="p-4 font-semibold text-slate">Encouraging</th>
-                    <th className="p-4 font-semibold text-slate">Disagree</th>
-                    <th className="p-4 font-semibold text-slate">Total</th>
-                    <th className="p-4 font-semibold text-slate">Last Updated</th>
+                  <tr className="border-b border-warm-200 bg-warm-50">
+                    <th className="p-4 font-semibold text-muted-foreground">Article</th>
+                    <th className="p-4 font-semibold text-muted-foreground">Helpful</th>
+                    <th className="p-4 font-semibold text-muted-foreground">Encouraging</th>
+                    <th className="p-4 font-semibold text-muted-foreground">Disagree</th>
+                    <th className="p-4 font-semibold text-muted-foreground">Total</th>
+                    <th className="p-4 font-semibold text-muted-foreground">Last Updated</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-border-soft">
+                <tbody className="divide-y divide-warm-200">
                   {stats.map((stat) => {
                     const article = getArticleBySlug(stat.articleSlug);
                     return (
-                      <tr key={stat.articleSlug} className="transition-colors hover:bg-blue-50/50">
+                      <tr key={stat.articleSlug} className="transition-colors hover:bg-warm-50">
                         <td className="p-4">
                           {article ? (
                             <div>
                               <Link
                                 href={getArticlePath(stat.articleSlug)}
-                                className="font-semibold text-brand hover:underline"
+                                className="font-semibold text-warm-700 hover:text-warm-800 hover:underline"
                               >
                                 {article.title}
                               </Link>
-                              <div className="mt-1 text-xs text-slate">
+                              <div className="mt-1 text-xs text-muted-foreground">
                                 {stat.articleSlug}
                               </div>
                             </div>
                           ) : (
-                            <span className="font-mono text-xs text-slate">
+                            <span className="font-mono text-xs text-muted-foreground">
                               {stat.articleSlug}
                             </span>
                           )}
                         </td>
-                        <td className="p-4 font-medium text-navy">{stat.helpful}</td>
-                        <td className="p-4 font-medium text-navy">{stat.encouraging}</td>
+                        <td className="p-4 font-medium">{stat.helpful}</td>
+                        <td className="p-4 font-medium">{stat.encouraging}</td>
                         <td className="p-4 font-medium text-destructive/80">{stat.disagree}</td>
-                        <td className="p-4 font-bold text-navy">{stat.total}</td>
-                        <td className="p-4 text-slate">
+                        <td className="p-4 font-bold">{stat.total}</td>
+                        <td className="p-4 text-muted-foreground">
                           {stat.updatedAt
                             ? new Date(stat.updatedAt).toLocaleDateString(undefined, {
                                 year: "numeric",

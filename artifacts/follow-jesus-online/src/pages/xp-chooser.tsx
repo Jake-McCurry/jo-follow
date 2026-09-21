@@ -9,21 +9,21 @@ export function XPChooserPage() {
     <Layout>
       <div className="container mx-auto max-w-5xl px-5 py-8 sm:px-8 md:py-10">
         <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <h1 className="text-4xl md:text-5xl font-bold text-navy mb-4">Where Did You Start?</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Where Did You Start?</h1>
           <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
         </div>
         
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
-          <Card className="flex flex-col h-full border-warm-200 bg-warm-50 shadow-sm hover:shadow-md hover:border-warm-400 hover:bg-warm-100 transition-all group">
+          <Card className="group flex flex-col h-full border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
             <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
               <div className="w-12 h-12 bg-warm-100 text-warm-700 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Compass className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-navy">I Just Began Following Jesus</h3>
-              <p className="text-slate text-sm leading-relaxed mb-8 flex-1">
+              <h3 className="text-xl font-bold mb-3">I Just Began Following Jesus</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                 Something real has started. Here are simple next steps to help you understand what happened and walk forward with confidence.
               </p>
-              <Button asChild className="w-full bg-hero hover:bg-structure text-white">
+              <Button asChild className="w-full group-hover:bg-[#004E8A]">
                 <Link href="/xp/received">
                   Begin Here <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
@@ -31,16 +31,16 @@ export function XPChooserPage() {
             </CardContent>
           </Card>
 
-          <Card className="flex flex-col h-full border-warm-200 bg-warm-50 shadow-sm hover:shadow-md hover:border-warm-400 hover:bg-warm-100 transition-all group">
+          <Card className="group flex flex-col h-full border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
             <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
               <div className="w-12 h-12 bg-warm-100 text-warm-700 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <HelpCircle className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-navy">I’m Returning to Jesus</h3>
-              <p className="text-slate text-sm leading-relaxed mb-8 flex-1">
+              <h3 className="text-xl font-bold mb-3">I’m Returning to Jesus</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                 Turning toward Him again matters. These pages will help you renew your walk and move forward with clarity.
               </p>
-              <Button asChild className="w-full bg-hero hover:bg-structure text-white">
+              <Button asChild className="w-full group-hover:bg-[#004E8A]">
                 <Link href="/xp/rededicated">
                   Welcome Back <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
@@ -48,16 +48,16 @@ export function XPChooserPage() {
             </CardContent>
           </Card>
 
-          <Card className="flex flex-col h-full border-warm-200 bg-warm-50 shadow-sm hover:shadow-md hover:border-warm-400 hover:bg-warm-100 transition-all group">
+          <Card className="group flex flex-col h-full border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
             <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
               <div className="w-12 h-12 bg-warm-100 text-warm-700 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <BookOpen className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-navy">I Already Walk with Jesus</h3>
-              <p className="text-slate text-sm leading-relaxed mb-8 flex-1">
+              <h3 className="text-xl font-bold mb-3">I Already Walk with Jesus</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                 Whether you want to be refreshed in the foundations or find clear ways to help others, you are in the right place.
               </p>
-              <Button asChild className="w-full bg-hero hover:bg-structure text-white">
+              <Button asChild className="w-full group-hover:bg-[#004E8A]">
                 <Link href="/xp/believer">
                   Continue Growing <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>

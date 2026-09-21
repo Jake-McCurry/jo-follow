@@ -154,11 +154,11 @@ export function XPPage() {
         {/* Header Section */}
         <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full mb-6"></div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             {content.title}
           </h1>
           {content.subtitle && (
-            <p className="text-xl text-slate max-w-2xl mx-auto mb-6">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
               {content.subtitle}
             </p>
           )}
@@ -167,7 +167,7 @@ export function XPPage() {
             href={videoUrl}
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-brand font-bold text-lg hover:text-hero transition-colors group"
+            className="inline-flex items-center gap-2 text-warm-700 font-semibold text-lg hover:text-warm-800 transition-colors group"
           >
             <PlayCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />
             Watch this video: How God sees you now
@@ -176,58 +176,58 @@ export function XPPage() {
         </div>
 
         {/* Main Content Area */}
-        <div className="bg-white border border-border-soft rounded-2xl p-8 md:p-12 shadow-sm mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
+        <div className="bg-white border border-warm-200 rounded-2xl p-8 md:p-12 shadow-sm mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
           <div className="flex flex-col md:flex-row gap-10 items-center md:items-start mb-8">
             <div className="shrink-0 w-full max-w-[240px] md:w-64">
-              <img src={guideCoverUrl} alt="The Adventure of Living with Jesus" className="w-full rounded-xl shadow-md border border-border-soft rotate-[-1deg]" />
+              <img src={guideCoverUrl} alt="The Adventure of Living with Jesus" className="w-full rounded-xl shadow-md border border-border/30 rotate-[-1deg]" />
             </div>
             <div className="prose prose-lg dark:prose-invert max-w-none flex-1">
-              <p className="text-xl leading-relaxed text-navy font-medium mb-8">
+              <p className="text-xl leading-relaxed text-card-foreground/90 font-medium mb-8">
                 {content.intro}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button asChild size="lg" className="text-base h-14 px-8 bg-hero hover:bg-structure text-white">
+                <Button asChild size="lg" variant="warm" className="text-base h-14 px-8 shadow-sm">
                   <Link href="/adv/begin-the-adventure">
                     Begin This Short Guide
                   </Link>
                 </Button>
               </div>
               
-              <p className="text-slate">
+              <p className="text-muted-foreground">
                 {content.guideText}
               </p>
             </div>
           </div>
           
-          <div className="mt-8 pt-8 border-t border-border-soft flex flex-col sm:flex-row items-center gap-4 text-sm text-slate">
+          <div className="mt-8 pt-8 border-t border-warm-200 flex flex-col sm:flex-row items-center gap-4 text-sm text-muted-foreground">
             <span>Want to come back easily later?</span>
             <ShareButton 
               title={content.title} 
               text={`I found this helpful: ${content.title} - Follow Jesus Online`}
               label="Save or Send this page" 
-              variant="outline"
-              className="w-full sm:w-auto"
+              variant="secondary"
+              className="w-full sm:w-auto bg-warm-100 hover:bg-warm-200 text-warm-900 border-none"
             />
           </div>
         </div>
 
         {/* Questions / Next Steps */}
         <div className="mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
-          <h2 className="text-2xl font-bold text-navy mb-8 text-center">{content.questionsTitle}</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">{content.questionsTitle}</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {content.questions.map((q, i) => (
-              <div key={i} className="bg-surface-soft border border-border-soft rounded-xl p-6 flex items-start gap-4 hover:border-brand/40 hover:bg-white hover:shadow-sm transition-all group">
-                <Heart className="w-5 h-5 text-brand/40 shrink-0 mt-0.5 group-hover:text-brand" />
+              <div key={i} className="bg-white border border-warm-200 rounded-xl p-6 flex items-start gap-4 shadow-sm hover:border-warm-300 transition-colors">
+                <Heart className="w-5 h-5 text-warm-400 shrink-0 mt-0.5" />
                 {XP_ARTICLE_LINKS[type]?.[q] ? (
                   <Link
                     href={articleHref(XP_ARTICLE_LINKS[type][q])}
-                    className="text-left font-semibold text-navy group-hover:text-brand"
+                    className="text-left font-medium text-foreground/90 underline decoration-warm-300 underline-offset-4 transition-colors hover:text-warm-800"
                   >
                     {q}
                   </Link>
                 ) : (
-                  <span className="text-navy font-semibold">{q}</span>
+                  <span className="text-foreground/90 font-medium">{q}</span>
                 )}
               </div>
             ))}
@@ -235,10 +235,10 @@ export function XPPage() {
         </div>
 
         {/* Support CTA */}
-        <div className="bg-blue-50 border border-blue-200 text-navy rounded-2xl p-8 md:p-12 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both shadow-sm">
-          <MessageCircle className="w-12 h-12 mx-auto mb-6 opacity-80 text-brand" />
+        <div className="bg-warm-50 border border-warm-200 text-foreground rounded-2xl p-8 md:p-12 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both shadow-sm">
+          <MessageCircle className="w-12 h-12 mx-auto mb-6 text-warm-700" />
           <h2 className="text-3xl font-bold mb-4">We’re Here If You Need Anything</h2>
-          <p className="text-lg text-slate max-w-xl mx-auto mb-8">
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
             {content.contactText}
           </p>
           <Button asChild size="lg" variant="warm" className="shadow-md">

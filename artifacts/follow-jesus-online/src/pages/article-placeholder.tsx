@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useParams } from "wouter";
-import { ArrowLeft, ArrowRight, BookOpen, MessageCircle, Quote } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, HelpCircle, MessageCircle, Quote } from "lucide-react";
 import { ScriptureRef } from "@/components/scripture-ref";
 import { useTrackRecentPage } from "@/hooks/use-recent-page";
 import NotFound from "@/pages/not-found";

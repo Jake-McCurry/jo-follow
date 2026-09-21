@@ -32,7 +32,7 @@ export function BibleStudyBackupPreview({ data }: BibleStudyBackupPreviewProps) 
 
   return (
     <section
-      className="rounded-xl border bg-muted/30 p-3"
+      className="rounded-xl border border-warm-200 bg-warm-50 p-3"
       aria-label="Selected backup contents"
     >
       <div className="flex items-start justify-between gap-3">
@@ -40,17 +40,17 @@ export function BibleStudyBackupPreview({ data }: BibleStudyBackupPreviewProps) 
         <span
           className={
             isEmpty || isSmall
-              ? "rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-900 dark:bg-amber-950/50 dark:text-amber-200"
-              : "rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary"
+              ? "rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-900"
+              : "rounded-full bg-warm-200 px-2 py-0.5 text-xs font-semibold text-warm-900"
           }
         >
           {summary.status}
         </span>
       </div>
-      <div className="mt-3 grid grid-cols-3 divide-x rounded-lg border bg-background">
+      <div className="mt-3 grid grid-cols-3 divide-x divide-warm-200 rounded-lg border border-warm-200 bg-white">
         {counts.map(({ label, count, icon: Icon }) => (
           <div key={label} className="flex flex-col items-center gap-1 px-2 py-2 text-center">
-            <Icon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+            <Icon className="h-4 w-4 text-warm-700" aria-hidden="true" />
             <span className="text-lg font-bold leading-none text-foreground">{count}</span>
             <span className="text-[11px] leading-tight text-muted-foreground">{label}</span>
           </div>

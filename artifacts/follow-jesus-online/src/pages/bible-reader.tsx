@@ -159,12 +159,12 @@ export function BibleReaderPage() {
 
           <div className="min-w-0 pb-32 lg:pb-0">
             {/* Navigation Toolbar */}
-            <div className="mb-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-border-soft bg-white p-3 shadow-sm sm:flex-row sm:p-4">
+            <div className="mb-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-warm-200 bg-warm-50 p-3 shadow-sm sm:flex-row sm:p-4">
               <div className="flex w-full items-center gap-2 sm:w-auto">
                 <SelectNative
                   value={canonicalBookName}
                   onChange={(e) => setLocation(`/bible/${encodeURIComponent(e.target.value)}/1`)}
-                  className="w-full bg-white font-bold text-navy border-border-control sm:w-[180px]"
+                  className="w-full bg-white font-medium text-foreground sm:w-[180px]"
                   disabled={isBooksLoading}
                   aria-label="Select Bible Book"
                 >
@@ -180,7 +180,7 @@ export function BibleReaderPage() {
                 <SelectNative
                   value={chapterParam.toString()}
                   onChange={(e) => setLocation(`/bible/${encodeURIComponent(canonicalBookName)}/${e.target.value}`)}
-                  className="w-24 bg-white font-bold text-navy border-border-control sm:w-28"
+                  className="w-24 bg-white font-medium text-foreground sm:w-28"
                   disabled={!currentBook}
                   aria-label="Select Chapter"
                 >
@@ -191,25 +191,25 @@ export function BibleReaderPage() {
               </div>
 
               <form onSubmit={handleSearch} className="relative w-full sm:w-64">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate" />
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   type="text"
                   placeholder="Go to a chapter, e.g. John 3"
                   value={searchInput}
                   onChange={e => setSearchInput(e.target.value)}
-                  className="bg-white pl-9 border-border-control text-navy placeholder:text-slate/60 focus-visible:ring-brand"
+                  className="bg-white pl-9 transition-colors focus:bg-white focus-visible:ring-warm-500"
                   aria-label="Search reference"
                 />
               </form>
             </div>
 
             {/* Reader Content */}
-            <div className="relative min-h-[60vh] overflow-hidden rounded-xl border border-border-soft bg-surface px-5 py-10 shadow-sm sm:px-10 sm:py-14">
-              <div className="absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r from-transparent via-brand/20 to-transparent opacity-50" />
+            <div className="relative min-h-[60vh] overflow-hidden rounded-xl border border-warm-200 bg-white px-5 py-10 shadow-sm sm:px-10 sm:py-14">
+              <div className="absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r from-transparent via-warm-400 to-transparent opacity-50" />
 
               {isPassageLoading ? (
-                <div className="flex h-64 flex-col items-center justify-center space-y-4 text-slate animate-in fade-in zoom-in-95 duration-300">
-                  <Loader2 className="h-8 w-8 animate-spin text-brand" />
+                <div className="flex h-64 flex-col items-center justify-center space-y-4 text-muted-foreground animate-in fade-in zoom-in-95 duration-300">
+                  <Loader2 className="h-8 w-8 animate-spin text-warm-600" />
                   <p>Loading {bookParam} {chapterParam}...</p>
                 </div>
               ) : passageError ? (
@@ -220,10 +220,10 @@ export function BibleReaderPage() {
                 </div>
               ) : passage ? (
                 <article className="animate-in fade-in duration-500">
-                  <h1 className="mb-10 text-center font-serif text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+                  <h1 className="mb-10 text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                     {passage.reference}
                   </h1>
-                  <div className="font-sans text-lg leading-loose tracking-wide text-navy">
+                  <div className="font-sans text-lg leading-loose tracking-wide text-foreground/90">
                     <p className="mb-6">
                       {passage.verses.map((verse) => {
                         const studyVerse: StudyVerse = {
@@ -243,14 +243,14 @@ export function BibleReaderPage() {
                             type="button"
                             onClick={() => setSelectedVerse(studyVerse)}
                             className={cn(
-                              "mr-1 inline rounded-md px-1 text-left transition-colors hover:bg-brand/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2",
+                              "mr-1 inline rounded-md px-1 text-left transition-colors hover:bg-warm-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500 focus-visible:ring-offset-2",
                               highlight && verseHighlightClasses[highlight],
-                              isSelected && "ring-2 ring-brand/50 ring-offset-1",
+                              isSelected && "ring-2 ring-warm-500/50 ring-offset-1",
                             )}
                             aria-pressed={isSelected}
                             aria-label={`Select ${verse.bookName} ${verse.chapter}:${verse.verse}`}
                           >
-                            <sup className="relative top-[-0.2em] mr-1 select-none align-super text-[0.7em] font-bold text-brand">
+                            <sup className="relative top-[-0.2em] mr-1 select-none align-super text-[0.7em] font-bold text-warm-700">
                               {verse.verse}
                             </sup>
                             <span>{verse.text}</span>
@@ -260,7 +260,7 @@ export function BibleReaderPage() {
                     </p>
                   </div>
 
-                  <div className="mt-16 space-y-2 border-t border-border-soft pt-8 text-center text-sm text-slate">
+                  <div className="mt-16 space-y-2 border-t border-border/50 pt-8 text-center text-sm text-muted-foreground">
                     <p className="mx-auto max-w-xl leading-relaxed opacity-80">{passage.copyright}</p>
                   </div>
                 </article>
@@ -272,7 +272,7 @@ export function BibleReaderPage() {
               <Button
                 variant="outline"
                 onClick={goToPrevChapter}
-                className="gap-2 bg-white hover:bg-blue-50 border-border-control text-navy"
+                className="gap-2 border-warm-200 bg-white hover:bg-warm-50"
                 disabled={isPassageLoading || (currentBook?.id === books?.[0]?.id && chapterParam === 1)}
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -282,7 +282,7 @@ export function BibleReaderPage() {
               <Button
                 variant="outline"
                 onClick={goToNextChapter}
-                className="gap-2 bg-white hover:bg-blue-50 border-border-control text-navy"
+                className="gap-2 border-warm-200 bg-white hover:bg-warm-50"
                 disabled={isPassageLoading || (currentBook?.id === books?.[books.length - 1]?.id && chapterParam === currentBook?.chapters)}
               >
                 Next
