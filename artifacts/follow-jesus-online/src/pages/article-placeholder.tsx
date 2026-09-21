@@ -330,7 +330,7 @@ function AdventureArticleView({
                      <p className="text-sm font-bold uppercase tracking-wider text-blue-100">Read the next chapter</p>
                      <h2 className="mt-2 flex items-start justify-between gap-4 font-serif text-2xl font-bold leading-tight text-white sm:text-3xl">
                        <span>{next ? next.title : article.continuation?.label ?? "You’ve finished the guide"}</span>
-                       <ArrowRight className="mt-0.5 h-7 w-7 shrink-0 text-warm-300 transition-transform group-hover:translate-x-1 sm:h-8 sm:w-8" aria-hidden="true" />
+                       <ArrowRight className="mt-0.5 h-7 w-7 shrink-0 text-white transition-transform group-hover:translate-x-1 sm:h-8 sm:w-8" aria-hidden="true" />
                      </h2>
                    </div>
                  </Link>
