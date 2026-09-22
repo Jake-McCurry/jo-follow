@@ -14,11 +14,11 @@ export function Layout({ children }: { children: ReactNode }) {
       >
         Skip to main content
       </a>
-      <header className="relative sticky top-0 z-40 w-full bg-primary shadow-sm">
+      <header className="relative sticky top-0 z-40 w-full bg-brand shadow-sm">
         <div className="mx-auto flex h-16 max-w-[1800px] items-center justify-between px-5 sm:px-8 md:h-[70px]">
           <Link
             href="/"
-            className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
             aria-label="JesusOnline home"
           >
             <img
@@ -48,35 +48,35 @@ export function Layout({ children }: { children: ReactNode }) {
         {isMenuOpen && (
           <nav
             id="site-menu"
-            className="absolute right-5 top-full w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-b-xl border border-border bg-card shadow-xl sm:right-8"
+            className="absolute right-5 top-full w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-b-xl border border-border bg-white shadow-xl sm:right-8"
             aria-label="Main navigation"
           >
             <div className="flex flex-col p-2">
               <Link
                 href="/adv/begin-the-adventure"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Begin the Guide
               </Link>
               <Link
                 href="/gf/"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Go Further
               </Link>
               <Link
                 href="/adv/citizen-of-heaven"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Going to Heaven?
               </Link>
               <Link
                 href="/rewatch"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Rewatch the Video
               </Link>
@@ -86,35 +86,35 @@ export function Layout({ children }: { children: ReactNode }) {
                   setIsMenuOpen(false)
                   setIsBibleDialogOpen(true)
                 }}
-                className="border-b border-muted px-4 py-3 text-left text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="border-b border-warm-200 px-4 py-3 text-left text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Read the NET Bible
               </button>
               <Link
                 href="/bible/saved"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Saved Bible Items
               </Link>
               <Link
                 href="/adv/prayer"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Connect with God
               </Link>
               <Link
                 href="/message"
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-muted px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Send a Message
               </Link>
               <Link
                 href="/xp-pages"
                 onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Return to Start Page
               </Link>

@@ -100,15 +100,15 @@ export function BibleStartDialog({ children, open: controlledOpen, onOpenChange 
       >
         <DialogHeader className="mb-2 pr-8">
           <DialogTitle className="flex items-center gap-2 text-left text-2xl">
-            <BookOpen className="h-6 w-6 text-primary" />
+            <BookOpen className="h-6 w-6 text-warm-700" />
             Read the NET Bible
           </DialogTitle>
-          <DialogDescription className="text-left">
+          <DialogDescription className="text-left text-muted-foreground">
             Choose a book and chapter, or search for a passage to begin reading.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="rounded-2xl border border-border/80 bg-card p-3 shadow-sm sm:p-4">
+        <div className="rounded-2xl border border-warm-200 bg-warm-50 p-3 shadow-sm sm:p-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex w-full items-center gap-2 sm:w-auto">
               <SelectNative
@@ -117,7 +117,7 @@ export function BibleStartDialog({ children, open: controlledOpen, onOpenChange 
                   setSelectedBook(event.target.value)
                   setSelectedChapter("1")
                 }}
-                className="h-12 rounded-xl bg-background px-4 text-base font-medium sm:w-[230px]"
+                className="h-12 rounded-xl bg-white border-warm-200 px-4 text-base font-medium sm:w-[230px]"
                 disabled={isBooksLoading || !books?.length}
                 aria-label="Select Bible book"
               >
@@ -135,7 +135,7 @@ export function BibleStartDialog({ children, open: controlledOpen, onOpenChange 
               <SelectNative
                 value={selectedChapter}
                 onChange={(event) => setSelectedChapter(event.target.value)}
-                className="h-12 w-28 rounded-xl bg-background px-4 text-base font-medium"
+                className="h-12 w-28 rounded-xl bg-white border-warm-200 px-4 text-base font-medium"
                 disabled={!currentBook}
                 aria-label="Select Bible chapter"
               >
@@ -159,7 +159,7 @@ export function BibleStartDialog({ children, open: controlledOpen, onOpenChange 
                 placeholder="Go to a chapter, e.g. John 3"
                 value={searchInput}
                 onChange={(event) => setSearchInput(event.target.value)}
-                className="h-12 rounded-xl bg-background pl-12 text-base"
+                className="h-12 rounded-xl bg-white border-warm-200 pl-12 text-base focus-visible:ring-warm-500"
                 aria-label="Search Bible reference"
               />
             </form>
@@ -169,7 +169,8 @@ export function BibleStartDialog({ children, open: controlledOpen, onOpenChange 
         <Button
           type="button"
           size="lg"
-          className="w-full sm:w-auto sm:self-end"
+          variant="warm"
+          className="w-full sm:w-auto sm:self-end shadow-sm"
           onClick={handleSelectedChapter}
           disabled={isBooksLoading || !currentBook}
         >

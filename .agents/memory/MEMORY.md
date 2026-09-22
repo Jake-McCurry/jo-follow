@@ -3,3 +3,4 @@
 - [Article link validation](article-link-validation.md) — Catalog link guards must cover every frontend source, not only article index pages.
 - [Workspace test runner dependencies](workspace-test-runner-dependencies.md) — Node test loaders must be declared by the package that runs them, not assumed from another workspace package.
 - [Orval js-yaml compatibility](orval-js-yaml-compatibility.md) — Keep security overrides within Orval’s compatible js-yaml major and validate code generation directly.
+- [Approved visual warmth](approved-visual-warmth.md) — Keep the site’s blue structure, warm-paper surfaces, restrained orange accents, and strong accessible actions consistent.

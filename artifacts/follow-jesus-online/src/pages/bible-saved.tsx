@@ -119,16 +119,16 @@ export function BibleSavedPage() {
 
   return (
     <Layout>
-      <div className="container mx-auto max-w-5xl px-5 py-12 sm:px-8">
+      <div className="container mx-auto max-w-5xl px-5 py-8 sm:px-8 md:py-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">Account-free Bible study</p>
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-warm-700">Account-free Bible study</p>
             <h1 className="mt-2 text-4xl font-bold text-foreground">Saved Bible Items</h1>
             <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
               Reopen your bookmarked chapters and verses, highlights, and private notes from this browser.
             </p>
           </div>
-          <Button asChild>
+          <Button asChild variant="warm">
             <Link href={study.data.lastRead ? biblePath(study.data.lastRead.bookName, study.data.lastRead.chapter) : "/bible/John/1"}>
               <History className="mr-2 h-4 w-4" />
               {study.data.lastRead ? `Continue ${study.data.lastRead.reference}` : "Start reading"}
@@ -137,7 +137,7 @@ export function BibleSavedPage() {
         </div>
 
         <div
-          className="mt-8 rounded-2xl border-2 border-amber-400 bg-amber-50 p-5 text-sm leading-relaxed text-amber-950 shadow-sm"
+          className="mt-8 rounded-2xl border-2 border-warm-300 bg-warm-100 p-5 text-sm leading-relaxed text-warm-900 shadow-sm"
           role="note"
         >
           <strong className="block font-bold">Your saved study is only on this device.</strong>
@@ -177,20 +177,20 @@ export function BibleSavedPage() {
         </div>
 
         {!hasSavedItems ? (
-          <div className="mt-10 rounded-2xl border border-dashed bg-card p-10 text-center">
-            <BookOpen className="mx-auto h-10 w-10 text-primary" />
+          <div className="mt-10 rounded-2xl border border-dashed border-warm-300 bg-warm-50 p-10 text-center shadow-sm">
+            <BookOpen className="mx-auto h-10 w-10 text-warm-700" />
             <h2 className="mt-4 text-2xl font-bold">Nothing saved yet</h2>
             <p className="mx-auto mt-2 max-w-lg text-muted-foreground">
               Open a Bible chapter, select a verse, and use the study tools to bookmark, highlight, or add a note.
             </p>
-            <Button asChild className="mt-6">
+            <Button asChild variant="warm" className="mt-6">
               <Link href="/bible/John/1">Read the Bible</Link>
             </Button>
           </div>
         ) : (
           <div className="mt-10 space-y-10">
             <SavedSection
-              icon={<Bookmark className="h-5 w-5 text-primary" />}
+              icon={<Bookmark className="h-5 w-5 text-warm-700" />}
               title={`Bookmarks (${chapterBookmarks.length + verseBookmarks.length})`}
               emptyText="No bookmarked chapters or verses yet."
             >
@@ -248,7 +248,7 @@ export function BibleSavedPage() {
             </SavedSection>
 
             <SavedSection
-              icon={<Highlighter className="h-5 w-5 text-primary" />}
+              icon={<Highlighter className="h-5 w-5 text-warm-700" />}
               title={`Highlights (${highlights.length})`}
               emptyText="No highlighted verses yet."
             >
@@ -280,7 +280,7 @@ export function BibleSavedPage() {
             </SavedSection>
 
             <SavedSection
-              icon={<NotebookPen className="h-5 w-5 text-primary" />}
+              icon={<NotebookPen className="h-5 w-5 text-warm-700" />}
               title={`Notes (${notes.length})`}
               emptyText="No verse notes yet."
             >
@@ -359,7 +359,7 @@ function SavedSection({
         <h2 className="text-2xl font-bold">{title}</h2>
       </div>
       <div className="mt-4 space-y-3">
-        {items.length ? items : <p className="rounded-xl border border-dashed p-5 text-sm text-muted-foreground">{emptyText}</p>}
+        {items.length ? items : <p className="rounded-xl border border-dashed border-warm-200 bg-warm-50 p-5 text-sm text-muted-foreground shadow-sm">{emptyText}</p>}
       </div>
     </section>
   )
@@ -367,7 +367,7 @@ function SavedSection({
 
 function SavedRow({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col gap-4 rounded-xl border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col gap-4 rounded-xl border border-warm-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
       {children}
     </div>
   )

@@ -56,7 +56,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
           type="button"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="inline-flex font-medium text-primary hover:text-primary/80 underline decoration-primary/30 underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm px-1 -mx-1"
+          className="inline-flex font-medium text-warm-700 hover:text-warm-800 underline decoration-warm-300 underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500 rounded-sm px-1 -mx-1"
           aria-expanded={isOpen}
         >
           {children || reference}
@@ -64,7 +64,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
       </PopoverTrigger>
       
       <PopoverContent 
-        className="w-[340px] max-w-[calc(100vw-2rem)] p-5 shadow-lg max-h-[300px] overflow-y-auto" 
+        className="w-[340px] max-w-[calc(100vw-2rem)] p-5 shadow-lg max-h-[300px] overflow-y-auto border-warm-200 bg-white"
         onMouseEnter={() => {
           if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
           if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
@@ -75,13 +75,13 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
         collisionPadding={16}
       >
         <div className="space-y-3">
-          <h4 className="font-sans font-bold text-lg text-foreground border-b pb-2">
+          <h4 className="font-sans font-bold text-lg text-foreground border-b border-warm-200 pb-2">
             {data?.reference || reference}
           </h4>
           
           {isLoading && (
             <div className="flex items-center gap-2 text-muted-foreground py-4 justify-center">
-              <Loader2 className="w-4 h-4 animate-spin" />
+              <Loader2 className="w-4 h-4 animate-spin text-warm-600" />
               <span className="text-sm">Loading Scripture...</span>
             </div>
           )}
@@ -98,7 +98,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
               <p>
                 {data.verses.map((v, i) => (
                   <span key={`${v.chapter}-${v.verse}-${i}`} className="inline mr-1.5">
-                    <sup className="text-[0.65em] font-bold text-primary mr-0.5 align-super">{v.verse}</sup>
+                    <sup className="text-[0.65em] font-bold text-warm-700 mr-0.5 align-super">{v.verse}</sup>
                     <span>{v.text}</span>
                   </span>
                 ))}

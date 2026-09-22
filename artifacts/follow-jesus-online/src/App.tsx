@@ -24,6 +24,7 @@ import { GFReadingPage } from '@/pages/gf/reading';
 import { RewatchPage } from '@/pages/rewatch';
 import { MessagePage } from '@/pages/message';
 import { ArticlePlaceholder } from '@/pages/article-placeholder';
+import { AdminReactionsPage } from '@/pages/admin/reactions';
 import { getArticleBySlug, getArticlePath, getArticleSlugFromPath } from '@/data/article-library';
 import { getGFBook } from '@/data/go-further-library';
 
@@ -99,6 +100,9 @@ function PageMetadata() {
     title = 'How God Sees You Now | Follow Jesus Online';
   } else if (pathname === '/message') {
     title = 'Send a Message | Follow Jesus Online';
+  } else if (pathname === '/admin/reactions') {
+    title = 'Reaction Report | Follow Jesus Online';
+    description = 'Private article reaction report.';
   }
 
   useEffect(() => {
@@ -152,6 +156,7 @@ function Router() {
         <Route path="/rewatch" component={RewatchPage} />
         <Route path="/rewatch-video" component={RewatchPage} />
         <Route path="/message" component={MessagePage} />
+        <Route path="/admin/reactions" component={AdminReactionsPage} />
         <Route path="/bible" component={BibleLandingPage} />
         <Route path="/bible/saved" component={BibleSavedPage} />
         <Route path="/bible/:book/:chapter" component={BibleReaderPage} />

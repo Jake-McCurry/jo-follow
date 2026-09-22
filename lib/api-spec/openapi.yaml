@@ -12,6 +12,8 @@ tags:
     description: Health operations
   - name: bible
     description: NET Bible reader operations
+  - name: reactions
+    description: Article reaction and private reporting operations
 paths:
   /healthz:
     get:
@@ -69,7 +71,112 @@ paths:
           description: Passage not found
         "502":
           description: Upstream Bible service unavailable
+  /articles/{articleSlug}/reactions:
+    get:
+      operationId: getArticleReactions
+      tags: [reactions]
+      summary: Get public article reactions
+      parameters:
+        - $ref: "#/components/parameters/ArticleSlug"
+      responses:
+        "200":
+          description: Public counts and the current visitor reaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleReactionSummary"
+    put:
+      operationId: setArticleReaction
+      tags: [reactions]
+      summary: Set or change the current visitor reaction
+      parameters:
+        - $ref: "#/components/parameters/ArticleSlug"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleReactionInput"
+      responses:
+        "200":
+          description: Updated public counts and current visitor reaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleReactionSummary"
+        "400":
+          description: Invalid article or reaction
+  /reaction-admin/session:
+    get:
+      operationId: getReactionAdminSession
+      tags: [reactions]
+      summary: Check the private reaction report session
+      responses:
+        "200":
+          description: Session state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReactionAdminSession"
+    post:
+      operationId: createReactionAdminSession
+      tags: [reactions]
+      summary: Sign in to the private reaction report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReactionAdminCredentials"
+      responses:
+        "200":
+          description: Signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReactionAdminSession"
+        "401":
+          description: Incorrect password
+        "503":
+          description: Administrator password is not configured
+    delete:
+      operationId: deleteReactionAdminSession
+      tags: [reactions]
+      summary: Sign out of the private reaction report
+      responses:
+        "200":
+          description: Signed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReactionAdminSession"
+  /reaction-admin/stats:
+    get:
+      operationId: listReactionStats
+      tags: [reactions]
+      summary: List private article reaction totals
+      responses:
+        "200":
+          description: Reaction totals by article
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArticleReactionStats"
+        "401":
+          description: A valid private report session is required
 components:
+  parameters:
+    ArticleSlug:
+      name: articleSlug
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        minLength: 3
+        maxLength: 160
   schemas:
     HealthStatus:
       type: object
@@ -144,4 +251,66 @@ components:
         copyright:
           type: string
           description: Required NET Bible copyright acknowledgement.
+    ArticleReactionType:
+      type: string
+      enum: [helpful, encouraging, disagree]
+    ArticleReactionInput:
+      type: object
+      required: [reaction]
+      properties:
+        reaction:
+          $ref: "#/components/schemas/ArticleReactionType"
+    ArticleReactionSummary:
+      type: object
+      required: [articleSlug, helpful, encouraging, selected]
+      properties:
+        articleSlug:
+          type: string
+        helpful:
+          type: ["number", "null"]
+          minimum: 5
+          description: Public total, or null until it reaches five.
+        encouraging:
+          type: ["number", "null"]
+          minimum: 5
+          description: Public total, or null until it reaches five.
+        selected:
+          anyOf:
+            - $ref: "#/components/schemas/ArticleReactionType"
+            - type: "null"
+    ReactionAdminCredentials:
+      type: object
+      required: [password]
+      properties:
+        password:
+          type: string
+          minLength: 1
+          maxLength: 200
+    ReactionAdminSession:
+      type: object
+      required: [authenticated]
+      properties:
+        authenticated:
+          type: boolean
+    ArticleReactionStats:
+      type: object
+      required: [articleSlug, helpful, encouraging, disagree, total]
+      properties:
+        articleSlug:
+          type: string
+        helpful:
+          type: number
+          minimum: 0
+        encouraging:
+          type: number
+          minimum: 0
+        disagree:
+          type: number
+          minimum: 0
+        total:
+          type: number
+          minimum: 0
+        updatedAt:
+          type: ["string", "null"]
+          format: date-time
 

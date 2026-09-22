@@ -5,10 +5,11 @@ import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ShareButton } from "@/components/share-button";
-import { ArrowRight, BookOpen, Search, HelpCircle, Compass, PlayCircle } from "lucide-react";
+import { ArrowRight, BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
 import { getRecentPage, clearRecentPage } from "@/hooks/use-recent-page";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
+const guideDownloadUrl = `${import.meta.env.BASE_URL}adventure-guide.pdf`;
 
 export function Home() {
   const [recentPage, setRecentPage] = useState<string | null>(null);
@@ -20,7 +21,7 @@ export function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative bg-[#006BB3] text-white py-16 md:py-24 overflow-hidden">
+      <section className="relative overflow-hidden bg-[#006BB3] py-8 text-white md:py-10">
         <div className="absolute inset-0 bg-gradient-to-b from-[#007AE0]/30 to-[#004E8A]/35"></div>
         
         <div className="container relative z-10 px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
@@ -30,6 +31,17 @@ export function Home() {
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
             Whether you are just beginning, returning, or have followed Him for years, you are welcome here.
           </p>
+        </div>
+      </section>
+
+      <section className="border-b border-primary/15 bg-primary/10 py-2">
+        <div className="container mx-auto flex max-w-4xl justify-center px-5 sm:px-8">
+          <ShareButton
+            title="Walking with Jesus"
+            text="Whether you are just beginning, returning, or have followed Him for years, you are welcome here."
+            label="Send this page to yourself"
+            variant="outline"
+          />
         </div>
       </section>
 
@@ -51,7 +63,7 @@ export function Home() {
       )}
 
       {/* Main Content */}
-      <div className="container mx-auto px-5 sm:px-8 py-16 max-w-5xl space-y-24">
+      <div className="container mx-auto max-w-5xl space-y-8 px-5 py-8 sm:px-8 md:space-y-10 md:py-10">
         
         {/* Where to begin */}
         <section className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
@@ -61,16 +73,16 @@ export function Home() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            <Card className="flex flex-col h-full border-border/60 shadow-sm hover:shadow-md transition-shadow group">
+            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <Compass className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">I Just Began Following Jesus</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   Something real has started. Here are simple next steps to help you understand what happened and walk forward with confidence.
                 </p>
-                <Button asChild className="w-full group-hover:bg-primary/90">
+                <Button asChild className="w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/received?journey=received&entry=landing&step=xp">
                     Begin Here <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
@@ -78,16 +90,16 @@ export function Home() {
               </CardContent>
             </Card>
 
-            <Card className="flex flex-col h-full border-border/60 shadow-sm hover:shadow-md transition-shadow group">
+            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <HelpCircle className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">I’m Returning to Jesus</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   Turning toward Him again matters. These pages will help you renew your walk and move forward with clarity.
                 </p>
-                <Button asChild className="w-full group-hover:bg-primary/90">
+                <Button asChild className="w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/rededicated?journey=rededicated&entry=landing&step=xp">
                     Welcome Back <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
@@ -95,16 +107,16 @@ export function Home() {
               </CardContent>
             </Card>
 
-            <Card className="flex flex-col h-full border-border/60 shadow-sm hover:shadow-md transition-shadow group">
+            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <BookOpen className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">I Already Walk with Jesus</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   Whether you want to be refreshed in the foundations or find clear ways to help others, you are in the right place.
                 </p>
-                <Button asChild className="w-full group-hover:bg-primary/90">
+                <Button asChild className="w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/believer?journey=believer&entry=landing&step=xp">
                     Continue Growing <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
@@ -115,12 +127,7 @@ export function Home() {
         </section>
 
         {/* Featured Guide */}
-        <section className="bg-secondary rounded-2xl p-8 md:p-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both relative overflow-hidden">
-          <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none">
-            <svg width="400" height="400" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L2 22h20L12 2zm0 4.5l7.5 14h-15L12 6.5z"/>
-            </svg>
-          </div>
+        <section className="relative overflow-hidden rounded-2xl bg-secondary p-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both md:p-10">
           <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
             <div className="shrink-0 flex items-center justify-center w-full md:w-48 mb-6 md:mb-0">
               <img src={guideCoverUrl} alt="The Adventure of Living with Jesus Guide" className="w-full max-w-[200px] md:max-w-full rounded-xl shadow-lg border border-border/20 rotate-[-2deg] hover:rotate-0 transition-transform duration-500" />
@@ -134,17 +141,16 @@ export function Home() {
                 A clear, steady companion for the first steps—and for the journey that follows.
               </p>
             </div>
-            <div className="shrink-0 flex flex-col sm:flex-row gap-4 w-full md:w-auto mt-6 md:mt-0">
-              <Button asChild size="lg" variant="warm" className="px-8 shadow-md">
+            <div className="mt-6 flex w-full shrink-0 flex-col gap-2 md:mt-0 md:w-auto">
+              <Button asChild size="lg" variant="warm" className="h-14 px-10 text-xl shadow-md">
                 <Link href="/adv/begin-the-adventure">Start the Guide</Link>
               </Button>
-              <ShareButton
-                title="The Adventure of Living with Jesus"
-                text="A clear, steady companion for walking with Jesus."
-                label="Send this page to yourself"
-                variant="outline"
-                className="bg-background/70"
-              />
+              <Button asChild size="sm" variant="outline">
+                <a href={guideDownloadUrl} download="The-Adventure-of-Living-with-Jesus.pdf">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download PDF
+                </a>
+              </Button>
             </div>
           </div>
         </section>
@@ -157,29 +163,29 @@ export function Home() {
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/rewatch" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
-              <PlayCircle className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-              <span className="font-semibold text-card-foreground">Rewatch the video</span>
+            <Link href="/rewatch" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+              <PlayCircle className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
+              <span className="text-lg font-bold text-card-foreground">Rewatch the videos</span>
             </Link>
-            <Link href="/gf/" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
-              <Search className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-              <span className="font-semibold text-card-foreground">Go Further</span>
+            <Link href="/gf/" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+              <Search className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
+              <span className="text-lg font-bold text-card-foreground">Go Further</span>
             </Link>
             <BibleStartDialog>
-              <button type="button" className="group flex w-full flex-col items-center rounded-xl border border-border/60 bg-card p-6 text-center transition-all hover:border-primary/30 hover:bg-muted/50">
-                <BookOpen className="w-8 h-8 text-primary mb-4 transition-transform group-hover:scale-110" />
-                <span className="font-semibold text-card-foreground">Read the Bible</span>
+              <button type="button" className="group flex w-full flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+                <BookOpen className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
+                <span className="text-lg font-bold text-card-foreground">Read the Bible</span>
               </button>
             </BibleStartDialog>
-            <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center p-6 bg-card border border-border/60 rounded-xl hover:bg-muted/50 hover:border-primary/30 transition-all text-center">
-              <Compass className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-              <span className="font-semibold text-card-foreground">About JesusOnline</span>
+            <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+              <Compass className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
+              <span className="text-lg font-bold text-card-foreground">About JesusOnline</span>
             </a>
           </div>
         </section>
 
         {/* Support CTA */}
-        <section className="bg-primary/5 border border-primary/10 rounded-2xl p-8 text-center max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both">
+        <section className="mx-auto max-w-3xl rounded-2xl border border-primary/10 bg-primary/5 p-8 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both md:p-10">
           <h2 className="text-2xl font-bold text-foreground mb-4">We’re Here If You Need Anything</h2>
           <p className="text-muted-foreground mb-8">
             If something is on your mind or you would simply like help finding the right resource, feel free to reach out.

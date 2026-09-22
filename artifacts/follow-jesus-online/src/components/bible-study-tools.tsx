@@ -145,9 +145,9 @@ export function BibleStudyTools({
 
   return (
     <aside id="bible-study-tools" className="space-y-4 lg:sticky lg:top-24" aria-labelledby="study-tools-heading">
-      <section className="rounded-2xl border bg-card p-4 shadow-sm">
+      <section className="rounded-2xl border border-warm-200 bg-white p-4 shadow-sm">
         <div className="flex items-center gap-2">
-          <BookMarked className="h-5 w-5 text-primary" />
+          <BookMarked className="h-5 w-5 text-warm-700" />
           <h2 id="study-tools-heading" className="text-xl font-bold">
             Study Tools
           </h2>
@@ -158,8 +158,8 @@ export function BibleStudyTools({
 
         <Button
           type="button"
-          variant={chapterIsSaved ? "default" : "outline"}
-          className="mt-4 w-full justify-start"
+          variant={chapterIsSaved ? "warm" : "outline"}
+          className="mt-4 w-full justify-start border-warm-200"
           onClick={() => study.toggleChapterBookmark({ bookName, chapter, reference })}
           disabled={!study.storageAvailable}
         >
@@ -168,7 +168,7 @@ export function BibleStudyTools({
         </Button>
 
         {study.data.lastRead && (
-          <Button asChild variant="ghost" className="mt-2 w-full justify-start">
+          <Button asChild variant="ghost" className="mt-2 w-full justify-start hover:bg-warm-50">
             <Link href={`/bible/${encodeURIComponent(study.data.lastRead.bookName)}/${study.data.lastRead.chapter}`}>
               <History className="mr-2 h-4 w-4" />
               Continue {study.data.lastRead.reference}
@@ -177,7 +177,7 @@ export function BibleStudyTools({
         )}
       </section>
 
-      <section className="rounded-2xl border bg-card p-4 shadow-sm">
+      <section className="rounded-2xl border border-warm-200 bg-white p-4 shadow-sm">
         <h3 className="font-bold text-foreground">
           {selectedVerse
             ? `${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse}`
@@ -194,7 +194,8 @@ export function BibleStudyTools({
               <Button
                 type="button"
                 size="sm"
-                variant={verseIsSaved ? "default" : "outline"}
+                variant={verseIsSaved ? "warm" : "outline"}
+                className="border-warm-200 hover:bg-warm-50"
                 onClick={() => study.toggleVerseBookmark(selectedVerse)}
                 disabled={!study.storageAvailable}
               >
@@ -205,6 +206,7 @@ export function BibleStudyTools({
                 type="button"
                 size="sm"
                 variant={selectedNote ? "secondary" : "outline"}
+                className="border-warm-200 hover:bg-warm-50"
                 onClick={() => setIsNoteOpen(true)}
                 disabled={!study.storageAvailable}
               >
@@ -227,7 +229,7 @@ export function BibleStudyTools({
                     disabled={!study.storageAvailable}
                     className={`h-8 w-8 rounded-full border-2 ${colorClasses[color]} ${
                       selectedHighlight === color
-                        ? "border-primary ring-2 ring-primary/30"
+                        ? "border-warm-500 ring-2 ring-warm-500/30"
                         : "border-white shadow-sm"
                     } disabled:cursor-not-allowed disabled:opacity-50`}
                     aria-label={`Highlight ${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} ${color}`}
@@ -238,7 +240,7 @@ export function BibleStudyTools({
                   <button
                     type="button"
                     onClick={() => study.setHighlight(selectedVerse, null)}
-                    className="rounded-md px-2 text-xs font-semibold text-muted-foreground underline underline-offset-2"
+                    className="rounded-md px-2 text-xs font-semibold text-muted-foreground underline underline-offset-2 hover:text-warm-800"
                   >
                     Clear
                   </button>
@@ -251,7 +253,7 @@ export function BibleStudyTools({
               text={`${selectedVerse.text}\n\nScripture quoted from the NET Bible.`}
               url={shareUrl}
               label="Share verse"
-              className="mt-4 w-full"
+              className="mt-4 w-full border-warm-200 hover:bg-warm-50"
             />
           </>
         ) : (
@@ -261,8 +263,8 @@ export function BibleStudyTools({
         )}
       </section>
 
-      <section className="rounded-2xl border bg-card p-4 shadow-sm">
-        <Button asChild variant="outline" className="w-full justify-start">
+      <section className="rounded-2xl border border-warm-200 bg-white p-4 shadow-sm">
+        <Button asChild variant="outline" className="w-full justify-start border-warm-200 hover:bg-warm-50">
           <Link href="/bible/saved">
             <Save className="mr-2 h-4 w-4" />
             View saved items
@@ -270,7 +272,7 @@ export function BibleStudyTools({
         </Button>
 
         <div className="mt-2 grid grid-cols-2 gap-2">
-          <Button type="button" size="sm" variant="ghost" onClick={handleExport}>
+          <Button type="button" size="sm" variant="ghost" onClick={handleExport} className="hover:bg-warm-50">
             <Download className="mr-1.5 h-4 w-4" />
             Export
           </Button>
@@ -278,6 +280,7 @@ export function BibleStudyTools({
             type="button"
             size="sm"
             variant="ghost"
+            className="hover:bg-warm-50"
             onClick={() => importInputRef.current?.click()}
             disabled={!study.storageAvailable}
           >
@@ -365,7 +368,7 @@ export function BibleStudyTools({
 
       {selectedVerse && (
         <div
-          className="fixed inset-x-0 bottom-0 z-30 border-t border-primary/20 bg-card/95 p-3 shadow-[0_-8px_30px_rgba(7,49,146,0.14)] backdrop-blur lg:hidden"
+          className="fixed inset-x-0 bottom-0 z-30 border-t border-warm-200 bg-white/95 p-3 shadow-[0_-8px_30px_rgba(7,49,146,0.14)] backdrop-blur lg:hidden"
           role="region"
           aria-label="Selected verse study tools"
           aria-live="polite"
@@ -382,7 +385,7 @@ export function BibleStudyTools({
                 <button
                   type="button"
                   onClick={onClearSelection}
-                  className="shrink-0 rounded px-1 text-xs font-semibold text-muted-foreground underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="shrink-0 rounded px-1 text-xs font-semibold text-muted-foreground underline underline-offset-2 hover:text-warm-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
                 >
                   Close
                 </button>
@@ -393,10 +396,10 @@ export function BibleStudyTools({
               <Button
                 type="button"
                 size="sm"
-                variant={verseIsSaved ? "default" : "outline"}
+                variant={verseIsSaved ? "warm" : "outline"}
                 onClick={() => study.toggleVerseBookmark(selectedVerse)}
                 disabled={!study.storageAvailable}
-                className="w-full px-2"
+                className="w-full px-2 border-warm-200 hover:bg-warm-50"
               >
                 <Bookmark className="mr-1 h-4 w-4" />
                 {verseIsSaved ? "Saved" : "Save"}
@@ -408,7 +411,7 @@ export function BibleStudyTools({
                 variant={selectedNote ? "secondary" : "outline"}
                 onClick={() => setIsNoteOpen(true)}
                 disabled={!study.storageAvailable}
-                className="w-full px-2"
+                className="w-full px-2 border-warm-200 hover:bg-warm-50"
               >
                 <NotebookPen className="mr-1 h-4 w-4" />
                 Note
@@ -418,7 +421,7 @@ export function BibleStudyTools({
                 text={`${selectedVerse.text}\n\nScripture quoted from the NET Bible.`}
                 url={shareUrl}
                 label="Share"
-                className="h-9 w-full justify-center px-2"
+                className="h-9 w-full justify-center px-2 border-warm-200 hover:bg-warm-50"
               />
             </div>
 
@@ -432,7 +435,7 @@ export function BibleStudyTools({
                   disabled={!study.storageAvailable}
                   className={`h-7 w-7 rounded-full border-2 ${colorClasses[color]} ${
                     selectedHighlight === color
-                      ? "border-primary ring-2 ring-primary/30"
+                      ? "border-warm-500 ring-2 ring-warm-500/30"
                       : "border-white shadow-sm"
                   } disabled:cursor-not-allowed disabled:opacity-50`}
                   aria-label={`Highlight ${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} ${color}`}

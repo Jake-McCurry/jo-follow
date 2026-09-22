@@ -1,4 +1,5 @@
 import express, { type Express } from "express";
+import cookieParser from "cookie-parser";
 import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
@@ -30,6 +31,7 @@ app.use(
 app.use(applyPublicApiSecurity);
 app.use(rateLimitPublicApi);
 app.use(express.json({ limit: "32kb" }));
+app.use(cookieParser());
 
 app.use("/api", router);
 

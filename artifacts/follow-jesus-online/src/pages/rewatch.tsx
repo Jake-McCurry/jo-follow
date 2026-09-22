@@ -9,7 +9,7 @@ export function RewatchPage() {
   
   return (
     <Layout>
-      <div className="container mx-auto px-5 sm:px-8 py-12 md:py-20 max-w-4xl">
+      <div className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
         <div className="mb-8 animate-in fade-in slide-in-from-left-4 duration-500">
           <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground -ml-4">
             <Link href="/">
@@ -20,10 +20,10 @@ export function RewatchPage() {
 
         <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Rewatch the Video</h1>
-          <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+          <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
         </div>
 
-        <div className="bg-card rounded-2xl overflow-hidden shadow-lg border border-border/60 aspect-video w-full animate-in fade-in zoom-in-95 duration-700 delay-150 fill-mode-both">
+        <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-warm-200 aspect-video w-full animate-in fade-in zoom-in-95 duration-700 delay-150 fill-mode-both">
           <iframe 
             width="100%" 
             height="100%" 
