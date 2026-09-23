@@ -1,10 +1,25 @@
-import { type ReactNode, useState } from "react"
-import { Link } from "wouter"
+import { type ReactNode, useEffect, useState } from "react"
+import { Link, useLocation } from "wouter"
 import { BibleStartDialog } from "@/components/bible-start-dialog"
+import { Button } from "@/components/ui/button"
+import { clearRecentPage, getRecentPage, isSamePage, saveRecentPage } from "@/hooks/use-recent-page"
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isBibleDialogOpen, setIsBibleDialogOpen] = useState(false)
+  const [location] = useLocation()
+  const [recentPage, setRecentPage] = useState(getRecentPage)
+
+  useEffect(() => {
+    setRecentPage(getRecentPage())
+    saveRecentPage(location)
+  }, [location])
+
+  const resumePage = recentPage && !isSamePage(recentPage, location) ? recentPage : null
+  const dismissResume = () => {
+    clearRecentPage()
+    setRecentPage(null)
+  }
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background selection:bg-primary/20">
@@ -123,6 +138,22 @@ export function Layout({ children }: { children: ReactNode }) {
         )}
         <BibleStartDialog open={isBibleDialogOpen} onOpenChange={setIsBibleDialogOpen} />
       </header>
+
+      {resumePage && (
+        <div className="border-b border-secondary-foreground/10 bg-secondary py-3 text-secondary-foreground">
+          <div className="container mx-auto flex flex-col items-center justify-center gap-2 px-5 text-sm sm:flex-row sm:gap-5 sm:px-8">
+            <span className="font-medium">Pick up where you left off...</span>
+            <div className="flex gap-2">
+              <Button asChild size="sm" variant="default" className="h-7 px-3">
+                <Link href={resumePage} onClick={dismissResume}>Continue</Link>
+              </Button>
+              <Button size="sm" variant="ghost" className="h-7" onClick={dismissResume}>
+                Dismiss
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <main id="main-content" className="flex-1 w-full animate-in fade-in duration-500">
         {children}

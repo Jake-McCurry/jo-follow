@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Link, useLocation, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, BookOpen, HelpCircle, MessageCircle, Quote } from "lucide-react";
 import { ScriptureRef } from "@/components/scripture-ref";
-import { useTrackRecentPage } from "@/hooks/use-recent-page";
 import NotFound from "@/pages/not-found";
 import { ShareButton } from "@/components/share-button";
 import {
@@ -383,7 +382,6 @@ function AdventureArticleView({
 }
 
 export function ArticlePlaceholder() {
-  useTrackRecentPage();
   const params = useParams();
   const [location] = useLocation();
   const routeGroup = location.split("?")[0].split("/").filter(Boolean)[0];

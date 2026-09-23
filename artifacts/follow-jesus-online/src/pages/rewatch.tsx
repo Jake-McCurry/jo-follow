@@ -1,11 +1,9 @@
 import { Layout } from "@/components/layout";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { useTrackRecentPage } from "@/hooks/use-recent-page";
 import { ArrowLeft } from "lucide-react";
 
 export function RewatchPage() {
-  useTrackRecentPage();
   
   return (
     <Layout>

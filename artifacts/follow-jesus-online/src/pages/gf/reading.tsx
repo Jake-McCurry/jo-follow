@@ -3,11 +3,9 @@ import { Link, useParams } from "wouter";
 import { getGFBook } from "@/data/go-further-library";
 import { ArrowLeft, ArrowRight, BookOpen, Clock } from "lucide-react";
 import NotFound from "@/pages/not-found";
-import { useTrackRecentPage } from "@/hooks/use-recent-page";
 import { Button } from "@/components/ui/button";
 
 export function GFReadingPage() {
-  useTrackRecentPage();
   const params = useParams();
   
   const book = getGFBook(params.bookSlug || "");

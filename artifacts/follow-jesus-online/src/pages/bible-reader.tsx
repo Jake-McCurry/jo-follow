@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ChevronLeft, ChevronRight, Loader2, AlertCircle, Search } from "lucide-react"
 import { useState, useMemo, useEffect, FormEvent } from "react"
-import { useTrackRecentPage } from "@/hooks/use-recent-page"
 import { BibleStudyTools } from "@/components/bible-study-tools"
 import { BibleRecap } from "@/components/bible-recap"
 import { getVerseKey, type HighlightColor, type StudyVerse, useBibleStudy } from "@/hooks/use-bible-study"
@@ -20,7 +19,6 @@ const verseHighlightClasses: Record<HighlightColor, string> = {
 }
 
 export function BibleReaderPage() {
-  useTrackRecentPage();
   const [match, params] = useRoute("/bible/:book/:chapter")
   const [, setLocation] = useLocation()
   const [selectedVerse, setSelectedVerse] = useState<StudyVerse | null>(null)

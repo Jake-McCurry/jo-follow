@@ -1,7 +1,6 @@
 import { Layout } from "@/components/layout";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
-import { useTrackRecentPage } from "@/hooks/use-recent-page";
 import { getArticlesInGroup } from "@/data/article-library";
 
 const ARTICLES = [
@@ -68,7 +67,6 @@ const ARTICLES = [
 ];
 
 export function ExploreArticlesPage() {
-  useTrackRecentPage();
   const deeperArticles = getArticlesInGroup("deeper");
   const resourceArticles = getArticlesInGroup("resources");
   const receivedArticles = getArticlesInGroup("received");

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { BibleStartDialog } from "@/components/bible-start-dialog";
 import { Layout } from "@/components/layout";
@@ -6,18 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ShareButton } from "@/components/share-button";
 import { ArrowRight, BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
-import { getRecentPage, clearRecentPage } from "@/hooks/use-recent-page";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
 const guideDownloadUrl = `${import.meta.env.BASE_URL}adventure-guide.pdf`;
 
 export function Home() {
-  const [recentPage, setRecentPage] = useState<string | null>(null);
-
-  useEffect(() => {
-    setRecentPage(getRecentPage());
-  }, []);
-
   return (
     <Layout>
       {/* Hero Section */}
@@ -44,23 +36,6 @@ export function Home() {
           />
         </div>
       </section>
-
-      {/* Resume Banner */}
-      {recentPage && (
-        <div className="bg-secondary text-secondary-foreground py-3 border-b border-secondary-foreground/10">
-          <div className="container px-5 sm:px-8 mx-auto max-w-4xl flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
-            <span className="font-medium">Pick up where you left off...</span>
-            <div className="flex gap-2">
-              <Button asChild size="sm" variant="default" className="h-8">
-                <Link href={recentPage}>Continue</Link>
-              </Button>
-              <Button size="sm" variant="ghost" className="h-8" onClick={() => { clearRecentPage(); setRecentPage(null); }}>
-                Dismiss
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Main Content */}
       <div className="container mx-auto max-w-5xl space-y-8 px-5 py-8 sm:px-8 md:space-y-10 md:py-10">
