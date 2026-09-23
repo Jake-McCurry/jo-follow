@@ -48,13 +48,13 @@ export function Home() {
       {/* Resume Banner */}
       {recentPage && (
         <div className="bg-secondary text-secondary-foreground py-3 border-b border-secondary-foreground/10">
-          <div className="container px-5 sm:px-8 mx-auto max-w-4xl flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
+          <div className="container px-5 sm:px-8 mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-sm">
             <span className="font-medium">Pick up where you left off...</span>
             <div className="flex gap-2">
-              <Button asChild size="sm" variant="default" className="h-8">
+              <Button asChild size="sm" variant="default" className="h-7 px-3">
                 <Link href={recentPage}>Continue</Link>
               </Button>
-              <Button size="sm" variant="ghost" className="h-8" onClick={() => { clearRecentPage(); setRecentPage(null); }}>
+              <Button size="sm" variant="ghost" className="h-7" onClick={() => { clearRecentPage(); setRecentPage(null); }}>
                 Dismiss
               </Button>
             </div>
