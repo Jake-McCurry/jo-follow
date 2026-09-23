@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "prebuild": "pnpm run test:articles && pnpm run test:bible-study",
+    "prebuild": "pnpm run test:articles && pnpm run test:bible-study && pnpm run test:recent-page",
     "build": "vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test:articles": "node --test scripts/article-links.test.mjs",
-    "test:bible-study": "node --import tsx --test scripts/bible-study-validation.test.ts"
+    "test:bible-study": "node --import tsx --test scripts/bible-study-validation.test.ts",
+    "test:recent-page": "node --import tsx --test scripts/recent-page.test.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",

@@ -4,7 +4,6 @@ import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { PlayCircle, MessageCircle, ArrowRight, Heart } from "lucide-react";
-import { useTrackRecentPage } from "@/hooks/use-recent-page";
 import NotFound from "@/pages/not-found";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
@@ -120,7 +119,6 @@ const XP_CONTENT: Record<XPType, {
 
 export function XPPage() {
   const [match, params] = useRoute("/xp/:type");
-  useTrackRecentPage();
   
   if (!match || !params?.type) return <NotFound />;
   

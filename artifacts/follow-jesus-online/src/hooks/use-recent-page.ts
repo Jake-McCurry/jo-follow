@@ -1,27 +1,29 @@
-import { useEffect } from "react";
-import { useLocation } from "wouter";
-
 const RECENT_PAGE_KEY = "jol_recent_page";
 
 const EXCLUDED_PATHS = ["/", "/message", "/xp-pages"];
 
-export function useTrackRecentPage() {
-  const [location] = useLocation();
+export function isTrackablePage(location: string): boolean {
+  return !EXCLUDED_PATHS.includes(location) && !location.startsWith("/admin/");
+}
 
-  useEffect(() => {
-    if (!EXCLUDED_PATHS.includes(location) && !location.startsWith("/adv/") && !location.startsWith("/deeper/") && !location.startsWith("/adv-") && !location.startsWith("/deeper-") && !location.startsWith("/more-")) {
-      try {
-        localStorage.setItem(RECENT_PAGE_KEY, location);
-      } catch (e) {
-        // ignore
-      }
-    }
-  }, [location]);
+export function isSamePage(left: string, right: string): boolean {
+  const normalize = (page: string) => page.split(/[?#]/, 1)[0].replace(/\/+$/, "") || "/";
+  return normalize(left) === normalize(right);
+}
+
+export function saveRecentPage(location: string) {
+  if (!isTrackablePage(location)) return;
+  try {
+    localStorage.setItem(RECENT_PAGE_KEY, location);
+  } catch (e) {
+    // ignore
+  }
 }
 
 export function getRecentPage(): string | null {
   try {
-    return localStorage.getItem(RECENT_PAGE_KEY);
+    const page = localStorage.getItem(RECENT_PAGE_KEY);
+    return page?.startsWith("/") && !page.startsWith("//") ? page : null;
   } catch (e) {
     return null;
   }

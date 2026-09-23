@@ -2,10 +2,8 @@ import { Layout } from "@/components/layout";
 import { Link } from "wouter";
 import { GO_FURTHER_BOOKS } from "@/data/go-further-library";
 import { ArrowRight, BookOpen } from "lucide-react";
-import { useTrackRecentPage } from "@/hooks/use-recent-page";
 
 export function GoFurtherPage() {
-  useTrackRecentPage();
 
   return (
     <Layout>
