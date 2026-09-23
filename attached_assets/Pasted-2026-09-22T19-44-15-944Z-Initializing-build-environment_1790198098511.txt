@@ -1,0 +1,466 @@
+2026-09-22T19:44:15.944Z	Initializing build environment...
+2026-09-22T20:00:54.512Z	Initializing build environment...
+2026-09-22T20:00:57.080Z	Success: Finished initializing build environment
+2026-09-22T20:00:58.072Z	Cloning repository...
+2026-09-22T20:01:04.768Z	Detected the following tools from environment: pnpm@10.11.1, nodejs@24.18.0
+2026-09-22T20:01:04.769Z	Restoring from dependencies cache
+2026-09-22T20:01:04.771Z	Restoring from build output cache
+2026-09-22T20:01:05.264Z	Installing project dependencies: pnpm install --frozen-lockfile
+2026-09-22T20:01:08.077Z	(node:454) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-22T20:01:08.077Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-22T20:01:08.077Z	Scope: all 9 workspace projects
+2026-09-22T20:01:08.139Z	Lockfile is up to date, resolution step is skipped
+2026-09-22T20:01:08.190Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-09-22T20:01:08.247Z	Packages: +476
+2026-09-22T20:01:08.249Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-22T20:01:09.191Z	Progress: resolved 476, reused 0, downloaded 85, added 77
+2026-09-22T20:01:10.200Z	Progress: resolved 476, reused 0, downloaded 248, added 236
+2026-09-22T20:01:11.201Z	Progress: resolved 476, reused 0, downloaded 282, added 269
+2026-09-22T20:01:12.202Z	Progress: resolved 476, reused 0, downloaded 292, added 278
+2026-09-22T20:01:13.204Z	Progress: resolved 476, reused 0, downloaded 293, added 278
+2026-09-22T20:01:14.205Z	Progress: resolved 476, reused 0, downloaded 372, added 362
+2026-09-22T20:01:15.188Z	Progress: resolved 476, reused 0, downloaded 476, added 476, done
+2026-09-22T20:01:15.364Z	.../esbuild@0.28.1/node_modules/esbuild postinstall$ node install.js
+2026-09-22T20:01:15.603Z	.../esbuild@0.28.1/node_modules/esbuild postinstall: Done
+2026-09-22T20:01:15.931Z	
+2026-09-22T20:01:15.931Z	dependencies:
+2026-09-22T20:01:15.931Z	+ @replit/connectors-sdk 0.4.1
+2026-09-22T20:01:15.932Z	
+2026-09-22T20:01:15.932Z	devDependencies:
+2026-09-22T20:01:15.932Z	+ prettier 3.9.6
+2026-09-22T20:01:15.932Z	+ typescript 5.9.3
+2026-09-22T20:01:15.932Z	
+2026-09-22T20:01:15.991Z	. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+2026-09-22T20:01:16.001Z	. preinstall: Done
+2026-09-22T20:01:16.138Z	Done in 8.7s
+2026-09-22T20:01:16.189Z	Installing project dependencies: uv sync
+2026-09-22T20:01:17.604Z	Using CPython 3.13.3 interpreter at: /opt/buildhome/.asdf/installs/python/3.13.3/bin/python3
+2026-09-22T20:01:17.604Z	Creating virtual environment at: .venv
+2026-09-22T20:01:17.613Z	Resolved 2 packages in 7ms
+2026-09-22T20:01:17.781Z	Downloading pymupdf (24.6MiB)
+2026-09-22T20:01:18.939Z	 Downloaded pymupdf
+2026-09-22T20:01:18.939Z	Prepared 1 package in 1.32s
+2026-09-22T20:01:18.944Z	Installed 1 package in 4ms
+2026-09-22T20:01:18.944Z	 + pymupdf==1.28.2
+2026-09-22T20:01:21.255Z	Executing user build command: pnpm run build
+2026-09-22T20:01:22.297Z	
+2026-09-22T20:01:22.297Z	> workspace@0.0.0 build /opt/buildhome/repo
+2026-09-22T20:01:22.297Z	> pnpm run typecheck && pnpm -r --if-present run build
+2026-09-22T20:01:22.298Z	
+2026-09-22T20:01:22.627Z	
+2026-09-22T20:01:22.627Z	> workspace@0.0.0 typecheck /opt/buildhome/repo
+2026-09-22T20:01:22.627Z	> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+2026-09-22T20:01:22.627Z	
+2026-09-22T20:01:22.968Z	
+2026-09-22T20:01:22.968Z	> workspace@0.0.0 typecheck:libs /opt/buildhome/repo
+2026-09-22T20:01:22.968Z	> tsc --build
+2026-09-22T20:01:22.968Z	
+2026-09-22T20:01:26.036Z	(node:1057) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-22T20:01:26.039Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-22T20:01:26.042Z	Scope: 4 of 9 workspace projects
+2026-09-22T20:01:26.050Z	artifacts/api-server typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-22T20:01:26.050Z	artifacts/follow-jesus-online typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-22T20:01:26.057Z	artifacts/mockup-sandbox typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-22T20:01:26.057Z	scripts typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-22T20:01:29.677Z	scripts typecheck: Done
+2026-09-22T20:01:32.563Z	artifacts/api-server typecheck: Done
+2026-09-22T20:01:37.663Z	artifacts/mockup-sandbox typecheck: Done
+2026-09-22T20:01:38.165Z	artifacts/follow-jesus-online typecheck: Done
+2026-09-22T20:01:38.574Z	(node:1124) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-22T20:01:38.575Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-22T20:01:38.575Z	Scope: 8 of 9 workspace projects
+2026-09-22T20:01:38.592Z	artifacts/mockup-sandbox build$ vite build
+2026-09-22T20:01:38.921Z	artifacts/mockup-sandbox build: vite v7.3.6 building client environment for production...
+2026-09-22T20:01:39.008Z	artifacts/mockup-sandbox build: transforming...
+2026-09-22T20:01:41.254Z	artifacts/mockup-sandbox build: ✓ 1678 modules transformed.
+2026-09-22T20:01:41.346Z	artifacts/mockup-sandbox build: rendering chunks...
+2026-09-22T20:01:41.448Z	artifacts/mockup-sandbox build: computing gzip size...
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/index.html                                4.42 kB │ gzip:  1.23 kB
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/assets/_group-CxWqfB8W.css                0.48 kB │ gzip:  0.30 kB
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/assets/index-kwrTy_9C.css                97.53 kB │ gzip: 16.31 kB
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/assets/book-open-eSJyOqXY.js              0.28 kB │ gzip:  0.21 kB
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/assets/sun-DC6qEYYY.js                    0.97 kB │ gzip:  0.47 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/_group-BmOEpM1r.js                 1.40 kB │ gzip:  0.81 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/Current-CKzGb1FJ.js                2.31 kB │ gzip:  0.99 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/InteractiveReading-BFvbYGL7.js    10.33 kB │ gzip:  3.52 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/InteractiveContents-BFKMzVTO.js   16.14 kB │ gzip:  5.61 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/index-DSWGaF7s.js                189.57 kB │ gzip: 60.27 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: ✓ built in 2.52s
+2026-09-22T20:01:41.516Z	artifacts/mockup-sandbox build: Done
+2026-09-22T20:01:41.516Z	artifacts/api-server build$ node ./build.mjs
+2026-09-22T20:01:41.517Z	artifacts/follow-jesus-online prebuild$ pnpm run test:articles && pnpm run test:bible-study
+2026-09-22T20:01:41.943Z	artifacts/follow-jesus-online prebuild: > @workspace/follow-jesus-online@0.0.0 test:articles /opt/buildhome/repo/artifacts/follow-jesus-online
+2026-09-22T20:01:41.943Z	artifacts/follow-jesus-online prebuild: > node --test scripts/article-links.test.mjs
+2026-09-22T20:01:42.096Z	artifacts/api-server build:   dist/index.mjs                       2.2mb ⚠️
+2026-09-22T20:01:42.098Z	artifacts/api-server build:   dist/pino-worker.mjs               153.5kb
+2026-09-22T20:01:42.098Z	artifacts/api-server build:   dist/pino-file.mjs                 142.1kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/pino-pretty.mjs               114.4kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/thread-stream-worker.mjs        7.4kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/index.mjs.map                   3.7mb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/pino-worker.mjs.map           256.9kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/pino-file.mjs.map             229.0kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/pino-pretty.mjs.map           203.6kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/thread-stream-worker.mjs.map   12.0kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build: ⚡ Done in 517ms
+2026-09-22T20:01:42.126Z	artifacts/follow-jesus-online prebuild: ✔ article catalog and published article links are internally consistent (26.654366ms)
+2026-09-22T20:01:42.126Z	artifacts/api-server build: Done
+2026-09-22T20:01:42.128Z	artifacts/follow-jesus-online prebuild: ✔ published article link scanning covers page and layout entry points (0.486159ms)
+2026-09-22T20:01:42.138Z	artifacts/follow-jesus-online prebuild: ℹ tests 2
+2026-09-22T20:01:42.140Z	artifacts/follow-jesus-online prebuild: ℹ suites 0
+2026-09-22T20:01:42.140Z	artifacts/follow-jesus-online prebuild: ℹ pass 2
+2026-09-22T20:01:42.140Z	artifacts/follow-jesus-online prebuild: ℹ fail 0
+2026-09-22T20:01:42.141Z	artifacts/follow-jesus-online prebuild: ℹ cancelled 0
+2026-09-22T20:01:42.141Z	artifacts/follow-jesus-online prebuild: ℹ skipped 0
+2026-09-22T20:01:42.141Z	artifacts/follow-jesus-online prebuild: ℹ todo 0
+2026-09-22T20:01:42.141Z	artifacts/follow-jesus-online prebuild: ℹ duration_ms 152.170349
+2026-09-22T20:01:42.493Z	artifacts/follow-jesus-online prebuild: > @workspace/follow-jesus-online@0.0.0 test:bible-study /opt/buildhome/repo/artifacts/follow-jesus-online
+2026-09-22T20:01:42.493Z	artifacts/follow-jesus-online prebuild: > node --import tsx --test scripts/bible-study-validation.test.ts
+2026-09-22T20:01:42.910Z	artifacts/follow-jesus-online prebuild: ✔ accepts a valid exported version-1 backup (1.809921ms)
+2026-09-22T20:01:42.910Z	artifacts/follow-jesus-online prebuild: ✔ preserves empty and small backup preview states (0.265483ms)
+2026-09-22T20:01:42.912Z	artifacts/follow-jesus-online prebuild: ✔ rejects incomplete backups (0.217045ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects unsupported backup versions (0.208054ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects malformed bookmarks (0.221296ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects duplicate bookmark IDs (0.190111ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects invalid chapter and verse numbers (0.362109ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects mismatched highlight and note map keys (0.298888ms)
+2026-09-22T20:01:42.941Z	artifacts/follow-jesus-online prebuild: ℹ tests 8
+2026-09-22T20:01:42.941Z	artifacts/follow-jesus-online prebuild: ℹ suites 0
+2026-09-22T20:01:42.942Z	artifacts/follow-jesus-online prebuild: ℹ pass 8
+2026-09-22T20:01:42.943Z	artifacts/follow-jesus-online prebuild: ℹ fail 0
+2026-09-22T20:01:42.943Z	artifacts/follow-jesus-online prebuild: ℹ cancelled 0
+2026-09-22T20:01:42.943Z	artifacts/follow-jesus-online prebuild: ℹ skipped 0
+2026-09-22T20:01:42.943Z	artifacts/follow-jesus-online prebuild: ℹ todo 0
+2026-09-22T20:01:42.944Z	artifacts/follow-jesus-online prebuild: ℹ duration_ms 415.976479
+2026-09-22T20:01:42.963Z	artifacts/follow-jesus-online prebuild: Done
+2026-09-22T20:01:42.964Z	artifacts/follow-jesus-online build$ vite build --config vite.config.ts
+2026-09-22T20:01:43.186Z	artifacts/follow-jesus-online build: vite v7.3.6 building client environment for production...
+2026-09-22T20:01:43.250Z	artifacts/follow-jesus-online build: transforming...
+2026-09-22T20:01:44.002Z	artifacts/follow-jesus-online build: src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+2026-09-22T20:01:45.194Z	artifacts/follow-jesus-online build: ✓ 736 modules transformed.
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build: ✗ Build failed in 2.00s
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build: error during build:
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build: [jolf-article-content] Could not load  virtual:article-content (imported by src/data/article-library.ts): Unable to extract the Adventure guide PDF during the build. Ensure pdftotext is available. Error: spawnSync pdftotext ENOENT
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at readAdventureGuidePdf (file:///opt/buildhome/repo/artifacts/follow-jesus-online/node_modules/.vite-temp/vite.config.ts.timestamp-1790107303105-48f193d8579878.mjs:261:11)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at buildArticleLibrary (file:///opt/buildhome/repo/artifacts/follow-jesus-online/node_modules/.vite-temp/vite.config.ts.timestamp-1790107303105-48f193d8579878.mjs:423:36)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at Object.load (file:///opt/buildhome/repo/artifacts/follow-jesus-online/node_modules/.vite-temp/vite.config.ts.timestamp-1790107303105-48f193d8579878.mjs:446:47)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at Object.handler (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:33798:13)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:22789:40
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at async PluginDriver.hookFirstAndGetPlugin (file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:22671:28)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at async file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:21657:33
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at async Queue.work (file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:22899:32)
+2026-09-22T20:01:45.234Z	artifacts/follow-jesus-online build: Failed
+2026-09-22T20:01:45.236Z	/opt/buildhome/repo/artifacts/follow-jesus-online:
+2026-09-22T20:01:45.236Z	 ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/follow-jesus-online@0.0.0 build: `vite build --config vite.config.ts`
+2026-09-22T20:01:45.236Z	Exit status 1
+2026-09-22T20:01:45.260Z	 ELIFECYCLE  Command failed with exit code 1.
+2026-09-22T20:01:45.287Z	Failed: error occurred while running build command
+2026-09-22T19:44:15.944Z	Initializing build environment...
+2026-09-22T20:00:54.512Z	Initializing build environment...
+2026-09-22T20:00:57.080Z	Success: Finished initializing build environment
+2026-09-22T20:00:58.072Z	Cloning repository...
+2026-09-22T20:01:04.768Z	Detected the following tools from environment: pnpm@10.11.1, nodejs@24.18.0
+2026-09-22T20:01:04.769Z	Restoring from dependencies cache
+2026-09-22T20:01:04.771Z	Restoring from build output cache
+2026-09-22T20:01:05.264Z	Installing project dependencies: pnpm install --frozen-lockfile
+2026-09-22T20:01:08.077Z	(node:454) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-22T20:01:08.077Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-22T20:01:08.077Z	Scope: all 9 workspace projects
+2026-09-22T20:01:08.139Z	Lockfile is up to date, resolution step is skipped
+2026-09-22T20:01:08.190Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-09-22T20:01:08.247Z	Packages: +476
+2026-09-22T20:01:08.249Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-22T20:01:09.191Z	Progress: resolved 476, reused 0, downloaded 85, added 77
+2026-09-22T20:01:10.200Z	Progress: resolved 476, reused 0, downloaded 248, added 236
+2026-09-22T20:01:11.201Z	Progress: resolved 476, reused 0, downloaded 282, added 269
+2026-09-22T20:01:12.202Z	Progress: resolved 476, reused 0, downloaded 292, added 278
+2026-09-22T20:01:13.204Z	Progress: resolved 476, reused 0, downloaded 293, added 278
+2026-09-22T20:01:14.205Z	Progress: resolved 476, reused 0, downloaded 372, added 362
+2026-09-22T20:01:15.188Z	Progress: resolved 476, reused 0, downloaded 476, added 476, done
+2026-09-22T20:01:15.364Z	.../esbuild@0.28.1/node_modules/esbuild postinstall$ node install.js
+2026-09-22T20:01:15.603Z	.../esbuild@0.28.1/node_modules/esbuild postinstall: Done
+2026-09-22T20:01:15.931Z	
+2026-09-22T20:01:15.931Z	dependencies:
+2026-09-22T20:01:15.931Z	+ @replit/connectors-sdk 0.4.1
+2026-09-22T20:01:15.932Z	
+2026-09-22T20:01:15.932Z	devDependencies:
+2026-09-22T20:01:15.932Z	+ prettier 3.9.6
+2026-09-22T20:01:15.932Z	+ typescript 5.9.3
+2026-09-22T20:01:15.932Z	
+2026-09-22T20:01:15.991Z	. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+2026-09-22T20:01:16.001Z	. preinstall: Done
+2026-09-22T20:01:16.138Z	Done in 8.7s
+2026-09-22T20:01:16.189Z	Installing project dependencies: uv sync
+2026-09-22T20:01:17.604Z	Using CPython 3.13.3 interpreter at: /opt/buildhome/.asdf/installs/python/3.13.3/bin/python3
+2026-09-22T20:01:17.604Z	Creating virtual environment at: .venv
+2026-09-22T20:01:17.613Z	Resolved 2 packages in 7ms
+2026-09-22T20:01:17.781Z	Downloading pymupdf (24.6MiB)
+2026-09-22T20:01:18.939Z	 Downloaded pymupdf
+2026-09-22T20:01:18.939Z	Prepared 1 package in 1.32s
+2026-09-22T20:01:18.944Z	Installed 1 package in 4ms
+2026-09-22T20:01:18.944Z	 + pymupdf==1.28.2
+2026-09-22T20:01:21.255Z	Executing user build command: pnpm run build
+2026-09-22T20:01:22.297Z	
+2026-09-22T20:01:22.297Z	> workspace@0.0.0 build /opt/buildhome/repo
+2026-09-22T20:01:22.297Z	> pnpm run typecheck && pnpm -r --if-present run build
+2026-09-22T20:01:22.298Z	
+2026-09-22T20:01:22.627Z	
+2026-09-22T20:01:22.627Z	> workspace@0.0.0 typecheck /opt/buildhome/repo
+2026-09-22T20:01:22.627Z	> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+2026-09-22T20:01:22.627Z	
+2026-09-22T20:01:22.968Z	
+2026-09-22T20:01:22.968Z	> workspace@0.0.0 typecheck:libs /opt/buildhome/repo
+2026-09-22T20:01:22.968Z	> tsc --build
+2026-09-22T20:01:22.968Z	
+2026-09-22T20:01:26.036Z	(node:1057) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-22T20:01:26.039Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-22T20:01:26.042Z	Scope: 4 of 9 workspace projects
+2026-09-22T20:01:26.050Z	artifacts/api-server typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-22T20:01:26.050Z	artifacts/follow-jesus-online typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-22T20:01:26.057Z	artifacts/mockup-sandbox typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-22T20:01:26.057Z	scripts typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-22T20:01:29.677Z	scripts typecheck: Done
+2026-09-22T20:01:32.563Z	artifacts/api-server typecheck: Done
+2026-09-22T20:01:37.663Z	artifacts/mockup-sandbox typecheck: Done
+2026-09-22T20:01:38.165Z	artifacts/follow-jesus-online typecheck: Done
+2026-09-22T20:01:38.574Z	(node:1124) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-22T20:01:38.575Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-22T20:01:38.575Z	Scope: 8 of 9 workspace projects
+2026-09-22T20:01:38.592Z	artifacts/mockup-sandbox build$ vite build
+2026-09-22T20:01:38.921Z	artifacts/mockup-sandbox build: vite v7.3.6 building client environment for production...
+2026-09-22T20:01:39.008Z	artifacts/mockup-sandbox build: transforming...
+2026-09-22T20:01:41.254Z	artifacts/mockup-sandbox build: ✓ 1678 modules transformed.
+2026-09-22T20:01:41.346Z	artifacts/mockup-sandbox build: rendering chunks...
+2026-09-22T20:01:41.448Z	artifacts/mockup-sandbox build: computing gzip size...
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/index.html                                4.42 kB │ gzip:  1.23 kB
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/assets/_group-CxWqfB8W.css                0.48 kB │ gzip:  0.30 kB
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/assets/index-kwrTy_9C.css                97.53 kB │ gzip: 16.31 kB
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/assets/book-open-eSJyOqXY.js              0.28 kB │ gzip:  0.21 kB
+2026-09-22T20:01:41.459Z	artifacts/mockup-sandbox build: dist/assets/sun-DC6qEYYY.js                    0.97 kB │ gzip:  0.47 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/_group-BmOEpM1r.js                 1.40 kB │ gzip:  0.81 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/Current-CKzGb1FJ.js                2.31 kB │ gzip:  0.99 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/InteractiveReading-BFvbYGL7.js    10.33 kB │ gzip:  3.52 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/InteractiveContents-BFKMzVTO.js   16.14 kB │ gzip:  5.61 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: dist/assets/index-DSWGaF7s.js                189.57 kB │ gzip: 60.27 kB
+2026-09-22T20:01:41.463Z	artifacts/mockup-sandbox build: ✓ built in 2.52s
+2026-09-22T20:01:41.516Z	artifacts/mockup-sandbox build: Done
+2026-09-22T20:01:41.516Z	artifacts/api-server build$ node ./build.mjs
+2026-09-22T20:01:41.517Z	artifacts/follow-jesus-online prebuild$ pnpm run test:articles && pnpm run test:bible-study
+2026-09-22T20:01:41.943Z	artifacts/follow-jesus-online prebuild: > @workspace/follow-jesus-online@0.0.0 test:articles /opt/buildhome/repo/artifacts/follow-jesus-online
+2026-09-22T20:01:41.943Z	artifacts/follow-jesus-online prebuild: > node --test scripts/article-links.test.mjs
+2026-09-22T20:01:42.096Z	artifacts/api-server build:   dist/index.mjs                       2.2mb ⚠️
+2026-09-22T20:01:42.098Z	artifacts/api-server build:   dist/pino-worker.mjs               153.5kb
+2026-09-22T20:01:42.098Z	artifacts/api-server build:   dist/pino-file.mjs                 142.1kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/pino-pretty.mjs               114.4kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/thread-stream-worker.mjs        7.4kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/index.mjs.map                   3.7mb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/pino-worker.mjs.map           256.9kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/pino-file.mjs.map             229.0kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/pino-pretty.mjs.map           203.6kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build:   dist/thread-stream-worker.mjs.map   12.0kb
+2026-09-22T20:01:42.103Z	artifacts/api-server build: ⚡ Done in 517ms
+2026-09-22T20:01:42.126Z	artifacts/follow-jesus-online prebuild: ✔ article catalog and published article links are internally consistent (26.654366ms)
+2026-09-22T20:01:42.126Z	artifacts/api-server build: Done
+2026-09-22T20:01:42.128Z	artifacts/follow-jesus-online prebuild: ✔ published article link scanning covers page and layout entry points (0.486159ms)
+2026-09-22T20:01:42.138Z	artifacts/follow-jesus-online prebuild: ℹ tests 2
+2026-09-22T20:01:42.140Z	artifacts/follow-jesus-online prebuild: ℹ suites 0
+2026-09-22T20:01:42.140Z	artifacts/follow-jesus-online prebuild: ℹ pass 2
+2026-09-22T20:01:42.140Z	artifacts/follow-jesus-online prebuild: ℹ fail 0
+2026-09-22T20:01:42.141Z	artifacts/follow-jesus-online prebuild: ℹ cancelled 0
+2026-09-22T20:01:42.141Z	artifacts/follow-jesus-online prebuild: ℹ skipped 0
+2026-09-22T20:01:42.141Z	artifacts/follow-jesus-online prebuild: ℹ todo 0
+2026-09-22T20:01:42.141Z	artifacts/follow-jesus-online prebuild: ℹ duration_ms 152.170349
+2026-09-22T20:01:42.493Z	artifacts/follow-jesus-online prebuild: > @workspace/follow-jesus-online@0.0.0 test:bible-study /opt/buildhome/repo/artifacts/follow-jesus-online
+2026-09-22T20:01:42.493Z	artifacts/follow-jesus-online prebuild: > node --import tsx --test scripts/bible-study-validation.test.ts
+2026-09-22T20:01:42.910Z	artifacts/follow-jesus-online prebuild: ✔ accepts a valid exported version-1 backup (1.809921ms)
+2026-09-22T20:01:42.910Z	artifacts/follow-jesus-online prebuild: ✔ preserves empty and small backup preview states (0.265483ms)
+2026-09-22T20:01:42.912Z	artifacts/follow-jesus-online prebuild: ✔ rejects incomplete backups (0.217045ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects unsupported backup versions (0.208054ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects malformed bookmarks (0.221296ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects duplicate bookmark IDs (0.190111ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects invalid chapter and verse numbers (0.362109ms)
+2026-09-22T20:01:42.913Z	artifacts/follow-jesus-online prebuild: ✔ rejects mismatched highlight and note map keys (0.298888ms)
+2026-09-22T20:01:42.941Z	artifacts/follow-jesus-online prebuild: ℹ tests 8
+2026-09-22T20:01:42.941Z	artifacts/follow-jesus-online prebuild: ℹ suites 0
+2026-09-22T20:01:42.942Z	artifacts/follow-jesus-online prebuild: ℹ pass 8
+2026-09-22T20:01:42.943Z	artifacts/follow-jesus-online prebuild: ℹ fail 0
+2026-09-22T20:01:42.943Z	artifacts/follow-jesus-online prebuild: ℹ cancelled 0
+2026-09-22T20:01:42.943Z	artifacts/follow-jesus-online prebuild: ℹ skipped 0
+2026-09-22T20:01:42.943Z	artifacts/follow-jesus-online prebuild: ℹ todo 0
+2026-09-22T20:01:42.944Z	artifacts/follow-jesus-online prebuild: ℹ duration_ms 415.976479
+2026-09-22T20:01:42.963Z	artifacts/follow-jesus-online prebuild: Done
+2026-09-22T20:01:42.964Z	artifacts/follow-jesus-online build$ vite build --config vite.config.ts
+2026-09-22T20:01:43.186Z	artifacts/follow-jesus-online build: vite v7.3.6 building client environment for production...
+2026-09-22T20:01:43.250Z	artifacts/follow-jesus-online build: transforming...
+2026-09-22T20:01:44.002Z	artifacts/follow-jesus-online build: src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+2026-09-22T20:01:45.194Z	artifacts/follow-jesus-online build: ✓ 736 modules transformed.
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build: ✗ Build failed in 2.00s
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build: error during build:
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build: [jolf-article-content] Could not load  virtual:article-content (imported by src/data/article-library.ts): Unable to extract the Adventure guide PDF during the build. Ensure pdftotext is available. Error: spawnSync pdftotext ENOENT
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at readAdventureGuidePdf (file:///opt/buildhome/repo/artifacts/follow-jesus-online/node_modules/.vite-temp/vite.config.ts.timestamp-1790107303105-48f193d8579878.mjs:261:11)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at buildArticleLibrary (file:///opt/buildhome/repo/artifacts/follow-jesus-online/node_modules/.vite-temp/vite.config.ts.timestamp-1790107303105-48f193d8579878.mjs:423:36)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at Object.load (file:///opt/buildhome/repo/artifacts/follow-jesus-online/node_modules/.vite-temp/vite.config.ts.timestamp-1790107303105-48f193d8579878.mjs:446:47)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at Object.handler (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:33798:13)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:22789:40
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at async PluginDriver.hookFirstAndGetPlugin (file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:22671:28)
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at async file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:21657:33
+2026-09-22T20:01:45.199Z	artifacts/follow-jesus-online build:     at async Queue.work (file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:22899:32)
+2026-09-22T20:01:45.234Z	artifacts/follow-jesus-online build: Failed
+2026-09-22T20:01:45.236Z	/opt/buildhome/repo/artifacts/follow-jesus-online:
+2026-09-22T20:01:45.236Z	 ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/follow-jesus-online@0.0.0 build: `vite build --config vite.config.ts`
+2026-09-22T20:01:45.236Z	Exit status 1
+2026-09-22T20:01:45.260Z	 ELIFECYCLE  Command failed with exit code 1.
+2026-09-22T20:01:45.287Z	Failed: error occurred while running build command
+2026-09-23T21:06:06.506Z	Success: Finished initializing build environment
+2026-09-23T21:06:07.404Z	Cloning repository...
+2026-09-23T21:06:14.313Z	Detected the following tools from environment: pnpm@10.11.1, nodejs@24.18.0
+2026-09-23T21:06:14.314Z	Restoring from dependencies cache
+2026-09-23T21:06:14.316Z	Restoring from build output cache
+2026-09-23T21:06:14.740Z	Installing project dependencies: pnpm install --frozen-lockfile
+2026-09-23T21:06:15.927Z	(node:453) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-23T21:06:15.927Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-23T21:06:15.927Z	Scope: all 9 workspace projects
+2026-09-23T21:06:15.975Z	Lockfile is up to date, resolution step is skipped
+2026-09-23T21:06:16.021Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-09-23T21:06:16.070Z	Packages: +476
+2026-09-23T21:06:16.071Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-23T21:06:17.022Z	Progress: resolved 476, reused 0, downloaded 110, added 100
+2026-09-23T21:06:18.025Z	Progress: resolved 476, reused 0, downloaded 251, added 236
+2026-09-23T21:06:19.026Z	Progress: resolved 476, reused 0, downloaded 288, added 278
+2026-09-23T21:06:20.026Z	Progress: resolved 476, reused 0, downloaded 293, added 278
+2026-09-23T21:06:21.027Z	Progress: resolved 476, reused 0, downloaded 308, added 292
+2026-09-23T21:06:22.028Z	Progress: resolved 476, reused 0, downloaded 442, added 427
+2026-09-23T21:06:22.378Z	Progress: resolved 476, reused 0, downloaded 476, added 476, done
+2026-09-23T21:06:22.565Z	.../esbuild@0.28.1/node_modules/esbuild postinstall$ node install.js
+2026-09-23T21:06:22.819Z	.../esbuild@0.28.1/node_modules/esbuild postinstall: Done
+2026-09-23T21:06:23.049Z	
+2026-09-23T21:06:23.051Z	dependencies:
+2026-09-23T21:06:23.051Z	+ @replit/connectors-sdk 0.4.1
+2026-09-23T21:06:23.051Z	
+2026-09-23T21:06:23.051Z	devDependencies:
+2026-09-23T21:06:23.051Z	+ prettier 3.9.6
+2026-09-23T21:06:23.051Z	+ typescript 5.9.3
+2026-09-23T21:06:23.051Z	
+2026-09-23T21:06:23.086Z	. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+2026-09-23T21:06:23.097Z	. preinstall: Done
+2026-09-23T21:06:23.183Z	Done in 7.8s
+2026-09-23T21:06:23.226Z	Installing project dependencies: uv sync
+2026-09-23T21:06:23.529Z	Using CPython 3.13.3 interpreter at: /opt/buildhome/.asdf/installs/python/3.13.3/bin/python3
+2026-09-23T21:06:23.530Z	Creating virtual environment at: .venv
+2026-09-23T21:06:23.539Z	Resolved 2 packages in 7ms
+2026-09-23T21:06:23.740Z	Downloading pymupdf (24.6MiB)
+2026-09-23T21:06:25.255Z	 Downloaded pymupdf
+2026-09-23T21:06:25.255Z	Prepared 1 package in 1.71s
+2026-09-23T21:06:25.259Z	Installed 1 package in 3ms
+2026-09-23T21:06:25.260Z	 + pymupdf==1.28.2
+2026-09-23T21:06:25.736Z	Executing user build command: pnpm run build
+2026-09-23T21:06:26.085Z	
+2026-09-23T21:06:26.085Z	> workspace@0.0.0 build /opt/buildhome/repo
+2026-09-23T21:06:26.085Z	> pnpm run typecheck && pnpm -r --if-present run build
+2026-09-23T21:06:26.085Z	
+2026-09-23T21:06:26.357Z	
+2026-09-23T21:06:26.360Z	> workspace@0.0.0 typecheck /opt/buildhome/repo
+2026-09-23T21:06:26.360Z	> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+2026-09-23T21:06:26.360Z	
+2026-09-23T21:06:26.637Z	
+2026-09-23T21:06:26.637Z	> workspace@0.0.0 typecheck:libs /opt/buildhome/repo
+2026-09-23T21:06:26.638Z	> tsc --build
+2026-09-23T21:06:26.638Z	
+2026-09-23T21:06:29.345Z	(node:1054) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-23T21:06:29.345Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-23T21:06:29.347Z	Scope: 4 of 9 workspace projects
+2026-09-23T21:06:29.363Z	artifacts/api-server typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-23T21:06:29.364Z	artifacts/follow-jesus-online typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-23T21:06:29.364Z	artifacts/mockup-sandbox typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-23T21:06:29.365Z	scripts typecheck$ tsc -p tsconfig.json --noEmit
+2026-09-23T21:06:31.861Z	scripts typecheck: Done
+2026-09-23T21:06:34.049Z	artifacts/api-server typecheck: Done
+2026-09-23T21:06:40.388Z	artifacts/mockup-sandbox typecheck: Done
+2026-09-23T21:06:41.129Z	artifacts/follow-jesus-online typecheck: Done
+2026-09-23T21:06:41.490Z	(node:1124) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-23T21:06:41.490Z	(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-23T21:06:41.494Z	Scope: 8 of 9 workspace projects
+2026-09-23T21:06:41.508Z	artifacts/mockup-sandbox build$ vite build
+2026-09-23T21:06:41.819Z	artifacts/mockup-sandbox build: vite v7.3.6 building client environment for production...
+2026-09-23T21:06:41.902Z	artifacts/mockup-sandbox build: transforming...
+2026-09-23T21:06:43.871Z	artifacts/mockup-sandbox build: ✓ 1678 modules transformed.
+2026-09-23T21:06:43.940Z	artifacts/mockup-sandbox build: rendering chunks...
+2026-09-23T21:06:44.032Z	artifacts/mockup-sandbox build: computing gzip size...
+2026-09-23T21:06:44.042Z	artifacts/mockup-sandbox build: dist/index.html                                4.42 kB │ gzip:  1.23 kB
+2026-09-23T21:06:44.043Z	artifacts/mockup-sandbox build: dist/assets/_group-CxWqfB8W.css                0.48 kB │ gzip:  0.30 kB
+2026-09-23T21:06:44.043Z	artifacts/mockup-sandbox build: dist/assets/index-kwrTy_9C.css                97.53 kB │ gzip: 16.31 kB
+2026-09-23T21:06:44.045Z	artifacts/mockup-sandbox build: dist/assets/book-open-eSJyOqXY.js              0.28 kB │ gzip:  0.21 kB
+2026-09-23T21:06:44.045Z	artifacts/mockup-sandbox build: dist/assets/sun-DC6qEYYY.js                    0.97 kB │ gzip:  0.47 kB
+2026-09-23T21:06:44.046Z	artifacts/mockup-sandbox build: dist/assets/_group-BmOEpM1r.js                 1.40 kB │ gzip:  0.81 kB
+2026-09-23T21:06:44.046Z	artifacts/mockup-sandbox build: dist/assets/Current-CKzGb1FJ.js                2.31 kB │ gzip:  0.99 kB
+2026-09-23T21:06:44.046Z	artifacts/mockup-sandbox build: dist/assets/InteractiveReading-BFvbYGL7.js    10.33 kB │ gzip:  3.52 kB
+2026-09-23T21:06:44.046Z	artifacts/mockup-sandbox build: dist/assets/InteractiveContents-BFKMzVTO.js   16.14 kB │ gzip:  5.61 kB
+2026-09-23T21:06:44.046Z	artifacts/mockup-sandbox build: dist/assets/index-DSWGaF7s.js                189.57 kB │ gzip: 60.27 kB
+2026-09-23T21:06:44.046Z	artifacts/mockup-sandbox build: ✓ built in 2.20s
+2026-09-23T21:06:44.095Z	artifacts/mockup-sandbox build: Done
+2026-09-23T21:06:44.096Z	artifacts/follow-jesus-online prebuild$ pnpm run test:articles && pnpm run test:bible-study
+2026-09-23T21:06:44.096Z	artifacts/api-server build$ node ./build.mjs
+2026-09-23T21:06:44.447Z	artifacts/follow-jesus-online prebuild: > @workspace/follow-jesus-online@0.0.0 test:articles /opt/buildhome/repo/artifacts/follow-jesus-online
+2026-09-23T21:06:44.447Z	artifacts/follow-jesus-online prebuild: > node --test scripts/article-links.test.mjs
+2026-09-23T21:06:44.554Z	artifacts/follow-jesus-online prebuild: ✔ article catalog and published article links are internally consistent (12.117332ms)
+2026-09-23T21:06:44.554Z	artifacts/follow-jesus-online prebuild: ✔ published article link scanning covers page and layout entry points (0.32238ms)
+2026-09-23T21:06:44.579Z	artifacts/follow-jesus-online prebuild: ℹ tests 2
+2026-09-23T21:06:44.579Z	artifacts/follow-jesus-online prebuild: ℹ suites 0
+2026-09-23T21:06:44.579Z	artifacts/follow-jesus-online prebuild: ℹ pass 2
+2026-09-23T21:06:44.580Z	artifacts/follow-jesus-online prebuild: ℹ fail 0
+2026-09-23T21:06:44.580Z	artifacts/follow-jesus-online prebuild: ℹ cancelled 0
+2026-09-23T21:06:44.580Z	artifacts/follow-jesus-online prebuild: ℹ skipped 0
+2026-09-23T21:06:44.580Z	artifacts/follow-jesus-online prebuild: ℹ todo 0
+2026-09-23T21:06:44.580Z	artifacts/follow-jesus-online prebuild: ℹ duration_ms 92.12947
+2026-09-23T21:06:44.635Z	artifacts/api-server build:   dist/index.mjs                       2.2mb ⚠️
+2026-09-23T21:06:44.637Z	artifacts/api-server build:   dist/pino-worker.mjs               153.5kb
+2026-09-23T21:06:44.637Z	artifacts/api-server build:   dist/pino-file.mjs                 142.1kb
+2026-09-23T21:06:44.637Z	artifacts/api-server build:   dist/pino-pretty.mjs               114.4kb
+2026-09-23T21:06:44.637Z	artifacts/api-server build:   dist/thread-stream-worker.mjs        7.4kb
+2026-09-23T21:06:44.637Z	artifacts/api-server build:   dist/index.mjs.map                   3.7mb
+2026-09-23T21:06:44.637Z	artifacts/api-server build:   dist/pino-worker.mjs.map           256.9kb
+2026-09-23T21:06:44.637Z	artifacts/api-server build:   dist/pino-file.mjs.map             229.0kb
+2026-09-23T21:06:44.637Z	artifacts/api-server build:   dist/pino-pretty.mjs.map           203.6kb
+2026-09-23T21:06:44.637Z	artifacts/api-server build:   dist/thread-stream-worker.mjs.map   12.0kb
+2026-09-23T21:06:44.637Z	artifacts/api-server build: ⚡ Done in 477ms
+2026-09-23T21:06:44.652Z	artifacts/api-server build: Done
+2026-09-23T21:06:44.912Z	artifacts/follow-jesus-online prebuild: > @workspace/follow-jesus-online@0.0.0 test:bible-study /opt/buildhome/repo/artifacts/follow-jesus-online
+2026-09-23T21:06:44.913Z	artifacts/follow-jesus-online prebuild: > node --import tsx --test scripts/bible-study-validation.test.ts
+2026-09-23T21:06:45.269Z	artifacts/follow-jesus-online prebuild: ✔ accepts a valid exported version-1 backup (1.648079ms)
+2026-09-23T21:06:45.269Z	artifacts/follow-jesus-online prebuild: ✔ preserves empty and small backup preview states (0.395667ms)
+2026-09-23T21:06:45.272Z	artifacts/follow-jesus-online prebuild: ✔ rejects incomplete backups (0.288672ms)
+2026-09-23T21:06:45.279Z	artifacts/follow-jesus-online prebuild: ✔ rejects unsupported backup versions (0.202699ms)
+2026-09-23T21:06:45.279Z	artifacts/follow-jesus-online prebuild: ✔ rejects malformed bookmarks (0.240204ms)
+2026-09-23T21:06:45.279Z	artifacts/follow-jesus-online prebuild: ✔ rejects duplicate bookmark IDs (0.198819ms)
+2026-09-23T21:06:45.279Z	artifacts/follow-jesus-online prebuild: ✔ rejects invalid chapter and verse numbers (0.385016ms)
+2026-09-23T21:06:45.279Z	artifacts/follow-jesus-online prebuild: ✔ rejects mismatched highlight and note map keys (0.291542ms)
+2026-09-23T21:06:45.298Z	artifacts/follow-jesus-online prebuild: ℹ tests 8
+2026-09-23T21:06:45.298Z	artifacts/follow-jesus-online prebuild: ℹ suites 0
+2026-09-23T21:06:45.299Z	artifacts/follow-jesus-online prebuild: ℹ pass 8
+2026-09-23T21:06:45.300Z	artifacts/follow-jesus-online prebuild: ℹ fail 0
+2026-09-23T21:06:45.300Z	artifacts/follow-jesus-online prebuild: ℹ cancelled 0
+2026-09-23T21:06:45.300Z	artifacts/follow-jesus-online prebuild: ℹ skipped 0
+2026-09-23T21:06:45.300Z	artifacts/follow-jesus-online prebuild: ℹ todo 0
+2026-09-23T21:06:45.300Z	artifacts/follow-jesus-online prebuild: ℹ duration_ms 356.302011
+2026-09-23T21:06:45.315Z	artifacts/follow-jesus-online prebuild: Done
+2026-09-23T21:06:45.315Z	artifacts/follow-jesus-online build$ vite build --config vite.config.ts
+2026-09-23T21:06:45.502Z	artifacts/follow-jesus-online build: vite v7.3.6 building client environment for production...
+2026-09-23T21:06:45.562Z	artifacts/follow-jesus-online build: transforming...
+2026-09-23T21:06:46.026Z	artifacts/follow-jesus-online build: src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+2026-09-23T21:06:46.644Z	artifacts/follow-jesus-online build: ✓ 52 modules transformed.
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build: ✗ Build failed in 1.13s
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build: error during build:
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build: [jolf-article-content] Could not load  virtual:article-content (imported by src/data/article-library.ts): Unable to extract the Adventure guide PDF during the build. Ensure pdftotext is available. Error: spawnSync pdftotext ENOENT
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build:     at readAdventureGuidePdf (file:///opt/buildhome/repo/artifacts/follow-jesus-online/node_modules/.vite-temp/vite.config.ts.timestamp-1790197605429-b459b6f9d9d208.mjs:261:11)
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build:     at buildArticleLibrary (file:///opt/buildhome/repo/artifacts/follow-jesus-online/node_modules/.vite-temp/vite.config.ts.timestamp-1790197605429-b459b6f9d9d208.mjs:423:36)
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build:     at Object.load (file:///opt/buildhome/repo/artifacts/follow-jesus-online/node_modules/.vite-temp/vite.config.ts.timestamp-1790197605429-b459b6f9d9d208.mjs:446:47)
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build:     at Object.handler (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:33798:13)
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build:     at file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:22789:40
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build:     at async PluginDriver.hookFirstAndGetPlugin (file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:22671:28)
+2026-09-23T21:06:46.647Z	artifacts/follow-jesus-online build:     at async file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:21657:33
+2026-09-23T21:06:46.648Z	artifacts/follow-jesus-online build:     at async Queue.work (file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:22899:32)
+2026-09-23T21:06:46.669Z	artifacts/follow-jesus-online build: Failed
+2026-09-23T21:06:46.670Z	/opt/buildhome/repo/artifacts/follow-jesus-online:
+2026-09-23T21:06:46.670Z	 ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/follow-jesus-online@0.0.0 build: `vite build --config vite.config.ts`
+2026-09-23T21:06:46.670Z	Exit status 1
+2026-09-23T21:06:46.689Z	 ELIFECYCLE  Command failed with exit code 1.
+2026-09-23T21:06:46.708Z	Failed: error occurred while running build command

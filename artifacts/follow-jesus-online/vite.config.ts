@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
+import { createHash } from 'node:crypto';
 import { execFileSync } from 'child_process';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
@@ -44,6 +45,11 @@ type ArticleRecord = {
 
 const ADVENTURE_GUIDE_SOURCE_FILE =
   'Adventure-Guide-Updated-Visible-Links_1789424679027.pdf';
+// Regenerate src/data/adventure-guide-source.txt with:
+// pdftotext -layout attached_assets/Adventure-Guide-Updated-Visible-Links_1789424679027.pdf artifacts/follow-jesus-online/src/data/adventure-guide-source.txt
+// If the PDF changes, update this digest after checking the new extracted content.
+const ADVENTURE_GUIDE_PDF_SHA256 =
+  '485804324ef243a0e56fa2f1b168f0d1f6936b036cbcc596517be9dc7310c7bb';
 
 const ADVENTURE_GUIDE_SECTIONS = [
   { route: 'adv-begin-the-adventure', title: 'Begin the Adventure', startPage: 3, endPage: 4 },
@@ -180,23 +186,23 @@ function parseAdventureGuideSection(
   return blocks;
 }
 
-function readAdventureGuidePdf(pdfPath: string): ArticleRecord[] {
+function readAdventureGuideSource(pdfPath: string): ArticleRecord[] {
   if (!fs.existsSync(pdfPath)) {
     throw new Error(`The Adventure guide PDF is required to build: ${pdfPath}`);
   }
 
-  let pdfText: string;
-  try {
-    pdfText = execFileSync('pdftotext', ['-layout', pdfPath, '-'], {
-      encoding: 'utf8',
-      maxBuffer: 10 * 1024 * 1024,
-    });
-  } catch (error) {
+  const pdfHash = createHash('sha256').update(fs.readFileSync(pdfPath)).digest('hex');
+  if (pdfHash !== ADVENTURE_GUIDE_PDF_SHA256) {
     throw new Error(
-      `Unable to extract the Adventure guide PDF during the build. Ensure pdftotext is available. ${String(error)}`,
+      'The Adventure guide PDF changed. Regenerate src/data/adventure-guide-source.txt and update its PDF digest before building.',
     );
   }
 
+  const sourcePath = path.join(import.meta.dirname, 'src/data/adventure-guide-source.txt');
+  if (!fs.existsSync(sourcePath)) {
+    throw new Error(`The extracted Adventure guide text is required to build: ${sourcePath}`);
+  }
+  const pdfText = fs.readFileSync(sourcePath, 'utf8');
   const pages = pdfText.split('\f');
   if (pages.length < 34) {
     throw new Error(
@@ -416,7 +422,7 @@ function buildArticleLibrary(): ArticleRecord[] {
         ),
       };
     });
-    const adventureGuideArticles = readAdventureGuidePdf(
+    const adventureGuideArticles = readAdventureGuideSource(
       path.join(attachedAssetsDir, ADVENTURE_GUIDE_SOURCE_FILE),
     );
     const adventureRoutes = new Set(
