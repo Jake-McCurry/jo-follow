@@ -49,7 +49,7 @@ export function Home() {
       {recentPage && (
         <div className="bg-secondary text-secondary-foreground py-3 border-b border-secondary-foreground/10">
           <div className="container px-5 sm:px-8 mx-auto max-w-4xl flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
-            <span className="font-medium">You have a resource in progress.</span>
+            <span className="font-medium">Pick up where you left off...</span>
             <div className="flex gap-2">
               <Button asChild size="sm" variant="default" className="h-8">
                 <Link href={recentPage}>Continue</Link>
