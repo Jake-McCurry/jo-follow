@@ -43,6 +43,46 @@ const updatedBySlug = new Map(
     .map((record) => [record.route.slice(1), record]),
 );
 
+function isApprovedFaq(article: Article) {
+  return article.group === "received" || article.group === "rededicated" ||
+    (article.group === "believer" && [0, 2, 3].includes(article.order)) ||
+    (article.group === "no-decision" && [0, 2, 4].includes(article.order));
+}
+
+function revisedFaqBlocks(
+  source: (typeof generatedContent)[number],
+  original: ArticleBlock[],
+): ArticleBlock[] {
+  const blocks: ArticleBlock[] = [];
+  for (const [index, block] of source.blocks.entries()) {
+    if (index === 0 && block.text.trim() === source.title) continue;
+    const asksForMessage = /write it in the box below|send us (?:your|a|the)|contact us|write to us/i.test(block.text);
+    const text = block.text
+      .replace(/write it in the box below/gi, (match) =>
+        `${match[0] === "W" ? "Send" : "send"} us a message through the contact page`)
+      .replace(/\s*>{3}\s*$/, "")
+      .trim();
+    blocks.push({
+      type: block.kind,
+      text,
+      src: block.src,
+      links: block.links?.map((link) => ({
+        ...link,
+        label: link.label.replace(/\s*>{3}\s*$/, "").trim(),
+        href: link.href.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, ""),
+      })),
+    });
+    if (asksForMessage) {
+      blocks.push({ type: "link", text: "Send a message", href: "/message" });
+    }
+  }
+  const linkedHrefs = new Set(blocks.flatMap((block) => block.links?.map((link) => link.href) ?? []));
+  blocks.push(...original.filter((block) =>
+    block.type === "link" && block.href && !linkedHrefs.has(block.href),
+  ));
+  return blocks;
+}
+
 const linkedFromFaq = new Map(
   linkedArticleMetadata.map(({ faqSlug, slug, title }) => [
     faqSlug,
@@ -132,8 +172,9 @@ export const ARTICLE_LIBRARY = [
   ...(library.articles as Article[]).map((article) => {
     const updated = updatedBySlug.get(article.slug);
     const relatedLink = linkedFromFaq.get(article.slug);
-    const blocks = updated
-      ? updated.blocks
+    const blocks = updated && isApprovedFaq(article)
+      ? revisedFaqBlocks(updated, article.blocks)
+      : updated ? updated.blocks
         .filter((block, index) => !(index === 0 && block.kind === "heading" && block.text === updated.title))
         .map((block) => ({ type: block.kind, text: block.text, src: block.src, links: block.links }))
       : article.blocks;
@@ -142,9 +183,7 @@ export const ARTICLE_LIBRARY = [
       ...(updated
         ? {
             title: updated.title,
-            excerpt:
-              updated.blocks.find((block) => block.kind === "paragraph")?.text ??
-              article.excerpt,
+            excerpt: blocks.find((block) => block.type === "paragraph")?.text ?? article.excerpt,
             blocks,
           }
         : {}),
