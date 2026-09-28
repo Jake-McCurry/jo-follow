@@ -31,7 +31,7 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 - A Scripture reader with direct, shareable book-and-chapter URLs.
 - The NET Bible is retrieved through the official Bible.org service; it is not hosted as a local Bible-text database.
 - The reader must retain the NET attribution and outbound netbible.org link.
-- Guide navigation: a chapter's Go Deeper companion should offer two end-of-article paths—continue to the next Guide chapter or return to the Guide chapter it came from. For example, the first chapter's Go Deeper page goes forward to Chapter 2 or back to Chapter 1. Never chain Go Deeper articles to other Go Deeper articles. The final companion can continue to Go Further when no next Guide chapter exists.
+- Guide navigation: preserve the existing design and placement of the two Go Deeper navigation options; this rule is about destinations, not a request to redesign them. A chapter's Go Deeper companion should continue to the next Guide chapter or return to the Guide chapter it came from. For example, the first chapter's Go Deeper page goes forward to Chapter 2 or back to Chapter 1. Never chain Go Deeper articles to other Go Deeper articles. The final companion can continue to Go Further when no next Guide chapter exists.
 
 ## Typography
 
