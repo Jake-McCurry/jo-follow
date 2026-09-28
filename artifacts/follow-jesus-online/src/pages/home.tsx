@@ -1,5 +1,4 @@
 import { Link } from "wouter";
-import { BibleStartDialog } from "@/components/bible-start-dialog";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -146,12 +145,10 @@ export function Home() {
               <Search className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
               <span className="text-lg font-bold text-card-foreground">Go Further</span>
             </Link>
-            <BibleStartDialog>
-              <button type="button" className="group flex w-full flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
-                <BookOpen className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-                <span className="text-lg font-bold text-card-foreground">Read the Bible</span>
-              </button>
-            </BibleStartDialog>
+            <Link href="/bible/John/1" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+              <BookOpen className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
+              <span className="text-lg font-bold text-card-foreground">Read the Bible</span>
+            </Link>
             <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <Compass className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
               <span className="text-lg font-bold text-card-foreground">About JesusOnline</span>

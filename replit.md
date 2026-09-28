@@ -31,6 +31,8 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 - A Scripture reader with direct, shareable book-and-chapter URLs.
 - The NET Bible is retrieved through the official Bible.org service; it is not hosted as a local Bible-text database.
 - The reader must retain the NET attribution and outbound netbible.org link.
+- Guide navigation: at the end of each Go Deeper companion, keep the paired-card treatment: a prominent blue forward card to the next Guide chapter and a white back card to its originating Guide chapter. For example, the first chapter's Go Deeper page goes forward to Chapter 2 or back to Chapter 1. Never chain Go Deeper articles to other Go Deeper articles. The final companion can continue to Go Further when no next Guide chapter exists.
+- On Guide chapter pages, keep the optional Go Deeper card white and the next-chapter card dark blue with a narrow orange top accent.
 
 ## Typography
 

@@ -1,9 +1,9 @@
 const questions = [
-  ["R", "Revelation", "Is there a revelation about God that I should embrace?", "bg-warm-100 text-warm-700"],
-  ["E", "Example", "Is there an example I should follow or avoid?", "bg-warm-200 text-warm-800"],
-  ["C", "Command", "Is there a command I should obey?", "bg-warm-300 text-warm-900"],
-  ["A", "Application", "Is there something I need to apply to my life?", "bg-warm-50 border border-warm-200 text-warm-700"],
-  ["P", "Promise", "Is there a promise I should claim?", "bg-warm-100 text-warm-700"],
+  { letter: "R", word: "REVELATION", before: "Is there a ", after: " about God that I should embrace?", color: "text-orange-700" },
+  { letter: "E", word: "EXAMPLE", before: "Is there an ", after: " I should follow or avoid?", color: "text-blue-700" },
+  { letter: "C", word: "COMMAND", before: "Is there a ", after: " I should obey?", color: "text-red-700" },
+  { letter: "A", word: "APPLICATION", before: "Is there an ", after: " I should make in my life?", color: "text-green-700" },
+  { letter: "P", word: "PROMISE", before: "Is there a ", after: " I should claim?", color: "text-purple-700" },
 ] as const
 
 export function BibleRecap() {
@@ -20,24 +20,20 @@ export function BibleRecap() {
       </p>
 
       <div className="mt-5 space-y-3" role="list" aria-label="R.E.C.A.P. Bible reading questions">
-        {questions.map(([letter, label, question, color]) => (
+        {questions.map(({ letter, word, before, after, color }) => (
           <div
             key={letter}
-            className="grid grid-cols-[2.25rem_minmax(0,1fr)] items-start gap-x-3 gap-y-2 sm:grid-cols-[2.25rem_7.25rem_minmax(0,1fr)] sm:items-center"
+            className="flex items-start gap-3"
             role="listitem"
-            aria-label={`${letter}: ${label}. ${question}`}
           >
             <span
-              className={`flex h-9 w-9 items-center justify-center rounded-full font-bold ${color}`}
+              className={`w-7 shrink-0 text-lg font-extrabold ${color}`}
               aria-hidden="true"
             >
               {letter}
             </span>
-            <span className={`rounded-xl px-3 py-2 text-sm font-bold leading-tight ${color}`}>
-              {label}
-            </span>
-            <p className="col-start-2 text-sm leading-relaxed text-foreground sm:col-start-auto">
-              {question}
+            <p className="text-sm leading-relaxed text-foreground">
+              {before}<strong className={`font-extrabold ${color}`}>{word}</strong>{after}
             </p>
           </div>
         ))}

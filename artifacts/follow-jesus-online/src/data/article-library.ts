@@ -1,6 +1,7 @@
 import library from "./article-library.json";
 import importedDeeperArticles from "./imported-deeper-articles.json";
 import linkedArticleMetadata from "./linked-articles.json";
+import faqReadingLinks from "./faq-reading-links.json";
 import generatedContent from "virtual:article-content";
 
 export type ArticleGroup =
@@ -42,6 +43,59 @@ const updatedBySlug = new Map(
     .filter((record) => record.category === "ZIP Updated")
     .map((record) => [record.route.slice(1), record]),
 );
+
+function isApprovedFaq(article: Article) {
+  return article.group === "received" || article.group === "rededicated" ||
+    (article.group === "believer" && [0, 2, 3].includes(article.order)) ||
+    (article.group === "no-decision" && [0, 2, 4].includes(article.order));
+}
+
+function revisedFaqBlocks(
+  source: (typeof generatedContent)[number],
+  original: ArticleBlock[],
+): ArticleBlock[] {
+  const readingLinks = (faqReadingLinks as Record<string, { label: string; href: string }[]>)[source.route.slice(1)] ?? [];
+  const matched = new Set<string>();
+  const blocks: ArticleBlock[] = [];
+  for (const [index, block] of source.blocks.entries()) {
+    if (index === 0 && block.text.trim() === source.title) continue;
+    const asksForMessage = /write it in the box below|send us (?:your|a|the)|contact us|write to us/i.test(block.text);
+    const text = block.text
+      .replace(/write it in the box below/gi, (match) =>
+        `${match[0] === "W" ? "Send" : "send"} us a message through the contact page`)
+      .replace(/\s*>{3}\s*$/, "")
+      .trim();
+    const links = block.links?.map((link) => ({
+      ...link,
+      label: link.label.replace(/\s*>{3}\s*$/, "").trim(),
+      href: link.href.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, ""),
+    })) ?? [];
+    for (const reading of readingLinks) {
+      if (!text.includes(reading.label)) continue;
+      matched.add(reading.label);
+      if (!links.some((link) => link.label === reading.label)) links.push(reading);
+    }
+    blocks.push({
+      type: block.kind,
+      text,
+      src: block.src,
+      ...(links.length ? { links: links.sort((a, b) => text.indexOf(a.label) - text.indexOf(b.label)) } : {}),
+    });
+    if (asksForMessage) {
+      blocks.push({ type: "link", text: "Send a message", href: "/message" });
+    }
+  }
+  for (const reading of readingLinks) {
+    if (!matched.has(reading.label)) {
+      throw new Error(`FAQ ${source.route} no longer contains reading suggestion "${reading.label}"`);
+    }
+  }
+  const linkedHrefs = new Set(blocks.flatMap((block) => block.links?.map((link) => link.href) ?? []));
+  blocks.push(...original.filter((block) =>
+    block.type === "link" && block.href && !linkedHrefs.has(block.href),
+  ));
+  return blocks;
+}
 
 const linkedFromFaq = new Map(
   linkedArticleMetadata.map(({ faqSlug, slug, title }) => [
@@ -132,23 +186,33 @@ export const ARTICLE_LIBRARY = [
   ...(library.articles as Article[]).map((article) => {
     const updated = updatedBySlug.get(article.slug);
     const relatedLink = linkedFromFaq.get(article.slug);
-    const blocks = updated
-      ? updated.blocks
+    const sourceBlocks = updated && isApprovedFaq(article)
+      ? revisedFaqBlocks(updated, article.blocks)
+      : updated ? updated.blocks
         .filter((block, index) => !(index === 0 && block.kind === "heading" && block.text === updated.title))
         .map((block) => ({ type: block.kind, text: block.text, src: block.src, links: block.links }))
       : article.blocks;
+    const guidePdfNavigationIndex = article.group === "adventure"
+      ? sourceBlocks.findIndex((block) =>
+          block.text === "Keep walking. If you want more on what you just read, pause here first." ||
+          block.text === "Keep walking. If you want more on the inner life this booklet has opened, pause here first.")
+      : -1;
+    const blocks = guidePdfNavigationIndex >= 0
+      ? sourceBlocks.slice(0, guidePdfNavigationIndex)
+      : sourceBlocks;
     return {
       ...article,
       ...(updated
         ? {
             title: updated.title,
-            excerpt:
-              updated.blocks.find((block) => block.kind === "paragraph")?.text ??
-              article.excerpt,
+            excerpt: blocks.find((block) => block.type === "paragraph")?.text ?? article.excerpt,
             blocks,
           }
         : {}),
-      ...(relatedLink ? {
+      ...(relatedLink && !blocks.some((block) =>
+        ("href" in block && block.href === relatedLink.href) ||
+        block.links?.some((link) => link.href === relatedLink.href),
+      ) ? {
         blocks: [...blocks, { type: "link" as const, ...relatedLink }],
       } : {}),
       order: article.group === "deeper" ? article.order + importedDeeperArticles.length : article.order,
@@ -161,6 +225,18 @@ export const ARTICLE_LIBRARY = [
 
 export function getArticleBySlug(slug: string) {
   return ARTICLE_LIBRARY.find((article) => article.slug === slug);
+}
+
+export function getGuideArticleForDeeper(slug: string) {
+  const currentGuide = ARTICLE_LIBRARY.find(
+    (article) => article.group === "adventure" && article.relatedSlug === slug,
+  );
+  if (currentGuide) return currentGuide;
+
+  const originalGuide = (library.articles as Article[]).find(
+    (article) => article.group === "adventure" && article.relatedSlug === slug,
+  );
+  return originalGuide ? getArticleBySlug(originalGuide.slug) : undefined;
 }
 
 export function getArticlePath(slug: string) {

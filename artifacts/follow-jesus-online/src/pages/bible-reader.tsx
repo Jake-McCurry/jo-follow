@@ -1,4 +1,4 @@
-import { useRoute, useLocation } from "wouter"
+import { useRoute, useLocation, useSearch } from "wouter"
 import { Layout } from "@/components/layout"
 import { useListBibleBooks, useGetBiblePassage, getGetBiblePassageQueryKey } from "@workspace/api-client-react"
 import { SelectNative } from "@/components/ui/select-native"
@@ -16,13 +16,18 @@ const verseHighlightClasses: Record<HighlightColor, string> = {
   blue: "bg-sky-200/80",
   green: "bg-emerald-200/80",
   pink: "bg-pink-200/80",
+  purple: "bg-purple-200/80",
 }
 
 export function BibleReaderPage() {
   const [match, params] = useRoute("/bible/:book/:chapter")
   const [, setLocation] = useLocation()
+  const search = useSearch()
   const [selectedVerse, setSelectedVerse] = useState<StudyVerse | null>(null)
   const study = useBibleStudy()
+  const version = new URLSearchParams(search).get("version") === "KJV" ? "KJV" : "NET"
+  const chapterHref = (book: string, chapter: number, nextVersion = version) =>
+    `/bible/${encodeURIComponent(book)}/${chapter}${nextVersion === "KJV" ? "?version=KJV" : ""}`
   
   let bookParam = "John"
   try {
@@ -30,15 +35,15 @@ export function BibleReaderPage() {
   } catch {
     bookParam = "John"
   }
-  const parsedChapter = Number.parseInt(params?.chapter || "3", 10)
-  const chapterParam = Number.isSafeInteger(parsedChapter) && parsedChapter > 0 ? parsedChapter : 3
+  const parsedChapter = Number.parseInt(params?.chapter || "1", 10)
+  const chapterParam = Number.isSafeInteger(parsedChapter) && parsedChapter > 0 ? parsedChapter : 1
 
   const { data: books, isLoading: isBooksLoading } = useListBibleBooks()
   
   const passageQuery = `${bookParam} ${chapterParam}`
   const { data: passage, isLoading: isPassageLoading, error: passageError } = useGetBiblePassage(
-    { passage: passageQuery },
-    { query: { enabled: match && !!bookParam && !!chapterParam, queryKey: getGetBiblePassageQueryKey({ passage: passageQuery }) } }
+    { passage: passageQuery, version },
+    { query: { enabled: match && !!bookParam && !!chapterParam, queryKey: getGetBiblePassageQueryKey({ passage: passageQuery, version }) } }
   )
 
   const currentBook = useMemo(() => {
@@ -49,13 +54,13 @@ export function BibleReaderPage() {
 
   useEffect(() => {
     if (!isBooksLoading && books && !currentBook) {
-      setLocation("/bible/John/3", { replace: true })
+      setLocation(chapterHref("John", 1), { replace: true })
     }
   }, [books, currentBook, isBooksLoading, setLocation])
 
   useEffect(() => {
     setSelectedVerse(null)
-  }, [bookParam, chapterParam])
+  }, [bookParam, chapterParam, version])
 
   useEffect(() => {
     if (!match) return
@@ -80,12 +85,13 @@ export function BibleReaderPage() {
       chapter: verse.chapter,
       verse: verse.verse,
       text: verse.text,
+      version,
     }
     setSelectedVerse(studyVerse)
     window.requestAnimationFrame(() => {
       document.getElementById(`verse-${verseNumber}`)?.scrollIntoView({ behavior: "smooth", block: "center" })
     })
-  }, [passage])
+  }, [passage, version])
 
   // Search state
   const [searchInput, setSearchInput] = useState("")
@@ -101,13 +107,13 @@ export function BibleReaderPage() {
     if (match) {
       const b = match[1].trim()
       const c = match[2].trim()
-      setLocation(`/bible/${encodeURIComponent(b)}/${c}`)
+      setLocation(chapterHref(b, Number(c)))
       setSearchInput("")
     } else {
       // Fallback: assume they just typed a book name
       const fallbackMatch = str.match(/^((?:[1-3]\s+)?[A-Za-z\s]+)$/)
       if (fallbackMatch) {
-        setLocation(`/bible/${encodeURIComponent(fallbackMatch[1].trim())}/1`)
+        setLocation(chapterHref(fallbackMatch[1].trim(), 1))
         setSearchInput("")
       }
     }
@@ -117,12 +123,12 @@ export function BibleReaderPage() {
   const goToNextChapter = () => {
     if (!currentBook || !books) return
     if (chapterParam < currentBook.chapters) {
-      setLocation(`/bible/${encodeURIComponent(currentBook.name)}/${chapterParam + 1}`)
+      setLocation(chapterHref(currentBook.name, chapterParam + 1))
     } else {
       const bookIndex = books.findIndex(b => b.id === currentBook.id)
       if (bookIndex !== -1 && bookIndex < books.length - 1) {
         const nextBook = books[bookIndex + 1]
-        setLocation(`/bible/${encodeURIComponent(nextBook.name)}/1`)
+        setLocation(chapterHref(nextBook.name, 1))
       }
     }
   }
@@ -130,22 +136,29 @@ export function BibleReaderPage() {
   const goToPrevChapter = () => {
     if (!currentBook || !books) return
     if (chapterParam > 1) {
-      setLocation(`/bible/${encodeURIComponent(currentBook.name)}/${chapterParam - 1}`)
+      setLocation(chapterHref(currentBook.name, chapterParam - 1))
     } else {
       const bookIndex = books.findIndex(b => b.id === currentBook.id)
       if (bookIndex > 0) {
         const prevBook = books[bookIndex - 1]
-        setLocation(`/bible/${encodeURIComponent(prevBook.name)}/${prevBook.chapters}`)
+        setLocation(chapterHref(prevBook.name, prevBook.chapters))
       }
     }
   }
 
   const chapterOptions = Array.from({ length: currentBook?.chapters || 1 }, (_, i) => i + 1)
+  const bookIndex = books?.findIndex((book) => book.id === currentBook?.id) ?? -1
+  const nextChapter = currentBook && chapterParam < currentBook.chapters
+    ? { bookName: currentBook.name, chapter: chapterParam + 1 }
+    : books && bookIndex >= 0 && bookIndex < books.length - 1
+      ? { bookName: books[bookIndex + 1].name, chapter: 1 }
+      : null
 
   return (
     <Layout>
       <div className="container mx-auto max-w-[1600px] px-4 py-8 sm:px-6 md:py-10">
         <div className="grid items-start gap-6 lg:grid-cols-[250px_minmax(0,1fr)_290px] xl:grid-cols-[270px_minmax(0,760px)_310px] xl:justify-center">
+          <div className="order-3 lg:order-1">
           <BibleStudyTools
             study={study}
             bookName={canonicalBookName}
@@ -153,16 +166,20 @@ export function BibleReaderPage() {
             reference={passage?.reference || `${canonicalBookName} ${chapterParam}`}
             selectedVerse={selectedVerse}
             onClearSelection={() => setSelectedVerse(null)}
+            nextChapter={nextChapter}
+            version={version}
           />
+          </div>
 
-          <div className="min-w-0 pb-32 lg:pb-0">
+          <div className="order-1 min-w-0 pb-32 lg:order-2 lg:pb-0">
             {/* Navigation Toolbar */}
-            <div className="mb-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-warm-200 bg-warm-50 p-3 shadow-sm sm:flex-row sm:p-4">
-              <div className="flex w-full items-center gap-2 sm:w-auto">
+            <div className="mb-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-warm-200 bg-warm-50 p-3 shadow-sm 2xl:flex-row sm:p-4">
+              <div className="flex w-full flex-wrap items-center gap-2 2xl:w-auto">
+                <div className="min-w-[130px] flex-1 sm:w-[180px] sm:flex-none">
                 <SelectNative
                   value={canonicalBookName}
-                  onChange={(e) => setLocation(`/bible/${encodeURIComponent(e.target.value)}/1`)}
-                  className="w-full bg-white font-medium text-foreground sm:w-[180px]"
+                  onChange={(e) => setLocation(chapterHref(e.target.value, 1))}
+                  className="bg-white font-medium text-foreground"
                   disabled={isBooksLoading}
                   aria-label="Select Bible Book"
                 >
@@ -174,11 +191,13 @@ export function BibleReaderPage() {
                     ))
                   )}
                 </SelectNative>
+                </div>
 
+                <div className="w-24 sm:w-28">
                 <SelectNative
                   value={chapterParam.toString()}
-                  onChange={(e) => setLocation(`/bible/${encodeURIComponent(canonicalBookName)}/${e.target.value}`)}
-                  className="w-24 bg-white font-medium text-foreground sm:w-28"
+                  onChange={(e) => setLocation(chapterHref(canonicalBookName, Number(e.target.value)))}
+                  className="bg-white font-medium text-foreground"
                   disabled={!currentBook}
                   aria-label="Select Chapter"
                 >
@@ -186,9 +205,21 @@ export function BibleReaderPage() {
                     <option key={c} value={c}>Ch. {c}</option>
                   ))}
                 </SelectNative>
+                </div>
+                <div className="w-24">
+                <SelectNative
+                  value={version}
+                  onChange={(e) => setLocation(chapterHref(canonicalBookName, chapterParam, e.target.value as "NET" | "KJV"))}
+                  className="bg-white font-medium text-foreground"
+                  aria-label="Select Bible translation"
+                >
+                  <option value="NET">NET</option>
+                  <option value="KJV">KJV</option>
+                </SelectNative>
+                </div>
               </div>
 
-              <form onSubmit={handleSearch} className="relative w-full sm:w-64">
+              <form onSubmit={handleSearch} className="relative w-full 2xl:w-64">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   type="text"
@@ -230,6 +261,7 @@ export function BibleReaderPage() {
                           chapter: verse.chapter,
                           verse: verse.verse,
                           text: verse.text,
+                          version,
                         }
                         const highlight = study.data.highlights[studyVerse.id]?.color
                         const isSelected = selectedVerse?.id === studyVerse.id
@@ -289,7 +321,7 @@ export function BibleReaderPage() {
             </div>
           </div>
 
-          <BibleRecap />
+          <div className="order-2 lg:order-3"><BibleRecap /></div>
         </div>
       </div>
     </Layout>

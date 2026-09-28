@@ -1,0 +1,10 @@
+---
+name: FAQ reading destinations
+description: Editorial rule for resolving plain-text reading suggestions in supplied FAQ documents.
+---
+
+Match unlinked FAQ reading prompts to the closest verified in-site article or reading when the exact named resource is not independently available. Use an outside URL only when the official resource can be verified; do not invent a plausible deep link from a title.
+
+**Why:** The supplied Word documents include plain-text calls to action without URLs. Some refer to themes rather than an exact article title, and guessed outside paths could strand readers.
+
+**How to apply:** When a new approved FAQ document introduces a plain-text resource suggestion, inspect the actual resource content and route before adding an editorial mapping. Preserve real hyperlinks supplied by Word.

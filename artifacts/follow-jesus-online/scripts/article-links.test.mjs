@@ -13,6 +13,8 @@ const importedDeeperPath = path.join(
   "src/data/imported-deeper-articles.json",
 );
 const linkedArticlesPath = path.join(projectRoot, "src/data/linked-articles.json");
+const faqReadingLinksPath = path.join(projectRoot, "src/data/faq-reading-links.json");
+const goFurtherLibraryPath = path.join(projectRoot, "src/data/go-further-library.ts");
 const sourceRoot = path.join(projectRoot, "src");
 const xpPagePath = path.join(projectRoot, "src/pages/xp-page.tsx");
 
@@ -315,4 +317,34 @@ test("published article link scanning covers page and layout entry points", () =
         `${path.relative(projectRoot, filePath)}:1 publishes missing article route "/${missingSlug}"`,
     ),
   );
+});
+
+test("revised FAQ reading suggestions point to published resources", () => {
+  const faqLinks = readJson(faqReadingLinksPath);
+  const articleSlugs = new Set([
+    ...readJson(articleLibraryPath).articles.map((article) => article.slug),
+    ...readJson(importedDeeperPath).map((article) => article.slug),
+    ...readJson(linkedArticlesPath).map((article) => article.slug),
+  ]);
+  const goFurtherSource = fs.readFileSync(goFurtherLibraryPath, "utf8");
+  const goFurtherSlugs = new Set(
+    [...goFurtherSource.matchAll(/^\s+slug: '([^']+)'/gm)].map((match) => match[1]),
+  );
+  const approvedExternal = "https://app.jesusonline.com/evidence";
+
+  for (const [faqSlug, suggestions] of Object.entries(faqLinks)) {
+    assert.ok(articleSlugs.has(faqSlug), `Unknown FAQ: ${faqSlug}`);
+    assert.ok(suggestions.length > 0, `No suggestions for ${faqSlug}`);
+    for (const { label, href } of suggestions) {
+      assert.ok(isNonEmptyString(label), `${faqSlug} has an empty reading label`);
+      if (href.startsWith("/gf/")) {
+        const [, , book, reading] = href.split("/");
+        assert.ok(goFurtherSlugs.has(book) && goFurtherSlugs.has(reading), `${faqSlug}: unknown reading ${href}`);
+      } else if (href.startsWith("/")) {
+        assert.ok(articleSlugs.has(href.slice(1)), `${faqSlug}: unknown article ${href}`);
+      } else {
+        assert.equal(href, approvedExternal, `${faqSlug}: unapproved external link ${href}`);
+      }
+    }
+  }
 });

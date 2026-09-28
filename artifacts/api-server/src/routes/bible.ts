@@ -7,7 +7,7 @@ import {
 import {
   BIBLE_BOOKS,
   BibleServiceError,
-  getNetBiblePassage,
+  getBiblePassage,
   isSafeBibleReference,
 } from "../lib/bible";
 
@@ -25,7 +25,7 @@ router.get("/bible/passage", async (req, res): Promise<void> => {
   }
 
   try {
-    const passage = await getNetBiblePassage(parsed.data.passage);
+    const passage = await getBiblePassage(parsed.data.passage, parsed.data.version);
     res.json(GetBiblePassageResponse.parse(passage));
   } catch (error) {
     if (error instanceof BibleServiceError) {

@@ -3,7 +3,7 @@ import { useCallback, useState } from "react"
 export const BIBLE_STUDY_STORAGE_KEY = "jol_bible_study_v1"
 export const BIBLE_STUDY_DATA_VERSION = 1 as const
 
-export const HIGHLIGHT_COLORS = ["yellow", "blue", "green", "pink"] as const
+export const HIGHLIGHT_COLORS = ["yellow", "blue", "green", "pink", "purple"] as const
 export type HighlightColor = (typeof HIGHLIGHT_COLORS)[number]
 
 export interface StudyVerse {
@@ -12,6 +12,7 @@ export interface StudyVerse {
   chapter: number
   verse: number
   text: string
+  version?: "NET" | "KJV"
 }
 
 export interface ChapterBookmark {
@@ -81,7 +82,8 @@ function isStudyVerse(value: unknown): value is StudyVerse {
     typeof value.verse === "number" &&
     Number.isSafeInteger(value.verse) &&
     value.verse > 0 &&
-    typeof value.text === "string"
+    typeof value.text === "string" &&
+    (value.version === undefined || value.version === "NET" || value.version === "KJV")
   )
 }
 
@@ -264,8 +266,10 @@ export function useBibleStudy() {
     try {
       window.localStorage.setItem(BIBLE_STUDY_STORAGE_KEY, JSON.stringify(nextData))
       setStoredState({ data: nextData, storageAvailable: true })
+      return true
     } catch {
       setStoredState({ data: nextData, storageAvailable: false })
+      return false
     }
   }, [])
 
@@ -366,11 +370,11 @@ export function useBibleStudy() {
   }, [update])
 
   const importData = useCallback((incoming: BibleStudyData) => {
-    update((current) => mergeData(current, incoming))
-  }, [update])
+    return persist(mergeData(data, incoming))
+  }, [data, persist])
 
   const replaceData = useCallback((incoming: BibleStudyData) => {
-    persist(incoming)
+    return persist(incoming)
   }, [persist])
 
   return {

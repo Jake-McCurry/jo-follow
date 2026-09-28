@@ -47,8 +47,8 @@ paths:
     get:
       operationId: getBiblePassage
       tags: [bible]
-      summary: Get a NET Bible passage
-      description: Retrieves a passage from the official NET Bible service as safe plain text.
+      summary: Get a NET or KJV Bible passage
+      description: Retrieves a passage as safe plain text. NET is the default translation.
       parameters:
         - name: passage
           in: query
@@ -58,9 +58,16 @@ paths:
             type: string
             minLength: 1
             maxLength: 100
+        - name: version
+          in: query
+          required: false
+          description: Bible translation, defaulting to NET.
+          schema:
+            type: string
+            enum: [NET, KJV]
       responses:
         "200":
-          description: NET Bible passage
+          description: Bible passage in the requested translation
           content:
             application/json:
               schema:
@@ -243,14 +250,14 @@ components:
           example: John 3
         version:
           type: string
-          example: NET
+          enum: [NET, KJV]
         verses:
           type: array
           items:
             $ref: "#/components/schemas/BibleVerse"
         copyright:
           type: string
-          description: Required NET Bible copyright acknowledgement.
+          description: Translation-specific copyright or public-domain acknowledgement.
     ArticleReactionType:
       type: string
       enum: [helpful, encouraging, disagree]
