@@ -119,14 +119,14 @@ function PageMetadata() {
       .querySelector('meta[property="og:description"]')
       ?.setAttribute('content', description);
 
-    // Apply noindex globally for all routes
+    // Keep pages out of search results while allowing crawlers to follow links.
     let robotsMeta = document.querySelector('meta[name="robots"]');
     if (!robotsMeta) {
       robotsMeta = document.createElement('meta');
       robotsMeta.setAttribute('name', 'robots');
       document.head.appendChild(robotsMeta);
     }
-    robotsMeta.setAttribute('content', 'noindex,nofollow');
+    robotsMeta.setAttribute('content', 'noindex,follow');
 
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     const articleSlug = getArticleSlugFromPath(pathname);
