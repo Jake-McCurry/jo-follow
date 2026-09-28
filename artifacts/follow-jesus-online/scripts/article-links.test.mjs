@@ -12,6 +12,7 @@ const importedDeeperPath = path.join(
   projectRoot,
   "src/data/imported-deeper-articles.json",
 );
+const linkedArticlesPath = path.join(projectRoot, "src/data/linked-articles.json");
 const sourceRoot = path.join(projectRoot, "src");
 const xpPagePath = path.join(projectRoot, "src/pages/xp-page.tsx");
 
@@ -80,6 +81,7 @@ function findMissingPublishedLinks(catalog, publishedLinks) {
 function validateArticleLibrary() {
   const library = readJson(articleLibraryPath);
   const importedDeeper = readJson(importedDeeperPath);
+  const linkedArticles = readJson(linkedArticlesPath);
   const articles = library?.articles;
   const errors = [];
 
@@ -92,6 +94,12 @@ function validateArticleLibrary() {
 
   for (const article of importedDeeper) {
     catalog.set(article.slug, article);
+  }
+  for (const article of linkedArticles) {
+    if (!articleRoutePattern.test(article.slug) || !isNonEmptyString(article.faqSlug)) {
+      errors.push(`invalid linked-only article metadata for "${article.slug}"`);
+    }
+    if (!catalog.has(article.slug)) catalog.set(article.slug, article);
   }
 
   for (const article of articles) {
@@ -106,6 +114,9 @@ function validateArticleLibrary() {
     }
     slugs.add(article.slug);
     catalog.set(article.slug, article);
+  }
+  for (const article of linkedArticles) {
+    if (!catalog.has(article.faqSlug)) errors.push(`${article.slug} links from missing FAQ "${article.faqSlug}"`);
   }
 
   for (const [articleIndex, article] of articles.entries()) {
@@ -215,9 +226,6 @@ function validateArticleLibrary() {
     errors.push(`imported Go Deeper orders must be 0 through 9; got [${importedOrders.join(", ")}]`);
   }
   for (const article of importedDeeper) {
-    if (!fs.existsSync(path.join(projectRoot, "..", "..", "attached_assets", article.file))) {
-      errors.push(`missing imported Go Deeper source "${article.file}"`);
-    }
     if (!articleRoutePattern.test(article.slug) || !article.slug.startsWith("deeper-")) {
       errors.push(`invalid imported Go Deeper slug "${article.slug}"`);
     }

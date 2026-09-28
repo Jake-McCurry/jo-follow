@@ -1,5 +1,6 @@
 import library from "./article-library.json";
 import importedDeeperArticles from "./imported-deeper-articles.json";
+import linkedArticleMetadata from "./linked-articles.json";
 import generatedContent from "virtual:article-content";
 
 export type ArticleGroup =
@@ -9,12 +10,15 @@ export type ArticleGroup =
   | "received"
   | "rededicated"
   | "believer"
-  | "no-decision";
+  | "no-decision"
+  | "linked";
 
 export type ArticleBlock = {
-  type: "heading" | "paragraph" | "question" | "list" | "table-row" | "link";
+  type: "heading" | "paragraph" | "question" | "list" | "table-row" | "link" | "image";
   text: string;
   href?: string;
+  src?: string;
+  links?: { label: string; href: string }[];
 };
 
 export type ArticleContinuation = {
@@ -33,53 +37,32 @@ export type Article = {
   continuation?: ArticleContinuation;
 };
 
-const BELIEVER_PREFIX = "more-believer-";
-const NO_DECISION_PREFIX = "more-no-decision-";
-
-const generatedFaqRecords = generatedContent.filter((record) => {
-  const slug = record.route.slice(1);
-  return slug.startsWith(BELIEVER_PREFIX) || slug.startsWith(NO_DECISION_PREFIX);
-});
-
-const generatedAdventureBySlug = new Map(
+const updatedBySlug = new Map(
   generatedContent
-    .filter((record) => record.category === "Adventure Guide")
+    .filter((record) => record.category === "ZIP Updated")
     .map((record) => [record.route.slice(1), record]),
 );
 
-const groupOrders: Record<"believer" | "no-decision", number> = {
-  believer: 0,
-  "no-decision": 0,
-};
+const linkedFromFaq = new Map(
+  linkedArticleMetadata.map(({ faqSlug, slug, title }) => [
+    faqSlug,
+    { text: `Read more: ${title}`, href: `/${slug}` },
+  ]),
+);
 
-const generatedFaqArticles: Article[] = generatedFaqRecords.map((record) => {
-  const group: "believer" | "no-decision" = record.route.slice(1).startsWith(BELIEVER_PREFIX)
-    ? "believer"
-    : "no-decision";
-  const blocks = record.blocks
-    .filter(
-      (block, index) =>
-        !(index === 0 && block.kind === "heading" && block.text === record.title),
-    )
-    .map((block) => ({
-      type: block.kind,
-      text: block.text,
-    }));
-  const excerpt =
-    blocks.find((block) => block.type === "paragraph")?.text ??
-    "A Follow Jesus Online resource.";
-
-  return {
+const linkedArticles: Article[] = generatedContent
+  .filter((record) => record.category === "Linked only")
+  .map((record, order) => ({
     slug: record.route.slice(1),
     title: record.title,
-    group,
-    order: groupOrders[group]++,
-    excerpt,
-    blocks,
-  };
-});
-
-const generatedFaqSlugs = new Set(generatedFaqArticles.map((article) => article.slug));
+    group: "linked",
+    order,
+    excerpt: record.blocks.find((block) => block.kind === "paragraph" && block.text !== record.title)?.text
+      ?? "A Follow Jesus Online resource.",
+    blocks: record.blocks
+      .filter((block, index) => !(index === 0 && block.text.replace(/[^\p{L}\p{N}]/gu, "").toLowerCase() === record.title.replace(/[^\p{L}\p{N}]/gu, "").toLowerCase()))
+      .map((block) => ({ type: block.kind, text: block.text, src: block.src, links: block.links })),
+  }));
 
 const adventureCompanions: Record<string, string> = {
   "adv-begin-the-adventure": "deeper-the-need-for-a-new-heart",
@@ -99,7 +82,7 @@ const importedDeeperBySlug = new Map(
 );
 
 const importedDeeperRecords: Article[] = generatedContent
-  .filter((record) => importedDeeperBySlug.has(record.route.slice(1)))
+  .filter((record) => record.category === "ZIP Updated" && importedDeeperBySlug.has(record.route.slice(1)))
   .map((record) => {
     const metadata = importedDeeperBySlug.get(record.route.slice(1))!;
     const blocks: ArticleBlock[] = record.blocks
@@ -109,7 +92,7 @@ const importedDeeperRecords: Article[] = generatedContent
           text !== "JesusOnline FOLLOW" &&
           !/^Go Deeper\s*·/.test(text) &&
           !/^Your Journey Continues\s*·/.test(text) &&
-          text !== metadata.title &&
+          text !== record.title &&
           !text.startsWith("A free resource from JesusOnline Ministries") &&
           !text.startsWith("Companion to The Adventure of Living with Jesus") &&
           !text.startsWith("After The Adventure of Living with Jesus") &&
@@ -127,6 +110,8 @@ const importedDeeperRecords: Article[] = generatedContent
                 ? "question"
                 : block.kind,
           text: block.text,
+          src: block.src,
+          links: block.links,
         };
       });
     const excerpt =
@@ -134,7 +119,7 @@ const importedDeeperRecords: Article[] = generatedContent
       "A Go Deeper companion from Follow Jesus Online.";
     return {
       slug: metadata.slug,
-      title: metadata.title,
+      title: record.title,
       group: "deeper",
       order: metadata.order,
       excerpt,
@@ -144,30 +129,34 @@ const importedDeeperRecords: Article[] = generatedContent
   });
 
 export const ARTICLE_LIBRARY = [
-  ...(library.articles as Article[]).filter(
-    (article) => !generatedFaqSlugs.has(article.slug),
-  ).map((article) => {
-    const generatedAdventure = generatedAdventureBySlug.get(article.slug);
+  ...(library.articles as Article[]).map((article) => {
+    const updated = updatedBySlug.get(article.slug);
+    const relatedLink = linkedFromFaq.get(article.slug);
+    const blocks = updated
+      ? updated.blocks
+        .filter((block, index) => !(index === 0 && block.kind === "heading" && block.text === updated.title))
+        .map((block) => ({ type: block.kind, text: block.text, src: block.src, links: block.links }))
+      : article.blocks;
     return {
       ...article,
-      ...(generatedAdventure
+      ...(updated
         ? {
-            title: generatedAdventure.title,
+            title: updated.title,
             excerpt:
-              generatedAdventure.blocks.find((block) => block.kind === "paragraph")?.text ??
+              updated.blocks.find((block) => block.kind === "paragraph")?.text ??
               article.excerpt,
-            blocks: generatedAdventure.blocks.map((block) => ({
-              type: block.kind,
-              text: block.text,
-            })),
+            blocks,
           }
         : {}),
+      ...(relatedLink ? {
+        blocks: [...blocks, { type: "link" as const, ...relatedLink }],
+      } : {}),
       order: article.group === "deeper" ? article.order + importedDeeperArticles.length : article.order,
       relatedSlug: adventureCompanions[article.slug] ?? article.relatedSlug,
     };
   }),
   ...importedDeeperRecords,
-  ...generatedFaqArticles,
+  ...linkedArticles,
 ];
 
 export function getArticleBySlug(slug: string) {

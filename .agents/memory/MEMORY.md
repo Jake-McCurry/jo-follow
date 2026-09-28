@@ -5,3 +5,4 @@
 - [Orval js-yaml compatibility](orval-js-yaml-compatibility.md) — Keep security overrides within Orval’s compatible js-yaml major and validate code generation directly.
 - [Approved visual warmth](approved-visual-warmth.md) — Keep the site’s blue structure, warm-paper surfaces, restrained orange accents, and strong accessible actions consistent.
 - [Generated text transfer](generated-text-transfer.md) — Large shell output with page-control characters can arrive incomplete through CodeExecution; compare hashes when saving generated text.
+- [Nested DOCX extraction](nested-docx-extraction.md) — Build-time unzip of Word files inside a ZIP can exceed Node’s default child-process output buffer.

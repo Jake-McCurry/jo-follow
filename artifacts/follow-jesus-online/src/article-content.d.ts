@@ -1,7 +1,9 @@
 declare module "virtual:article-content" {
   export type ArticleBlock = {
-    kind: "heading" | "paragraph" | "question" | "list";
+    kind: "heading" | "paragraph" | "question" | "list" | "image";
     text: string;
+    src?: string;
+    links?: { label: string; href: string }[];
   };
 
   export type ArticleRecord = {

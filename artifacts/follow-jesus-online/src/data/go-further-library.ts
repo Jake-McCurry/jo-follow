@@ -19,12 +19,12 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
   {
     slug: 'a-heart-after-god',
     title: 'A Heart After God',
-    subtitle: 'Seven Reflections on the Inner Life',
+    subtitle: 'Eight Reflections on the Inner Life',
     desc: 'Learn to want what God wants, in the hidden places no one else sees.',
     intro: [
       'God is not first after your schedule, your words, or the life other people can see. He is after your heart.',
       'That is good news. The heart is where you actually live—where you want, fear, hide, and hope. If Christ is welcome there, He will, in time, walk through every other room. If He is kept at the door, the rest of life can look ordered and still remain unchanged.',
-      'These seven short readings are for that inner place. They are not a program for becoming impressive. They are a quiet look at what God sees, what a new heart means, and how His Spirit does the work you cannot do by trying harder.',
+      'These eight short readings are for that inner place. They are not a program for becoming impressive. They are a quiet look at what God sees, what a new heart means, and how His Spirit does the work you cannot do by trying harder.',
       'Read them in order if you can. Or open the one that is of particular interest to you today.',
     ],
     readings: [
@@ -62,7 +62,12 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
         slug: 'the-holy-spirit-and-the-transformation-of-the-heart',
         title: '7. The Holy Spirit and the Transformation of the Heart',
         desc: 'You can set the sails with discipline and sincere effort. Only the Spirit supplies the wind that actually moves the heart.',
-      }
+      },
+      {
+        slug: 'a-heart-that-remains',
+        title: '8. A Heart That Remains',
+        desc: 'The heart grows by remaining in Christ, not by straining to produce fruit on its own.',
+      },
     ],
     closing: 'He already knows the rooms you would rather keep closed. This is an invitation to let Him in—not as a guest for an hour, but as the One who lives at the center.',
     buttonText: 'Begin the first reading',
@@ -106,8 +111,8 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       },
       {
         slug: 'you-are-a-citizen-of-gods-kingdom',
-        title: '6. You Are a Citizen of God’s Kingdom',
-        desc: 'Your true citizenship is not of this world. You now belong to an unshakable kingdom and represent its King.',
+        title: '6. You Are a Citizen of God',
+        desc: 'Your true citizenship is not of this world. You belong to God and represent Him in everyday life.',
       },
       {
         slug: 'choosing-wisely-with-your-new-identity',
@@ -147,23 +152,23 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       },
       {
         slug: 'attributes-of-being',
-        title: '2. Attributes of Being',
-        desc: 'God does not depend on anything He has made. He is the One who simply is—and all life flows from Him.',
+        title: '2. Attributes of Self-Existence',
+        desc: 'God has always existed and depends on nothing He has made.',
       },
       {
         slug: 'attributes-of-ability',
-        title: '3. Attributes of Ability',
-        desc: 'Nothing you face is beyond His power or hidden from His sight. The God who is able is also near—and He does not change.',
+        title: '3. Attributes of Sovereignty',
+        desc: 'God reigns over all things with wisdom and power.',
       },
       {
         slug: 'attributes-of-integrity',
-        title: '4. Attributes of Integrity',
-        desc: 'God’s character has no fracture and no shadow. The purity that humbles the heart is the same integrity that draws it near.',
+        title: '4. Attributes of Holiness',
+        desc: 'God is completely set apart, pure in all He is and does.',
       },
       {
         slug: 'attributes-of-goodness',
-        title: '5. Attributes of Goodness',
-        desc: 'The heart of God is not only holy. It is goodness that moves toward the undeserving and does not let go.',
+        title: '5. Attributes of Love',
+        desc: 'His love moves toward us and calls us to love others.',
       },
       {
         slug: 'live-in-the-light-of-his-majesty',
@@ -203,7 +208,7 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       },
       {
         slug: 'how-to-be-filled-and-empowered-by-the-holy-spirit',
-        title: '4. How to Be Filled and Empowered by the Holy Spirit',
+        title: '4. How Can a Person Be Filled and Empowered by the Holy Spirit?',
         desc: 'Being filled with the Spirit is not a rare crisis. It is a daily yielding to His direction and power.',
       },
       {
@@ -249,53 +254,53 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
     readings: [
       {
         slug: 'seeing-life-from-gods-perspective',
-        title: '1. Seeing Life from God’s Perspective',
-        desc: 'Circumstances look different when you read them through God’s character, not through fear or the world’s scoreboard.',
+        title: '1. Seeing the Truth',
+        desc: 'Learn to see what is true through the lens of God’s Word.',
       },
       {
         slug: 'growing-closer-to-god',
-        title: '2. Growing Closer to God',
-        desc: 'Maturity is not more activity for God. It is a living, affectionate walk with the Lord Himself.',
+        title: '2. Cultivating 7 Habits for Intimacy with God',
+        desc: 'Practice rhythms that help you stay close to God.',
       },
       {
         slug: 'becoming-the-new-you',
-        title: '3. Becoming the New You',
-        desc: 'You do not have to keep wearing the old self. In Christ you are already new—and you can learn to live as if that is true.',
+        title: '3. Walking in Your New Identity',
+        desc: 'Let your daily choices reflect who you are in Christ.',
       },
       {
         slug: 'walking-by-the-spirit-reading',
-        title: '4. Walking by the Spirit',
-        desc: 'A grown-up life in Christ is not self-effort dressed in religious language. It is daily reliance on the Spirit who lives in you.',
+        title: '4. The Exchanged Life',
+        desc: 'The Christian life is lived through Christ’s strength, not self-effort.',
       },
       {
         slug: 'receiving-insights-from-god',
-        title: '5. Receiving Insights from God',
-        desc: 'God still speaks. Scripture and a renewed mind become the path by which He directs your next faithful step.',
+        title: '5. Renewing the Mind for Transformation',
+        desc: 'Let God’s truth reshape your thoughts and choices.',
       },
       {
         slug: 'obeying-god-faithfully',
-        title: '6. Obeying God Faithfully',
-        desc: 'Knowing the truth is not the same as walking in it. Obedience is how love for Christ takes on a body.',
+        title: '6. The Heart of True Obedience',
+        desc: 'Discover how love and trust give shape to obedience.',
       },
       {
         slug: 'living-as-gods-family',
-        title: '7. Living as God’s Family',
-        desc: 'Faith grows cold in isolation. God places you in a family so you can be strengthened, needed, and kept near the fire.',
+        title: '7. You Belong to Become and to Bless',
+        desc: 'Grow with God’s people and become a blessing to others.',
       },
       {
         slug: 'reaching-the-world',
-        title: '8. Reaching the World',
-        desc: 'The life Christ has given you is not only for you. He intends it to move outward—in witness, mercy, and making disciples.',
+        title: '8. Advancing Christ’s Kingdom',
+        desc: 'Take part in Christ’s work through witness and service.',
       },
       {
         slug: 'resisting-the-enemy',
-        title: '9. Resisting the Enemy',
-        desc: 'You have an enemy who accuses and distracts. You also have armor, truth, and a Lord who has already won.',
+        title: '9. Standing Firm in Christ',
+        desc: 'Stand against false identity, isolation, condemnation, and temptation.',
       },
       {
         slug: 'pursuing-gods-master-plan',
-        title: '10. Pursuing God’s Master Plan',
-        desc: 'Your life is not an accident to manage. Christ intends to use your ordinary days—and your gifts—for something that lasts.',
+        title: '10. God’s Plan for You',
+        desc: 'Live with purpose in the path God has prepared for you.',
       }
     ],
     closing: 'He is already with you. Choose one and take the next step.',
