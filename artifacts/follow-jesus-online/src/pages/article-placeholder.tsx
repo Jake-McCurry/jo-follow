@@ -378,12 +378,12 @@ function AdventureArticleView({
                   )}
                   <Link
                     href={next ? articleHref(next.slug) : article.continuation ? continuationHref(article.continuation.href) : "/explore-articles"}
-                    className="group min-w-0 rounded-xl border border-blue-200 bg-blue-50 p-3 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-100 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
+                    className="group min-w-0 rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-3 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
                   >
-                    <p className="text-[11px] font-bold uppercase tracking-wide text-blue-800 sm:text-sm">Continue the Adventure</p>
-                    <h2 className="mt-2 flex items-start justify-between gap-1 font-serif text-lg font-bold leading-snug text-navy sm:gap-3 sm:text-2xl">
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-blue-100 sm:text-sm">Continue the Adventure</p>
+                    <h2 className="mt-2 flex items-start justify-between gap-1 font-serif text-lg font-bold leading-snug text-white sm:gap-3 sm:text-2xl">
                       <span className="min-w-0 break-words">{next ? `Next: ${articleIndex + 1}. ${next.title}` : article.continuation?.label ?? "Explore more articles"}</span>
-                      <ArrowRight className="mt-0.5 h-5 w-5 shrink-0 text-brand transition-transform group-hover:translate-x-1 sm:h-7 sm:w-7" aria-hidden="true" />
+                      <ArrowRight className="mt-0.5 h-5 w-5 shrink-0 text-white transition-transform group-hover:translate-x-1 sm:h-7 sm:w-7" aria-hidden="true" />
                     </h2>
                   </Link>
                 </nav>
