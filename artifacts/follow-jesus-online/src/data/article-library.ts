@@ -1,6 +1,7 @@
 import library from "./article-library.json";
 import importedDeeperArticles from "./imported-deeper-articles.json";
 import linkedArticleMetadata from "./linked-articles.json";
+import faqReadingLinks from "./faq-reading-links.json";
 import generatedContent from "virtual:article-content";
 
 export type ArticleGroup =
@@ -53,6 +54,8 @@ function revisedFaqBlocks(
   source: (typeof generatedContent)[number],
   original: ArticleBlock[],
 ): ArticleBlock[] {
+  const readingLinks = (faqReadingLinks as Record<string, { label: string; href: string }[]>)[source.route.slice(1)] ?? [];
+  const matched = new Set<string>();
   const blocks: ArticleBlock[] = [];
   for (const [index, block] of source.blocks.entries()) {
     if (index === 0 && block.text.trim() === source.title) continue;
@@ -62,18 +65,29 @@ function revisedFaqBlocks(
         `${match[0] === "W" ? "Send" : "send"} us a message through the contact page`)
       .replace(/\s*>{3}\s*$/, "")
       .trim();
+    const links = block.links?.map((link) => ({
+      ...link,
+      label: link.label.replace(/\s*>{3}\s*$/, "").trim(),
+      href: link.href.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, ""),
+    })) ?? [];
+    for (const reading of readingLinks) {
+      if (!text.includes(reading.label)) continue;
+      matched.add(reading.label);
+      if (!links.some((link) => link.label === reading.label)) links.push(reading);
+    }
     blocks.push({
       type: block.kind,
       text,
       src: block.src,
-      links: block.links?.map((link) => ({
-        ...link,
-        label: link.label.replace(/\s*>{3}\s*$/, "").trim(),
-        href: link.href.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, ""),
-      })),
+      ...(links.length ? { links: links.sort((a, b) => text.indexOf(a.label) - text.indexOf(b.label)) } : {}),
     });
     if (asksForMessage) {
       blocks.push({ type: "link", text: "Send a message", href: "/message" });
+    }
+  }
+  for (const reading of readingLinks) {
+    if (!matched.has(reading.label)) {
+      throw new Error(`FAQ ${source.route} no longer contains reading suggestion "${reading.label}"`);
     }
   }
   const linkedHrefs = new Set(blocks.flatMap((block) => block.links?.map((link) => link.href) ?? []));
@@ -187,7 +201,10 @@ export const ARTICLE_LIBRARY = [
             blocks,
           }
         : {}),
-      ...(relatedLink ? {
+      ...(relatedLink && !blocks.some((block) =>
+        ("href" in block && block.href === relatedLink.href) ||
+        block.links?.some((link) => link.href === relatedLink.href),
+      ) ? {
         blocks: [...blocks, { type: "link" as const, ...relatedLink }],
       } : {}),
       order: article.group === "deeper" ? article.order + importedDeeperArticles.length : article.order,

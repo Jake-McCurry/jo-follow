@@ -8,3 +8,4 @@
 - [Nested DOCX extraction](nested-docx-extraction.md) — Build-time unzip of Word files inside a ZIP can exceed Node’s default child-process output buffer.
 - [FAQ message invitations](faq-message-invitations.md) — Revised FAQ copy inviting questions should direct visitors to the existing contact form, not imply an inline box.
 - [One-chapter Bible API responses](one-chapter-bible-api-responses.md) — Verify full verse coverage for single-chapter books; a successful passage response may contain only verse 1.
+- [FAQ reading destinations](faq-reading-destinations.md) — Prefer verified in-site readings for unlinked editorial prompts; avoid guessing outside deep links.
