@@ -76,7 +76,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
       >
         <div className="space-y-3">
           <h4 className="font-sans font-bold text-lg text-foreground border-b border-warm-200 pb-2">
-            {data?.reference || reference}
+            {data?.reference || reference} <span className="whitespace-nowrap">({data?.version || "NET"})</span>
           </h4>
           
           {isLoading && (
