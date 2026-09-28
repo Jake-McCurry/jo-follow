@@ -23,8 +23,8 @@ import {
 } from "@/components/ui/dialog"
 import { ShareButton } from "@/components/share-button"
 import { useToast } from "@/hooks/use-toast"
+import { downloadBibleStudy } from "@/lib/bible-study-export"
 import {
-  BIBLE_STUDY_DATA_VERSION,
   type BibleStudyData,
   type ChapterBookmark,
   type HighlightColor,
@@ -38,10 +38,11 @@ const colorClasses: Record<HighlightColor, string> = {
   blue: "bg-sky-300",
   green: "bg-emerald-300",
   pink: "bg-pink-300",
+  purple: "bg-purple-400",
 }
 
-function biblePath(bookName: string, chapter: number, verse?: number) {
-  const path = `/bible/${encodeURIComponent(bookName)}/${chapter}`
+function biblePath(bookName: string, chapter: number, verse?: number, version?: "NET" | "KJV") {
+  const path = `/bible/${encodeURIComponent(bookName)}/${chapter}${version === "KJV" ? "?version=KJV" : ""}`
   return verse ? `${path}#verse-${verse}` : path
 }
 
@@ -67,19 +68,13 @@ export function BibleSavedPage() {
   const notes = Object.values(study.data.notes)
   const hasSavedItems = chapterBookmarks.length + verseBookmarks.length + highlights.length + notes.length > 0
 
-  const handleExport = () => {
-    const blob = new Blob([JSON.stringify(study.data, null, 2)], { type: "application/json" })
-    const url = URL.createObjectURL(blob)
-    const anchor = document.createElement("a")
-    anchor.href = url
-    anchor.download = `follow-jesus-bible-study-v${BIBLE_STUDY_DATA_VERSION}.json`
-    document.body.appendChild(anchor)
-    anchor.click()
-    anchor.remove()
-    URL.revokeObjectURL(url)
+  const handleExport = (format: "backup" | "text") => {
+    downloadBibleStudy(study.data, format)
     toast({
-      title: "Study backup downloaded",
-      description: "Keep the file somewhere safe so you can import it later.",
+      title: format === "backup" ? "Study backup downloaded" : "Readable study downloaded",
+      description: format === "backup"
+        ? "Import this JSON file later to restore your saved items."
+        : "This text file is for reading or printing; import requires a JSON backup.",
     })
   }
 
@@ -88,11 +83,16 @@ export function BibleSavedPage() {
     event.target.value = ""
     if (!file) return
 
-    const imported = parseImportedBibleStudyData(await file.text())
+    let imported: BibleStudyData | null = null
+    try {
+      imported = parseImportedBibleStudyData(await file.text())
+    } catch {
+      // An unreadable file is reported in the same way as an invalid backup.
+    }
     if (!imported) {
       toast({
         title: "That backup could not be imported",
-        description: "Choose a valid Follow Jesus Bible study backup file.",
+        description: "Choose a .json backup exported from this Bible reader. Text exports cannot be imported.",
         variant: "destructive",
       })
       return
@@ -104,8 +104,15 @@ export function BibleSavedPage() {
 
   const finishImport = (mode: "merge" | "replace") => {
     if (!pendingImport) return
-    if (mode === "merge") study.importData(pendingImport)
-    else study.replaceData(pendingImport)
+    const saved = mode === "merge" ? study.importData(pendingImport) : study.replaceData(pendingImport)
+    if (!saved) {
+      toast({
+        title: "Backup could not be saved",
+        description: "This browser blocked local storage. Try another browser or check its privacy settings.",
+        variant: "destructive",
+      })
+      return
+    }
     setIsImportOpen(false)
     setPendingImport(null)
     toast({
@@ -153,9 +160,13 @@ export function BibleSavedPage() {
         )}
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <Button type="button" variant="outline" onClick={handleExport}>
+          <Button type="button" variant="outline" onClick={() => handleExport("text")}>
             <Download className="mr-2 h-4 w-4" />
-            Export backup
+            Export readable text
+          </Button>
+          <Button type="button" variant="outline" onClick={() => handleExport("backup")}>
+            <Download className="mr-2 h-4 w-4" />
+            Export JSON backup
           </Button>
           <Button
             type="button"
@@ -164,17 +175,18 @@ export function BibleSavedPage() {
             disabled={!study.storageAvailable}
           >
             <FileUp className="mr-2 h-4 w-4" />
-            Import backup
+            Import JSON backup
           </Button>
           <input
             ref={importInputRef}
             type="file"
-            accept="application/json,.json"
+            accept=".json,application/json"
             className="sr-only"
             onChange={handleImportFile}
             aria-label="Import Bible study backup"
           />
         </div>
+        <p className="mt-2 text-sm text-muted-foreground">Only JSON backups can be imported. Text exports are for reading or printing.</p>
 
         {!hasSavedItems ? (
           <div className="mt-10 rounded-2xl border border-dashed border-warm-300 bg-warm-50 p-10 text-center shadow-sm">
@@ -224,11 +236,11 @@ export function BibleSavedPage() {
                   </div>
                   <div className="flex shrink-0 gap-2">
                     <Button asChild size="sm" variant="outline">
-                      <Link href={biblePath(bookmark.bookName, bookmark.chapter, bookmark.verse)}>Open</Link>
+                      <Link href={biblePath(bookmark.bookName, bookmark.chapter, bookmark.verse, bookmark.version)}>Open</Link>
                     </Button>
                     <ShareButton
-                      title={`${bookmark.reference} (NET)`}
-                      text={`${bookmark.text}\n\nScripture quoted from the NET Bible.`}
+                      title={`${bookmark.reference} (${bookmark.version ?? "NET"})`}
+                      text={`${bookmark.text}\n\n${bookmark.version === "KJV" ? "King James Version (public domain)." : "Scripture quoted from the NET Bible."}`}
                       url={bibleShareUrl(bookmark.bookName, bookmark.chapter, bookmark.verse)}
                       label="Share"
                       className="h-9 px-3"
@@ -263,7 +275,7 @@ export function BibleSavedPage() {
                   </div>
                   <div className="flex shrink-0 gap-2">
                     <Button asChild size="sm" variant="outline">
-                      <Link href={biblePath(highlight.bookName, highlight.chapter, highlight.verse)}>Open</Link>
+                      <Link href={biblePath(highlight.bookName, highlight.chapter, highlight.verse, highlight.version)}>Open</Link>
                     </Button>
                     <Button
                       type="button"
@@ -292,7 +304,7 @@ export function BibleSavedPage() {
                   </div>
                   <div className="flex shrink-0 gap-2">
                     <Button asChild size="sm" variant="outline">
-                      <Link href={biblePath(note.bookName, note.chapter, note.verse)}>Open</Link>
+                      <Link href={biblePath(note.bookName, note.chapter, note.verse, note.version)}>Open</Link>
                     </Button>
                     <Button
                       type="button"

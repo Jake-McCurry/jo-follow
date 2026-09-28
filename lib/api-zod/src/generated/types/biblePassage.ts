@@ -5,12 +5,13 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { BiblePassageVersion } from './biblePassageVersion';
 import type { BibleVerse } from './bibleVerse';
 
 export interface BiblePassage {
   reference: string;
-  version: string;
+  version: BiblePassageVersion;
   verses: BibleVerse[];
-  /** Required NET Bible copyright acknowledgement. */
+  /** Translation-specific copyright or public-domain acknowledgement. */
   copyright: string;
 }

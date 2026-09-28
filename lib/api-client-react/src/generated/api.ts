@@ -230,8 +230,8 @@ export const getGetBiblePassageUrl = (params: GetBiblePassageParams,) => {
 }
 
 /**
- * Retrieves a passage from the official NET Bible service as safe plain text.
- * @summary Get a NET Bible passage
+ * Retrieves a passage as safe plain text. NET is the default translation.
+ * @summary Get a NET or KJV Bible passage
  */
 export const getBiblePassage = async (params: GetBiblePassageParams, options?: Parameters<typeof customFetch>[1]): Promise<BiblePassage> => {
 
@@ -278,7 +278,7 @@ export type GetBiblePassageQueryError = ErrorType<void>
 
 
 /**
- * @summary Get a NET Bible passage
+ * @summary Get a NET or KJV Bible passage
  */
 
 export function useGetBiblePassage<TData = Awaited<ReturnType<typeof getBiblePassage>>, TError = ErrorType<void>>(

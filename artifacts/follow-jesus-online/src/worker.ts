@@ -1,7 +1,7 @@
 import {
   BIBLE_BOOKS,
   BibleServiceError,
-  getNetBiblePassage,
+  getBiblePassage,
   isSafeBibleReference,
 } from "../../api-server/src/lib/bible";
 
@@ -50,7 +50,8 @@ async function handleBibleApi(request: Request, url: URL): Promise<Response> {
 
   if (url.pathname === "/api/bible/passage") {
     const reference = url.searchParams.get("passage") ?? "";
-    if (!isSafeBibleReference(reference)) {
+    const version = url.searchParams.get("version") ?? "NET";
+    if (!isSafeBibleReference(reference) || (version !== "NET" && version !== "KJV")) {
       return json(
         {
           error:
@@ -61,7 +62,7 @@ async function handleBibleApi(request: Request, url: URL): Promise<Response> {
     }
 
     try {
-      return json(await getNetBiblePassage(reference));
+      return json(await getBiblePassage(reference, version));
     } catch (error) {
       if (error instanceof BibleServiceError) {
         console.warn("Bible passage request could not be completed", {

@@ -34,15 +34,16 @@ export const ListBibleBooksResponse = zod.array(ListBibleBooksResponseItem)
 
 
 /**
- * Retrieves a passage from the official NET Bible service as safe plain text.
- * @summary Get a NET Bible passage
+ * Retrieves a passage as safe plain text. NET is the default translation.
+ * @summary Get a NET or KJV Bible passage
  */
 export const getBiblePassageQueryPassageMax = 100;
 
 
 
 export const GetBiblePassageQueryParams = zod.object({
-  "passage": zod.coerce.string().min(1).max(getBiblePassageQueryPassageMax).describe('A human-readable Bible reference such as John 3 or Romans 8:1-11.')
+  "passage": zod.coerce.string().min(1).max(getBiblePassageQueryPassageMax).describe('A human-readable Bible reference such as John 3 or Romans 8:1-11.'),
+  "version": zod.enum(['NET', 'KJV']).optional().describe('Bible translation, defaulting to NET.')
 })
 
 
@@ -51,7 +52,7 @@ export const GetBiblePassageQueryParams = zod.object({
 
 export const GetBiblePassageResponse = zod.object({
   "reference": zod.string(),
-  "version": zod.string(),
+  "version": zod.enum(['NET', 'KJV']),
   "verses": zod.array(zod.object({
   "bookName": zod.string(),
   "chapter": zod.number().min(1),
@@ -59,7 +60,7 @@ export const GetBiblePassageResponse = zod.object({
   "text": zod.string(),
   "type": zod.string().optional()
 })),
-  "copyright": zod.string().describe('Required NET Bible copyright acknowledgement.')
+  "copyright": zod.string().describe('Translation-specific copyright or public-domain acknowledgement.')
 })
 
 

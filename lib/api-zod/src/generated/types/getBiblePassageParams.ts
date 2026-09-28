@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { GetBiblePassageVersion } from './getBiblePassageVersion';
 
 export type GetBiblePassageParams = {
 /**
@@ -13,4 +14,8 @@ export type GetBiblePassageParams = {
  * @maxLength 100
  */
 passage: string;
+/**
+ * Bible translation, defaulting to NET.
+ */
+version?: GetBiblePassageVersion;
 };

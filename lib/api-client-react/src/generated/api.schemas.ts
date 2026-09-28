@@ -35,11 +35,19 @@ export interface BibleVerse {
   type?: string;
 }
 
+export type BiblePassageVersion = typeof BiblePassageVersion[keyof typeof BiblePassageVersion];
+
+
+export const BiblePassageVersion = {
+  NET: 'NET',
+  KJV: 'KJV',
+} as const;
+
 export interface BiblePassage {
   reference: string;
-  version: string;
+  version: BiblePassageVersion;
   verses: BibleVerse[];
-  /** Required NET Bible copyright acknowledgement. */
+  /** Translation-specific copyright or public-domain acknowledgement. */
   copyright: string;
 }
 
@@ -106,5 +114,17 @@ export type GetBiblePassageParams = {
  * @maxLength 100
  */
 passage: string;
+/**
+ * Bible translation, defaulting to NET.
+ */
+version?: GetBiblePassageVersion;
 };
+
+export type GetBiblePassageVersion = typeof GetBiblePassageVersion[keyof typeof GetBiblePassageVersion];
+
+
+export const GetBiblePassageVersion = {
+  NET: 'NET',
+  KJV: 'KJV',
+} as const;
 

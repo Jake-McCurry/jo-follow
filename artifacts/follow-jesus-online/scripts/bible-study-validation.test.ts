@@ -8,6 +8,7 @@ import {
   type BibleStudyData,
 } from "../src/hooks/use-bible-study.ts"
 import { getBibleStudyBackupPreviewSummary } from "../src/components/bible-study-backup-preview.tsx"
+import { formatBibleStudyAsText } from "../src/lib/bible-study-export.ts"
 
 const verse = {
   id: getVerseKey("John", 3, 16),
@@ -65,6 +66,20 @@ function backupWith(change: (backup: Record<string, unknown>) => void): string {
 
 test("accepts a valid exported version-1 backup", () => {
   assert.deepEqual(parseImportedBibleStudyData(JSON.stringify(validBackup)), validBackup)
+})
+
+test("imports KJV bookmarks and purple highlights without losing old NET backups", () => {
+  const kjvBackup: BibleStudyData = {
+    ...validBackup,
+    bookmarks: [{ ...verseBookmark, version: "KJV" }],
+    highlights: {
+      [verse.id]: { ...validBackup.highlights[verse.id], version: "KJV", color: "purple" },
+    },
+  }
+  assert.deepEqual(parseImportedBibleStudyData(JSON.stringify(kjvBackup)), kjvBackup)
+  assert.match(formatBibleStudyAsText(kjvBackup), /John 3:16 \(KJV\) \[purple\]/)
+  assert.match(formatBibleStudyAsText(kjvBackup), /Note: Read this again tomorrow/)
+  assert.equal(parseImportedBibleStudyData(formatBibleStudyAsText(kjvBackup)), null)
 })
 
 test("preserves empty and small backup preview states", () => {

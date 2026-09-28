@@ -23,8 +23,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { ShareButton } from "@/components/share-button"
 import { BibleStudyBackupPreview } from "@/components/bible-study-backup-preview"
 import { useToast } from "@/hooks/use-toast"
+import { downloadBibleStudy } from "@/lib/bible-study-export"
 import {
-  BIBLE_STUDY_DATA_VERSION,
   HIGHLIGHT_COLORS,
   type BibleStudyData,
   type HighlightColor,
@@ -40,6 +40,7 @@ const colorClasses: Record<HighlightColor, string> = {
   blue: "bg-sky-300",
   green: "bg-emerald-300",
   pink: "bg-pink-300",
+  purple: "bg-purple-400",
 }
 
 interface BibleStudyToolsProps {
@@ -49,6 +50,8 @@ interface BibleStudyToolsProps {
   reference: string
   selectedVerse: StudyVerse | null
   onClearSelection?: () => void
+  nextChapter: { bookName: string; chapter: number } | null
+  version: "NET" | "KJV"
 }
 
 export function BibleStudyTools({
@@ -58,6 +61,8 @@ export function BibleStudyTools({
   reference,
   selectedVerse,
   onClearSelection,
+  nextChapter,
+  version,
 }: BibleStudyToolsProps) {
   const [isNoteOpen, setIsNoteOpen] = useState(false)
   const [isImportOpen, setIsImportOpen] = useState(false)
@@ -79,23 +84,16 @@ export function BibleStudyTools({
   }, [selectedNote, selectedVerse?.id])
 
   const shareUrl = selectedVerse
-    ? `${window.location.origin}${window.location.pathname}#verse-${selectedVerse.verse}`
+    ? `${window.location.origin}${window.location.pathname}${window.location.search}#verse-${selectedVerse.verse}`
     : window.location.href
 
-  const handleExport = () => {
-    const payload = JSON.stringify(study.data, null, 2)
-    const blob = new Blob([payload], { type: "application/json" })
-    const url = URL.createObjectURL(blob)
-    const anchor = document.createElement("a")
-    anchor.href = url
-    anchor.download = `follow-jesus-bible-study-v${BIBLE_STUDY_DATA_VERSION}.json`
-    document.body.appendChild(anchor)
-    anchor.click()
-    anchor.remove()
-    URL.revokeObjectURL(url)
+  const handleExport = (format: "backup" | "text") => {
+    downloadBibleStudy(study.data, format)
     toast({
-      title: "Study backup downloaded",
-      description: "Keep this file somewhere safe so you can import it later.",
+      title: format === "backup" ? "Study backup downloaded" : "Readable study downloaded",
+      description: format === "backup"
+        ? "Import this JSON backup later to restore your saved items."
+        : "This text file is for reading or printing; import requires a JSON backup.",
     })
   }
 
@@ -104,11 +102,16 @@ export function BibleStudyTools({
     event.target.value = ""
     if (!file) return
 
-    const imported = parseImportedBibleStudyData(await file.text())
+    let imported: BibleStudyData | null = null
+    try {
+      imported = parseImportedBibleStudyData(await file.text())
+    } catch {
+      // An unreadable file is reported in the same way as an invalid backup.
+    }
     if (!imported) {
       toast({
         title: "That backup could not be imported",
-        description: "Choose a valid Follow Jesus Bible study backup file.",
+        description: "Choose a .json backup exported from this Bible reader. Text exports cannot be imported.",
         variant: "destructive",
       })
       return
@@ -120,8 +123,15 @@ export function BibleStudyTools({
 
   const finishImport = (mode: "merge" | "replace") => {
     if (!pendingImport) return
-    if (mode === "merge") study.importData(pendingImport)
-    else study.replaceData(pendingImport)
+    const saved = mode === "merge" ? study.importData(pendingImport) : study.replaceData(pendingImport)
+    if (!saved) {
+      toast({
+        title: "Backup could not be saved",
+        description: "This browser blocked local storage. Try another browser or check its privacy settings.",
+        variant: "destructive",
+      })
+      return
+    }
     setIsImportOpen(false)
     setPendingImport(null)
     toast({
@@ -168,13 +178,18 @@ export function BibleStudyTools({
         </Button>
 
         {study.data.lastRead && (
+          (study.data.lastRead.bookName !== bookName || study.data.lastRead.chapter !== chapter || nextChapter) && (
           <Button asChild variant="ghost" className="mt-2 w-full justify-start hover:bg-warm-50">
-            <Link href={`/bible/${encodeURIComponent(study.data.lastRead.bookName)}/${study.data.lastRead.chapter}`}>
+            <Link href={study.data.lastRead.bookName === bookName && study.data.lastRead.chapter === chapter && nextChapter
+              ? `/bible/${encodeURIComponent(nextChapter.bookName)}/${nextChapter.chapter}${version === "KJV" ? "?version=KJV" : ""}`
+              : `/bible/${encodeURIComponent(study.data.lastRead.bookName)}/${study.data.lastRead.chapter}${version === "KJV" ? "?version=KJV" : ""}`}>
               <History className="mr-2 h-4 w-4" />
-              Continue {study.data.lastRead.reference}
+              {study.data.lastRead.bookName === bookName && study.data.lastRead.chapter === chapter
+                ? `Read ${nextChapter?.bookName} ${nextChapter?.chapter}`
+                : `Continue ${study.data.lastRead.reference}`}
             </Link>
           </Button>
-        )}
+        ))}
       </section>
 
       <section className="rounded-2xl border border-warm-200 bg-white p-4 shadow-sm">
@@ -186,7 +201,7 @@ export function BibleStudyTools({
 
         {selectedVerse ? (
           <>
-            <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               {selectedVerse.text}
             </p>
 
@@ -249,8 +264,8 @@ export function BibleStudyTools({
             </div>
 
             <ShareButton
-              title={`${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} (NET)`}
-              text={`${selectedVerse.text}\n\nScripture quoted from the NET Bible.`}
+              title={`${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} (${version})`}
+              text={`${selectedVerse.text}\n\n${version === "NET" ? "Scripture quoted from the NET Bible." : "King James Version (public domain)."}`}
               url={shareUrl}
               label="Share verse"
               className="mt-4 w-full border-warm-200 hover:bg-warm-50"
@@ -272,9 +287,9 @@ export function BibleStudyTools({
         </Button>
 
         <div className="mt-2 grid grid-cols-2 gap-2">
-          <Button type="button" size="sm" variant="ghost" onClick={handleExport} className="hover:bg-warm-50">
+          <Button type="button" size="sm" variant="ghost" onClick={() => handleExport("text")} className="hover:bg-warm-50">
             <Download className="mr-1.5 h-4 w-4" />
-            Export
+            Export text
           </Button>
           <Button
             type="button"
@@ -285,17 +300,22 @@ export function BibleStudyTools({
             disabled={!study.storageAvailable}
           >
             <FileUp className="mr-1.5 h-4 w-4" />
-            Import
+            Import JSON
           </Button>
         </div>
+        <Button type="button" size="sm" variant="ghost" onClick={() => handleExport("backup")} className="mt-1 w-full justify-start hover:bg-warm-50">
+          <Download className="mr-1.5 h-4 w-4" />
+          Export JSON backup (for import)
+        </Button>
         <input
           ref={importInputRef}
           type="file"
-          accept="application/json,.json"
+          accept=".json,application/json"
           className="sr-only"
           onChange={handleImport}
           aria-label="Import Bible study backup"
         />
+        <p className="mt-2 text-xs text-muted-foreground">Import accepts JSON backups only; text exports are for reading.</p>
       </section>
 
       <div
@@ -379,7 +399,9 @@ export function BibleStudyTools({
                 <p className="truncate text-sm font-bold text-foreground">
                   {selectedVerse.bookName} {selectedVerse.chapter}:{selectedVerse.verse}
                 </p>
-                <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">{selectedVerse.text}</p>
+                <p className="mt-0.5 max-h-24 overflow-y-auto text-xs leading-relaxed text-muted-foreground">
+                  {selectedVerse.text}
+                </p>
               </div>
               {onClearSelection && (
                 <button
@@ -417,8 +439,8 @@ export function BibleStudyTools({
                 Note
               </Button>
               <ShareButton
-                title={`${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} (NET)`}
-                text={`${selectedVerse.text}\n\nScripture quoted from the NET Bible.`}
+                 title={`${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} (${version})`}
+                 text={`${selectedVerse.text}\n\n${version === "NET" ? "Scripture quoted from the NET Bible." : "King James Version (public domain)."}`}
                 url={shareUrl}
                 label="Share"
                 className="h-9 w-full justify-center px-2 border-warm-200 hover:bg-warm-50"

@@ -1,12 +1,10 @@
 import { type ReactNode, useEffect, useState } from "react"
 import { Link, useLocation } from "wouter"
-import { BibleStartDialog } from "@/components/bible-start-dialog"
 import { Button } from "@/components/ui/button"
 import { clearRecentPage, getRecentPage, isSamePage, saveRecentPage } from "@/hooks/use-recent-page"
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isBibleDialogOpen, setIsBibleDialogOpen] = useState(false)
   const [location] = useLocation()
   const [recentPage, setRecentPage] = useState(getRecentPage)
 
@@ -95,16 +93,13 @@ export function Layout({ children }: { children: ReactNode }) {
               >
                 Rewatch the Video
               </Link>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMenuOpen(false)
-                  setIsBibleDialogOpen(true)
-                }}
+              <Link
+                href="/bible/John/1"
+                onClick={() => setIsMenuOpen(false)}
                 className="border-b border-warm-200 px-4 py-3 text-left text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Read the NET Bible
-              </button>
+              </Link>
               <Link
                 href="/bible/saved"
                 onClick={() => setIsMenuOpen(false)}
@@ -136,7 +131,6 @@ export function Layout({ children }: { children: ReactNode }) {
             </div>
           </nav>
         )}
-        <BibleStartDialog open={isBibleDialogOpen} onOpenChange={setIsBibleDialogOpen} />
       </header>
 
       {resumePage && (

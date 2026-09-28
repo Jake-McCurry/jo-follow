@@ -6,6 +6,15 @@ type NetBibleApiVerse = {
   type?: unknown;
 };
 
+type KjvApiVerse = {
+  book_name?: unknown;
+  chapter?: unknown;
+  verse?: unknown;
+  text?: unknown;
+};
+
+export type BibleVersion = "NET" | "KJV";
+
 export type BibleBook = {
   id: string;
   name: string;
@@ -27,6 +36,16 @@ export type BiblePassage = {
 };
 
 const NET_BIBLE_API_URL = "https://labs.bible.org/api/";
+const KJV_BIBLE_API_URL = "https://bible-api.com/";
+// The KJV service reads "3 John 1" as verse 1, not the whole chapter.
+// Explicit ranges are required for all five one-chapter books.
+const SINGLE_CHAPTER_VERSE_COUNTS: Record<string, number> = {
+  obadiah: 21,
+  philemon: 25,
+  "2 john": 13,
+  "3 john": 14,
+  jude: 25,
+};
 const CACHE_TTL_MS = 15 * 60 * 1000;
 const CACHE_MAX_ENTRIES = 150;
 const REFERENCE_PATTERN = /^[A-Za-z0-9\s:;,\-]+$/;
@@ -35,6 +54,7 @@ const passageCache = new Map<string, { expiresAt: number; data: BiblePassage }>(
 
 export const NET_COPYRIGHT =
   "Scripture quoted by permission. Quotations designated (NET) are from the NET Bible® copyright ©1996, 2019 by Biblical Studies Press, L.L.C. http://netbible.com All rights reserved.";
+export const KJV_ATTRIBUTION = "King James Version (KJV). Public domain.";
 
 export const BIBLE_BOOKS: BibleBook[] = [
   ["genesis", "Genesis", "Old Testament", 50],
@@ -222,5 +242,58 @@ export async function getNetBiblePassage(referenceInput: string): Promise<BibleP
   evictExpiredCacheEntries(now);
   passageCache.set(cacheKey, { expiresAt: now + CACHE_TTL_MS, data });
 
+  return data;
+}
+
+export async function getBiblePassage(referenceInput: string, version: BibleVersion = "NET"): Promise<BiblePassage> {
+  if (version === "NET") return getNetBiblePassage(referenceInput);
+  const reference = normalizeReference(referenceInput);
+  const cacheKey = `kjv:${reference.toLowerCase()}`;
+  const now = Date.now();
+  const cached = passageCache.get(cacheKey);
+  if (cached && cached.expiresAt > now) return cached.data;
+
+  const singleChapter = /^(.+?) 1$/i.exec(reference);
+  const verseCount = singleChapter && SINGLE_CHAPTER_VERSE_COUNTS[singleChapter[1].toLowerCase()];
+  const requestReference = verseCount ? `${reference}:1-${verseCount}` : reference;
+  const url = new URL(encodeURIComponent(requestReference), KJV_BIBLE_API_URL);
+  url.searchParams.set("translation", "kjv");
+  let response: Response;
+  try {
+    response = await fetch(url, { signal: AbortSignal.timeout(8_000) });
+  } catch {
+    throw new BibleServiceError("The KJV Bible service is temporarily unavailable.", 502);
+  }
+  if (response.status === 404) throw new BibleServiceError("No Scripture passage was found for that reference.", 404);
+  if (!response.ok) throw new BibleServiceError("The KJV Bible service is temporarily unavailable.", 502);
+
+  let payload: unknown;
+  try {
+    payload = await response.json();
+  } catch {
+    throw new BibleServiceError("The KJV Bible service returned an unreadable response.", 502);
+  }
+  if (typeof payload !== "object" || payload === null || !("verses" in payload) || !Array.isArray(payload.verses)) {
+    throw new BibleServiceError("The KJV Bible service returned an unexpected response.", 502);
+  }
+  const verses = payload.verses
+    .filter((item): item is KjvApiVerse => typeof item === "object" && item !== null)
+    .map((item) => parseVerse({
+      bookname: item.book_name,
+      chapter: item.chapter,
+      verse: item.verse,
+      text: item.text,
+    }))
+    .filter((verse): verse is NonNullable<typeof verse> => verse !== null);
+  if (verses.length === 0) throw new BibleServiceError("No Scripture passage was found for that reference.", 404);
+
+  const data: BiblePassage = {
+    reference,
+    version: "KJV",
+    verses,
+    copyright: KJV_ATTRIBUTION,
+  };
+  evictExpiredCacheEntries(now);
+  passageCache.set(cacheKey, { expiresAt: now + CACHE_TTL_MS, data });
   return data;
 }

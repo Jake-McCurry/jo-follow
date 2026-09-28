@@ -7,3 +7,4 @@
 - [Generated text transfer](generated-text-transfer.md) — Large shell output with page-control characters can arrive incomplete through CodeExecution; compare hashes when saving generated text.
 - [Nested DOCX extraction](nested-docx-extraction.md) — Build-time unzip of Word files inside a ZIP can exceed Node’s default child-process output buffer.
 - [FAQ message invitations](faq-message-invitations.md) — Revised FAQ copy inviting questions should direct visitors to the existing contact form, not imply an inline box.
+- [One-chapter Bible API responses](one-chapter-bible-api-responses.md) — Verify full verse coverage for single-chapter books; a successful passage response may contain only verse 1.
