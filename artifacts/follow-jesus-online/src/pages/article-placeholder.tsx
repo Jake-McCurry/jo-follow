@@ -101,8 +101,8 @@ function LinkedRichText({ block }: { block: ArticleBlock }) {
       <a
         key={`link-${index}`}
         href={link.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={link.href.startsWith("/") ? undefined : "_blank"}
+        rel={link.href.startsWith("/") ? undefined : "noopener noreferrer"}
         className="text-brand underline decoration-brand/30 underline-offset-4 hover:text-brand/80"
       >
         {link.label}
@@ -130,7 +130,7 @@ export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
   if (block.type === "heading") {
     return (
       <h2 className="text-2xl md:text-3xl font-bold text-navy mt-12 mb-4 first:mt-0">
-        <RichText text={block.text} />
+        <LinkedRichText block={block} />
       </h2>
     );
   }
@@ -138,7 +138,7 @@ export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
   if (block.type === "list") {
     return (
       <li className="ml-5 pl-2 marker:text-warm-500 leading-relaxed text-navy">
-        <RichText text={block.text} />
+        <LinkedRichText block={block} />
       </li>
     );
   }
@@ -159,7 +159,7 @@ export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
   if (block.type === "table-row") {
     return (
       <p className="rounded-lg border border-border-soft bg-surface-soft px-4 py-3 text-navy">
-        <RichText text={block.text} />
+        <LinkedRichText block={block} />
       </p>
     );
   }
@@ -197,11 +197,12 @@ function groupLabel(group: ArticleBlock["type"] | string) {
 }
 
 function AdventureBlockView({ block }: { block: ArticleBlock }) {
+  if (block.type === "image") return <DefaultArticleBlockView block={block} />;
   if (block.type === "heading") {
     return (
       <h2 className="text-2xl sm:text-3xl font-bold text-navy mt-14 mb-6 text-center sm:text-left flex flex-col sm:flex-row items-center gap-3">
         <span className="w-12 h-px bg-warm-300 hidden sm:block"></span>
-        <RichText text={block.text} />
+        <LinkedRichText block={block} />
       </h2>
     );
   }
@@ -210,7 +211,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
     return (
       <li className="relative pl-8 leading-relaxed text-slate text-lg sm:text-[19px] font-sans mb-4">
         <span className="absolute left-1 top-2.5 w-2 h-2 rounded-full bg-warm-200 border border-warm-400"></span>
-        <RichText text={block.text} />
+        <LinkedRichText block={block} />
       </li>
     );
   }
@@ -230,7 +231,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
     return (
       <div className="my-8 border-l-4 border-warm-500 bg-warm-50/40 px-6 py-5 rounded-r-xl">
         <p className="text-lg italic text-navy leading-relaxed">
-          <RichText text={block.text} />
+          <LinkedRichText block={block} />
         </p>
       </div>
     );
@@ -259,7 +260,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
         </div>
         <div className="rounded-xl bg-warm-50/70 p-6 sm:p-8 text-navy flex-1 w-full">
           <p className="text-xl sm:text-2xl leading-relaxed text-navy italic">
-            <RichText text={block.text} />
+            <LinkedRichText block={block} />
           </p>
         </div>
       </div>
@@ -268,7 +269,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
 
   return (
     <p className="leading-relaxed text-slate text-lg sm:text-[19px] mb-6 font-sans">
-      <RichText text={block.text} />
+      <LinkedRichText block={block} />
     </p>
   );
 }
@@ -513,7 +514,7 @@ export function ArticlePlaceholder() {
             </h1>
             {firstParagraphIndex >= 0 && (
               <p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate">
-                <RichText text={blocks[firstParagraphIndex].text} />
+                <LinkedRichText block={blocks[firstParagraphIndex]} />
               </p>
             )}
             <div className="mt-7 flex flex-wrap items-center gap-3">

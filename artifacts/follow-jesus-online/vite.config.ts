@@ -9,6 +9,7 @@ import { defineConfig, type Plugin } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 import importedDeeperArticles from './src/data/imported-deeper-articles.json';
+import articleCatalog from './src/data/article-library.json';
 import { GO_FURTHER_BOOKS } from './src/data/go-further-library';
 import linkedArticles from './src/data/linked-articles.json';
 
@@ -268,13 +269,14 @@ function parseDocxBlocks(
       paragraphIndex === 0
         ? text.replace(/^\d+(?:\.\d+)+\s*/, '').replace(/^\d+\.\s*/, '')
         : text.replace(/^\d+(?:\.\d+)+\s*/, '')
-    ).replace(/\s*>{3}\s*$/, '');
+    );
     const style = paragraphXml.match(/<w:pStyle\b[^>]*w:val="([^"]+)"/)?.[1] ?? '';
     const links = hyperlinks
       ? [...paragraphXml.matchAll(/<w:hyperlink\b[^>]*r:id="([^"]+)"[^>]*>([\s\S]*?)<\/w:hyperlink>/g)]
         .map((match) => ({
           label: decodeXml((match[2].match(/<w:t\b[^>]*>[\s\S]*?<\/w:t>/g) ?? [])
-            .map((run) => run.replace(/^<w:t\b[^>]*>/, '').replace(/<\/w:t>$/, '')).join('')).trim(),
+            .map((run) => run.replace(/^<w:t\b[^>]*>/, '').replace(/<\/w:t>$/, '')).join(''))
+            .replace(/\s+/g, ' ').trim(),
           href: hyperlinks.get(match[1]),
         }))
         .filter((link): link is { label: string; href: string } => Boolean(link.label && link.href))
@@ -334,6 +336,15 @@ const FOLLOW_ARCHIVE = 'Follow_Articles_1790629240431.zip';
 const followImages = new Map<string, { source: Buffer; type: string }>();
 const FOLLOW_DOCX_MAX_BUFFER = 32 * 1024 * 1024;
 
+const FOLLOW_EXISTING_GROUPS = [
+  { group: 'adventure', directory: '/1.1 The Adventure of Living with Jesus/', prefix: '1.1.', first: 0, step: 1 },
+  { group: 'deeper', directory: '/1.1.01 Go Deeper/', prefix: '1.1.01.', first: 0, step: 1 },
+  { group: 'received', directory: '/1.3.10 New Believers FAQs/', prefix: '1.3.10.', first: 10, step: 10 },
+  { group: 'rededicated', directory: '/1.3.20 Rededicated FAQs/', prefix: '1.3.20.', first: 10, step: 10 },
+  { group: 'believer', directory: '/1.3.30 Already FAQs/', prefix: '1.3.30.', first: 1, step: 1 },
+  { group: 'no-decision', directory: '/1.3.40 No Decision FAQs/', prefix: '1.3.40.', first: 1, step: 1 },
+] as const;
+
 function readFollowArticle(
   archivePath: string,
   entryName: string,
@@ -355,7 +366,10 @@ function readFollowArticle(
     const target = match[0].match(/\bTarget="([^"]+)"/)?.[1];
     if (!id || !target) continue;
     if (/^https?:\/\//i.test(target) && match[0].includes('TargetMode="External"')) {
-      hyperlinkRelationships.set(id, decodeXml(target));
+      const href = decodeXml(target);
+      const url = new URL(href);
+      hyperlinkRelationships.set(id, url.hostname === 'follow.jesusonline.com'
+        ? `${url.pathname}${url.search}${url.hash}` : href);
       continue;
     }
     if (!/^media\/[^/]+\.(?:png|jpe?g|webp)$/i.test(target)) continue;
@@ -420,6 +434,40 @@ function readNewFollowArticles(attachedAssetsDir: string, tempDir: string): Arti
       category: 'Linked only',
       blocks,
     });
+  }
+
+  for (const config of FOLLOW_EXISTING_GROUPS) {
+    const existing = config.group === 'deeper'
+      ? importedDeeperArticles
+      : articleCatalog.articles.filter((article) => article.group === config.group)
+        .sort((a, b) => a.order - b.order);
+    const matching = entries.filter((entry) =>
+      entry.includes(config.directory)
+      && new RegExp(`^${config.prefix.replaceAll('.', '\\.')}\\d{3} `).test(path.basename(entry)),
+    ).sort();
+    if (matching.length !== existing.length) {
+      throw new Error(`${config.group}: expected ${existing.length} ZIP documents; found ${matching.length}`);
+    }
+    for (const [index, article] of existing.entries()) {
+      const expectedPrefix = `${config.prefix}${String(config.first + index * config.step).padStart(3, '0')} `;
+      if (!path.basename(matching[index]).startsWith(expectedPrefix)) {
+        throw new Error(`${config.group}: expected ${expectedPrefix}; found ${matching[index]}`);
+      }
+      const blocks = readFollowArticle(archivePath, matching[index], tempDir);
+      const title = blocks.find((block) => block.kind === 'heading')?.text;
+      if (!title || !blocks.some((block) => block.kind === 'paragraph')) {
+        throw new Error(`${config.group}: missing title or body in ${matching[index]}`);
+      }
+      records.push({
+        route: `/${article.slug}`,
+        title,
+        category: 'ZIP Updated',
+        blocks,
+      });
+    }
+  }
+  if (records.length !== 90) {
+    throw new Error(`Expected 42 Go Further, 4 linked-only and 44 existing articles; found ${records.length}`);
   }
   return records;
 }
@@ -529,32 +577,11 @@ function buildArticleLibrary(): ArticleRecord[] {
         };
       });
     });
-    const standaloneDeeperArticles = importedDeeperArticles.map((article) => {
-      const docxPath = path.join(attachedAssetsDir, article.file);
-      if (!fs.existsSync(docxPath)) {
-        throw new Error(`Required Go Deeper article is missing: ${article.file}`);
-      }
-      return {
-        route: `/${article.slug}`,
-        title: article.title,
-        category: 'Go Deeper',
-        blocks: applyApprovedArticleTextReplacements(
-          article.slug,
-          readDocxFileBlocks(docxPath),
-        ),
-      };
-    });
-    const adventureGuideArticles = readAdventureGuideSource(
-      path.join(attachedAssetsDir, ADVENTURE_GUIDE_SOURCE_FILE),
-    );
-    const adventureRoutes = new Set(
-      adventureGuideArticles.map((article) => article.route),
-    );
+    const followArticles = readNewFollowArticles(attachedAssetsDir, tempDir);
+    const updatedRoutes = new Set(followArticles.map((article) => article.route));
     return [
-      ...archivedArticles.filter((article) => !adventureRoutes.has(article.route)),
-      ...adventureGuideArticles,
-      ...standaloneDeeperArticles,
-      ...readNewFollowArticles(attachedAssetsDir, tempDir),
+      ...archivedArticles.filter((article) => !updatedRoutes.has(article.route)),
+      ...followArticles,
     ];
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
