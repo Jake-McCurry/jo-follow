@@ -186,12 +186,20 @@ export const ARTICLE_LIBRARY = [
   ...(library.articles as Article[]).map((article) => {
     const updated = updatedBySlug.get(article.slug);
     const relatedLink = linkedFromFaq.get(article.slug);
-    const blocks = updated && isApprovedFaq(article)
+    const sourceBlocks = updated && isApprovedFaq(article)
       ? revisedFaqBlocks(updated, article.blocks)
       : updated ? updated.blocks
         .filter((block, index) => !(index === 0 && block.kind === "heading" && block.text === updated.title))
         .map((block) => ({ type: block.kind, text: block.text, src: block.src, links: block.links }))
       : article.blocks;
+    const guidePdfNavigationIndex = article.group === "adventure"
+      ? sourceBlocks.findIndex((block) =>
+          block.text === "Keep walking. If you want more on what you just read, pause here first." ||
+          block.text === "Keep walking. If you want more on the inner life this booklet has opened, pause here first.")
+      : -1;
+    const blocks = guidePdfNavigationIndex >= 0
+      ? sourceBlocks.slice(0, guidePdfNavigationIndex)
+      : sourceBlocks;
     return {
       ...article,
       ...(updated
@@ -217,6 +225,18 @@ export const ARTICLE_LIBRARY = [
 
 export function getArticleBySlug(slug: string) {
   return ARTICLE_LIBRARY.find((article) => article.slug === slug);
+}
+
+export function getGuideArticleForDeeper(slug: string) {
+  const currentGuide = ARTICLE_LIBRARY.find(
+    (article) => article.group === "adventure" && article.relatedSlug === slug,
+  );
+  if (currentGuide) return currentGuide;
+
+  const originalGuide = (library.articles as Article[]).find(
+    (article) => article.group === "adventure" && article.relatedSlug === slug,
+  );
+  return originalGuide ? getArticleBySlug(originalGuide.slug) : undefined;
 }
 
 export function getArticlePath(slug: string) {
