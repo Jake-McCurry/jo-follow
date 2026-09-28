@@ -1,9 +1,11 @@
 import { Layout } from "@/components/layout";
 import { Link, useParams } from "wouter";
 import { getGFBook } from "@/data/go-further-library";
-import { ArrowLeft, ArrowRight, BookOpen, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
 import NotFound from "@/pages/not-found";
 import { Button } from "@/components/ui/button";
+import articleContent from "virtual:article-content";
+import { DefaultArticleBlockView } from "@/pages/article-placeholder";
 
 export function GFReadingPage() {
   const params = useParams();
@@ -17,9 +19,14 @@ export function GFReadingPage() {
   const reading = book.readings[readingIndex];
   const previous = book.readings[readingIndex - 1];
   const next = book.readings[readingIndex + 1];
-
-  // Clean the title from the leading "1. " or "2. " pattern if it exists, just for display.
-  // Actually, keeping the number might be nice for context, but let's just show it as is.
+  const article = articleContent.find((item) =>
+    item.route === `/gf/${book.slug}/${reading.slug}`,
+  );
+  if (!article || article.blocks.length === 0) return <NotFound />;
+  const titleText = (text: string) => text.replace(/[^\p{L}\p{N}]/gu, "").toLowerCase();
+  const blocks = titleText(article.blocks[0].text) === titleText(article.title)
+    ? article.blocks.slice(1)
+    : article.blocks;
 
   return (
     <Layout>
@@ -48,15 +55,10 @@ export function GFReadingPage() {
             </p>
           </header>
 
-          <div className="rounded-2xl border border-dashed border-border-soft bg-white p-8 sm:p-12 text-center my-12 shadow-sm">
-            <div className="inline-flex w-16 h-16 rounded-full bg-warm-100 text-warm-700 items-center justify-center mb-6">
-              <Clock className="w-8 h-8" />
-            </div>
-            <h2 className="text-2xl font-bold text-navy mb-3">Content coming soon</h2>
-            <p className="text-slate max-w-md mx-auto">
-              This reading is currently being prepared for the digital library. 
-              The complete text will be available in a future update.
-            </p>
+          <div className="prose prose-lg max-w-none text-slate">
+            {blocks.map((block, index) => (
+              <DefaultArticleBlockView key={`${index}-${block.kind}`} block={{ type: block.kind, text: block.text, src: block.src, links: block.links }} />
+            ))}
           </div>
         </article>
 

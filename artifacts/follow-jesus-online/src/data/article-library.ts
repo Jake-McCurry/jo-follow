@@ -1,5 +1,6 @@
 import library from "./article-library.json";
 import importedDeeperArticles from "./imported-deeper-articles.json";
+import linkedArticleMetadata from "./linked-articles.json";
 import generatedContent from "virtual:article-content";
 
 export type ArticleGroup =
@@ -9,12 +10,15 @@ export type ArticleGroup =
   | "received"
   | "rededicated"
   | "believer"
-  | "no-decision";
+  | "no-decision"
+  | "linked";
 
 export type ArticleBlock = {
-  type: "heading" | "paragraph" | "question" | "list" | "table-row" | "link";
+  type: "heading" | "paragraph" | "question" | "list" | "table-row" | "link" | "image";
   text: string;
   href?: string;
+  src?: string;
+  links?: { label: string; href: string }[];
 };
 
 export type ArticleContinuation = {
@@ -80,6 +84,27 @@ const generatedFaqArticles: Article[] = generatedFaqRecords.map((record) => {
 });
 
 const generatedFaqSlugs = new Set(generatedFaqArticles.map((article) => article.slug));
+
+const linkedFromFaq = new Map(
+  linkedArticleMetadata.map(({ faqSlug, slug, title }) => [
+    faqSlug,
+    { text: `Read more: ${title}`, href: `/${slug}` },
+  ]),
+);
+
+const linkedArticles: Article[] = generatedContent
+  .filter((record) => record.category === "Linked only")
+  .map((record, order) => ({
+    slug: record.route.slice(1),
+    title: record.title,
+    group: "linked",
+    order,
+    excerpt: record.blocks.find((block) => block.kind === "paragraph" && block.text !== record.title)?.text
+      ?? "A Follow Jesus Online resource.",
+    blocks: record.blocks
+      .filter((block, index) => !(index === 0 && block.text.replace(/[^\p{L}\p{N}]/gu, "").toLowerCase() === record.title.replace(/[^\p{L}\p{N}]/gu, "").toLowerCase()))
+      .map((block) => ({ type: block.kind, text: block.text, src: block.src, links: block.links })),
+  }));
 
 const adventureCompanions: Record<string, string> = {
   "adv-begin-the-adventure": "deeper-the-need-for-a-new-heart",
@@ -148,6 +173,7 @@ export const ARTICLE_LIBRARY = [
     (article) => !generatedFaqSlugs.has(article.slug),
   ).map((article) => {
     const generatedAdventure = generatedAdventureBySlug.get(article.slug);
+    const relatedLink = linkedFromFaq.get(article.slug);
     return {
       ...article,
       ...(generatedAdventure
@@ -162,12 +188,14 @@ export const ARTICLE_LIBRARY = [
             })),
           }
         : {}),
+      ...(relatedLink ? { blocks: [...article.blocks, { type: "link" as const, ...relatedLink }] } : {}),
       order: article.group === "deeper" ? article.order + importedDeeperArticles.length : article.order,
       relatedSlug: adventureCompanions[article.slug] ?? article.relatedSlug,
     };
   }),
   ...importedDeeperRecords,
   ...generatedFaqArticles,
+  ...linkedArticles,
 ];
 
 export function getArticleBySlug(slug: string) {

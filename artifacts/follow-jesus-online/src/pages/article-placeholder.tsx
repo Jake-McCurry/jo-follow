@@ -13,6 +13,7 @@ import {
   type Article,
 } from "@/data/article-library";
 import { ArticleReaction } from "@/components/article-reaction";
+import linkedArticleMetadata from "@/data/linked-articles.json";
 import { useEffect } from "react";
 
 const BIBLE_BOOKS = [
@@ -88,7 +89,44 @@ function RichText({ text }: { text: string }) {
   );
 }
 
-function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
+function LinkedRichText({ block }: { block: ArticleBlock }) {
+  if (!block.links?.length) return <RichText text={block.text} />;
+  const result: React.ReactNode[] = [];
+  let cursor = 0;
+  for (const [index, link] of block.links.entries()) {
+    const start = block.text.indexOf(link.label, cursor);
+    if (start === -1) continue;
+    result.push(<RichText key={`text-${index}`} text={block.text.slice(cursor, start)} />);
+    result.push(
+      <a
+        key={`link-${index}`}
+        href={link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-brand underline decoration-brand/30 underline-offset-4 hover:text-brand/80"
+      >
+        {link.label}
+      </a>,
+    );
+    cursor = start + link.label.length;
+  }
+  result.push(<RichText key="remaining" text={block.text.slice(cursor)} />);
+  return <>{result}</>;
+}
+
+export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
+  if (block.type === "image" && block.src) {
+    return (
+      <figure className="my-8">
+        <img
+          src={`${import.meta.env.BASE_URL}article-images/${block.src}`}
+          alt={block.text || "Illustration accompanying this article"}
+          loading="lazy"
+          className="mx-auto h-auto max-w-full rounded-lg"
+        />
+      </figure>
+    );
+  }
   if (block.type === "heading") {
     return (
       <h2 className="text-2xl md:text-3xl font-bold text-navy mt-12 mb-4 first:mt-0">
@@ -142,12 +180,13 @@ function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
 
   return (
     <p className="leading-relaxed text-slate text-lg mb-5">
-      <RichText text={block.text} />
+      <LinkedRichText block={block} />
     </p>
   );
 }
 
 function groupLabel(group: ArticleBlock["type"] | string) {
+  if (group === "linked") return "Related Article";
   if (group === "deeper") return "Go Deeper";
   if (group === "resources") return "More Resources";
   if (group === "received") return "Questions after following Jesus";
@@ -399,9 +438,12 @@ export function ArticlePlaceholder() {
 
   const groupArticles = getArticlesInGroup(article.group);
   const articleIndex = groupArticles.findIndex((item) => item.slug === article.slug);
-  const previous = groupArticles[articleIndex - 1];
-  const next = groupArticles[articleIndex + 1];
+  const previous = article.group === "linked" ? undefined : groupArticles[articleIndex - 1];
+  const next = article.group === "linked" ? undefined : groupArticles[articleIndex + 1];
   const blocks = article.blocks;
+  const linkedSource = article.group === "linked"
+    ? linkedArticleMetadata.find((item) => item.slug === article.slug)
+    : undefined;
   const firstParagraphIndex = blocks.findIndex((block) => block.type === "paragraph");
   const currentSearch = new URLSearchParams(
     typeof window === "undefined" ? "" : window.location.search,
@@ -450,13 +492,15 @@ export function ArticlePlaceholder() {
       <main className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
           <Button asChild variant="ghost" className="-ml-4 text-muted-foreground hover:text-foreground">
-            <Link href="/explore-articles">
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back to Articles
+             <Link href={linkedSource ? getArticlePath(linkedSource.faqSlug) : "/explore-articles"}>
+               <ArrowLeft className="w-4 h-4 mr-2" /> {linkedSource ? "Back to question" : "Back to Articles"}
             </Link>
           </Button>
-          <span className="text-sm text-muted-foreground">
-            {articleIndex + 1} of {groupArticles.length}
-          </span>
+           {article.group !== "linked" && (
+             <span className="text-sm text-muted-foreground">
+               {articleIndex + 1} of {groupArticles.length}
+             </span>
+           )}
         </div>
 
         <article className="animate-in fade-in slide-in-from-bottom-6 duration-700">
@@ -529,7 +573,7 @@ export function ArticlePlaceholder() {
             <ArticleReaction articleSlug={article.slug} />
           </div>
 
-          <nav aria-label="Article navigation" className="mt-8 grid gap-3 sm:grid-cols-2">
+          {article.group !== "linked" && <nav aria-label="Article navigation" className="mt-8 grid gap-3 sm:grid-cols-2">
             {previous ? (
               <Link
                 href={articleHref(previous.slug)}
@@ -552,7 +596,7 @@ export function ArticlePlaceholder() {
                 </span>
               </Link>
             ) : <span aria-hidden="true" />}
-          </nav>
+          </nav>}
 
           <div className="mt-10 rounded-2xl border border-blue-200 bg-blue-50 p-7 text-center text-navy sm:p-9 shadow-sm">
             <MessageCircle className="mx-auto mb-4 h-9 w-9 opacity-80 text-brand" />

@@ -9,6 +9,8 @@ import { defineConfig, type Plugin } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 import importedDeeperArticles from './src/data/imported-deeper-articles.json';
+import { GO_FURTHER_BOOKS } from './src/data/go-further-library';
+import linkedArticles from './src/data/linked-articles.json';
 
 // Vite needs a port for dev/preview, but static production builds do not
 // receive one from CI providers such as Cloudflare Pages.
@@ -32,8 +34,10 @@ const APPROVED_ARTICLE_TEXT_REPLACEMENTS: Record<string, Record<string, string>>
 };
 
 type ArticleBlock = {
-  kind: 'heading' | 'paragraph' | 'question' | 'list';
+  kind: 'heading' | 'paragraph' | 'question' | 'list' | 'image';
   text: string;
+  src?: string;
+  links?: { label: string; href: string }[];
 };
 
 type ArticleRecord = {
@@ -235,7 +239,11 @@ function decodeXml(text: string) {
     .replace(/&amp;/g, '&');
 }
 
-function parseDocxBlocks(documentXml: string): ArticleBlock[] {
+function parseDocxBlocks(
+  documentXml: string,
+  images?: Map<string, string>,
+  hyperlinks?: Map<string, string>,
+): ArticleBlock[] {
   const blocks: ArticleBlock[] = [];
   const paragraphPattern = /<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g;
   let match: RegExpExecArray | null;
@@ -251,7 +259,10 @@ function parseDocxBlocks(documentXml: string): ArticleBlock[] {
       .replace(/\s+/g, ' ')
       .trim();
 
-    if (!text) continue;
+    const embeddedIds = images
+      ? [...paragraphXml.matchAll(/<a:blip\b[^>]*r:embed="([^"]+)"/g)].map((match) => match[1])
+      : [];
+    if (!text && embeddedIds.length === 0) continue;
 
     const cleanedText = (
       paragraphIndex === 0
@@ -259,16 +270,33 @@ function parseDocxBlocks(documentXml: string): ArticleBlock[] {
         : text.replace(/^\d+(?:\.\d+)+\s*/, '')
     ).replace(/\s*>{3}\s*$/, '');
     const style = paragraphXml.match(/<w:pStyle\b[^>]*w:val="([^"]+)"/)?.[1] ?? '';
+    const links = hyperlinks
+      ? [...paragraphXml.matchAll(/<w:hyperlink\b[^>]*r:id="([^"]+)"[^>]*>([\s\S]*?)<\/w:hyperlink>/g)]
+        .map((match) => ({
+          label: decodeXml((match[2].match(/<w:t\b[^>]*>[\s\S]*?<\/w:t>/g) ?? [])
+            .map((run) => run.replace(/^<w:t\b[^>]*>/, '').replace(/<\/w:t>$/, '')).join('')).trim(),
+          href: hyperlinks.get(match[1]),
+        }))
+        .filter((link): link is { label: string; href: string } => Boolean(link.label && link.href))
+      : [];
 
-    blocks.push({
-      kind: style.toLowerCase().startsWith('heading')
-        ? 'heading'
-        : style.toLowerCase() === 'listparagraph'
-          ? 'list'
-          : 'paragraph',
-      text: cleanedText,
-    });
-    paragraphIndex += 1;
+    if (text) {
+      blocks.push({
+        kind: style.toLowerCase().startsWith('heading')
+          ? 'heading'
+          : style.toLowerCase() === 'listparagraph'
+            ? 'list'
+            : 'paragraph',
+        text: cleanedText,
+        ...(links.length ? { links } : {}),
+      });
+      paragraphIndex += 1;
+    }
+    for (const id of embeddedIds) {
+      const src = images?.get(id);
+      if (!src) throw new Error(`Missing image relationship ${id} in article document`);
+      blocks.push({ kind: 'image', text: '', src });
+    }
   }
 
   return blocks;
@@ -300,6 +328,100 @@ function readDocxBlocks(archivePath: string, entryName: string, tempDir: string)
   const docxPath = path.join(tempDir, `${slugify(path.basename(entryName))}.docx`);
   fs.writeFileSync(docxPath, execFileSync('unzip', ['-p', archivePath, entryName]));
   return readDocxFileBlocks(docxPath);
+}
+
+const FOLLOW_ARCHIVE = 'Follow_Articles_1790629240431.zip';
+const followImages = new Map<string, { source: Buffer; type: string }>();
+const FOLLOW_DOCX_MAX_BUFFER = 32 * 1024 * 1024;
+
+function readFollowArticle(
+  archivePath: string,
+  entryName: string,
+  tempDir: string,
+): ArticleBlock[] {
+  const docxPath = path.join(tempDir, `${slugify(entryName)}.docx`);
+  fs.writeFileSync(docxPath, execFileSync('unzip', ['-p', archivePath, entryName], { maxBuffer: FOLLOW_DOCX_MAX_BUFFER }));
+  const documentXml = execFileSync('unzip', ['-p', docxPath, 'word/document.xml'], { encoding: 'utf8', maxBuffer: FOLLOW_DOCX_MAX_BUFFER });
+  let relationships = '';
+  try {
+    relationships = execFileSync('unzip', ['-p', docxPath, 'word/_rels/document.xml.rels'], { encoding: 'utf8', maxBuffer: FOLLOW_DOCX_MAX_BUFFER });
+  } catch {
+    // Word documents without images may omit this file.
+  }
+  const imageRelationships = new Map<string, string>();
+  const hyperlinkRelationships = new Map<string, string>();
+  for (const match of relationships.matchAll(/<Relationship\b[^>]*\/>/g)) {
+    const id = match[0].match(/\bId="([^"]+)"/)?.[1];
+    const target = match[0].match(/\bTarget="([^"]+)"/)?.[1];
+    if (!id || !target) continue;
+    if (/^https?:\/\//i.test(target) && match[0].includes('TargetMode="External"')) {
+      hyperlinkRelationships.set(id, decodeXml(target));
+      continue;
+    }
+    if (!/^media\/[^/]+\.(?:png|jpe?g|webp)$/i.test(target)) continue;
+    const extension = target.split('.').at(-1)!.toLowerCase();
+    const name = `${createHash('sha256').update(`${entryName}:${target}`).digest('hex').slice(0, 16)}.${extension}`;
+    followImages.set(name, {
+      source: execFileSync('unzip', ['-p', docxPath, `word/${target}`], { maxBuffer: FOLLOW_DOCX_MAX_BUFFER }),
+      type: extension === 'png' ? 'image/png' : extension === 'webp' ? 'image/webp' : 'image/jpeg',
+    });
+    imageRelationships.set(id, name);
+  }
+  return parseDocxBlocks(documentXml, imageRelationships, hyperlinkRelationships);
+}
+
+function readNewFollowArticles(attachedAssetsDir: string, tempDir: string): ArticleRecord[] {
+  const archivePath = path.join(attachedAssetsDir, FOLLOW_ARCHIVE);
+  if (!fs.existsSync(archivePath)) throw new Error(`Required Follow articles ZIP is missing: ${archivePath}`);
+  followImages.clear();
+  const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
+    .split('\n')
+    .filter((entry) => entry.toLowerCase().endsWith('.docx'));
+  const records: ArticleRecord[] = [];
+
+  for (const [bookIndex, book] of GO_FURTHER_BOOKS.entries()) {
+    const prefix = `1.2.${String(bookIndex + 1).padStart(2, '0')}.`;
+    const bookEntries = entries.filter((entry) =>
+      entry.includes('/1.2 Go Further/') && path.basename(entry).startsWith(prefix),
+    ).sort();
+    if (bookEntries.length !== book.readings.length) {
+      throw new Error(`${book.title}: ZIP has ${bookEntries.length} readings but site lists ${book.readings.length}`);
+    }
+    for (const [index, reading] of book.readings.entries()) {
+      const expectedPrefix = `${prefix}${String(index + 1).padStart(3, '0')} `;
+      if (!path.basename(bookEntries[index]).startsWith(expectedPrefix)) {
+        throw new Error(`${book.title}: expected ${expectedPrefix} but found ${bookEntries[index]}`);
+      }
+      const blocks = readFollowArticle(archivePath, bookEntries[index], tempDir);
+      if (!blocks.some((block) => block.kind === 'paragraph')) {
+        throw new Error(`${book.title}: ${reading.title} has no readable body text`);
+      }
+      records.push({
+        route: `/gf/${book.slug}/${reading.slug}`,
+        title: reading.title.replace(/^\d+\.\s*/, ''),
+        category: 'Go Further',
+        blocks,
+      });
+    }
+  }
+
+  for (const item of linkedArticles) {
+    const entry = entries.find((name) =>
+      name.includes('/Linked articles not to be shown in any menu/') && path.basename(name).startsWith(item.prefix),
+    );
+    if (!entry) throw new Error(`Required linked-only article missing: ${item.prefix}`);
+    const blocks = readFollowArticle(archivePath, entry, tempDir);
+    if (!blocks.some((block) => block.kind === 'paragraph')) {
+      throw new Error(`Linked-only article ${item.title} has no readable body text`);
+    }
+    records.push({
+      route: `/${item.slug}`,
+      title: item.title,
+      category: 'Linked only',
+      blocks,
+    });
+  }
+  return records;
 }
 
 function normalizeTitle(title: string) {
@@ -432,6 +554,7 @@ function buildArticleLibrary(): ArticleRecord[] {
       ...archivedArticles.filter((article) => !adventureRoutes.has(article.route)),
       ...adventureGuideArticles,
       ...standaloneDeeperArticles,
+      ...readNewFollowArticles(attachedAssetsDir, tempDir),
     ];
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
@@ -441,12 +564,34 @@ function buildArticleLibrary(): ArticleRecord[] {
 function articleContentPlugin(): Plugin {
   return {
     name: 'jolf-article-content',
+    configureServer(server) {
+      server.middlewares.use((request, response, next) => {
+        const pathname = decodeURIComponent((request.url ?? '').split('?')[0]);
+        const prefix = `${basePath.replace(/\/?$/, '/')}article-images/`;
+        if (!pathname.startsWith(prefix)) return next();
+        const name = pathname.slice(prefix.length);
+        const image = followImages.get(name);
+        if (!image) {
+          response.statusCode = 404;
+          response.end('Image not found');
+          return;
+        }
+        response.setHeader('Content-Type', image.type);
+        response.setHeader('Cache-Control', 'public, max-age=3600');
+        response.end(image.source);
+      });
+    },
     resolveId(id) {
       return id === ARTICLE_MODULE_ID ? RESOLVED_ARTICLE_MODULE_ID : undefined;
     },
     load(id) {
       if (id !== RESOLVED_ARTICLE_MODULE_ID) return undefined;
       return `export default ${JSON.stringify(buildArticleLibrary())};`;
+    },
+    generateBundle() {
+      for (const [name, image] of followImages) {
+        this.emitFile({ type: 'asset', fileName: `article-images/${name}`, source: image.source });
+      }
     },
   };
 }
