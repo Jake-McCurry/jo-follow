@@ -21,6 +21,7 @@ import { ExploreArticlesPage } from '@/pages/explore-articles';
 import { GoFurtherPage } from '@/pages/gf/index';
 import { GFBookPage } from '@/pages/gf/book';
 import { GFReadingPage } from '@/pages/gf/reading';
+import { HeartAfterGodIntroPage } from '@/pages/gf/heart-after-god-intro';
 import { RewatchPage } from '@/pages/rewatch';
 import { MessagePage } from '@/pages/message';
 import { ArticlePlaceholder } from '@/pages/article-placeholder';
@@ -79,7 +80,8 @@ function PageMetadata() {
     } else if (parts.length === 3) {
       // /gf/:book/:reading
       const book = getGFBook(parts[1]);
-      const reading = book?.readings.find((item) => item.slug === parts[2]);
+       const reading = book?.readings.find((item) => item.slug === parts[2]) ??
+         (book?.introChapter?.slug === parts[2] ? book.introChapter : undefined);
       const readingSlug = parts[2];
       title = `${reading?.title ?? readingSlug.replace(/-/g, ' ')} | Go Further`;
       description = reading?.desc ?? 'A Go Further reading from Follow Jesus Online.';
@@ -152,6 +154,7 @@ function Router() {
         <Route path="/explore-articles" component={ExploreArticlesPage} />
         <Route path="/gf" component={GoFurtherPage} />
         <Route path="/gf/:slug" component={GFBookPage} />
+        <Route path="/gf/a-heart-after-god/the-restless-heart" component={HeartAfterGodIntroPage} />
         <Route path="/gf/:bookSlug/:readingSlug" component={GFReadingPage} />
         <Route path="/rewatch" component={RewatchPage} />
         <Route path="/rewatch-video" component={RewatchPage} />
