@@ -49,10 +49,15 @@ function AdminLoginForm() {
         queryClient.setQueryData(getGetReactionAdminSessionQueryKey(), data);
       },
       onError: (loginError) => {
+         const status = errorStatus(loginError);
         setError(
-          errorStatus(loginError) === 503
-            ? "The private report password has not been configured yet."
-            : "Incorrect password. Please try again.",
+           status === 503
+             ? "The private report password has not been configured for this site."
+             : status === 401
+               ? "This site's server rejected the password. Check the password configured for this site."
+               : status === undefined
+                 ? "Could not reach the sign-in service. Please try again."
+                 : "Could not sign in right now. Please try again later.",
         );
       },
     },
