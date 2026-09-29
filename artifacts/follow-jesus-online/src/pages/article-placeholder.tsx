@@ -14,7 +14,6 @@ import {
 } from "@/data/article-library";
 import { ArticleEndSection } from "@/components/article-end-section";
 import linkedArticleMetadata from "@/data/linked-articles.json";
-import { useEffect } from "react";
 
 const BIBLE_BOOKS = [
   "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles",
@@ -271,6 +270,32 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
   );
 }
 
+export function AdventureArticleBlocks({ blocks }: { blocks: ArticleBlock[] }) {
+  return (
+    <div className="prose prose-lg max-w-none prose-p:font-sans prose-headings:font-sans">
+      <div className="space-y-6">
+        {blocks.map((block, index) => {
+          if (block.type === "list") {
+            if (blocks[index - 1]?.type === "list") return null;
+            const items: ArticleBlock[] = [];
+            for (let position = index; blocks[position]?.type === "list"; position += 1) {
+              items.push(blocks[position]);
+            }
+            return (
+              <ul key={index} className="my-8 list-none space-y-3 pl-0">
+                {items.map((item, itemIndex) => (
+                  <AdventureBlockView key={itemIndex} block={item} />
+                ))}
+              </ul>
+            );
+          }
+          return <AdventureBlockView key={index} block={block} />;
+        })}
+      </div>
+    </div>
+  );
+}
+
 function AdventureArticleView({
   article,
   groupArticles,
@@ -326,27 +351,7 @@ function AdventureArticleView({
               />
             </header>
 
-            <div className="prose prose-lg max-w-none prose-p:font-sans prose-headings:font-sans">
-              <div className="space-y-6">
-                {blocks.map((block, index) => {
-                  if (block.type === "list") {
-                    const previousBlock = blocks[index - 1];
-                    if (previousBlock?.type === "list") return null;
-                    const listItems = blocks.slice(index).slice(0, blocks.slice(index).findIndex((item) => item.type !== "list") < 0
-                      ? blocks.length - index
-                      : blocks.slice(index).findIndex((item) => item.type !== "list"));
-                    return (
-                      <ul key={index} className="my-8 list-none space-y-3 pl-0">
-                        {listItems.map((item, itemIndex) => (
-                          <AdventureBlockView key={itemIndex} block={item} />
-                        ))}
-                      </ul>
-                    );
-                  }
-                  return <AdventureBlockView key={index} block={block} />;
-                })}
-              </div>
-            </div>
+            <AdventureArticleBlocks blocks={blocks} />
 
             <p className="mt-8 text-lg leading-relaxed text-slate">
               Keep walking. If you want more on what you just read, pause here first.
@@ -381,10 +386,6 @@ export function ArticlePlaceholder() {
     routeGroup === "adv" || routeGroup === "deeper"
       ? `${routeGroup}-${params.slug || ""}`
       : params.slug || "";
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [articleSlug]);
 
   const article = getArticleBySlug(articleSlug);
   if (!article) return <NotFound />;

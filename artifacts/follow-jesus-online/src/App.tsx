@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect } from 'react';
+import { type ReactNode, useEffect, useLayoutEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
@@ -143,10 +143,33 @@ function PageMetadata() {
   return null;
 }
 
+function ScrollToTopOnNavigation() {
+  const [location] = useLocation();
+  const pathname = location.split('?')[0];
+
+  useEffect(() => {
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
+    return () => {
+      window.history.scrollRestoration = previous;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    // Explicit anchors, such as Bible verse links, should still reach their target.
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+  }, [pathname]);
+
+  return null;
+}
+
 function Router() {
   return (
     <RoutedErrorBoundary>
       <PageMetadata />
+      <ScrollToTopOnNavigation />
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/xp-pages" component={XPChooserPage} />

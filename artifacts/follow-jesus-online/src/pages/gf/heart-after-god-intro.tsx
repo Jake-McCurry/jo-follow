@@ -1,7 +1,4 @@
-import { ArrowLeft, BookOpen } from "lucide-react";
-import { Link } from "wouter";
-import { Layout } from "@/components/layout";
-import { Button } from "@/components/ui/button";
+import { BookChapterFrame } from "@/components/book-chapter-frame";
 import { ArticleEndSection } from "@/components/article-end-section";
 import { getGFBook } from "@/data/go-further-library";
 import NotFound from "@/pages/not-found";
@@ -33,28 +30,16 @@ export function HeartAfterGodIntroPage() {
   if (!book?.introChapter || !book.readings[0]) return <NotFound />;
 
   return (
-    <Layout>
-      <main className="container mx-auto max-w-3xl px-5 py-8 sm:px-8 md:py-10">
-        <Button asChild variant="ghost" className="-ml-4 mb-8 text-slate hover:bg-warm-50 hover:text-navy">
-          <Link href={`/gf/${book.slug}`}>
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to {book.title}
-          </Link>
-        </Button>
-
-        <article>
-          <header className="mb-10">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
-              <BookOpen className="h-3.5 w-3.5" /> {book.title} · Intro
-            </div>
-            <h1 className="font-serif text-3xl font-bold leading-tight text-navy md:text-5xl">
-              {book.introChapter.title}
-            </h1>
-          </header>
-
-          <div className="prose prose-lg max-w-none text-slate">
+    <BookChapterFrame
+      bookTitle={book.title}
+      bookHref={`/gf/${book.slug}`}
+      chapterLabel="Introduction"
+      title={book.introChapter.title}
+    >
+          <div className="prose prose-lg max-w-none text-slate prose-p:font-sans prose-headings:font-sans">
             <p>Something in every person longs to be whole.</p>
 
-            <blockquote>
+            <blockquote className="rounded-xl border-l-4 border-warm-500 bg-warm-50/70 p-6 text-navy sm:p-8">
               <p>You have made us for Yourself, O Lord, and our heart is restless until it rests in You.</p>
               <footer>— Augustine</footer>
             </blockquote>
@@ -63,7 +48,7 @@ export function HeartAfterGodIntroPage() {
               We feel that restlessness when words come out sharper than we intended, when a hidden motive surfaces, when the life we present to others does not match the life we carry within. Scripture is not silent about that inner world. It gives it a name. It calls it the heart.
             </p>
 
-            <blockquote>
+            <blockquote className="rounded-xl border-l-4 border-warm-500 bg-warm-50/70 p-6 text-navy sm:p-8">
               <p>The Bible term ‘heart’ is best understood if we simply say ‘me.’ It is the central citadel of a man’s personality.</p>
               <footer>— Oswald Chambers</footer>
             </blockquote>
@@ -86,7 +71,10 @@ export function HeartAfterGodIntroPage() {
 
             <p>The journey starts where all true change starts. It starts with the heart.</p>
 
-            <h2>Before You Begin</h2>
+            <h2 className="mt-14 mb-6 flex items-center gap-3 text-2xl font-bold text-navy sm:text-3xl">
+              <span className="hidden h-px w-12 bg-warm-300 sm:block" aria-hidden="true" />
+              Before You Begin
+            </h2>
             <p>
               This is not a test of how mature you are. It is a walk through the inner life with the God who has already drawn near.
             </p>
@@ -97,7 +85,10 @@ export function HeartAfterGodIntroPage() {
               If you are new to faith, you are welcome here. These reflections were written so that a new believer can walk the path without being left behind, and so that a growing believer can return to the foundations with fresh honesty.
             </p>
 
-            <h2>Words You Will Meet</h2>
+            <h2 className="mt-14 mb-6 flex items-center gap-3 text-2xl font-bold text-navy sm:text-3xl">
+              <span className="hidden h-px w-12 bg-warm-300 sm:block" aria-hidden="true" />
+              Words You Will Meet
+            </h2>
             <p>
               A few words in these pages carry a biblical meaning that is easy to miss. They are kept because Scripture uses them. Here is their plain sense the first time they appear:
             </p>
@@ -110,7 +101,10 @@ export function HeartAfterGodIntroPage() {
               ))}
             </dl>
 
-            <h2>The Path of These Eight Reflections</h2>
+            <h2 className="mt-14 mb-6 flex items-center gap-3 text-2xl font-bold text-navy sm:text-3xl">
+              <span className="hidden h-px w-12 bg-warm-300 sm:block" aria-hidden="true" />
+              The Path of These Eight Reflections
+            </h2>
             <ol>
               {path.map((step) => <li key={step}>{step}</li>)}
             </ol>
@@ -118,8 +112,6 @@ export function HeartAfterGodIntroPage() {
               Each reflection includes a picture to help you see the truth, a short glimpse of how this looks in an ordinary life, one primary step for the day, and a word of assurance. You are not asked to carry this work alone.
             </p>
           </div>
-        </article>
-
         <ArticleEndSection
           articleSlug={`gf-${book.slug}-${book.introChapter.slug}`}
           next={{
@@ -128,7 +120,6 @@ export function HeartAfterGodIntroPage() {
             label: "Begin the first reading",
           }}
         />
-      </main>
-    </Layout>
+    </BookChapterFrame>
   );
 }
