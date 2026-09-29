@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useParams } from "wouter";
-import { ArrowLeft, ArrowRight, BookOpen, HelpCircle, MessageCircle, Quote } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, HelpCircle, Quote } from "lucide-react";
 import { ScriptureRef } from "@/components/scripture-ref";
 import NotFound from "@/pages/not-found";
 import { ShareButton } from "@/components/share-button";
@@ -13,7 +13,7 @@ import {
   type ArticleBlock,
   type Article,
 } from "@/data/article-library";
-import { ArticleReaction } from "@/components/article-reaction";
+import { ArticleEndSection } from "@/components/article-end-section";
 import linkedArticleMetadata from "@/data/linked-articles.json";
 import { useEffect } from "react";
 
@@ -36,9 +36,6 @@ const BIBLE_REFERENCE_PATTERN = new RegExp(
     .join("|")})\\s+\\d{1,3}(?::\\d{1,3}(?:[-–—](?:\\d{1,3}:)?\\d{1,3})?(?:(?:,\\s*\\d{1,3}(?:[-–—]\\d{1,3})?)|(?:;\\s*\\d{1,3}:\\d{1,3}(?:[-–—](?:\\d{1,3}:)?\\d{1,3})?))*)?`,
   "g",
 );
-
-const NET_COPYRIGHT =
-  "Scripture quoted by permission. Quotations designated (NET) are from the NET Bible® copyright ©1996, 2019 by Biblical Studies Press, L.L.C. http://netbible.com All rights reserved.";
 
 const WEB_ADDRESS_PATTERN =
   /(https?:\/\/[^\s]+|(?:follow\.jesusonline\.com|bible\.com|equip\.jesusonline\.com|app\.jesusonline\.com)(?:\/[^\s]*)?)/g;
@@ -358,66 +355,45 @@ function AdventureArticleView({
               Keep walking. If you want more on what you just read, pause here first.
             </p>
 
-            <div className="mt-6">
-              <ArticleReaction articleSlug={article.slug} compact />
-            </div>
-
-             <div id="adventure-next-steps" className="mt-8 scroll-mt-6">
-                <nav aria-label="Continue reading" className="mb-6 grid grid-cols-2 gap-2 sm:gap-4">
+            <ArticleEndSection articleSlug={article.slug} compactReaction>
+              <div id="adventure-next-steps" className="scroll-mt-6">
+                <nav aria-label="Continue reading" className="grid gap-3 sm:grid-cols-[1.3fr_0.7fr] sm:gap-4">
+                  <Link
+                    href={next ? articleHref(next.slug) : article.continuation ? continuationHref(article.continuation.href) : "/explore-articles"}
+                    className={`group min-w-0 rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-5 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-7 ${deeperArticle ? "" : "sm:col-span-2"}`}
+                  >
+                    <span className="block text-xs font-bold uppercase tracking-wide text-blue-100 sm:text-sm">
+                      {next ? "Read the next chapter" : "Continue the Adventure"}
+                    </span>
+                    <h2 className="mt-2 flex items-start justify-between gap-3 font-serif text-xl font-bold leading-tight text-white sm:text-3xl">
+                      <span className="min-w-0 break-words">{next?.title ?? article.continuation?.label ?? "Explore more articles"}</span>
+                      <ArrowRight className="h-6 w-6 shrink-0 text-white transition-transform group-hover:translate-x-1 sm:h-8 sm:w-8" aria-hidden="true" />
+                    </h2>
+                  </Link>
                   {deeperArticle && (
                     <Link
                       href={articleHref(deeperArticle.slug)}
-                      className="group min-w-0 rounded-xl border border-border-soft bg-white p-3 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
+                      className="group min-w-0 rounded-xl border border-border-soft bg-white p-5 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
                     >
-                      <p className="text-[11px] font-bold uppercase tracking-wide text-slate sm:text-sm">Go Deeper (OPTIONAL)</p>
-                      <h2 className="mt-2 flex items-start justify-between gap-1 text-base font-bold leading-snug text-navy sm:gap-3 sm:text-xl">
+                      <span className="block text-xs font-bold uppercase tracking-wide text-slate sm:text-sm">Go Deeper (optional)</span>
+                      <h2 className="mt-2 flex items-start gap-3 text-lg font-bold leading-snug text-navy sm:text-xl">
                         <span className="min-w-0 break-words">{deeperArticle.title}</span>
-                        <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-brand transition-transform group-hover:translate-x-1 sm:h-6 sm:w-6" aria-hidden="true" />
+                        <ArrowRight className="h-5 w-5 shrink-0 text-brand transition-transform group-hover:translate-x-1 sm:h-6 sm:w-6" aria-hidden="true" />
                       </h2>
                     </Link>
                   )}
-                  <Link
-                    href={next ? articleHref(next.slug) : article.continuation ? continuationHref(article.continuation.href) : "/explore-articles"}
-                    className="group min-w-0 rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-3 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
-                  >
-                    <p className="text-[11px] font-bold uppercase tracking-wide text-blue-100 sm:text-sm">Continue the Adventure</p>
-                    <h2 className="mt-2 flex items-start justify-between gap-1 font-serif text-lg font-bold leading-snug text-white sm:gap-3 sm:text-2xl">
-                      <span className="min-w-0 break-words">{next ? `Next: ${articleIndex + 1}. ${next.title}` : article.continuation?.label ?? "Explore more articles"}</span>
-                      <ArrowRight className="mt-0.5 h-5 w-5 shrink-0 text-white transition-transform group-hover:translate-x-1 sm:h-7 sm:w-7" aria-hidden="true" />
-                    </h2>
-                  </Link>
                 </nav>
-
                 {previous && (
                   <Link
                     href={articleHref(previous.slug)}
-                    className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                   >
                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                     Back to the previous chapter
                   </Link>
                 )}
-
-                <div className="flex flex-col items-center gap-8">
-                  <div className="w-full rounded-xl border border-blue-100 bg-blue-50 p-5 text-center text-navy sm:p-6">
-                     <div>
-                       <h2 className="text-xl font-bold">Questions along the way?</h2>
-                       <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-slate">
-                        If something is on your heart or you would like help taking your next step, you’re welcome to send a message.
-                      </p>
-                       <Button asChild variant="outline" className="mt-4 h-10 rounded-full border-blue-200 bg-white px-5 font-bold text-blue-900 hover:bg-blue-100">
-                        <Link href="/message">Send a Message</Link>
-                      </Button>
-                    </div>
-                 </div>
-
-                 <div className="pt-8 w-full text-center">
-                   <p className="text-xs leading-relaxed text-slate">
-                     Scripture references open an accessible NET Bible preview. {NET_COPYRIGHT}
-                   </p>
-                 </div>
-               </div>
-            </div>
+              </div>
+            </ArticleEndSection>
           </article>
         </main>
       </div>
@@ -566,122 +542,83 @@ export function ArticlePlaceholder() {
             </div>
           </div>
 
-           {article.group !== "deeper" && article.relatedSlug && getArticleBySlug(article.relatedSlug) && (
-            <div className="mt-8 rounded-2xl border border-warm-200 bg-warm-50 p-6 sm:p-8">
-              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Continue exploring</p>
-              <Link
-                href={articleHref(article.relatedSlug)}
-                className="inline-flex items-center text-xl font-semibold text-navy hover:text-brand"
-              >
-                {getArticleBySlug(article.relatedSlug)?.title}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </div>
-          )}
-
-           {article.group !== "deeper" && <div className="mt-10 border-t border-border-soft pt-8">
-            <p className="text-xs leading-relaxed text-slate">
-              Scripture references open an accessible NET Bible preview. {NET_COPYRIGHT}
-            </p>
-           </div>}
-
-          <div className="mt-10">
-            <ArticleReaction articleSlug={article.slug} />
-          </div>
-
-          {article.group === "deeper" && (
-            <nav aria-label="Go Deeper navigation" className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-[1.3fr_0.7fr] sm:gap-4">
-              <Link
-                href={nextGuideArticle
-                  ? articleHref(nextGuideArticle.slug)
-                  : deeperContinuation
-                    ? continuationHref(deeperContinuation.href)
-                    : "/explore-articles"}
-                className="group min-w-0 rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-3 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-7"
-              >
-                <span className="block text-[11px] font-bold uppercase tracking-wide text-blue-100 sm:text-sm">
-                  {nextGuideArticle ? "Read the next chapter" : deeperContinuation ? "Continue the journey" : "Explore the Guide"}
-                </span>
-                <h2 className="mt-2 flex items-start justify-between gap-1 font-serif text-lg font-bold leading-tight text-white sm:gap-4 sm:text-3xl">
-                  <span className="min-w-0 break-words">
-                    {nextGuideArticle?.title ?? deeperContinuation?.label.replace(/^Go Further:\s*/i, "") ?? "Adventure Guide"}
+          <ArticleEndSection articleSlug={article.slug}>
+            {article.group === "deeper" ? (
+              <nav aria-label="Go Deeper navigation" className="grid gap-3 sm:grid-cols-[1.3fr_0.7fr] sm:gap-4">
+                <Link
+                  href={nextGuideArticle
+                    ? articleHref(nextGuideArticle.slug)
+                    : deeperContinuation
+                      ? continuationHref(deeperContinuation.href)
+                      : "/explore-articles"}
+                  className="group min-w-0 rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-5 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-7"
+                >
+                  <span className="block text-xs font-bold uppercase tracking-wide text-blue-100 sm:text-sm">
+                    {nextGuideArticle ? "Read the next chapter" : deeperContinuation ? "Continue the journey" : "Explore the Guide"}
                   </span>
-                  <ArrowRight className="h-5 w-5 shrink-0 text-white transition-transform group-hover:translate-x-1 sm:h-8 sm:w-8" aria-hidden="true" />
-                </h2>
-              </Link>
-              <Link
-                href={mainGuideArticle ? articleHref(mainGuideArticle.slug) : "/explore-articles"}
-                className="group min-w-0 rounded-xl border border-border-soft bg-white p-3 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
-              >
-                <span className="block text-[11px] font-bold uppercase tracking-wide text-slate sm:text-sm">
-                  {mainGuideArticle ? `Back to chapter ${mainGuideIndex + 1}` : "Back to the Guide"}
-                </span>
-                <h2 className="mt-2 flex items-start gap-1 text-base font-bold leading-snug text-navy sm:gap-3 sm:text-xl">
-                  <ArrowLeft className="mt-0.5 h-4 w-4 shrink-0 text-brand transition-transform group-hover:-translate-x-1 sm:h-6 sm:w-6" aria-hidden="true" />
-                  <span className="min-w-0 break-words">{mainGuideArticle?.title ?? "Adventure Guide"}</span>
-                </h2>
-              </Link>
-            </nav>
-          )}
-
-           {article.group !== "linked" && article.group !== "deeper" && <nav aria-label="Article navigation" className="mt-8 grid gap-3 sm:grid-cols-2">
-            {previous ? (
-              <Link
-                href={articleHref(previous.slug)}
-                className="group rounded-xl border border-border-soft bg-white p-5 hover:border-brand/40 hover:shadow-sm transition-all"
-              >
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate">Previous</span>
-                <span className="mt-2 flex items-center font-semibold text-navy group-hover:text-brand">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> {previous.title}
-                </span>
-              </Link>
-            ) : <span aria-hidden="true" />}
-            {next ? (
-              <Link
-                href={articleHref(next.slug)}
-                className="group rounded-xl border border-border-soft bg-white p-5 text-left hover:border-brand/40 hover:shadow-sm transition-all sm:text-right"
-              >
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate">Next</span>
-                <span className="mt-2 flex items-center justify-end font-semibold text-navy group-hover:text-brand">
-                  {next.title} <ArrowRight className="ml-2 h-4 w-4" />
-                </span>
-              </Link>
-            ) : <span aria-hidden="true" />}
-          </nav>}
-
-          <div className="mt-10 rounded-2xl border border-blue-200 bg-blue-50 p-7 text-center text-navy sm:p-9 shadow-sm">
-            <MessageCircle className="mx-auto mb-4 h-9 w-9 opacity-80 text-brand" />
-            <h2 className="text-2xl font-bold">Questions about this article?</h2>
-            <p className="mx-auto mt-3 max-w-xl leading-relaxed text-slate">
-              If something is on your heart or you would like help taking your next step, you’re welcome to send a message.
-            </p>
-            <Button asChild variant="warm" className="mt-6 shadow-sm">
-              <Link href="/message">Send a Message</Link>
-            </Button>
-          </div>
-
-           {article.group !== "deeper" && article.continuation && (
-            <div className="mt-8 rounded-2xl border border-warm-200 bg-warm-50 p-6 sm:p-8">
-              <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">
-                Your next step
-              </p>
-              <Link
-                href={continuationHref(article.continuation.href)}
-                className="inline-flex items-center text-xl font-semibold text-navy hover:text-brand"
-              >
-                {article.continuation.label}
-                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-              </Link>
-            </div>
-          )}
-
-           {article.group === "deeper" && (
-             <div className="mt-10 border-t border-border-soft pt-8">
-               <p className="text-xs leading-relaxed text-slate">
-                 Scripture references open an accessible NET Bible preview. {NET_COPYRIGHT}
-               </p>
-             </div>
-           )}
+                  <h2 className="mt-2 flex items-start justify-between gap-3 font-serif text-xl font-bold leading-tight text-white sm:text-3xl">
+                    <span className="min-w-0 break-words">
+                      {nextGuideArticle?.title ?? deeperContinuation?.label.replace(/^Go Further:\s*/i, "") ?? "Adventure Guide"}
+                    </span>
+                    <ArrowRight className="h-6 w-6 shrink-0 text-white transition-transform group-hover:translate-x-1 sm:h-8 sm:w-8" aria-hidden="true" />
+                  </h2>
+                </Link>
+                <Link
+                  href={mainGuideArticle ? articleHref(mainGuideArticle.slug) : "/explore-articles"}
+                  className="group min-w-0 rounded-xl border border-border-soft bg-white p-5 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
+                >
+                  <span className="block text-xs font-bold uppercase tracking-wide text-slate sm:text-sm">
+                    {mainGuideArticle ? "Back to the chapter" : "Back to the Guide"}
+                  </span>
+                  <h2 className="mt-2 flex items-start gap-3 text-lg font-bold leading-snug text-navy sm:text-xl">
+                    <ArrowLeft className="h-5 w-5 shrink-0 text-brand transition-transform group-hover:-translate-x-1 sm:h-6 sm:w-6" aria-hidden="true" />
+                    <span className="min-w-0 break-words">{mainGuideArticle?.title ?? "Adventure Guide"}</span>
+                  </h2>
+                </Link>
+              </nav>
+            ) : (
+              <>
+                {article.relatedSlug && getArticleBySlug(article.relatedSlug) && (
+                  <div className="rounded-2xl border border-warm-200 bg-warm-50 p-6 sm:p-8">
+                    <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Continue exploring</p>
+                    <Link href={articleHref(article.relatedSlug)} className="inline-flex items-center text-xl font-semibold text-navy hover:text-brand">
+                      {getArticleBySlug(article.relatedSlug)?.title}
+                      <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                    </Link>
+                  </div>
+                )}
+                {article.group !== "linked" && (
+                  <nav aria-label="Article navigation" className="mt-8 grid gap-3 sm:grid-cols-2">
+                    {previous ? (
+                      <Link href={articleHref(previous.slug)} className="group rounded-xl border border-border-soft bg-white p-5 transition-all hover:border-brand/40 hover:shadow-sm">
+                        <span className="block text-xs font-bold uppercase tracking-wider text-slate">Previous</span>
+                        <span className="mt-2 flex items-center font-semibold text-navy group-hover:text-brand">
+                          <ArrowLeft className="mr-2 h-4 w-4" /> {previous.title}
+                        </span>
+                      </Link>
+                    ) : <span aria-hidden="true" />}
+                    {next ? (
+                      <Link href={articleHref(next.slug)} className="group rounded-xl border border-border-soft bg-white p-5 text-left transition-all hover:border-brand/40 hover:shadow-sm sm:text-right">
+                        <span className="block text-xs font-bold uppercase tracking-wider text-slate">Next</span>
+                        <span className="mt-2 flex items-center justify-end font-semibold text-navy group-hover:text-brand">
+                          {next.title} <ArrowRight className="ml-2 h-4 w-4" />
+                        </span>
+                      </Link>
+                    ) : <span aria-hidden="true" />}
+                  </nav>
+                )}
+                {article.continuation && (
+                  <div className="mt-8 rounded-2xl border border-warm-200 bg-warm-50 p-6 sm:p-8">
+                    <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Your next step</p>
+                    <Link href={continuationHref(article.continuation.href)} className="inline-flex items-center text-xl font-semibold text-navy hover:text-brand">
+                      {article.continuation.label}
+                      <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                    </Link>
+                  </div>
+                )}
+              </>
+            )}
+          </ArticleEndSection>
         </article>
       </main>
     </Layout>
