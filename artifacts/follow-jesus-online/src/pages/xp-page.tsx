@@ -3,7 +3,7 @@ import { Layout } from "@/components/layout";
 import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { PlayCircle, MessageCircle, ArrowRight, Heart } from "lucide-react";
+import { PlayCircle, MessageCircle, Heart } from "lucide-react";
 import NotFound from "@/pages/not-found";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
@@ -169,7 +169,6 @@ export function XPPage() {
           >
             <PlayCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />
             Watch this video: How God sees you now
-            <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
 
