@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { MessageCircle } from "lucide-react";
 import { Link } from "wouter";
 import { ArticleReaction } from "@/components/article-reaction";
 import { Button } from "@/components/ui/button";
@@ -22,12 +21,11 @@ export function ArticleEndSection({
 
       {children && <div className="mt-8">{children}</div>}
 
-      <div className="mt-8 rounded-2xl border border-warm-200 bg-warm-50 p-7 text-center text-navy shadow-sm sm:p-9">
-        <MessageCircle className="mx-auto mb-4 h-9 w-9 text-warm-700" aria-hidden="true" />
-        <h2 className="mx-auto max-w-2xl text-2xl font-bold leading-snug sm:text-3xl">
+      <div className="mt-6 rounded-2xl border border-warm-200 bg-warm-50 p-4 text-center text-navy shadow-sm sm:p-5">
+        <h2 className="mx-auto max-w-2xl text-base font-bold leading-snug sm:text-lg">
           Have a question or need help with your next step?
         </h2>
-        <Button asChild variant="warm" className="mt-6 bg-warm-700 text-white shadow-sm hover:bg-warm-800">
+        <Button asChild variant="warm" size="sm" className="mt-3 bg-warm-700 text-white shadow-sm hover:bg-warm-800">
           <Link href="/message">Send Us a Message</Link>
         </Button>
       </div>
