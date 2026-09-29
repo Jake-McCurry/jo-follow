@@ -9,13 +9,11 @@ import {
   getArticleBySlug,
   getArticlePath,
   getArticlesInGroup,
-  getGuideArticleForDeeper,
   type ArticleBlock,
   type Article,
 } from "@/data/article-library";
 import { ArticleEndSection } from "@/components/article-end-section";
 import linkedArticleMetadata from "@/data/linked-articles.json";
-import { useEffect } from "react";
 
 const BIBLE_BOOKS = [
   "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles",
@@ -219,7 +217,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
       <div className="not-prose my-3 rounded-lg border-l-4 border-warm-500 bg-warm-50 px-4 py-2 sm:px-5">
         <span className="block text-[11px] font-semibold leading-snug text-warm-700">REFLECT:</span>
         <p className="m-0 text-lg leading-snug text-navy sm:text-xl">
-          <RichText text={block.text.replace(/^Q:\s*/, "")} />
+          <RichText text={block.text.replace(/^(?:Q:|Your thoughts:)\s*/i, "")} />
         </p>
       </div>
     );
@@ -272,18 +270,42 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
   );
 }
 
+export function AdventureArticleBlocks({ blocks }: { blocks: ArticleBlock[] }) {
+  return (
+    <div className="prose prose-lg max-w-none prose-p:font-sans prose-headings:font-sans">
+      <div className="space-y-6">
+        {blocks.map((block, index) => {
+          if (block.type === "list") {
+            if (blocks[index - 1]?.type === "list") return null;
+            const items: ArticleBlock[] = [];
+            for (let position = index; blocks[position]?.type === "list"; position += 1) {
+              items.push(blocks[position]);
+            }
+            return (
+              <ul key={index} className="my-8 list-none space-y-3 pl-0">
+                {items.map((item, itemIndex) => (
+                  <AdventureBlockView key={itemIndex} block={item} />
+                ))}
+              </ul>
+            );
+          }
+          return <AdventureBlockView key={index} block={block} />;
+        })}
+      </div>
+    </div>
+  );
+}
+
 function AdventureArticleView({
   article,
   groupArticles,
   articleIndex,
   articleHref,
-  continuationHref,
 }: {
   article: Article;
   groupArticles: Article[];
   articleIndex: number;
   articleHref: (slug: string) => string;
-  continuationHref: (href: string) => string;
 }) {
   const previous = groupArticles[articleIndex - 1];
   const next = groupArticles[articleIndex + 1];
@@ -329,71 +351,26 @@ function AdventureArticleView({
               />
             </header>
 
-            <div className="prose prose-lg max-w-none prose-p:font-sans prose-headings:font-sans">
-              <div className="space-y-6">
-                {blocks.map((block, index) => {
-                  if (block.type === "list") {
-                    const previousBlock = blocks[index - 1];
-                    if (previousBlock?.type === "list") return null;
-                    const listItems = blocks.slice(index).slice(0, blocks.slice(index).findIndex((item) => item.type !== "list") < 0
-                      ? blocks.length - index
-                      : blocks.slice(index).findIndex((item) => item.type !== "list"));
-                    return (
-                      <ul key={index} className="my-8 list-none space-y-3 pl-0">
-                        {listItems.map((item, itemIndex) => (
-                          <AdventureBlockView key={itemIndex} block={item} />
-                        ))}
-                      </ul>
-                    );
-                  }
-                  return <AdventureBlockView key={index} block={block} />;
-                })}
-              </div>
-            </div>
+            <AdventureArticleBlocks blocks={blocks} />
 
             <p className="mt-8 text-lg leading-relaxed text-slate">
               Keep walking. If you want more on what you just read, pause here first.
             </p>
 
-            <ArticleEndSection articleSlug={article.slug} compactReaction>
-              <div id="adventure-next-steps" className="scroll-mt-6">
-                <nav aria-label="Continue reading" className="grid gap-3 sm:grid-cols-[1.3fr_0.7fr] sm:gap-4">
-                  <Link
-                    href={next ? articleHref(next.slug) : article.continuation ? continuationHref(article.continuation.href) : "/explore-articles"}
-                    className={`group min-w-0 rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-5 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-7 ${deeperArticle ? "" : "sm:col-span-2"}`}
-                  >
-                    <span className="block text-xs font-bold uppercase tracking-wide text-blue-100 sm:text-sm">
-                      {next ? "Read the next chapter" : "Continue the Adventure"}
-                    </span>
-                    <h2 className="mt-2 flex items-start justify-between gap-3 font-serif text-xl font-bold leading-tight text-white sm:text-3xl">
-                      <span className="min-w-0 break-words">{next?.title ?? article.continuation?.label ?? "Explore more articles"}</span>
-                      <ArrowRight className="h-6 w-6 shrink-0 text-white transition-transform group-hover:translate-x-1 sm:h-8 sm:w-8" aria-hidden="true" />
-                    </h2>
-                  </Link>
-                  {deeperArticle && (
-                    <Link
-                      href={articleHref(deeperArticle.slug)}
-                      className="group min-w-0 rounded-xl border border-border-soft bg-white p-5 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
-                    >
-                      <span className="block text-xs font-bold uppercase tracking-wide text-slate sm:text-sm">Go Deeper (optional)</span>
-                      <h2 className="mt-2 flex items-start gap-3 text-lg font-bold leading-snug text-navy sm:text-xl">
-                        <span className="min-w-0 break-words">{deeperArticle.title}</span>
-                        <ArrowRight className="h-5 w-5 shrink-0 text-brand transition-transform group-hover:translate-x-1 sm:h-6 sm:w-6" aria-hidden="true" />
-                      </h2>
-                    </Link>
-                  )}
-                </nav>
-                {previous && (
-                  <Link
-                    href={articleHref(previous.slug)}
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-                  >
-                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                    Back to the previous chapter
-                  </Link>
-                )}
-              </div>
-            </ArticleEndSection>
+            <ArticleEndSection
+              articleSlug={article.slug}
+              navigationId="adventure-next-steps"
+              next={next ? { href: articleHref(next.slug), title: next.title, label: "Read the next chapter" } : undefined}
+              secondary={deeperArticle ? {
+                href: articleHref(deeperArticle.slug),
+                title: deeperArticle.title,
+                label: "Go Deeper (optional)",
+              } : undefined}
+              previous={previous ? {
+                href: articleHref(previous.slug),
+                label: "Back to the previous chapter",
+              } : undefined}
+            />
           </article>
         </main>
       </div>
@@ -410,27 +387,17 @@ export function ArticlePlaceholder() {
       ? `${routeGroup}-${params.slug || ""}`
       : params.slug || "";
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [articleSlug]);
-
   const article = getArticleBySlug(articleSlug);
   if (!article) return <NotFound />;
 
   const groupArticles = getArticlesInGroup(article.group);
   const articleIndex = groupArticles.findIndex((item) => item.slug === article.slug);
-  const previous = article.group === "linked" ? undefined : groupArticles[articleIndex - 1];
-  const next = article.group === "linked" ? undefined : groupArticles[articleIndex + 1];
-  const mainGuideArticle = article.group === "deeper" ? getGuideArticleForDeeper(article.slug) : undefined;
   const guideArticles = article.group === "deeper" ? getArticlesInGroup("adventure") : [];
+  const mainGuideArticle = guideArticles.find((item) => item.relatedSlug === article.slug);
   const mainGuideIndex = mainGuideArticle
     ? guideArticles.findIndex((item) => item.slug === mainGuideArticle.slug)
     : -1;
   const nextGuideArticle = mainGuideIndex >= 0 ? guideArticles[mainGuideIndex + 1] : undefined;
-  const deeperContinuation = article.group === "deeper" && article.continuation &&
-    !/^\/deeper(?:\/|-)/.test(article.continuation.href)
-    ? article.continuation
-    : undefined;
   const blocks = article.blocks;
   const linkedSource = article.group === "linked"
     ? linkedArticleMetadata.find((item) => item.slug === article.slug)
@@ -453,19 +420,6 @@ export function ArticlePlaceholder() {
     return `${getArticlePath(slug)}?${journeyParams.toString()}`;
   };
 
-  const continuationHref = (href: string) => {
-    const internalArticle = href.match(/^\/(adv|deeper)\/([^/?#]+)$/);
-    if (internalArticle) {
-      return articleHref(`${internalArticle[1]}-${internalArticle[2]}`);
-    }
-    const journey = currentSearch.get("journey");
-    if (!journey) return href;
-    const separator = href.includes("?") ? "&" : "?";
-    return `${href}${separator}journey=${encodeURIComponent(journey)}&entry=${encodeURIComponent(
-      currentSearch.get("entry") || "direct",
-    )}&from=faq&step=faq`;
-  };
-
   if (article.group === "adventure") {
     return (
       <AdventureArticleView
@@ -473,7 +427,6 @@ export function ArticlePlaceholder() {
         groupArticles={groupArticles}
         articleIndex={articleIndex}
         articleHref={articleHref}
-        continuationHref={continuationHref}
       />
     );
   }
@@ -542,83 +495,20 @@ export function ArticlePlaceholder() {
             </div>
           </div>
 
-          <ArticleEndSection articleSlug={article.slug} compactReaction={article.group === "deeper"}>
-            {article.group === "deeper" ? (
-              <nav aria-label="Go Deeper navigation" className="grid gap-3 sm:grid-cols-[1.3fr_0.7fr] sm:gap-4">
-                <Link
-                  href={nextGuideArticle
-                    ? articleHref(nextGuideArticle.slug)
-                    : deeperContinuation
-                      ? continuationHref(deeperContinuation.href)
-                      : "/explore-articles"}
-                  className="group min-w-0 rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-5 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-7"
-                >
-                  <span className="block text-xs font-bold uppercase tracking-wide text-blue-100 sm:text-sm">
-                    {nextGuideArticle ? "Read the next chapter" : deeperContinuation ? "Continue the journey" : "Explore the Guide"}
-                  </span>
-                  <h2 className="mt-2 flex items-start justify-between gap-3 font-serif text-xl font-bold leading-tight text-white sm:text-3xl">
-                    <span className="min-w-0 break-words">
-                      {nextGuideArticle?.title ?? deeperContinuation?.label.replace(/^Go Further:\s*/i, "") ?? "Adventure Guide"}
-                    </span>
-                    <ArrowRight className="h-6 w-6 shrink-0 text-white transition-transform group-hover:translate-x-1 sm:h-8 sm:w-8" aria-hidden="true" />
-                  </h2>
-                </Link>
-                <Link
-                  href={mainGuideArticle ? articleHref(mainGuideArticle.slug) : "/explore-articles"}
-                  className="group min-w-0 rounded-xl border border-border-soft bg-white p-5 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
-                >
-                  <span className="block text-xs font-bold uppercase tracking-wide text-slate sm:text-sm">
-                    {mainGuideArticle ? "Back to the chapter" : "Back to the Guide"}
-                  </span>
-                  <h2 className="mt-2 flex items-start gap-3 text-lg font-bold leading-snug text-navy sm:text-xl">
-                    <ArrowLeft className="h-5 w-5 shrink-0 text-brand transition-transform group-hover:-translate-x-1 sm:h-6 sm:w-6" aria-hidden="true" />
-                    <span className="min-w-0 break-words">{mainGuideArticle?.title ?? "Adventure Guide"}</span>
-                  </h2>
-                </Link>
-              </nav>
-            ) : (
-              <>
-                {article.relatedSlug && getArticleBySlug(article.relatedSlug) && (
-                  <div className="rounded-2xl border border-warm-200 bg-warm-50 p-6 sm:p-8">
-                    <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Continue exploring</p>
-                    <Link href={articleHref(article.relatedSlug)} className="inline-flex items-center text-xl font-semibold text-navy hover:text-brand">
-                      {getArticleBySlug(article.relatedSlug)?.title}
-                      <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-                    </Link>
-                  </div>
-                )}
-                {article.group !== "linked" && (
-                  <nav aria-label="Article navigation" className="mt-8 grid gap-3 sm:grid-cols-2">
-                    {previous ? (
-                      <Link href={articleHref(previous.slug)} className="group rounded-xl border border-border-soft bg-white p-5 transition-all hover:border-brand/40 hover:shadow-sm">
-                        <span className="block text-xs font-bold uppercase tracking-wider text-slate">Previous</span>
-                        <span className="mt-2 flex items-center font-semibold text-navy group-hover:text-brand">
-                          <ArrowLeft className="mr-2 h-4 w-4" /> {previous.title}
-                        </span>
-                      </Link>
-                    ) : <span aria-hidden="true" />}
-                    {next ? (
-                      <Link href={articleHref(next.slug)} className="group rounded-xl border border-border-soft bg-white p-5 text-left transition-all hover:border-brand/40 hover:shadow-sm sm:text-right">
-                        <span className="block text-xs font-bold uppercase tracking-wider text-slate">Next</span>
-                        <span className="mt-2 flex items-center justify-end font-semibold text-navy group-hover:text-brand">
-                          {next.title} <ArrowRight className="ml-2 h-4 w-4" />
-                        </span>
-                      </Link>
-                    ) : <span aria-hidden="true" />}
-                  </nav>
-                )}
-                {article.continuation && (
-                  <div className="mt-8 rounded-2xl border border-warm-200 bg-warm-50 p-6 sm:p-8">
-                    <p className="mb-2 text-sm font-bold uppercase tracking-wider text-warm-700">Your next step</p>
-                    <Link href={continuationHref(article.continuation.href)} className="inline-flex items-center text-xl font-semibold text-navy hover:text-brand">
-                      {article.continuation.label}
-                      <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-                    </Link>
-                  </div>
-                )}
-              </>
-            )}
-          </ArticleEndSection>
+          <ArticleEndSection
+            articleSlug={article.slug}
+            next={nextGuideArticle ? {
+              href: articleHref(nextGuideArticle.slug),
+              title: nextGuideArticle.title,
+              label: "Read the next chapter",
+            } : undefined}
+            secondary={mainGuideArticle ? {
+              href: articleHref(mainGuideArticle.slug),
+              title: mainGuideArticle.title,
+              label: "Back to the chapter",
+              back: true,
+            } : undefined}
+          />
         </article>
       </main>
     </Layout>

@@ -80,6 +80,14 @@ function findMissingPublishedLinks(catalog, publishedLinks) {
     );
 }
 
+function articleSlugFromHref(href) {
+  if (typeof href !== "string") return undefined;
+  const legacy = href.match(/^\/((?:adv|deeper|more)-[a-z0-9-]+)(?:[?#].*)?$/);
+  if (legacy) return legacy[1];
+  const canonical = href.match(/^\/(adv|deeper)\/([a-z0-9-]+)(?:[?#].*)?$/);
+  return canonical ? `${canonical[1]}-${canonical[2]}` : undefined;
+}
+
 function validateArticleLibrary() {
   const library = readJson(articleLibraryPath);
   const importedDeeper = readJson(importedDeeperPath);
@@ -90,6 +98,7 @@ function validateArticleLibrary() {
   if (!Array.isArray(articles) || articles.length === 0) {
     return ["article-library.json must contain a non-empty articles array"];
   }
+  const publishedArticles = articles.filter((article) => !article?.retired);
 
   const slugs = new Set();
   const catalog = new Map();
@@ -104,7 +113,7 @@ function validateArticleLibrary() {
     if (!catalog.has(article.slug)) catalog.set(article.slug, article);
   }
 
-  for (const article of articles) {
+  for (const article of publishedArticles) {
     if (
       !article ||
       typeof article !== "object" ||
@@ -121,7 +130,7 @@ function validateArticleLibrary() {
     if (!catalog.has(article.faqSlug)) errors.push(`${article.slug} links from missing FAQ "${article.faqSlug}"`);
   }
 
-  for (const [articleIndex, article] of articles.entries()) {
+  for (const [articleIndex, article] of publishedArticles.entries()) {
     const label = `articles[${articleIndex}]`;
 
     if (!article || typeof article !== "object") {
@@ -178,13 +187,11 @@ function validateArticleLibrary() {
         errors.push(`${blockLabel}.href is empty`);
       }
 
-      const internalArticleLink =
-        typeof block.href === "string" &&
-        block.href.match(/^\/((?:adv|deeper|more)-[a-z0-9-]+)(?:[?#].*)?$/);
-      if (internalArticleLink && !catalog.has(internalArticleLink[1])) {
-        errors.push(
-          `${label} links to missing article route "/${internalArticleLink[1]}"`,
-        );
+      for (const href of [block.href, ...(block.links?.map((link) => link.href) ?? [])]) {
+        const linkedSlug = articleSlugFromHref(href);
+        if (linkedSlug && !catalog.has(linkedSlug)) {
+          errors.push(`${label} links to missing article route "${href}"`);
+        }
       }
     }
 
@@ -244,7 +251,7 @@ function validateArticleLibrary() {
   }
 
   for (const group of sequenceGroups) {
-    const sequence = articles
+    const sequence = publishedArticles
       .filter((article) => article?.group === group)
       .sort((a, b) => a.order - b.order);
     const firstOrder = sequence[0]?.order ?? 0;
@@ -294,6 +301,27 @@ test("article catalog and published article links are internally consistent", ()
   assert.deepEqual(errors, [], errors.join("\n"));
 });
 
+test("retired Go Deeper pages are not in the published catalog", () => {
+  const library = readJson(articleLibraryPath);
+  const retired = library.articles.filter((article) => article.retired).map((article) => article.slug).sort();
+  assert.deepEqual(retired, [
+    "deeper-how-to-experience-god",
+    "deeper-spiritual-breathing",
+  ]);
+  for (const slug of retired) {
+    assert.ok(!readJson(importedDeeperPath).some((article) => article.slug === slug), `${slug} is reimported`);
+    assert.ok(!readJson(linkedArticlesPath).some((article) => article.slug === slug), `${slug} is linked-only`);
+  }
+  const published = library.articles.filter((article) => !article.retired);
+  for (const article of published) {
+    for (const block of article.blocks) {
+      for (const href of [block.href, ...(block.links?.map((link) => link.href) ?? [])]) {
+        assert.ok(!retired.includes(articleSlugFromHref(href)), `${article.slug} still links to ${href}`);
+      }
+    }
+  }
+});
+
 test("published article link scanning covers page and layout entry points", () => {
   const missingSlug = "adv-missing-article";
   const fixtures = [
@@ -322,7 +350,7 @@ test("published article link scanning covers page and layout entry points", () =
 test("revised FAQ reading suggestions point to published resources", () => {
   const faqLinks = readJson(faqReadingLinksPath);
   const articleSlugs = new Set([
-    ...readJson(articleLibraryPath).articles.map((article) => article.slug),
+    ...readJson(articleLibraryPath).articles.filter((article) => !article.retired).map((article) => article.slug),
     ...readJson(importedDeeperPath).map((article) => article.slug),
     ...readJson(linkedArticlesPath).map((article) => article.slug),
   ]);

@@ -34,6 +34,7 @@ export type Article = {
   order: number;
   excerpt: string;
   blocks: ArticleBlock[];
+  retired?: boolean;
   relatedSlug?: string;
   continuation?: ArticleContinuation;
 };
@@ -183,14 +184,25 @@ const importedDeeperRecords: Article[] = generatedContent
   });
 
 export const ARTICLE_LIBRARY = [
-  ...(library.articles as Article[]).map((article) => {
+  ...(library.articles as Article[]).filter((article) => !article.retired).map((article) => {
     const updated = updatedBySlug.get(article.slug);
     const relatedLink = linkedFromFaq.get(article.slug);
     const sourceBlocks = updated && isApprovedFaq(article)
       ? revisedFaqBlocks(updated, article.blocks)
       : updated ? updated.blocks
-        .filter((block, index) => !(index === 0 && block.kind === "heading" && block.text === updated.title))
-        .map((block) => ({ type: block.kind, text: block.text, src: block.src, links: block.links }))
+        .filter((block, index) =>
+          !(index === 0 && block.kind === "heading" && block.text === updated.title) &&
+          !(article.group === "adventure" && /^_+$/.test(block.text.trim())))
+        .map((block) => ({
+          type: article.group === "adventure" &&
+            block.kind === "paragraph" &&
+            /^(?:Q:|Your thoughts:)/i.test(block.text)
+            ? "question" as const
+            : block.kind,
+          text: block.text,
+          src: block.src,
+          links: block.links,
+        }))
       : article.blocks;
     const guidePdfNavigationIndex = article.group === "adventure"
       ? sourceBlocks.findIndex((block) =>
