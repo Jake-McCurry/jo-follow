@@ -1,7 +1,8 @@
-import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
+import { ArrowLeft, BookOpen } from "lucide-react";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
+import { ArticleEndSection } from "@/components/article-end-section";
 import { getGFBook } from "@/data/go-further-library";
 import NotFound from "@/pages/not-found";
 
@@ -119,18 +120,14 @@ export function HeartAfterGodIntroPage() {
           </div>
         </article>
 
-        <nav aria-label="Intro navigation" className="mt-12 border-t border-border-soft pt-8">
-          <Link
-            href={`/gf/${book.slug}/${book.readings[0].slug}`}
-            className="group block rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-5 text-white shadow-sm transition-colors hover:bg-blue-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
-          >
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-100">Begin the first reading</span>
-            <span className="mt-2 flex items-center justify-between gap-3 text-lg font-bold">
-              {book.readings[0].title}
-              <ArrowRight className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </span>
-          </Link>
-        </nav>
+        <ArticleEndSection
+          articleSlug={`gf-${book.slug}-${book.introChapter.slug}`}
+          next={{
+            href: `/gf/${book.slug}/${book.readings[0].slug}`,
+            title: book.readings[0].title,
+            label: "Begin the first reading",
+          }}
+        />
       </main>
     </Layout>
   );

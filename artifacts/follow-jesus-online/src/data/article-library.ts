@@ -34,6 +34,7 @@ export type Article = {
   order: number;
   excerpt: string;
   blocks: ArticleBlock[];
+  retired?: boolean;
   relatedSlug?: string;
   continuation?: ArticleContinuation;
 };
@@ -183,7 +184,7 @@ const importedDeeperRecords: Article[] = generatedContent
   });
 
 export const ARTICLE_LIBRARY = [
-  ...(library.articles as Article[]).map((article) => {
+  ...(library.articles as Article[]).filter((article) => !article.retired).map((article) => {
     const updated = updatedBySlug.get(article.slug);
     const relatedLink = linkedFromFaq.get(article.slug);
     const sourceBlocks = updated && isApprovedFaq(article)

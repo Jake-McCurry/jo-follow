@@ -1751,6 +1751,7 @@
       "slug": "deeper-spiritual-breathing",
       "title": "Spiritual Breathing",
       "group": "deeper",
+      "retired": true,
       "order": 12,
       "excerpt": "As a follower of Christ (Christian), you are indwelt by the Holy Spirit. His presence in your life is the sign and seal that you are in Christ and belong to God.",
       "blocks": [
@@ -1848,6 +1849,7 @@
       "slug": "deeper-how-to-experience-god",
       "title": "How to Experience God’s Forgiveness",
       "group": "deeper",
+      "retired": true,
       "order": 13,
       "excerpt": "God’s forgiveness will truly set you free. If you are seeking God’s forgiveness, the good news is that He has already forgiven you in Jesus Christ. To experience His forgiveness, you…",
       "blocks": [
@@ -1947,11 +1949,6 @@
         {
           "type": "paragraph",
           "text": "\"Where your sins are great, God's grace is even greater.\" (Romans 5:20-21)"
-        },
-        {
-          "type": "link",
-          "text": "Learn more about \"How to Experience God's Forgiveness\"",
-          "href": "/deeper-how-to-experience-god"
         },
         {
           "type": "heading",
@@ -2190,11 +2187,6 @@
         {
           "type": "paragraph",
           "text": "First and foremost, God wants you to experience and enjoy His love for you."
-        },
-        {
-          "type": "link",
-          "text": "Learn more about how to “Experience God’s Love”",
-          "href": "/deeper-how-to-experience-god"
         },
         {
           "type": "paragraph",
@@ -2570,11 +2562,6 @@
           "text": "\"But if we confess our sins, he is faithful and righteous, forgiving us our sins and cleansing us from all unrighteousness.\" (1 John 1:9)."
         },
         {
-          "type": "link",
-          "text": "Learn \"Spiritual Breathing\" to maintain your fellowship with God",
-          "href": "/deeper-spiritual-breathing"
-        },
-        {
           "type": "heading",
           "text": "Your Questions?"
         },
@@ -2745,11 +2732,6 @@
         {
           "type": "paragraph",
           "text": "First and foremost, God wants you to experience and enjoy His love for you."
-        },
-        {
-          "type": "link",
-          "text": "Learn more about how to “Experience God’s Love”",
-          "href": "/deeper-how-to-experience-god"
         },
         {
           "type": "paragraph",

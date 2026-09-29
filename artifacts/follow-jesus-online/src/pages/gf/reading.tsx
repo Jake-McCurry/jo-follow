@@ -1,9 +1,10 @@
 import { Layout } from "@/components/layout";
 import { Link, useParams } from "wouter";
 import { getGFBook } from "@/data/go-further-library";
-import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
+import { ArrowLeft, BookOpen } from "lucide-react";
 import NotFound from "@/pages/not-found";
 import { Button } from "@/components/ui/button";
+import { ArticleEndSection } from "@/components/article-end-section";
 import articleContent from "virtual:article-content";
 import { DefaultArticleBlockView } from "@/pages/article-placeholder";
 
@@ -17,7 +18,7 @@ export function GFReadingPage() {
   if (readingIndex === -1) return <NotFound />;
 
   const reading = book.readings[readingIndex];
-   const previous = book.readings[readingIndex - 1] ?? (readingIndex === 0 ? book.introChapter : undefined);
+  const previous = book.readings[readingIndex - 1] ?? (readingIndex === 0 ? book.introChapter : undefined);
   const next = book.readings[readingIndex + 1];
   const article = articleContent.find((item) =>
     item.route === `/gf/${book.slug}/${reading.slug}`,
@@ -30,7 +31,7 @@ export function GFReadingPage() {
 
   return (
     <Layout>
-      <main className="container mx-auto flex min-h-[70vh] max-w-3xl flex-col px-5 py-8 sm:px-8 md:py-10">
+      <main className="container mx-auto max-w-3xl px-5 py-8 sm:px-8 md:py-10">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
           <Button asChild variant="ghost" className="-ml-4 text-slate hover:text-navy hover:bg-warm-50">
             <Link href={`/gf/${book.slug}`}>
@@ -42,7 +43,7 @@ export function GFReadingPage() {
           </span>
         </div>
 
-        <article className="animate-in fade-in slide-in-from-bottom-6 duration-700 flex-1">
+        <article className="animate-in fade-in slide-in-from-bottom-6 duration-700">
           <header className="mb-12">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
               <BookOpen className="h-3.5 w-3.5" /> {book.title}
@@ -62,61 +63,18 @@ export function GFReadingPage() {
           </div>
         </article>
 
-        <nav aria-label="Reading navigation" className="mt-12 pt-8 border-t border-border-soft">
-          <div className="grid gap-4 sm:grid-cols-2">
-            {previous ? (
-              <Link
-                href={`/gf/${book.slug}/${previous.slug}`}
-                className="group rounded-xl border border-border-soft bg-white p-5 hover:border-brand/40 transition-colors shadow-sm"
-              >
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate">Previous</span>
-                <span className="mt-2 flex items-center font-bold text-navy group-hover:text-brand transition-colors">
-                  <ArrowLeft className="mr-2 h-4 w-4 shrink-0" /> <span className="truncate">{previous.title}</span>
-                </span>
-              </Link>
-            ) : <span aria-hidden="true" />}
-            
-            {next ? (
-              <Link
-                href={`/gf/${book.slug}/${next.slug}`}
-                className="group rounded-xl border border-border-soft bg-white p-5 text-left hover:border-brand/40 transition-colors sm:text-right flex flex-col items-start sm:items-end shadow-sm"
-              >
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate">Next reading</span>
-                <span className="mt-2 flex items-center justify-end font-bold text-navy group-hover:text-brand transition-colors w-full">
-                  <span className="truncate">{next.title}</span> <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
-                </span>
-              </Link>
-            ) : (
-              <Link
-                href={`/gf/${book.slug}`}
-                className="group rounded-xl border border-border-soft bg-white p-5 text-left hover:border-brand/40 transition-colors sm:text-right flex flex-col items-start sm:items-end shadow-sm"
-              >
-                <span className="block text-xs font-bold uppercase tracking-wider text-slate">Finished</span>
-                <span className="mt-2 flex items-center justify-end font-bold text-navy group-hover:text-brand transition-colors w-full">
-                  Back to the reading list <BookOpen className="ml-2 h-4 w-4 shrink-0" />
-                </span>
-              </Link>
-            )}
-          </div>
-          
-          {next && (
-            <div className="mt-8 text-center sm:hidden">
-              <Link 
-                href={`/gf/${book.slug}`}
-                className="text-sm font-bold text-slate hover:text-navy underline underline-offset-4"
-              >
-                Back to the reading list
-              </Link>
-            </div>
-          )}
-          {next && (
-             <div className="mt-8 text-center hidden sm:block">
-               <Button asChild variant="ghost" className="text-slate hover:text-navy hover:bg-warm-50">
-                 <Link href={`/gf/${book.slug}`}>Back to the reading list</Link>
-               </Button>
-             </div>
-          )}
-        </nav>
+        <ArticleEndSection
+          articleSlug={`gf-${book.slug}-${reading.slug}`}
+          next={next ? {
+            href: `/gf/${book.slug}/${next.slug}`,
+            title: next.title,
+            label: "Read the next reading",
+          } : undefined}
+          previous={previous ? {
+            href: `/gf/${book.slug}/${previous.slug}`,
+            label: readingIndex === 0 ? "Back to the introduction" : "Back to the previous reading",
+          } : undefined}
+        />
       </main>
     </Layout>
   );
