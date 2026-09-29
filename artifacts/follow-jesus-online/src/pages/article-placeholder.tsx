@@ -542,7 +542,7 @@ export function ArticlePlaceholder() {
             </div>
           </div>
 
-          <ArticleEndSection articleSlug={article.slug}>
+          <ArticleEndSection articleSlug={article.slug} compactReaction={article.group === "deeper"}>
             {article.group === "deeper" ? (
               <nav aria-label="Go Deeper navigation" className="grid gap-3 sm:grid-cols-[1.3fr_0.7fr] sm:gap-4">
                 <Link
