@@ -10,6 +10,8 @@ export type GFBook = {
   subtitle: string;
   desc: string;
   intro: string[];
+  introChapter?: GFReading;
+  tocLinkStyle?: 'title' | 'title-and-more';
   readings: GFReading[];
   closing: string;
   buttonText: string;
@@ -25,8 +27,14 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       'God is not first after your schedule, your words, or the life other people can see. He is after your heart.',
       'That is good news. The heart is where you actually live—where you want, fear, hide, and hope. If Christ is welcome there, He will, in time, walk through every other room. If He is kept at the door, the rest of life can look ordered and still remain unchanged.',
       'These eight short readings are for that inner place. They are not a program for becoming impressive. They are a quiet look at what God sees, what a new heart means, and how His Spirit does the work you cannot do by trying harder.',
-      'Read them in order if you can. Or open the one that is of particular interest to you today.',
+      'Read them in order if you can. Or open the one that names what is happening in you today.',
     ],
+    introChapter: {
+      slug: 'the-restless-heart',
+      title: 'The Restless Heart',
+      desc: 'Begin with the inner life: why the heart matters and how to walk through these eight reflections.',
+    },
+    tocLinkStyle: 'title-and-more',
     readings: [
       {
         slug: 'the-heart-reflects-the-person',
@@ -70,7 +78,7 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       },
     ],
     closing: 'He already knows the rooms you would rather keep closed. This is an invitation to let Him in—not as a guest for an hour, but as the One who lives at the center.',
-    buttonText: 'Begin the first reading',
+    buttonText: 'Read the Intro',
   },
   {
     slug: 'your-new-identity-in-christ',
@@ -83,6 +91,7 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       'These nine short readings are for that settling. They are not nine ways to feel better about yourself. They are a slow look at what God has already declared: child, saint, member, citizen. Believe it. Walk in it. Choose from it. Live it on an ordinary day.',
       'Read them in order if you can. Or open the one that names the old label you still hear.',
     ],
+    tocLinkStyle: 'title',
     readings: [
       {
         slug: 'embracing-your-new-identity-in-christ',
@@ -111,8 +120,8 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       },
       {
         slug: 'you-are-a-citizen-of-gods-kingdom',
-        title: '6. You Are a Citizen of God',
-        desc: 'Your true citizenship is not of this world. You belong to God and represent Him in everyday life.',
+        title: '6. You Are a Citizen of God’s Kingdom',
+        desc: 'Your true citizenship is not of this world. You now belong to an unshakable kingdom and represent its King.',
       },
       {
         slug: 'choosing-wisely-with-your-new-identity',
@@ -144,6 +153,7 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       'These six short readings are an invitation to look up. They are not a catalog of ideas about God. They are a quiet beholding of His being, His power, His integrity, and His goodness—so that ordinary days can be lived in the light of who He actually is.',
       'Read them in order if you can. Or open the one that names the question you carry about Him today.',
     ],
+    tocLinkStyle: 'title',
     readings: [
       {
         slug: 'the-supreme-pursuit-of-the-heart',
@@ -152,23 +162,23 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       },
       {
         slug: 'attributes-of-being',
-        title: '2. Attributes of Self-Existence',
-        desc: 'God has always existed and depends on nothing He has made.',
+        title: '2. Attributes of Being',
+        desc: 'God does not depend on anything He has made. He is the One who simply is—and all life flows from Him.',
       },
       {
         slug: 'attributes-of-ability',
-        title: '3. Attributes of Sovereignty',
-        desc: 'God reigns over all things with wisdom and power.',
+        title: '3. Attributes of Ability',
+        desc: 'Nothing you face is beyond His power or hidden from His sight. The God who is able is also near—and He does not change.',
       },
       {
         slug: 'attributes-of-integrity',
-        title: '4. Attributes of Holiness',
-        desc: 'God is completely set apart, pure in all He is and does.',
+        title: '4. Attributes of Integrity',
+        desc: 'God’s character has no fracture and no shadow. The purity that humbles the heart is the same integrity that draws it near.',
       },
       {
         slug: 'attributes-of-goodness',
-        title: '5. Attributes of Love',
-        desc: 'His love moves toward us and calls us to love others.',
+        title: '5. Attributes of Goodness',
+        desc: 'The heart of God is not only holy. It is goodness that moves toward the undeserving and does not let go.',
       },
       {
         slug: 'live-in-the-light-of-his-majesty',
@@ -190,6 +200,7 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       'These nine short readings are a practical walk into that companionship. They will help you know who the Spirit is, how a surrendered heart is filled, what He has already secured in you, and how His fruit grows over time—not in a rare crisis, but in daily step with the One who already dwells within.',
       'Read them in order if you can. Or open the one that names the place you feel weakest today.',
     ],
+    tocLinkStyle: 'title',
     readings: [
       {
         slug: 'who-is-the-holy-spirit',
@@ -208,7 +219,7 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
       },
       {
         slug: 'how-to-be-filled-and-empowered-by-the-holy-spirit',
-        title: '4. How Can a Person Be Filled and Empowered by the Holy Spirit?',
+        title: '4. How to Be Filled and Empowered by the Holy Spirit',
         desc: 'Being filled with the Spirit is not a rare crisis. It is a daily yielding to His direction and power.',
       },
       {

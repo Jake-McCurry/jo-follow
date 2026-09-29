@@ -17,7 +17,7 @@ export function GFReadingPage() {
   if (readingIndex === -1) return <NotFound />;
 
   const reading = book.readings[readingIndex];
-  const previous = book.readings[readingIndex - 1];
+   const previous = book.readings[readingIndex - 1] ?? (readingIndex === 0 ? book.introChapter : undefined);
   const next = book.readings[readingIndex + 1];
   const article = articleContent.find((item) =>
     item.route === `/gf/${book.slug}/${reading.slug}`,

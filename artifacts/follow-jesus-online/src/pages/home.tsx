@@ -6,14 +6,22 @@ import { ShareButton } from "@/components/share-button";
 import { ArrowRight, BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
+const guideHeroUrl = `${import.meta.env.BASE_URL}guide-wilderness-hero.jpg`;
 const guideDownloadUrl = `${import.meta.env.BASE_URL}adventure-guide.pdf`;
 
 export function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-[#006BB3] py-8 text-white md:py-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#007AE0]/30 to-[#004E8A]/35"></div>
+      <section className="relative flex min-h-[400px] items-start overflow-hidden bg-[#003A66] py-12 text-white sm:min-h-[420px] md:min-h-[470px] md:py-16">
+        <img
+          src={guideHeroUrl}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#003A66]/95 via-[#003A66]/65 to-[#003A66]/20" />
         
         <div className="container relative z-10 px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white text-balance leading-tight">
