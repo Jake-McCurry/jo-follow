@@ -189,8 +189,19 @@ export const ARTICLE_LIBRARY = [
     const sourceBlocks = updated && isApprovedFaq(article)
       ? revisedFaqBlocks(updated, article.blocks)
       : updated ? updated.blocks
-        .filter((block, index) => !(index === 0 && block.kind === "heading" && block.text === updated.title))
-        .map((block) => ({ type: block.kind, text: block.text, src: block.src, links: block.links }))
+        .filter((block, index) =>
+          !(index === 0 && block.kind === "heading" && block.text === updated.title) &&
+          !(article.group === "adventure" && /^_+$/.test(block.text.trim())))
+        .map((block) => ({
+          type: article.group === "adventure" &&
+            block.kind === "paragraph" &&
+            /^(?:Q:|Your thoughts:)/i.test(block.text)
+            ? "question" as const
+            : block.kind,
+          text: block.text,
+          src: block.src,
+          links: block.links,
+        }))
       : article.blocks;
     const guidePdfNavigationIndex = article.group === "adventure"
       ? sourceBlocks.findIndex((block) =>
