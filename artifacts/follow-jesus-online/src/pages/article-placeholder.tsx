@@ -216,11 +216,14 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
 
   if (block.type === "question") {
     return (
-      <div className="not-prose my-3 rounded-lg border-l-4 border-warm-500 bg-warm-50 px-4 py-2 sm:px-5">
-        <span className="block text-[11px] font-semibold leading-snug text-warm-700">REFLECT:</span>
-        <p className="m-0 text-lg leading-snug text-navy sm:text-xl">
-          <RichText text={block.text.replace(/^Q:\s*/, "")} />
+      <div className="not-prose my-10 text-navy">
+        <p className="m-0 text-xl leading-relaxed sm:text-2xl">
+          <RichText text={block.text} />
         </p>
+        <div className="mt-8 space-y-8 sm:mt-10 sm:space-y-10" aria-hidden="true">
+          <div className="h-8 border-b border-navy sm:h-10" />
+          <div className="h-8 border-b border-navy sm:h-10" />
+        </div>
       </div>
     );
   }
