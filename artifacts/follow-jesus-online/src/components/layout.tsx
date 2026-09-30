@@ -91,7 +91,7 @@ export function Layout({ children }: { children: ReactNode }) {
                 onClick={() => setIsMenuOpen(false)}
                 className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
-                Rewatch the Video
+                Rewatch the Videos
               </Link>
               <Link
                 href="/bible/John/1"
