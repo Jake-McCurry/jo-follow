@@ -276,8 +276,7 @@
           "type": "paragraph",
           "text": "These are not requirements to earn His love. They are the natural ways a new life in Christ begins to take shape. As you move through the rest of this booklet, look up the verses, respond honestly, and ask God to form these patterns in you. He is already committed to the work He has begun."
         }
-      ],
-      "relatedSlug": "deeper-assurance-of-your-salvation"
+      ]
     },
     {
       "slug": "adv-your-new-identity-christ",
@@ -587,8 +586,7 @@
           "type": "paragraph",
           "text": "Whenever you become aware of sin or self-centeredness, you can turn quickly: confess it, and by faith entrust yourself again to the Spirit’s leadership. He is always ready to restore and empower you."
         }
-      ],
-      "relatedSlug": "more-the-holy-spirit"
+      ]
     },
     {
       "slug": "adv-walking-by-faith",
@@ -701,8 +699,7 @@
           "type": "paragraph",
           "text": "“Don’t copy the behavior and customs of this world, but let God transform you into a new person by changing the way you think. Then you will learn to know God’s will for you, which is good and pleasing and perfect.” (Romans 12:2, NLT)"
         }
-      ],
-      "relatedSlug": "deeper-faith-knowing-who-you-can-trust"
+      ]
     },
     {
       "slug": "adv-gods-word",
@@ -1593,6 +1590,7 @@
       "slug": "deeper-assurance-of-your-salvation",
       "title": "Assurance of Your Salvation",
       "group": "deeper",
+      "retired": true,
       "order": 10,
       "excerpt": "The assurance of our relationship with God is based on the authority of His Word.",
       "blocks": [
@@ -1654,6 +1652,7 @@
       "slug": "deeper-faith-knowing-who-you-can-trust",
       "title": "Faith: Knowing Whom You Can Trust",
       "group": "deeper",
+      "retired": true,
       "order": 11,
       "excerpt": "“Now without faith it is impossible to please him, for the one who approaches God must believe that he exists and that he rewards those who seek him.” —Hebrews 11:6",
       "blocks": [
@@ -1986,11 +1985,6 @@
         {
           "type": "paragraph",
           "text": "You'll have wins and losses, good days and tough ones, times of fast progress and moments when you feel stuck or take steps backward. You may struggle with old sins or not always feel or act like a Christian. But your relationship with God remains secure—like a marriage vow that endures beyond wedding-day joy."
-        },
-        {
-          "type": "link",
-          "text": "Learn more about “Assurance of Your Salvation”.",
-          "href": "/deeper-assurance-of-your-salvation"
         },
         {
           "type": "heading",
@@ -2495,22 +2489,12 @@
           "text": "When you start feeling increasingly troubled or uncomfortable about your old habits and sins, that's the Holy Spirit gently prompting you from within—like a tap on your shoulder. Respond to Him and deal with them."
         },
         {
-          "type": "link",
-          "text": "Learn more about overcoming old habits and sins: “Struggling with Destructive Behavior?”",
-          "href": "/more-struggling-with-destructive-behavior"
-        },
-        {
           "type": "heading",
           "text": "\"How do I overcome temptations?\""
         },
         {
           "type": "paragraph",
           "text": "God promises in the Bible (God’s Word): “No trial has overtaken you that is not faced by others. And God is faithful: He will not let you be tried beyond what you are able to bear, but with the trial will also provide a way out so that you may be able to endure it.” (1 Corinthians 10:13)"
-        },
-        {
-          "type": "link",
-          "text": "Learn more about \"Fleeing Temptation\"",
-          "href": "/more-fleeing-temptation"
         },
         {
           "type": "heading",
@@ -3152,11 +3136,6 @@
           "text": "Genuine faith can be weak or strong."
         },
         {
-          "type": "link",
-          "text": "“Faith: Knowing Whom You Can Trust”",
-          "href": "/deeper-faith-knowing-who-you-can-trust"
-        },
-        {
           "type": "heading",
           "text": "“How do I know Christianity is actually true?”"
         },
@@ -3327,6 +3306,7 @@
       "slug": "more-the-holy-spirit",
       "title": "The Holy Spirit",
       "group": "resources",
+      "retired": true,
       "order": 0,
       "excerpt": "What The Bible Says",
       "blocks": [
@@ -3592,6 +3572,7 @@
       "slug": "more-the-bible",
       "title": "The Bible",
       "group": "resources",
+      "retired": true,
       "order": 1,
       "excerpt": "What the Bible Says",
       "blocks": [
@@ -3957,6 +3938,7 @@
       "slug": "more-struggling-with-destructive-behavior",
       "title": "Struggling with Destructive Behavior?",
       "group": "resources",
+      "retired": true,
       "order": 2,
       "excerpt": "Do you have an undesirable attitude or ungodly behavior that causes problems? Is a destructive habit jeopardizing your future?",
       "blocks": [
@@ -4090,6 +4072,7 @@
       "slug": "more-fleeing-temptation",
       "title": "Fleeing Temptation",
       "group": "resources",
+      "retired": true,
       "order": 3,
       "excerpt": "Temptations are one of the most frequently used tactics of the enemy to get us to depend on something other than God.",
       "blocks": [

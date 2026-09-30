@@ -251,8 +251,10 @@ function validateArticleLibrary() {
   }
 
   for (const group of sequenceGroups) {
-    const sequence = publishedArticles
-      .filter((article) => article?.group === group)
+    const sequence = [
+      ...publishedArticles.filter((article) => article?.group === group),
+      ...(group === "deeper" ? importedDeeper : []),
+    ]
       .sort((a, b) => a.order - b.order);
     const firstOrder = sequence[0]?.order ?? 0;
     const expectedOrders = sequence.map((_, index) => firstOrder + index);
@@ -301,24 +303,62 @@ test("article catalog and published article links are internally consistent", ()
   assert.deepEqual(errors, [], errors.join("\n"));
 });
 
-test("retired Go Deeper pages are not in the published catalog", () => {
+test("retired legacy Go Deeper and More to Explore pages stay in the source catalog only", () => {
   const library = readJson(articleLibraryPath);
   const retired = library.articles.filter((article) => article.retired).map((article) => article.slug).sort();
-  assert.deepEqual(retired, [
+  const retiredGoDeeper = library.articles
+    .filter((article) => article.retired && article.group === "deeper")
+    .map((article) => article.slug)
+    .sort();
+  const retiredMoreToExplore = library.articles
+    .filter((article) => article.retired && article.group === "resources")
+    .map((article) => article.slug)
+    .sort();
+  const expectedGoDeeper = [
+    "deeper-assurance-of-your-salvation",
+    "deeper-faith-knowing-who-you-can-trust",
     "deeper-how-to-experience-god",
     "deeper-spiritual-breathing",
-  ]);
+  ];
+  const expectedMoreToExplore = [
+    "more-fleeing-temptation",
+    "more-struggling-with-destructive-behavior",
+    "more-the-bible",
+    "more-the-holy-spirit",
+  ];
+  assert.deepEqual(retiredGoDeeper, expectedGoDeeper.sort());
+  assert.deepEqual(retiredMoreToExplore, expectedMoreToExplore.sort());
+  assert.equal(retiredGoDeeper.length, 4);
+  assert.equal(retiredMoreToExplore.length, 4);
+  assert.deepEqual(retired, [...expectedGoDeeper, ...expectedMoreToExplore].sort());
+
+  const retiredSet = new Set(retired);
+  const retainedFaithCompanion = "deeper-faith-knowing-god-who-is-trustworthy";
+  assert.ok(readJson(importedDeeperPath).some((article) => article.slug === retainedFaithCompanion));
+  assert.ok(!retiredSet.has(retainedFaithCompanion));
+
   for (const slug of retired) {
+    assert.equal(library.articles.filter((article) => article.slug === slug).length, 1, `${slug} was removed or duplicated`);
     assert.ok(!readJson(importedDeeperPath).some((article) => article.slug === slug), `${slug} is reimported`);
     assert.ok(!readJson(linkedArticlesPath).some((article) => article.slug === slug), `${slug} is linked-only`);
+    const article = library.articles.find((item) => item.slug === slug);
+    assert.ok(article.title && article.excerpt && article.blocks.length > 0, `${slug} source content was deleted`);
   }
   const published = library.articles.filter((article) => !article.retired);
   for (const article of published) {
+    assert.ok(!retiredSet.has(article.relatedSlug), `${article.slug} still points to retired companion ${article.relatedSlug}`);
     for (const block of article.blocks) {
       for (const href of [block.href, ...(block.links?.map((link) => link.href) ?? [])]) {
-        assert.ok(!retired.includes(articleSlugFromHref(href)), `${article.slug} still links to ${href}`);
+        assert.ok(!retiredSet.has(articleSlugFromHref(href)), `${article.slug} still links to ${href}`);
       }
     }
+  }
+
+  const staticLinks = listSourceFiles(sourceRoot).flatMap((filePath) =>
+    collectPublishedArticleSlugs(fs.readFileSync(filePath, "utf8"), filePath),
+  );
+  for (const { slug, location } of staticLinks) {
+    assert.ok(!retiredSet.has(slug), `${location} still publishes retired article route "/${slug}"`);
   }
 });
 
@@ -358,7 +398,11 @@ test("revised FAQ reading suggestions point to published resources", () => {
   const goFurtherSlugs = new Set(
     [...goFurtherSource.matchAll(/^\s+slug: '([^']+)'/gm)].map((match) => match[1]),
   );
-  const approvedExternal = "https://app.jesusonline.com/evidence";
+  const approvedExternal = new Set([
+    "https://app.jesusonline.com/evidence",
+    "https://app.jesusonline.com/series/73",
+    "https://app.jesusonline.com/series/72",
+  ]);
 
   for (const [faqSlug, suggestions] of Object.entries(faqLinks)) {
     assert.ok(articleSlugs.has(faqSlug), `Unknown FAQ: ${faqSlug}`);
@@ -369,9 +413,10 @@ test("revised FAQ reading suggestions point to published resources", () => {
         const [, , book, reading] = href.split("/");
         assert.ok(goFurtherSlugs.has(book) && goFurtherSlugs.has(reading), `${faqSlug}: unknown reading ${href}`);
       } else if (href.startsWith("/")) {
-        assert.ok(articleSlugs.has(href.slice(1)), `${faqSlug}: unknown article ${href}`);
+        const slug = articleSlugFromHref(href) ?? href.slice(1);
+        assert.ok(articleSlugs.has(slug), `${faqSlug}: unknown article ${href}`);
       } else {
-        assert.equal(href, approvedExternal, `${faqSlug}: unapproved external link ${href}`);
+        assert.ok(approvedExternal.has(href), `${faqSlug}: unapproved external link ${href}`);
       }
     }
   }

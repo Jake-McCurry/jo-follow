@@ -1,9 +1,7 @@
 {
   "more-received-how-do-i-know-this-is-real": [
-    { "label": "Learn more about who God is", "href": "/more-who-is-god" }
-  ],
-  "more-received-how-should-i-handle-my-current-relationships": [
-    { "label": "Learn more about God’s Love", "href": "/more-gods-love" }
+    { "label": "Learn more about who God is", "href": "/more-who-is-god" },
+    { "label": "Learn more about becoming a “Citizen of Heaven”", "href": "/adv/citizen-of-heaven" }
   ],
   "more-returning-how-should-i-handle-the-relationships-and-patterns-i-left-behind": [
     { "label": "Learn more about how to “Love Your Neighbor as Yourself”", "href": "/gf/building-blocks-for-maturity/living-as-gods-family" }
@@ -15,7 +13,8 @@
     { "label": "Learn the habits", "href": "/more-seven-habits-for-intimacy-with-god" }
   ],
   "more-returning-other-questions": [
-    { "label": "Examine the evidence for yourself", "href": "https://app.jesusonline.com/evidence" },
+    { "label": "Examine the evidence for Jesus’ true identity", "href": "https://app.jesusonline.com/series/73" },
+    { "label": "Examine the evidence for the reliability of the Bible", "href": "https://app.jesusonline.com/series/72" },
     { "label": "This article will help you sort things through: “When You Get Hurt by the Church”", "href": "/more-when-you-got-hurt-by-the-church" }
   ],
   "more-believer-revisit-a-specific-area-of-spiritual-growth": [
