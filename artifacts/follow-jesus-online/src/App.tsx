@@ -99,7 +99,8 @@ function PageMetadata() {
       description = article.excerpt;
     }
   } else if (pathname === '/rewatch' || pathname === '/rewatch-video') {
-    title = 'How God Sees You Now | Follow Jesus Online';
+    title = 'Rewatch the Videos | Follow Jesus Online';
+    description = 'Watch How God Sees You Now, The Gift of Heaven, and Jesus’ Resurrection and You.';
   } else if (pathname === '/message') {
     title = 'Send a Message | Follow Jesus Online';
   } else if (pathname === '/admin/reactions') {
