@@ -21,7 +21,7 @@ export function Home() {
           fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#003A66]/95 via-[#003A66]/65 to-[#003A66]/20" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#004E8A]/90 via-[#003A66]/65 to-[#003A66]/20" />
         
         <div className="container relative z-10 px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white text-balance leading-tight">
