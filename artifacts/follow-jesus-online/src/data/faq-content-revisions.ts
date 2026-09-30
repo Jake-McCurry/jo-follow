@@ -3,9 +3,10 @@ type FaqSourceLink = {
   href: string;
 };
 
-type FaqSourceBlock = {
+export type FaqSourceBlock = {
   kind: "heading" | "paragraph" | "question" | "list" | "image";
   text: string;
+  headingLevel?: 2 | 3;
   src?: string;
   links?: FaqSourceLink[];
 };

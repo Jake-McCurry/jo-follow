@@ -2,6 +2,7 @@ import library from "./article-library.json";
 import importedDeeperArticles from "./imported-deeper-articles.json";
 import linkedArticleMetadata from "./linked-articles.json";
 import faqReadingLinks from "./faq-reading-links.json";
+import { applyBelieverResourceRevisions } from "./believer-resource-revisions";
 import {
   applyFaqContentRevisions,
   isRemovedFaqContent,
@@ -23,6 +24,7 @@ export type ArticleGroup =
 export type ArticleBlock = {
   type: "heading" | "paragraph" | "question" | "list" | "table-row" | "link" | "image";
   text: string;
+  headingLevel?: 2 | 3;
   href?: string;
   src?: string;
   links?: { label: string; href: string }[];
@@ -53,7 +55,7 @@ const updatedBySlug = new Map(
 
 function isApprovedFaq(article: Article) {
   return article.group === "received" || article.group === "rededicated" ||
-    (article.group === "believer" && [0, 2, 3].includes(article.order)) ||
+    article.group === "believer" ||
     (article.group === "no-decision" && [0, 2, 4].includes(article.order));
 }
 
@@ -63,7 +65,7 @@ function revisedFaqBlocks(
 ): ArticleBlock[] {
   const route = source.route.slice(1);
   const readingLinks = (faqReadingLinks as Record<string, { label: string; href: string }[]>)[route] ?? [];
-  const sourceBlocks = applyFaqContentRevisions(route, source.blocks)
+  const sourceBlocks = applyBelieverResourceRevisions(route, applyFaqContentRevisions(route, source.blocks))
     .filter((block) => !/^_+$/.test(block.text.trim()));
   const hasExplicitMessageLink = sourceBlocks.some((block) =>
     block.text.trim().toLowerCase() === "send a message" &&
@@ -100,6 +102,7 @@ function revisedFaqBlocks(
     blocks.push({
       type: block.kind,
       text,
+      ...(block.headingLevel ? { headingLevel: block.headingLevel } : {}),
       src: block.src,
       ...(links.length ? { links: links.sort((a, b) => text.indexOf(a.label) - text.indexOf(b.label)) } : {}),
     });

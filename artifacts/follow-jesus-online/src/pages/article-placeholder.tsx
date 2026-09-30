@@ -131,6 +131,13 @@ export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
     );
   }
   if (block.type === "heading") {
+    if (block.headingLevel === 3) {
+      return (
+        <h3 className="text-lg md:text-xl font-bold text-navy mt-8 mb-3 first:mt-0">
+          <LinkedRichText block={block} />
+        </h3>
+      );
+    }
     return (
       <h2 className="text-2xl md:text-3xl font-bold text-navy mt-12 mb-4 first:mt-0">
         <LinkedRichText block={block} />
@@ -407,6 +414,7 @@ export function ArticlePlaceholder() {
   const nextGuideArticle = mainGuideIndex >= 0 ? guideArticles[mainGuideIndex + 1] : undefined;
   const blocks = article.blocks;
   const isJourneyFaq = article.group === "received" || article.group === "rededicated";
+  const introInContentBox = isJourneyFaq || article.group === "believer";
   const linkedSource = article.group === "linked"
     ? linkedArticleMetadata.find((item) => item.slug === article.slug)
     : undefined;
@@ -463,7 +471,7 @@ export function ArticlePlaceholder() {
             <h1 className="max-w-3xl text-4xl font-bold leading-tight text-navy md:text-6xl">
               {article.title}
             </h1>
-             {!isJourneyFaq && firstParagraphIndex >= 0 && (
+             {!introInContentBox && firstParagraphIndex >= 0 && (
               <p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate">
                 <LinkedRichText block={blocks[firstParagraphIndex]} />
               </p>
@@ -481,7 +489,7 @@ export function ArticlePlaceholder() {
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <div className="space-y-5">
                 {blocks.map((block, index) => {
-                   if (!isJourneyFaq && index === firstParagraphIndex) return null;
+                   if (!introInContentBox && index === firstParagraphIndex) return null;
                    if (article.group === "deeper" && block.type === "question") return null;
                   if (block.type === "list") {
                     const previousBlock = blocks[index - 1];
