@@ -9,7 +9,7 @@
     "build": "vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test:articles": "node --test scripts/article-links.test.mjs && node --import tsx --test scripts/faq-content-revisions.test.ts scripts/believer-resource-revisions.test.ts",
+    "test:articles": "node --test scripts/article-links.test.mjs && node --import tsx --test scripts/faq-content-revisions.test.ts scripts/believer-resource-revisions.test.ts scripts/scripture-text.test.ts scripts/guide-main-format-revisions.test.ts scripts/guide-deeper-format-revisions.test.ts",
     "test:bible-study": "node --import tsx --test scripts/bible-study-validation.test.ts",
     "test:recent-page": "node --import tsx --test scripts/recent-page.test.ts"
   },

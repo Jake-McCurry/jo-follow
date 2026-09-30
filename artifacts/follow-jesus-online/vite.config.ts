@@ -599,6 +599,14 @@ function articleContentPlugin(): Plugin {
         const name = pathname.slice(prefix.length);
         const image = followImages.get(name);
         if (!image) {
+          // Uploaded article illustrations live in public; let Vite serve them
+          // rather than treating every non-archive image as missing.
+          const publicImage = path.join(import.meta.dirname, 'public/article-images', name);
+          if (
+            name === path.basename(name) &&
+            fs.existsSync(publicImage) &&
+            fs.statSync(publicImage).isFile()
+          ) return next();
           response.statusCode = 404;
           response.end('Image not found');
           return;
