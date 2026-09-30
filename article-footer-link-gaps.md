@@ -25,12 +25,9 @@ These five are the last reading in their respective books. They keep their previ
 
 All other Go Further readings have a next-reading link. The “A Heart After God” introduction links to its first reading; first readings in the other books have no previous-reading link because those books have no separate intro article.
 
-## Older Go Deeper articles without a current Guide-chapter pairing
+## Retired legacy articles
 
-These have no verified next Guide chapter or back-to-chapter card in the current companion mapping. Do not use former or guessed pairings; decide them editorially first. “Spiritual Breathing” and “How to Experience God’s Forgiveness” have been removed from the public catalog and are no longer mapping candidates.
-
-- [Assurance of Your Salvation](/deeper/assurance-of-your-salvation)
-- [Faith: Knowing Whom You Can Trust](/deeper/faith-knowing-who-you-can-trust)
+The four legacy Go Deeper pages and four older More to Explore resources have been retired from the public catalog and are no longer footer-navigation candidates. The similarly named imported ALJ companion “Faith: Knowing God Who Is Trustworthy” remains a distinct published article.
 
 ## Standalone articles without mapped Guide-footer cards
 
@@ -55,13 +52,6 @@ These are not currently assigned a next **Guide chapter** or an optional **Go De
 - [I Have Questions about Getting Connected Again](/more-returning-i-have-questions-about-getting-connected-again)
 - [I Want to Know Jesus More Deeply](/more-returning-i-want-to-know-jesus-more-deeply)
 - [More Questions?](/more-returning-other-questions)
-
-### Resources
-
-- [The Holy Spirit](/more-the-holy-spirit)
-- [The Bible](/more-the-bible)
-- [Struggling with Destructive Behavior?](/more-struggling-with-destructive-behavior)
-- [Fleeing Temptation](/more-fleeing-temptation)
 
 ### Questions for existing believers
 

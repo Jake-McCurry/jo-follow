@@ -2,6 +2,12 @@ import library from "./article-library.json";
 import importedDeeperArticles from "./imported-deeper-articles.json";
 import linkedArticleMetadata from "./linked-articles.json";
 import faqReadingLinks from "./faq-reading-links.json";
+import {
+  applyFaqContentRevisions,
+  isRemovedFaqContent,
+  redirectRetiredFaqReading,
+  shouldAppendFaqRelatedLink,
+} from "./faq-content-revisions";
 import generatedContent from "virtual:article-content";
 
 export type ArticleGroup =
@@ -55,11 +61,22 @@ function revisedFaqBlocks(
   source: (typeof generatedContent)[number],
   original: ArticleBlock[],
 ): ArticleBlock[] {
-  const readingLinks = (faqReadingLinks as Record<string, { label: string; href: string }[]>)[source.route.slice(1)] ?? [];
+  const route = source.route.slice(1);
+  const readingLinks = (faqReadingLinks as Record<string, { label: string; href: string }[]>)[route] ?? [];
+  const sourceBlocks = applyFaqContentRevisions(route, source.blocks)
+    .filter((block) => !/^_+$/.test(block.text.trim()));
+  const hasExplicitMessageLink = sourceBlocks.some((block) =>
+    block.text.trim().toLowerCase() === "send a message" &&
+    block.links?.some((link) => {
+      const href = link.href.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, "");
+      return href === "/message";
+    }),
+  );
   const matched = new Set<string>();
   const blocks: ArticleBlock[] = [];
-  for (const [index, block] of source.blocks.entries()) {
+  for (const [index, block] of sourceBlocks.entries()) {
     if (index === 0 && block.text.trim() === source.title) continue;
+    if (isRemovedFaqContent(route, block.text)) continue;
     const asksForMessage = /write it in the box below|send us (?:your|a|the)|contact us|write to us/i.test(block.text);
     const text = block.text
       .replace(/write it in the box below/gi, (match) =>
@@ -69,12 +86,16 @@ function revisedFaqBlocks(
     const links = block.links?.map((link) => ({
       ...link,
       label: link.label.replace(/\s*>{3}\s*$/, "").trim(),
-      href: link.href.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, ""),
+      href: redirectRetiredFaqReading(
+        link.href.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, ""),
+      ),
     })) ?? [];
     for (const reading of readingLinks) {
       if (!text.includes(reading.label)) continue;
       matched.add(reading.label);
-      if (!links.some((link) => link.label === reading.label)) links.push(reading);
+      if (!links.some((link) => link.label === reading.label)) {
+        links.push({ ...reading, href: redirectRetiredFaqReading(reading.href) });
+      }
     }
     blocks.push({
       type: block.kind,
@@ -82,7 +103,7 @@ function revisedFaqBlocks(
       src: block.src,
       ...(links.length ? { links: links.sort((a, b) => text.indexOf(a.label) - text.indexOf(b.label)) } : {}),
     });
-    if (asksForMessage) {
+    if (asksForMessage && !hasExplicitMessageLink) {
       blocks.push({ type: "link", text: "Send a message", href: "/message" });
     }
   }
@@ -92,9 +113,23 @@ function revisedFaqBlocks(
     }
   }
   const linkedHrefs = new Set(blocks.flatMap((block) => block.links?.map((link) => link.href) ?? []));
-  blocks.push(...original.filter((block) =>
-    block.type === "link" && block.href && !linkedHrefs.has(block.href),
-  ));
+  const visibleSourceText = sourceBlocks.map((block) =>
+    block.text.replace(/\s*>{3}\s*$/, "").trim(),
+  );
+  blocks.push(...original
+    .filter((block) =>
+      block.type === "link" &&
+      block.href &&
+      !linkedHrefs.has(block.href) &&
+      !isRemovedFaqContent(route, block.text) &&
+      visibleSourceText.some((text) => text.includes(block.text.replace(/\s*>{3}\s*$/, "").trim())),
+    )
+    .map((block) => ({
+      ...block,
+      href: redirectRetiredFaqReading(
+        block.href!.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, ""),
+      ),
+    })));
   return blocks;
 }
 
@@ -221,12 +256,16 @@ export const ARTICLE_LIBRARY = [
             blocks,
           }
         : {}),
-      ...(relatedLink && !blocks.some((block) =>
-        ("href" in block && block.href === relatedLink.href) ||
-        block.links?.some((link) => link.href === relatedLink.href),
-      ) ? {
-        blocks: [...blocks, { type: "link" as const, ...relatedLink }],
-      } : {}),
+      ...(relatedLink &&
+        shouldAppendFaqRelatedLink(article.slug, relatedLink.href) &&
+        !blocks.some((block) =>
+          ("href" in block && block.href === relatedLink.href) ||
+          block.links?.some((link) => link.href === relatedLink.href),
+        )
+        ? {
+            blocks: [...blocks, { type: "link" as const, ...relatedLink }],
+          }
+        : {}),
       order: article.group === "deeper" ? article.order + importedDeeperArticles.length : article.order,
       relatedSlug: adventureCompanions[article.slug] ?? article.relatedSlug,
     };
