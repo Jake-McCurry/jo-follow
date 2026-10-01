@@ -11,3 +11,4 @@
 - [FAQ reading destinations](faq-reading-destinations.md) — Prefer verified in-site readings for unlinked editorial prompts; avoid guessing outside deep links.
 - [Client-rendered footer previews](client-rendered-footer-previews.md) — Hash URLs may not scroll to sections mounted by React; scroll after render for footer screenshots.
 - [JO EQUIP download verification](jo-equip-download-verification.md) — Cloudflare can block shell PDF downloads even when a reader proxy retrieves the document.
+- [Article image verification](article-image-verification.md) — Check preview image responses as well as build assets; custom middleware can shadow public files.

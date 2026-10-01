@@ -3,6 +3,8 @@ import importedDeeperArticles from "./imported-deeper-articles.json";
 import linkedArticleMetadata from "./linked-articles.json";
 import faqReadingLinks from "./faq-reading-links.json";
 import { applyBelieverResourceRevisions } from "./believer-resource-revisions";
+import { applyGuideMainFormatRevisions } from "./guide-main-format-revisions";
+import { applyGuideDeeperFormatRevisions } from "./guide-deeper-format-revisions";
 import {
   applyFaqContentRevisions,
   isRemovedFaqContent,
@@ -22,9 +24,12 @@ export type ArticleGroup =
   | "linked";
 
 export type ArticleBlock = {
-  type: "heading" | "paragraph" | "question" | "list" | "table-row" | "link" | "image";
+  type: "heading" | "paragraph" | "question" | "list" | "table-row" | "link" | "image" | "answer-line";
   text: string;
   headingLevel?: 2 | 3;
+  bold?: boolean;
+  boldPhrases?: string[];
+  presentation?: "story";
   href?: string;
   src?: string;
   links?: { label: string; href: string }[];
@@ -229,10 +234,11 @@ export const ARTICLE_LIBRARY = [
       ? revisedFaqBlocks(updated, article.blocks)
       : updated ? updated.blocks
         .filter((block, index) =>
-          !(index === 0 && block.kind === "heading" && block.text === updated.title) &&
-          !(article.group === "adventure" && /^_+$/.test(block.text.trim())))
+          !(index === 0 && block.kind === "heading" && block.text === updated.title))
         .map((block) => ({
-          type: article.group === "adventure" &&
+          type: article.group === "adventure" && /^_+$/.test(block.text.trim())
+            ? "answer-line" as const
+            : article.group === "adventure" &&
             block.kind === "paragraph" &&
             /^(?:Q:|Your thoughts:)/i.test(block.text)
             ? "question" as const
@@ -275,7 +281,7 @@ export const ARTICLE_LIBRARY = [
   }),
   ...importedDeeperRecords,
   ...linkedArticles,
-];
+].map(applyGuideMainFormatRevisions).map(applyGuideDeeperFormatRevisions);
 
 export function getArticleBySlug(slug: string) {
   return ARTICLE_LIBRARY.find((article) => article.slug === slug);

@@ -14,54 +14,23 @@ import {
 } from "@/data/article-library";
 import { ArticleEndSection } from "@/components/article-end-section";
 import linkedArticleMetadata from "@/data/linked-articles.json";
-
-const BIBLE_BOOKS = [
-  "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles",
-  "1 Corinthians", "2 Corinthians", "1 Thessalonians", "2 Thessalonians",
-  "1 Timothy", "2 Timothy", "1 Peter", "2 Peter", "1 John", "2 John", "3 John",
-  "Song of Solomon", "Ecclesiastes", "Lamentations", "Deuteronomy", "Leviticus",
-  "Numbers", "Philippians", "Colossians", "Ephesians", "Galatians", "Romans",
-  "Hebrews", "Revelation", "Matthew", "Mark", "Luke", "John", "Acts", "Titus",
-  "Philemon", "James", "Jude", "Genesis", "Exodus", "Joshua", "Judges", "Ruth",
-  "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Psalm", "Proverbs", "Isaiah",
-  "Jeremiah", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Obadiah", "Jonah",
-  "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi",
-];
-
-const BIBLE_REFERENCE_PATTERN = new RegExp(
-  `\\b(?:${BIBLE_BOOKS.sort((a, b) => b.length - a.length)
-    .map((book) => book.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&"))
-    .join("|")})\\s+\\d{1,3}(?::\\d{1,3}(?:[-–—](?:\\d{1,3}:)?\\d{1,3})?(?:(?:,\\s*\\d{1,3}(?:[-–—]\\d{1,3})?)|(?:;\\s*\\d{1,3}:\\d{1,3}(?:[-–—](?:\\d{1,3}:)?\\d{1,3})?))*)?`,
-  "g",
-);
+import { splitScriptureText } from "@/lib/scripture-text";
 
 const WEB_ADDRESS_PATTERN =
   /(https?:\/\/[^\s]+|(?:follow\.jesusonline\.com|bible\.com|equip\.jesusonline\.com|app\.jesusonline\.com)(?:\/[^\s]*)?)/g;
 
 function BibleText({ text }: { text: string }) {
-  const parts: React.ReactNode[] = [];
-  let lastIndex = 0;
-
-  for (const match of text.matchAll(BIBLE_REFERENCE_PATTERN)) {
-    const referenceStart = match.index ?? 0;
-    const referenceEnd = referenceStart + match[0].length;
-    const parenthesized = text[referenceStart - 1] === "(" && text[referenceEnd] === ")";
-    const start = parenthesized ? referenceStart - 1 : referenceStart;
-    if (start > lastIndex) parts.push(text.slice(lastIndex, start));
-    parts.push(
-      <span key={`${match[0]}-${start}`} className={parenthesized ? "whitespace-nowrap" : undefined}>
-        {parenthesized && "("}
-        <ScriptureRef reference={match[0]}>
-          {match[0]}
-        </ScriptureRef>
-        {parenthesized && ")"}
-      </span>,
-    );
-    lastIndex = parenthesized ? referenceEnd + 1 : referenceEnd;
-  }
-
-  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
-  return <>{parts.length ? parts : text}</>;
+  return (
+    <>
+      {splitScriptureText(text).map((part, index) => part.reference ? (
+        <span key={index} className="whitespace-nowrap">
+          {part.prefix}
+          <ScriptureRef reference={part.reference}>{part.text}</ScriptureRef>
+          {part.suffix}
+        </span>
+      ) : <span key={index}>{part.text}</span>)}
+    </>
+  );
 }
 
 function RichText({ text }: { text: string }) {
@@ -92,14 +61,40 @@ function RichText({ text }: { text: string }) {
   );
 }
 
+function EmphasizedRichText({ text, phrases = [] }: { text: string; phrases?: string[] }) {
+  const ranges: { start: number; end: number }[] = [];
+  for (const phrase of phrases) {
+    if (!phrase) continue;
+    let start = text.indexOf(phrase);
+    while (start >= 0) {
+      ranges.push({ start, end: start + phrase.length });
+      start = text.indexOf(phrase, start + phrase.length);
+    }
+  }
+  ranges.sort((a, b) => a.start - b.start || b.end - a.end);
+  const parts: React.ReactNode[] = [];
+  let cursor = 0;
+  for (const range of ranges) {
+    if (range.start < cursor) continue;
+    if (range.start > cursor) parts.push(<RichText key={`text-${cursor}`} text={text.slice(cursor, range.start)} />);
+    parts.push(<strong key={`bold-${range.start}`}><RichText text={text.slice(range.start, range.end)} /></strong>);
+    cursor = range.end;
+  }
+  parts.push(<RichText key="tail" text={text.slice(cursor)} />);
+  return <>{parts}</>;
+}
+
 function LinkedRichText({ block }: { block: ArticleBlock }) {
-  if (!block.links?.length) return <RichText text={block.text} />;
+  if (!block.links?.length) {
+    const content = <EmphasizedRichText text={block.text} phrases={block.boldPhrases} />;
+    return block.bold ? <strong>{content}</strong> : content;
+  }
   const result: React.ReactNode[] = [];
   let cursor = 0;
   for (const [index, link] of block.links.entries()) {
     const start = block.text.indexOf(link.label, cursor);
     if (start === -1) continue;
-    result.push(<RichText key={`text-${index}`} text={block.text.slice(cursor, start)} />);
+    result.push(<EmphasizedRichText key={`text-${index}`} text={block.text.slice(cursor, start)} phrases={block.boldPhrases} />);
     result.push(
       <a
         key={`link-${index}`}
@@ -113,11 +108,14 @@ function LinkedRichText({ block }: { block: ArticleBlock }) {
     );
     cursor = start + link.label.length;
   }
-  result.push(<RichText key="remaining" text={block.text.slice(cursor)} />);
-  return <>{result}</>;
+  result.push(<EmphasizedRichText key="remaining" text={block.text.slice(cursor)} phrases={block.boldPhrases} />);
+  return block.bold ? <strong>{result}</strong> : <>{result}</>;
 }
 
 export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
+  if (block.type === "answer-line") {
+    return <div aria-hidden="true" className="h-6 w-full border-b border-navy/30" />;
+  }
   if (block.type === "image" && block.src) {
     return (
       <figure className="my-8">
@@ -159,7 +157,7 @@ export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
         <div className="flex items-start gap-3">
           <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-warm-700" aria-hidden="true" />
           <p className="font-medium leading-relaxed">
-            <RichText text={block.text.replace(/^Q:\s*/, "")} />
+             <LinkedRichText block={{ ...block, text: block.text.replace(/^Q:\s*/, "") }} />
           </p>
         </div>
       </div>
@@ -207,7 +205,7 @@ function groupLabel(group: ArticleBlock["type"] | string) {
 }
 
 function AdventureBlockView({ block }: { block: ArticleBlock }) {
-  if (block.type === "image") return <DefaultArticleBlockView block={block} />;
+  if (block.type === "image" || block.type === "answer-line") return <DefaultArticleBlockView block={block} />;
   if (block.type === "heading") {
     return (
       <h2 className="text-2xl sm:text-3xl font-bold text-navy mt-14 mb-6 text-center sm:text-left flex flex-col sm:flex-row items-center gap-3">
@@ -231,7 +229,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
       <div className="not-prose my-3 rounded-lg border-l-4 border-warm-500 bg-warm-50 px-4 py-2 sm:px-5">
         <span className="block text-[11px] font-semibold leading-snug text-warm-700">REFLECT:</span>
         <p className="m-0 text-lg leading-snug text-navy sm:text-xl">
-          <RichText text={block.text.replace(/^(?:Q:|Your thoughts:)\s*/i, "")} />
+           <LinkedRichText block={{ ...block, text: block.text.replace(/^(?:Q:|Your thoughts:)\s*/i, "") }} />
         </p>
       </div>
     );
@@ -261,7 +259,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
     );
   }
 
-  const isQuote = block.text.startsWith("“") || block.text.startsWith("\"");
+  const isQuote = block.presentation === "story" || block.text.startsWith("“") || block.text.startsWith("\"");
   if (isQuote) {
     return (
       <div className="my-10 flex flex-col sm:flex-row items-center sm:items-start gap-6">
@@ -289,6 +287,18 @@ export function AdventureArticleBlocks({ blocks }: { blocks: ArticleBlock[] }) {
     <div className="prose prose-lg max-w-none prose-p:font-sans prose-headings:font-sans">
       <div className="space-y-6">
         {blocks.map((block, index) => {
+          if (block.type === "answer-line") {
+            if (blocks[index - 1]?.type === "answer-line") return null;
+            const lines: ArticleBlock[] = [];
+            for (let position = index; blocks[position]?.type === "answer-line"; position += 1) {
+              lines.push(blocks[position]);
+            }
+            return (
+              <div key={index} className="not-prose w-full space-y-3" aria-hidden="true">
+                {lines.map((line, lineIndex) => <AdventureBlockView key={lineIndex} block={line} />)}
+              </div>
+            );
+          }
           if (block.type === "list") {
             if (blocks[index - 1]?.type === "list") return null;
             const items: ArticleBlock[] = [];
