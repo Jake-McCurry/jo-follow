@@ -14,3 +14,17 @@ mtime_ms = 1788556943571
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/271eb334-5714-491c-89ab-e18f818d84ec/4b8b164d-66f3-4b3a-8e33-5e432c3b4419"
 storage_version_token = "1788556995131372"
 content_type = "application/pdf"
+
+[[outputs]]
+id = "Z7n2JjQmd29MaFx2INlZ6"
+uri = "file://downloads/follow-jesus-online-weekly-changes.xlsx"
+type = "table"
+title = "Weekly Changes Review Spreadsheet"
+description = "All 106 numbered changes, grouped into 10 categories, with filters, review-status dropdowns, space for your notes, and a separate Exceptions & Notes sheet."
+logical_id = "c24c90f5-0b0c-45e3-a521-12c8487b3ae6"
+content_hash = "sha256:152a15c7e22be8a5cde8b42daff8f1fdd744b24deea1a72c0111576b7059fd42"
+size = 12573
+mtime_ms = 1791048470889
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/c24c90f5-0b0c-45e3-a521-12c8487b3ae6/2067781a-0b53-4320-a0f0-36a7a03c780f"
+storage_version_token = "1791048475212463"
+content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
