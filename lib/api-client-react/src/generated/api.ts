@@ -332,7 +332,7 @@ export const getGetArticleReactionsQueryKey = (articleSlug: string,) => {
     }
 
 
-export const getGetArticleReactionsQueryOptions = <TData = Awaited<ReturnType<typeof getArticleReactions>>, TError = ErrorType<unknown>>(articleSlug: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getArticleReactions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+export const getGetArticleReactionsQueryOptions = <TData = Awaited<ReturnType<typeof getArticleReactions>>, TError = ErrorType<void>>(articleSlug: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getArticleReactions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -351,14 +351,14 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetArticleReactionsQueryResult = NonNullable<Awaited<ReturnType<typeof getArticleReactions>>>
-export type GetArticleReactionsQueryError = ErrorType<unknown>
+export type GetArticleReactionsQueryError = ErrorType<void>
 
 
 /**
  * @summary Get public article reactions
  */
 
-export function useGetArticleReactions<TData = Awaited<ReturnType<typeof getArticleReactions>>, TError = ErrorType<unknown>>(
+export function useGetArticleReactions<TData = Awaited<ReturnType<typeof getArticleReactions>>, TError = ErrorType<void>>(
  articleSlug: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getArticleReactions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {

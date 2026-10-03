@@ -4,6 +4,7 @@ import { and, desc, eq, sql } from "drizzle-orm";
 import { articleReactionsTable, db } from "@workspace/db";
 import { ADMIN_SESSION_SECONDS, createAdminToken, safeEqual, secret, verifyAdminToken } from "../lib/admin-session";
 import { consumeAdminLoginAttempt } from "../lib/admin-login-limit";
+import { isReactionArticle } from "../lib/reaction-articles";
 import {
   CreateReactionAdminSessionBody,
   CreateReactionAdminSessionResponse,
@@ -72,6 +73,10 @@ router.get("/articles/:articleSlug/reactions", async (req, res): Promise<void> =
     res.status(400).json({ error: "Invalid article." });
     return;
   }
+  if (!isReactionArticle(params.data.articleSlug)) {
+    res.status(404).json({ error: "Article not found." });
+    return;
+  }
   const hash = visitorHash(req, res);
   const [current] = await db
     .select({ reaction: articleReactionsTable.reaction })
@@ -91,6 +96,10 @@ router.put("/articles/:articleSlug/reactions", async (req, res): Promise<void> =
   const body = SetArticleReactionBody.safeParse(req.body);
   if (!params.success || !body.success) {
     res.status(400).json({ error: "Invalid article or reaction." });
+    return;
+  }
+  if (!isReactionArticle(params.data.articleSlug)) {
+    res.status(404).json({ error: "Article not found." });
     return;
   }
   const hash = visitorHash(req, res);

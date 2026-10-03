@@ -4,13 +4,20 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
+import { reactionArticleSlugs } from "../scripts/reaction-article-catalog.mjs";
 
 const dir = await mkdtemp(join(tmpdir(), "reaction-auth-"));
 try {
   const sessionFile = join(dir, "session.cjs");
   const testFile = join(dir, "auth.test.cjs");
   const probeFile = join(dir, "limit-probe.cjs");
-  const options = { bundle: true, platform: "node", format: "cjs", external: ["pg-native"] };
+  const options = {
+    bundle: true,
+    platform: "node",
+    format: "cjs",
+    external: ["pg-native"],
+    define: { __REACTION_ARTICLE_SLUGS__: JSON.stringify(await reactionArticleSlugs()) },
+  };
   await build({ ...options, entryPoints: ["src/lib/admin-session.ts"], outfile: sessionFile });
   await build({ ...options, entryPoints: ["tests/auth.test.ts"], outfile: testFile });
   await build({ ...options, entryPoints: ["tests/limit-probe.ts"], outfile: probeFile });
