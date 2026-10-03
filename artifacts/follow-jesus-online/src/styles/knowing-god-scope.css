@@ -1,0 +1,96 @@
+/* Scoped Knowing God feature tokens and base rules (from source brand-tokens.css and global.css).
+   Everything is limited to .kg-root so the rest of Follow Jesus Online is untouched. */
+.kg-root {
+  --section-space-mobile: 2rem;
+  --section-space-desktop: 2.5rem;
+  --blue-50: #e6f5ff;
+  --blue-100: #ccebff;
+  --blue-200: #99d6ff;
+  --blue-300: #66c2ff;
+  --blue-400: #33adff;
+  --blue-500: #0095ff;
+  --blue-600: #0084e6;
+  --blue-700: #007ae0;
+  --blue-800: #006bb3;
+  --blue-900: #004e8a;
+  --blue-950: #003a66;
+  --warm-50: #fff6f0;
+  --warm-100: #ffeadb;
+  --warm-200: #ffd2b3;
+  --warm-300: #ffb580;
+  --warm-400: #ee9c5d;
+  --warm-500: #e87722;
+  --warm-600: #e66000;
+  --warm-700: #c45100;
+  --warm-800: #994000;
+  --warm-900: #662b00;
+  --color-brand: var(--blue-500);
+  --color-hero: var(--blue-800);
+  --color-structure: var(--blue-950);
+  --color-text: var(--blue-950);
+  --color-text-muted: #2e5a7a;
+  --color-surface: #fffdfb;
+  --color-surface-soft: var(--blue-50);
+  --color-border-soft: var(--blue-100);
+  --color-border-control: #5b9bc4;
+  --color-focus: var(--blue-500);
+  --color-accent: var(--warm-500);
+  --color-action-warm: var(--warm-700);
+  --color-selected-warm: var(--warm-100);
+  --color-background: #fffdfb;
+  --color-foreground: #003a66;
+  --color-border: #ccebff;
+  --color-muted-foreground: #2e5a7a;
+  --color-primary: #0095ff;
+  --font-sans: "Knowing God Source Sans 3", "Source Sans 3", Arial, sans-serif;
+  --font-display: "Knowing God Playfair Display", "Playfair Display", Georgia, serif;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.kg-root .kg-equip-navigation { display: contents; }
+.kg-root .kg-local-return {
+  background: var(--blue-950);
+  color: #fff;
+  font-size: .875rem;
+  padding: .35rem 1rem;
+}
+.kg-root .kg-local-return a { color: #fff; text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+.kg-root .kg-local-return a:hover { color: var(--blue-200); }
+.kg-root .kg-intro-theme-wrapper {
+  background: var(--color-surface, #FFFDFB);
+  color: var(--color-text, #003A66);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+@layer base {
+  .kg-root * { border-color: var(--color-border); }
+  .kg-root :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+    color: var(--color-text);
+  }
+  .kg-root h1 { font-family: var(--font-display); font-weight: 600; }
+  .kg-root :is(input, select, textarea, button) { font-family: var(--font-sans); }
+  .kg-root :is(input, select, textarea) { font-size: 1rem; border-color: var(--color-border-control); }
+  .kg-root :is(small, figcaption) { font-size: 0.75rem; }
+  .kg-root *:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+@media print {
+  .kg-root .equip-header, .kg-root .kg-equip-navigation, .kg-root .kg-local-return { display: none !important; }
+  .kg-root .kg-intro-main { max-width: none; }
+}

@@ -1,0 +1,102 @@
+/* 
+  Knowing God Warm Theme Override 
+  Applied only to the reading surfaces/body via .kg-warm-theme wrapper.
+  This preserves the main site brand styles on navigation headers while 
+  giving Knowing God readers a more comforting, quiet, and reflective experience.
+*/
+
+/* Open Font License; a visual Baskerville match for the flattened cover,
+   not a claim that the cover's original font was identified. */
+@font-face {
+  font-family: "Knowing God Baskerville";
+  src: url("../assets/fonts/libre-baskerville/regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Knowing God Baskerville";
+  src: url("../assets/fonts/libre-baskerville/bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+.kg-warm-theme {
+  /* The book's interior headlines use Georgia Bold (verified in the PDF).
+     This exception stays inside the reading area, never the shared navigation. */
+  --font-knowing-god-heading: Georgia, "Times New Roman", serif;
+  --font-display: var(--font-knowing-god-heading);
+  /* Warm paper/ivory reading background */
+  --color-surface: #fffaf2;
+  
+  /* Softly tinted warm neutral sidebars/panels */
+  --color-surface-soft: #f3ede2;
+  
+  /* Warm muted borders */
+  --color-border-soft: #d9cdb9;
+  /* Interactive boundaries remain darker than decorative panel separators. */
+  --color-border-control: #9a866d;
+  
+  /* Less clinical blue-heavy reading text */
+  --color-text: #394b4b;
+  
+  /* Warm muted text */
+  --color-text-muted: #655f55;
+  
+  /* Dark reading headings */
+  --color-hero: #29474b;
+
+  /* Note: 
+     Navy structure (--color-structure), 
+     Warm 500 orange (--color-accent), 
+     Warm 700 orange (--color-action-warm),
+     and Warm 100 orange (--color-selected-warm) 
+     remain unchanged and inherit naturally. 
+  */
+}
+
+/* Scoped override wins over individual article and React heading styles.
+   Body text, captions, forms, and navigation retain Source Sans 3. */
+.kg-warm-theme :is(h1, h2, h3, h4, h5, h6),
+.kg-warm-theme .book-title-card div b {
+  font-family: var(--font-knowing-god-heading) !important;
+  font-weight: 700 !important;
+}
+
+.kg-warm-theme .kg-copyright-link {
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-action-warm);
+  text-underline-offset: 4px;
+}
+.kg-warm-theme .kg-copyright-link:hover {
+  color: var(--color-action-warm);
+}
+
+/* Cover treatment is limited to the introduction title and subtitle.
+   Topic headings and the rest of the book keep their existing typography. */
+.kg-book-intro { container-type: inline-size; }
+.kg-warm-theme .kg-book-intro .kg-cover-title {
+  font-family: "Knowing God Baskerville", Baskerville, Georgia, serif !important;
+  font-weight: 400 !important;
+  font-variant-caps: small-caps;
+  font-size: clamp(1.5rem, 9cqi, 3.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+.kg-book-intro .kg-cover-subtitle {
+  font-family: "Knowing God Baskerville", Baskerville, Georgia, serif;
+  font-size: clamp(1.125rem, 4.5cqi, 1.75rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.kg-cover-subtitle strong { font-weight: 700; }
+
+/* Disjoint Scripture ranges remain separate in NET and source KJV text. */
+.kg-reading article > p:last-child { white-space: pre-line; }

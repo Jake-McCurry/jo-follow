@@ -13,3 +13,4 @@
 - [JO EQUIP download verification](jo-equip-download-verification.md) — Cloudflare can block shell PDF downloads even when a reader proxy retrieves the document.
 - [Article image verification](article-image-verification.md) — Check preview image responses as well as build assets; custom middleware can shadow public files.
 - [Video transcript provenance](video-transcript-provenance.md) — Use verified transcripts, not related articles; caption requests may return HTTP 200 with no text.
+- [Knowing God fidelity](knowing-god-fidelity.md) — Preserve the approved full source feature and offline corpus; isolate its JO EQUIP appearance from the host site.

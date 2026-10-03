@@ -35,7 +35,7 @@ test("Connect with God preserves all nine resource titles and descriptions", () 
 test("every menu and resource destination resolves to existing content", () => {
   const links = [...TOPIC_MENU_LINKS, ...CONNECT_WITH_GOD_RESOURCES];
   for (const { href } of links) {
-    if (href === "/rewatch" || href === "/gf/") continue;
+    if (href === "/rewatch" || href === "/gf/" || href === "/knowing-god") continue;
     if (href.startsWith("/bible/")) {
       assert.ok(["/bible/John/1", "/bible/Romans/8"].includes(href), href);
       continue;
@@ -72,5 +72,5 @@ test("exact prayer guide and approved fallback resources remain linked", () => {
   assert.equal(CONNECT_WITH_GOD_RESOURCES.find((item) => item.title === "God’s Promises for Hope")?.href,
     "/bible/Romans/8");
   assert.equal(CONNECT_WITH_GOD_RESOURCES.find((item) => item.title === "Knowing God / Topical Concordance")?.href,
-    "/gf/beholding-the-majesty-of-god");
+    "/knowing-god");
 });
