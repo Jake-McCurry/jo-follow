@@ -15,3 +15,4 @@
 - [Video transcript provenance](video-transcript-provenance.md) — Use verified transcripts, not related articles; caption requests may return HTTP 200 with no text.
 - [Knowing God fidelity](knowing-god-fidelity.md) — Preserve the full source content and offline corpus; use native Follow navigation and JO FOLLOW branding.
 - [Promises editorial scope](promises-editorial.md) — Use the requested Hope display title while retaining the supplied edition's original title and quotation wording in source content.
+- [Unpatched glob dependencies](unpatched-glob-dependencies.md) — Prefer native Node discovery over reintroducing the fast-glob/micromatch/braces chain without a verified security fix.
