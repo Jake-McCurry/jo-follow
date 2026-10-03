@@ -1,3 +1,4 @@
+export * from "./admin-login-attempts";
 // Export your models here. Add one export per file
 // export * from "./posts";
 //

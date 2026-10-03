@@ -1,0 +1,500 @@
+/* Scoped port of the Knowing God introduction styles (Astro scoped/global blocks). */
+.kg-root .kg-intro-eyebrow{
+    display: block;
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+.kg-root .kg-intro-main{
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 5rem;
+  }
+.kg-root .kg-intro-breadcrumbs{
+    margin-bottom: 2.2rem;
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem;
+  }
+.kg-root .kg-intro-breadcrumbs a{ color: var(--color-hero, #006BB3); }
+.kg-root .kg-intro-eyebrow{ color: var(--color-action-warm, #C45100); }
+.kg-root .kg-intro-title{
+    max-width: 850px;
+    margin: .6rem 0 1rem;
+    color: var(--color-hero, #006BB3);
+    font-family: var(--font-display, 'Playfair Display', serif);
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 600;
+    letter-spacing: -.035em;
+    line-height: .98;
+  }
+.kg-root .kg-intro-lede{
+    max-width: 760px;
+    margin: 0;
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: clamp(1.1rem, 2.3vw, 1.35rem);
+    font-style: italic;
+    line-height: 1.6;
+  }
+@media (max-width: 620px){.kg-root .kg-intro-main{ padding-top: 2rem; }
+
+  }
+
+
+.kg-root .intro-grid{
+    display: grid;
+    gap: 1px;
+    margin-top: 3rem;
+    border: 1px solid var(--color-border-soft, #CCEBFF);
+    background: var(--color-border-soft, #CCEBFF);
+  }
+.kg-root .intro-card{
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1.5rem;
+    background: var(--color-surface, #FFFDFB);
+    color: inherit;
+    text-decoration: none;
+    transition: background .18s ease, transform .18s ease;
+  }
+.kg-root .intro-card:hover{ background: var(--color-surface-soft, #E6F5FF); }
+.kg-root .intro-number{
+    color: var(--color-action-warm, #C45100);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+    font-weight: 800;
+    letter-spacing: .12em;
+  }
+.kg-root .intro-card p{
+    margin: 0 0 .35rem;
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+.kg-root .intro-card h2{
+    margin: 0 0 .55rem;
+    color: var(--color-hero, #006BB3);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+    font-weight: 600;
+  }
+.kg-root .intro-card div > span{
+    display: block;
+    max-width: 680px;
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 1rem; 
+    line-height: 1.55;
+  }
+.kg-root .intro-card strong{ color: var(--color-action-warm, #C45100); font-size: 1.4rem; font-weight: 400; }
+@media (max-width: 560px){.kg-root .intro-card{ grid-template-columns: 2rem 1fr auto; gap: .65rem; padding: 1.2rem .9rem; }
+
+  }
+
+
+.kg-root .content-section{
+    margin-top: clamp(2.25rem, 6vw, 4rem);
+  }
+.kg-root .section-label{
+    margin: 0 0 .55rem;
+    color: var(--color-action-warm, #C45100);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+    font-weight: 800;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+.kg-root .book-title-card{
+    display: grid;
+    min-height: 30rem;
+    padding: clamp(2rem, 8vw, 5rem);
+    place-content: center;
+    border: 1px solid var(--color-border-soft, #CCEBFF);
+    background:
+      linear-gradient(rgba(255,253,251,.96), rgba(255,253,251,.96)),
+      repeating-linear-gradient(45deg, var(--color-border-soft, #CCEBFF) 0 1px, transparent 1px 12px);
+    text-align: center;
+    box-shadow: 0 22px 60px rgba(0,58,102,.05);
+  }
+.kg-root .book-title-card p{
+    margin: 0;
+    color: var(--color-text, #003A66);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: clamp(1.4rem, 4vw, 2.4rem);
+    letter-spacing: .08em;
+  }
+.kg-root .book-title-card h2{
+    margin: -.15em 0 .35em;
+    color: var(--color-hero, #006BB3);
+    font-family: var(--font-display, 'Playfair Display', serif);
+    font-size: clamp(5rem, 15vw, 10rem);
+    font-weight: 600;
+    letter-spacing: -.07em;
+    line-height: .9;
+  }
+.kg-root .book-title-card div span{
+    display: block;
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: clamp(1rem, 2.4vw, 1.35rem);
+    line-height: 1.45;
+  }
+.kg-root .book-title-card strong{
+    margin-top: 2.5rem;
+    color: var(--color-action-warm, #C45100);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem;
+    letter-spacing: .3em;
+  }
+.kg-root .publication-grid{
+    display: grid;
+    grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    margin-top: 3.5rem;
+    padding-top: 3.5rem;
+    border-top: 1px solid var(--color-border-soft, #CCEBFF);
+  }
+.kg-root .publication-contact h2{
+    margin: 0 0 1.25rem;
+    color: var(--color-hero, #006BB3);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 2rem;
+    font-weight: 600;
+  }
+.kg-root .publication-contact address{
+    display: grid;
+    gap: .32rem;
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 1.5;
+  }
+.kg-root .publisher-mark{
+    display: inline-grid;
+    margin-top: 1.5rem;
+    padding: .85rem 1rem;
+    border: 1px solid var(--color-accent, #E87722);
+    color: var(--color-action-warm, #C45100);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-align: center;
+  }
+.kg-root .publisher-mark span{ display: block; }
+.kg-root .publication-details{
+    display: grid;
+    gap: 1.15rem;
+  }
+.kg-root .publication-details p{
+    margin: 0;
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text, #003A66);
+  }
+.kg-root .publication-details .copyright,.kg-root .publication-details .isbn{
+    color: var(--color-text, #003A66);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-weight: 700;
+  }
+.kg-root .publication-details h3{
+    margin: .5rem 0 -.5rem;
+    color: var(--color-text, #003A66);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+.kg-root .dedication-content{
+    max-width: 800px;
+    margin-inline: auto;
+  }
+.kg-root .hymn-heading{
+    padding: clamp(1.6rem, 5vw, 3rem);
+    border-block: 1px solid var(--color-border-soft, #CCEBFF);
+    text-align: center;
+  }
+.kg-root .hymn-heading h2{
+    margin: 0;
+    color: var(--color-hero, #006BB3);
+    font-family: var(--font-display, 'Playfair Display', serif);
+    font-size: clamp(2.2rem, 7vw, 4.2rem);
+    font-weight: 600;
+  }
+.kg-root .hymn-stanzas{ margin-top: 1rem; }
+.kg-root .hymn-stanza{
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: clamp(.75rem, 3vw, 1.5rem);
+    padding: clamp(1.2rem, 4vw, 2rem) 0;
+    border-bottom: 1px solid var(--color-border-soft, #CCEBFF);
+  }
+.kg-root .stanza-number,.kg-root .scripture-number{
+    color: var(--color-action-warm, #C45100);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+    font-weight: 800;
+    letter-spacing: .14em;
+  }
+.kg-root .hymn-stanza p{ margin: 0; }
+.kg-root .hymn-stanza p span{
+    display: block;
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: clamp(1.06rem, 2.5vw, 1.28rem);
+    line-height: 1.75;
+  }
+.kg-root .hymn-author{
+    margin: 2rem 0 0;
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    text-align: right;
+  }
+.kg-root .source-footnote{
+    margin-top: 2.5rem;
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--color-accent, #E87722);
+    background: var(--color-surface-soft, #E6F5FF);
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 1rem; 
+    line-height: 1.6;
+  }
+.kg-root .scripture-list{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+.kg-root .scripture-card{
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    padding: clamp(1.2rem, 3vw, 1.7rem);
+    border: 1px solid var(--color-border-soft, #CCEBFF);
+    background: var(--color-surface, #FFFDFB);
+  }
+.kg-root .scripture-card blockquote{
+    margin: 0;
+    color: var(--color-text, #003A66);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: clamp(1rem, 1.8vw, 1.13rem);
+    line-height: 1.72;
+  }
+.kg-root .scripture-card h2{
+    grid-column: 2;
+    margin: 1rem 0 0;
+    color: var(--color-action-warm, #C45100);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+    font-weight: 800;
+    letter-spacing: .07em;
+  }
+.kg-root .hymn-stanza u{
+    text-decoration-color: var(--color-action-warm, #C45100);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: .16em;
+  }
+.kg-root .guide-introduction{
+    max-width: 850px;
+    margin: 0;
+    padding: clamp(1.3rem, 4vw, 2.2rem);
+    border-left: 4px solid var(--color-accent, #E87722);
+    background: var(--color-surface-soft, #E6F5FF);
+    color: var(--color-text, #003A66);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    font-style: italic;
+    line-height: 1.65;
+  }
+.kg-root .guide-tools{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .5rem 1rem;
+    margin: 2.5rem 0 1rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border-soft, #CCEBFF);
+    background: rgba(255,253,251,.96);
+    backdrop-filter: blur(10px);
+  }
+.kg-root .guide-tools label{
+    grid-column: 1 / -1;
+    color: var(--color-text, #003A66);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 1rem; 
+    font-weight: 700;
+  }
+.kg-root .guide-tools input{
+    min-width: 0;
+    border: 1px solid var(--color-border-control, #5B9BC4);
+    border-radius: 0;
+    background: var(--color-surface, #FFFDFB);
+    padding: .8rem .9rem;
+    color: var(--color-text, #003A66);
+    font: 1rem var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+  }
+.kg-root .guide-tools input:focus-visible{ outline: 3px solid var(--color-focus, #0095FF); outline-offset: 2px; }
+.kg-root .guide-tools p{
+    align-self: center;
+    margin: 0;
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+  }
+.kg-root .guide-categories{
+    columns: 2 25rem;
+    column-gap: 1rem;
+  }
+.kg-root .guide-category{
+    break-inside: avoid;
+    margin: 0 0 1rem;
+    padding: 1.25rem;
+    border: 1px solid var(--color-border-soft, #CCEBFF);
+    background: var(--color-surface, #FFFDFB);
+  }
+.kg-root .guide-category[hidden]{ display: none; }
+.kg-root .guide-category h2{
+    margin: 0 0 .85rem;
+    padding-bottom: .65rem;
+    border-bottom: 2px solid var(--color-accent, #E87722);
+    color: var(--color-hero, #006BB3);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+  }
+.kg-root .guide-category ul{
+    display: grid;
+    gap: .42rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+.kg-root .guide-category li{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: .4rem;
+    align-items: baseline;
+    color: var(--color-text-muted, #2E5A7A);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: 1rem; 
+    line-height: 1.35;
+  }
+.kg-root .guide-category li i{
+    min-width: .6rem;
+    border-bottom: 1px dotted var(--color-border-control, #5B9BC4);
+  }
+.kg-root .guide-category li strong{
+    color: var(--color-action-warm, #C45100);
+    font-size: 1rem;
+  }
+.kg-root .quotations-grid{
+    columns: 2 24rem;
+    column-gap: 1rem;
+  }
+.kg-root .quotation-card{
+    position: relative;
+    break-inside: avoid;
+    margin: 0;
+    margin-bottom: 1rem;
+    padding: clamp(1.3rem, 4vw, 2rem);
+    border: 1px solid var(--color-border-soft, #CCEBFF);
+    background: var(--color-surface, #FFFDFB);
+  }
+.kg-root .quotation-card.featured{
+    border-color: var(--color-structure, #003A66);
+    background: var(--color-structure, #003A66);
+    color: #FFFFFF;
+  }
+.kg-root .quote-mark{
+    display: block;
+    height: 2.2rem;
+    color: var(--color-accent, #E87722);
+    font-size: 4rem;
+    line-height: 1;
+    font-family: var(--font-display, 'Playfair Display', serif);
+  }
+.kg-root .quotation-card blockquote{
+    margin: .5rem 0 1.4rem;
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: clamp(1.03rem, 2vw, 1.2rem);
+    line-height: 1.65;
+  }
+.kg-root .quotation-card sup{
+    margin-left: .15em;
+    color: var(--color-action-warm, #C45100);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .65em;
+  }
+.kg-root .quotation-card figcaption{
+    display: flex;
+    gap: .65rem;
+    align-items: center;
+    color: var(--color-action-warm, #C45100);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+.kg-root .quotation-card.featured figcaption{ color: var(--color-accent, #E87722); }
+.kg-root .quotation-card figcaption span{
+    width: 1.5rem;
+    border-top: 1px solid currentColor;
+  }
+.kg-root .article-navigation{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border-soft, #CCEBFF);
+  }
+.kg-root .article-navigation a{
+    color: var(--color-text, #003A66);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    text-decoration: none;
+  }
+.kg-root .article-navigation small{
+    display: block;
+    margin-bottom: .3rem;
+    color: var(--color-action-warm, #C45100);
+    font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
+    font-size: .75rem; 
+    font-weight: 800;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+.kg-root .article-navigation span{ font-size: 1.08rem; }
+.kg-root .article-navigation .next{ text-align: right; }
+@media (max-width: 760px){.kg-root .publication-grid,.kg-root .scripture-list{ grid-template-columns: 1fr; }
+.kg-root .guide-categories,.kg-root .quotations-grid{ columns: 1; }
+.kg-root .guide-tools{ position: static; }
+
+  }
+@media (max-width: 560px){.kg-root .book-title-card{ min-height: 23rem; padding-inline: 1.2rem; }
+.kg-root .hymn-stanza{ grid-template-columns: 1.5rem 1fr; }
+.kg-root .hymn-stanza p span{ line-height: 1.65; }
+.kg-root .scripture-card{ grid-template-columns: 1.5rem 1fr; padding-inline: .9rem; }
+.kg-root .guide-tools{ grid-template-columns: 1fr; }
+.kg-root .guide-tools label{ grid-column: auto; }
+.kg-root .guide-category{ padding: 1rem .85rem; }
+.kg-root .guide-category li{ font-size: 1rem; }
+.kg-root .article-navigation{ grid-template-columns: 1fr; }
+.kg-root .article-navigation > span{ display: none; }
+.kg-root .article-navigation .next{ text-align: left; }
+
+  }
+

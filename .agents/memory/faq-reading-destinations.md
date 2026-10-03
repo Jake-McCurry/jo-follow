@@ -15,7 +15,7 @@ The same closest-available-resource approach is approved for the topic menu and 
 
 **How to apply:** Preserve the supplied labels and copy, choose relevant verified content, and distinguish interim destinations from dedicated resources when reporting the result. Do not create empty destination pages just to match the labels.
 
-The Promises and Knowing God destinations are interim links. The user will supply dedicated pages for those menu and card options.
+The Promises destination is still an interim link. The user supplied the dedicated Knowing God feature; do not restore its earlier closest-resource fallback.
 
 **Why:** The user stated: “I will be working on a ‘promises’ and ‘knowing god’ page soon that will populate those menu and card options.”
 

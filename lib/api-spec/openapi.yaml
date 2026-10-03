@@ -92,6 +92,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ArticleReactionSummary"
+        "400":
+          description: Invalid article
+        "404":
+          description: Article not found
     put:
       operationId: setArticleReaction
       tags: [reactions]
@@ -113,6 +117,8 @@ paths:
                 $ref: "#/components/schemas/ArticleReactionSummary"
         "400":
           description: Invalid article or reaction
+        "404":
+          description: Article not found
   /reaction-admin/session:
     get:
       operationId: getReactionAdminSession
@@ -144,8 +150,16 @@ paths:
                 $ref: "#/components/schemas/ReactionAdminSession"
         "401":
           description: Incorrect password
+        "429":
+          description: Admin account login attempt budget exhausted
+          headers:
+            Retry-After:
+              description: Seconds until the account-wide attempt window resets
+              schema:
+                type: integer
+                minimum: 1
         "503":
-          description: Administrator password is not configured
+          description: Administrator password is not configured or shared login limiter is unavailable
     delete:
       operationId: deleteReactionAdminSession
       tags: [reactions]
@@ -320,4 +334,3 @@ components:
         updatedAt:
           type: ["string", "null"]
           format: date-time
-

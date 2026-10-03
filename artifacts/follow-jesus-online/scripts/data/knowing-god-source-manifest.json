@@ -1,0 +1,882 @@
+{
+  "artifacts/discipleship-hub/astro.config.mjs": {
+    "bytes": 3044,
+    "sha256": "9e7bd440d459a53ae4e5d5fe79c35a75c22d56ad16453cf6d0292592088e6453"
+  },
+  "artifacts/discipleship-hub/package.json": {
+    "bytes": 2251,
+    "sha256": "7934ac181936c886fe998ca1af9fc789083387e23319597693e1df5ecb8d7927"
+  },
+  "artifacts/discipleship-hub/public/books/covers/knowing-god.jpg": {
+    "bytes": 592657,
+    "sha256": "6e6272edbc99b5c285779826ea66e42cbfe9d1cf9b87b58e7290ba2a046e7959"
+  },
+  "artifacts/discipleship-hub/public/favicon.svg": {
+    "bytes": 403,
+    "sha256": "7ff561d67c26d3b90465290f75b5387fb1425e367a74290f9e6c66d001c65357"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/index.json": {
+    "bytes": 115690,
+    "sha256": "76e9dea90fe753e0430f440f99b2de1dfe026effd72eab80ca0a5c6ebbc74135"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/quality-report.json": {
+    "bytes": 23464,
+    "sha256": "80ea639f176d17051c168f68971a6b8fb141b0b728d412ed6345f55ffd1570d7"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-a.json": {
+    "bytes": 633372,
+    "sha256": "71eba974ffc24c211cafc735603cff678dee0f8323077f2b483e8b94eddef70f"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-b.json": {
+    "bytes": 273622,
+    "sha256": "f719985618b2f5eb6e5a6934004d8ca7272aed254ec896860d7c187d5161aa7d"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-c.json": {
+    "bytes": 741020,
+    "sha256": "ba4cab2633f08cea24d7874cc6b8996ea07571f002826b51edaafc28db2dd825"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-d.json": {
+    "bytes": 546887,
+    "sha256": "09f6909f31cce93881d3b9dd7a0df9bb0a687e862fe44ea6b61f1b03d916d971"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-e.json": {
+    "bytes": 302058,
+    "sha256": "aefbd0a39c9a34ca7c7dd4dc7e9853dbf276cb2126ed038eb547147e17e76268"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-f.json": {
+    "bytes": 438771,
+    "sha256": "cc93331daffe3681077485d7a78496a335ce3e00bcee0be0df7635995aa5ea0c"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-g.json": {
+    "bytes": 516435,
+    "sha256": "3eebc38a5af97cf7046dbecf175411b0bf2c03b00d52baedc7770402b4f5d7ef"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-h.json": {
+    "bytes": 250360,
+    "sha256": "f3b4ca37fd5504e219993454f372633d098eeb903f6ddb4f1508397627cd4e6f"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-i.json": {
+    "bytes": 481301,
+    "sha256": "4f098e370298c0b3456504c39768d7d2cef313c74daea856578c2051e19f8ec5"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-j.json": {
+    "bytes": 162059,
+    "sha256": "6cac23808ad897b3aeef43d4664052328b36260b1d3b944e6d24040fbe0e0f89"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-k.json": {
+    "bytes": 109733,
+    "sha256": "a74b082d8ffed72f049e15afecfe0fae88c0669a3e627ff010771b1ff2954d3d"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-l.json": {
+    "bytes": 291886,
+    "sha256": "6329cfcaa48937591c657a7d346911bd8123a259bb33ea45e529939c4c07c4ac"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-m.json": {
+    "bytes": 387702,
+    "sha256": "9d41ad083b999b5e73870d1dd0c25371366df684fb6a9043bebfd2882a8a4892"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-n.json": {
+    "bytes": 113312,
+    "sha256": "1acb3f096f314961f57498101ccb37adc6bb7cc124e7232ba03852b1da0d72b9"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-o.json": {
+    "bytes": 233926,
+    "sha256": "70a2bf16cde1227d2aae8c30a9423504520dd9ec412788aa7383e29a355b4d7a"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-p.json": {
+    "bytes": 945433,
+    "sha256": "6e40e1911d62383446fa037fb2131899211da839f75a1a28f6ee4a1de133339d"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-q.json": {
+    "bytes": 63593,
+    "sha256": "c73e77e37702df191ed4888359e6b316a65c9fadd267ff6af352bda2f8a9f13d"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-r.json": {
+    "bytes": 706213,
+    "sha256": "f16a0b148448d3754ec2f543218d7cde7f6c393344233f5cfac656a9d190a37e"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-s.json": {
+    "bytes": 901716,
+    "sha256": "4d93bb3d8bc499c3eb334ea09e68237bf88f41015f29788bfb18fc8db1e6f593"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-t.json": {
+    "bytes": 549097,
+    "sha256": "eddab55710e210bf2b60d5d1c29e5b8bad3efaa07ff62ae5477cdc56ed190731"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-u.json": {
+    "bytes": 304752,
+    "sha256": "61847a75521720d2f1bdac59e9fbd549bc737832c47a05ca3cce5310f8227ef7"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-v.json": {
+    "bytes": 111007,
+    "sha256": "6bbb5985b734562fec253566eaa08889f96412416190ebc76a38f54c4db69ecf"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-w.json": {
+    "bytes": 443926,
+    "sha256": "6828b84aab7b94519d6a53020789f4d289d89a93dce62ef7c32619682d83ed7a"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/data/topics-z.json": {
+    "bytes": 31469,
+    "sha256": "a8c08ba71d29d38b0e50d552b3680ba1eaa45ac6abc05c30392bf8a76382651b"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/1-chronicles.6bceee60d9ee.json": {
+    "bytes": 43601,
+    "sha256": "6bceee60d9ee566ba05ef4714b48f65c2d458a4a0d0defc30f60a411c58fdddd"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/1-corinthians.9f79ce890368.json": {
+    "bytes": 100044,
+    "sha256": "9f79ce8903681f87f9d20fc8d14d9cd1b0d2dfeb81d1ee5193386c50d092daea"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/1-john.e00ae8e3cbe8.json": {
+    "bytes": 37524,
+    "sha256": "e00ae8e3cbe833386945a3b7149a07f7a3b668987f826470870b846e372ca0c1"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/1-kings.862821b8b995.json": {
+    "bytes": 78864,
+    "sha256": "862821b8b995b636f8b11eb4549eee106a2deb969e5183e2b34f12bef3949661"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/1-peter.6c8ec92d75f0.json": {
+    "bytes": 34664,
+    "sha256": "6c8ec92d75f0317f01ad6711a419a76b014d987f1deb536842478db7f9dd98ad"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/1-samuel.bc7dd50a3b62.json": {
+    "bytes": 87979,
+    "sha256": "bc7dd50a3b62aa21904386d8f63da3dfca7fb7dabd66d1ab7bcc75a9acb9e14a"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/1-thessalonians.cafb778bd632.json": {
+    "bytes": 23031,
+    "sha256": "cafb778bd632a081e42c602454ec3a2780e3370aee8aa6ac9877f61866b47b95"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/1-timothy.3449b2318711.json": {
+    "bytes": 26982,
+    "sha256": "3449b23187115a8ca52f16594fb7f49d49b4b7d5548a60be39f8ed923a3e6db0"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/2-chronicles.ee46f9858207.json": {
+    "bytes": 122229,
+    "sha256": "ee46f985820766cf04d2a03ae1ac361f74cd9e92ed79fce92cc36d14d31931e2"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/2-corinthians.c5db2f6c23da.json": {
+    "bytes": 51471,
+    "sha256": "c5db2f6c23dad473c9ee89c186cf6e994691a92530bb32f5e9f99f3083c13e00"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/2-john.85b519792277.json": {
+    "bytes": 2516,
+    "sha256": "85b5197922772a8d59e096ab92f3f59d9a0e160585a176f89fd1393de2bc2ae4"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/2-kings.9397dc0d4b24.json": {
+    "bytes": 64353,
+    "sha256": "9397dc0d4b24e23024e4b0fa148977b0b33f64e04456a3212d426352da6f8e83"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/2-peter.982125e821a8.json": {
+    "bytes": 26322,
+    "sha256": "982125e821a8e1323977710ea7545932e4dbe781a8c8904ba9ad14157e9cecd9"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/2-samuel.d64d759a4b85.json": {
+    "bytes": 49980,
+    "sha256": "d64d759a4b850bb69972bc278fcf574a11d3745addd12dadc194e65fc4e910ff"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/2-thessalonians.90d024eaa65f.json": {
+    "bytes": 18099,
+    "sha256": "90d024eaa65fe06460f070e27ed9ec37c537c593cd1753e3acb6f7f37222b083"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/2-timothy.0a73720dd3c5.json": {
+    "bytes": 20045,
+    "sha256": "0a73720dd3c5c52da0866650681bec67ed6acc620b9433368bc0d46d9cf74a62"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/3-john.ff9c40dc4f94.json": {
+    "bytes": 2027,
+    "sha256": "ff9c40dc4f941e275ee5d4aab2e6a6bb74f2f420be2b11e8e72d4e8860e4cb74"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/acts.ae7677dded92.json": {
+    "bytes": 212980,
+    "sha256": "ae7677dded92c4334dbcf4015f56c90766a90914313ad9c16495a0f74ec1cdc9"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/amos.a9a63a7986fd.json": {
+    "bytes": 17879,
+    "sha256": "a9a63a7986fdb910b4d3cebe227d3fefc3f28b713b648c74dc6064dd70221cab"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/colossians.51068c90ec51.json": {
+    "bytes": 31181,
+    "sha256": "51068c90ec5141fcb96429b47839c0fb9efe08027b6eb9cf32827ac3c721c5a2"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/daniel.6f81d89d140e.json": {
+    "bytes": 107418,
+    "sha256": "6f81d89d140e92d4de646ba8a96e393468bba97fde5d7408a547c707a123e78e"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/deuteronomy.67f3dfd1063d.json": {
+    "bytes": 133185,
+    "sha256": "67f3dfd1063d4734430c3b095a1adbb9236d3efebb07dcd1b4dae097dd3b9a55"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/ecclesiastes.2ab3297fdc60.json": {
+    "bytes": 16947,
+    "sha256": "2ab3297fdc60cd02a6e049aeffee3da7f6247354f8bd1b2ef8d3961474825424"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/ephesians.c9a4c52d4c6a.json": {
+    "bytes": 69526,
+    "sha256": "c9a4c52d4c6aff8fd0d55b9f17ea1a0d0f6f1f3b40e0da017d38a4cc91636168"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/esther.22ad40e31b67.json": {
+    "bytes": 16316,
+    "sha256": "22ad40e31b675cf46e195e03ec8c56794540581b381b5248e00bf960aff8342f"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/exodus.378d09582f7d.json": {
+    "bytes": 123892,
+    "sha256": "378d09582f7d00f29a3f92da418a592c35860fc59ef9420be63aa8d27514002a"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/ezekiel.3e7e84e48c76.json": {
+    "bytes": 182865,
+    "sha256": "3e7e84e48c76167345e99a01e2de34e5b56b4e97e962df74a1d69adf61b74418"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/ezra.860f5b50aec1.json": {
+    "bytes": 18043,
+    "sha256": "860f5b50aec1f925b2cfe39d936026474bc9a80e275310764e361634b3545989"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/galatians.22e17dd3b897.json": {
+    "bytes": 28465,
+    "sha256": "22e17dd3b897dd7da25a00f3c5ad8f9b35651e1838a4e7e786bc8eaf32a91659"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/genesis.9a0385dbda87.json": {
+    "bytes": 172755,
+    "sha256": "9a0385dbda8731f9ae009036c593ebb8bde47750f858555f107de5a2c60d6e80"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/habakkuk.df476d01e211.json": {
+    "bytes": 7282,
+    "sha256": "df476d01e211c83b5f2a9f2a3ece4448253b4aecdd0c06d8246d564ddac415f3"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/haggai.f87b0007aaa1.json": {
+    "bytes": 9174,
+    "sha256": "f87b0007aaa1074137aad0e025703f7522ceb6d191e7ed13e7d74b202ee820cd"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/hebrews.d9d00f512a7b.json": {
+    "bytes": 97520,
+    "sha256": "d9d00f512a7b8244549ed5863ca4fda9876d67024971d225b665284d9db06a5d"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/hosea.b3d6a2ffd83b.json": {
+    "bytes": 28251,
+    "sha256": "b3d6a2ffd83be404f187c9f518f1bc68ec45d9cfc7afdeef3ecd477583b5010a"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/isaiah.d8445259b592.json": {
+    "bytes": 222796,
+    "sha256": "d8445259b592874ee2436994c09008d23fc7524bf7a6d71142b01f68bea35a71"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/issues.json": {
+    "bytes": 4144,
+    "sha256": "a4e0976a349108af51eb2324e216ce9387e1775464b45611b9382543cbf4bc9e"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/james.0b40e20bc18c.json": {
+    "bytes": 23939,
+    "sha256": "0b40e20bc18c4d9f7e3ef0df6123a38c2ce75010aa8934af2dbe07307ce56a13"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/jeremiah.f113e99add05.json": {
+    "bytes": 166409,
+    "sha256": "f113e99add05cd6fdd801836edceb47c245c36258ca8a589bd386316c345e2ce"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/job.22da8ea65a81.json": {
+    "bytes": 72956,
+    "sha256": "22da8ea65a81e91a40b82301af1def175eaf73b9e21390d62afc181ee5d0dc29"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/joel.ce0d30a0b5ea.json": {
+    "bytes": 16749,
+    "sha256": "ce0d30a0b5ea24cac8b306301acd662702aaa63df2602c7e4ab7dd6ca55cf9cc"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/john.b15c99e4c6e1.json": {
+    "bytes": 261988,
+    "sha256": "b15c99e4c6e1cfc4ca54b9d892004166365ffee69eb78142dce62b54e1f3c273"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/jonah.9c3c4fe7e427.json": {
+    "bytes": 12933,
+    "sha256": "9c3c4fe7e427607fe6a9422f693fd54e0aa304c8919b69195d55683ff5bde71a"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/joshua.dd719551afb0.json": {
+    "bytes": 42113,
+    "sha256": "dd719551afb0fba92f76936f5f37881d7f2b81fb048445998cc03a678c5b73c7"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/jude.2bd15dcf2dce.json": {
+    "bytes": 8217,
+    "sha256": "2bd15dcf2dce5c9a9645a7697f9f7589a2732c95c47c94b8143c0d6e9f79dbb1"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/judges.0ac90c4d9c98.json": {
+    "bytes": 42333,
+    "sha256": "0ac90c4d9c98592108cfe244d3e77fb2333d49a4c30c6ac0fd1f41186711f715"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/lamentations.97d4476c0d95.json": {
+    "bytes": 13447,
+    "sha256": "97d4476c0d9563840b91ce8f0b22ac173ead03b22c05f026152a2ce3b1b90581"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/leviticus.c96baa6550d0.json": {
+    "bytes": 62767,
+    "sha256": "c96baa6550d09d22b1763364b41544706e95e7b5b68dc07349c0fe5acae9a16d"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/luke.a048df15595b.json": {
+    "bytes": 224898,
+    "sha256": "a048df15595b0ee204ed58071ddcced88de83d3bf4b969e272e69227194dfa73"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/malachi.1fcf512092ac.json": {
+    "bytes": 14741,
+    "sha256": "1fcf512092ac42bed475cc81c79425c054c700fb2e2a81781dbf486a9068ab60"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/manifest.json": {
+    "bytes": 357742,
+    "sha256": "22b478fffa895037d91b07cb05ce9d74720bd035eb9325207203087e02f16608"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/mark.4fef504a5f0a.json": {
+    "bytes": 89524,
+    "sha256": "4fef504a5f0a11a655ffc00f465d637e9e526fc5d80c8127ac265ec01b84e64e"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/matthew.2326a4369af2.json": {
+    "bytes": 200382,
+    "sha256": "2326a4369af21a12cd4f98260a8fa2e3852a1ee96b3850bd923c1c84d26c24b2"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/micah.576ab22d87bb.json": {
+    "bytes": 14144,
+    "sha256": "576ab22d87bbb1be0dd11404056a93f6ef4a8054d193fc26d172e37e893e0f61"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/nahum.f0e91a0a7686.json": {
+    "bytes": 5072,
+    "sha256": "f0e91a0a7686caf44987488dcaedb0e2ed61a2677bffb8cc7f633a85dee653a0"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/nehemiah.e75e284c7140.json": {
+    "bytes": 58622,
+    "sha256": "e75e284c7140e694984f9732836765847c1743003966103fda896eea7e5c04ec"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/numbers.bcd656d050ce.json": {
+    "bytes": 84559,
+    "sha256": "bcd656d050ced6d92c149058100b18b6325d4a46c552561e1c1e3c705c85434b"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/obadiah.ab7fe426cdec.json": {
+    "bytes": 3000,
+    "sha256": "ab7fe426cdecb28bc3d91720bc16de5c150b7b823f73d30006e832eb0fe88dec"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/philemon.b7743e9dbb92.json": {
+    "bytes": 6988,
+    "sha256": "b7743e9dbb9287dce58308f2f27a4aec782aa76d9e97ff5635d0979c38276c69"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/philippians.c44587ed8db0.json": {
+    "bytes": 27251,
+    "sha256": "c44587ed8db0f1278bd3771ed9574f763fdf4d5fb58e58e77dc3d404c0841db6"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/proverbs.70bcdc0b8c58.json": {
+    "bytes": 65268,
+    "sha256": "70bcdc0b8c589c498d9a2264cc90bef60e9f79b8f0ad0c44eef132749e53726d"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/psalms.4054066b6caf.json": {
+    "bytes": 302678,
+    "sha256": "4054066b6cafe722d85d1226c8f663ce228ef38793d70c964b39ff06237ed6a0"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/revelation.c6a083e62dcc.json": {
+    "bytes": 209174,
+    "sha256": "c6a083e62dcc60808af39ba7a0365f8789025f21c7181d961ab7ecdca2766301"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/romans.0fada9f4a166.json": {
+    "bytes": 134760,
+    "sha256": "0fada9f4a166cbfe9ee68a689d8ee1ce9d683d5303c8ac0ec41333fc90f44333"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/ruth.30bdf2b77418.json": {
+    "bytes": 5108,
+    "sha256": "30bdf2b77418fd43c9f3fad98afe9439e02d8d21898b33f6632119ef98f9cb84"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/song-of-solomon.95a097442b35.json": {
+    "bytes": 1096,
+    "sha256": "95a097442b3554d68a4c4151b6651955be01656ff1e349f857bd0873c1ac8588"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/titus.8b028e3336db.json": {
+    "bytes": 11176,
+    "sha256": "8b028e3336dba871e45c8d93d5445c74fe6033077c06dc434169eed505a837bb"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/zechariah.64bcc938c0d8.json": {
+    "bytes": 37852,
+    "sha256": "64bcc938c0d83aa015ea3afb5f3423436983fda45d0642a11d2016da007d1836"
+  },
+  "artifacts/discipleship-hub/public/knowing-god/net/zephaniah.919958408318.json": {
+    "bytes": 12664,
+    "sha256": "919958408318a67c0bdaa9b9273447a8e064505576ca4c89184f4a8fad0f404b"
+  },
+  "artifacts/discipleship-hub/public/opengraph.jpg": {
+    "bytes": 97080,
+    "sha256": "cfc1c318ab570eb62cb0dd472c3fdd8b7cfc10a9dd47252d338dcf8af2befbff"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/1-chronicles.json": {
+    "bytes": 165165,
+    "sha256": "874d2af94c5e151e95136c31be2e387a2e48e0ac7807308cc2e2d38b956edbc9"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/1-corinthians.json": {
+    "bytes": 78068,
+    "sha256": "43c9c2ac16a5ca63b0eb1ee356056f94195fa75852246aa60bb62bece71f2ef7"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/1-john.json": {
+    "bytes": 19660,
+    "sha256": "d5dfdca7337a1571c6eff238dc57bb1b93525309ba2ed38bc9f8538a6beb82d1"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/1-kings.json": {
+    "bytes": 166417,
+    "sha256": "9810763c5de40b468194cb6acd8639d244583a87d5aeb0288cbaa57dec621965"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/1-peter.json": {
+    "bytes": 19135,
+    "sha256": "79a5747f2adbc7dfd346526b311c170c5c6dde1a02e55daf10c5c2c866d4a82f"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/1-samuel.json": {
+    "bytes": 174924,
+    "sha256": "9df144a057bf57f5563eb6c338f6e5547f7ae22dba113e2b244a784d0c2d620e"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/1-thessalonians.json": {
+    "bytes": 15962,
+    "sha256": "943b858ba4a2e5245de2bfa129ec0b02286aa0765015ed0c6c2043e5b36a33e6"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/1-timothy.json": {
+    "bytes": 20185,
+    "sha256": "0c0e5405d0d6981dd11e7e94f5897f4d89f688df7a78d1c5461f414a66d7f790"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/2-chronicles.json": {
+    "bytes": 181571,
+    "sha256": "967a5bda2a183eb7d7eb859a3ee5298c3845330f6c2f5e136be5eca65bc77e94"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/2-corinthians.json": {
+    "bytes": 51036,
+    "sha256": "b452db873182b242aef59cfa8521542890053ee76f0adadf1bcaed6a7ea1a56f"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/2-john.json": {
+    "bytes": 2346,
+    "sha256": "f80efbb67928e419115bc97f293d417bd535719ddfe91243891ee396977b3b1d"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/2-kings.json": {
+    "bytes": 158721,
+    "sha256": "ca34a0da31591d87448aa735fe7aa4f407eae914bc6cfec2dc1c781c92867a26"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/2-peter.json": {
+    "bytes": 12883,
+    "sha256": "9cf11f3228f74847326028f7e378cb7f231b399e5c4de049fefc13657650f4cf"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/2-samuel.json": {
+    "bytes": 145545,
+    "sha256": "f84b75caa9d70bf6c9bfc592dc9e788be422265ae134c070b95475c90365744a"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/2-thessalonians.json": {
+    "bytes": 8830,
+    "sha256": "858f1ad8903eff117c001a6850088485fca8aadb2e7444c9a553a547469bcd9c"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/2-timothy.json": {
+    "bytes": 14523,
+    "sha256": "02bc358e56fa399a07ec1671561817a336ea039c7b101d6a242c9c168976cb89"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/3-john.json": {
+    "bytes": 2558,
+    "sha256": "456814d54e34987dc94265f4c3dab32e74c7e1404c00c740ddd4d184968987a3"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/acts.json": {
+    "bytes": 187825,
+    "sha256": "c3f3e4812c343da5e5208cceb4317eb4dcdea21e818b156c643adf40337579a6"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/amos.json": {
+    "bytes": 30711,
+    "sha256": "b0fa9b7cacaf8e032e65b846dc4344fb931a337cb3229232102741f00af7c1e3"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/colossians.json": {
+    "bytes": 17146,
+    "sha256": "52f0fed42d0e145714a6de4fac071a544f7a22da93b14ce12f8f24acb0eebc6d"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/daniel.json": {
+    "bytes": 81657,
+    "sha256": "e2b966b2d4d4dc8a2a921cddd33c2aadc9cd7b93d20c0fd0f8395fac18363dc5"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/deuteronomy.json": {
+    "bytes": 196184,
+    "sha256": "d4e16ba3a4fbec41e5d4aadca7e3449f4e9f22ce75dc9cce6f78c09cc2ea2295"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/ecclesiastes.json": {
+    "bytes": 43587,
+    "sha256": "8ad50f8e86ae7f5ec25834defa19af45dcce3f1b51b14f0d2b9e246b051d662e"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/ephesians.json": {
+    "bytes": 26246,
+    "sha256": "578bfae43a129efc8054cc875b2f68310d49b9ec0f1f76ed3416ab080f6e6b99"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/esther.json": {
+    "bytes": 40523,
+    "sha256": "9bf72662811e127329abf342f07d7099b1e5c986014c7939ea11211bd2f31c69"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/exodus.json": {
+    "bytes": 233999,
+    "sha256": "21d736bd5bb3aeb92ddb2d3f5734bed667665ad27fe3ba79e3dc5a62f1a7ab93"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/ezekiel.json": {
+    "bytes": 269302,
+    "sha256": "6a7e066a8d3a4c1e33157d63a205752275dbc3b88c90141bd68494d677a4fd6e"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/ezra.json": {
+    "bytes": 54127,
+    "sha256": "00a10aacae5509d4e94327cd9a1f1c683ab66a642765257b1838e76b644c372f"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/galatians.json": {
+    "bytes": 26556,
+    "sha256": "bac5e812beed7e16fd81c040bcf06ea7286f03d5ca33b071ed9a895b6b5bd328"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/genesis.json": {
+    "bytes": 284336,
+    "sha256": "2f0cf914550a129bf83ba8113916aeca373f8bd9e8b617b69f68ff97b99d3ae8"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/habakkuk.json": {
+    "bytes": 11603,
+    "sha256": "514a15a6e8560b3464b8f0c8b7b505b1dd6fe5a27c8d92d2dcfbeabe323e1287"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/haggai.json": {
+    "bytes": 8143,
+    "sha256": "1c026e9671953ea93fc5e0e49f66d06498f4ee5229b1bf20255a177158078d36"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/hebrews.json": {
+    "bytes": 55660,
+    "sha256": "b7d6c841e489bce736387030258ed4516309b6b085630e59a3b36d1c6a661e8f"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/hosea.json": {
+    "bytes": 40193,
+    "sha256": "1c9c07e18d29428b362d572eee327e5f2393b00423367b92e46f8fd58af89ce6"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/isaiah.json": {
+    "bytes": 267007,
+    "sha256": "1f7d172e25aa6cacce1178ba165600d31353f57c5f3aca813430f7f9fad6928a"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/james.json": {
+    "bytes": 18788,
+    "sha256": "66d103fbdb0bccfe178e335d0548cd5ebd9a9be6d6c079c89c74b84d93abea3d"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/jeremiah.json": {
+    "bytes": 329926,
+    "sha256": "242fa8b1ad62c3daa17b51dd44dc9cbc896409e3d2257ed68ab2ba59dff9e4fc"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/job.json": {
+    "bytes": 154081,
+    "sha256": "3d5e78fcbfb41a33496d1b8f17641a1df4fa67466c47f388f3c6349e341cc15e"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/joel.json": {
+    "bytes": 14966,
+    "sha256": "722c63cceb71184f4380880eef439c7e728b5e8502b8d8222512b86fc15e3bef"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/john.json": {
+    "bytes": 152402,
+    "sha256": "70ae0ebb96aae5267600dc0ce138864dd40a3700981743819c3a56ea14849b5d"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/jonah.json": {
+    "bytes": 9403,
+    "sha256": "634a38c8d4ffc1f11a3958afdf734b489e56e28e49c328be3f96f0053cf88bc3"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/joshua.json": {
+    "bytes": 125687,
+    "sha256": "55e580c5dbd3d27e7b64a5266ae022b714b14330216d0e0e0b65dafa94db2e1d"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/jude.json": {
+    "bytes": 5221,
+    "sha256": "99da3f04412c88b2384f2fefb12e54440847fa36e530be9fad2143da5429d37b"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/judges.json": {
+    "bytes": 127321,
+    "sha256": "bed569da2ee04a8ca3a08b527b640e357c861d4f486854bf9030b79e46171202"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/lamentations.json": {
+    "bytes": 28343,
+    "sha256": "be388e5a0f10d4faa25d5a41dc8306141bee84a289f1c025ef068da36e9ddfdd"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/leviticus.json": {
+    "bytes": 178825,
+    "sha256": "0a2109300ed27ab1eb4f44697e228467d1100275a1d8cf22dd77ea22c83ebd66"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/luke.json": {
+    "bytes": 197964,
+    "sha256": "b8581dcabd96d03dc593607fdd80de8203460ef558e6aa9c8baabc50ad8a7cfc"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/malachi.json": {
+    "bytes": 12801,
+    "sha256": "6f61ee6c2ec473b07df4c4444d58e7e8a0b66db212f80b5695bee1c19eee50c4"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/mark.json": {
+    "bytes": 113613,
+    "sha256": "45b9e024c882d3919c7f69681a9b31166d28710a49c88a4d63bd8dae1d8a0801"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/matthew.json": {
+    "bytes": 184412,
+    "sha256": "f1ae146de27bd8a061638bd833b2e196b8df9c9301c17969398c19fed852e45c"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/micah.json": {
+    "bytes": 22447,
+    "sha256": "3966dc2a57f643b9edf42141f6ac2414ab359ff409f6d827bdceb3fa733f14d3"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/nahum.json": {
+    "bytes": 9878,
+    "sha256": "f8495f8bc5cc79f54c49bf560b83bf5e74a682c939e405114e81523bdeac8ced"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/nehemiah.json": {
+    "bytes": 80480,
+    "sha256": "045f2f838a1a9615fb09eb7a0209dd3e323920302d12fedfdf59cb5c68b34fd7"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/numbers.json": {
+    "bytes": 243433,
+    "sha256": "a1f7df6a4747b77fdb0476b1266b3d82506152df854a328b090aab790fe1f50b"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/obadiah.json": {
+    "bytes": 4957,
+    "sha256": "3df7d150aae9ced37a1326ae68ac7081c6590b8f6f4a2f870b1440a4bf362808"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/philemon.json": {
+    "bytes": 4010,
+    "sha256": "aeaa7a45e34c954cc1a9074b3ca2229e993cef498adae6906ac52a824b861d40"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/philippians.json": {
+    "bytes": 18676,
+    "sha256": "ddda7a85f2d43d9cb8a589c8c7d3a3075a154a4cfa18a6144f73097a8a870e43"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/proverbs.json": {
+    "bytes": 137869,
+    "sha256": "3cf7102df6d1761103ffd42e7663589c0c1f04431ea483f6acbf61e0a9448ceb"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/psalms.json": {
+    "bytes": 370837,
+    "sha256": "8ee551ee680989120755cb45c2d7b516b8d3cf901cb0cf4922d4bf8f66aa2ef1"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/revelation.json": {
+    "bytes": 88815,
+    "sha256": "19e59e78bb8700444e7093253488259c38d0c5cf4c3624234c7fa726c0acf95b"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/romans.json": {
+    "bytes": 76711,
+    "sha256": "54a75dfbc27e52d2105e2e85630446ade58939f20e9ef0f14391f7522555f4af"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/ruth.json": {
+    "bytes": 18295,
+    "sha256": "3797bad157babb29a80434b87a9d5628e61d367e6927eb2bee1c63b70d3f6ab1"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/song-of-solomon.json": {
+    "bytes": 23768,
+    "sha256": "d2b2109fb7a0c470b61134b562701452c7f022a6553af5726607d9e708c3bdf8"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/titus.json": {
+    "bytes": 8026,
+    "sha256": "c68bacb8b423bbfd07e9b045ac2fd8f54d1f15609a19f027db0e61a0522dfacc"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/zechariah.json": {
+    "bytes": 45791,
+    "sha256": "7f3c32ea14f419bf921a411639c67b95f00c74206f94181eff3a13012e85af46"
+  },
+  "artifacts/discipleship-hub/scripts/data/net-cache/zephaniah.json": {
+    "bytes": 11979,
+    "sha256": "305781bd597fa49e516d832f8edfb1e1849ec9a2e342c252e7dc4b1a76dd47d3"
+  },
+  "artifacts/discipleship-hub/scripts/generate-knowing-god-net.py": {
+    "bytes": 24308,
+    "sha256": "08d5df97ff01e110dd4b4e403b23fff3ca5207e7a9576cc399b55d4c72ba2f8f"
+  },
+  "artifacts/discipleship-hub/scripts/generate-knowing-god.py": {
+    "bytes": 51678,
+    "sha256": "4f473ab645c6de044687d18b87abae7dd30c5138c59148a7b2e10506b7e394e4"
+  },
+  "artifacts/discipleship-hub/scripts/knowing-god-net-loader.test.mjs": {
+    "bytes": 3226,
+    "sha256": "588a4236d431f821207b8d381b67170346a775c483459672b93fcefd3014864b"
+  },
+  "artifacts/discipleship-hub/scripts/knowing-god-net-validation.test.py": {
+    "bytes": 2363,
+    "sha256": "1645876c114298d370c9476aef18988ed5d7303b78153f4fc92b60f16b400a80"
+  },
+  "artifacts/discipleship-hub/scripts/knowing-god-net.test.mjs": {
+    "bytes": 2112,
+    "sha256": "9d5ebb99ed8d451a6749211ff32487e5557774b2a8ab2b9d4a1eaacb6028e323"
+  },
+  "artifacts/discipleship-hub/scripts/knowing-god-passages.test.mjs": {
+    "bytes": 3201,
+    "sha256": "ad52db4858f4bc51f92f849b1360b757c41a20b6ba8ce0d412b7347ad0ea5ac3"
+  },
+  "artifacts/discipleship-hub/scripts/knowing-god-regressions.test.mjs": {
+    "bytes": 8603,
+    "sha256": "146edb91252629aa2099a70a125bbcfc52034c38d1f82bc1de71519e79e0fa1b"
+  },
+  "artifacts/discipleship-hub/scripts/knowing-god-source-validation.test.py": {
+    "bytes": 12775,
+    "sha256": "644e73871e6a6579a30eaecbfba3e4cd75e6e7232bd782e8a02808968458d2b0"
+  },
+  "artifacts/discipleship-hub/src/assets/books/covers/knowing-god.jpg": {
+    "bytes": 592657,
+    "sha256": "6e6272edbc99b5c285779826ea66e42cbfe9d1cf9b87b58e7290ba2a046e7959"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/Playfair-Display-OFL.txt": {
+    "bytes": 4449,
+    "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/Source-Sans-3-OFL.txt": {
+    "bytes": 4579,
+    "sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/libre-baskerville/OFL.txt": {
+    "bytes": 4542,
+    "sha256": "3624eddd4c8f8a908130a417ae7cd089c9da69899c4e0ca1a5217d0a6fae16fd"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/libre-baskerville/bold.ttf": {
+    "bytes": 106752,
+    "sha256": "8b008ffdae31b314657cb8e28d822da09893035d06bad9b1ab53ea762549cbd1"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/libre-baskerville/regular.ttf": {
+    "bytes": 106728,
+    "sha256": "f5bc4341f15de5e877d8d95b6b14b33e9a3da1f8fef4ed0700ed407f096cffb6"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2": {
+    "bytes": 21140,
+    "sha256": "42898ad49a6b23f32b109243e1df596edf831015ed685f429e4dafbb181d599d"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2": {
+    "bytes": 9112,
+    "sha256": "ef6446229b59773e671021650ef3882cf35806dae723ce047de87c0a6633039a"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2": {
+    "bytes": 21152,
+    "sha256": "c108681cba6a9820bff52f4a1a4a1d9edf356b347bd79b7c61e916028e8a8b54"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2": {
+    "bytes": 38404,
+    "sha256": "e0c764a8e9e1cce92163c55bac4b2ad6cd4cf8c696ce2289ab5c41565e65b7e2"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpMtKy2OAdR1K-IwhWudF-R3woqY-LY1HY.woff2": {
+    "bytes": 18724,
+    "sha256": "747ba5266ef049efc6d67eaa99058a81efa134ec00483c246ed388ef288186d2"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpMtKy2OAdR1K-IwhWudF-R3woqZ-LY.woff2": {
+    "bytes": 28532,
+    "sha256": "9a15dafc2c2b2414aaa9d6c30830d9aab4361329d8495b1574633603b994b411"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpMtKy2OAdR1K-IwhWudF-R3woqZOLY1HY.woff2": {
+    "bytes": 14936,
+    "sha256": "34177ef48786984f32c045dd5b4a717a69cd6f14b6da5adbaf7b7a2e62470bc7"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpMtKy2OAdR1K-IwhWudF-R3woqa-LY1HY.woff2": {
+    "bytes": 9880,
+    "sha256": "4c9e2fb8dbc56263b83752747ad6ad08dbb171d1d9dadd55a2181a5c200c9363"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpMtKy2OAdR1K-IwhWudF-R3woqaOLY1HY.woff2": {
+    "bytes": 10724,
+    "sha256": "a9dedfb0c65bcd734e9a4b2dcefb382f1d9cdc784e1238c5431708d7dcd45ae8"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpMtKy2OAdR1K-IwhWudF-R3woqaeLY1HY.woff2": {
+    "bytes": 59496,
+    "sha256": "6fe10a66ec416f77a26309b645471d032ad8175063bb605b886e9b7e57efaaa8"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpMtKy2OAdR1K-IwhWudF-R3woqauLY1HY.woff2": {
+    "bytes": 10976,
+    "sha256": "e31d1fc39f2fa419e06bebc48b3bd1c6876b349e2effa4a629e0b947a7fd241b"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpStKy2OAdR1K-IwhWudF-R3w8aZQ.woff2": {
+    "bytes": 28740,
+    "sha256": "7a19a7027e125257d310c6dbd78ae3a30b5ea1e3794d60b12bb28227a003bfda"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpStKy2OAdR1K-IwhWudF-R3wAaZfrc.woff2": {
+    "bytes": 10324,
+    "sha256": "ff34bf5a131a3f9d194f47b4ff7de95aceef5dad72b74709a5d5bf2c069e1f86"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpStKy2OAdR1K-IwhWudF-R3wEaZfrc.woff2": {
+    "bytes": 60088,
+    "sha256": "a85a7459bdb3cdc1136751e151a506bae653fc29ada3ca86237477df6f1b59e6"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpStKy2OAdR1K-IwhWudF-R3wIaZfrc.woff2": {
+    "bytes": 10676,
+    "sha256": "6aba01e1a800f890b4d91094c4cf5e1769aaf77085371a3ad96065d586186796"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpStKy2OAdR1K-IwhWudF-R3wMaZfrc.woff2": {
+    "bytes": 9784,
+    "sha256": "3576fb9237b1a58cb5b38369bd63074a6f884dbeb9f88069690b6bc67ee5d3ff"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpStKy2OAdR1K-IwhWudF-R3wsaZfrc.woff2": {
+    "bytes": 18496,
+    "sha256": "b6b721e08d0324b9e743858e8260463085d4c5e1e684f036f9d4a8ca6c62996f"
+  },
+  "artifacts/discipleship-hub/src/assets/fonts/nwpStKy2OAdR1K-IwhWudF-R3wwaZfrc.woff2": {
+    "bytes": 14600,
+    "sha256": "5360981f035cd4307cd65e4cf46a27693a2409702d3234403c534d9e656d7844"
+  },
+  "artifacts/discipleship-hub/src/assets/jol-logo-white.png": {
+    "bytes": 5327,
+    "sha256": "bc1b2a4e93026dd40623ee7a1fe5e3501c56fce6f830b53d3416b13bc849b4ec"
+  },
+  "artifacts/discipleship-hub/src/components/EquipHeader.astro": {
+    "bytes": 8636,
+    "sha256": "4f58a40c18ad523045e08f01aec041a1e5cde57cbd614392faa992da790c9999"
+  },
+  "artifacts/discipleship-hub/src/components/knowing-god/ConcordancePrototype.tsx": {
+    "bytes": 33938,
+    "sha256": "debc716cabffaf672a23159510c773a28bad492e1651d887ba73293b57e8a0ff"
+  },
+  "artifacts/discipleship-hub/src/components/knowing-god/TopicCrossReferences.tsx": {
+    "bytes": 1772,
+    "sha256": "591d86b565cd792df4669ebeadf561d8e11c4b19fc10dbd4c674fd1dfa7779fc"
+  },
+  "artifacts/discipleship-hub/src/components/knowing-god/bible-api.ts": {
+    "bytes": 3776,
+    "sha256": "c1c7732a47de237fdfa52b2bb215cc2ef9fbcd3550e549b90674b403d0ecee86"
+  },
+  "artifacts/discipleship-hub/src/components/knowing-god/devotional-topics.ts": {
+    "bytes": 651,
+    "sha256": "4bf142902f3ebdd43a0cdbd379ba6585c3560011400d1a44df8b7026287e9d9a"
+  },
+  "artifacts/discipleship-hub/src/components/knowing-god/passage-format.ts": {
+    "bytes": 3795,
+    "sha256": "83b5ef532b1d69af00bdd0d48fc5b4aac1dd2cd4f262661d4822a88ca1e4f596"
+  },
+  "artifacts/discipleship-hub/src/components/knowing-god/topic-history.mjs": {
+    "bytes": 534,
+    "sha256": "722ab9e042fb8026745db2b90fce530d0811981f9c7ce1dcdcb01db7ab256cc3"
+  },
+  "artifacts/discipleship-hub/src/data/knowing-god/introduction/about-and-dedication.ts": {
+    "bytes": 3679,
+    "sha256": "25c903847ed2c342696eb27ddd109a1eb11d6533ff207557447d5947a68c4361"
+  },
+  "artifacts/discipleship-hub/src/data/knowing-god/introduction/devotional-guide.ts": {
+    "bytes": 42188,
+    "sha256": "309a793c6f0aee73acc30d8b8dda9e5136aac1b4ae1c55a1b4a3fb6855165aaa"
+  },
+  "artifacts/discipleship-hub/src/data/knowing-god/introduction/foundational-scriptures.ts": {
+    "bytes": 10967,
+    "sha256": "6477135702a91b17af576e6197927b0be35c00084957b8631b62b12975d3c397"
+  },
+  "artifacts/discipleship-hub/src/data/knowing-god/introduction/notable-quotations.ts": {
+    "bytes": 9163,
+    "sha256": "45b9bf9e40679f91ffb8e5e10dd70c6e33d99ab51c08784c9e0e9d3229c98cb0"
+  },
+  "artifacts/discipleship-hub/src/data/knowingGodIntroductions.ts": {
+    "bytes": 1483,
+    "sha256": "f768be246bd579679bc4f854e7b14832751dc51303d8b4b47b5b46dbb526fa0c"
+  },
+  "artifacts/discipleship-hub/src/layouts/KnowingGodIntroductionLayout.astro": {
+    "bytes": 3600,
+    "sha256": "e270794645b250f17d0faafccfe9546d06511c7033fee038ed2a66f5c2f4dfff"
+  },
+  "artifacts/discipleship-hub/src/pages/knowing-god/introduction/[section].astro": {
+    "bytes": 23195,
+    "sha256": "fb2bfbf38b0ab51cd372296ac9d9ec74e5a40a51ccd509311dcf29968b6d4496"
+  },
+  "artifacts/discipleship-hub/src/pages/knowing-god/introduction/index.astro": {
+    "bytes": 3328,
+    "sha256": "16ca610e5ab9d499e17a2267deb6ba82d7c9a87b01462592e77d5711d1bda6d2"
+  },
+  "artifacts/discipleship-hub/src/pages/knowing-god.astro": {
+    "bytes": 2049,
+    "sha256": "aa099bc543e782f76cf345d767b9d57745caa3ccf35cadd77104b56cd4426205"
+  },
+  "artifacts/discipleship-hub/src/styles/brand-tokens.css": {
+    "bytes": 1239,
+    "sha256": "d775eb412eec3c01595f875e3af9c0f10b6f51622ed03fa52cc051dd89136923"
+  },
+  "artifacts/discipleship-hub/src/styles/fonts.css": {
+    "bytes": 6380,
+    "sha256": "d39a79201869a599be759d3a2bf6f6d677beefb9f2237482e130a0d2bd3fe316"
+  },
+  "artifacts/discipleship-hub/src/styles/global.css": {
+    "bytes": 2334,
+    "sha256": "5eb81bf5f27cc1b257a92a98fc703154ed9a6d2df78530c62f5c8889666fd287"
+  },
+  "artifacts/discipleship-hub/src/styles/knowing-god-theme.css": {
+    "bytes": 3434,
+    "sha256": "3ca583206749107d91f612f906f1219ad1e6de72481868ba5c0896a5a08910a4"
+  },
+  "artifacts/discipleship-hub/tsconfig.json": {
+    "bytes": 273,
+    "sha256": "fb3df70781751dfe1be58727c534cd5ac9c98473ebfc7e05d3c331e7d3b84361"
+  },
+  "pnpm-workspace.yaml": {
+    "bytes": 8089,
+    "sha256": "a918b0ed2b8c4ea13d2e762a624123f15095b75d8c7f9fab78c8fc3d2943db0f"
+  }
+}

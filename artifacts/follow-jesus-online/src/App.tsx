@@ -22,6 +22,10 @@ import { GoFurtherPage } from '@/pages/gf/index';
 import { GFBookPage } from '@/pages/gf/book';
 import { GFReadingPage } from '@/pages/gf/reading';
 import { HeartAfterGodIntroPage } from '@/pages/gf/heart-after-god-intro';
+import { KnowingGodPage } from '@/pages/knowing-god/index';
+import { PromisesPage } from '@/pages/promises/index';
+import { KnowingGodIntroductionIndexPage, KnowingGodIntroductionPage } from '@/pages/knowing-god/introduction';
+import { knowingGodIntroductions } from '@/data/knowingGodIntroductions';
 import { RewatchPage } from '@/pages/rewatch';
 import { MessagePage } from '@/pages/message';
 import { ArticlePlaceholder } from '@/pages/article-placeholder';
@@ -48,7 +52,21 @@ function PageMetadata() {
   let title = 'Follow Jesus Online';
   let description = 'Take your next step in following Jesus.';
 
-  if (pathname === '/bible/saved') {
+  const knowingGodPath = pathname.replace(/\/$/, '');
+  if (knowingGodPath === '/knowing-god') {
+    title = 'Knowing God / Topical Bible Verses | Follow Jesus Online';
+    description = 'Search and study topical Bible passages about the nature and character of God.';
+  } else if (knowingGodPath === '/knowing-god/introduction') {
+    title = 'Introductory Articles | Knowing God Topical Bible | Follow Jesus Online';
+    description = 'Read the complete introductory material from Knowing God before exploring the Topical Bible.';
+  } else if (knowingGodPath.startsWith('/knowing-god/introduction/')) {
+    const intro = knowingGodIntroductions.find((item) => item.slug === knowingGodPath.split('/')[3]);
+    title = `${intro?.title ?? 'Introduction'} | Knowing God Topical Bible | Follow Jesus Online`;
+    description = intro?.description ?? 'Introductory material from Knowing God.';
+  } else if (knowingGodPath === '/promises') {
+    title = 'God’s Promises for Hope | JO FOLLOW';
+    description = 'Study God’s promises for your situation, feelings, relationships, identity, future, and God’s character.';
+  } else if (pathname === '/bible/saved') {
     title = 'Saved Bible Items | Follow Jesus Online';
     description = 'Reopen your locally saved Bible bookmarks, highlights, and notes.';
   } else if (pathname.startsWith('/bible/')) {
@@ -180,6 +198,10 @@ function Router() {
         <Route path="/gf/:slug" component={GFBookPage} />
         <Route path="/gf/a-heart-after-god/the-restless-heart" component={HeartAfterGodIntroPage} />
         <Route path="/gf/:bookSlug/:readingSlug" component={GFReadingPage} />
+        <Route path="/knowing-god" component={KnowingGodPage} />
+        <Route path="/promises" component={PromisesPage} />
+        <Route path="/knowing-god/introduction" component={KnowingGodIntroductionIndexPage} />
+        <Route path="/knowing-god/introduction/:section" component={KnowingGodIntroductionPage} />
         <Route path="/rewatch" component={RewatchPage} />
         <Route path="/rewatch-video" component={RewatchPage} />
         <Route path="/message" component={MessagePage} />

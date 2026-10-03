@@ -4,6 +4,7 @@ import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
 import { applyPublicApiSecurity, rateLimitPublicApi } from "./middlewares/public-api";
+import { apiErrorHandler } from "./middlewares/api-errors";
 
 const app: Express = express();
 app.disable("x-powered-by");
@@ -34,5 +35,9 @@ app.use(express.json({ limit: "32kb" }));
 app.use(cookieParser());
 
 app.use("/api", router);
+app.use("/api", (_req, res) => {
+  res.status(404).json({ error: "API endpoint not found." });
+});
+app.use(apiErrorHandler);
 
 export default app;

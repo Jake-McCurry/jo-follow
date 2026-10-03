@@ -8,6 +8,13 @@ Follow Jesus Online is a discipleship destination in the JesusOnline family, beg
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
+- `pnpm --filter @workspace/api-server run test:auth` — authentication regressions, including isolated PostgreSQL tests
+
+### Reaction admin security
+
+- The Express API requires a nonblank `SESSION_SECRET` at startup. Use a randomly generated, high-entropy secret and admin password. Changing the signing secret invalidates existing admin sessions and changes visitor reaction hashes.
+- Apply the additive `lib/db/migrations/20261003-admin-login-attempts.sql` to the API's existing PostgreSQL database before running this version (or use the standard Drizzle schema push). Without the table or database access, admin login returns 503; it never falls back to an in-memory limiter.
+- Admin login has an atomic, persistent, account-wide budget of 10 attempts per 15 minutes, including successful and invalid login requests. This intentionally prevents IP rotation or instance recycling from increasing the budget. Exhaustion returns 429 with `Retry-After`; blocked requests do not extend the window. The tradeoff is that repeated attempts can temporarily prevent the legitimate admin from logging in; already authenticated sessions remain usable.
 
 ## Stack
 

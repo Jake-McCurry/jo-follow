@@ -15,8 +15,8 @@ export const TOPIC_MENU_LINKS: TopicMenuLink[] = [
   { label: "Books", href: "/gf/" },
   { label: "Holy Spirit", href: "/gf/walking-in-the-spirit" },
   { label: "Videos", href: "/rewatch" },
-  { label: "Promises", href: "/bible/Romans/8" },
-  { label: "Knowing God", href: "/gf/beholding-the-majesty-of-god" },
+  { label: "Promises", href: "/promises" },
+  { label: "Knowing God", href: "/knowing-god" },
 ]
 
 export const CONNECT_WITH_GOD_RESOURCES: ConnectWithGodResource[] = [
@@ -28,12 +28,12 @@ export const CONNECT_WITH_GOD_RESOURCES: ConnectWithGodResource[] = [
   {
     title: "Knowing God / Topical Concordance",
     description: "A new view of the Father, one topic at a time.",
-    href: "/gf/beholding-the-majesty-of-god",
+    href: "/knowing-god",
   },
   {
     title: "God\u2019s Promises for Hope",
     description: "When feelings fail, His promises still stand.",
-    href: "/bible/Romans/8",
+    href: "/promises",
   },
   {
     title: "Reflecting on God\u2019s Majesty",

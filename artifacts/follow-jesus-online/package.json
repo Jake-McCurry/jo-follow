@@ -5,15 +5,19 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "prebuild": "pnpm run test:articles && pnpm run test:bible-study && pnpm run test:recent-page && pnpm run test:rewatch && pnpm run test:connect",
+    "prebuild": "pnpm run test:articles && pnpm run test:bible-study && pnpm run test:recent-page && pnpm run test:rewatch && pnpm run test:connect && pnpm run test:knowing-god && pnpm run test:promises",
     "build": "vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:promises": "python3 scripts/promises-source.test.py && node --import tsx --test scripts/promises-navigation.test.mjs",
     "test:articles": "node --test scripts/article-links.test.mjs && node --import tsx --test scripts/faq-content-revisions.test.ts scripts/believer-resource-revisions.test.ts scripts/scripture-text.test.ts scripts/guide-main-format-revisions.test.ts scripts/guide-deeper-format-revisions.test.ts",
     "test:bible-study": "node --import tsx --test scripts/bible-study-validation.test.ts",
     "test:recent-page": "node --import tsx --test scripts/recent-page.test.ts",
     "test:rewatch": "node --import tsx --test scripts/rewatch-videos.test.ts",
-    "test:connect": "node --import tsx --test scripts/connect-with-god.test.ts"
+    "test:connect": "node --import tsx --test scripts/connect-with-god.test.ts",
+    "test:knowing-god": "python3 scripts/knowing-god-source-validation.test.py && python3 scripts/knowing-god-net-validation.test.py && node --import tsx --test scripts/knowing-god-regressions.test.mjs scripts/knowing-god-passages.test.mjs scripts/knowing-god-net.test.mjs scripts/knowing-god-net-loader.test.mjs scripts/knowing-god-integration.test.mjs",
+    "validate:knowing-god-net": "python3 scripts/generate-knowing-god-net.py --validate-only",
+    "validate:knowing-god-source": "python3 scripts/generate-knowing-god.py --validate-only"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",

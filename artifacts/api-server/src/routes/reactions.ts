@@ -1,7 +1,10 @@
-import { createHash, createHmac, randomUUID, timingSafeEqual } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { Router, type IRouter, type Request, type Response } from "express";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { articleReactionsTable, db } from "@workspace/db";
+import { ADMIN_SESSION_SECONDS, createAdminToken, safeEqual, secret, verifyAdminToken } from "../lib/admin-session";
+import { consumeAdminLoginAttempt } from "../lib/admin-login-limit";
+import { isReactionArticle } from "../lib/reaction-articles";
 import {
   CreateReactionAdminSessionBody,
   CreateReactionAdminSessionResponse,
@@ -19,22 +22,11 @@ const router: IRouter = Router();
 const PUBLIC_THRESHOLD = 5;
 const VISITOR_COOKIE = "jo_reaction_visitor";
 const ADMIN_COOKIE = "jo_reaction_admin";
-const ADMIN_SESSION_SECONDS = 60 * 60 * 12;
 
 type ReactionType = "helpful" | "encouraging" | "disagree";
 
 function secureCookie(req: Request) {
   return req.secure || req.get("x-forwarded-proto") === "https";
-}
-
-function secret() {
-  return process.env.SESSION_SECRET ?? "";
-}
-
-function safeEqual(left: string, right: string) {
-  const leftBuffer = Buffer.from(left);
-  const rightBuffer = Buffer.from(right);
-  return leftBuffer.length === rightBuffer.length && timingSafeEqual(leftBuffer, rightBuffer);
 }
 
 function visitorHash(req: Request, res: Response) {
@@ -54,19 +46,8 @@ function visitorHash(req: Request, res: Response) {
   return createHash("sha256").update(`${secret()}:${visitorId}`).digest("hex");
 }
 
-function createAdminToken() {
-  const expiresAt = Math.floor(Date.now() / 1000) + ADMIN_SESSION_SECONDS;
-  const payload = String(expiresAt);
-  const signature = createHmac("sha256", secret()).update(payload).digest("hex");
-  return `${payload}.${signature}`;
-}
-
 function hasAdminSession(req: Request) {
-  const token = typeof req.cookies[ADMIN_COOKIE] === "string" ? req.cookies[ADMIN_COOKIE] : "";
-  const [expiresAt, signature] = token.split(".");
-  if (!expiresAt || !signature || Number(expiresAt) <= Math.floor(Date.now() / 1000)) return false;
-  const expected = createHmac("sha256", secret()).update(expiresAt).digest("hex");
-  return safeEqual(signature, expected);
+  return verifyAdminToken(req.cookies[ADMIN_COOKIE]);
 }
 
 async function reactionSummary(articleSlug: string, selected: ReactionType | null) {
@@ -92,6 +73,10 @@ router.get("/articles/:articleSlug/reactions", async (req, res): Promise<void> =
     res.status(400).json({ error: "Invalid article." });
     return;
   }
+  if (!isReactionArticle(params.data.articleSlug)) {
+    res.status(404).json({ error: "Article not found." });
+    return;
+  }
   const hash = visitorHash(req, res);
   const [current] = await db
     .select({ reaction: articleReactionsTable.reaction })
@@ -111,6 +96,10 @@ router.put("/articles/:articleSlug/reactions", async (req, res): Promise<void> =
   const body = SetArticleReactionBody.safeParse(req.body);
   if (!params.success || !body.success) {
     res.status(400).json({ error: "Invalid article or reaction." });
+    return;
+  }
+  if (!isReactionArticle(params.data.articleSlug)) {
+    res.status(404).json({ error: "Article not found." });
     return;
   }
   const hash = visitorHash(req, res);
@@ -134,7 +123,19 @@ router.get("/reaction-admin/session", (req, res): void => {
   res.json(GetReactionAdminSessionResponse.parse({ authenticated: hasAdminSession(req) }));
 });
 
-router.post("/reaction-admin/session", (req, res): void => {
+router.post("/reaction-admin/session", async (req, res): Promise<void> => {
+  try {
+    const retryAfter = await consumeAdminLoginAttempt();
+    if (retryAfter > 0) {
+      res.setHeader("Retry-After", retryAfter);
+      res.status(429).json({ error: "Too many sign-in attempts. Please try again later." });
+      return;
+    }
+  } catch {
+    req.log.error("Reaction admin login attempt limiter is unavailable");
+    res.status(503).json({ error: "Sign-in is temporarily unavailable. Please try again later." });
+    return;
+  }
   const body = CreateReactionAdminSessionBody.safeParse(req.body);
   if (!body.success) {
     res.status(400).json({ error: "Enter a password." });
