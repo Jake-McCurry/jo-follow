@@ -1,5 +1,6 @@
 import { type ReactNode, useEffect, useState } from "react"
 import { Link, useLocation } from "wouter"
+import { TopicMenuBar } from "@/components/topic-menu-bar"
 import { Button } from "@/components/ui/button"
 import { clearRecentPage, getRecentPage, isSamePage, saveRecentPage } from "@/hooks/use-recent-page"
 
@@ -58,6 +59,7 @@ export function Layout({ children }: { children: ReactNode }) {
             </div>
           </button>
         </div>
+        <TopicMenuBar />
         {isMenuOpen && (
           <nav
             id="site-menu"
@@ -108,8 +110,13 @@ export function Layout({ children }: { children: ReactNode }) {
                 Saved Bible Items
               </Link>
               <Link
-                href="/adv/prayer"
-                onClick={() => setIsMenuOpen(false)}
+                href="/#connect-with-god"
+                onClick={() => {
+                  setIsMenuOpen(false)
+                  if (location.split("?")[0] === "/") {
+                    document.getElementById("connect-with-god")?.scrollIntoView()
+                  }
+                }}
                 className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Connect with God
