@@ -16,3 +16,4 @@
 - [Knowing God fidelity](knowing-god-fidelity.md) — Preserve the full source content and offline corpus; use native Follow navigation and JO FOLLOW branding.
 - [Promises editorial scope](promises-editorial.md) — Use the requested Hope display title while retaining the supplied edition's original title and quotation wording in source content.
 - [Unpatched glob dependencies](unpatched-glob-dependencies.md) — Prefer native Node discovery over reintroducing the fast-glob/micromatch/braces chain without a verified security fix.
+- [Development preview file boundaries](dev-preview-file-boundaries.md) — Vite's default pnpm workspace allowance can expose backend source; restrict browser-facing file access.

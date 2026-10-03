@@ -51,6 +51,12 @@ export default defineConfig({
     allowedHosts: true,
     fs: {
       strict: true,
+      // Component previews must not serve the API server or private workspace files.
+      allow: [
+        import.meta.dirname,
+        path.resolve(import.meta.dirname, '../../node_modules'),
+        path.resolve(import.meta.dirname, '../../attached_assets'),
+      ],
     },
   },
   preview: {
