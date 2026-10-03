@@ -1,0 +1,13 @@
+/* Promises-only reading colors. Shared navigation and Knowing God stay unchanged. */
+.kg-root .promises-theme {
+  --color-surface: #F1F6FA;
+  --color-surface-soft: #E5EDF4;
+  --color-text: #17384D;
+  --color-hero: #17384D;
+  --color-text-muted: #435C70;
+  --color-border-soft: #C9D6E1;
+  --color-border-control: #71879A;
+
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
