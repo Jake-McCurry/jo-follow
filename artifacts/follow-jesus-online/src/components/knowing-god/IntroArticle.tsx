@@ -76,7 +76,7 @@ function DevotionalGuide() {
 export function IntroArticle({ article, previous, next }: { article: KnowingGodIntroduction; previous: KnowingGodIntroduction | null; next: KnowingGodIntroduction | null }) {
   const { titlePage, publication, dedication } = aboutAndDedication;
   return (
-    <main className="kg-intro-main" id="main-content">
+    <div className="kg-intro-main">
       <nav className="kg-intro-breadcrumbs" aria-label="Breadcrumb">
         <Link href="/knowing-god">Knowing God</Link>{" "}
         <span aria-hidden="true">/</span>{" "}
@@ -106,7 +106,7 @@ export function IntroArticle({ article, previous, next }: { article: KnowingGodI
               <div className="publisher-mark">{publication.publisherMark.map(line => <span key={line}>{line}</span>)}</div>
             </div>
             <div className="publication-details">
-              <p className="copyright"><a className="kg-copyright-link" href="https://www.zmission.org/our-story.html" target="_blank" rel="noopener noreferrer">{publication.copyright}</a></p>
+              <p className="copyright">{publication.copyright}</p>
               <p>{publication.rights.join(" ")}</p>
               <p>{publication.internetNotice.join(" ")}</p>
               <h3>{publication.orderingHeading}</h3>
@@ -195,13 +195,13 @@ export function IntroArticle({ article, previous, next }: { article: KnowingGodI
           </Link>
         )}
       </nav>
-    </main>
+    </div>
   );
 }
 
 export function IntroIndex() {
   return (
-    <main className="kg-intro-main" id="main-content">
+    <div className="kg-intro-main">
       <nav className="kg-intro-breadcrumbs" aria-label="Breadcrumb">
         <Link href="/knowing-god">Knowing God</Link> <span aria-hidden="true">/</span> Introductory Articles
       </nav>
@@ -221,6 +221,6 @@ export function IntroIndex() {
           </Link>
         ))}
       </section>
-    </main>
+    </div>
   );
 }

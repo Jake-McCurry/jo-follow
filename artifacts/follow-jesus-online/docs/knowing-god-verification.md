@@ -23,11 +23,13 @@ The separate Reflecting on God's Majesty and interim Promises links are unchange
 - Preserved source content and asset bytes: all 220 original manifest entries
   were verified on extraction; 125 imported immutable content/data/asset files
   are also checked against that manifest by the destination's regression suite.
-- Ported Astro introduction pages and the JO EQUIP header to React/Wouter rather
-  than replacing the existing application framework or layout.
+- Ported Astro introduction pages to React/Wouter rather than replacing the
+  existing application framework or layout.
 - Kept feature colors, reading styles and self-hosted font families isolated.
-  Added a local return link. Original hub-only navigation links are explicit
-  external links; Books and Read the Bible use existing local pages.
+  Uses Follow's existing header, topic menu and main navigation. Removed the
+  original JO EQUIP header and navigation to the source application. Supplemental
+  Scripture links use Follow's Bible reader in the same tab; attribution wording
+  remains intact without outbound links.
 - Retained original local-storage keys, topic IDs and hash/history behavior.
   Assets and feature links respect the application's base path.
 - Adapted generator output paths without regenerating or editing approved data.
@@ -70,7 +72,7 @@ above to avoid confusing 625 entries with 627 sections.
 | Browser Back/topic hashes | Passed unit and browser verification |
 | Study-list add/remove and reload persistence | Passed browser verification |
 | Copy references/passages and unavailable/rejected clipboard | Passed browser verification |
-| Print action, hidden header/controls and retained study content | Passed targeted browser verification after fixing header visibility |
+| Print action, hidden Follow header/controls and retained study content | Passed targeted browser verification |
 | Introduction index and all five complete article routes | Passed content checksums and browser verification |
 | Introduction navigation and devotional filtering | Passed browser verification |
 | Mobile topic toggle, reading focus/scroll and width | Passed at 390×844 after fixing focus/scroll |
@@ -83,7 +85,9 @@ above to avoid confusing 625 entries with 627 sections.
 - Production Vite build: passed.
 - Existing article, Bible-study, recent-page, Rewatch and Connect with God suites:
   49 tests passed.
-- Knowing God JavaScript suites: 27 tests passed.
+- Knowing God JavaScript suites: 28 tests passed, including a navigation guard
+  checking that feature links stay in Follow and every supplemental Scripture
+  reference resolves to a local Bible route.
 - Python source tests: 8 passed, 2 explicitly skipped because the original PDF
   was not included.
 - Python NET tests: 3 passed.
@@ -91,6 +95,10 @@ above to avoid confusing 625 entries with 627 sections.
 - Browser pass covered desktop and mobile routes, persistence, translations,
   cross-references, copy, print and all five introductions. The three issues
   found were fixed and confirmed with a focused browser check.
+- Follow-only navigation was additionally confirmed in the browser: Books opens
+  local `/gf/`, introductions retain the Follow header, supplemental Scripture
+  opens the working local Bible reader in the same tab, and mobile focus/scroll
+  and print respect the Follow header.
 - No browser page errors or local Knowing God content request failures observed.
   Existing third-party telemetry requests were blocked/aborted by the browser;
   they are not Knowing God content dependencies.

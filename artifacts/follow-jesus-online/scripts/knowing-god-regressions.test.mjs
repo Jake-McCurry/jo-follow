@@ -110,7 +110,8 @@ test("zero-passage links appear in the reader and topic navigation stays shared"
   assert.match(reader, /<TopicCrossReferences onNavigate=\{followCrossReference\} related=\{selected\.seeAlso\}/);
   assert.doesNotMatch(reader, /view === "topic" && <header/);
   assert.doesNotMatch(reader, /view === "start" && <div className="kg-no-print/);
-  assert.match(page, /<EquipHeader \/>/);
+  assert.match(page, /<Layout>/);
+  assert.doesNotMatch(page, /EquipHeader/);
   assert.doesNotMatch(page, /html\[data-knowing-god-view="topic"\]/);
 });
 

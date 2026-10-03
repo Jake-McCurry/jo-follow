@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter"
 import { TopicMenuBar } from "@/components/topic-menu-bar"
 import { Button } from "@/components/ui/button"
 import { clearRecentPage, getRecentPage, isSamePage, saveRecentPage } from "@/hooks/use-recent-page"
+import joLogo from "@/assets/jol-logo-white.png"
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -28,20 +29,21 @@ export function Layout({ children }: { children: ReactNode }) {
       >
         Skip to main content
       </a>
-      <header className="relative sticky top-0 z-40 w-full bg-brand shadow-sm">
+      <header data-site-header className="relative sticky top-0 z-40 w-full bg-brand shadow-sm">
         <div className="mx-auto flex h-16 max-w-[1800px] items-center justify-between px-5 sm:px-8 md:h-[70px]">
           <Link
             href="/"
-            className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
-            aria-label="JesusOnline home"
+            className="inline-flex items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
+            aria-label="JO FOLLOW home"
           >
             <img
-              src="https://jesusonline.org/jesusonline-wordmark.png"
-              alt="JesusOnline"
-              width="320"
-              height="57"
-              className="h-8 w-auto sm:h-11"
+              src={joLogo}
+              alt=""
+              width="352"
+              height="356"
+              className="h-8 w-auto sm:h-10"
             />
+            <span className="font-sans text-xl font-bold tracking-wide text-white">JO FOLLOW</span>
           </Link>
           <button
             type="button"

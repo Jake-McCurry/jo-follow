@@ -1,10 +1,39 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
+import { knowingGodScriptureHref } from "../src/components/knowing-god/scripture-link.ts";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
 const json = async (path) => JSON.parse(await readFile(new URL(path, root), "utf8"));
+
+test("Knowing God navigation stays in Follow, including all supplemental Scripture destinations", async () => {
+  const dir = new URL("src/components/knowing-god/", root);
+  const files = (await readdir(dir)).filter((name) => /\.(?:tsx?|mjs)$/.test(name));
+  for (const name of files) {
+    const source = await readFile(new URL(name, dir), "utf8");
+    assert.doesNotMatch(source, /equip\.jesusonline\.com|biblegateway\.com/, name);
+    assert.doesNotMatch(source, /href\s*=\s*["'](?:https?:|mailto:)/, name);
+  }
+  const shell = await readFile(new URL("KnowingGodShell.tsx", dir), "utf8");
+  assert.match(shell, /<Layout>/);
+  assert.equal(knowingGodScriptureHref("Psalm 23:1-6"), "/bible/Psalms/23#verse-1");
+  assert.equal(knowingGodScriptureHref("Jude 20-23"), "/bible/Jude/1#verse-20");
+  assert.equal(knowingGodScriptureHref("2 John 1-6", "/follow/"), "/follow/bible/2%20John/1#verse-1");
+  assert.equal(knowingGodScriptureHref("3 John 1:12"), "/bible/3%20John/1#verse-12");
+  const index = await json("public/knowing-god/data/index.json");
+  for (const name of new Set(index.topics.map((item) => item.payload))) {
+    for (const topic of (await json(`public/knowing-god/data/${name}`)).topics) {
+      for (const section of topic.additionalScripture) {
+        for (const link of section.links) {
+          for (const query of link.queries) {
+            assert.match(knowingGodScriptureHref(query, "/follow/"), /^\/follow\/bible\/[^/]+\/\d+(?:#verse-\d+)?$/, query);
+          }
+        }
+      }
+    }
+  }
+});
 
 test("Knowing God content, introductory data and assets retain their source checksums", async () => {
   const manifest = await json("scripts/data/knowing-god-source-manifest.json");

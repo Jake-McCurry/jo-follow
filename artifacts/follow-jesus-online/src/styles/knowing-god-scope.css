@@ -55,7 +55,10 @@
   font-size: 17px;
   line-height: 1.55;
 }
-.kg-root .kg-equip-navigation { display: contents; }
+.kg-root .kg-scroll {
+  top: var(--kg-header-height, 120px);
+  max-height: calc(100dvh - var(--kg-header-height, 120px));
+}
 .kg-root .kg-local-return {
   background: var(--blue-950);
   color: #fff;
@@ -91,6 +94,6 @@
   }
 }
 @media print {
-  .kg-root .equip-header, .kg-root .kg-equip-navigation, .kg-root .kg-local-return { display: none !important; }
+  .kg-page [data-site-header], .kg-page footer { display: none !important; }
   .kg-root .kg-intro-main { max-width: none; }
 }
