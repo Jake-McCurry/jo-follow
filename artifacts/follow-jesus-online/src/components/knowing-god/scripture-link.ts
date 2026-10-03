@@ -1,7 +1,7 @@
 /** Supplemental references open Follow's own Bible reader at the first verse.
  * The complete source citation/range remains visible in the concordance. */
 export function knowingGodScriptureHref(reference: string, baseUrl = "/"): string {
-  const match = reference.trim().match(/^(.+?)\s+(\d+)(?::(\d+))?/);
+  const match = reference.trim().match(/^(.+?)\s+(\d+)(?:\s*:\s*(\d+))?/);
   if (!match) throw new Error(`Invalid Knowing God Scripture reference: ${reference}`);
   const book = match[1].replace(/^Psalm$/, "Psalms");
   const singleChapter = ["Obadiah", "Philemon", "2 John", "3 John", "Jude"].includes(book);

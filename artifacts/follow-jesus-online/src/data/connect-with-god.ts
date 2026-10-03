@@ -15,7 +15,7 @@ export const TOPIC_MENU_LINKS: TopicMenuLink[] = [
   { label: "Books", href: "/gf/" },
   { label: "Holy Spirit", href: "/gf/walking-in-the-spirit" },
   { label: "Videos", href: "/rewatch" },
-  { label: "Promises", href: "/bible/Romans/8" },
+  { label: "Promises", href: "/promises" },
   { label: "Knowing God", href: "/knowing-god" },
 ]
 
@@ -33,7 +33,7 @@ export const CONNECT_WITH_GOD_RESOURCES: ConnectWithGodResource[] = [
   {
     title: "God\u2019s Promises for Hope",
     description: "When feelings fail, His promises still stand.",
-    href: "/bible/Romans/8",
+    href: "/promises",
   },
   {
     title: "Reflecting on God\u2019s Majesty",
