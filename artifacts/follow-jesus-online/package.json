@@ -13,7 +13,7 @@
     "test:articles": "node --test scripts/article-links.test.mjs && node --import tsx --test scripts/faq-content-revisions.test.ts scripts/believer-resource-revisions.test.ts scripts/scripture-text.test.ts scripts/guide-main-format-revisions.test.ts scripts/guide-deeper-format-revisions.test.ts",
     "test:bible-study": "node --import tsx --test scripts/bible-study-validation.test.ts",
     "test:recent-page": "node --import tsx --test scripts/recent-page.test.ts",
-    "test:rewatch": "node --import tsx --test scripts/rewatch-videos.test.ts",
+    "test:rewatch": "python3 scripts/rewatch-docx-source.test.py && node --import tsx --test scripts/rewatch-videos.test.ts",
     "test:connect": "node --import tsx --test scripts/connect-with-god.test.ts",
     "test:knowing-god": "python3 scripts/knowing-god-source-validation.test.py && python3 scripts/knowing-god-net-validation.test.py && node --import tsx --test scripts/knowing-god-regressions.test.mjs scripts/knowing-god-passages.test.mjs scripts/knowing-god-net.test.mjs scripts/knowing-god-net-loader.test.mjs scripts/knowing-god-integration.test.mjs",
     "validate:knowing-god-net": "python3 scripts/generate-knowing-god-net.py --validate-only",

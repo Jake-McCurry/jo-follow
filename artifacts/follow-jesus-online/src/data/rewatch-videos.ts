@@ -6,7 +6,9 @@ export type TranscriptBlock = {
 };
 
 export type VideoTranscript = {
-  sourceUrl: string;
+  sourceUrl?: string;
+  sourceDocument?: string;
+  sourceHeading?: string;
   blocks: TranscriptBlock[];
 };
 
