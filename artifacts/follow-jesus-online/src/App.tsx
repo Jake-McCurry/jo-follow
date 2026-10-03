@@ -100,7 +100,7 @@ function PageMetadata() {
     }
   } else if (pathname === '/rewatch' || pathname === '/rewatch-video') {
     title = 'Rewatch the Videos | Follow Jesus Online';
-    description = 'Watch How God Sees You Now, The Gift of Heaven, and Jesus’ Resurrection and You.';
+    description = 'Watch Jesus’ Resurrection and You, The Gift of Heaven, God’s Vision, Personal Transformation, and Eternal Impact.';
   } else if (pathname === '/message') {
     title = 'Send a Message | Follow Jesus Online';
   } else if (pathname === '/admin/reactions') {

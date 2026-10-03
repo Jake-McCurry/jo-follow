@@ -20,3 +20,9 @@ The Explore Articles page should remain icon-free; its cards and section links r
 **Why:** Repeated icons consumed too much card space and made the article catalog feel busier than its content required.
 
 **How to apply:** Do not reintroduce per-card icons, section-header icons, or arrow icons on Explore Articles. Keep cards compact and text-led.
+
+Keep “Connect with God” compact on mobile. Use the supplied three-card grouping as the reference rather than nine spacious standalone cards.
+
+**Why:** The user said the nine cards “need to take up significantly less space, so it’s less scrolling on mobile,” explaining that the document grouped the resources “inside 3 total cards.” They approved the compact three-card result.
+
+**How to apply:** Retain the nine resource options but reduce card padding and repeated action rows. Do not expand this section's mobile footprint during future visual changes.

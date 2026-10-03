@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ConnectWithGodSection } from "@/components/connect-with-god-section";
 import { ShareButton } from "@/components/share-button";
 import { ArrowRight, BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
 
@@ -10,6 +12,12 @@ const guideHeroUrl = `${import.meta.env.BASE_URL}guide-wilderness-hero.jpg`;
 const guideDownloadUrl = `${import.meta.env.BASE_URL}adventure-guide.pdf`;
 
 export function Home() {
+  useEffect(() => {
+    if (window.location.hash === "#connect-with-god") {
+      document.getElementById("connect-with-god")?.scrollIntoView();
+    }
+  }, []);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -47,6 +55,37 @@ export function Home() {
       {/* Main Content */}
       <div className="container mx-auto max-w-5xl space-y-8 px-5 py-8 sm:px-8 md:space-y-10 md:py-10">
         
+        <ConnectWithGodSection />
+
+        {/* Featured Guide */}
+        <section className="relative overflow-hidden rounded-2xl bg-secondary p-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both md:p-10">
+          <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
+            <div className="shrink-0 flex items-center justify-center w-full md:w-48 mb-6 md:mb-0">
+              <img src={guideCoverUrl} alt="The Adventure of Living with Jesus Guide" className="w-full max-w-[200px] md:max-w-full rounded-xl shadow-lg border border-border/20 rotate-[-2deg] hover:rotate-0 transition-transform duration-500" />
+            </div>
+            <div className="flex-1 space-y-4 text-center md:text-left">
+              <div className="inline-block px-3 py-1 bg-warm-accent/15 text-warm-accent text-xs font-bold uppercase tracking-wider rounded-full mb-2">
+                Featured Guide
+              </div>
+              <h2 className="text-3xl font-bold text-secondary-foreground">The Adventure of Living with Jesus</h2>
+              <p className="text-secondary-foreground/80 text-lg max-w-xl mx-auto md:mx-0">
+                A clear, steady companion for the first steps—and for the journey that follows.
+              </p>
+            </div>
+            <div className="mt-6 flex w-full shrink-0 flex-col gap-2 md:mt-0 md:w-auto">
+              <Button asChild size="lg" variant="warm" className="h-14 px-10 text-xl shadow-md">
+                <Link href="/adv/begin-the-adventure">Start the Guide</Link>
+              </Button>
+              <Button asChild size="sm" variant="outline">
+                <a href={guideDownloadUrl} download="The-Adventure-of-Living-with-Jesus.pdf">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download PDF
+                </a>
+              </Button>
+            </div>
+          </div>
+        </section>
+
         {/* Where to begin */}
         <section className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
           <div className="text-center mb-12">
@@ -105,35 +144,6 @@ export function Home() {
                 </Button>
               </CardContent>
             </Card>
-          </div>
-        </section>
-
-        {/* Featured Guide */}
-        <section className="relative overflow-hidden rounded-2xl bg-secondary p-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both md:p-10">
-          <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
-            <div className="shrink-0 flex items-center justify-center w-full md:w-48 mb-6 md:mb-0">
-              <img src={guideCoverUrl} alt="The Adventure of Living with Jesus Guide" className="w-full max-w-[200px] md:max-w-full rounded-xl shadow-lg border border-border/20 rotate-[-2deg] hover:rotate-0 transition-transform duration-500" />
-            </div>
-            <div className="flex-1 space-y-4 text-center md:text-left">
-              <div className="inline-block px-3 py-1 bg-warm-accent/15 text-warm-accent text-xs font-bold uppercase tracking-wider rounded-full mb-2">
-                Featured Guide
-              </div>
-              <h2 className="text-3xl font-bold text-secondary-foreground">The Adventure of Living with Jesus</h2>
-              <p className="text-secondary-foreground/80 text-lg max-w-xl mx-auto md:mx-0">
-                A clear, steady companion for the first steps—and for the journey that follows.
-              </p>
-            </div>
-            <div className="mt-6 flex w-full shrink-0 flex-col gap-2 md:mt-0 md:w-auto">
-              <Button asChild size="lg" variant="warm" className="h-14 px-10 text-xl shadow-md">
-                <Link href="/adv/begin-the-adventure">Start the Guide</Link>
-              </Button>
-              <Button asChild size="sm" variant="outline">
-                <a href={guideDownloadUrl} download="The-Adventure-of-Living-with-Jesus.pdf">
-                  <Download className="mr-2 h-4 w-4" />
-                  Download PDF
-                </a>
-              </Button>
-            </div>
           </div>
         </section>
 

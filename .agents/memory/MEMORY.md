@@ -12,3 +12,4 @@
 - [Client-rendered footer previews](client-rendered-footer-previews.md) — Hash URLs may not scroll to sections mounted by React; scroll after render for footer screenshots.
 - [JO EQUIP download verification](jo-equip-download-verification.md) — Cloudflare can block shell PDF downloads even when a reader proxy retrieves the document.
 - [Article image verification](article-image-verification.md) — Check preview image responses as well as build assets; custom middleware can shadow public files.
+- [Video transcript provenance](video-transcript-provenance.md) — Use verified transcripts, not related articles; caption requests may return HTTP 200 with no text.
