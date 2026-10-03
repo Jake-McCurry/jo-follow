@@ -28,3 +28,17 @@ mtime_ms = 1791048470889
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/c24c90f5-0b0c-45e3-a521-12c8487b3ae6/2067781a-0b53-4320-a0f0-36a7a03c780f"
 storage_version_token = "1791048475212463"
 content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+[[outputs]]
+id = "mNm91JxUw5S7f7SgLNZBc"
+uri = "file://downloads/follow-jesus-online-changes-2026-10-03.xlsx"
+type = "table"
+title = "Today’s Changes — October 3, 2026"
+description = "Excel workbook with 48 change entries, verification results, pending items, all 15 recorded updates, and a complete per-update file inventory."
+logical_id = "11c4d456-fba8-4d2c-ab7d-602f1e2808a3"
+content_hash = "sha256:bc141594f753d02eed321d023cfdbd2a53b89c37808f47f6b8b5f7c0c5929b71"
+size = 27032
+mtime_ms = 1791067540636
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/11c4d456-fba8-4d2c-ab7d-602f1e2808a3/fd39a4c5-30a4-4102-962f-333db4835898"
+storage_version_token = "1791067544769233"
+content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
