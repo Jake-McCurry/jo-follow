@@ -5,8 +5,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { REWATCH_VIDEOS } from "@/data/rewatch-videos";
 import { ArrowLeft } from "lucide-react";
 
-export function RewatchPage() {
-  
+export function RewatchPage({ videoId }: { videoId?: string } = {}) {
+  const videos = videoId ? REWATCH_VIDEOS.filter(video => video.id === videoId) : REWATCH_VIDEOS;
   return (
     <Layout>
       <div className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
@@ -19,12 +19,12 @@ export function RewatchPage() {
         </div>
 
         <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">Rewatch the Videos</h1>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">{videoId ? videos[0]?.title : "Rewatch the Videos"}</h1>
           <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
         </div>
 
         <div className="space-y-12">
-          {REWATCH_VIDEOS.map((video, index) => (
+          {videos.map((video, index) => (
             <section key={video.id} aria-labelledby={`video-title-${video.id}`}>
               <h2 id={`video-title-${video.id}`} className="mb-4 text-2xl font-bold text-navy sm:text-3xl">
                 {video.title}

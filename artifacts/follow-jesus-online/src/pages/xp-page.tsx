@@ -48,16 +48,24 @@ const XP_ARTICLE_LINKS: Partial<Record<XPType, Record<string, string>>> = {
 const XP_CONTENT: Record<XPType, {
   title: string;
   subtitle?: string;
-  intro: string;
-  guideText: string;
+  intro: string | string[];
+  guideHeading?: string;
+  guideLabel?: string;
+  guideText: string | string[];
   questionsTitle: string;
   questions: string[];
   contactText: string;
 }> = {
   "received": {
-    title: "Something Real Has Begun",
-    intro: "You just took a step of faith. What happened is real. These simple next steps will help you understand it more clearly and begin walking forward with confidence.",
-    guideText: "In the video you heard that Jesus offers a new life. This guide helps you see what that new life looks like in ordinary days—clearly, gently, and at your own pace.",
+    title: "He heard you. You are His.",
+    intro: "You asked Jesus to come into your heart. And He did. What happened is real. God already sees you as His child — forgiven, belonging, and secure.",
+    guideHeading: "Something real has begun.",
+    guideText: [
+      "When you invited Jesus Christ into your life, you entered a personal relationship with God that lasts forever. He now lives within you, accepting you as you are and transforming your life as you walk with Him.",
+      "This relationship isn't based on fleeting feelings; Christ's presence is constant. The days ahead may be unpredictable, but His Spirit is always at work within you, equipping you for your journey.",
+      "This short guide will help you understand who you are now, the Spirit in you, moving forward, and living purposefully. Take the next step.",
+    ],
+    guideLabel: "Read what just happened — 2 minutes",
     questionsTitle: "You’re Not the Only One Wondering…",
     questions: [
       "How do I know this is real?",
@@ -71,9 +79,17 @@ const XP_CONTENT: Record<XPType, {
     contactText: "If a question or concern is on your heart, you’re welcome to share it."
   },
   "rededicated": {
-    title: "Welcome Back",
-    intro: "You just took a meaningful step. Turning toward Jesus again matters. What you did is real, and He receives you with open arms. These simple next steps will help you renew your walk with Him and move forward with clarity and confidence.",
-    guideText: "In the video you were reminded of the life Jesus offers. This guide will help you return to the daily reality of walking with Him—steadily and sincerely.",
+    title: "Welcome back. He never left.",
+    intro: [
+      "You just turned toward Jesus again. He receives you. You do not have to earn your way back, and you did not lose your place as His child while you were away.",
+      "If you feel ashamed or far off, that feeling is not the verdict. He already knows where you have been. Coming back is the step that matters.",
+    ],
+    guideHeading: "You are still His",
+    guideText: [
+      "Turning back to Jesus is not about obtaining a second salvation; it's a return home, like the prodigal son. The Father welcomed him back without requiring reacceptance. Christ doesn't abandon His own. Instead, confession is simply the way to walk back into the light, not a means of being readopted.",
+      "You don't need to fix everything at once or feel close to Him before you are. Just take the next faithful step. He welcomes you back with open arms, regardless of your past.",
+    ],
+    guideLabel: "How to walk with Him again — 2 minutes",
     questionsTitle: "You’re Not the Only One Feeling This Way…",
     questions: [
       "How do I start walking closely with Him again?",
@@ -87,9 +103,14 @@ const XP_CONTENT: Record<XPType, {
     contactText: "If something is weighing on you or you simply want help taking the next step, you’re welcome to share it."
   },
   "believer": {
-    title: "Good to See You Here",
-    intro: "Thank you for watching. Since you already walk with Jesus, we’re glad these truths could encourage you today. If you would like to keep growing or simply be refreshed in the basics of walking with Him, this short guide is a clear and steady place to continue.",
-    guideText: "Many believers find it helpful to return to these foundational truths from time to time—or to share them with someone who is just beginning.",
+    title: "You already belong to Him.",
+    intro: "You said you already trust Jesus. God already sees you as His child — forgiven, belonging, and accepted.",
+    guideHeading: "Already His",
+    guideText: [
+      "If you have trusted Christ, you are not a guest in God’s family. You are His child.",
+      "Many believers live as if they were still on trial — useful when they do well, distant when they fail. That is not how the Father sees you. Christ has already settled the case. Your part now is to walk in what is already true.",
+    ],
+    guideLabel: "How to walk with Him again — 2 minutes",
     questionsTitle: "Ways You Might Use These Resources",
     questions: [
       "Refresh the foundations of your own walk with Jesus",
@@ -126,6 +147,9 @@ export function XPPage() {
   const content = XP_CONTENT[type];
   
   if (!content) return <NotFound />;
+  const updatedPage = type !== "did-not-pray";
+  const introParagraphs = Array.isArray(content.intro) ? content.intro : [content.intro];
+  const guideParagraphs = Array.isArray(content.guideText) ? content.guideText : [content.guideText];
 
   const inboundParams = new URLSearchParams(
     typeof window === "undefined" ? "" : window.location.search,
@@ -161,7 +185,11 @@ export function XPPage() {
             </p>
           )}
           
-          <a 
+          {updatedPage ? (
+            <div className="space-y-5 max-w-2xl mx-auto text-xl leading-relaxed text-muted-foreground">
+              {introParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+            </div>
+          ) : <a 
             href={videoUrl}
             target="_blank" 
             rel="noopener noreferrer"
@@ -169,7 +197,7 @@ export function XPPage() {
           >
             <PlayCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />
             Watch this video: How God sees you now
-          </a>
+          </a>}
         </div>
 
         {/* Main Content Area */}
@@ -179,21 +207,35 @@ export function XPPage() {
               <img src={guideCoverUrl} alt="The Adventure of Living with Jesus" className="w-full rounded-xl shadow-md border border-border/30 rotate-[-1deg]" />
             </div>
             <div className="prose prose-lg dark:prose-invert max-w-none flex-1">
-              <p className="text-xl leading-relaxed text-card-foreground/90 font-medium mb-8">
-                {content.intro}
-              </p>
+              {updatedPage ? (
+                <>
+                  <h2 className="text-2xl font-bold text-foreground mb-5">{content.guideHeading}</h2>
+                  {guideParagraphs.map((paragraph, index) => (
+                    <p key={index} className="text-lg leading-relaxed text-card-foreground/90 mb-5">{paragraph}</p>
+                  ))}
+                </>
+              ) : (
+                <p className="text-xl leading-relaxed text-card-foreground/90 font-medium mb-8">
+                  {content.intro}
+                </p>
+              )}
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button asChild size="lg" variant="warm" className="text-base h-14 px-8 shadow-sm">
+                <Button asChild size="lg" variant="warm" className={updatedPage ? "text-base h-auto min-h-14 px-6 py-4 whitespace-normal text-center shadow-sm" : "text-base h-14 px-8 shadow-sm"}>
                   <Link href="/adv/begin-the-adventure">
-                    Begin This Short Guide
+                    {content.guideLabel ?? "Begin This Short Guide"}
                   </Link>
                 </Button>
               </div>
               
-              <p className="text-muted-foreground">
+              {updatedPage ? (
+                <Link href="/videos/Gods-Vision" className="inline-flex items-start gap-2 text-warm-700 font-semibold hover:text-warm-800 transition-colors">
+                  <PlayCircle className="w-6 h-6 shrink-0" />
+                  <span>Prefer to listen?  3 minutes — How God sees you now</span>
+                </Link>
+              ) : <p className="text-muted-foreground">
                 {content.guideText}
-              </p>
+              </p>}
             </div>
           </div>
           

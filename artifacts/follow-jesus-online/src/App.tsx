@@ -79,6 +79,9 @@ function PageMetadata() {
   } else if (pathname.startsWith('/xp/')) {
     title = 'Next Steps | Follow Jesus Online';
     description = 'Find clear, steady next steps for walking with Jesus.';
+  } else if (pathname === '/videos/Gods-Vision') {
+    title = 'God’s Vision | Follow Jesus Online';
+    description = 'Watch how God sees you now and read the complete God’s Vision transcript.';
   } else if (pathname === '/xp-pages') {
     title = 'Where Did You Start? | Follow Jesus Online';
   } else if (pathname === '/explore-articles') {
@@ -202,8 +205,11 @@ function Router() {
         <Route path="/promises" component={PromisesPage} />
         <Route path="/knowing-god/introduction" component={KnowingGodIntroductionIndexPage} />
         <Route path="/knowing-god/introduction/:section" component={KnowingGodIntroductionPage} />
-        <Route path="/rewatch" component={RewatchPage} />
-        <Route path="/rewatch-video" component={RewatchPage} />
+        <Route path="/rewatch"><RewatchPage /></Route>
+        <Route path="/rewatch-video"><RewatchPage /></Route>
+        <Route path="/videos/Gods-Vision">
+          <RewatchPage videoId="psw_5rn9WFY" />
+        </Route>
         <Route path="/message" component={MessagePage} />
         <Route path="/admin/reactions" component={AdminReactionsPage} />
         <Route path="/bible" component={BibleLandingPage} />
