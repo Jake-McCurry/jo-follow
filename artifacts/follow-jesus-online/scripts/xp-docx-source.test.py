@@ -1,4 +1,4 @@
-"""Check XP copy against all three supplied Word documents."""
+"""Check XP copy against all four supplied Word documents."""
 import json
 import unittest
 from pathlib import Path
@@ -12,6 +12,7 @@ FILES = {
     "believer": "New_XP_Already_Received_Page_261005_1791236696472.docx",
     "rededicated": "New_XP_Rededicated_Page_261005_1791236698727.docx",
     "received": "New_XP_Received_Page_261005_1791236700785.docx",
+    "did-not-pray": "New_XP_Did_Not_Pray_Page_261005_1791243431450.docx",
 }
 
 
@@ -28,7 +29,8 @@ class XPSourceTests(unittest.TestCase):
                 ]
                 paragraphs = [p for p in paragraphs if p]
                 self.assertEqual(paragraphs[0], f"URL: https://follow.jesusonline.com/xp/{page}")
-                page_source = SOURCE.split(f'  "{page}": {{', 1)[1].split("\n  },", 1)[0]
+                content_source = SOURCE.split("const XP_CONTENT:", 1)[1].split("export function XPPage", 1)[0]
+                page_source = content_source.split(f'  "{page}": {{', 1)[1].split("\n  },", 1)[0]
                 for paragraph in paragraphs[1:]:
                     if paragraph.startswith("Link to:"):
                         self.assertIn(paragraph.split("https://follow.jesusonline.com", 1)[1], SOURCE)
