@@ -51,10 +51,11 @@ const XP_CONTENT: Record<XPType, {
   intro: string | string[];
   guideHeading?: string;
   guideLabel?: string;
-  guideText: string | string[];
+  guideText?: string | string[];
   questionsTitle: string;
   questions: string[];
   contactText: string;
+  contactHeading?: string;
 }> = {
   "received": {
     title: "He heard you. You are His.",
@@ -122,10 +123,12 @@ const XP_CONTENT: Record<XPType, {
     contactText: "If you have a question or would like help finding the right resource, feel free to reach out."
   },
   "did-not-pray": {
-    title: "Thanks for Watching",
-    subtitle: "We’re glad you took the time to hear this message. Whether you are still considering Jesus, have questions, or already walk with Him, you are welcome here.",
-    intro: "If you would like to explore further, this short guide offers a clear and steady next step—at whatever pace feels right for you.",
-    guideText: "You can also explore it to read later or share with someone else.",
+    title: "You do not have to decide today.",
+    intro: [
+      "You watched. You did not pray. That is an honest answer, and it is all right to still be unsure.",
+      "Jesus does not ask you to pretend. If you have a question, start there. If you want to look again at who He is, that door is open.",
+    ],
+    contactHeading: "We’re here to answer your questions.",
     questionsTitle: "Common Next Steps",
     questions: [
       "I have questions about what I heard",
@@ -147,9 +150,9 @@ export function XPPage() {
   const content = XP_CONTENT[type];
   
   if (!content) return <NotFound />;
-  const updatedPage = type !== "did-not-pray";
+  const hasGuide = Boolean(content.guideHeading);
   const introParagraphs = Array.isArray(content.intro) ? content.intro : [content.intro];
-  const guideParagraphs = Array.isArray(content.guideText) ? content.guideText : [content.guideText];
+  const guideParagraphs = Array.isArray(content.guideText) ? content.guideText : content.guideText ? [content.guideText] : [];
 
   const inboundParams = new URLSearchParams(
     typeof window === "undefined" ? "" : window.location.search,
@@ -167,8 +170,6 @@ export function XPPage() {
     return `/${slug}?${journeyParams.toString()}`;
   };
 
-  const videoUrl = "https://www.youtube.com/watch?v=psw_5rn9WFY&list=PLyI_AdjR33H3yAO7F9M4tJoq9EwU7Afmc&index=2";
-
   return (
     <Layout>
       <div className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
@@ -185,57 +186,35 @@ export function XPPage() {
             </p>
           )}
           
-          {updatedPage ? (
-            <div className="space-y-5 max-w-2xl mx-auto text-xl leading-relaxed text-muted-foreground">
-              {introParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-            </div>
-          ) : <a 
-            href={videoUrl}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-warm-700 font-semibold text-lg hover:text-warm-800 transition-colors group"
-          >
-            <PlayCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />
-            Watch this video: How God sees you now
-          </a>}
+          <div className="space-y-5 max-w-2xl mx-auto text-xl leading-relaxed text-muted-foreground">
+            {introParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+          </div>
         </div>
 
         {/* Main Content Area */}
-        <div className="bg-white border border-warm-200 rounded-2xl p-8 md:p-12 shadow-sm mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
+        {hasGuide && <div className="bg-white border border-warm-200 rounded-2xl p-8 md:p-12 shadow-sm mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
           <div className="flex flex-col md:flex-row gap-10 items-center md:items-start mb-8">
             <div className="shrink-0 w-full max-w-[240px] md:w-64">
               <img src={guideCoverUrl} alt="The Adventure of Living with Jesus" className="w-full rounded-xl shadow-md border border-border/30 rotate-[-1deg]" />
             </div>
             <div className="prose prose-lg dark:prose-invert max-w-none flex-1">
-              {updatedPage ? (
-                <>
-                  <h2 className="text-2xl font-bold text-foreground mb-5">{content.guideHeading}</h2>
-                  {guideParagraphs.map((paragraph, index) => (
-                    <p key={index} className="text-lg leading-relaxed text-card-foreground/90 mb-5">{paragraph}</p>
-                  ))}
-                </>
-              ) : (
-                <p className="text-xl leading-relaxed text-card-foreground/90 font-medium mb-8">
-                  {content.intro}
-                </p>
-              )}
+              <h2 className="text-2xl font-bold text-foreground mb-5">{content.guideHeading}</h2>
+              {guideParagraphs.map((paragraph, index) => (
+                <p key={index} className="text-lg leading-relaxed text-card-foreground/90 mb-5">{paragraph}</p>
+              ))}
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button asChild size="lg" variant="warm" className={updatedPage ? "text-base h-auto min-h-14 px-6 py-4 whitespace-normal text-center shadow-sm" : "text-base h-14 px-8 shadow-sm"}>
+                <Button asChild size="lg" variant="warm" className="text-base h-auto min-h-14 px-6 py-4 whitespace-normal text-center shadow-sm">
                   <Link href="/adv/begin-the-adventure">
                     {content.guideLabel ?? "Begin This Short Guide"}
                   </Link>
                 </Button>
               </div>
               
-              {updatedPage ? (
-                <Link href="/videos/Gods-Vision" className="inline-flex items-start gap-2 text-warm-700 font-semibold hover:text-warm-800 transition-colors">
+              <Link href="/videos/Gods-Vision" className="inline-flex items-start gap-2 text-warm-700 font-semibold hover:text-warm-800 transition-colors">
                   <PlayCircle className="w-6 h-6 shrink-0" />
                   <span>Prefer to listen?  3 minutes — How God sees you now</span>
-                </Link>
-              ) : <p className="text-muted-foreground">
-                {content.guideText}
-              </p>}
+              </Link>
             </div>
           </div>
           
@@ -249,7 +228,7 @@ export function XPPage() {
               className="w-full sm:w-auto bg-warm-100 hover:bg-warm-200 text-warm-900 border-none"
             />
           </div>
-        </div>
+        </div>}
 
         {/* Questions / Next Steps */}
         <div className="mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
@@ -276,7 +255,7 @@ export function XPPage() {
         {/* Support CTA */}
         <div className="bg-warm-50 border border-warm-200 text-foreground rounded-2xl p-8 md:p-12 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both shadow-sm">
           <MessageCircle className="w-12 h-12 mx-auto mb-6 text-warm-700" />
-          <h2 className="text-3xl font-bold mb-4">We’re Here If You Need Anything</h2>
+          <h2 className="text-3xl font-bold mb-4">{content.contactHeading ?? "We’re Here If You Need Anything"}</h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
             {content.contactText}
           </p>
