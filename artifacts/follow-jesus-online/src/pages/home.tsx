@@ -93,7 +93,7 @@ export function Home() {
             <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
@@ -140,6 +140,22 @@ export function Home() {
                 <Button asChild className="w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/believer?journey=believer&entry=landing&step=xp">
                     Continue Growing <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
+              <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
+                  <Search className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">I’m Still Considering Jesus</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
+                  You do not have to decide today. It’s all right to be unsure. Start with your questions, at your own pace.
+                </p>
+                <Button asChild className="w-full group-hover:bg-[#004E8A]">
+                  <Link href="/xp/did-not-pray?journey=did-not-pray&entry=landing&step=xp">
+                    Explore My Questions <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
               </CardContent>
