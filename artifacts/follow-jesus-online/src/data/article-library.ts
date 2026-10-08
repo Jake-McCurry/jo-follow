@@ -2,6 +2,7 @@ import library from "./article-library.json";
 import importedDeeperArticles from "./imported-deeper-articles.json";
 import linkedArticleMetadata from "./linked-articles.json";
 import faqReadingLinks from "./faq-reading-links.json";
+import prayerMetadata from "./prayer-articles.json";
 import { applyBelieverResourceRevisions } from "./believer-resource-revisions";
 import { applyGuideMainFormatRevisions } from "./guide-main-format-revisions";
 import { applyGuideDeeperFormatRevisions } from "./guide-deeper-format-revisions";
@@ -21,7 +22,8 @@ export type ArticleGroup =
   | "rededicated"
   | "believer"
   | "no-decision"
-  | "linked";
+  | "linked"
+  | "prayer";
 
 export type ArticleBlock = {
   type: "heading" | "paragraph" | "question" | "list" | "table-row" | "link" | "image" | "answer-line";
@@ -226,6 +228,23 @@ const importedDeeperRecords: Article[] = generatedContent
     };
   });
 
+const prayerRecords: Article[] = prayerMetadata.map(metadata => {
+  const source = generatedContent.find(record =>
+    record.category === "Prayer" && record.route === `/${metadata.slug}`);
+  if (!source) throw new Error(`Missing prayer article: ${metadata.title}`);
+  const blocks: ArticleBlock[] = source.blocks
+    .filter((block, index) => !(index === 0 && block.text === source.title))
+    .map(block => ({ type: block.kind, text: block.text, src: block.src, links: block.links }));
+  return {
+    slug: metadata.slug,
+    title: source.title,
+    group: "prayer",
+    order: metadata.order,
+    excerpt: blocks.find(block => block.type === "paragraph")?.text ?? "",
+    blocks,
+  };
+});
+
 export const ARTICLE_LIBRARY = [
   ...(library.articles as Article[]).filter((article) => !article.retired).map((article) => {
     const updated = updatedBySlug.get(article.slug);
@@ -281,6 +300,7 @@ export const ARTICLE_LIBRARY = [
   }),
   ...importedDeeperRecords,
   ...linkedArticles,
+  ...prayerRecords,
 ].map(applyGuideMainFormatRevisions).map(applyGuideDeeperFormatRevisions);
 
 export function getArticleBySlug(slug: string) {
@@ -300,6 +320,8 @@ export function getGuideArticleForDeeper(slug: string) {
 }
 
 export function getArticlePath(slug: string) {
+  const prayer = prayerMetadata.find(article => article.slug === slug);
+  if (prayer) return prayer.href;
   if (slug.startsWith("adv-")) return `/adv/${slug.slice("adv-".length)}`;
   if (slug.startsWith("deeper-")) return `/deeper/${slug.slice("deeper-".length)}`;
   return `/${slug}`;
@@ -307,7 +329,8 @@ export function getArticlePath(slug: string) {
 
 export function getArticleSlugFromPath(pathname: string) {
   const segments = pathname.split("/").filter(Boolean);
-  if (segments.length === 2 && (segments[0] === "adv" || segments[0] === "deeper")) {
+  if (segments.length === 1 && segments[0] === "prayer") return "prayer-starter-guide";
+  if (segments.length === 2 && (segments[0] === "adv" || segments[0] === "deeper" || segments[0] === "prayer")) {
     return `${segments[0]}-${segments[1]}`;
   }
   return segments.length === 1 ? segments[0] : undefined;

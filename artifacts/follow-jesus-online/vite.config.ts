@@ -12,6 +12,7 @@ import importedDeeperArticles from './src/data/imported-deeper-articles.json';
 import articleCatalog from './src/data/article-library.json';
 import { GO_FURTHER_BOOKS } from './src/data/go-further-library';
 import linkedArticles from './src/data/linked-articles.json';
+import prayerArticles from './src/data/prayer-articles.json';
 
 // Vite needs a port for dev/preview, but static production builds do not
 // receive one from CI providers such as Cloudflare Pages.
@@ -244,6 +245,7 @@ function parseDocxBlocks(
   documentXml: string,
   images?: Map<string, string>,
   hyperlinks?: Map<string, string>,
+  preserveSourceText = false,
 ): ArticleBlock[] {
   const blocks: ArticleBlock[] = [];
   const paragraphPattern = /<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g;
@@ -265,7 +267,7 @@ function parseDocxBlocks(
       : [];
     if (!text && embeddedIds.length === 0) continue;
 
-    const cleanedText = (
+    const cleanedText = preserveSourceText ? text : (
       paragraphIndex === 0
         ? text.replace(/^\d+(?:\.\d+)+\s*/, '').replace(/^\d+\.\s*/, '')
         : text.replace(/^\d+(?:\.\d+)+\s*/, '')
@@ -349,6 +351,7 @@ function readFollowArticle(
   archivePath: string,
   entryName: string,
   tempDir: string,
+  preserveSourceText = false,
 ): ArticleBlock[] {
   const docxPath = path.join(tempDir, `${slugify(entryName)}.docx`);
   fs.writeFileSync(docxPath, execFileSync('unzip', ['-p', archivePath, entryName], { maxBuffer: FOLLOW_DOCX_MAX_BUFFER }));
@@ -381,7 +384,44 @@ function readFollowArticle(
     });
     imageRelationships.set(id, name);
   }
-  return parseDocxBlocks(documentXml, imageRelationships, hyperlinkRelationships);
+  return parseDocxBlocks(
+    preserveSourceText
+      ? documentXml.replace(/<w:(?:tab|br|cr)\b[^>]*\/>/g, '<w:t> </w:t>')
+      : documentXml,
+    imageRelationships,
+    hyperlinkRelationships,
+    preserveSourceText,
+  );
+}
+
+function readPrayerArticles(attachedAssetsDir: string, tempDir: string): ArticleRecord[] {
+  const archivePath = path.join(attachedAssetsDir, 'OneDrive_2026-10-08_1791498971259.zip');
+  if (!fs.existsSync(archivePath)) throw new Error(`Required prayer articles ZIP is missing: ${archivePath}`);
+  const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
+    .split('\n').filter(entry => entry.endsWith('.docx'));
+  if (entries.length !== prayerArticles.length) {
+    throw new Error(`Expected ${prayerArticles.length} prayer documents; found ${entries.length}`);
+  }
+  return prayerArticles.map(metadata => {
+    const matches = entries.filter(entry => path.basename(entry).startsWith(metadata.prefix));
+    if (matches.length !== 1) throw new Error(`Missing or duplicate prayer document: ${metadata.prefix}`);
+    const blocks = readFollowArticle(archivePath, matches[0], tempDir, true);
+    if (blocks[0]?.text !== metadata.title || !blocks.some(block => block.kind === 'paragraph')) {
+      throw new Error(`Prayer title or body does not match: ${metadata.title}`);
+    }
+    for (const block of blocks) {
+      if (block.kind === 'image') block.text = metadata.imageAlt ?? `${metadata.title} summary`;
+      if (metadata.order === 0 && block.kind === 'heading') {
+        const title = normalizeTitle(block.text.replace(/^\d+\.?\s*/, ''));
+        const destination = prayerArticles.find(item => item.order > 0 && normalizeTitle(item.title) === title);
+        if (destination) block.links = [{ label: block.text, href: destination.href }];
+      }
+    }
+    if (metadata.order === 0 && blocks.filter(block => block.links?.length).length !== 9) {
+      throw new Error('Prayer Starter Guide must link to all nine readings');
+    }
+    return { route: `/${metadata.slug}`, title: metadata.title, category: 'Prayer', blocks };
+  });
 }
 
 function readNewFollowArticles(attachedAssetsDir: string, tempDir: string): ArticleRecord[] {
@@ -582,6 +622,7 @@ function buildArticleLibrary(): ArticleRecord[] {
     return [
       ...archivedArticles.filter((article) => !updatedRoutes.has(article.route)),
       ...followArticles,
+      ...readPrayerArticles(attachedAssetsDir, tempDir),
     ];
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });

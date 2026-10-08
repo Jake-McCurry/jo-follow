@@ -11,7 +11,7 @@ export interface ConnectWithGodResource {
 
 export const TOPIC_MENU_LINKS: TopicMenuLink[] = [
   { label: "Bible", href: "/bible/John/1" },
-  { label: "Prayer", href: "/adv/prayer" },
+  { label: "Prayer", href: "/prayer" },
   { label: "Books", href: "/gf/" },
   { label: "Holy Spirit", href: "/gf/walking-in-the-spirit" },
   { label: "Videos", href: "/rewatch" },
@@ -58,7 +58,7 @@ export const CONNECT_WITH_GOD_RESOURCES: ConnectWithGodResource[] = [
   {
     title: "Prayer Starters",
     description: "Begin the conversation.",
-    href: "/adv/prayer",
+    href: "/prayer",
   },
   {
     title: "The Lord\u2019s Prayer Guide",
