@@ -194,6 +194,7 @@ export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
 }
 
 function groupLabel(group: ArticleBlock["type"] | string) {
+  if (group === "prayer") return "Prayer Starters";
   if (group === "linked") return "Related Article";
   if (group === "deeper") return "Go Deeper";
   if (group === "resources") return "More Resources";
@@ -407,7 +408,8 @@ export function ArticlePlaceholder() {
   const [location] = useLocation();
   const routeGroup = location.split("?")[0].split("/").filter(Boolean)[0];
   const articleSlug =
-    routeGroup === "adv" || routeGroup === "deeper"
+    routeGroup === "prayer" && !params.slug ? "prayer-starter-guide" :
+    routeGroup === "adv" || routeGroup === "deeper" || routeGroup === "prayer"
       ? `${routeGroup}-${params.slug || ""}`
       : params.slug || "";
 
@@ -416,6 +418,7 @@ export function ArticlePlaceholder() {
 
   const groupArticles = getArticlesInGroup(article.group);
   const articleIndex = groupArticles.findIndex((item) => item.slug === article.slug);
+  const nextPrayerArticle = article.group === "prayer" ? groupArticles[articleIndex + 1] : undefined;
   const guideArticles = article.group === "deeper" ? getArticlesInGroup("adventure") : [];
   const mainGuideArticle = guideArticles.find((item) => item.relatedSlug === article.slug);
   const mainGuideIndex = mainGuideArticle
@@ -424,7 +427,8 @@ export function ArticlePlaceholder() {
   const nextGuideArticle = mainGuideIndex >= 0 ? guideArticles[mainGuideIndex + 1] : undefined;
   const blocks = article.blocks;
   const isJourneyFaq = article.group === "received" || article.group === "rededicated";
-  const introInContentBox = isJourneyFaq || article.group === "believer";
+  const introInContentBox = isJourneyFaq || article.group === "believer" ||
+    (article.group === "prayer" && articleIndex === 0);
   const linkedSource = article.group === "linked"
     ? linkedArticleMetadata.find((item) => item.slug === article.slug)
     : undefined;
@@ -462,8 +466,8 @@ export function ArticlePlaceholder() {
       <main className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
           <Button asChild variant="ghost" className="-ml-4 text-muted-foreground hover:text-foreground">
-             <Link href={linkedSource ? getArticlePath(linkedSource.faqSlug) : "/explore-articles"}>
-               <ArrowLeft className="w-4 h-4 mr-2" /> {linkedSource ? "Back to question" : "Back to Articles"}
+             <Link href={article.group === "prayer" ? articleIndex === 0 ? "/#connect-with-god" : "/prayer" : linkedSource ? getArticlePath(linkedSource.faqSlug) : "/explore-articles"}>
+               <ArrowLeft className="w-4 h-4 mr-2" /> {article.group === "prayer" ? articleIndex === 0 ? "Back to Connect with God" : "Back to Prayer Starters" : linkedSource ? "Back to question" : "Back to Articles"}
             </Link>
           </Button>
            {article.group !== "linked" && (
@@ -527,11 +531,20 @@ export function ArticlePlaceholder() {
               href: articleHref(nextGuideArticle.slug),
               title: nextGuideArticle.title,
               label: "Read the next chapter",
+            } : nextPrayerArticle ? {
+              href: articleHref(nextPrayerArticle.slug),
+              title: nextPrayerArticle.title,
+              label: "Read the next prayer article",
             } : undefined}
             secondary={mainGuideArticle ? {
               href: articleHref(mainGuideArticle.slug),
               title: mainGuideArticle.title,
               label: "Back to the chapter",
+              back: true,
+            } : article.group === "prayer" && articleIndex > 0 ? {
+              href: "/prayer",
+              title: "Prayer Starter Guide",
+              label: "Explore the prayer guide",
               back: true,
             } : isJourneyFaq ? {
               href: articleHref("adv-begin-the-adventure"),

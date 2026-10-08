@@ -15,7 +15,7 @@ test("catalog includes published sources and excludes retired and invented artic
   for (const article of library.articles) {
     assert.equal(slugs.has(article.slug), !article.retired, article.slug);
   }
-  for (const filename of ["imported-deeper-articles.json", "linked-articles.json"]) {
+  for (const filename of ["imported-deeper-articles.json", "linked-articles.json", "prayer-articles.json"]) {
     for (const article of JSON.parse(await readFile(new URL(filename, dataRoot), "utf8"))) {
       assert.ok(slugs.has(article.slug), article.slug);
     }

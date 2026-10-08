@@ -108,6 +108,8 @@ function PageMetadata() {
       description = reading?.desc ?? 'A Go Further reading from Follow Jesus Online.';
     }
   } else if (
+    pathname === '/prayer' ||
+    pathname.startsWith('/prayer/') ||
     pathname.startsWith('/adv/') ||
     pathname.startsWith('/deeper/') ||
     pathname.startsWith('/adv-') ||
@@ -215,6 +217,8 @@ function Router() {
         <Route path="/bible" component={BibleLandingPage} />
         <Route path="/bible/saved" component={BibleSavedPage} />
         <Route path="/bible/:book/:chapter" component={BibleReaderPage} />
+        <Route path="/prayer" component={ArticlePlaceholder} />
+        <Route path="/prayer/:slug" component={ArticlePlaceholder} />
         <Route path="/adv/:slug" component={ArticlePlaceholder} />
         <Route path="/deeper/:slug" component={ArticlePlaceholder} />
         

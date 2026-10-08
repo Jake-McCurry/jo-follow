@@ -14,7 +14,8 @@
     "test:bible-study": "node --import tsx --test scripts/bible-study-validation.test.ts",
     "test:recent-page": "node --import tsx --test scripts/recent-page.test.ts",
     "test:rewatch": "python3 scripts/rewatch-docx-source.test.py && node --import tsx --test scripts/rewatch-videos.test.ts",
-    "test:connect": "node --import tsx --test scripts/connect-with-god.test.ts",
+    "test:connect": "node --import tsx --test scripts/connect-with-god.test.ts && pnpm run test:prayer",
+    "test:prayer": "node --test scripts/prayer-source.test.mjs",
     "test:knowing-god": "python3 scripts/knowing-god-source-validation.test.py && python3 scripts/knowing-god-net-validation.test.py && node --import tsx --test scripts/knowing-god-regressions.test.mjs scripts/knowing-god-passages.test.mjs scripts/knowing-god-net.test.mjs scripts/knowing-god-net-loader.test.mjs scripts/knowing-god-integration.test.mjs",
     "validate:knowing-god-net": "python3 scripts/generate-knowing-god-net.py --validate-only",
     "validate:knowing-god-source": "python3 scripts/generate-knowing-god.py --validate-only"

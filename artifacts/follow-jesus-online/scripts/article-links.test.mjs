@@ -18,7 +18,7 @@ const goFurtherLibraryPath = path.join(projectRoot, "src/data/go-further-library
 const sourceRoot = path.join(projectRoot, "src");
 const xpPagePath = path.join(projectRoot, "src/pages/xp-page.tsx");
 
-const articleRoutePattern = /^(?:adv|deeper|more)-[a-z0-9-]+$/;
+const articleRoutePattern = /^(?:adv|deeper|more|prayer)-[a-z0-9-]+$/;
 const sequenceGroups = [
   "adventure",
   "deeper",
@@ -40,8 +40,9 @@ function isNonEmptyString(value) {
 function collectPublishedArticleSlugs(source, filePath) {
   const slugs = [];
   const publishedSlugPatterns = [
-    /["'`]\/((?:adv|deeper|more)-[a-z0-9-]+)["'`]/g,
-    /["'`]\/(adv|deeper)\/([a-z0-9-]+)["'`]/g,
+    /["'`]\/((?:adv|deeper|more|prayer)-[a-z0-9-]+)["'`]/g,
+    /["'`]\/(adv|deeper|prayer)\/([a-z0-9-]+)["'`]/g,
+    /["'`]\/(prayer)["'`]/g,
   ];
 
   if (filePath === xpPagePath) {
@@ -54,7 +55,7 @@ function collectPublishedArticleSlugs(source, filePath) {
     for (const match of source.matchAll(pattern)) {
       const line = source.slice(0, match.index).split("\n").length;
       slugs.push({
-        slug: match[2] ? `${match[1]}-${match[2]}` : match[1],
+        slug: match[2] ? `${match[1]}-${match[2]}` : match[1] === "prayer" ? "prayer-starter-guide" : match[1],
         location: `${path.relative(projectRoot, filePath)}:${line}`,
       });
     }
@@ -82,9 +83,10 @@ function findMissingPublishedLinks(catalog, publishedLinks) {
 
 function articleSlugFromHref(href) {
   if (typeof href !== "string") return undefined;
-  const legacy = href.match(/^\/((?:adv|deeper|more)-[a-z0-9-]+)(?:[?#].*)?$/);
+  if (/^\/prayer(?:[?#].*)?$/.test(href)) return "prayer-starter-guide";
+  const legacy = href.match(/^\/((?:adv|deeper|more|prayer)-[a-z0-9-]+)(?:[?#].*)?$/);
   if (legacy) return legacy[1];
-  const canonical = href.match(/^\/(adv|deeper)\/([a-z0-9-]+)(?:[?#].*)?$/);
+  const canonical = href.match(/^\/(adv|deeper|prayer)\/([a-z0-9-]+)(?:[?#].*)?$/);
   return canonical ? `${canonical[1]}-${canonical[2]}` : undefined;
 }
 
@@ -102,6 +104,9 @@ function validateArticleLibrary() {
 
   const slugs = new Set();
   const catalog = new Map();
+  for (const article of readJson(path.join(projectRoot, "src/data/prayer-articles.json"))) {
+    catalog.set(article.slug, article);
+  }
 
   for (const article of importedDeeper) {
     catalog.set(article.slug, article);

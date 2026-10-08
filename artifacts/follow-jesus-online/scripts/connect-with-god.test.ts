@@ -3,6 +3,7 @@ import test from "node:test";
 import { readFileSync, statSync } from "node:fs";
 import { CONNECT_WITH_GOD_RESOURCES, TOPIC_MENU_LINKS } from "../src/data/connect-with-god";
 import { getGFBook } from "../src/data/go-further-library";
+import prayerArticles from "../src/data/prayer-articles.json";
 
 // The application library also loads Vite virtual modules. Validate these
 // destinations against its published JSON sources without invoking Vite in Node.
@@ -35,6 +36,11 @@ test("Connect with God preserves all nine resource titles and descriptions", () 
 test("every menu and resource destination resolves to existing content", () => {
   const links = [...TOPIC_MENU_LINKS, ...CONNECT_WITH_GOD_RESOURCES];
   for (const { href } of links) {
+    if (href === "/prayer") {
+      assert.ok(prayerArticles.some(article => article.href === href && article.order === 0));
+      assert.ok(statSync(new URL("../../../attached_assets/OneDrive_2026-10-08_1791498971259.zip", import.meta.url)).size > 0);
+      continue;
+    }
     if (href === "/rewatch" || href === "/gf/" || href === "/knowing-god" || href === "/promises") continue;
     if (href.startsWith("/bible/")) {
       assert.ok(["/bible/John/1", "/bible/Romans/8"].includes(href), href);
@@ -67,6 +73,8 @@ test("every menu and resource destination resolves to existing content", () => {
 });
 
 test("exact prayer guide and approved fallback resources remain linked", () => {
+  assert.equal(CONNECT_WITH_GOD_RESOURCES.find(item => item.title === "Prayer Starters")?.href, "/prayer");
+  assert.equal(TOPIC_MENU_LINKS.find(item => item.label === "Prayer")?.href, "/prayer");
   assert.equal(CONNECT_WITH_GOD_RESOURCES.find((item) => item.title === "The Lord’s Prayer Guide")?.href,
     "/deeper/the-lords-prayer-guide");
   assert.equal(CONNECT_WITH_GOD_RESOURCES.find((item) => item.title === "God’s Promises for Hope")?.href,

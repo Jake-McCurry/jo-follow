@@ -8,3 +8,9 @@ Article catalog validation must cover every user-visible frontend source that ca
 **Why:** Article entry links also live outside Explore and XP. Limiting validation to those pages allowed Home or Layout typos to evade the guard.
 
 **How to apply:** When article-link sources change, keep discovery broad enough to include new TypeScript/TSX pages and shared components, and retain a regression case for links outside article index pages.
+
+When introducing a content catalog, check reaction eligibility as well as article navigation. Keep eligibility restricted to published articles rather than accepting arbitrary slug prefixes.
+
+**Why:** New prayer pages could render correctly while their existing reaction controls showed an unavailable message because the reaction allowlist did not yet include the new catalog.
+
+**How to apply:** Verify a read-only reaction request for newly published article slugs alongside their page and image checks.

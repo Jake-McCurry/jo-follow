@@ -6,10 +6,11 @@ const dataRoot = new URL("../../follow-jesus-online/src/data/", import.meta.url)
 // Match the published article sources, not a slug prefix or a manually maintained list.
 // The API build embeds this catalog so runtime requests never read client files.
 export async function reactionArticleSlugs() {
-  const [library, deeper, linked, goFurtherSource] = await Promise.all([
+  const [library, deeper, linked, prayer, goFurtherSource] = await Promise.all([
     readFile(new URL("article-library.json", dataRoot), "utf8").then(JSON.parse),
     readFile(new URL("imported-deeper-articles.json", dataRoot), "utf8").then(JSON.parse),
     readFile(new URL("linked-articles.json", dataRoot), "utf8").then(JSON.parse),
+    readFile(new URL("prayer-articles.json", dataRoot), "utf8").then(JSON.parse),
     readFile(new URL("go-further-library.ts", dataRoot), "utf8"),
   ]);
   const { code } = await transform(goFurtherSource, { loader: "ts", format: "esm" });
@@ -20,6 +21,7 @@ export async function reactionArticleSlugs() {
     ...library.articles.filter((article) => !article.retired).map((article) => article.slug),
     ...deeper.map((article) => article.slug),
     ...linked.map((article) => article.slug),
+    ...prayer.map((article) => article.slug),
     ...GO_FURTHER_BOOKS.flatMap((book) =>
       [...book.readings, ...(book.introChapter ? [book.introChapter] : [])]
         .map((reading) => `gf-${book.slug}-${reading.slug}`),
