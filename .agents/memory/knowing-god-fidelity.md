@@ -20,3 +20,9 @@ The shared header brand should be the JO symbol followed by “JO FOLLOW,” mat
 **Why:** The user requested: “Perhaps we should have the logo say 'JO FOLLOW' instead of JESUSONLINE like we did on the equip project.”
 
 **How to apply:** Keep this branding consistent across Follow's shared header, including Knowing God pages.
+
+Knowing God search results should load in the main window while someone is typing, not in the sidebar.
+
+**Why:** The user requested this placement.
+
+**How to apply:** Keep live results in the primary reading area when changing the Knowing God interface.
