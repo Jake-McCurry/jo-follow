@@ -21,8 +21,8 @@ The shared header brand should be the JO symbol followed by “JO FOLLOW,” mat
 
 **How to apply:** Keep this branding consistent across Follow's shared header, including Knowing God pages.
 
-Knowing God search results should load in the main window while someone is typing, not in the sidebar.
+Knowing God search results should load in the main window while someone is typing, not in the sidebar. Put matching titles first, followed by reference and content matches, as in Promises.
 
-**Why:** The user requested this placement.
+**Why:** The user requested main-window results, then asked to apply the same title-first search behavior as Promises.
 
-**How to apply:** Keep live results in the primary reading area when changing the Knowing God interface.
+**How to apply:** Keep live results in the primary reading area and all title hits ahead of non-title hits. Search coverage should not depend on which topics the reader has already visited.

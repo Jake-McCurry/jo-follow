@@ -1,6 +1,6 @@
-/* Promises-only reading colors. Shared navigation and Knowing God stay unchanged. */
+/* Cream reading paper with blue sidebars. Shared navigation stays unchanged. */
 .kg-root .promises-theme {
-  --color-surface: #F1F6FA;
+  --color-surface: #fffaf2;
   --color-surface-soft: #E5EDF4;
   --color-text: #17384D;
   --color-hero: #17384D;
@@ -10,4 +10,9 @@
 
   background-color: var(--color-surface);
   color: var(--color-text);
+}
+
+/* Keep sidebar controls blue-toned rather than inheriting the reading paper. */
+.kg-root .promises-theme #promises-sidebar {
+  --color-surface: #F1F6FA;
 }

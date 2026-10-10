@@ -35,16 +35,17 @@ const normalizeSearch = (value: string) => value.normalize("NFKC").replace(/[‘
 export const searchTopics = (book: Book, query: string) => {
   const q = normalizeSearch(query.trim());
   if (!q) return [];
-  const out: { topic: Topic; group: Group; hit: string }[] = [];
+  const out: { topic: Topic; group: Group; hit: string; rank: number }[] = [];
   for (const group of book.groups) for (const topic of group.topics) {
-    if (normalizeSearch(topic.title).includes(q)) { out.push({ topic, group, hit: "Title" }); continue; }
+    if (normalizeSearch(topic.title).includes(q)) { out.push({ topic, group, hit: "Title", rank: 0 }); continue; }
     const b = topic.blocks.find(x => normalizeSearch(x.reference || "").includes(q));
-    if (b) { out.push({ topic, group, hit: b.reference || "Reference" }); continue; }
+    if (b) { out.push({ topic, group, hit: b.reference || "Reference", rank: 1 }); continue; }
     const t = topic.blocks.find(x => normalizeSearch(x.text).includes(q));
     if (t) {
       const i = normalizeSearch(t.text).indexOf(q);
-      out.push({ topic, group, hit: `…${t.text.slice(Math.max(0, i - 50), i + 90).replace(/\s+/g, " ")}…` });
+      out.push({ topic, group, hit: `…${t.text.slice(Math.max(0, i - 50), i + 90).replace(/\s+/g, " ")}…`, rank: 2 });
     }
   }
-  return out;
+  // Keep the book's order within each tier, but surface every title hit first.
+  return out.sort((a, b) => a.rank - b.rank).map(({ topic, group, hit }) => ({ topic, group, hit }));
 };

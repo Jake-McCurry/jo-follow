@@ -1,7 +1,7 @@
 import { ChevronDown, ChevronRight, Printer, Search } from "lucide-react";
 import { type Book, printedTranslations } from "./promises-data";
 
-export type View = "overview" | "intro" | "source" | "saved" | "topic";
+export type View = "intro" | "source" | "saved" | "topic";
 const sel = "bg-[var(--color-selected-warm,#FFEADB)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]";
 const lab = "mb-1 text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]";
 
@@ -15,6 +15,7 @@ export function PromisesSidebar(p: Props) {
   const nav = (v: View, label: string) => <button type="button" onClick={() => p.onView(v)} aria-current={p.view === v && !p.query ? "page" : undefined}
     className={`kg-focus w-full border-l-4 px-3 py-2 text-left text-base ${p.view === v && !p.query ? `border-[var(--color-action-warm,#C45100)] ${sel}` : "border-transparent hover:bg-[var(--color-surface,#fffaf2)]"}`}>{label}{v === "saved" ? ` (${p.savedCount})` : ""}</button>;
   return <div className="p-5" style={{ fontFamily: "var(--font-sans)" }}>
+    <h2 data-testid="heading-promises-sidebar" className="sticky top-0 z-10 -mx-5 -mt-5 mb-5 border-b border-[var(--color-border-soft,#C9D6E1)] bg-[var(--color-surface-soft,#E5EDF4)] px-5 py-4 text-2xl font-bold text-[var(--color-hero,#17384D)]">Promises of God</h2>
     <button type="button" onClick={() => window.print()} className="kg-focus mb-5 flex w-full items-center justify-center gap-2 rounded border border-[var(--color-border-control,#9a866d)] bg-[var(--color-surface,#fffaf2)] px-3 py-2 font-bold"><Printer size={16} />Print</button>
     <p className={lab}>Translation as printed</p>
     <label className="sr-only" htmlFor="promises-translation">Filter passages by translation</label>
@@ -27,7 +28,7 @@ export function PromisesSidebar(p: Props) {
     <div className="relative mb-5"><Search className="absolute left-3 top-3 text-[var(--color-text-muted,#655f55)]" size={16} />
       <input id="promises-search" type="search" value={p.query} onChange={e => p.onQuery(e.target.value)} placeholder="Search all promises" className="kg-focus w-full border border-[var(--color-border-control,#9a866d)] bg-[var(--color-surface,#fffaf2)] py-2.5 pl-9 pr-3 text-base" /></div>
     <nav aria-label="Promises navigation">
-      <div className="mb-4 border-b border-[var(--color-border-soft,#d9cdb9)] pb-4">{nav("overview", "Overview")}{nav("intro", "Introduction")}{nav("saved", "Saved study")}{nav("source", "About, source and resources")}</div>
+      <div className="mb-4 border-b border-[var(--color-border-soft,#d9cdb9)] pb-4">{nav("intro", "Introduction")}{nav("saved", "Saved study")}{nav("source", "About, source and resources")}</div>
       <p className={lab}>Six groups</p>
       <ul className="m-0 list-none p-0">
         {p.book.groups.map(g => {

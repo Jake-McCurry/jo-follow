@@ -12,7 +12,7 @@ export function PromisesReader() {
   const [book, setBook] = useState<Book | null>(null);
   const [loadError, setLoadError] = useState("");
   const [retry, setRetry] = useState(0);
-  const [view, setView] = useState<View>("overview");
+  const [view, setView] = useState<View>("intro");
   const [selectedId, setSelectedId] = useState("");
   const [expanded, setExpanded] = useState("");
   const [query, setQuery] = useState("");
@@ -50,7 +50,7 @@ export function PromisesReader() {
     if (hit) { setSelectedId(hit.topic.id); setExpanded(hit.group.id); setView("topic"); setQuery(""); setFocusTick(t => t + 1); }
     else {
       const requested = new URLSearchParams(window.location.hash.slice(1)).get("view");
-      setView(requested === "intro" || requested === "source" || requested === "saved" ? requested : "overview");
+      setView(requested === "intro" || requested === "source" || requested === "saved" ? requested : "intro");
       setQuery("");
       if (requested) setFocusTick(t => t + 1);
     }
@@ -71,7 +71,7 @@ export function PromisesReader() {
   };
   const openView = (v: View) => {
     setQuery(""); setView(v); setMenu(false); setFocusTick(t => t + 1);
-    const hash = v === "overview" ? "" : `#view=${v}`;
+    const hash = v === "intro" ? "" : `#view=${v}`;
     if (window.location.hash !== hash) {
       window.history.pushState(null, "", window.location.pathname + window.location.search + hash);
     }
@@ -126,8 +126,6 @@ export function PromisesReader() {
       <PromiseBlocks blocks={sel.topic.blocks} translation={translation} />
       {shown.length === 0 && <p className="mt-6 border border-dashed border-[var(--color-border-control,#9a866d)] p-6 text-center">No {translation} passages in this topic. Choose All to see every passage.</p>}
       <div className="mt-10 border-t border-[var(--color-border-soft,#d9cdb9)] pt-4 text-sm text-[var(--color-text-muted,#655f55)]" style={sansStyle}>Source: God’s Promises for a New Year, JesusOnline Ministries, © 2024. Quotations retain the translations printed in the source; see About, source and resources for full copyright notices.</div></>;
-  } else if (view === "intro") {
-    main = <><p className={eyebrow} style={sansStyle}>Introduction</p><div className="mt-4"><PromiseBlocks blocks={book.introduction} translation={translation} level={2} /></div></>;
   } else if (view === "source") {
     main = <><p className={eyebrow} style={sansStyle}>About this book</p><h2 className="mt-2 text-4xl text-[var(--color-hero,#29474b)]">Source, copyright and resources</h2>
       <p className="mt-4 text-lg leading-[1.75]">The original supplied title reads “{book.sourceTitle.replace(/\n/g, " — ")}”. Follow presents it here as God’s Promises for Hope; the content is unchanged.</p>
@@ -141,13 +139,9 @@ export function PromisesReader() {
       {savedTopics.length === 0 ? <div className="mt-8 border border-dashed border-[var(--color-border-control,#9a866d)] p-8 text-center text-lg">Nothing saved yet. Open any topic and choose Save study to keep it here.</div>
         : <ul className="mt-6 list-none p-0">{savedTopics.map(s => cardLink(s.topic.id, s.topic.title, s.group.title))}</ul>}</>;
   } else {
-    main = <div className="kg-book-intro"><p className={eyebrow} style={sansStyle}>Overview</p><h2 className="mt-2 text-4xl text-[var(--color-hero,#29474b)] md:text-5xl">{book.title}</h2>
-      <p className="mt-4 text-lg text-[var(--color-text-muted,#655f55)]">Scripture for real life: {book.counts.topics} topics and {book.counts.passages} passages in {book.counts.groups} groups. Published by JesusOnline Ministries.</p>
-      <div className="mt-8 space-y-8">{book.groups.map(g => <section key={g.id}>
-        <h3 className="text-2xl text-[var(--color-hero,#29474b)]">{g.title}</h3>
-        <p className="mt-1 text-lg leading-[1.75]">{g.description}</p>
-        <div className="mt-3"><PromiseBlocks blocks={g.preamble} translation={translation} /></div>
-        <ul className="mt-3 list-none p-0">{g.topics.map(t => cardLink(t.id, t.title))}</ul></section>)}</div></div>;
+    main = <><p className={eyebrow} style={sansStyle}>Introduction</p>
+      <h2 className="mt-2 text-4xl text-[var(--color-hero,#29474b)] md:text-5xl">{book.title}</h2>
+      <div className="mt-6"><PromiseBlocks blocks={book.introduction} translation={translation} level={2} /></div></>;
   }
 
   return <div className="promises-reader flex flex-1 flex-col text-[var(--color-text,#394b4b)]" style={{ background: "var(--color-surface,#fffaf2)" }}>

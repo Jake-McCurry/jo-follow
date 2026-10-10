@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { devotionalGuideCategories } from "../src/data/knowing-god/introduction/devotional-guide.ts";
 import { devotionalTopicKey, isDevotionalTopic } from "../src/components/knowing-god/devotional-topics.ts";
-import { topicTitleSearchRank } from "../src/components/knowing-god/topic-search.ts";
+import { searchKnowingGodTopics, topicTitleSearchRank } from "../src/components/knowing-god/topic-search.ts";
 import {
   pushTopicHash,
   subscribeToTopicHistory,
@@ -34,6 +34,38 @@ test("devotional selection includes exactly the guide's unique topics", async ()
   }
   assert.equal(isDevotionalTopic({ title: "Not a source topic" }), false);
   assert.ok(topics.length > selected.length);
+});
+
+test("Knowing God puts every title hit ahead of reference and content hits", () => {
+  const topics = [
+    { id: "content", title: "Abiding", letter: "A" },
+    { id: "reference", title: "Beginning", letter: "B" },
+    { id: "title", title: "John's Example", letter: "J" },
+  ];
+  const payloads = {
+    A: [{ id: "content", definition: "John’s example of abiding", passages: [] }],
+    B: [{ id: "reference", definition: "", passages: [{ reference: "John 1:1", text: "In the beginning" }] }],
+  };
+  const hits = searchKnowingGodTopics(topics, payloads, "  JOHN  ");
+  assert.deepEqual(hits.map(item => item.id), ["title", "reference", "content"]);
+  assert.deepEqual(hits.map(item => item.searchMatch), ["title", "reference", "content"]);
+  assert.deepEqual(searchKnowingGodTopics(topics, {}, "John").map(item => item.id), ["title"]);
+  assert.deepEqual(searchKnowingGodTopics(topics, payloads, ""), []);
+  assert.deepEqual(searchKnowingGodTopics(topics, payloads, "no matches"), []);
+});
+
+test("fear searches retain full-corpus content hits below all title hits", async () => {
+  const { topics } = JSON.parse(await readFile(new URL("index.json", dataDirectory), "utf8"));
+  const payloads = Object.fromEntries(await Promise.all([...new Set(topics.map(topic => topic.letter))]
+    .map(async letter => [letter, JSON.parse(await readFile(new URL(`topics-${letter.toLowerCase()}.json`, dataDirectory), "utf8")).topics])));
+  const results = searchKnowingGodTopics(topics, payloads, "fear");
+  const titleCount = topics.filter(topic => topicTitleSearchRank(topic.title, "fear") < 4).length;
+  assert.ok(titleCount > 0);
+  assert.ok(results.length > titleCount);
+  assert.ok(results.slice(0, titleCount).every(topic => topic.searchMatch === "title"));
+  assert.ok(results.slice(titleCount).every(topic => topic.searchMatch !== "title"));
+  assert.ok(results.some(topic => topic.searchMatch === "content"));
+  assert.equal(new Set(results.map(topic => topic.id)).size, results.length);
 });
 
 const loadTopic = async id => {
