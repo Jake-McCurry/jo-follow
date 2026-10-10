@@ -1,4 +1,4 @@
-/* Cream reading paper with blue sidebars. Shared navigation stays unchanged. */
+/* Cream reading paper with a sage sidebar. Shared navigation stays unchanged. */
 .kg-root .promises-theme {
   --color-surface: #fffaf2;
   --color-surface-soft: #E5EDF4;
@@ -12,7 +12,10 @@
   color: var(--color-text);
 }
 
-/* Keep sidebar controls blue-toned rather than inheriting the reading paper. */
+/* Scope sage surfaces and matching borders to the Promises sidebar only. */
 .kg-root .promises-theme #promises-sidebar {
-  --color-surface: #F1F6FA;
+  --color-surface-soft: #E5EDDF;
+  --color-surface: #F4F7F0;
+  --color-border-soft: #C8D3C1;
+  --color-border-control: #707F67;
 }

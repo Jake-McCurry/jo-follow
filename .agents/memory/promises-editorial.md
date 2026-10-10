@@ -9,11 +9,11 @@ Display this feature as “God’s Promises for Hope,” even though the supplie
 
 **How to apply:** Follow the requested display title rather than automatically rebranding the feature from its source title page. Keep original quotation wording and printed translations intact; book imports do not authorize silent translation substitutions or textual corrections.
 
-Promises uses a light cream reading background matching Knowing God (#fffaf2), while its sidebar stays blue. Keep its deep navy text and shared JO FOLLOW navigation. Knowing God's existing cream and dark teal palette remains unchanged.
+Promises uses a light cream reading background matching Knowing God (#fffaf2), with a soft sage green sidebar (#E5EDDF). Keep its deep navy text and shared JO FOLLOW navigation. Knowing God's existing cream and dark teal palette remains unchanged.
 
-**Why:** The user replaced the earlier blue-gray reading palette with “a lighter cream color like knowing god” and asked to “keep the side bar blue.”
+**Why:** The user requested the cream reading area, then replaced the earlier blue sidebar preference by explicitly approving the recommended soft sage green (#E5EDDF). This is an approved complementary extension; the supplied brand kit itself lists blue and orange, not a green.
 
-**How to apply:** Separate the cream main reading surface from the blue Promises sidebar; do not recolor Knowing God or the shared header as an incidental change.
+**How to apply:** Keep sage scoped to the Promises sidebar and its controls, separate from the cream reading surface. Do not recolor Scripture panels, Knowing God, or the shared header as an incidental change.
 
 Keep “Knowing God” and “Promises of God” visible at the top of their respective sidebars.
 
