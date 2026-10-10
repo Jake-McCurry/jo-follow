@@ -1,6 +1,6 @@
-/* Promises-only reading colors. Shared navigation and Knowing God stay unchanged. */
+/* Cream reading paper with a sage sidebar. Shared navigation stays unchanged. */
 .kg-root .promises-theme {
-  --color-surface: #F1F6FA;
+  --color-surface: #fffaf2;
   --color-surface-soft: #E5EDF4;
   --color-text: #17384D;
   --color-hero: #17384D;
@@ -10,4 +10,12 @@
 
   background-color: var(--color-surface);
   color: var(--color-text);
+}
+
+/* Scope sage surfaces and matching borders to the Promises sidebar only. */
+.kg-root .promises-theme #promises-sidebar {
+  --color-surface-soft: #E5EDDF;
+  --color-surface: #F4F7F0;
+  --color-border-soft: #C8D3C1;
+  --color-border-control: #707F67;
 }

@@ -24,6 +24,16 @@ test("search covers the full book and tolerates smart punctuation", async () => 
   assert.deepEqual(printedTranslations(book), ["HCSB", "ISV", "KJV", "NET", "NIV", "NLT", "TLB"]);
 });
 
+test("Promises opens the Introduction and no longer exposes an Overview page", async () => {
+  const reader = await text("src/components/promises/PromisesReader.tsx");
+  const sidebar = await text("src/components/promises/PromisesSidebar.tsx");
+  assert.match(reader, /useState<View>\("intro"\)/);
+  assert.doesNotMatch(reader, /"overview"|>Overview</);
+  assert.doesNotMatch(sidebar, /"overview"|>Overview</);
+  assert.match(sidebar, /nav\("intro", "Introduction"\)/);
+  assert.match(reader, /blocks=\{book\.introduction\}/);
+});
+
 test("every Scripture reference links into Follow, with supplied verse spacing and base paths", async () => {
   const book = JSON.parse(await text("public/promises/book.json"));
   const blocks = [...book.introduction, ...book.groups.flatMap(group => [
@@ -44,4 +54,27 @@ test("every Scripture reference links into Follow, with supplied verse spacing a
   }
   const page = await text("src/pages/promises/index.tsx");
   assert.match(page, /<KnowingGodShell warmWrapper>/);
+});
+
+test("fear title matches come before content matches without dropping any results", async () => {
+  const book = JSON.parse(await text("public/promises/book.json"));
+  const matches = searchTopics(book, "fear");
+  const titles = book.groups.flatMap(group => group.topics)
+    .filter(topic => topic.title.toLowerCase().includes("fear"));
+  assert.ok(titles.length > 0);
+  assert.ok(matches.length > titles.length, "Content-only results remain available");
+  assert.deepEqual(matches.slice(0, titles.length).map(match => match.topic.id), titles.map(topic => topic.id));
+  assert.ok(matches.slice(0, titles.length).every(match => match.hit === "Title"));
+  assert.ok(matches.slice(titles.length).every(match => match.hit !== "Title"));
+  assert.equal(new Set(matches.map(match => match.topic.id)).size, matches.length);
+});
+
+test("title, reference and content tiers override source order and ignore query case", () => {
+  const book = { groups: [{ id: "test", title: "Test", topics: [
+    { id: "content", title: "Hope", blocks: [{ text: "John wrote about hope." }] },
+    { id: "reference", title: "Life", blocks: [{ reference: "John 1:1", text: "In the beginning" }] },
+    { id: "title", title: "John’s example", blocks: [{ text: "An example" }] },
+  ] }] };
+  assert.deepEqual(searchTopics(book, "  JOHN  ").map(match => match.topic.id), ["title", "reference", "content"]);
+  assert.deepEqual(searchTopics(book, " "), []);
 });
