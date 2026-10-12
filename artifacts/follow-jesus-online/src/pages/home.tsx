@@ -8,7 +8,7 @@ import { ShareButton } from "@/components/share-button";
 import { ArrowRight, BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
-const guideHeroUrl = `${import.meta.env.BASE_URL}guide-wilderness-hero.jpg`;
+const homeHeroUrl = `${import.meta.env.BASE_URL}walking-with-jesus-hero.jpg`;
 const guideDownloadUrl = `${import.meta.env.BASE_URL}adventure-guide.pdf`;
 
 export function Home() {
@@ -23,7 +23,7 @@ export function Home() {
       {/* Hero Section */}
       <section className="relative flex min-h-[400px] items-start overflow-hidden bg-[#003A66] py-12 text-white sm:min-h-[420px] md:min-h-[470px] md:py-16">
         <img
-          src={guideHeroUrl}
+          src={homeHeroUrl}
           alt=""
           aria-hidden="true"
           fetchPriority="high"
@@ -36,7 +36,7 @@ export function Home() {
             Walking with Jesus
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-            Whether you are just beginning, returning, or have followed Him for years, you are welcome here.
+            Deepen your walk. Discover His purpose. Come back again.
           </p>
         </div>
       </section>
@@ -45,7 +45,7 @@ export function Home() {
         <div className="container mx-auto flex max-w-4xl justify-center px-5 sm:px-8">
           <ShareButton
             title="Walking with Jesus"
-            text="Whether you are just beginning, returning, or have followed Him for years, you are welcome here."
+            text="Deepen your walk. Discover His purpose. Come back again."
             label="Send this page to yourself"
             variant="outline"
           />
