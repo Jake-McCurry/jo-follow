@@ -510,7 +510,7 @@ export function ArticlePlaceholder() {
             </div>
           </header>
 
-          <div className={`rounded-2xl border p-7 shadow-sm sm:p-10 md:p-12 ${isPrayerGuide ? "border-warm-200 bg-warm-50" : "border-border-soft bg-white"}`}>
+          <div className={`rounded-2xl border p-7 shadow-sm sm:p-10 md:p-12 ${isPrayerGuide ? "border-warm-100 bg-[#FFFAF6]" : "border-border-soft bg-white"}`}>
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <div className="space-y-5">
                 {blocks.map((block, index) => {

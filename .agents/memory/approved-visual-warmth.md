@@ -35,6 +35,6 @@ Keep the homepage hero compact and show the supplied photograph without a gradie
 
 Use plain, unnumbered navy article titles with trailing arrows on the Prayer Starter Guide.
 
-**Why:** The user clarified that removing list bullets was not enough: numeric prefixes such as “03” and “04” before the titles must also be removed. They requested a warmer main-content card on `/prayer` only, explicitly as a test.
+**Why:** The user clarified that removing list bullets was not enough: numeric prefixes such as “03” and “04” before the titles must also be removed. They requested a warmer main-content card on `/prayer` only, explicitly as a test, then said the first tint was too much and requested a lighter card and darker hover treatment for the links above it.
 
-**How to apply:** Treat “just the titles” on this page as excluding both list markers and numbers embedded in imported title text. Keep the descriptions and link destinations intact; do not extend this arrow treatment to Explore Articles. The warmer content-card treatment is a `/prayer`-only test, not approval to apply it to other reading pages.
+**How to apply:** Treat “just the titles” on this page as excluding both list markers and numbers embedded in imported title text. Keep the descriptions and link destinations intact; do not extend this arrow treatment to Explore Articles. Keep the card tint subtle. The warmer card and stronger hover treatment are a `/prayer`-only test, not approval to apply them to other reading pages.
