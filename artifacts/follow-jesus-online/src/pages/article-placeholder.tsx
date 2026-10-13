@@ -84,7 +84,7 @@ function EmphasizedRichText({ text, phrases = [] }: { text: string; phrases?: st
   return <>{parts}</>;
 }
 
-function LinkedRichText({ block }: { block: ArticleBlock }) {
+function LinkedRichText({ block, titleLinks = false }: { block: ArticleBlock; titleLinks?: boolean }) {
   if (!block.links?.length) {
     const content = <EmphasizedRichText text={block.text} phrases={block.boldPhrases} />;
     return block.bold ? <strong>{content}</strong> : content;
@@ -101,9 +101,16 @@ function LinkedRichText({ block }: { block: ArticleBlock }) {
         href={link.href}
         target={link.href.startsWith("/") ? undefined : "_blank"}
         rel={link.href.startsWith("/") ? undefined : "noopener noreferrer"}
-        className="text-brand underline decoration-brand/30 underline-offset-4 hover:text-brand/80"
+        className={titleLinks
+          ? "inline-flex max-w-full items-center gap-2 rounded-sm text-navy no-underline hover:text-navy/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-4"
+          : "text-brand underline decoration-brand/30 underline-offset-4 hover:text-brand/80"}
       >
-        {link.label}
+        {titleLinks ? (
+          <>
+            <span>{link.label}</span>
+            <ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
+          </>
+        ) : link.label}
       </a>,
     );
     cursor = start + link.label.length;
@@ -112,7 +119,7 @@ function LinkedRichText({ block }: { block: ArticleBlock }) {
   return block.bold ? <strong>{result}</strong> : <>{result}</>;
 }
 
-export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
+export function DefaultArticleBlockView({ block, titleLinks = false }: { block: ArticleBlock; titleLinks?: boolean }) {
   if (block.type === "answer-line") {
     return <div aria-hidden="true" className="h-6 w-full border-b border-navy/30" />;
   }
@@ -132,13 +139,13 @@ export function DefaultArticleBlockView({ block }: { block: ArticleBlock }) {
     if (block.headingLevel === 3) {
       return (
         <h3 className="text-lg md:text-xl font-bold text-navy mt-8 mb-3 first:mt-0">
-          <LinkedRichText block={block} />
+          <LinkedRichText block={block} titleLinks={titleLinks} />
         </h3>
       );
     }
     return (
       <h2 className="text-2xl md:text-3xl font-bold text-navy mt-12 mb-4 first:mt-0">
-        <LinkedRichText block={block} />
+        <LinkedRichText block={block} titleLinks={titleLinks} />
       </h2>
     );
   }
@@ -416,6 +423,7 @@ export function ArticlePlaceholder() {
   const article = getArticleBySlug(articleSlug);
   if (!article) return <NotFound />;
 
+  const isPrayerGuide = article.slug === "prayer-starter-guide";
   const groupArticles = getArticlesInGroup(article.group);
   const articleIndex = groupArticles.findIndex((item) => item.slug === article.slug);
   const nextPrayerArticle = article.group === "prayer" ? groupArticles[articleIndex + 1] : undefined;
@@ -505,6 +513,7 @@ export function ArticlePlaceholder() {
                 {blocks.map((block, index) => {
                    if (!introInContentBox && index === firstParagraphIndex) return null;
                    if (article.group === "deeper" && block.type === "question") return null;
+                   if (isPrayerGuide && block.type === "list") return null;
                   if (block.type === "list") {
                     const previousBlock = blocks[index - 1];
                     if (previousBlock?.type === "list") return null;
@@ -519,7 +528,7 @@ export function ArticlePlaceholder() {
                       </ul>
                     );
                   }
-                  return <DefaultArticleBlockView key={index} block={block} />;
+                  return <DefaultArticleBlockView key={index} block={block} titleLinks={isPrayerGuide} />;
                 })}
               </div>
             </div>
