@@ -8,7 +8,7 @@ import { ShareButton } from "@/components/share-button";
 import { ArrowRight, BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
-const homeHeroUrl = `${import.meta.env.BASE_URL}walking-with-jesus-hero.jpg`;
+const homeHeroUrl = `${import.meta.env.BASE_URL}walking-with-jesus-hero-ankle-crop.jpg`;
 const guideDownloadUrl = `${import.meta.env.BASE_URL}adventure-guide.pdf`;
 
 export function Home() {
@@ -21,18 +21,16 @@ export function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative flex min-h-[300px] items-start overflow-hidden bg-[#003A66] py-9 text-white sm:min-h-[315px] md:min-h-[352.5px] md:py-12">
+      <section className="relative flex min-h-[240px] items-start overflow-hidden bg-[#003A66] pb-2 text-white sm:min-h-[260px] md:min-h-[300px] lg:min-h-[320px]">
         <img
           src={homeHeroUrl}
           alt=""
           aria-hidden="true"
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-bottom"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#004E8A]/60 via-[#003A66]/35 to-[#003A66]/5" />
-        
         <div className="container relative z-10 px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.65)" }}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white text-balance leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white text-balance leading-[1.1]">
             Walking with Jesus
           </h1>
           <p className="text-lg md:text-xl font-bold text-white max-w-2xl mx-auto leading-relaxed" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.8)" }}>
