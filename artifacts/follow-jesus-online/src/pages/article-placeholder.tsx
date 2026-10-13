@@ -1,10 +1,11 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useParams } from "wouter";
-import { ArrowLeft, ArrowRight, BookOpen, ChevronsRight, HelpCircle, Quote } from "lucide-react";
+import { BookOpen, HelpCircle, Quote } from "lucide-react";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 import { ScriptureRef } from "@/components/scripture-ref";
 import NotFound from "@/pages/not-found";
-import { ShareButton } from "@/components/share-button";
+import { ArticleShareButton } from "@/components/share-button";
 import {
   getArticleBySlug,
   getArticlePath,
@@ -96,7 +97,7 @@ function LinkedRichText({ block, titleLinks = false }: { block: ArticleBlock; ti
     const start = block.text.indexOf(link.label, cursor);
     if (start === -1) continue;
     const title = link.label.replace(/^\s*\d+[.)]?\s+/, "");
-    const lastWordStart = title.lastIndexOf(" ") + 1;
+    const trailingArrow = /^\s*(?:>{2,}|→|⇒)\s*$/.test(block.text.slice(start + link.label.length));
     const precedingText = block.text.slice(cursor, start);
     result.push(<EmphasizedRichText key={`text-${index}`} text={titleLinks && index === 0
       ? precedingText.replace(/^\s*\d+[.)]?\s+/, "")
@@ -111,18 +112,12 @@ function LinkedRichText({ block, titleLinks = false }: { block: ArticleBlock; ti
           ? "rounded-sm text-navy no-underline hover:text-navy/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-4"
           : "text-brand underline decoration-brand/30 underline-offset-4 hover:text-brand/80"}
       >
-        {titleLinks ? (
-          <>
-            {title.slice(0, lastWordStart)}
-            <span className="whitespace-nowrap">
-              {title.slice(lastWordStart)}
-              <ChevronsRight className="ml-1 inline-block h-5 w-5 align-middle text-warm-700" aria-hidden="true" />
-            </span>
-          </>
+        {titleLinks || trailingArrow ? (
+          <ChevronLabel text={titleLinks ? title : link.label} />
         ) : link.label}
       </a>,
     );
-    cursor = start + link.label.length;
+    cursor = trailingArrow ? block.text.length : start + link.label.length;
   }
   result.push(<EmphasizedRichText key="remaining" text={block.text.slice(cursor)} phrases={block.boldPhrases} />);
   return block.bold ? <strong>{result}</strong> : <>{result}</>;
@@ -193,10 +188,9 @@ export function DefaultArticleBlockView({ block, titleLinks = false }: { block: 
       <p className="my-5">
         <Link
           href={block.href.replace(/^\/(adv|deeper)-/, "/$1/")}
-          className="inline-flex items-center font-bold text-brand underline decoration-brand/30 underline-offset-4 hover:text-brand/80"
+          className="inline font-bold text-brand underline decoration-brand/30 underline-offset-4 hover:text-brand/80"
         >
-          <RichText text={block.text} />
-          <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
+          <ChevronLabel text={block.text} renderText={text => <RichText text={text} />} />
         </Link>
       </p>
     );
@@ -269,8 +263,7 @@ function AdventureBlockView({ block }: { block: ArticleBlock }) {
           href={block.href.replace(/^\/(adv|deeper)-/, "/$1/")}
           className="inline-flex items-center font-bold text-blue-700 bg-blue-50 px-5 py-2.5 rounded-full hover:bg-blue-100 hover:text-blue-800 transition-colors"
         >
-          <RichText text={block.text} />
-          <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
+          <ChevronLabel text={block.text} renderText={text => <RichText text={text} />} />
         </Link>
       </p>
     );
@@ -357,7 +350,8 @@ function AdventureArticleView({
     <Layout>
       <div className="min-h-[100dvh] bg-background pb-20">
         <main className="container mx-auto max-w-3xl px-5 py-8 sm:px-8 md:py-10">
-          <nav aria-label="Breadcrumb" className="mb-10 text-sm text-slate">
+          <div data-testid="article-utilities" className="mb-8 flex items-center justify-between gap-3">
+          <nav aria-label="Breadcrumb" className="min-w-0 text-xs text-slate">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <li>
                 <Link href="/explore-articles" className="font-medium text-navy hover:text-brand hover:underline">
@@ -370,6 +364,8 @@ function AdventureArticleView({
               </li>
             </ol>
           </nav>
+          <ArticleShareButton title={`${article.title} | Follow Jesus Online`} text={`Read “${article.title}” from Follow Jesus Online.`} />
+          </div>
 
           <article className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <header className="mb-12 text-center">
@@ -383,13 +379,6 @@ function AdventureArticleView({
               <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] font-serif font-bold text-navy uppercase tracking-tight leading-[1.15] mb-8">
                 {article.title}
               </h1>
-              <ShareButton
-                title={`${article.title} | Follow Jesus Online`}
-                text={`Read “${article.title}” from Follow Jesus Online.`}
-                label="Share this article"
-                variant="ghost"
-                className="h-8 rounded-full px-3 text-xs font-medium text-slate hover:bg-warm-50 hover:text-navy"
-              />
             </header>
 
             <AdventureArticleBlocks blocks={blocks} />
@@ -481,24 +470,27 @@ export function ArticlePlaceholder() {
   return (
     <Layout>
       <main className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
-        <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-          <Button asChild variant="ghost" className="-ml-4 text-muted-foreground hover:text-foreground">
+        <div data-testid="article-utilities" className="mb-8 flex items-center justify-between gap-3">
+          <Button asChild variant="ghost" className="-ml-2 h-auto min-h-11 min-w-0 max-w-full px-2 text-left text-sm font-medium text-muted-foreground hover:text-foreground">
              <Link href={article.group === "prayer" ? articleIndex === 0 ? "/#connect-with-god" : "/prayer" : linkedSource ? getArticlePath(linkedSource.faqSlug) : "/explore-articles"}>
-               <ArrowLeft className="w-4 h-4 mr-2" /> {article.group === "prayer" ? articleIndex === 0 ? "Back to Connect with God" : "Back to Prayer Starters" : linkedSource ? "Back to question" : "Back to Articles"}
+               <ChevronLabel direction="left" text={article.group === "prayer" ? articleIndex === 0 ? "Back to Connect with God" : "Back to Prayer Starters" : linkedSource ? "Back to question" : "Back to Articles"} />
             </Link>
           </Button>
-           {article.group !== "linked" && (
-             <span className="text-sm text-muted-foreground">
+          <div className="ml-auto flex shrink-0 items-center gap-2">
+           {article.group !== "linked" && !isPrayerGuide && (
+              <span className="text-xs text-muted-foreground">
                {articleIndex + 1} of {groupArticles.length}
              </span>
            )}
+            <ArticleShareButton title={`${article.title} | Follow Jesus Online`} text={`Read “${article.title}” from Follow Jesus Online.`} />
+          </div>
         </div>
 
         <article className="animate-in fade-in slide-in-from-bottom-6 duration-700">
           <header className="mb-10">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
+            {!isPrayerGuide && <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
               <BookOpen className="h-3.5 w-3.5" /> {groupLabel(article.group)}
-            </div>
+            </div>}
             <h1 className="max-w-3xl text-4xl font-bold leading-tight text-navy md:text-6xl">
               {article.title}
             </h1>
@@ -507,13 +499,6 @@ export function ArticlePlaceholder() {
                 <LinkedRichText block={blocks[firstParagraphIndex]} />
               </p>
             )}
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <ShareButton
-                title={`${article.title} | Follow Jesus Online`}
-                text={`Read “${article.title}” from Follow Jesus Online.`}
-                label="Share this article"
-              />
-            </div>
           </header>
 
           {isPrayerGuide ? (

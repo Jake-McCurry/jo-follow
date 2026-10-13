@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { REWATCH_VIDEOS } from "@/data/rewatch-videos";
-import { ArrowLeft } from "lucide-react";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 
 export function RewatchPage({ videoId }: { videoId?: string } = {}) {
   const videos = videoId ? REWATCH_VIDEOS.filter(video => video.id === videoId) : REWATCH_VIDEOS;
@@ -13,13 +13,13 @@ export function RewatchPage({ videoId }: { videoId?: string } = {}) {
         <div className="mb-8 animate-in fade-in slide-in-from-left-4 duration-500">
           <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground -ml-4">
             <Link href="/">
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back to start
+              <ChevronLabel direction="left" text="Back to start" />
             </Link>
           </Button>
         </div>
 
         <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">{videoId ? videos[0]?.title : "Rewatch the Videos"}</h1>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">{videoId ? videos[0]?.title : "Watch the Videos"}</h1>
           <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full"></div>
         </div>
 

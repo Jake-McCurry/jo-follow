@@ -4,7 +4,8 @@ import { useListBibleBooks, useGetBiblePassage, getGetBiblePassageQueryKey } fro
 import { SelectNative } from "@/components/ui/select-native"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ChevronLeft, ChevronRight, Loader2, AlertCircle, Search } from "lucide-react"
+import { Loader2, AlertCircle, Search } from "lucide-react"
+import { ChevronLabel } from "@/components/navigation-chevrons"
 import { useState, useMemo, useEffect, FormEvent } from "react"
 import { BibleStudyTools } from "@/components/bible-study-tools"
 import { BibleRecap } from "@/components/bible-recap"
@@ -305,8 +306,7 @@ export function BibleReaderPage() {
                 className="gap-2 border-warm-200 bg-white hover:bg-warm-50"
                 disabled={isPassageLoading || (currentBook?.id === books?.[0]?.id && chapterParam === 1)}
               >
-                <ChevronLeft className="h-4 w-4" />
-                Previous
+                <ChevronLabel text="Previous" direction="left" />
               </Button>
 
               <Button
@@ -315,8 +315,7 @@ export function BibleReaderPage() {
                 className="gap-2 border-warm-200 bg-white hover:bg-warm-50"
                 disabled={isPassageLoading || (currentBook?.id === books?.[books.length - 1]?.id && chapterParam === currentBook?.chapters)}
               >
-                Next
-                <ChevronRight className="h-4 w-4" />
+                <ChevronLabel text="Next" />
               </Button>
             </div>
           </div>

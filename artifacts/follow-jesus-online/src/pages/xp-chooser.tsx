@@ -2,7 +2,8 @@ import { Layout } from "@/components/layout";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Compass, HelpCircle, BookOpen } from "lucide-react";
+import { Compass, HelpCircle, BookOpen } from "lucide-react";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 
 export function XPChooserPage() {
   return (
@@ -23,9 +24,9 @@ export function XPChooserPage() {
               <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                 Something real has started. Here are simple next steps to help you understand what happened and walk forward with confidence.
               </p>
-              <Button asChild className="w-full group-hover:bg-[#004E8A]">
+              <Button asChild className="h-auto min-h-11 w-full group-hover:bg-[#004E8A]">
                 <Link href="/xp/received">
-                  Begin Here <ArrowRight className="w-4 h-4 ml-2" />
+                  <ChevronLabel text="Begin Here" tone="light" />
                 </Link>
               </Button>
             </CardContent>
@@ -40,9 +41,9 @@ export function XPChooserPage() {
               <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                 Turning toward Him again matters. These pages will help you renew your walk and move forward with clarity.
               </p>
-              <Button asChild className="w-full group-hover:bg-[#004E8A]">
+              <Button asChild className="h-auto min-h-11 w-full group-hover:bg-[#004E8A]">
                 <Link href="/xp/rededicated">
-                  Welcome Back <ArrowRight className="w-4 h-4 ml-2" />
+                  <ChevronLabel text="Welcome Back" tone="light" />
                 </Link>
               </Button>
             </CardContent>
@@ -57,9 +58,9 @@ export function XPChooserPage() {
               <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                 Whether you want to be refreshed in the foundations or find clear ways to help others, you are in the right place.
               </p>
-              <Button asChild className="w-full group-hover:bg-[#004E8A]">
+              <Button asChild className="h-auto min-h-11 w-full group-hover:bg-[#004E8A]">
                 <Link href="/xp/believer">
-                  Continue Growing <ArrowRight className="w-4 h-4 ml-2" />
+                  <ChevronLabel text="Continue Growing" tone="light" />
                 </Link>
               </Button>
             </CardContent>

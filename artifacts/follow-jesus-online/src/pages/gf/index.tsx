@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout";
 import { Link } from "wouter";
 import { GO_FURTHER_BOOKS } from "@/data/go-further-library";
-import { ArrowRight } from "lucide-react";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 
 export function GoFurtherPage() {
   return (
@@ -42,7 +42,7 @@ export function GoFurtherPage() {
                   <p className="mt-1 text-sm font-semibold text-slate">{book.subtitle}</p>
                   <p className="mt-4 max-w-2xl leading-relaxed text-slate">{book.desc}</p>
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand">
-                    Open this book <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                    <ChevronLabel text="Open this book" />
                   </span>
                 </div>
               </Link>

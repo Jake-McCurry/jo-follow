@@ -1,9 +1,9 @@
 import { Layout } from "@/components/layout";
 import { Link, useParams } from "wouter";
 import { getGFBook, GO_FURTHER_BOOKS } from "@/data/go-further-library";
-import { ArrowRight } from "lucide-react";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 import NotFound from "@/pages/not-found";
-import { ShareButton } from "@/components/share-button";
+import { ArticleShareButton } from "@/components/share-button";
 
 export function GFBookPage() {
   const params = useParams();
@@ -19,13 +19,16 @@ export function GFBookPage() {
     <Layout>
       <div className="min-h-[100dvh] bg-background pb-20">
         <main className="container mx-auto max-w-3xl px-5 py-8 sm:px-8 md:py-10">
-          <nav aria-label="Breadcrumb" className="mb-10 text-sm text-slate">
+          <div data-testid="article-utilities" className="mb-8 flex items-center justify-between gap-3">
+          <nav aria-label="Breadcrumb" className="min-w-0 text-xs text-slate">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <li><Link href="/gf" className="font-medium text-navy hover:text-brand hover:underline">Go Further</Link></li>
               <li aria-hidden="true" className="text-slate/40">/</li>
               <li aria-current="page">{book.title}</li>
             </ol>
           </nav>
+          <ArticleShareButton title={`${book.title} | Follow Jesus Online`} text={`Read “${book.title}” from Follow Jesus Online.`} label="Share this book" />
+          </div>
 
           <article className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <header className="mb-12 text-center">
@@ -40,13 +43,6 @@ export function GFBookPage() {
                 {book.title}
               </h1>
               <p className="mb-6 text-lg leading-relaxed text-slate">{book.subtitle}</p>
-              <ShareButton
-                title={`${book.title} | Follow Jesus Online`}
-                text={`Read “${book.title}” from Follow Jesus Online.`}
-                label="Share this book"
-                variant="ghost"
-                className="h-8 rounded-full px-3 text-xs font-medium text-slate hover:bg-warm-50 hover:text-navy"
-              />
             </header>
 
             <div className="space-y-6 text-lg leading-relaxed text-slate sm:text-[19px]">
@@ -58,9 +54,8 @@ export function GFBookPage() {
               className="group mt-10 block rounded-xl border border-blue-900 border-t-4 border-t-warm-500 bg-blue-900 p-5 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-7"
             >
               <span className="block text-xs font-bold uppercase tracking-wide text-blue-100 sm:text-sm">{book.buttonText}</span>
-              <span className="mt-2 flex items-start justify-between gap-3 font-serif text-xl font-bold leading-tight text-white sm:text-3xl">
-                <span>{startTitle}</span>
-                <ArrowRight className="h-6 w-6 shrink-0 transition-transform group-hover:translate-x-1 sm:h-8 sm:w-8" aria-hidden="true" />
+              <span className="mt-2 block font-serif text-xl font-bold leading-tight text-white sm:text-3xl">
+                <ChevronLabel text={startTitle} tone="light" />
               </span>
             </Link>
 
@@ -95,7 +90,7 @@ export function GFBookPage() {
                       <p className="mt-1 text-sm leading-relaxed text-slate sm:text-base">{reading.desc}</p>
                       {book.tocLinkStyle === "title-and-more" && (
                         <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand">
-                          Read more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                          <ChevronLabel text="Read more" />
                         </span>
                       )}
                     </Link>
@@ -107,7 +102,7 @@ export function GFBookPage() {
             <div className="mt-16 rounded-xl bg-card p-6 text-center sm:p-8">
               <p className="text-lg italic leading-relaxed text-navy">“{book.closing}”</p>
               <Link href={startHref} className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">
-                {book.buttonText} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                <ChevronLabel text={book.buttonText} />
               </Link>
             </div>
           </article>

@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ConnectWithGodSection } from "@/components/connect-with-god-section";
 import { ShareButton } from "@/components/share-button";
-import { ArrowRight, BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
+import { BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
 const homeHeroUrl = `${import.meta.env.BASE_URL}walking-with-jesus-hero-ankle-crop.jpg`;
@@ -101,9 +102,9 @@ export function Home() {
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   Something real has started. Here are simple next steps to help you understand what happened and walk forward with confidence.
                 </p>
-                <Button asChild className="w-full group-hover:bg-[#004E8A]">
+                <Button asChild className="h-auto min-h-11 w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/received?journey=received&entry=landing&step=xp">
-                    Begin Here <ArrowRight className="w-4 h-4 ml-2" />
+                    <ChevronLabel text="Begin Here" tone="light" />
                   </Link>
                 </Button>
               </CardContent>
@@ -118,9 +119,9 @@ export function Home() {
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   Turning toward Him again matters. These pages will help you renew your walk and move forward with clarity.
                 </p>
-                <Button asChild className="w-full group-hover:bg-[#004E8A]">
+                <Button asChild className="h-auto min-h-11 w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/rededicated?journey=rededicated&entry=landing&step=xp">
-                    Welcome Back <ArrowRight className="w-4 h-4 ml-2" />
+                    <ChevronLabel text="Welcome Back" tone="light" />
                   </Link>
                 </Button>
               </CardContent>
@@ -135,9 +136,9 @@ export function Home() {
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   Whether you want to be refreshed in the foundations or find clear ways to help others, you are in the right place.
                 </p>
-                <Button asChild className="w-full group-hover:bg-[#004E8A]">
+                <Button asChild className="h-auto min-h-11 w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/believer?journey=believer&entry=landing&step=xp">
-                    Continue Growing <ArrowRight className="w-4 h-4 ml-2" />
+                    <ChevronLabel text="Continue Growing" tone="light" />
                   </Link>
                 </Button>
               </CardContent>
@@ -151,9 +152,9 @@ export function Home() {
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
                   You do not have to decide today. It’s all right to be unsure. Start with your questions, at your own pace.
                 </p>
-                <Button asChild className="w-full group-hover:bg-[#004E8A]">
+                <Button asChild className="h-auto min-h-11 w-full group-hover:bg-[#004E8A]">
                   <Link href="/xp/did-not-pray?journey=did-not-pray&entry=landing&step=xp">
-                    Explore My Questions <ArrowRight className="w-4 h-4 ml-2" />
+                    <ChevronLabel text="Explore My Questions" tone="light" />
                   </Link>
                 </Button>
               </CardContent>
@@ -171,7 +172,7 @@ export function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link href="/rewatch" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <PlayCircle className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-              <span className="text-lg font-bold text-card-foreground">Rewatch the videos</span>
+              <span className="text-lg font-bold text-card-foreground">Watch the videos</span>
             </Link>
             <Link href="/gf/" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <Search className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />

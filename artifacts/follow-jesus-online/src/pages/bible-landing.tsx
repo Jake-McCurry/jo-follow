@@ -1,7 +1,8 @@
 import { Layout } from "@/components/layout";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Search, ArrowRight } from "lucide-react";
+import { BookOpen, Search } from "lucide-react";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, FormEvent } from "react";
@@ -72,7 +73,7 @@ export function BibleLandingPage() {
             <h3 className="font-bold text-lg mb-2 text-foreground transition-colors">Gospel of John</h3>
             <p className="text-sm text-muted-foreground mb-4">A great place to start reading about the life of Jesus.</p>
             <span className="text-warm-700 text-sm font-semibold flex items-center">
-              Start Reading <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              <ChevronLabel text="Start Reading" />
             </span>
           </Link>
           
@@ -80,7 +81,7 @@ export function BibleLandingPage() {
             <h3 className="font-bold text-lg mb-2 text-foreground transition-colors">Psalms</h3>
             <p className="text-sm text-muted-foreground mb-4">Poetry and prayers for every season of life.</p>
             <span className="text-warm-700 text-sm font-semibold flex items-center">
-              Start Reading <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              <ChevronLabel text="Start Reading" />
             </span>
           </Link>
         </div>

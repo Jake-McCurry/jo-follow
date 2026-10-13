@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 import { Link } from "wouter";
 import { ArticleReaction } from "@/components/article-reaction";
 import { Button } from "@/components/ui/button";
@@ -44,9 +44,8 @@ export function ArticleEndSection({
                   <span className="block text-xs font-bold uppercase tracking-wide text-blue-100 sm:text-sm">
                     {next.label}
                   </span>
-                  <h2 className="mt-2 flex items-start justify-between gap-3 font-serif text-xl font-bold leading-tight text-white sm:text-3xl">
-                    <span className="min-w-0 break-words">{next.title}</span>
-                    <ArrowRight className="h-6 w-6 shrink-0 text-white transition-transform group-hover:translate-x-1 sm:h-8 sm:w-8" aria-hidden="true" />
+                  <h2 className="mt-2 font-serif text-xl font-bold leading-tight text-white sm:text-3xl">
+                    <ChevronLabel text={next.title} tone="light" />
                   </h2>
                 </Link>
               )}
@@ -58,10 +57,8 @@ export function ArticleEndSection({
                   <span className="block text-xs font-bold uppercase tracking-wide text-slate sm:text-sm">
                     {secondary.label}
                   </span>
-                  <h2 className="mt-2 flex items-start gap-3 text-lg font-bold leading-snug text-navy sm:text-xl">
-                    {secondary.back && <ArrowLeft className="h-5 w-5 shrink-0 text-brand transition-transform group-hover:-translate-x-1 sm:h-6 sm:w-6" aria-hidden="true" />}
-                    <span className="min-w-0 break-words">{secondary.title}</span>
-                    {!secondary.back && <ArrowRight className="h-5 w-5 shrink-0 text-brand transition-transform group-hover:translate-x-1 sm:h-6 sm:w-6" aria-hidden="true" />}
+                  <h2 className="mt-2 text-lg font-bold leading-snug text-navy sm:text-xl">
+                    <ChevronLabel text={secondary.title} direction={secondary.back ? "left" : "right"} />
                   </h2>
                 </Link>
               )}
@@ -70,10 +67,9 @@ export function ArticleEndSection({
           {previous && (
             <Link
               href={previous.href}
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+              className="mt-6 inline-block text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
             >
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-              {previous.label}
+              <ChevronLabel text={previous.label} direction="left" />
             </Link>
           )}
         </div>

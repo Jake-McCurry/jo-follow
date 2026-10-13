@@ -1,4 +1,5 @@
 import type { TopicSearchMatch } from "./topic-search";
+import type { ReactNode } from "react";
 
 type SearchTopic = { id: string; title: string; passageCount: number; searchMatch?: TopicSearchMatch };
 
@@ -12,6 +13,7 @@ export function TopicSearchResults({
   onRetry,
   onSelect,
   onClear,
+  searchControl,
 }: {
   query: string;
   topics: SearchTopic[];
@@ -22,6 +24,7 @@ export function TopicSearchResults({
   onRetry: () => void;
   onSelect: (id: string) => void;
   onClear: () => void;
+  searchControl?: ReactNode;
 }) {
   return (
     <section
@@ -31,23 +34,24 @@ export function TopicSearchResults({
       data-testid="panel-topic-search-results"
       data-search-complete={!loading && !searchingContent && !contentError}
     >
+      {searchControl}
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h2 id="topic-search-heading" className="text-3xl text-[var(--color-hero,#006BB3)] md:text-4xl">Search results</h2>
+          <h2 id="topic-search-heading" className="text-3xl text-[var(--color-hero,#006BB3)] md:text-4xl">{query.trim() ? "Search results" : "Search Knowing God"}</h2>
           <p role="status" className="kg-sans mt-3 text-base text-[var(--color-text-muted,#2E5A7A)]" data-testid="status-topic-search">
-            {loading ? "Loading complete topical index…" : `${topics.length} ${topics.length === 1 ? "topic" : "topics"} found for “${query.trim()}”`}
+            {loading ? "Loading complete topical index…" : query.trim() ? `${topics.length} ${topics.length === 1 ? "topic" : "topics"} found for “${query.trim()}”` : "Search the complete topical Bible."}
             {searchingContent && <span className="mt-1 block">Searching remaining topic text…</span>}
           </p>
           <p className="kg-sans mt-2 text-sm text-[var(--color-text-muted,#2E5A7A)]">Title matches first, then Scripture references and content.</p>
         </div>
-        <button
+        {query.trim() && <button
           type="button"
           onClick={onClear}
           data-testid="button-clear-topic-search"
           className="kg-focus kg-sans min-h-11 rounded border border-[var(--color-border-control,#5B9BC4)] px-4 py-2 text-sm font-bold text-[var(--color-text,#003A66)] hover:bg-[var(--color-surface-soft,#E6F5FF)]"
         >
           Clear search
-        </button>
+        </button>}
       </div>
       {contentError && (
         <p role="alert" className="kg-sans mb-4 text-[var(--color-action-warm,#C45100)]">
@@ -58,7 +62,7 @@ export function TopicSearchResults({
       {error ? <p role="alert" className="kg-sans text-[var(--color-action-warm,#C45100)]">{error}</p> :
         !loading && !searchingContent && !contentError && topics.length === 0 ? (
           <p className="kg-sans py-6 text-lg text-[var(--color-text-muted,#2E5A7A)]" data-testid="text-topic-search-empty">
-            No topics match that search. Try a different word or phrase.
+            {query.trim() ? "No topics match that search. Try a different word or phrase." : "Enter a word or phrase above to find topics."}
           </p>
         ) : (
           <ul className="space-y-2" aria-label="Matching topics">

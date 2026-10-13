@@ -3,6 +3,7 @@ import { TOPIC_MENU_LINKS } from "@/data/connect-with-god"
 
 export function TopicMenuBar() {
   const [location] = useLocation()
+  const pageLocation = location.replace(/\/$/, "") === "/videos" ? "/rewatch" : location
   const isPrayerGuide = location.replace(/\/$/, "") === "/prayer"
   return (
     <nav
@@ -15,7 +16,7 @@ export function TopicMenuBar() {
         tabIndex={-1}
       >
         {TOPIC_MENU_LINKS.map((item) => {
-          const active = location === item.href || location === item.href.replace(/\/$/, "")
+          const active = pageLocation === item.href || pageLocation === item.href.replace(/\/$/, "")
           return (
             <li key={item.label} className="shrink-0 snap-start">
               <Link

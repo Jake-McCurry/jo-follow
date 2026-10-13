@@ -29,7 +29,10 @@ export const writeSaved = (ids: string[]): string => {
   catch { return "Your saved list could not be stored in this browser (storage may be full or blocked). It will be lost when you leave this page."; }
 };
 
-export const blockText = (blocks: Block[]) => blocks.map(b => b.text).join("\n\n");
+export const blockText = (blocks: Block[]) => blocks.map(b => {
+  if (b.kind !== "passage" || !b.reference || b.text.includes(b.reference)) return b.text;
+  return `${b.text}\n—${b.reference}${b.translation ? `, ${b.translation}` : ""}`;
+}).join("\n\n");
 
 const normalizeSearch = (value: string) => value.normalize("NFKC").replace(/[‘’]/g, "'").replace(/[–—]/g, "-").toLocaleLowerCase();
 export const searchTopics = (book: Book, query: string) => {

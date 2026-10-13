@@ -33,11 +33,23 @@ Keep the homepage hero compact and show the supplied photograph without a gradie
 
 **How to apply:** Preserve the shorter, image-led treatment, keeping the main title above the group's heads and the lower crop at the center figure's ankles. Maintain text contrast with bold white type and a local text shadow, not an image overlay. Do not restore the gradient during later hero changes.
 
-Use individual title-and-paragraph cards with plain, unnumbered navy links and darker orange double chevrons on the Prayer Starter Guide.
+Use individual title-and-paragraph cards with plain, unnumbered navy links and darker orange triple chevrons on the Prayer Starter Guide.
 
 **Why:** The user clarified that removing list bullets also meant removing numeric prefixes embedded in titles. They requested subtle warmth after finding the first tint too strong, darker hover treatment for links above the content, and a separate card for each article title and its paragraph instead of one shared card. They later replaced title arrows with darker orange double chevrons and asked that they follow the final word when a title wraps.
 
-**How to apply:** Treat “just the titles” on this page as excluding both list markers and numbers embedded in imported title text. Keep each article's description paired with its title and preserve link destinations. Keep the final word and its double chevrons together rather than placing the icon at the card's right edge. Individual article cards, double-chevron links, and darker topic-navigation hovers remain specific to `/prayer`; do not extend this icon treatment to Explore Articles.
+**How to apply:** Treat “just the titles” on this page as excluding both list markers and numbers embedded in imported title text. Keep each article's description paired with its title and preserve link destinations. Individual article cards and darker topic-navigation hovers remain specific to `/prayer`. The user extended the chevron replacement to existing arrows across the website; do not add new icons to otherwise icon-free Explore Articles cards.
+
+Use moderately sized, close-spaced triple chevrons for the shared directional navigation style. Right-pointing chevrons go after the final word; left-pointing chevrons go before the text.
+
+**Why:** After requesting the site-wide replacement, the user found the larger double chevrons too big, requested a smaller compromise with three closer chevrons, and clarified that their side must match their pointing direction.
+
+**How to apply:** Keep right-pointing chevrons attached to the final word when wrapping; keep left-pointing chevrons attached to the first word. Preserve navigation destinations and readable contrast on dark buttons. This replaces existing arrow affordances, not disclosure indicators or previously icon-free links.
+
+Article sharing is a quiet, icon-only utility at the far right of the breadcrumb row, not a call to action beneath the heading. Breadcrumbs should be smaller.
+
+**Why:** The user wants sharing available for readers who seek it out, without prominent “Share this article” text. On Prayer articles it belongs to the right of the article progress indicator.
+
+**How to apply:** Apply this consistently across article and book-reading layouts. Keep any progress indicator before the share icon, preserve sharing metadata and functionality, and retain an accessible name and usable touch target even though the visible icon is small.
 
 Use the approved subtle cream cards against a lighter page background across the homepage and other public card-based sections.
 

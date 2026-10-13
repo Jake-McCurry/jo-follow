@@ -12,6 +12,18 @@ import {
 
 const dataDirectory = new URL("../public/knowing-god/data/", import.meta.url);
 
+test("Knowing God keeps icon-only print/search after the index and removes topic selection", async () => {
+  const reader = await readFile(new URL("../src/components/knowing-god/ConcordancePrototype.tsx", import.meta.url), "utf8");
+  const sidebar = reader.match(/<aside data-testid="knowing-god-sidebar"[\s\S]*?<\/aside>/)?.[0];
+  assert.ok(sidebar);
+  assert.doesNotMatch(reader, /Topic selection|setTopicScope|changeTopicScope/);
+  assert.doesNotMatch(sidebar, /input-topic-search|> Print<\/button>/);
+  assert.match(sidebar, /<\/nav>}\s*<div data-testid="knowing-god-sidebar-footer"[\s\S]*aria-label="Print this page"[\s\S]*aria-label="Search Knowing God"/);
+  assert.equal([...sidebar.matchAll(/<Printer /g)].length, 1);
+  assert.equal([...sidebar.matchAll(/<Search /g)].length, 1);
+  assert.match(reader, /searchControl=\{<div[\s\S]*ref=\{searchInput\}[\s\S]*aria-label="Close search"/);
+});
+
 test("reader title search accepts devotional punctuation variants without loading content", () => {
   assert.equal(topicTitleSearchRank("Nonimpossibilitation Of The Lord", "Non-impossibilitation"), 1);
   assert.equal(topicTitleSearchRank("I AM DECLARATIONS", "I-AM"), 1);

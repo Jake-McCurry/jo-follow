@@ -121,8 +121,8 @@ function PageMetadata() {
       title = `${article.title} | Follow Jesus Online`;
       description = article.excerpt;
     }
-  } else if (pathname === '/rewatch' || pathname === '/rewatch-video') {
-    title = 'Rewatch the Videos | Follow Jesus Online';
+  } else if (pathname === '/videos' || pathname === '/rewatch' || pathname === '/rewatch-video') {
+    title = 'Watch the Videos | Follow Jesus Online';
     description = 'Watch Jesus’ Resurrection and You, The Gift of Heaven, God’s Vision, Personal Transformation, and Eternal Impact.';
   } else if (pathname === '/message') {
     title = 'Send a Message | Follow Jesus Online';
@@ -154,7 +154,7 @@ function PageMetadata() {
 
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     const articleSlug = getArticleSlugFromPath(pathname);
-    const canonicalPath = pathname === '/rewatch-video'
+    const canonicalPath = pathname === '/rewatch-video' || pathname === '/videos'
       ? '/rewatch'
       : pathname === '/gf'
         ? '/gf/'
@@ -207,6 +207,7 @@ function Router() {
         <Route path="/promises" component={PromisesPage} />
         <Route path="/knowing-god/introduction" component={KnowingGodIntroductionIndexPage} />
         <Route path="/knowing-god/introduction/:section" component={KnowingGodIntroductionPage} />
+        <Route path="/videos"><RewatchPage /></Route>
         <Route path="/rewatch"><RewatchPage /></Route>
         <Route path="/rewatch-video"><RewatchPage /></Route>
         <Route path="/videos/Gods-Vision">
