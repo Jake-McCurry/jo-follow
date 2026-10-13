@@ -94,7 +94,10 @@ function LinkedRichText({ block, titleLinks = false }: { block: ArticleBlock; ti
   for (const [index, link] of block.links.entries()) {
     const start = block.text.indexOf(link.label, cursor);
     if (start === -1) continue;
-    result.push(<EmphasizedRichText key={`text-${index}`} text={block.text.slice(cursor, start)} phrases={block.boldPhrases} />);
+    const precedingText = block.text.slice(cursor, start);
+    result.push(<EmphasizedRichText key={`text-${index}`} text={titleLinks && index === 0
+      ? precedingText.replace(/^\s*\d+[.)]?\s+/, "")
+      : precedingText} phrases={block.boldPhrases} />);
     result.push(
       <a
         key={`link-${index}`}
@@ -107,7 +110,7 @@ function LinkedRichText({ block, titleLinks = false }: { block: ArticleBlock; ti
       >
         {titleLinks ? (
           <>
-            <span>{link.label}</span>
+            <span>{link.label.replace(/^\s*\d+[.)]?\s+/, "")}</span>
             <ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
           </>
         ) : link.label}
@@ -507,7 +510,7 @@ export function ArticlePlaceholder() {
             </div>
           </header>
 
-          <div className="rounded-2xl border border-border-soft bg-white p-7 shadow-sm sm:p-10 md:p-12">
+          <div className={`rounded-2xl border p-7 shadow-sm sm:p-10 md:p-12 ${isPrayerGuide ? "border-warm-200 bg-warm-50" : "border-border-soft bg-white"}`}>
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <div className="space-y-5">
                 {blocks.map((block, index) => {

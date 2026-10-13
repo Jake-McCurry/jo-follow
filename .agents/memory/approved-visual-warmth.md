@@ -32,3 +32,9 @@ Keep the homepage hero compact and show the supplied photograph without a gradie
 **Why:** The user first requested a lighter gradient and shorter hero, then requested removing the gradient entirely. They also requested a bolder subtitle, the title above the group's heads, and a crop at the center figure's ankles.
 
 **How to apply:** Preserve the shorter, image-led treatment, keeping the main title above the group's heads and the lower crop at the center figure's ankles. Maintain text contrast with bold white type and a local text shadow, not an image overlay. Do not restore the gradient during later hero changes.
+
+Use plain, unnumbered navy article titles with trailing arrows on the Prayer Starter Guide.
+
+**Why:** The user clarified that removing list bullets was not enough: numeric prefixes such as “03” and “04” before the titles must also be removed. They requested a warmer main-content card on `/prayer` only, explicitly as a test.
+
+**How to apply:** Treat “just the titles” on this page as excluding both list markers and numbers embedded in imported title text. Keep the descriptions and link destinations intact; do not extend this arrow treatment to Explore Articles. The warmer content-card treatment is a `/prayer`-only test, not approval to apply it to other reading pages.
