@@ -56,7 +56,7 @@ export function Home() {
         <ConnectWithGodSection />
 
         {/* Featured Guide */}
-        <section className="relative overflow-hidden rounded-2xl bg-secondary p-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both md:p-10">
+        <section className="relative overflow-hidden rounded-2xl bg-card p-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both md:p-10">
           <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
             <div className="shrink-0 flex items-center justify-center w-full md:w-48 mb-6 md:mb-0">
               <img src={guideCoverUrl} alt="The Adventure of Living with Jesus Guide" className="w-full max-w-[200px] md:max-w-full rounded-xl shadow-lg border border-border/20 rotate-[-2deg] hover:rotate-0 transition-transform duration-500" />
@@ -92,7 +92,7 @@ export function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
+            <Card className="group flex h-full flex-col border-card-border bg-card shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <Compass className="w-6 h-6" />
@@ -109,7 +109,7 @@ export function Home() {
               </CardContent>
             </Card>
 
-            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
+            <Card className="group flex h-full flex-col border-card-border bg-card shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <HelpCircle className="w-6 h-6" />
@@ -126,7 +126,7 @@ export function Home() {
               </CardContent>
             </Card>
 
-            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
+            <Card className="group flex h-full flex-col border-card-border bg-card shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <BookOpen className="w-6 h-6" />
@@ -142,7 +142,7 @@ export function Home() {
                 </Button>
               </CardContent>
             </Card>
-            <Card className="group flex h-full flex-col border-warm-200 bg-warm-50 shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
+            <Card className="group flex h-full flex-col border-card-border bg-card shadow-sm transition-all hover:border-warm-400 hover:bg-warm-100 hover:shadow-md">
               <CardContent className="pt-8 pb-6 px-6 flex flex-col h-full items-center text-center">
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-warm-100 text-warm-700 transition-transform group-hover:scale-110">
                   <Search className="w-6 h-6" />
@@ -169,19 +169,19 @@ export function Home() {
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/rewatch" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+            <Link href="/rewatch" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <PlayCircle className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
               <span className="text-lg font-bold text-card-foreground">Rewatch the videos</span>
             </Link>
-            <Link href="/gf/" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+            <Link href="/gf/" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <Search className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
               <span className="text-lg font-bold text-card-foreground">Go Further</span>
             </Link>
-            <Link href="/bible/John/1" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+            <Link href="/bible/John/1" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <BookOpen className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
               <span className="text-lg font-bold text-card-foreground">Read the Bible</span>
             </Link>
-            <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center rounded-xl border border-warm-200 bg-warm-50 p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
+            <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
               <Compass className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
               <span className="text-lg font-bold text-card-foreground">About JesusOnline</span>
             </a>
@@ -189,7 +189,7 @@ export function Home() {
         </section>
 
         {/* Support CTA */}
-        <section className="mx-auto max-w-3xl rounded-2xl border border-primary/10 bg-primary/5 p-8 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both md:p-10">
+        <section className="mx-auto max-w-3xl rounded-2xl border border-card-border bg-card p-8 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both md:p-10">
           <h2 className="text-2xl font-bold text-foreground mb-4">We’re Here If You Need Anything</h2>
           <p className="text-muted-foreground mb-8">
             If something is on your mind or you would simply like help finding the right resource, feel free to reach out.

@@ -173,7 +173,7 @@ export function BibleReaderPage() {
 
           <div className="order-1 min-w-0 pb-32 lg:order-2 lg:pb-0">
             {/* Navigation Toolbar */}
-            <div className="mb-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-warm-200 bg-warm-50 p-3 shadow-sm 2xl:flex-row sm:p-4">
+            <div className="mb-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-card-border bg-card p-3 shadow-sm 2xl:flex-row sm:p-4">
               <div className="flex w-full flex-wrap items-center gap-2 2xl:w-auto">
                 <div className="min-w-[130px] flex-1 sm:w-[180px] sm:flex-none">
                 <SelectNative
@@ -233,7 +233,7 @@ export function BibleReaderPage() {
             </div>
 
             {/* Reader Content */}
-            <div className="relative min-h-[60vh] overflow-hidden rounded-xl border border-warm-200 bg-white px-5 py-10 shadow-sm sm:px-10 sm:py-14">
+            <div className="relative min-h-[60vh] overflow-hidden rounded-xl border border-card-border bg-card px-5 py-10 shadow-sm sm:px-10 sm:py-14">
               <div className="absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r from-transparent via-warm-400 to-transparent opacity-50" />
 
               {isPassageLoading ? (

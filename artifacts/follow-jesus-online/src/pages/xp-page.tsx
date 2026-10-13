@@ -192,7 +192,7 @@ export function XPPage() {
         </div>
 
         {/* Main Content Area */}
-        {hasGuide && <div className="bg-white border border-warm-200 rounded-2xl p-8 md:p-12 shadow-sm mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
+        {hasGuide && <div className="bg-card border border-card-border rounded-2xl p-8 md:p-12 shadow-sm mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
           <div className="flex flex-col md:flex-row gap-10 items-center md:items-start mb-8">
             <div className="shrink-0 w-full max-w-[240px] md:w-64">
               <img src={guideCoverUrl} alt="The Adventure of Living with Jesus" className="w-full rounded-xl shadow-md border border-border/30 rotate-[-1deg]" />
@@ -235,7 +235,7 @@ export function XPPage() {
           <h2 className="text-2xl font-bold text-foreground mb-8 text-center">{content.questionsTitle}</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {content.questions.map((q, i) => (
-              <div key={i} className="bg-white border border-warm-200 rounded-xl p-6 flex items-start gap-4 shadow-sm hover:border-warm-300 transition-colors">
+              <div key={i} className="bg-card border border-card-border rounded-xl p-6 flex items-start gap-4 shadow-sm hover:border-warm-300 transition-colors">
                 <Heart className="w-5 h-5 text-warm-400 shrink-0 mt-0.5" />
                 {XP_ARTICLE_LINKS[type]?.[q] ? (
                   <Link
@@ -253,7 +253,7 @@ export function XPPage() {
         </div>
 
         {/* Support CTA */}
-        <div className="bg-warm-50 border border-warm-200 text-foreground rounded-2xl p-8 md:p-12 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both shadow-sm">
+        <div className="bg-card border border-card-border text-foreground rounded-2xl p-8 md:p-12 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both shadow-sm">
           <MessageCircle className="w-12 h-12 mx-auto mb-6 text-warm-700" />
           <h2 className="text-3xl font-bold mb-4">{content.contactHeading ?? "We’re Here If You Need Anything"}</h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">

@@ -155,7 +155,7 @@ export function BibleStudyTools({
 
   return (
     <aside id="bible-study-tools" className="space-y-4 lg:sticky lg:top-24" aria-labelledby="study-tools-heading">
-      <section className="rounded-2xl border border-warm-200 bg-white p-4 shadow-sm">
+      <section className="rounded-2xl border border-card-border bg-card p-4 shadow-sm">
         <div className="flex items-center gap-2">
           <BookMarked className="h-5 w-5 text-warm-700" />
           <h2 id="study-tools-heading" className="text-xl font-bold">
@@ -192,7 +192,7 @@ export function BibleStudyTools({
         ))}
       </section>
 
-      <section className="rounded-2xl border border-warm-200 bg-white p-4 shadow-sm">
+      <section className="rounded-2xl border border-card-border bg-card p-4 shadow-sm">
         <h3 className="font-bold text-foreground">
           {selectedVerse
             ? `${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse}`
@@ -278,7 +278,7 @@ export function BibleStudyTools({
         )}
       </section>
 
-      <section className="rounded-2xl border border-warm-200 bg-white p-4 shadow-sm">
+      <section className="rounded-2xl border border-card-border bg-card p-4 shadow-sm">
         <Button asChild variant="outline" className="w-full justify-start border-warm-200 hover:bg-warm-50">
           <Link href="/bible/saved">
             <Save className="mr-2 h-4 w-4" />

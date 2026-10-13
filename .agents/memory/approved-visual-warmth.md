@@ -33,8 +33,20 @@ Keep the homepage hero compact and show the supplied photograph without a gradie
 
 **How to apply:** Preserve the shorter, image-led treatment, keeping the main title above the group's heads and the lower crop at the center figure's ankles. Maintain text contrast with bold white type and a local text shadow, not an image overlay. Do not restore the gradient during later hero changes.
 
-Use plain, unnumbered navy article titles with trailing arrows on the Prayer Starter Guide.
+Use individual title-and-paragraph cards with plain, unnumbered navy links and darker orange double chevrons on the Prayer Starter Guide.
 
-**Why:** The user clarified that removing list bullets was not enough: numeric prefixes such as “03” and “04” before the titles must also be removed. They requested a warmer main-content card on `/prayer` only, explicitly as a test, then said the first tint was too much and requested a lighter card and darker hover treatment for the links above it.
+**Why:** The user clarified that removing list bullets also meant removing numeric prefixes embedded in titles. They requested subtle warmth after finding the first tint too strong, darker hover treatment for links above the content, and a separate card for each article title and its paragraph instead of one shared card. They later replaced title arrows with darker orange double chevrons and asked that they follow the final word when a title wraps.
 
-**How to apply:** Treat “just the titles” on this page as excluding both list markers and numbers embedded in imported title text. Keep the descriptions and link destinations intact; do not extend this arrow treatment to Explore Articles. Keep the card tint subtle. The warmer card and stronger hover treatment are a `/prayer`-only test, not approval to apply them to other reading pages.
+**How to apply:** Treat “just the titles” on this page as excluding both list markers and numbers embedded in imported title text. Keep each article's description paired with its title and preserve link destinations. Keep the final word and its double chevrons together rather than placing the icon at the card's right edge. Individual article cards, double-chevron links, and darker topic-navigation hovers remain specific to `/prayer`; do not extend this icon treatment to Explore Articles.
+
+Use the approved subtle cream cards against a lighter page background across the homepage and other public card-based sections.
+
+**Why:** After the Prayer page test, the user explicitly requested applying its card and page colors to the homepage and other places using that contrast.
+
+**How to apply:** Keep neutral cards and page surfaces consistent without changing navigation/sidebar palettes, primary action colors, content, or card groupings. This approval extends the colors, not the Prayer-specific link and layout treatments.
+
+Use the `/prayer` page as the template when building “The Lord’s Prayer Guide.”
+
+**Why:** The user asked to keep this as a future project note.
+
+**How to apply:** When work on “The Lord’s Prayer Guide” begins, use `/prayer` as the template.

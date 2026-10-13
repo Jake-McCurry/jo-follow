@@ -45,7 +45,7 @@ export function BibleLandingPage() {
           A trustworthy and clear translation to help you explore God's Word.
         </p>
 
-        <Card className="max-w-xl mx-auto mb-16 shadow-md border-warm-200 bg-white animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
+        <Card className="max-w-xl mx-auto mb-16 shadow-md border-card-border bg-card animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
           <CardContent className="p-6 md:p-8">
             <h2 className="text-xl font-bold mb-4 text-left text-foreground">Jump to a passage</h2>
             <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">
@@ -68,7 +68,7 @@ export function BibleLandingPage() {
         </Card>
 
         <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto text-left animate-in fade-in slide-in-from-bottom-8 duration-700 delay-400 fill-mode-both">
-          <Link href="/bible/John/1" className="group block p-6 bg-warm-50 border border-warm-200 rounded-xl hover:border-warm-400 hover:bg-warm-100 hover:shadow-md transition-all">
+          <Link href="/bible/John/1" className="group block p-6 bg-card border border-card-border rounded-xl hover:border-warm-400 hover:bg-warm-100 hover:shadow-md transition-all">
             <h3 className="font-bold text-lg mb-2 text-foreground transition-colors">Gospel of John</h3>
             <p className="text-sm text-muted-foreground mb-4">A great place to start reading about the life of Jesus.</p>
             <span className="text-warm-700 text-sm font-semibold flex items-center">
@@ -76,7 +76,7 @@ export function BibleLandingPage() {
             </span>
           </Link>
           
-          <Link href="/bible/Psalms/1" className="group block p-6 bg-warm-50 border border-warm-200 rounded-xl hover:border-warm-400 hover:bg-warm-100 hover:shadow-md transition-all">
+          <Link href="/bible/Psalms/1" className="group block p-6 bg-card border border-card-border rounded-xl hover:border-warm-400 hover:bg-warm-100 hover:shadow-md transition-all">
             <h3 className="font-bold text-lg mb-2 text-foreground transition-colors">Psalms</h3>
             <p className="text-sm text-muted-foreground mb-4">Poetry and prayers for every season of life.</p>
             <span className="text-warm-700 text-sm font-semibold flex items-center">

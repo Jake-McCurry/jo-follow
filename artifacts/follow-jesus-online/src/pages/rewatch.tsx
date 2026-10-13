@@ -29,7 +29,7 @@ export function RewatchPage({ videoId }: { videoId?: string } = {}) {
               <h2 id={`video-title-${video.id}`} className="mb-4 text-2xl font-bold text-navy sm:text-3xl">
                 {video.title}
               </h2>
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-warm-200 aspect-video w-full">
+              <div className="bg-card rounded-2xl overflow-hidden shadow-lg border border-card-border aspect-video w-full">
                 <iframe
                   data-testid={`video-${video.id}`}
                   width="100%"
@@ -46,7 +46,7 @@ export function RewatchPage({ videoId }: { videoId?: string } = {}) {
               <Accordion
                 type="single"
                 collapsible
-                className="mt-4 rounded-xl border border-warm-200 bg-warm-50 px-5 sm:px-6"
+                className="mt-4 rounded-xl border border-card-border bg-card px-5 sm:px-6"
               >
                 <AccordionItem value={`transcript-${video.id}`} className="border-0">
                   <AccordionTrigger

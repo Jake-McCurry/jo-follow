@@ -53,7 +53,7 @@ export function ArticleEndSection({
               {secondary && (
                 <Link
                   href={secondary.href}
-                  className="group min-w-0 rounded-xl border border-border-soft bg-white p-5 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
+                  className="group min-w-0 rounded-xl border border-card-border bg-card p-5 text-navy shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:p-6"
                 >
                   <span className="block text-xs font-bold uppercase tracking-wide text-slate sm:text-sm">
                     {secondary.label}
@@ -79,7 +79,7 @@ export function ArticleEndSection({
         </div>
       )}
 
-      <div className="mt-6 rounded-2xl border border-warm-200 bg-warm-50 p-4 text-center text-navy shadow-sm sm:p-5">
+      <div className="mt-6 rounded-2xl border border-card-border bg-card p-4 text-center text-navy shadow-sm sm:p-5">
         <h2 className="mx-auto max-w-2xl text-base font-bold leading-snug sm:text-lg">
           Have a question or need help with your next step?
         </h2>

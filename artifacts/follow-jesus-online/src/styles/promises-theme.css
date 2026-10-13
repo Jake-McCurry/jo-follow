@@ -1,7 +1,7 @@
 /* Cream reading paper with a sage sidebar. Shared navigation stays unchanged. */
 .kg-root .promises-theme {
-  --color-surface: #fffaf2;
-  --color-surface-soft: #E5EDF4;
+  --color-surface: hsl(var(--background));
+  --color-surface-soft: hsl(var(--card));
   --color-text: #17384D;
   --color-hero: #17384D;
   --color-text-muted: #435C70;

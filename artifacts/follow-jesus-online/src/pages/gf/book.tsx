@@ -17,7 +17,7 @@ export function GFBookPage() {
 
   return (
     <Layout>
-      <div className="min-h-[100dvh] bg-[#F7F1E6] pb-20">
+      <div className="min-h-[100dvh] bg-background pb-20">
         <main className="container mx-auto max-w-3xl px-5 py-8 sm:px-8 md:py-10">
           <nav aria-label="Breadcrumb" className="mb-10 text-sm text-slate">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -104,7 +104,7 @@ export function GFBookPage() {
               </ol>
             </nav>
 
-            <div className="mt-16 rounded-xl bg-warm-50/70 p-6 text-center sm:p-8">
+            <div className="mt-16 rounded-xl bg-card p-6 text-center sm:p-8">
               <p className="text-lg italic leading-relaxed text-navy">“{book.closing}”</p>
               <Link href={startHref} className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">
                 {book.buttonText} <ArrowRight className="h-4 w-4" aria-hidden="true" />

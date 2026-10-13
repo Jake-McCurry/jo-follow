@@ -21,7 +21,7 @@ export function ConnectWithGodSection() {
       </div>
       <ul className="grid gap-3 md:grid-cols-3 md:gap-6">
         {resourceGroups.map(({ resources, start }) => (
-          <li key={resources[0].title} className="overflow-hidden rounded-xl border border-warm-200 bg-warm-50">
+          <li key={resources[0].title} className="overflow-hidden rounded-xl border border-card-border bg-card">
             <ul className="divide-y divide-warm-200">
               {resources.map((item, itemIndex) => (
                 <li key={item.title}>

@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 export function GoFurtherPage() {
   return (
     <Layout>
-      <div className="min-h-[100dvh] bg-[#F7F1E6] pb-20">
+      <div className="min-h-[100dvh] bg-background pb-20">
         <main className="container mx-auto max-w-3xl px-5 py-12 sm:px-8 md:py-16">
           <header className="mb-16 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="mb-6 flex items-center justify-center gap-4">
@@ -29,7 +29,7 @@ export function GoFurtherPage() {
               <Link
                 key={book.slug}
                 href={`/gf/${book.slug}`}
-                className="group flex overflow-hidden rounded-xl border border-warm-300 bg-warm-50/80 shadow-sm transition-all hover:-translate-y-0.5 hover:border-warm-500 hover:bg-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                className="group flex overflow-hidden rounded-xl border border-card-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-warm-500 hover:bg-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
               >
                 <span className="w-2 shrink-0 border-r border-warm-500 bg-blue-900 sm:w-3" aria-hidden="true" />
                 <div className="min-w-0 flex-1 px-5 py-6 sm:px-8 sm:py-8">

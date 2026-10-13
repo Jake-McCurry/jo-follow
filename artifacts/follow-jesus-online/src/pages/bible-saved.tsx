@@ -189,7 +189,7 @@ export function BibleSavedPage() {
         <p className="mt-2 text-sm text-muted-foreground">Only JSON backups can be imported. Text exports are for reading or printing.</p>
 
         {!hasSavedItems ? (
-          <div className="mt-10 rounded-2xl border border-dashed border-warm-300 bg-warm-50 p-10 text-center shadow-sm">
+          <div className="mt-10 rounded-2xl border border-dashed border-card-border bg-card p-10 text-center shadow-sm">
             <BookOpen className="mx-auto h-10 w-10 text-warm-700" />
             <h2 className="mt-4 text-2xl font-bold">Nothing saved yet</h2>
             <p className="mx-auto mt-2 max-w-lg text-muted-foreground">
@@ -371,7 +371,7 @@ function SavedSection({
         <h2 className="text-2xl font-bold">{title}</h2>
       </div>
       <div className="mt-4 space-y-3">
-        {items.length ? items : <p className="rounded-xl border border-dashed border-warm-200 bg-warm-50 p-5 text-sm text-muted-foreground shadow-sm">{emptyText}</p>}
+        {items.length ? items : <p className="rounded-xl border border-dashed border-card-border bg-card p-5 text-sm text-muted-foreground shadow-sm">{emptyText}</p>}
       </div>
     </section>
   )
@@ -379,7 +379,7 @@ function SavedSection({
 
 function SavedRow({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-warm-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col gap-4 rounded-xl border border-card-border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
       {children}
     </div>
   )

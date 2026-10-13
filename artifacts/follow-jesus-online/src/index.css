@@ -118,7 +118,7 @@
   --blue-950: 206 100% 20%;
 
   --slate: 206 100% 20%; /* #003A66 Deep navy */
-  --paper: 30 100% 99%;
+  --paper: var(--background);
 
   --warm-50: 25 100% 97%;
   --warm-100: 25 100% 93%;
@@ -138,9 +138,9 @@
   --destructive: 0 70% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  --card: 0 0% 100%;
+  --card: 26.666667 100% 98.235294%; /* #FFFAF6 Subtle cream cards */
   --card-foreground: 206 100% 20%;
-  --card-border: 204 100% 90%; /* #CCEBFF for card borders so it's softer than main borders */
+  --card-border: 25 100% 93%; /* Subtle warm card borders */
 
   --popover: 0 0% 100%;
   --popover-foreground: 206 100% 20%;

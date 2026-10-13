@@ -9,7 +9,7 @@ const questions = [
 export function BibleRecap() {
   return (
     <aside
-      className="rounded-2xl border border-warm-200 bg-white p-5 shadow-sm lg:sticky lg:top-24"
+      className="rounded-2xl border border-card-border bg-card p-5 shadow-sm lg:sticky lg:top-24"
       aria-labelledby="recap-heading"
     >
       <h2 id="recap-heading" className="text-2xl font-bold text-foreground">
