@@ -21,7 +21,7 @@ export function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative flex min-h-[400px] items-start overflow-hidden bg-[#003A66] py-12 text-white sm:min-h-[420px] md:min-h-[470px] md:py-16">
+      <section className="relative flex min-h-[300px] items-start overflow-hidden bg-[#003A66] py-9 text-white sm:min-h-[315px] md:min-h-[352.5px] md:py-12">
         <img
           src={homeHeroUrl}
           alt=""
@@ -29,13 +29,13 @@ export function Home() {
           fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#004E8A]/90 via-[#003A66]/65 to-[#003A66]/20" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#004E8A]/60 via-[#003A66]/35 to-[#003A66]/5" />
         
-        <div className="container relative z-10 px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
+        <div className="container relative z-10 px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.65)" }}>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white text-balance leading-tight">
             Walking with Jesus
           </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl font-bold text-white max-w-2xl mx-auto leading-relaxed" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.8)" }}>
             Deepen your walk. Discover His purpose. Come back again.
           </p>
         </div>

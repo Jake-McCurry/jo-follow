@@ -26,3 +26,9 @@ Keep “Connect with God” compact on mobile. Use the supplied three-card group
 **Why:** The user said the nine cards “need to take up significantly less space, so it’s less scrolling on mobile,” explaining that the document grouped the resources “inside 3 total cards.” They approved the compact three-card result.
 
 **How to apply:** Retain the nine resource options but reduce card padding and repeated action rows. Do not expand this section's mobile footprint during future visual changes.
+
+Keep the homepage hero compact and let the supplied photograph remain visible through a lighter gradient.
+
+**Why:** The user asked to lighten the gradient so they could see more of the image and reduce the hero height by one quarter, then requested a bolder, higher-contrast subtitle.
+
+**How to apply:** Preserve the shorter, image-led treatment when updating homepage imagery or copy. Strengthen subtitle contrast with bold white type and a local text shadow rather than darkening the whole image again. Check desktop and mobile rather than restoring a tall hero with a dense blue overlay.
