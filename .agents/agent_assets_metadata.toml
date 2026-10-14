@@ -84,3 +84,31 @@ mtime_ms = 1792017271371
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/b8e4568b-d9d5-433b-ab06-0e7d83c92d71/999b9b0f-b309-4b14-ac80-2204d3aab509"
 storage_version_token = "1792017333572703"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "dMmPwf9LoMxYJ_JJ8-ge6"
+uri = "file://generated-artifacts/wordpress-believer-replacement-received-content.html"
+type = "html"
+title = "WordPress Believer — Correct Replacement Code"
+description = "Copy the complete code box into WordPress. Contains the entire /xp/received content beginning “He heard you. You are His.”, not the Believer text."
+logical_id = "b82aed30-56c9-409b-bf0c-3c1c1b75afc6"
+content_hash = "sha256:3a60071cd277ed9de7862822fd57cccc88055547267eb82addb88beaec99e932"
+size = 13860
+mtime_ms = 1792018845167
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/b82aed30-56c9-409b-bf0c-3c1c1b75afc6/a8dfb061-e9fa-426b-ad44-677089246058"
+storage_version_token = "1792018859294468"
+content_type = "text/html"
+
+[[outputs]]
+id = "zkKjX_SOTMUs1v3fyaFen"
+uri = "file://generated-artifacts/wordpress-believer-replacement-received-content.txt"
+type = "text"
+title = "Replacement HTML — Plain Text"
+description = "The same complete replacement code as a downloadable text file, with inline CSS."
+logical_id = "1c9d271f-5006-48fa-b206-e1b434f98e52"
+content_hash = "sha256:6f3b6852161ce6488c1f6ffccd223b3c7dd13699afe42d5eed3eade487a64881"
+size = 11200
+mtime_ms = 1792018845163
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/1c9d271f-5006-48fa-b206-e1b434f98e52/c9fa9c5d-9e36-4d43-b1fb-53ac4626a60e"
+storage_version_token = "1792018859858970"
+content_type = "text/plain"
