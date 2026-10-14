@@ -42,3 +42,17 @@ mtime_ms = 1791067540636
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/11c4d456-fba8-4d2c-ab7d-602f1e2808a3/fd39a4c5-30a4-4102-962f-333db4835898"
 storage_version_token = "1791067544769233"
 content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+[[outputs]]
+id = "P7AShcaZLGsj1uVq99pJ8"
+uri = "file://generated-artifacts/follow-xp-main-content.zip"
+type = "unspecified"
+title = "Follow XP — Four-Page Content Package"
+description = "All four XP pages’ main content, without site header, navigation or footer. Includes a reusable React component, scoped CSS, guide artwork, JSON/Markdown content, HTML previews, and transfer instructions."
+logical_id = "1a9f1937-6bbf-4402-8a38-35a33f8050fa"
+content_hash = "sha256:19da5d74db397f7fb951dbba59d4783f2d4bdb48412c7274b60a6cf104fe5c09"
+size = 395865
+mtime_ms = 1792016085235
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/1a9f1937-6bbf-4402-8a38-35a33f8050fa/2796d266-0c38-4389-8912-3fc7433dd89e"
+storage_version_token = "1792016164547668"
+content_type = "application/octet-stream"
