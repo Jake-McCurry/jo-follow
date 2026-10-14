@@ -1,6 +1,13 @@
 FOLLOW XP — WORDPRESS / GENESIS INLINE HTML
 =========================================
 
+REPLACEMENT PACKAGE — PLEASE REPLACE THE OLD BLOCK, DO NOT APPEND TO IT.
+
+The previous screenshot showed a style-attribute fragment printed as text.
+That indicates lost or altered markup, not merely different colors or fonts.
+This replacement uses complete, readable markup and a conservative stacked
+layout: no flexbox, grids, CSS functions, external fonts or scripts.
+
 Four main-content snippets:
   received.html        — He heard you. You are His.
   rededicated.html     — Welcome back. He never left.
@@ -9,6 +16,14 @@ Four main-content snippets:
 
 Each .txt file contains exactly the same code as its matching .html file.
 Use the .txt files if your computer opens HTML as a rendered page instead of code.
+
+EASIEST WAY TO COPY WITHOUT LOSING THE START OF THE CODE
+------------------------------------------------------
+Open copy/believer.html in your browser (or the matching other page).
+Click INSIDE its code box, Select All, then Copy. Paste into the WordPress
+page Code editor after removing the old XP block. The whole snippet,
+including its wrapper and title, is already inside that one code box.
+These copy-helper pages are not the page snippets; copy the text IN the box.
 
 WHAT THESE FILES ARE
 -------------------
@@ -35,12 +50,18 @@ PASTE INTO THE WORDPRESS PAGE CODE EDITOR
 1. Open the appropriate WordPress page.
 2. If your Genesis setup offers a per-page layout setting, choose Full Width
    Content for the closest result. Leave the site's header/footer alone.
-3. In the page editor's options menu, switch to Code editor.
-4. Paste the complete contents of the matching .txt or .html file,
-   including the opening <!-- wp:html --> and closing <!-- /wp:html --> lines.
-5. Preview on desktop and mobile, then save/update the WordPress page.
+3. Remove the entire old XP content block, including any stray CSS text.
+   Keep unrelated page content and the site's theme header/footer.
+4. In the page editor's options menu, switch to Code editor.
+5. Open the matching .txt file in a PLAIN-TEXT editor, such as Notepad or
+   TextEdit in plain-text mode. Select All and Copy. Do not copy from a
+   rendered HTML preview, a rich-text document, or only part of a line.
+6. Paste the COMPLETE file, including the opening <!-- wp:html --> and
+   closing <!-- /wp:html --> lines. The opening data-follow-xp wrapper,
+   title, intro and guide must all be present, not just the questions.
+7. Preview on desktop and mobile, save/update, then reload the live page.
 
-Alternative: insert ONE Custom HTML block and paste just the inner code,
+Alternative, including Genesis Blocks: insert ONE Custom HTML block and paste just the inner code,
 omitting the opening and closing wp:html comment lines. Do not paste into
 a Paragraph or Code block: a Code block displays code rather than rendering it.
 
@@ -65,11 +86,12 @@ the visitor's configured email app with the original Follow XP URL.
 If you want it to share the WordPress copy instead, update the URL in that
 mailto link's URL-encoded body to the final WordPress page URL.
 
-The main content has responsive wrapping columns without media queries.
+The main content uses one readable column with full-width stacked cards.
+The guide cover is centered above the guide text. This deliberately trades
+the Replit two-column layout for a simpler layout on the WordPress theme.
 Card/page colors match the warm Follow palette. The outer page background
 is inherited from your WordPress theme.
-Fonts prefer Source Sans 3 and Playfair Display, with Arial/Georgia fallbacks;
-this package does not load remote font stylesheets.
+Fonts use Arial and Georgia; no remote font stylesheets are needed.
 
 WORDPRESS NOTES
 ---------------
@@ -79,6 +101,10 @@ Use a trusted editor account with appropriate HTML permissions; do not
 disable site security to paste these pages.
 Theme rules marked !important can override inline styles. If that happens,
 adjust the page's existing theme settings rather than pasting global CSS.
+
+If raw CSS still appears after a complete clean paste, do not keep making
+random styling changes. Share the page URL and the saved Code editor HTML
+so the exact editor transformation or theme override can be inspected.
 
 Main source copy is retained for all four pages. The contact invitation is
 main content, not the site's footer. The did-not-pray differences are intentional.

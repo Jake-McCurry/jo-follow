@@ -4,6 +4,7 @@
 - [Workspace test runner dependencies](workspace-test-runner-dependencies.md) — Node test loaders must be declared by the package that runs them, not assumed from another workspace package.
 - [Orval js-yaml compatibility](orval-js-yaml-compatibility.md) — Keep security overrides within Orval’s compatible js-yaml major and validate code generation directly.
 - [Approved visual warmth](approved-visual-warmth.md) — Preserve the palette, compact triple chevrons with directional placement, and quiet breadcrumb-row article sharing.
+- [XP export fidelity](xp-export-fidelity.md) — Live Follow XP pages are the approved transfer templates; preserve wording and layout, including “He heard you. You are His.”
 - [Generated text transfer](generated-text-transfer.md) — Large shell output with page-control characters can arrive incomplete through CodeExecution; compare hashes when saving generated text.
 - [Nested DOCX extraction](nested-docx-extraction.md) — Build-time unzip of Word files inside a ZIP can exceed Node’s default child-process output buffer.
 - [FAQ message invitations](faq-message-invitations.md) — Revised FAQ copy inviting questions should direct visitors to the existing contact form, not imply an inline box.

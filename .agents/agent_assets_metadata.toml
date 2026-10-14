@@ -70,3 +70,17 @@ mtime_ms = 1792016432652
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/3e27bf13-77b1-43bb-ad95-6708e3b2898b/997ce65f-be84-47f1-b76f-8372c9946beb"
 storage_version_token = "1792016530090940"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "5gevtPeFHO32CTnTaKker"
+uri = "file://generated-artifacts/follow-xp-wordpress-live-matched.zip"
+type = "unspecified"
+title = "Follow XP — Live-Matched WordPress Copies"
+description = "All four XP pages with wording checked against the live Follow pages and the original two-column arrangement retained. Includes inline HTML/CSS, complete-copy boxes, live-text references, the cover image and instructions. No site header, navigation or footer."
+logical_id = "b8e4568b-d9d5-433b-ab06-0e7d83c92d71"
+content_hash = "sha256:5c48b8d460949f665d17d70496d9bcaf8c442aa84d764568910a70624d02c072"
+size = 408410
+mtime_ms = 1792017271371
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/b8e4568b-d9d5-433b-ab06-0e7d83c92d71/999b9b0f-b309-4b14-ac80-2204d3aab509"
+storage_version_token = "1792017333572703"
+content_type = "application/octet-stream"
