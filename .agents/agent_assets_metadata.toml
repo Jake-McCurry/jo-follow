@@ -56,3 +56,17 @@ mtime_ms = 1792016085235
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/1a9f1937-6bbf-4402-8a38-35a33f8050fa/2796d266-0c38-4389-8912-3fc7433dd89e"
 storage_version_token = "1792016164547668"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "Iwsc6qk4z_ow5KuIVoBjT"
+uri = "file://generated-artifacts/follow-xp-wordpress-inline.zip"
+type = "unspecified"
+title = "Four XP Pages — WordPress Inline HTML"
+description = "Four separate paste-ready WordPress Custom HTML snippets, also supplied as plain-text files. Inline styling only, with guide artwork and Genesis/WordPress setup instructions. No React, scripts, external CSS, site header, navigation or footer."
+logical_id = "3e27bf13-77b1-43bb-ad95-6708e3b2898b"
+content_hash = "sha256:d6892acf1259e52075d3b578602c39f6772f5cbd0e4dfe0bac5edb1a8310deb1"
+size = 390978
+mtime_ms = 1792016432652
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/3e27bf13-77b1-43bb-ad95-6708e3b2898b/997ce65f-be84-47f1-b76f-8372c9946beb"
+storage_version_token = "1792016530090940"
+content_type = "application/octet-stream"
