@@ -46,7 +46,7 @@ test("navigation controls no longer import the old arrow icons", () => {
 
 test("Prayer's category badge and ordinal counter are omitted, without changing other article headers", () => {
   const article = read("pages/article-placeholder.tsx");
-  assert.match(article, /article\.group !== "linked" && !isPrayerGuide/);
-  assert.match(article, /\{!isPrayerGuide && <div className="mb-5 inline-flex/);
+  assert.match(article, /article\.group !== "linked" && !isGuideOverview/);
+  assert.match(article, /\{!isGuideOverview && <div className="mb-5 inline-flex/);
   assert.match(article, /Back to Connect with God/);
 });

@@ -1,0 +1,93 @@
+[
+  {
+    "prefix": "2.1.001",
+    "slug": "experiencing-god",
+    "href": "/experiencing-god",
+    "title": "Experiencing God 24/7",
+    "order": 0
+  },
+  {
+    "prefix": "2.1.002",
+    "slug": "experiencing-god-quiet-time",
+    "href": "/experiencing-god/quiet-time",
+    "title": "A More Meaningful Quiet Time with God",
+    "tipsLabel": "Tips about how to have a more meaningful quiet time with God",
+    "order": 1,
+    "pendingLinks": [
+      { "label": "Reflecting on God’s Majesty", "sourceId": "2.2.001", "series": "Because statements" },
+      { "label": "Reflecting on Your Identity in Christ", "sourceId": "2.2.002", "series": "Because statements" },
+      { "label": "Reflecting on the Work of the Spirit", "sourceId": "2.2.003", "series": "Because statements" },
+      { "label": "The Lord’s Prayer Guide Overview", "sourceId": "2.4.30.001", "series": "The Lord’s Prayer Guide" }
+    ]
+  },
+  {
+    "prefix": "2.1.003",
+    "slug": "experiencing-god-activity-time",
+    "href": "/experiencing-god/activity-time",
+    "title": "Practicing the Presence of God throughout Your Day",
+    "tipsLabel": "Tips about how to practice the presence of God throughout your day",
+    "order": 2
+  },
+  {
+    "prefix": "2.1.004",
+    "slug": "experiencing-god-family-time",
+    "href": "/experiencing-god/family-time",
+    "title": "Enjoying Family Time with God",
+    "tipsLabel": "Tips about how to enjoy family time with God",
+    "order": 3,
+    "pendingLinks": [
+      { "label": "Forgiveness Overview", "sourceId": "2.4.30.008", "series": "The Lord’s Prayer Guide" },
+      { "label": "Deliverance Overview", "sourceId": "2.4.30.009", "series": "The Lord’s Prayer Guide" },
+      { "label": "Intercession Overview", "sourceId": "2.4.30.010", "series": "The Lord’s Prayer Guide" }
+    ]
+  },
+  {
+    "prefix": "2.1.005",
+    "slug": "experiencing-god-retreat-time",
+    "href": "/experiencing-god/retreat-time",
+    "title": "A Special Retreat with God",
+    "tipsLabel": "Tips about how to have a special retreat with God",
+    "order": 4,
+    "pendingLinks": [
+      { "label": "The Lord’s Prayer Guide Overview", "sourceId": "2.4.30.001", "series": "The Lord’s Prayer Guide" }
+    ]
+  },
+  {
+    "prefix": "2.1.006",
+    "slug": "experiencing-god-journey-time",
+    "href": "/experiencing-god/journey-time",
+    "title": "Journey Time with God",
+    "tipsLabel": "Tips about how to benefit the most from your journeys with God",
+    "order": 5,
+    "appendedResourcesHeading": "Resources for Journey Time with God",
+    "pendingLinks": [
+      { "label": "Reflecting on God’s Majesty", "sourceId": "2.2.001", "series": "Because statements" },
+      { "label": "Reflecting on Your Identity in Christ", "sourceId": "2.2.002", "series": "Because statements" },
+      { "label": "Reflecting on the Work of the Spirit", "sourceId": "2.2.003", "series": "Because statements" },
+      { "label": "The Lord’s Prayer Guide Overview", "sourceId": "2.4.30.001", "series": "The Lord’s Prayer Guide" }
+    ]
+  },
+  {
+    "prefix": "2.1.007",
+    "slug": "experiencing-god-sleep-time",
+    "href": "/experiencing-god/sleep-time",
+    "title": "Resting in God While You Sleep",
+    "tipsLabel": "Tips about how to rest in God while you sleep",
+    "order": 6
+  },
+  {
+    "prefix": "2.1.008",
+    "slug": "experiencing-god-desert-time",
+    "href": "/experiencing-god/desert-time",
+    "title": "Walking through the Desert with God",
+    "tipsLabel": "Tips about how to walk through the desert with God",
+    "order": 7,
+    "appendedResourcesHeading": "Resources for Desert Time with God",
+    "pendingLinks": [
+      { "label": "Reflecting on God’s Majesty", "sourceId": "2.2.001", "series": "Because statements" },
+      { "label": "Reflecting on Your Identity in Christ", "sourceId": "2.2.002", "series": "Because statements" },
+      { "label": "Reflecting on the Work of the Spirit", "sourceId": "2.2.003", "series": "Because statements" },
+      { "label": "The Lord’s Prayer Guide Overview", "sourceId": "2.4.30.001", "series": "The Lord’s Prayer Guide" }
+    ]
+  }
+]

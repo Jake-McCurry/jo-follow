@@ -3,6 +3,8 @@ import importedDeeperArticles from "./imported-deeper-articles.json";
 import linkedArticleMetadata from "./linked-articles.json";
 import faqReadingLinks from "./faq-reading-links.json";
 import prayerMetadata from "./prayer-articles.json";
+import experiencingGodMetadata from "./experiencing-god-articles.json";
+import lordsPrayerMetadata from "./lords-prayer-articles.json";
 import { applyBelieverResourceRevisions } from "./believer-resource-revisions";
 import { applyGuideMainFormatRevisions } from "./guide-main-format-revisions";
 import { applyGuideDeeperFormatRevisions } from "./guide-deeper-format-revisions";
@@ -23,7 +25,9 @@ export type ArticleGroup =
   | "believer"
   | "no-decision"
   | "linked"
-  | "prayer";
+  | "prayer"
+  | "lords-prayer"
+  | "experiencing-god";
 
 export type ArticleBlock = {
   type: "heading" | "paragraph" | "question" | "list" | "table-row" | "link" | "image" | "answer-line";
@@ -182,7 +186,8 @@ const importedDeeperBySlug = new Map(
 );
 
 const importedDeeperRecords: Article[] = generatedContent
-  .filter((record) => record.category === "ZIP Updated" && importedDeeperBySlug.has(record.route.slice(1)))
+  .filter((record) => record.category === "ZIP Updated" && importedDeeperBySlug.has(record.route.slice(1)) &&
+    !lordsPrayerMetadata.some(item => item.slug === record.route.slice(1)))
   .map((record) => {
     const metadata = importedDeeperBySlug.get(record.route.slice(1))!;
     const blocks: ArticleBlock[] = record.blocks
@@ -249,8 +254,49 @@ const prayerRecords: Article[] = prayerMetadata.map(metadata => {
   };
 });
 
+const lordsPrayerRecords: Article[] = lordsPrayerMetadata.map(metadata => {
+  const source = generatedContent.find(record =>
+    record.category === "Lords Prayer" && record.route === `/${metadata.slug}`);
+  if (!source) throw new Error(`Missing Lord’s Prayer article: ${metadata.title}`);
+  const blocks: ArticleBlock[] = source.blocks.slice(1).map(block => ({
+    type: block.kind,
+    text: block.text,
+    headingLevel: block.headingLevel,
+    src: block.src,
+    links: block.links,
+    ...(block.text.startsWith("Focus on ") ? { bold: true } : {}),
+  }));
+  return {
+    slug: metadata.slug, title: source.title, group: "lords-prayer", order: metadata.order,
+    excerpt: blocks.find(block => block.type === "paragraph")?.text ?? metadata.title,
+    blocks,
+  };
+});
+
+const experiencingGodRecords: Article[] = experiencingGodMetadata.map(metadata => {
+  const source = generatedContent.find(record =>
+    record.category === "Experiencing God" && record.route === `/${metadata.slug}`);
+  if (!source) throw new Error(`Missing Experiencing God article: ${metadata.title}`);
+  const blocks: ArticleBlock[] = source.blocks.slice(1).map(block => ({
+    type: metadata.order === 0 && block.text.startsWith("Tips about") && block.links?.length ? "link" : block.kind,
+    text: block.text,
+    headingLevel: block.headingLevel,
+    links: block.links,
+    ...(metadata.order === 0 && block.text.startsWith("Tips about") ? { href: block.links?.[0]?.href } : {}),
+  }));
+  return {
+    slug: metadata.slug,
+    title: source.title,
+    group: "experiencing-god",
+    order: metadata.order,
+    excerpt: blocks.find(block => block.type === "paragraph")?.text ?? "",
+    blocks,
+  };
+});
+
 export const ARTICLE_LIBRARY = [
-  ...(library.articles as Article[]).filter((article) => !article.retired).map((article) => {
+  ...(library.articles as Article[]).filter((article) => !article.retired &&
+    !lordsPrayerMetadata.some(item => item.slug === article.slug)).map((article) => {
     const updated = updatedBySlug.get(article.slug);
     const relatedLink = linkedFromFaq.get(article.slug);
     const sourceBlocks = updated && isApprovedFaq(article)
@@ -305,6 +351,8 @@ export const ARTICLE_LIBRARY = [
   ...importedDeeperRecords,
   ...linkedArticles,
   ...prayerRecords,
+  ...lordsPrayerRecords,
+  ...experiencingGodRecords,
 ].map(applyGuideMainFormatRevisions).map(applyGuideDeeperFormatRevisions);
 
 export function getArticleBySlug(slug: string) {
@@ -324,6 +372,10 @@ export function getGuideArticleForDeeper(slug: string) {
 }
 
 export function getArticlePath(slug: string) {
+  const lordsPrayer = lordsPrayerMetadata.find(article => article.slug === slug);
+  if (lordsPrayer) return lordsPrayer.href;
+  const experiencingGod = experiencingGodMetadata.find(article => article.slug === slug);
+  if (experiencingGod) return experiencingGod.href;
   const prayer = prayerMetadata.find(article => article.slug === slug);
   if (prayer) return prayer.href;
   if (slug.startsWith("adv-")) return `/adv/${slug.slice("adv-".length)}`;
@@ -333,6 +385,9 @@ export function getArticlePath(slug: string) {
 
 export function getArticleSlugFromPath(pathname: string) {
   const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 1 && segments[0] === "lords-prayer") return "deeper-the-lords-prayer-guide";
+  if (segments.length === 2 && segments[0] === "lords-prayer") return `lords-prayer-${segments[1]}`;
+  if (segments.length === 2 && segments[0] === "experiencing-god") return `experiencing-god-${segments[1]}`;
   if (segments.length === 1 && segments[0] === "prayer") return "prayer-starter-guide";
   if (segments.length === 2 && (segments[0] === "adv" || segments[0] === "deeper" || segments[0] === "prayer")) {
     return `${segments[0]}-${segments[1]}`;

@@ -44,7 +44,7 @@ const ARTICLES = [
     title: "Prayer – Your Ongoing Conversation with God",
     desc: "Turn prayer from a duty into a natural, ongoing conversation with the One who loves you most.",
     link: "/adv/prayer",
-    deeper: { label: "The Lord’s Prayer Guide", link: "/deeper/the-lords-prayer-guide" },
+    deeper: { label: "The Lord’s Prayer Guide", link: "/lords-prayer" },
   },
   {
     title: "Belonging to God’s Family",
@@ -67,7 +67,10 @@ const ARTICLES = [
 ];
 
 export function ExploreArticlesPage() {
-  const deeperArticles = getArticlesInGroup("deeper");
+  const deeperArticles = [
+    ...getArticlesInGroup("deeper"),
+    ...getArticlesInGroup("lords-prayer").filter(article => article.order === 0),
+  ];
   const resourceArticles = getArticlesInGroup("resources");
   const receivedArticles = getArticlesInGroup("received");
   const rededicatedArticles = getArticlesInGroup("rededicated");

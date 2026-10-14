@@ -11,11 +11,11 @@ export function PrayerGuideContent({ blocks, renderBlock }: PrayerGuideContentPr
 
   for (const block of blocks) {
     if (block.type === "list") continue;
-    if (block.type === "heading" || sections.length === 0) {
+    if ((block.type === "heading" && block.headingLevel !== 3) || sections.length === 0) {
       sections.push({
         blocks: [],
         isArticle: block.type === "heading" &&
-          Boolean(block.links?.some((link) => link.href.startsWith("/prayer/"))),
+          Boolean(block.links?.some((link) => link.href.startsWith("/prayer/") || link.href.startsWith("/lords-prayer/"))),
       });
     }
     sections[sections.length - 1].blocks.push(block);

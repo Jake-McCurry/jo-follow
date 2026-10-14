@@ -51,6 +51,12 @@ Article sharing is a quiet, icon-only utility at the far right of the breadcrumb
 
 **How to apply:** Apply this consistently across article and book-reading layouts. Keep any progress indicator before the share icon, preserve sharing metadata and functionality, and retain an accessible name and usable touch target even though the visible icon is small.
 
+Use the `/prayer` page as the template for The Lord’s Prayer Guide.
+
+**Why:** The user explicitly asked to use the Prayer Starter page as the template when building The Lord’s Prayer Guide.
+
+**How to apply:** Keep the same individual warm topic-card pattern, navy link titles, shared chevrons, and native reading navigation rather than introducing a separate visual style.
+
 Use the approved subtle cream cards against a lighter page background across the homepage and other public card-based sections.
 
 **Why:** After the Prayer page test, the user explicitly requested applying its card and page colors to the homepage and other places using that contrast.

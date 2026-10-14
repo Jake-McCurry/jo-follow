@@ -3,7 +3,7 @@
 - [Article link validation](article-link-validation.md) — Cover every frontend entry point and keep reaction eligibility in sync with new content catalogs.
 - [Workspace test runner dependencies](workspace-test-runner-dependencies.md) — Node test loaders must be declared by the package that runs them, not assumed from another workspace package.
 - [Orval js-yaml compatibility](orval-js-yaml-compatibility.md) — Keep security overrides within Orval’s compatible js-yaml major and validate code generation directly.
-- [Approved visual warmth](approved-visual-warmth.md) — Preserve the approved palette and action styling; site-wide double chevrons stay attached to the final word.
+- [Approved visual warmth](approved-visual-warmth.md) — Preserve the palette, compact triple chevrons with directional placement, and quiet breadcrumb-row article sharing.
 - [Generated text transfer](generated-text-transfer.md) — Large shell output with page-control characters can arrive incomplete through CodeExecution; compare hashes when saving generated text.
 - [Nested DOCX extraction](nested-docx-extraction.md) — Build-time unzip of Word files inside a ZIP can exceed Node’s default child-process output buffer.
 - [FAQ message invitations](faq-message-invitations.md) — Revised FAQ copy inviting questions should direct visitors to the existing contact form, not imply an inline box.
@@ -18,3 +18,4 @@
 - [Unpatched glob dependencies](unpatched-glob-dependencies.md) — Prefer native Node discovery over reintroducing the fast-glob/micromatch/braces chain without a verified security fix.
 - [Development preview file boundaries](dev-preview-file-boundaries.md) — Vite's default pnpm workspace allowance can expose backend source; restrict browser-facing file access.
 - [Modal exit accessibility](modal-exit-accessibility.md) — Animated dialog exit can temporarily hide visible background content from accessibility queries.
+- [Experiencing God editorial](experiencing-god-editorial.md) — Use full document headings; defer specified series links until the Lord’s Prayer Guide and Because statements uploads.

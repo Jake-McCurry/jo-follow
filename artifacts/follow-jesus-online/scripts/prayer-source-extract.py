@@ -27,6 +27,7 @@ def extract(archive_path):
                 }
                 paragraphs = []
                 images = []
+                links = []
                 for paragraph in root.findall(f".//{W}body//{W}p"):
                     text = "".join(
                         (node.text or "") if node.tag == f"{W}t" else
@@ -36,12 +37,19 @@ def extract(archive_path):
                     text = re.sub(r"\s+", " ", text).strip()
                     if text:
                         paragraphs.append(text)
+                    for hyperlink in paragraph.iter(f"{W}hyperlink"):
+                        target = relationships.get(hyperlink.attrib.get(f"{R}id"))
+                        label = "".join(node.text or "" for node in hyperlink.iter(f"{W}t"))
+                        label = re.sub(r"\s+", " ", label).strip()
+                        if target and label:
+                            links.append({"label": label, "href": target})
                     for blip in paragraph.iter(f"{A}blip"):
                         target = relationships[blip.attrib[f"{R}embed"]]
                         images.append(hashlib.sha256(document.read(f"word/{target}")).hexdigest())
                 documents[Path(name).name[:len("2.4.10.000 ")]] = {
                     "paragraphs": paragraphs,
                     "images": images,
+                    "links": links,
                 }
     return documents
 
