@@ -14,3 +14,9 @@ For the WordPress Believer destination, use the entire `/xp/received` content, b
 **Why:** After reviewing the WordPress Believer screenshot, the user explicitly selected “Yes—copy the entire /xp/received content.”
 
 **How to apply:** Treat the WordPress destination name separately from the approved source. This mapping is for the export; it does not authorize changing this project's live `/xp/believer` page or replacing every XP variant with Received.
+
+The user confirmed the complete-code-box Received replacement worked and requested the same process for the next XP page.
+
+**Why:** “Wow you finally accomplished it. Good job. Now please do the next for the next XP page.”
+
+**How to apply:** Deliver each requested page as a clearly named complete inline-HTML copy box with a plain-text alternative, stating its source heading. Preserve that source's full content rather than inferring content from the WordPress destination name.

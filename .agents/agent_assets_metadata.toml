@@ -112,3 +112,31 @@ mtime_ms = 1792018845163
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/1c9d271f-5006-48fa-b206-e1b434f98e52/c9fa9c5d-9e36-4d43-b1fb-53ac4626a60e"
 storage_version_token = "1792018859858970"
 content_type = "text/plain"
+
+[[outputs]]
+id = "luJEzRyY-ZNZ0gikv7yQm"
+uri = "file://generated-artifacts/follow-xp-wordpress-exact/copy/rededicated.html"
+type = "html"
+title = "Rededicated — Complete WordPress Code"
+description = "Complete inline HTML/CSS for /xp/rededicated, beginning “Welcome back. He never left.” Open the file and copy everything inside the code box."
+logical_id = "4d697e72-6e4e-4e9f-bb0f-b5ce1d620f35"
+content_hash = "sha256:b3b71088f61e6e7703afb575732bcc765a16765d631ecf47adad490099f02258"
+size = 14717
+mtime_ms = 1792017270911
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/4d697e72-6e4e-4e9f-bb0f-b5ce1d620f35/6d22e307-b02a-4d80-b111-ef4fb86ee17e"
+storage_version_token = "1792019134890676"
+content_type = "text/html"
+
+[[outputs]]
+id = "suHbke67dbZlSgKcA95KJ"
+uri = "file://generated-artifacts/follow-xp-wordpress-exact/rededicated.txt"
+type = "text"
+title = "Rededicated — Plain-Text HTML"
+description = "The same complete WordPress code in a downloadable text file."
+logical_id = "1e6f18ff-2a95-4e9f-ae1d-46a946b2d176"
+content_hash = "sha256:a4ec2b7c8b6f400152ddb9968f5a5acd60bab84713d0ae64af5dacd84d041db7"
+size = 11557
+mtime_ms = 1792017270911
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/1e6f18ff-2a95-4e9f-ae1d-46a946b2d176/6e0d9304-f839-4f96-9738-da0ace5d3eb2"
+storage_version_token = "1792019135452476"
+content_type = "text/plain"
