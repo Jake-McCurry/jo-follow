@@ -229,3 +229,9 @@
     @apply font-sans tracking-tight;
   }
 }
+
+/* Hide the white backing baked into the guide illustrations without changing
+   the original artwork or the surrounding page and card backgrounds. */
+[data-article-group="lords-prayer"] figure img {
+  mix-blend-mode: multiply;
+}

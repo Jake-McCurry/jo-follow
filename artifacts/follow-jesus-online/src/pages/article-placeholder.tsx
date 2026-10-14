@@ -490,7 +490,7 @@ export function ArticlePlaceholder() {
           </div>
         </div>
 
-        <article className="animate-in fade-in slide-in-from-bottom-6 duration-700">
+        <article data-article-group={article.group} className="animate-in fade-in slide-in-from-bottom-6 duration-700">
           <header className="mb-10">
             {!isGuideOverview && <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
               <BookOpen className="h-3.5 w-3.5" /> {groupLabel(article.group)}
