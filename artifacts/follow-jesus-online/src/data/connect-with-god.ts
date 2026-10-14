@@ -53,7 +53,7 @@ export const CONNECT_WITH_GOD_RESOURCES: ConnectWithGodResource[] = [
   {
     title: "Experiencing God 24/7",
     description: "Practice His presence from first light to last thought.",
-    href: "/gf/a-heart-after-god/a-heart-that-remains",
+    href: "/experiencing-god",
   },
   {
     title: "Prayer Starters",
@@ -63,6 +63,6 @@ export const CONNECT_WITH_GOD_RESOURCES: ConnectWithGodResource[] = [
   {
     title: "The Lord\u2019s Prayer Guide",
     description: "Pray as Jesus taught\u2014one topic at a time.",
-    href: "/deeper/the-lords-prayer-guide",
+    href: "/lords-prayer",
   },
 ]

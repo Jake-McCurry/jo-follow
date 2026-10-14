@@ -15,7 +15,7 @@ test("catalog includes published sources and excludes retired and invented artic
   for (const article of library.articles) {
     assert.equal(slugs.has(article.slug), !article.retired, article.slug);
   }
-  for (const filename of ["imported-deeper-articles.json", "linked-articles.json", "prayer-articles.json"]) {
+  for (const filename of ["imported-deeper-articles.json", "linked-articles.json", "prayer-articles.json", "experiencing-god-articles.json", "lords-prayer-articles.json"]) {
     for (const article of JSON.parse(await readFile(new URL(filename, dataRoot), "utf8"))) {
       assert.ok(slugs.has(article.slug), article.slug);
     }
@@ -25,6 +25,7 @@ test("catalog includes published sources and excludes retired and invented artic
   assert.ok(slugs.has("gf-a-heart-after-god-the-heart-reflects-the-person"));
   assert.ok(!slugs.has("pentest-nonexistent-zzz123"));
   assert.ok(!slugs.has("gf-a-heart-after-god-invented"));
+  assert.ok(!slugs.has("experiencing-god-invented"));
 });
 
 test("reaction routes reject unknown articles before cookies or database access; real reactions still work", async () => {

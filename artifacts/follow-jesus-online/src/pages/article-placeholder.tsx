@@ -9,6 +9,7 @@ import { ArticleShareButton } from "@/components/share-button";
 import {
   getArticleBySlug,
   getArticlePath,
+  getArticleSlugFromPath,
   getArticlesInGroup,
   type ArticleBlock,
   type Article,
@@ -204,6 +205,8 @@ export function DefaultArticleBlockView({ block, titleLinks = false }: { block: 
 }
 
 function groupLabel(group: ArticleBlock["type"] | string) {
+  if (group === "lords-prayer") return "The Lord’s Prayer Guide";
+  if (group === "experiencing-god") return "Experiencing God 24/7";
   if (group === "prayer") return "Prayer Starters";
   if (group === "linked") return "Related Article";
   if (group === "deeper") return "Go Deeper";
@@ -411,20 +414,21 @@ function AdventureArticleView({
 export function ArticlePlaceholder() {
   const params = useParams();
   const [location] = useLocation();
-  const routeGroup = location.split("?")[0].split("/").filter(Boolean)[0];
-  const articleSlug =
-    routeGroup === "prayer" && !params.slug ? "prayer-starter-guide" :
-    routeGroup === "adv" || routeGroup === "deeper" || routeGroup === "prayer"
-      ? `${routeGroup}-${params.slug || ""}`
-      : params.slug || "";
+  const articleSlug = getArticleSlugFromPath(location.split("?")[0]) ?? params.slug ?? "";
 
   const article = getArticleBySlug(articleSlug);
   if (!article) return <NotFound />;
 
   const isPrayerGuide = article.slug === "prayer-starter-guide";
+  const isExperiencingGod = article.group === "experiencing-god";
+  const isLordsPrayer = article.group === "lords-prayer";
   const groupArticles = getArticlesInGroup(article.group);
   const articleIndex = groupArticles.findIndex((item) => item.slug === article.slug);
+  const isLordsOverview = isLordsPrayer && articleIndex === 0;
+  const isGuideOverview = isPrayerGuide || isLordsOverview;
   const nextPrayerArticle = article.group === "prayer" ? groupArticles[articleIndex + 1] : undefined;
+  const nextExperiencingGodArticle = isExperiencingGod ? groupArticles[articleIndex + 1] : undefined;
+  const nextLordsPrayerArticle = isLordsPrayer ? groupArticles[articleIndex + 1] : undefined;
   const guideArticles = article.group === "deeper" ? getArticlesInGroup("adventure") : [];
   const mainGuideArticle = guideArticles.find((item) => item.relatedSlug === article.slug);
   const mainGuideIndex = mainGuideArticle
@@ -434,7 +438,7 @@ export function ArticlePlaceholder() {
   const blocks = article.blocks;
   const isJourneyFaq = article.group === "received" || article.group === "rededicated";
   const introInContentBox = isJourneyFaq || article.group === "believer" ||
-    (article.group === "prayer" && articleIndex === 0);
+    isGuideOverview;
   const linkedSource = article.group === "linked"
     ? linkedArticleMetadata.find((item) => item.slug === article.slug)
     : undefined;
@@ -472,12 +476,12 @@ export function ArticlePlaceholder() {
       <main className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
         <div data-testid="article-utilities" className="mb-8 flex items-center justify-between gap-3">
           <Button asChild variant="ghost" className="-ml-2 h-auto min-h-11 min-w-0 max-w-full px-2 text-left text-sm font-medium text-muted-foreground hover:text-foreground">
-             <Link href={article.group === "prayer" ? articleIndex === 0 ? "/#connect-with-god" : "/prayer" : linkedSource ? getArticlePath(linkedSource.faqSlug) : "/explore-articles"}>
-               <ChevronLabel direction="left" text={article.group === "prayer" ? articleIndex === 0 ? "Back to Connect with God" : "Back to Prayer Starters" : linkedSource ? "Back to question" : "Back to Articles"} />
+             <Link href={isLordsPrayer ? isLordsOverview ? "/#connect-with-god" : "/lords-prayer" : isExperiencingGod ? articleIndex === 0 ? "/#connect-with-god" : "/experiencing-god" : article.group === "prayer" ? articleIndex === 0 ? "/#connect-with-god" : "/prayer" : linkedSource ? getArticlePath(linkedSource.faqSlug) : "/explore-articles"}>
+               <ChevronLabel direction="left" text={isLordsPrayer ? isLordsOverview ? "Back to Connect with God" : "Back to The Lord’s Prayer Guide" : isExperiencingGod ? articleIndex === 0 ? "Back to Connect with God" : "Back to Experiencing God 24/7" : article.group === "prayer" ? articleIndex === 0 ? "Back to Connect with God" : "Back to Prayer Starters" : linkedSource ? "Back to question" : "Back to Articles"} />
             </Link>
           </Button>
           <div className="ml-auto flex shrink-0 items-center gap-2">
-           {article.group !== "linked" && !isPrayerGuide && (
+           {article.group !== "linked" && !isGuideOverview && (
               <span className="text-xs text-muted-foreground">
                {articleIndex + 1} of {groupArticles.length}
              </span>
@@ -486,9 +490,9 @@ export function ArticlePlaceholder() {
           </div>
         </div>
 
-        <article className="animate-in fade-in slide-in-from-bottom-6 duration-700">
+        <article data-article-group={article.group} className="animate-in fade-in slide-in-from-bottom-6 duration-700">
           <header className="mb-10">
-            {!isPrayerGuide && <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
+            {!isGuideOverview && <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
               <BookOpen className="h-3.5 w-3.5" /> {groupLabel(article.group)}
             </div>}
             <h1 className="max-w-3xl text-4xl font-bold leading-tight text-navy md:text-6xl">
@@ -501,7 +505,13 @@ export function ArticlePlaceholder() {
             )}
           </header>
 
-          {isPrayerGuide ? (
+          {isLordsOverview && (
+            <nav aria-label="Prayer guide resources" className="mb-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-navy">
+              <Link href="/lords-prayer/how-to-use" className="hover:text-warm-700"><ChevronLabel text="How to Use This Prayer Guide" /></Link>
+              <Link href="/lords-prayer/one-page-overview" className="hover:text-warm-700"><ChevronLabel text="One-Page Overview" /></Link>
+            </nav>
+          )}
+          {isGuideOverview ? (
             <PrayerGuideContent
               blocks={blocks}
               renderBlock={(block, index) => (
@@ -546,6 +556,14 @@ export function ArticlePlaceholder() {
               href: articleHref(nextPrayerArticle.slug),
               title: nextPrayerArticle.title,
               label: "Read the next prayer article",
+            } : nextExperiencingGodArticle ? {
+              href: articleHref(nextExperiencingGodArticle.slug),
+              title: nextExperiencingGodArticle.title,
+              label: "Continue Experiencing God 24/7",
+            } : nextLordsPrayerArticle ? {
+              href: articleHref(nextLordsPrayerArticle.slug),
+              title: nextLordsPrayerArticle.title,
+              label: "Continue The Lord’s Prayer Guide",
             } : undefined}
             secondary={mainGuideArticle ? {
               href: articleHref(mainGuideArticle.slug),
@@ -556,6 +574,16 @@ export function ArticlePlaceholder() {
               href: "/prayer",
               title: "Prayer Starter Guide",
               label: "Explore the prayer guide",
+              back: true,
+            } : isExperiencingGod && articleIndex > 0 ? {
+              href: "/experiencing-god",
+              title: "Experiencing God 24/7",
+              label: "Back to the overview",
+              back: true,
+            } : isLordsPrayer && !isLordsOverview ? {
+              href: "/lords-prayer",
+              title: "The Lord’s Prayer Guide",
+              label: "Back to the prayer guide",
               back: true,
             } : isJourneyFaq ? {
               href: articleHref("adv-begin-the-adventure"),

@@ -2,6 +2,7 @@ declare module "virtual:article-content" {
   export type ArticleBlock = {
     kind: "heading" | "paragraph" | "question" | "list" | "image";
     text: string;
+    headingLevel?: 2 | 3;
     src?: string;
     links?: { label: string; href: string }[];
   };

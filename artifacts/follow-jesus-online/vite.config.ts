@@ -13,6 +13,10 @@ import articleCatalog from './src/data/article-library.json';
 import { GO_FURTHER_BOOKS } from './src/data/go-further-library';
 import linkedArticles from './src/data/linked-articles.json';
 import prayerArticles from './src/data/prayer-articles.json';
+import experiencingGodArticles from './src/data/experiencing-god-articles.json';
+import lordsPrayerArticles from './src/data/lords-prayer-articles.json';
+
+const PRAYER_ARCHIVE = 'OneDrive_2026-10-14_1792010333357.zip';
 
 // Vite needs a port for dev/preview, but static production builds do not
 // receive one from CI providers such as Cloudflare Pages.
@@ -38,6 +42,7 @@ const APPROVED_ARTICLE_TEXT_REPLACEMENTS: Record<string, Record<string, string>>
 type ArticleBlock = {
   kind: 'heading' | 'paragraph' | 'question' | 'list' | 'image';
   text: string;
+  headingLevel?: 2 | 3;
   src?: string;
   links?: { label: string; href: string }[];
 };
@@ -292,6 +297,7 @@ function parseDocxBlocks(
             ? 'list'
             : 'paragraph',
         text: cleanedText,
+        ...(preserveSourceText && /^heading3$/i.test(style) ? { headingLevel: 3 as const } : {}),
         ...(links.length ? { links } : {}),
       });
       paragraphIndex += 1;
@@ -395,10 +401,10 @@ function readFollowArticle(
 }
 
 function readPrayerArticles(attachedAssetsDir: string, tempDir: string): ArticleRecord[] {
-  const archivePath = path.join(attachedAssetsDir, 'OneDrive_2026-10-08_1791498971259.zip');
+  const archivePath = path.join(attachedAssetsDir, PRAYER_ARCHIVE);
   if (!fs.existsSync(archivePath)) throw new Error(`Required prayer articles ZIP is missing: ${archivePath}`);
   const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
-    .split('\n').filter(entry => entry.endsWith('.docx'));
+    .split('\n').filter(entry => entry.endsWith('.docx') && path.basename(entry).startsWith('2.4.10.'));
   if (entries.length !== prayerArticles.length) {
     throw new Error(`Expected ${prayerArticles.length} prayer documents; found ${entries.length}`);
   }
@@ -421,6 +427,95 @@ function readPrayerArticles(attachedAssetsDir: string, tempDir: string): Article
       throw new Error('Prayer Starter Guide must link to all nine readings');
     }
     return { route: `/${metadata.slug}`, title: metadata.title, category: 'Prayer', blocks };
+  });
+}
+
+function readLordsPrayerArticles(attachedAssetsDir: string, tempDir: string): ArticleRecord[] {
+  const archivePath = path.join(attachedAssetsDir, PRAYER_ARCHIVE);
+  const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
+    .split('\n').filter(entry => entry.endsWith('.docx') && path.basename(entry).startsWith('2.4.30.'));
+  if (entries.length !== lordsPrayerArticles.length) throw new Error('Expected eleven Lord’s Prayer documents');
+  return lordsPrayerArticles.map(metadata => {
+    const matches = entries.filter(entry => path.basename(entry).startsWith(metadata.prefix));
+    if (matches.length !== 1) throw new Error(`Missing or duplicate Lord’s Prayer document: ${metadata.prefix}`);
+    const blocks = readFollowArticle(archivePath, matches[0], tempDir, true);
+    if (blocks[0]?.text !== (metadata.sourceTitle ?? metadata.title) || blocks.length < 5) {
+      throw new Error(`Lord’s Prayer title or body does not match: ${metadata.title}`);
+    }
+    let heading = metadata.title;
+    for (const block of blocks) {
+      if (block.kind === 'heading') heading = block.text;
+      if (block.kind === 'image') block.text = `${heading} — illustration from ${metadata.title}`;
+      if (block.links) block.links = block.links.map(link => {
+        const id = link.href.match(/app\.jesusonline\.com\/post\/(\d+)-/)?.[1];
+        const target = id ? lordsPrayerArticles.find(item => item.legacyPostId === id) : undefined;
+        return target ? { ...link, href: target.href } : link;
+      });
+      if (metadata.order === 0 && block.kind === 'heading') {
+        const target = lordsPrayerArticles.find(item => item.legacyPostId && item.title === block.text);
+        if (target) block.links = [{ label: block.text, href: target.href }];
+      }
+    }
+    if (metadata.order === 0 && blocks.filter(block =>
+      block.kind === 'heading' && block.links?.some(link => link.href.startsWith('/lords-prayer/'))).length !== 8) {
+      throw new Error('The Lord’s Prayer Guide must link to all eight roadmap topics');
+    }
+    return { route: `/${metadata.slug}`, title: metadata.title, category: 'Lords Prayer', blocks };
+  });
+}
+
+function readExperiencingGodArticles(attachedAssetsDir: string, tempDir: string): ArticleRecord[] {
+  const archivePath = path.join(attachedAssetsDir, 'Experiencing_God_2026-10-14_1792009307040.zip');
+  const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
+    .split('\n').filter(entry => entry.endsWith('.docx'));
+  if (entries.length !== experiencingGodArticles.length) throw new Error('Expected eight Experiencing God documents');
+  return experiencingGodArticles.map(metadata => {
+    const matches = entries.filter(entry => path.basename(entry).startsWith(`${metadata.prefix} `));
+    if (matches.length !== 1) throw new Error(`Missing or duplicate Experiencing God document: ${metadata.prefix}`);
+    const blocks = readFollowArticle(archivePath, matches[0], tempDir, true);
+    if (blocks[0]?.text !== metadata.title || blocks.length < 5) {
+      throw new Error(`Experiencing God title or body does not match: ${metadata.title}`);
+    }
+    const notes = new Set<string>();
+    for (const block of blocks) {
+      block.text = block.text.replace(/\s*\[Note to Jake: ([^\]]+)\]/g, (_, sourceId: string) => {
+        const pending = metadata.pendingLinks?.find(link => link.sourceId === sourceId);
+        if (!pending || !block.text.startsWith(pending.label)) throw new Error(`Unmapped editorial note: ${sourceId}`);
+        notes.add(sourceId);
+        return '';
+      }).trim();
+      if (block.links) block.links = block.links.map(link => ({
+        ...link,
+        href: link.href.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, ''),
+      }));
+      if (metadata.order === 0 && /^Tips about/.test(block.text)) {
+        block.text = block.text.replace(/\s*>{3}\s*$/, '');
+        const destination = experiencingGodArticles.find(item => item.tipsLabel === block.text);
+        if (!destination) throw new Error(`Unmapped Experiencing God tip: ${block.text}`);
+        block.links = [{ label: block.text, href: destination.href }];
+      }
+    }
+    const expectedNotes = metadata.appendedResourcesHeading ? 0 : (metadata.pendingLinks?.length ?? 0);
+    if (notes.size !== expectedNotes) throw new Error(`Pending link count mismatch: ${metadata.prefix}`);
+    // Editorial additions requested after the ZIP upload remain separate from
+    // the source documents, so re-importing cannot silently remove them.
+    if (metadata.appendedResourcesHeading) {
+      blocks.push({ kind: 'heading', text: metadata.appendedResourcesHeading });
+      for (const resource of metadata.pendingLinks ?? []) {
+        blocks.push({ kind: 'paragraph', text: resource.label });
+      }
+    }
+    for (const resource of metadata.pendingLinks ?? []) {
+      const target = lordsPrayerArticles.find(item => item.prefix.trim() === resource.sourceId);
+      if (!target) continue;
+      const matches = blocks.filter(block => block.text === resource.label);
+      if (matches.length !== 1) throw new Error(`Missing or duplicate prayer resource: ${resource.label}`);
+      matches[0].links = [{ label: resource.label, href: target.href }];
+    }
+    if (metadata.order === 0 && blocks.filter(block => /^Tips about/.test(block.text) && block.links?.length).length !== 7) {
+      throw new Error('Experiencing God overview must link to all seven readings');
+    }
+    return { route: `/${metadata.slug}`, title: blocks[0].text, category: 'Experiencing God', blocks };
   });
 }
 
@@ -623,6 +718,8 @@ function buildArticleLibrary(): ArticleRecord[] {
       ...archivedArticles.filter((article) => !updatedRoutes.has(article.route)),
       ...followArticles,
       ...readPrayerArticles(attachedAssetsDir, tempDir),
+      ...readLordsPrayerArticles(attachedAssetsDir, tempDir),
+      ...readExperiencingGodArticles(attachedAssetsDir, tempDir),
     ];
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });

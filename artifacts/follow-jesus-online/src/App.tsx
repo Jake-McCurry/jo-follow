@@ -110,6 +110,10 @@ function PageMetadata() {
   } else if (
     pathname === '/prayer' ||
     pathname.startsWith('/prayer/') ||
+    pathname === '/lords-prayer' ||
+    pathname.startsWith('/lords-prayer/') ||
+    pathname === '/experiencing-god' ||
+    pathname.startsWith('/experiencing-god/') ||
     pathname.startsWith('/adv/') ||
     pathname.startsWith('/deeper/') ||
     pathname.startsWith('/adv-') ||
@@ -220,6 +224,10 @@ function Router() {
         <Route path="/bible/:book/:chapter" component={BibleReaderPage} />
         <Route path="/prayer" component={ArticlePlaceholder} />
         <Route path="/prayer/:slug" component={ArticlePlaceholder} />
+        <Route path="/lords-prayer" component={ArticlePlaceholder} />
+        <Route path="/lords-prayer/:slug" component={ArticlePlaceholder} />
+        <Route path="/experiencing-god" component={ArticlePlaceholder} />
+        <Route path="/experiencing-god/:slug" component={ArticlePlaceholder} />
         <Route path="/adv/:slug" component={ArticlePlaceholder} />
         <Route path="/deeper/:slug" component={ArticlePlaceholder} />
         
