@@ -63,8 +63,8 @@ Use the approved subtle cream cards against a lighter page background across the
 
 **How to apply:** Keep neutral cards and page surfaces consistent without changing navigation/sidebar palettes, primary action colors, content, or card groupings. This approval extends the colors, not the Prayer-specific link and layout treatments.
 
-Use the `/prayer` page as the template when building “The Lord’s Prayer Guide.”
+Lord’s Prayer Guide illustrated cards should blend into their surrounding warm background without visible white backing.
 
-**Why:** The user asked to keep this as a future project note.
+**Why:** The user requested removing the white backing and confirmed the result with “good work.”
 
-**How to apply:** When work on “The Lord’s Prayer Guide” begins, use `/prayer` as the template.
+**How to apply:** Preserve the colored artwork and text when displaying or replacing these illustrations; avoid reintroducing white frames or gaps around the colored panels.
