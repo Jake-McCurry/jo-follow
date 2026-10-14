@@ -28,7 +28,7 @@
   --font-knowing-god-heading: Georgia, "Times New Roman", serif;
   --font-display: var(--font-knowing-god-heading);
   /* Warm paper/ivory reading background */
-  --color-surface: #fffaf2;
+  --color-surface: hsl(var(--background));
   
   /* Softly tinted warm neutral sidebars/panels */
   --color-surface-soft: #f3ede2;

@@ -26,3 +26,9 @@ Knowing God search results should load in the main window while someone is typin
 **Why:** The user requested main-window results, then asked to apply the same title-first search behavior as Promises.
 
 **How to apply:** Keep live results in the primary reading area and all title hits ahead of non-title hits. Search coverage should not depend on which topics the reader has already visited.
+
+Knowing God sidebar print and search controls should be small icons at the bottom of the entire column. Do not restore the “Topic selection” control; browsing and searching cover the complete index.
+
+**Why:** The user requested bottom icon-only utilities and removal of “Topic selection.”
+
+**How to apply:** Keep the sidebar title non-sticky and preserve translation and passage filters. The main white banner identifies the book during scrolling. The search icon opens a focused search field in the main reading area so the sidebar stays icon-only and mobile readers can see live results while typing.

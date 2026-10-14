@@ -64,7 +64,7 @@ export function ScriptureRef({ reference, children }: ScriptureRefProps) {
       </PopoverTrigger>
       
       <PopoverContent 
-        className="w-[340px] max-w-[calc(100vw-2rem)] p-5 shadow-lg max-h-[300px] overflow-y-auto border-warm-200 bg-white"
+        className="w-[340px] max-w-[calc(100vw-2rem)] p-5 shadow-lg max-h-[300px] overflow-y-auto border-card-border bg-card"
         onMouseEnter={() => {
           if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
           if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);

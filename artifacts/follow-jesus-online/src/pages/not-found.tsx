@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <Layout>
       <div className="flex min-h-[70vh] w-full items-center justify-center">
-        <Card className="w-full max-w-md mx-4 border-warm-200 bg-white shadow-sm">
+        <Card className="w-full max-w-md mx-4 border-card-border bg-card shadow-sm">
           <CardContent className="pt-8 text-center pb-8">
             <div className="mx-auto w-16 h-16 bg-warm-100 text-warm-700 rounded-full flex items-center justify-center mb-6">
               <Compass className="h-8 w-8" />

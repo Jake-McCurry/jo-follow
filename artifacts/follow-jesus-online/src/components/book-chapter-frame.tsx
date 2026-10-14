@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout";
-import { ShareButton } from "@/components/share-button";
+import { ArticleShareButton } from "@/components/share-button";
 
 type BookChapterFrameProps = {
   bookTitle: string;
@@ -20,9 +20,10 @@ export function BookChapterFrame({
 }: BookChapterFrameProps) {
   return (
     <Layout>
-      <div className="min-h-[100dvh] bg-[#F7F1E6] pb-20">
+      <div className="min-h-[100dvh] bg-background pb-20">
         <main className="container mx-auto max-w-3xl px-5 py-8 sm:px-8 md:py-10">
-          <nav aria-label="Breadcrumb" className="mb-10 text-sm text-slate">
+          <div data-testid="article-utilities" className="mb-8 flex items-center justify-between gap-3">
+          <nav aria-label="Breadcrumb" className="min-w-0 text-xs text-slate">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <li>
                 <Link href="/gf" className="font-medium text-navy hover:text-brand hover:underline">
@@ -39,6 +40,8 @@ export function BookChapterFrame({
               <li aria-current="page">{chapterLabel}</li>
             </ol>
           </nav>
+          <ArticleShareButton title={`${title} | Follow Jesus Online`} text={`Read “${title}” from ${bookTitle} on Follow Jesus Online.`} label="Share this reading" />
+          </div>
 
           <article className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <header className="mb-12 text-center">
@@ -52,13 +55,6 @@ export function BookChapterFrame({
               <h1 className="mb-8 font-serif text-4xl font-bold uppercase leading-[1.15] tracking-tight text-navy sm:text-5xl md:text-[3.5rem]">
                 {title}
               </h1>
-              <ShareButton
-                title={`${title} | Follow Jesus Online`}
-                text={`Read “${title}” from ${bookTitle} on Follow Jesus Online.`}
-                label="Share this reading"
-                variant="ghost"
-                className="h-8 rounded-full px-3 text-xs font-medium text-slate hover:bg-warm-50 hover:text-navy"
-              />
             </header>
             {children}
           </article>

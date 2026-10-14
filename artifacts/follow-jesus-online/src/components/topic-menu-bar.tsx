@@ -3,6 +3,8 @@ import { TOPIC_MENU_LINKS } from "@/data/connect-with-god"
 
 export function TopicMenuBar() {
   const [location] = useLocation()
+  const pageLocation = location.replace(/\/$/, "") === "/videos" ? "/rewatch" : location
+  const isPrayerGuide = location.replace(/\/$/, "") === "/prayer"
   return (
     <nav
       aria-label="Topics"
@@ -14,14 +16,16 @@ export function TopicMenuBar() {
         tabIndex={-1}
       >
         {TOPIC_MENU_LINKS.map((item) => {
-          const active = location === item.href || location === item.href.replace(/\/$/, "")
+          const active = pageLocation === item.href || pageLocation === item.href.replace(/\/$/, "")
           return (
             <li key={item.label} className="shrink-0 snap-start">
               <Link
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 data-testid={`link-topic-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-                className={`block whitespace-nowrap px-3 py-3 text-sm font-semibold text-[#004E8A] transition-colors hover:bg-blue-50 hover:text-[#003A66] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0095FF] sm:px-4 sm:text-base ${
+                className={`block whitespace-nowrap px-3 py-3 text-sm font-semibold text-[#004E8A] transition-colors hover:text-[#003A66] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0095FF] sm:px-4 sm:text-base ${
+                  isPrayerGuide ? "hover:bg-[#D9EAF5]" : "hover:bg-blue-50"
+                } ${
                   active ? "border-b-2 border-[#0095FF]" : "border-b-2 border-transparent"
                 }`}
               >

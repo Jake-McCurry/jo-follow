@@ -2,10 +2,32 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { knowingGodScriptureHref } from "../src/components/knowing-god/scripture-link.ts";
-import { printedTranslations, searchTopics } from "../src/components/promises/promises-data.ts";
+import { blockText, printedTranslations, searchTopics } from "../src/components/promises/promises-data.ts";
 
 const root = new URL("../", import.meta.url);
 const text = path => readFile(new URL(path, root), "utf8");
+
+test("copied passages include references without duplicating printed citations", async () => {
+  const book = JSON.parse(await text("public/promises/book.json"));
+  for (const topic of book.groups.flatMap(group => group.topics)) {
+    const passages = topic.blocks.filter(block => block.kind === "passage");
+    const copied = blockText(passages);
+    for (const passage of passages) {
+      assert.ok(copied.includes(passage.text), `${topic.title}: preserve the quotation`);
+      assert.ok(copied.includes(passage.reference), `${topic.title}: include the reference`);
+    }
+  }
+  assert.equal(blockText([{ kind: "passage", text: "A quotation.", reference: "John 1:1", translation: "NET" }]), "A quotation.\n—John 1:1, NET");
+  const printed = "A quotation. —John 1:1, NET";
+  assert.equal(blockText([{ kind: "passage", text: printed, reference: "John 1:1", translation: "NET" }]), printed);
+});
+
+test("each topic has top print/share icons and a single passage-copy action", async () => {
+  const reader = await text("src/components/promises/PromisesReader.tsx");
+  assert.match(reader, /promises-topic-actions[\s\S]*Copy passages[\s\S]*aria-label="Print this topic"[\s\S]*Share this topic/);
+  assert.match(reader, /title=\{`\$\{sel\.topic\.title\} \| \$\{book\.title\}`\}/);
+  assert.doesNotMatch(reader, /Copy refs/);
+});
 
 test("sticky Promises menu and homepage card both open the new reader", async () => {
   const data = await text("src/data/connect-with-god.ts");
@@ -30,7 +52,7 @@ test("Promises opens the Introduction and no longer exposes an Overview page", a
   assert.match(reader, /useState<View>\("intro"\)/);
   assert.doesNotMatch(reader, /"overview"|>Overview</);
   assert.doesNotMatch(sidebar, /"overview"|>Overview</);
-  assert.match(sidebar, /nav\("intro", "Introduction"\)/);
+  assert.match(sidebar, /onClick=\{\(\) => p\.onView\("intro"\)\}[\s\S]*?>Introduction<\/button>/);
   assert.match(reader, /blocks=\{book\.introduction\}/);
 });
 
@@ -77,4 +99,26 @@ test("title, reference and content tiers override source order and ignore query 
   ] }] };
   assert.deepEqual(searchTopics(book, "  JOHN  ").map(match => match.topic.id), ["title", "reference", "content"]);
   assert.deepEqual(searchTopics(book, " "), []);
+});
+
+test("Promises sidebar keeps Introduction above groups and utilities in a quiet footer", async () => {
+  const sidebar = await text("src/components/promises/PromisesSidebar.tsx");
+  const reader = await text("src/components/promises/PromisesReader.tsx");
+  assert.doesNotMatch(sidebar, /promises-search|promises-translation|Translation as printed|About, source and resources|onQuery|onTranslation/);
+  assert.doesNotMatch(reader, /Groups &amp; search|setTranslation|setQuery/);
+  assert.match(sidebar, /promises-sidebar-footer[\s\S]*Saved study[\s\S]*aria-label="Print this page"[\s\S]*Share this page[\s\S]*>Copyright<\/button>/);
+  assert.ok(sidebar.indexOf(">Introduction</button>") < sidebar.indexOf(">Six groups</p>"));
+  assert.ok(sidebar.indexOf("</nav>") < sidebar.indexOf("promises-sidebar-footer"));
+});
+
+test("Copyright view uses only the requested publisher and Scripture notices", async () => {
+  const reader = await text("src/components/promises/PromisesReader.tsx");
+  const copyright = await text("src/components/promises/PromisesCopyright.tsx");
+  assert.match(reader, /view === "source"[\s\S]*?main = <PromisesCopyright \/>/);
+  assert.doesNotMatch(reader, /blocks=\{book\.(publication|resources)\}|Download PDF|Download DOCX|Source, copyright and resources/);
+  for (const notice of ["Published by JesusOnline Ministries", "copyright ©1996, 2019", "New Living Translation", "New International Version®", "Copyright © 2024 by JesusOnline Ministries", "JesusOnlineMinistries.org"]) {
+    assert.ok(copyright.includes(notice), notice);
+  }
+  assert.match(copyright, /href="https:\/\/netbible\.com"/);
+  assert.match(copyright, /href="https:\/\/JesusOnlineMinistries\.org"/);
 });

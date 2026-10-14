@@ -234,6 +234,10 @@ const prayerRecords: Article[] = prayerMetadata.map(metadata => {
   if (!source) throw new Error(`Missing prayer article: ${metadata.title}`);
   const blocks: ArticleBlock[] = source.blocks
     .filter((block, index) => !(index === 0 && block.text === source.title))
+    .filter(block => metadata.slug !== "prayer-starter-guide" || (
+      block.text.trim() !== "How the path works" &&
+      !block.text.trim().startsWith("Start with what prayer is and why the Father invites it.")
+    ))
     .map(block => ({ type: block.kind, text: block.text, src: block.src, links: block.links }));
   return {
     slug: metadata.slug,

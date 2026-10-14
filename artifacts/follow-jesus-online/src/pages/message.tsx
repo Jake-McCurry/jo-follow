@@ -2,7 +2,8 @@ import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Link } from "wouter";
-import { ArrowLeft, Mail, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 
 export function MessagePage() {
   return (
@@ -30,12 +31,12 @@ export function MessagePage() {
 
             <Button asChild variant="outline" className="px-6 border-warm-200 hover:bg-warm-50">
               <Link href="/">
-                <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" /> Return to Start
+                <ChevronLabel direction="left" text="Return to Start" />
               </Link>
             </Button>
           </div>
 
-          <div className="rounded-2xl border border-warm-200 bg-white p-6 sm:p-8 shadow-sm">
+          <div className="rounded-2xl border border-card-border bg-card p-6 sm:p-8 shadow-sm">
             <form
               action="https://jesusonline.us1.list-manage.com/subscribe/post?u=c02949f5de137184b156da9bc&amp;id=e06ba0649d&amp;f_id=00a087e5f0"
               method="post"

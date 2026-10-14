@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "wouter";
+import { ChevronLabel } from "@/components/navigation-chevrons";
 import { knowingGodIntroductions, type KnowingGodIntroduction } from "@/data/knowingGodIntroductions";
 import { aboutAndDedication } from "@/data/knowing-god/introduction/about-and-dedication";
 import { foundationalScriptures } from "@/data/knowing-god/introduction/foundational-scriptures";
@@ -180,18 +181,18 @@ export function IntroArticle({ article, previous, next }: { article: KnowingGodI
         {previous ? (
           <Link href={`/knowing-god/introduction/${previous.slug}`}>
             <small>Previous</small>
-            <span>← {previous.title}</span>
+            <ChevronLabel text={previous.title} direction="left" />
           </Link>
         ) : <span />}
         {next ? (
           <Link className="next" href={`/knowing-god/introduction/${next.slug}`}>
             <small>Next</small>
-            <span>{next.title} →</span>
+            <ChevronLabel text={next.title} />
           </Link>
         ) : (
           <Link className="next" href="/knowing-god">
             <small>Continue</small>
-            <span>Browse the topics →</span>
+            <ChevronLabel text="Browse the topics" />
           </Link>
         )}
       </nav>
@@ -214,10 +215,9 @@ export function IntroIndex() {
             <span className="intro-number">{String(index + 1).padStart(2, "0")}</span>
             <div>
               <p>{article.eyebrow}</p>
-              <h2>{article.title}</h2>
+              <h2><ChevronLabel text={article.title} /></h2>
               <span>{article.description}</span>
             </div>
-            <strong aria-hidden="true">→</strong>
           </Link>
         ))}
       </section>

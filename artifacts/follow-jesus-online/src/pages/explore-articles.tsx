@@ -85,7 +85,7 @@ export function ExploreArticlesPage() {
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
           {ARTICLES.map((article, i) => (
-              <Card key={i} className="flex flex-col h-full border-border-soft hover:border-brand/30 shadow-sm hover:shadow-md transition-all group overflow-hidden bg-white">
+              <Card key={i} className="flex flex-col h-full border-card-border hover:border-brand/30 shadow-sm hover:shadow-md transition-all group overflow-hidden bg-card">
                 <CardContent className="p-0 flex flex-col h-full">
                   <Link href={article.link} className="flex-1 p-5 md:p-6 flex flex-col items-start focus-visible:outline-none focus-visible:bg-blue-50">
                     <h3 className="text-2xl font-bold mb-3 text-navy group-hover:text-brand transition-colors">
@@ -98,7 +98,7 @@ export function ExploreArticlesPage() {
                   </Link>
                   
                   {article.deeper && (
-                    <div className="bg-surface-soft border-t border-border-soft px-6 md:px-8 py-4">
+                    <div className="bg-card border-t border-card-border px-6 md:px-8 py-4">
                       <Link 
                         href={article.deeper.link} 
                         className="text-sm font-semibold text-navy hover:text-brand transition-colors flex items-center"
@@ -127,7 +127,7 @@ export function ExploreArticlesPage() {
               <Link
                 key={article.slug}
                 href={article.slug.replace(/^((?:adv|deeper))-/, "/$1/")}
-                className="group rounded-xl border border-border-soft bg-white p-5 shadow-sm transition-all hover:border-brand/40 hover:shadow-md"
+                className="group rounded-xl border border-card-border bg-card p-5 shadow-sm transition-all hover:border-brand/40 hover:shadow-md"
               >
                 <h3 className="text-xl font-bold text-navy group-hover:text-brand">{article.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate">{article.excerpt}</p>
@@ -160,7 +160,7 @@ export function ExploreArticlesPage() {
               <Link
                 key={article.slug}
                 href={`/${article.slug}`}
-                className="group rounded-xl border border-border-soft bg-white p-5 shadow-sm transition-all hover:border-brand/40 hover:shadow-md"
+                className="group rounded-xl border border-card-border bg-card p-5 shadow-sm transition-all hover:border-brand/40 hover:shadow-md"
               >
                 <h3 className="text-xl font-bold text-navy group-hover:text-brand">{article.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate">{article.excerpt}</p>
@@ -181,14 +181,14 @@ function QuestionGroup({
   articles: ReturnType<typeof getArticlesInGroup>;
 }) {
   return (
-    <div className="rounded-2xl border border-border-soft bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-card-border bg-card p-6 shadow-sm">
       <h3 className="mb-5 text-xl font-bold text-navy">{title}</h3>
       <div className="space-y-3">
         {articles.map((article) => (
           <Link
             key={article.slug}
             href={`/${article.slug}`}
-            className="group block rounded-lg border border-border-soft bg-surface-soft px-4 py-3 transition-colors hover:border-brand/40 hover:bg-white"
+            className="group block rounded-lg border border-card-border bg-card px-4 py-3 transition-colors hover:border-brand/40 hover:bg-white"
           >
             <span className="font-semibold leading-snug text-navy group-hover:text-brand">{article.title}</span>
           </Link>

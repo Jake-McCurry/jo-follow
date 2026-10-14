@@ -95,7 +95,7 @@ export function Layout({ children }: { children: ReactNode }) {
                 onClick={() => setIsMenuOpen(false)}
                 className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
-                Rewatch the Videos
+                Watch the Videos
               </Link>
               <Link
                 href="/bible/John/1"
@@ -143,7 +143,7 @@ export function Layout({ children }: { children: ReactNode }) {
       </header>
 
       {resumePage && (
-        <div className="border-b border-secondary-foreground/10 bg-secondary py-3 text-secondary-foreground">
+        <div className="border-b border-secondary-foreground/10 bg-card py-3 text-secondary-foreground">
           <div className="container mx-auto flex flex-col items-center justify-center gap-2 px-5 text-sm sm:flex-row sm:gap-5 sm:px-8">
             <span className="font-medium">Pick up where you left off...</span>
             <div className="flex gap-2">

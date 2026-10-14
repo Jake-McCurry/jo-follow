@@ -39,7 +39,7 @@ export function HeartAfterGodIntroPage() {
           <div className="prose prose-lg max-w-none text-slate prose-p:font-sans prose-headings:font-sans">
             <p>Something in every person longs to be whole.</p>
 
-            <blockquote className="rounded-xl border-l-4 border-warm-500 bg-warm-50/70 p-6 text-navy sm:p-8">
+            <blockquote className="rounded-xl border-l-4 border-warm-500 bg-card p-6 text-navy sm:p-8">
               <p>You have made us for Yourself, O Lord, and our heart is restless until it rests in You.</p>
               <footer>— Augustine</footer>
             </blockquote>
@@ -48,7 +48,7 @@ export function HeartAfterGodIntroPage() {
               We feel that restlessness when words come out sharper than we intended, when a hidden motive surfaces, when the life we present to others does not match the life we carry within. Scripture is not silent about that inner world. It gives it a name. It calls it the heart.
             </p>
 
-            <blockquote className="rounded-xl border-l-4 border-warm-500 bg-warm-50/70 p-6 text-navy sm:p-8">
+            <blockquote className="rounded-xl border-l-4 border-warm-500 bg-card p-6 text-navy sm:p-8">
               <p>The Bible term ‘heart’ is best understood if we simply say ‘me.’ It is the central citadel of a man’s personality.</p>
               <footer>— Oswald Chambers</footer>
             </blockquote>

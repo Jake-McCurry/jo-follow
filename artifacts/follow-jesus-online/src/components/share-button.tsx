@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, type ReactNode } from "react";
 import { Share2, Link as LinkIcon, Mail, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,10 +17,11 @@ interface ShareButtonProps {
   url?: string;
   className?: string;
   variant?: "default" | "outline" | "ghost" | "secondary" | "link";
-  label?: string;
+  label?: ReactNode;
+  iconOnly?: boolean;
 }
 
-export function ShareButton({ title, text, url, className, variant = "outline", label = "Share" }: ShareButtonProps) {
+export function ShareButton({ title, text, url, className, variant = "outline", label = "Share", iconOnly = false }: ShareButtonProps) {
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -74,9 +75,10 @@ export function ShareButton({ title, text, url, className, variant = "outline", 
         onClick={handleShare} 
         className={className}
         data-testid="button-share"
+        title={iconOnly && typeof label === "string" ? label : undefined}
       >
-        <Share2 className="w-4 h-4 mr-2" />
-        {label}
+        <Share2 className={iconOnly ? "h-4 w-4" : "w-4 h-4 mr-2"} aria-hidden="true" />
+        {iconOnly ? <span className="sr-only">{label}</span> : label}
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -105,4 +107,9 @@ export function ShareButton({ title, text, url, className, variant = "outline", 
       </Dialog>
     </>
   );
+}
+
+export function ArticleShareButton(props: Omit<ShareButtonProps, "variant" | "className" | "iconOnly">) {
+  return <ShareButton {...props} label={props.label ?? "Share this article"} iconOnly variant="ghost"
+    className="h-11 w-11 shrink-0 rounded-full border-0 bg-transparent p-0 text-slate shadow-none hover:bg-warm-50 hover:text-navy" />;
 }
