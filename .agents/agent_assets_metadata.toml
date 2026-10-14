@@ -42,3 +42,101 @@ mtime_ms = 1791067540636
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/11c4d456-fba8-4d2c-ab7d-602f1e2808a3/fd39a4c5-30a4-4102-962f-333db4835898"
 storage_version_token = "1791067544769233"
 content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+[[outputs]]
+id = "P7AShcaZLGsj1uVq99pJ8"
+uri = "file://generated-artifacts/follow-xp-main-content.zip"
+type = "unspecified"
+title = "Follow XP — Four-Page Content Package"
+description = "All four XP pages’ main content, without site header, navigation or footer. Includes a reusable React component, scoped CSS, guide artwork, JSON/Markdown content, HTML previews, and transfer instructions."
+logical_id = "1a9f1937-6bbf-4402-8a38-35a33f8050fa"
+content_hash = "sha256:19da5d74db397f7fb951dbba59d4783f2d4bdb48412c7274b60a6cf104fe5c09"
+size = 395865
+mtime_ms = 1792016085235
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/1a9f1937-6bbf-4402-8a38-35a33f8050fa/2796d266-0c38-4389-8912-3fc7433dd89e"
+storage_version_token = "1792016164547668"
+content_type = "application/octet-stream"
+
+[[outputs]]
+id = "Iwsc6qk4z_ow5KuIVoBjT"
+uri = "file://generated-artifacts/follow-xp-wordpress-inline.zip"
+type = "unspecified"
+title = "Four XP Pages — WordPress Inline HTML"
+description = "Four separate paste-ready WordPress Custom HTML snippets, also supplied as plain-text files. Inline styling only, with guide artwork and Genesis/WordPress setup instructions. No React, scripts, external CSS, site header, navigation or footer."
+logical_id = "3e27bf13-77b1-43bb-ad95-6708e3b2898b"
+content_hash = "sha256:d6892acf1259e52075d3b578602c39f6772f5cbd0e4dfe0bac5edb1a8310deb1"
+size = 390978
+mtime_ms = 1792016432652
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/3e27bf13-77b1-43bb-ad95-6708e3b2898b/997ce65f-be84-47f1-b76f-8372c9946beb"
+storage_version_token = "1792016530090940"
+content_type = "application/octet-stream"
+
+[[outputs]]
+id = "5gevtPeFHO32CTnTaKker"
+uri = "file://generated-artifacts/follow-xp-wordpress-live-matched.zip"
+type = "unspecified"
+title = "Follow XP — Live-Matched WordPress Copies"
+description = "All four XP pages with wording checked against the live Follow pages and the original two-column arrangement retained. Includes inline HTML/CSS, complete-copy boxes, live-text references, the cover image and instructions. No site header, navigation or footer."
+logical_id = "b8e4568b-d9d5-433b-ab06-0e7d83c92d71"
+content_hash = "sha256:5c48b8d460949f665d17d70496d9bcaf8c442aa84d764568910a70624d02c072"
+size = 408410
+mtime_ms = 1792017271371
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/b8e4568b-d9d5-433b-ab06-0e7d83c92d71/999b9b0f-b309-4b14-ac80-2204d3aab509"
+storage_version_token = "1792017333572703"
+content_type = "application/octet-stream"
+
+[[outputs]]
+id = "dMmPwf9LoMxYJ_JJ8-ge6"
+uri = "file://generated-artifacts/wordpress-believer-replacement-received-content.html"
+type = "html"
+title = "WordPress Believer — Correct Replacement Code"
+description = "Copy the complete code box into WordPress. Contains the entire /xp/received content beginning “He heard you. You are His.”, not the Believer text."
+logical_id = "b82aed30-56c9-409b-bf0c-3c1c1b75afc6"
+content_hash = "sha256:3a60071cd277ed9de7862822fd57cccc88055547267eb82addb88beaec99e932"
+size = 13860
+mtime_ms = 1792018845167
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/b82aed30-56c9-409b-bf0c-3c1c1b75afc6/a8dfb061-e9fa-426b-ad44-677089246058"
+storage_version_token = "1792018859294468"
+content_type = "text/html"
+
+[[outputs]]
+id = "zkKjX_SOTMUs1v3fyaFen"
+uri = "file://generated-artifacts/wordpress-believer-replacement-received-content.txt"
+type = "text"
+title = "Replacement HTML — Plain Text"
+description = "The same complete replacement code as a downloadable text file, with inline CSS."
+logical_id = "1c9d271f-5006-48fa-b206-e1b434f98e52"
+content_hash = "sha256:6f3b6852161ce6488c1f6ffccd223b3c7dd13699afe42d5eed3eade487a64881"
+size = 11200
+mtime_ms = 1792018845163
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/1c9d271f-5006-48fa-b206-e1b434f98e52/c9fa9c5d-9e36-4d43-b1fb-53ac4626a60e"
+storage_version_token = "1792018859858970"
+content_type = "text/plain"
+
+[[outputs]]
+id = "luJEzRyY-ZNZ0gikv7yQm"
+uri = "file://generated-artifacts/follow-xp-wordpress-exact/copy/rededicated.html"
+type = "html"
+title = "Rededicated — Complete WordPress Code"
+description = "Complete inline HTML/CSS for /xp/rededicated, beginning “Welcome back. He never left.” Open the file and copy everything inside the code box."
+logical_id = "4d697e72-6e4e-4e9f-bb0f-b5ce1d620f35"
+content_hash = "sha256:b3b71088f61e6e7703afb575732bcc765a16765d631ecf47adad490099f02258"
+size = 14717
+mtime_ms = 1792017270911
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/4d697e72-6e4e-4e9f-bb0f-b5ce1d620f35/6d22e307-b02a-4d80-b111-ef4fb86ee17e"
+storage_version_token = "1792019134890676"
+content_type = "text/html"
+
+[[outputs]]
+id = "suHbke67dbZlSgKcA95KJ"
+uri = "file://generated-artifacts/follow-xp-wordpress-exact/rededicated.txt"
+type = "text"
+title = "Rededicated — Plain-Text HTML"
+description = "The same complete WordPress code in a downloadable text file."
+logical_id = "1e6f18ff-2a95-4e9f-ae1d-46a946b2d176"
+content_hash = "sha256:a4ec2b7c8b6f400152ddb9968f5a5acd60bab84713d0ae64af5dacd84d041db7"
+size = 11557
+mtime_ms = 1792017270911
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/1e6f18ff-2a95-4e9f-ae1d-46a946b2d176/6e0d9304-f839-4f96-9738-da0ace5d3eb2"
+storage_version_token = "1792019135452476"
+content_type = "text/plain"
