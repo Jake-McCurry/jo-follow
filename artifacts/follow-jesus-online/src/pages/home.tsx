@@ -22,7 +22,7 @@ export function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative flex min-h-[240px] items-start overflow-hidden bg-[#003A66] pb-2 text-white sm:min-h-[260px] md:min-h-[300px] lg:min-h-[320px]">
+      <section className="relative flex min-h-[240px] items-center overflow-hidden bg-[#003A66] py-2 text-white sm:min-h-[260px] md:min-h-[300px] lg:min-h-[320px]">
         <img
           src={homeHeroUrl}
           alt=""
