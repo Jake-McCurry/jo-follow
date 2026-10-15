@@ -154,3 +154,31 @@ mtime_ms = 1792083862457
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/96f0de1f-ceca-4185-8b37-74db20f028a0/4d1f23c9-7ae4-4d3a-a84e-9c523e889470"
 storage_version_token = "1792083877735398"
 content_type = "image/jpeg"
+
+[[outputs]]
+id = "P5BX9jzj8isZIYkLwXl3j"
+uri = "file://generated-artifacts/change-log-2026-10-02-to-15/Follow-Jesus-Online-Changes-Oct-02-to-15-2026.xlsx"
+type = "table"
+title = "Follow Jesus Online — Two-Week Change Log"
+description = "October 2–15, 2026. 131 detailed entries, newest first, with page/location, exact change, status, checkpoint evidence, history, changed files and date-method notes."
+logical_id = "4641f251-8c45-477b-8984-a9f5f3df789f"
+content_hash = "sha256:585ebe2e7d597625fe778f3907029868a09bdd8506c86f93a6896a06cced3908"
+size = 37952
+mtime_ms = 1792095466379
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/4641f251-8c45-477b-8984-a9f5f3df789f/3f795a73-2aeb-4c40-909d-d21dc5246a9e"
+storage_version_token = "1792095549068596"
+content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+[[outputs]]
+id = "nmgcM4JgHa-EMFnWErOB9"
+uri = "file://generated-artifacts/change-log-2026-10-02-to-15/JOLF%20Change%20log.xlsx"
+type = "table"
+title = "JOLF Change log"
+description = "October 2–15, 2026. 131 recorded changes, newest first, with page, date, exact change, checkpoint evidence and notes."
+logical_id = "82de869f-4df9-4929-b6be-01383ebbc243"
+content_hash = "sha256:9308fdbd2ae1189ebb44cf6ed55eef822a39e9daf4031eb5bab4241706e308b7"
+size = 37952
+mtime_ms = 1792095576995
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/82de869f-4df9-4929-b6be-01383ebbc243/20d93f70-57c2-4073-b363-3d4af2ca9f17"
+storage_version_token = "1792095588534420"
+content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
