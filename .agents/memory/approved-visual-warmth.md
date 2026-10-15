@@ -9,6 +9,12 @@ Use the branding guide’s “cool structure + warm humanity” direction consis
 
 **How to apply:** Carry this direction into new and revised public pages, reading surfaces, supporting screens, and shared components. Preserve generous editorial space and avoid turning every surface orange.
 
+When moving the homepage hero text, preserve the live site's image framing and hero height; move only the text.
+
+**Why:** The user repeatedly clarified that they wanted the live hero image unchanged, with the text moved down. Different browser widths made the responsive crop look different during comparisons.
+
+**How to apply:** Compare live and preview at matching viewport widths before changing image sizing or cropping. Keep text placement independent of the image.
+
 For the Adventure Guide series, use a warmer chapter-like reading experience with subtle cream-background breadcrumbs, editorial display headings, warm quote/question callouts, and an inviting next-chapter moment. Keep this treatment isolated from Go Deeper articles.
 
 **Why:** The user found the standard article treatment too cold for the Adventure series and approved a more engaging guided-journey direction inspired by a warm editorial chapter reference.
