@@ -140,3 +140,17 @@ mtime_ms = 1792017270911
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/1e6f18ff-2a95-4e9f-ae1d-46a946b2d176/6e0d9304-f839-4f96-9738-da0ace5d3eb2"
 storage_version_token = "1792019135452476"
 content_type = "text/plain"
+
+[[outputs]]
+id = "G-PRhmSFTML1HQDq8Iaxb"
+uri = "file://generated-artifacts/home-hero-live-framing.jpg"
+type = "image"
+title = "Hero preview — original image framing, lower text"
+description = "Preview at the width of your reference screenshot, with the live image framing retained and the headline and subtitle centered vertically."
+logical_id = "96f0de1f-ceca-4185-8b37-74db20f028a0"
+content_hash = "sha256:5d724c85c1ba8f001c14c0fbaeef4c7155dbd3e656feae9ddc3f482426bb76ed"
+size = 157416
+mtime_ms = 1792083862457
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/96f0de1f-ceca-4185-8b37-74db20f028a0/4d1f23c9-7ae4-4d3a-a84e-9c523e889470"
+storage_version_token = "1792083877735398"
+content_type = "image/jpeg"
