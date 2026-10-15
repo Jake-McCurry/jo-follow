@@ -9,9 +9,9 @@ Use the branding guide’s “cool structure + warm humanity” direction consis
 
 **How to apply:** Carry this direction into new and revised public pages, reading surfaces, supporting screens, and shared components. Preserve generous editorial space and avoid turning every surface orange.
 
-When moving the homepage hero text, preserve the live site's image framing and hero height; move only the text.
+The approved homepage hero keeps the live site's image framing and hero height, with the headline and subtitle vertically centered over it.
 
-**Why:** The user repeatedly clarified that they wanted the live hero image unchanged, with the text moved down. Different browser widths made the responsive crop look different during comparisons.
+**Why:** The user repeatedly clarified that they wanted the live hero image unchanged, with the text moved down, then explicitly approved the matching-width preview. Different browser widths made the responsive crop look different during comparisons.
 
 **How to apply:** Compare live and preview at matching viewport widths before changing image sizing or cropping. Keep text placement independent of the image.
 
