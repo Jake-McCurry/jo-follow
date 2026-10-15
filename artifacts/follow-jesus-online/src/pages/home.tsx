@@ -22,7 +22,7 @@ export function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative flex min-h-[240px] items-start overflow-hidden bg-[#003A66] pb-2 text-white sm:min-h-[260px] md:min-h-[300px] lg:min-h-[320px]">
+      <section className="relative flex h-[240px] items-start overflow-hidden bg-[#003A66] text-white sm:h-[260px] md:h-[clamp(180px,20.833333vw,320px)]">
         <img
           src={homeHeroUrl}
           alt=""
@@ -31,14 +31,14 @@ export function Home() {
           className="absolute inset-0 h-full w-full object-cover object-bottom"
         />
         <div className="absolute inset-0 z-10 flex items-center">
-        <div className="container relative px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.65)" }}>
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white text-balance leading-[1.1]">
-            Walking with Jesus
-          </h1>
-          <p className="text-lg md:text-xl font-bold text-white max-w-2xl mx-auto leading-relaxed" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.8)" }}>
-            Deepen your walk. Discover His purpose. Come back again.
-          </p>
-        </div>
+          <div className="container relative px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.65)" }}>
+            <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white text-balance leading-[1.1]">
+              Walking with Jesus
+            </h1>
+            <p className="text-lg md:text-xl font-bold text-white max-w-2xl mx-auto leading-relaxed" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.8)" }}>
+              Deepen your walk. Discover His purpose. Come back again.
+            </p>
+          </div>
         </div>
       </section>
 

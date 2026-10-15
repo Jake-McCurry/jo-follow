@@ -9,11 +9,11 @@ Use the branding guide’s “cool structure + warm humanity” direction consis
 
 **How to apply:** Carry this direction into new and revised public pages, reading surfaces, supporting screens, and shared components. Preserve generous editorial space and avoid turning every surface orange.
 
-The approved homepage hero keeps the live site's image framing and hero height, with the headline and subtitle vertically centered over it.
+The approved homepage hero keeps the reference image framing, with the headline and subtitle vertically centered over it. At narrower desktop widths, scale the hero height to retain that framing rather than retaining a fixed desktop height that exposes extra sky.
 
-**Why:** The user repeatedly clarified that they wanted the live hero image unchanged, with the text moved down, then explicitly approved the matching-width preview. Different browser widths made the responsive crop look different during comparisons.
+**Why:** The user repeatedly clarified that they wanted the live hero image unchanged, with the text moved down, then explicitly approved the matching-width preview. Their narrower Replit preview still showed extra sky after cache clearing because the fixed-height responsive crop differed from the approved wider reference.
 
-**How to apply:** Compare live and preview at matching viewport widths before changing image sizing or cropping. Keep text placement independent of the image.
+**How to apply:** Compare the actual narrower Replit preview as well as the reference width, not just matching-width screenshots. Preserve the approved framing across desktop widths and keep text placement independent of the image.
 
 For the Adventure Guide series, use a warmer chapter-like reading experience with subtle cream-background breadcrumbs, editorial display headings, warm quote/question callouts, and an inviting next-chapter moment. Keep this treatment isolated from Go Deeper articles.
 
