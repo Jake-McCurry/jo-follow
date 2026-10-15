@@ -20,3 +20,4 @@
 - [Development preview file boundaries](dev-preview-file-boundaries.md) — Vite's default pnpm workspace allowance can expose backend source; restrict browser-facing file access.
 - [Modal exit accessibility](modal-exit-accessibility.md) — Animated dialog exit can temporarily hide visible background content from accessibility queries.
 - [Experiencing God editorial](experiencing-god-editorial.md) — Use full document headings; defer specified series links until the Lord’s Prayer Guide and Because statements uploads.
+- [PDF download size](pdf-download-size.md) — Aim for PDFs under 2 MB where possible, preserving readability, text, links, and layout.
