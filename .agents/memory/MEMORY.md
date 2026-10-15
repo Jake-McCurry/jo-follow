@@ -21,4 +21,4 @@
 - [Modal exit accessibility](modal-exit-accessibility.md) — Animated dialog exit can temporarily hide visible background content from accessibility queries.
 - [Experiencing God editorial](experiencing-god-editorial.md) — Use full document headings; defer specified series links until the Lord’s Prayer Guide and Because statements uploads.
 - [PDF download size](pdf-download-size.md) — Aim for PDFs under 2 MB where possible, preserving readability, text, links, and layout.
-- [Staging change log timing](staging-change-log.md) — Update JOLF Change log only after a confirmed Git staging push; do not count local-only changes.
+- [Staging change log timing](staging-change-log.md) — The user pushes to staging; update JOLF Change log only after confirmation, never for local-only changes.
