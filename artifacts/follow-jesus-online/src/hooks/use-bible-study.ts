@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react"
+import { highlightSelectedVerses, toggleSelectedBookmarks } from "@/lib/bible-verse-selection"
 
 export const BIBLE_STUDY_STORAGE_KEY = "jol_bible_study_v1"
 export const BIBLE_STUDY_DATA_VERSION = 1 as const
@@ -321,6 +322,14 @@ export function useBibleStudy() {
     })
   }, [update])
 
+  const toggleVerseBookmarks = useCallback((verses: StudyVerse[]) => {
+    update(current => toggleSelectedBookmarks(current, verses))
+  }, [update])
+
+  const setHighlights = useCallback((verses: StudyVerse[], color: HighlightColor | null) => {
+    update(current => highlightSelectedVerses(current, verses, color))
+  }, [update])
+
   const setHighlight = useCallback((verse: StudyVerse, color: HighlightColor | null) => {
     update((current) => {
       const highlights = { ...current.highlights }
@@ -382,6 +391,8 @@ export function useBibleStudy() {
     storageAvailable,
     toggleChapterBookmark,
     toggleVerseBookmark,
+    toggleVerseBookmarks,
+    setHighlights,
     setHighlight,
     setNote,
     removeBookmark,

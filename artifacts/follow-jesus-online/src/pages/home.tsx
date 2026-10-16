@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ConnectWithGodSection } from "@/components/connect-with-god-section";
 import { ShareButton } from "@/components/share-button";
-import { BookOpen, Search, HelpCircle, Compass, Download, PlayCircle } from "lucide-react";
+import { BookOpen, Search, HelpCircle, Compass, Download } from "lucide-react";
 import { ChevronLabel } from "@/components/navigation-chevrons";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
@@ -161,33 +161,6 @@ export function Home() {
                 </Button>
               </CardContent>
             </Card>
-          </div>
-        </section>
-
-        {/* More Ways to Explore */}
-        <section className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">More Ways to Explore</h2>
-            <p className="text-muted-foreground">You don’t have to figure everything out at once. Take the next step when you’re ready.</p>
-          </div>
-          
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/rewatch" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
-              <PlayCircle className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-              <span className="text-lg font-bold text-card-foreground">Watch the videos</span>
-            </Link>
-            <Link href="/gf/" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
-              <Search className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-              <span className="text-lg font-bold text-card-foreground">Go Further</span>
-            </Link>
-            <Link href="/bible/John/1" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
-              <BookOpen className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-              <span className="text-lg font-bold text-card-foreground">Read the Bible</span>
-            </Link>
-            <a href="https://jesusonline.com" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center rounded-xl border border-card-border bg-card p-6 text-center transition-all hover:border-warm-400 hover:bg-warm-100">
-              <Compass className="mb-4 h-8 w-8 text-warm-700 transition-transform group-hover:scale-110" />
-              <span className="text-lg font-bold text-card-foreground">About JesusOnline</span>
-            </a>
           </div>
         </section>
 

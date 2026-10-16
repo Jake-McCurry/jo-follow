@@ -6,7 +6,8 @@ const resourceGroups = [0, 6, 3].map((start) => ({
   resources: CONNECT_WITH_GOD_RESOURCES.slice(start, start + 3),
 }))
 
-export function ConnectWithGodSection() {
+export function ConnectWithGodSection({ headingLevel = 2 }: { headingLevel?: 1 | 2 }) {
+  const Heading = headingLevel === 1 ? "h1" : "h2";
   return (
     <section
       id="connect-with-god"
@@ -14,9 +15,9 @@ export function ConnectWithGodSection() {
       className="scroll-mt-32"
     >
       <div className="mb-6 text-center">
-        <h2 id="connect-with-god-heading" className="mb-4 text-3xl font-bold text-foreground">
+        <Heading id="connect-with-god-heading" className="mb-4 text-3xl font-bold text-foreground">
           Connect with God
-        </h2>
+        </Heading>
         <div className="mx-auto h-1 w-16 rounded-full bg-warm-accent" />
       </div>
       <ul className="grid gap-3 md:grid-cols-3 md:gap-6">
