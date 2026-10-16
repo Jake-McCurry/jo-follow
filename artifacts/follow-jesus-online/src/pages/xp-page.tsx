@@ -6,8 +6,6 @@ import { Link } from "wouter";
 import { PlayCircle, MessageCircle, Heart } from "lucide-react";
 import NotFound from "@/pages/not-found";
 
-const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
-
 type XPType = "received" | "rededicated" | "believer" | "did-not-pray";
 
 const XP_ARTICLE_LINKS: Partial<Record<XPType, Record<string, string>>> = {
@@ -63,8 +61,6 @@ const XP_CONTENT: Record<XPType, {
     guideHeading: "Something real has begun.",
     guideText: [
       "When you invited Jesus Christ into your life, you entered a personal relationship with God that lasts forever. He now lives within you, accepting you as you are and transforming your life as you walk with Him.",
-      "This relationship isn't based on fleeting feelings; Christ's presence is constant. The days ahead may be unpredictable, but His Spirit is always at work within you, equipping you for your journey.",
-      "This short guide will help you understand who you are now, the Spirit in you, moving forward, and living purposefully. Take the next step.",
     ],
     guideLabel: "Read what just happened — 2 minutes",
     questionsTitle: "You’re Not the Only One Wondering…",
@@ -85,11 +81,6 @@ const XP_CONTENT: Record<XPType, {
       "You just turned toward Jesus again. He receives you. You do not have to earn your way back, and you did not lose your place as His child while you were away.",
       "If you feel ashamed or far off, that feeling is not the verdict. He already knows where you have been. Coming back is the step that matters.",
     ],
-    guideHeading: "You are still His",
-    guideText: [
-      "Turning back to Jesus is not about obtaining a second salvation; it's a return home, like the prodigal son. The Father welcomed him back without requiring reacceptance. Christ doesn't abandon His own. Instead, confession is simply the way to walk back into the light, not a means of being readopted.",
-      "You don't need to fix everything at once or feel close to Him before you are. Just take the next faithful step. He welcomes you back with open arms, regardless of your past.",
-    ],
     guideLabel: "How to walk with Him again — 2 minutes",
     questionsTitle: "You’re Not the Only One Feeling This Way…",
     questions: [
@@ -105,12 +96,7 @@ const XP_CONTENT: Record<XPType, {
   },
   "believer": {
     title: "You already belong to Him.",
-    intro: "You said you already trust Jesus. God already sees you as His child — forgiven, belonging, and accepted.",
-    guideHeading: "Already His",
-    guideText: [
-      "If you have trusted Christ, you are not a guest in God’s family. You are His child.",
-      "Many believers live as if they were still on trial — useful when they do well, distant when they fail. That is not how the Father sees you. Christ has already settled the case. Your part now is to walk in what is already true.",
-    ],
+    intro: "You said you already trust Jesus. God already sees you as His child — forgiven, belonging, and accepted. Your part now is to walk in what is already true.",
     guideLabel: "How to walk with Him again — 2 minutes",
     questionsTitle: "Ways You Might Use These Resources",
     questions: [
@@ -150,7 +136,7 @@ export function XPPage() {
   const content = XP_CONTENT[type];
   
   if (!content) return <NotFound />;
-  const hasGuide = Boolean(content.guideHeading);
+  const hasGuide = Boolean(content.guideLabel);
   const introParagraphs = Array.isArray(content.intro) ? content.intro : [content.intro];
   const guideParagraphs = Array.isArray(content.guideText) ? content.guideText : content.guideText ? [content.guideText] : [];
 
@@ -172,12 +158,12 @@ export function XPPage() {
 
   return (
     <Layout>
-      <div className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
+      <div data-testid="xp-page" className="container mx-auto max-w-4xl px-5 py-6 sm:px-8 md:py-8">
         
         {/* Header Section */}
-        <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full mb-6"></div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+        <div className="text-center mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full mb-4"></div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             {content.title}
           </h1>
           {content.subtitle && (
@@ -186,53 +172,37 @@ export function XPPage() {
             </p>
           )}
           
-          <div className="space-y-5 max-w-2xl mx-auto text-xl leading-relaxed text-muted-foreground">
+          <div className="space-y-3 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed text-muted-foreground">
             {introParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
           </div>
         </div>
 
         {/* Main Content Area */}
-        {hasGuide && <div className="bg-card border border-card-border rounded-2xl p-8 md:p-12 shadow-sm mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
-          <div className="flex flex-col md:flex-row gap-10 items-center md:items-start mb-8">
-            <div className="shrink-0 w-full max-w-[240px] md:w-64">
-              <img src={guideCoverUrl} alt="The Adventure of Living with Jesus" className="w-full rounded-xl shadow-md border border-border/30 rotate-[-1deg]" />
-            </div>
-            <div className="prose prose-lg dark:prose-invert max-w-none flex-1">
-              <h2 className="text-2xl font-bold text-foreground mb-5">{content.guideHeading}</h2>
+        {hasGuide && <div className="bg-card border border-card-border rounded-2xl p-5 sm:p-6 shadow-sm mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
+            <div>
+              {content.guideHeading && <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-3">{content.guideHeading}</h2>}
               {guideParagraphs.map((paragraph, index) => (
-                <p key={index} className="text-lg leading-relaxed text-card-foreground/90 mb-5">{paragraph}</p>
+                <p key={index} className="text-base sm:text-lg leading-relaxed text-card-foreground/90 mb-4">{paragraph}</p>
               ))}
               
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button asChild size="lg" variant="warm" className="text-base h-auto min-h-14 px-6 py-4 whitespace-normal text-center shadow-sm">
-                  <Link href="/adv/begin-the-adventure">
+              <div className="flex flex-col sm:flex-row gap-3 mb-4">
+                <Button asChild size="lg" variant="warm" className="text-base h-auto min-h-12 px-5 py-3 whitespace-normal text-center shadow-sm">
+                  <Link href="/adv/begin-the-adventure" data-testid="xp-guide-link">
                     {content.guideLabel ?? "Begin This Short Guide"}
                   </Link>
                 </Button>
               </div>
               
-              <Link href="/videos/Gods-Vision" className="inline-flex items-start gap-2 text-warm-700 font-semibold hover:text-warm-800 transition-colors">
+              <Link href="/videos/Gods-Vision" data-testid="xp-listen-link" className="inline-flex items-start gap-2 text-warm-700 font-semibold hover:text-warm-800 transition-colors">
                   <PlayCircle className="w-6 h-6 shrink-0" />
                   <span>Prefer to listen?  3 minutes — How God sees you now</span>
               </Link>
             </div>
-          </div>
-          
-          <div className="mt-8 pt-8 border-t border-warm-200 flex flex-col sm:flex-row items-center gap-4 text-sm text-muted-foreground">
-            <span>Want to come back easily later?</span>
-            <ShareButton 
-              title={content.title} 
-              text={`I found this helpful: ${content.title} - Follow Jesus Online`}
-              label="Save or Send this page" 
-              variant="secondary"
-              className="w-full sm:w-auto bg-warm-100 hover:bg-warm-200 text-warm-900 border-none"
-            />
-          </div>
         </div>}
 
         {/* Questions / Next Steps */}
-        <div className="mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
-          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">{content.questionsTitle}</h2>
+        <div className="mb-10 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
+          <h2 className="text-2xl font-bold text-foreground mb-6 text-center">{content.questionsTitle}</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {content.questions.map((q, i) => (
               <div key={i} className="bg-card border border-card-border rounded-xl p-6 flex items-start gap-4 shadow-sm hover:border-warm-300 transition-colors">
@@ -251,6 +221,17 @@ export function XPPage() {
             ))}
           </div>
         </div>
+
+        {hasGuide && <div className="mb-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm text-muted-foreground">
+            <span>Want to come back easily later?</span>
+            <ShareButton
+              title={content.title}
+              text={`I found this helpful: ${content.title} - Follow Jesus Online`}
+              label="Save or Send this page"
+              variant="secondary"
+              className="w-full sm:w-auto bg-warm-100 hover:bg-warm-200 text-warm-900 border-none"
+            />
+        </div>}
 
         {/* Support CTA */}
         <div className="bg-card border border-card-border text-foreground rounded-2xl p-8 md:p-12 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both shadow-sm">
