@@ -20,3 +20,9 @@ The user confirmed the complete-code-box Received replacement worked and request
 **Why:** “Wow you finally accomplished it. Good job. Now please do the next for the next XP page.”
 
 **How to apply:** Deliver each requested page as a clearly named complete inline-HTML copy box with a plain-text alternative, stating its source heading. Preserve that source's full content rather than inferring content from the WordPress destination name.
+
+XP revisions should make the primary reading and listening links visible much earlier, rather than placing a book cover and long explanations before them.
+
+**Why:** After reviewing the XP pages in a meeting, the user reported that no links appeared above the fold and supplied shorter replacement copy, explicitly asking to remove the book image.
+
+**How to apply:** Preserve the supplied replacement wording and the distinct page variants. Check the first viewport on mobile as well as desktop when changing XP spacing or introductory content; do not restore an image-heavy introduction ahead of the links.
