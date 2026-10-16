@@ -15,11 +15,13 @@ export type GFBook = {
   readings: GFReading[];
   closing: string;
   buttonText: string;
+  ebookHref?: string;
 };
 
 export const GO_FURTHER_BOOKS: GFBook[] = [
   {
     slug: 'a-heart-after-god',
+    ebookHref: 'https://equip.jesusonline.com/books/a-heart-after-god.pdf',
     title: 'A Heart After God',
     subtitle: 'Eight Reflections on the Inner Life',
     desc: 'Learn to want what God wants, in the hidden places no one else sees.',
@@ -82,6 +84,7 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
   },
   {
     slug: 'your-new-identity-in-christ',
+    ebookHref: 'https://equip.jesusonline.com/books/your-new-identity-in-christ.pdf',
     title: 'Your New Identity in Christ',
     subtitle: 'Embracing Who God Says You Are',
     desc: 'Settle the question of who you are now, so the old names lose their hold.',
@@ -144,6 +147,7 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
   },
   {
     slug: 'beholding-the-majesty-of-god',
+    ebookHref: 'https://equip.jesusonline.com/books/beholding-the-majesty-of-god.pdf',
     title: 'Beholding the Majesty of God',
     subtitle: 'Explore His Divine Attributes',
     desc: 'Lift your eyes from your own story long enough to see the God who holds it.',
@@ -191,6 +195,7 @@ export const GO_FURTHER_BOOKS: GFBook[] = [
   },
   {
     slug: 'walking-in-the-spirit',
+    ebookHref: 'https://equip.jesusonline.com/books/walking-in-the-spirit.pdf',
     title: 'Walking in the Spirit',
     subtitle: 'A Practical Guide to the Holy Spirit\'s Presence, Power, and Fruit in the Believer\'s Life',
     desc: 'Discover how the Spirit who lives in you shapes ordinary decisions, not only high moments.',

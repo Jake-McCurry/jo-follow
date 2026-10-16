@@ -73,8 +73,8 @@ export function BibleSavedPage() {
     toast({
       title: format === "backup" ? "Study backup downloaded" : "Readable study downloaded",
       description: format === "backup"
-        ? "Import this JSON file later to restore your saved items."
-        : "This text file is for reading or printing; import requires a JSON backup.",
+        ? "Keep this backup file to restore your saved items later."
+        : "This text file is for reading or printing. Use Backup for a restorable copy.",
     })
   }
 
@@ -91,8 +91,8 @@ export function BibleSavedPage() {
     }
     if (!imported) {
       toast({
-        title: "That backup could not be imported",
-        description: "Choose a .json backup exported from this Bible reader. Text exports cannot be imported.",
+        title: "That backup could not be restored",
+        description: "Choose the .json file saved using Backup. Readable text copies cannot restore saved study.",
         variant: "destructive",
       })
       return
@@ -116,7 +116,7 @@ export function BibleSavedPage() {
     setIsImportOpen(false)
     setPendingImport(null)
     toast({
-      title: "Study backup imported",
+      title: "Study backup restored",
       description:
         mode === "merge"
           ? "The backup was merged with this browser’s saved study."
@@ -149,7 +149,7 @@ export function BibleSavedPage() {
         >
           <strong className="block font-bold">Your saved study is only on this device.</strong>
           If you return using a VPN, private or incognito browsing, another browser or device, or delete cookies
-          and site data, your bookmarks, highlights, and notes may be lost or unavailable. Export a backup if you
+          and site data, your bookmarks, highlights, and notes may be lost or unavailable. Keep a backup if you
           want to keep or move them.
         </div>
 
@@ -162,11 +162,11 @@ export function BibleSavedPage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Button type="button" variant="outline" onClick={() => handleExport("text")}>
             <Download className="mr-2 h-4 w-4" />
-            Export readable text
+            Save readable text
           </Button>
           <Button type="button" variant="outline" onClick={() => handleExport("backup")}>
             <Download className="mr-2 h-4 w-4" />
-            Export JSON backup
+            Backup
           </Button>
           <Button
             type="button"
@@ -175,7 +175,7 @@ export function BibleSavedPage() {
             disabled={!study.storageAvailable}
           >
             <FileUp className="mr-2 h-4 w-4" />
-            Import JSON backup
+            Restore
           </Button>
           <input
             ref={importInputRef}
@@ -183,10 +183,10 @@ export function BibleSavedPage() {
             accept=".json,application/json"
             className="sr-only"
             onChange={handleImportFile}
-            aria-label="Import Bible study backup"
+            aria-label="Restore Bible study backup"
           />
         </div>
-        <p className="mt-2 text-sm text-muted-foreground">Only JSON backups can be imported. Text exports are for reading or printing.</p>
+        <p className="mt-2 text-sm text-muted-foreground">Use Backup before clearing browser data or changing devices. Restore loads a backup file. Readable text copies are for reading or printing only.</p>
 
         {!hasSavedItems ? (
           <div className="mt-10 rounded-2xl border border-dashed border-card-border bg-card p-10 text-center shadow-sm">
@@ -326,9 +326,9 @@ export function BibleSavedPage() {
       <Dialog open={isImportOpen} onOpenChange={setIsImportOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Import Bible study backup</DialogTitle>
+            <DialogTitle>Restore Bible study backup</DialogTitle>
             <DialogDescription>
-              Merge keeps your current items and adds the backup. Replace removes current items first.
+              Combine keeps your current items and adds the backup. Replace removes current items first.
             </DialogDescription>
           </DialogHeader>
           {pendingImport && <BibleStudyBackupPreview data={pendingImport} />}
@@ -342,7 +342,7 @@ export function BibleSavedPage() {
               Replace current data
             </Button>
             <Button type="button" onClick={() => finishImport("merge")}>
-              Merge saved data
+              Combine saved items
             </Button>
           </DialogFooter>
         </DialogContent>

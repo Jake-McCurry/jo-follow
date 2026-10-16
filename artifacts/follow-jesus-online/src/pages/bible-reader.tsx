@@ -11,6 +11,7 @@ import { BibleStudyTools } from "@/components/bible-study-tools"
 import { BibleRecap } from "@/components/bible-recap"
 import { getVerseKey, type HighlightColor, type StudyVerse, useBibleStudy } from "@/hooks/use-bible-study"
 import { cn } from "@/lib/utils"
+import { toggleSelectedVerse } from "@/lib/bible-verse-selection"
 
 const verseHighlightClasses: Record<HighlightColor, string> = {
   yellow: "bg-amber-200/80",
@@ -24,7 +25,8 @@ export function BibleReaderPage() {
   const [match, params] = useRoute("/bible/:book/:chapter")
   const [, setLocation] = useLocation()
   const search = useSearch()
-  const [selectedVerse, setSelectedVerse] = useState<StudyVerse | null>(null)
+  const [selectedVerses, setSelectedVerses] = useState<StudyVerse[]>([])
+  const selectedVerse = selectedVerses[0] ?? null
   const study = useBibleStudy()
   const version = new URLSearchParams(search).get("version") === "KJV" ? "KJV" : "NET"
   const chapterHref = (book: string, chapter: number, nextVersion = version) =>
@@ -60,7 +62,7 @@ export function BibleReaderPage() {
   }, [books, currentBook, isBooksLoading, setLocation])
 
   useEffect(() => {
-    setSelectedVerse(null)
+    setSelectedVerses([])
   }, [bookParam, chapterParam, version])
 
   useEffect(() => {
@@ -73,24 +75,16 @@ export function BibleReaderPage() {
   }, [canonicalBookName, chapterParam, match, passage?.reference, study.setLastRead])
 
   useEffect(() => {
-    if (!passage || !window.location.hash.startsWith("#verse-")) return
-    const verseNumber = Number.parseInt(window.location.hash.replace("#verse-", ""), 10)
-    if (!Number.isSafeInteger(verseNumber)) return
-
-    const verse = passage.verses.find((item) => item.verse === verseNumber)
-    if (!verse) return
-
-    const studyVerse: StudyVerse = {
+    if (!passage || !/^#verses?-/.test(window.location.hash)) return
+    const verseNumbers = new Set(window.location.hash.replace(/^#verses?-/, "").split(",").map(Number))
+    const verses: StudyVerse[] = passage.verses.filter(item => verseNumbers.has(item.verse)).map(verse => ({
       id: getVerseKey(verse.bookName, verse.chapter, verse.verse),
-      bookName: verse.bookName,
-      chapter: verse.chapter,
-      verse: verse.verse,
-      text: verse.text,
-      version,
-    }
-    setSelectedVerse(studyVerse)
+      bookName: verse.bookName, chapter: verse.chapter, verse: verse.verse, text: verse.text, version,
+    }))
+    if (!verses.length) return
+    setSelectedVerses(verses)
     window.requestAnimationFrame(() => {
-      document.getElementById(`verse-${verseNumber}`)?.scrollIntoView({ behavior: "smooth", block: "center" })
+      document.getElementById(`verse-${verses[0].verse}`)?.scrollIntoView({ behavior: "smooth", block: "center" })
     })
   }, [passage, version])
 
@@ -159,14 +153,15 @@ export function BibleReaderPage() {
     <Layout>
       <div className="container mx-auto max-w-[1600px] px-4 py-8 sm:px-6 md:py-10">
         <div className="grid items-start gap-6 lg:grid-cols-[250px_minmax(0,1fr)_290px] xl:grid-cols-[270px_minmax(0,760px)_310px] xl:justify-center">
-          <div className="order-3 lg:order-1">
+          <div className="order-2 lg:order-1">
           <BibleStudyTools
             study={study}
             bookName={canonicalBookName}
             chapter={chapterParam}
             reference={passage?.reference || `${canonicalBookName} ${chapterParam}`}
             selectedVerse={selectedVerse}
-            onClearSelection={() => setSelectedVerse(null)}
+            selectedVerses={selectedVerses}
+            onClearSelection={() => setSelectedVerses([])}
             nextChapter={nextChapter}
             version={version}
           />
@@ -250,9 +245,19 @@ export function BibleReaderPage() {
                 </div>
               ) : passage ? (
                 <article className="animate-in fade-in duration-500">
-                  <h1 className="mb-10 text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  <h1 className="mb-4 text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                     {passage.reference}
                   </h1>
+                  <p className="mb-8 text-center text-sm text-muted-foreground">
+                    Tap one or more verses to select them.{" "}
+                    <a href="#choose-a-verse" className="font-semibold text-navy underline underline-offset-4"
+                      onClick={event => {
+                        event.preventDefault()
+                        const panel = document.getElementById("choose-a-verse")
+                        panel?.focus({ preventScroll: true })
+                        panel?.scrollIntoView({ behavior: "instant", block: "start" })
+                      }}>See Study Tools</a>
+                  </p>
                   <div className="font-sans text-lg leading-loose tracking-wide text-foreground/90">
                     <p className="mb-6">
                       {passage.verses.map((verse) => {
@@ -265,14 +270,14 @@ export function BibleReaderPage() {
                           version,
                         }
                         const highlight = study.data.highlights[studyVerse.id]?.color
-                        const isSelected = selectedVerse?.id === studyVerse.id
+                        const isSelected = selectedVerses.some(item => item.id === studyVerse.id)
 
                         return (
                           <button
                             key={studyVerse.id}
                             id={`verse-${verse.verse}`}
                             type="button"
-                            onClick={() => setSelectedVerse(studyVerse)}
+                            onClick={() => setSelectedVerses(current => toggleSelectedVerse(current, studyVerse))}
                             className={cn(
                               "mr-1 inline rounded-md px-1 text-left transition-colors hover:bg-warm-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500 focus-visible:ring-offset-2",
                               highlight && verseHighlightClasses[highlight],
@@ -320,7 +325,7 @@ export function BibleReaderPage() {
             </div>
           </div>
 
-          <div className="order-2 lg:order-3"><BibleRecap /></div>
+          <div className="order-3 lg:order-3"><BibleRecap /></div>
         </div>
       </div>
     </Layout>

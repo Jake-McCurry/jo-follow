@@ -1,4 +1,18 @@
 const RECENT_PAGE_KEY = "jol_recent_page";
+const RESUME_SESSION_KEY = "jol_resume_session_started";
+let fallbackSessionStarted = false;
+
+/** Consume the offer once per tab session, before tracking its first page. */
+export function takeSessionResumePage(): string | null {
+  try {
+    if (sessionStorage.getItem(RESUME_SESSION_KEY)) return null;
+    sessionStorage.setItem(RESUME_SESSION_KEY, "1");
+  } catch {
+    if (fallbackSessionStarted) return null;
+    fallbackSessionStarted = true;
+  }
+  return getRecentPage();
+}
 
 const EXCLUDED_PATHS = ["/", "/message", "/xp-pages"];
 

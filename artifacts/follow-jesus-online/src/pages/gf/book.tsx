@@ -59,7 +59,15 @@ export function GFBookPage() {
               </span>
             </Link>
 
-            <nav aria-label={`Contents of ${book.title}`} className="mt-16">
+            {book.ebookHref && (
+              <p className="mt-10">
+                <a href={book.ebookHref} target="_blank" rel="noopener noreferrer" className="font-semibold text-navy underline underline-offset-4 hover:text-brand">
+                  Download eBook
+                </a>
+              </p>
+            )}
+
+            <nav aria-label={`Contents of ${book.title}`} className={book.ebookHref ? "mt-6" : "mt-16"}>
               <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-navy sm:text-3xl">
                 <span className="hidden h-px w-12 bg-warm-300 sm:block" aria-hidden="true" />
                 Contents

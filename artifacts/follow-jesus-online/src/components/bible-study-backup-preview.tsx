@@ -60,7 +60,7 @@ export function BibleStudyBackupPreview({ data }: BibleStudyBackupPreviewProps) 
         {isEmpty
           ? "This valid backup has no bookmarks, highlights, or notes."
           : isSmall
-            ? "This backup contains very few saved items. Make sure it is the file you intended to import."
+            ? "This backup contains very few saved items. Make sure it is the file you intended to restore."
             : "Review these counts before choosing Replace current data."}
       </p>
     </section>

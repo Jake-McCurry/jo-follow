@@ -23,3 +23,5 @@
 - [PDF download size](pdf-download-size.md) — Aim for PDFs under 2 MB where possible, preserving readability, text, links, and layout.
 - [Staging change log timing](staging-change-log.md) — The user pushes to staging; update JOLF Change log only after confirmation, never for local-only changes.
 - [Drive-only spreadsheet updates](drive-only-spreadsheet-updates.md) — Preserve current data and file identity when updating a simple Sheet through the Drive-only connection.
+- [Reading interface rules](reading-interface-rules.md) — Session-start resume offers, four eBook downloads excluding Building Blocks, and safe multi-verse actions.
+- [Browser jump verification](browser-jump-verification.md) — Confirm link activation and target viewport coordinates before treating an automated click miss as a scrolling bug.

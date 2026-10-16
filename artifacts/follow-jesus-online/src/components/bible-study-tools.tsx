@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react"
+import { selectionReference } from "@/lib/bible-verse-selection"
 import { Link } from "wouter"
 import {
   Bookmark,
-  BookMarked,
   Download,
   FileUp,
   Highlighter,
@@ -49,6 +49,7 @@ interface BibleStudyToolsProps {
   chapter: number
   reference: string
   selectedVerse: StudyVerse | null
+  selectedVerses: StudyVerse[]
   onClearSelection?: () => void
   nextChapter: { bookName: string; chapter: number } | null
   version: "NET" | "KJV"
@@ -60,6 +61,7 @@ export function BibleStudyTools({
   chapter,
   reference,
   selectedVerse,
+  selectedVerses,
   onClearSelection,
   nextChapter,
   version,
@@ -73,10 +75,13 @@ export function BibleStudyTools({
 
   const chapterId = `chapter|${bookName.trim().toLowerCase()}|${chapter}`
   const chapterIsSaved = study.data.bookmarks.some((bookmark) => bookmark.id === chapterId)
-  const verseIsSaved = selectedVerse
-    ? study.data.bookmarks.some((bookmark) => bookmark.id === selectedVerse.id)
-    : false
-  const selectedHighlight = selectedVerse ? study.data.highlights[selectedVerse.id]?.color : undefined
+  const verseIsSaved = selectedVerses.length > 0 && selectedVerses.every(verse =>
+    study.data.bookmarks.some(bookmark => bookmark.id === verse.id))
+  const firstHighlight = selectedVerse ? study.data.highlights[selectedVerse.id]?.color : undefined
+  const selectedHighlight = selectedVerses.every(verse => study.data.highlights[verse.id]?.color === firstHighlight) ? firstHighlight : undefined
+  const hasHighlights = selectedVerses.some(verse => study.data.highlights[verse.id])
+  const selectedReference = selectionReference(selectedVerses)
+  const selectedText = selectedVerses.map(verse => `${verse.text}\n—${verse.bookName} ${verse.chapter}:${verse.verse}`).join("\n\n")
   const selectedNote = selectedVerse ? study.data.notes[selectedVerse.id]?.note ?? "" : ""
 
   useEffect(() => {
@@ -84,7 +89,7 @@ export function BibleStudyTools({
   }, [selectedNote, selectedVerse?.id])
 
   const shareUrl = selectedVerse
-    ? `${window.location.origin}${window.location.pathname}${window.location.search}#verse-${selectedVerse.verse}`
+    ? `${window.location.origin}${window.location.pathname}${window.location.search}#verses-${selectedVerses.map(verse => verse.verse).join(",")}`
     : window.location.href
 
   const handleExport = (format: "backup" | "text") => {
@@ -92,8 +97,8 @@ export function BibleStudyTools({
     toast({
       title: format === "backup" ? "Study backup downloaded" : "Readable study downloaded",
       description: format === "backup"
-        ? "Import this JSON backup later to restore your saved items."
-        : "This text file is for reading or printing; import requires a JSON backup.",
+        ? "Keep this backup file to restore your saved items later."
+        : "This text file is for reading or printing. Use Backup for a restorable copy.",
     })
   }
 
@@ -110,8 +115,8 @@ export function BibleStudyTools({
     }
     if (!imported) {
       toast({
-        title: "That backup could not be imported",
-        description: "Choose a .json backup exported from this Bible reader. Text exports cannot be imported.",
+        title: "That backup could not be restored",
+        description: "Choose the .json file saved using Backup. Readable text copies cannot restore saved study.",
         variant: "destructive",
       })
       return
@@ -135,7 +140,7 @@ export function BibleStudyTools({
     setIsImportOpen(false)
     setPendingImport(null)
     toast({
-      title: "Study backup imported",
+      title: "Study backup restored",
       description:
         mode === "merge"
           ? "The backup was merged with this browser’s saved study."
@@ -154,18 +159,8 @@ export function BibleStudyTools({
   }
 
   return (
-    <aside id="bible-study-tools" className="space-y-4 lg:sticky lg:top-24" aria-labelledby="study-tools-heading">
-      <section className="rounded-2xl border border-card-border bg-card p-4 shadow-sm">
-        <div className="flex items-center gap-2">
-          <BookMarked className="h-5 w-5 text-warm-700" />
-          <h2 id="study-tools-heading" className="text-xl font-bold">
-            Study Tools
-          </h2>
-        </div>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          Select a verse in the passage to save, highlight, note, or share it.
-        </p>
-
+    <aside id="bible-study-tools" className="space-y-4 lg:sticky lg:top-32" aria-label="Bible study tools">
+      <div>
         <Button
           type="button"
           variant={chapterIsSaved ? "warm" : "outline"}
@@ -190,19 +185,19 @@ export function BibleStudyTools({
             </Link>
           </Button>
         ))}
-      </section>
+      </div>
 
-      <section className="rounded-2xl border border-card-border bg-card p-4 shadow-sm">
+      <section id="choose-a-verse" tabIndex={-1} className="scroll-mt-40 rounded-2xl border border-card-border bg-card p-4 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-warm-500">
         <h3 className="font-bold text-foreground">
           {selectedVerse
-            ? `${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse}`
+            ? selectedReference
             : "Choose a verse"}
         </h3>
 
         {selectedVerse ? (
           <>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {selectedVerse.text}
+              {selectedText}
             </p>
 
             <div className="mt-4 grid grid-cols-2 gap-2">
@@ -211,11 +206,11 @@ export function BibleStudyTools({
                 size="sm"
                 variant={verseIsSaved ? "warm" : "outline"}
                 className="border-warm-200 hover:bg-warm-50"
-                onClick={() => study.toggleVerseBookmark(selectedVerse)}
+                onClick={() => study.toggleVerseBookmarks(selectedVerses)}
                 disabled={!study.storageAvailable}
               >
                 <Bookmark className="mr-1.5 h-4 w-4" />
-                {verseIsSaved ? "Saved" : "Save"}
+                {verseIsSaved ? "Saved" : selectedVerses.length > 1 ? "Save verses" : "Save"}
               </Button>
               <Button
                 type="button"
@@ -223,10 +218,11 @@ export function BibleStudyTools({
                 variant={selectedNote ? "secondary" : "outline"}
                 className="border-warm-200 hover:bg-warm-50"
                 onClick={() => setIsNoteOpen(true)}
-                disabled={!study.storageAvailable}
+                disabled={!study.storageAvailable || selectedVerses.length > 1}
+                title={selectedVerses.length > 1 ? "Select one verse to write a note" : "Add a note"}
               >
                 <NotebookPen className="mr-1.5 h-4 w-4" />
-                Note
+                {selectedVerses.length > 1 ? "Note (one verse)" : "Note"}
               </Button>
             </div>
 
@@ -240,21 +236,21 @@ export function BibleStudyTools({
                   <button
                     key={color}
                     type="button"
-                    onClick={() => study.setHighlight(selectedVerse, color)}
+                    onClick={() => study.setHighlights(selectedVerses, color)}
                     disabled={!study.storageAvailable}
                     className={`h-8 w-8 rounded-full border-2 ${colorClasses[color]} ${
                       selectedHighlight === color
                         ? "border-warm-500 ring-2 ring-warm-500/30"
                         : "border-white shadow-sm"
                     } disabled:cursor-not-allowed disabled:opacity-50`}
-                    aria-label={`Highlight ${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} ${color}`}
+                    aria-label={`Highlight ${selectedReference} ${color}`}
                     aria-pressed={selectedHighlight === color}
                   />
                 ))}
-                {selectedHighlight && (
+                {hasHighlights && (
                   <button
                     type="button"
-                    onClick={() => study.setHighlight(selectedVerse, null)}
+                    onClick={() => study.setHighlights(selectedVerses, null)}
                     className="rounded-md px-2 text-xs font-semibold text-muted-foreground underline underline-offset-2 hover:text-warm-800"
                   >
                     Clear
@@ -264,16 +260,16 @@ export function BibleStudyTools({
             </div>
 
             <ShareButton
-              title={`${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} (${version})`}
-              text={`${selectedVerse.text}\n\n${version === "NET" ? "Scripture quoted from the NET Bible." : "King James Version (public domain)."}`}
+              title={`${selectedReference} (${version})`}
+              text={`${selectedText}\n\n${version === "NET" ? "Scripture quoted from the NET Bible." : "King James Version (public domain)."}`}
               url={shareUrl}
-              label="Share verse"
+              label={selectedVerses.length > 1 ? "Share verses" : "Share verse"}
               className="mt-4 w-full border-warm-200 hover:bg-warm-50"
             />
           </>
         ) : (
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Tap or click any verse to make its tools available here.
+            Tap one or more verses in the passage, then save, highlight or share your selection. Tap a selected verse again to remove it. Notes are written one verse at a time.
           </p>
         )}
       </section>
@@ -289,7 +285,7 @@ export function BibleStudyTools({
         <div className="mt-2 grid grid-cols-2 gap-2">
           <Button type="button" size="sm" variant="ghost" onClick={() => handleExport("text")} className="hover:bg-warm-50">
             <Download className="mr-1.5 h-4 w-4" />
-            Export text
+            Save text
           </Button>
           <Button
             type="button"
@@ -300,12 +296,12 @@ export function BibleStudyTools({
             disabled={!study.storageAvailable}
           >
             <FileUp className="mr-1.5 h-4 w-4" />
-            Import JSON
+            Restore
           </Button>
         </div>
         <Button type="button" size="sm" variant="ghost" onClick={() => handleExport("backup")} className="mt-1 w-full justify-start hover:bg-warm-50">
           <Download className="mr-1.5 h-4 w-4" />
-          Export JSON backup (for import)
+          Backup
         </Button>
         <input
           ref={importInputRef}
@@ -313,9 +309,9 @@ export function BibleStudyTools({
           accept=".json,application/json"
           className="sr-only"
           onChange={handleImport}
-          aria-label="Import Bible study backup"
+          aria-label="Restore Bible study backup"
         />
-        <p className="mt-2 text-xs text-muted-foreground">Import accepts JSON backups only; text exports are for reading.</p>
+        <p className="mt-2 text-xs text-muted-foreground">Use Backup before clearing browser data or changing devices. Restore loads a backup file; Save text creates a readable copy.</p>
       </section>
 
       <div
@@ -329,7 +325,7 @@ export function BibleStudyTools({
 
       {!study.storageAvailable && (
         <div className="rounded-xl border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive" role="alert">
-          Local browser storage is unavailable. Saving, highlighting, notes, and imports are disabled in this session.
+          Local browser storage is unavailable. Saving, highlighting, notes, and restoring are disabled in this session.
         </div>
       )}
 
@@ -340,7 +336,7 @@ export function BibleStudyTools({
               Note for {selectedVerse?.bookName} {selectedVerse?.chapter}:{selectedVerse?.verse}
             </DialogTitle>
             <DialogDescription>
-              This private note stays only in this browser unless you export a backup.
+              This private note stays only in this browser unless you save a backup.
             </DialogDescription>
           </DialogHeader>
           <Textarea
@@ -364,9 +360,9 @@ export function BibleStudyTools({
       <Dialog open={isImportOpen} onOpenChange={setIsImportOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Import Bible study backup</DialogTitle>
+            <DialogTitle>Restore Bible study backup</DialogTitle>
             <DialogDescription>
-              Merge keeps your current items and adds the backup. Replace removes current items first.
+              Combine keeps your current items and adds the backup. Replace removes current items first.
             </DialogDescription>
           </DialogHeader>
           {pendingImport && <BibleStudyBackupPreview data={pendingImport} />}
@@ -380,7 +376,7 @@ export function BibleStudyTools({
               Replace current data
             </Button>
             <Button type="button" onClick={() => finishImport("merge")}>
-              Merge saved data
+              Combine saved items
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -397,10 +393,10 @@ export function BibleStudyTools({
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
                 <p className="truncate text-sm font-bold text-foreground">
-                  {selectedVerse.bookName} {selectedVerse.chapter}:{selectedVerse.verse}
+                  {selectedReference}
                 </p>
                 <p className="mt-0.5 max-h-24 overflow-y-auto text-xs leading-relaxed text-muted-foreground">
-                  {selectedVerse.text}
+                  {selectedVerses.length > 1 ? `${selectedVerses.length} verses selected` : selectedVerse.text}
                 </p>
               </div>
               {onClearSelection && (
@@ -419,7 +415,7 @@ export function BibleStudyTools({
                 type="button"
                 size="sm"
                 variant={verseIsSaved ? "warm" : "outline"}
-                onClick={() => study.toggleVerseBookmark(selectedVerse)}
+                onClick={() => study.toggleVerseBookmarks(selectedVerses)}
                 disabled={!study.storageAvailable}
                 className="w-full px-2 border-warm-200 hover:bg-warm-50"
               >
@@ -432,15 +428,16 @@ export function BibleStudyTools({
                 size="sm"
                 variant={selectedNote ? "secondary" : "outline"}
                 onClick={() => setIsNoteOpen(true)}
-                disabled={!study.storageAvailable}
+                disabled={!study.storageAvailable || selectedVerses.length > 1}
+                title={selectedVerses.length > 1 ? "Select one verse to write a note" : "Add a note"}
                 className="w-full px-2 border-warm-200 hover:bg-warm-50"
               >
                 <NotebookPen className="mr-1 h-4 w-4" />
                 Note
               </Button>
               <ShareButton
-                 title={`${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} (${version})`}
-                 text={`${selectedVerse.text}\n\n${version === "NET" ? "Scripture quoted from the NET Bible." : "King James Version (public domain)."}`}
+                  title={`${selectedReference} (${version})`}
+                  text={`${selectedText}\n\n${version === "NET" ? "Scripture quoted from the NET Bible." : "King James Version (public domain)."}`}
                 url={shareUrl}
                 label="Share"
                 className="h-9 w-full justify-center px-2 border-warm-200 hover:bg-warm-50"
@@ -453,14 +450,14 @@ export function BibleStudyTools({
                 <button
                   key={`mobile-${color}`}
                   type="button"
-                  onClick={() => study.setHighlight(selectedVerse, color)}
+                  onClick={() => study.setHighlights(selectedVerses, color)}
                   disabled={!study.storageAvailable}
                   className={`h-7 w-7 rounded-full border-2 ${colorClasses[color]} ${
                     selectedHighlight === color
                       ? "border-warm-500 ring-2 ring-warm-500/30"
                       : "border-white shadow-sm"
                   } disabled:cursor-not-allowed disabled:opacity-50`}
-                  aria-label={`Highlight ${selectedVerse.bookName} ${selectedVerse.chapter}:${selectedVerse.verse} ${color}`}
+                  aria-label={`Highlight ${selectedReference} ${color}`}
                   aria-pressed={selectedHighlight === color}
                 />
               ))}

@@ -17,7 +17,7 @@ export function PromisesReader() {
   const [view, setView] = useState<View>("intro");
   const [selectedId, setSelectedId] = useState("");
   const [expanded, setExpanded] = useState("");
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(true);
   const [saved, setSaved] = useState<string[]>([]);
   const [storageError, setStorageError] = useState("");
   const [savedReady, setSavedReady] = useState(false);

@@ -6,10 +6,13 @@ import {
   isSamePage,
   isTrackablePage,
   saveRecentPage,
+  takeSessionResumePage,
 } from "../src/hooks/use-recent-page.ts";
 
 const originalStorage = globalThis.localStorage;
+const originalSessionStorage = globalThis.sessionStorage;
 const stored = new Map<string, string>();
+const session = new Map<string, string>();
 
 before(() => {
   globalThis.localStorage = {
@@ -17,10 +20,16 @@ before(() => {
     setItem: (key: string, value: string) => { stored.set(key, value); },
     removeItem: (key: string) => { stored.delete(key); },
   } as Storage;
+  globalThis.sessionStorage = {
+    getItem: (key: string) => session.get(key) ?? null,
+    setItem: (key: string, value: string) => { session.set(key, value); },
+    removeItem: (key: string) => { session.delete(key); },
+  } as Storage;
 });
 
 after(() => {
   globalThis.localStorage = originalStorage;
+  globalThis.sessionStorage = originalSessionStorage;
 });
 
 test("the saved page is available before visiting another page", () => {
@@ -44,4 +53,23 @@ test("private or start pages do not replace the saved reading page", () => {
   assert.equal(isTrackablePage("/admin/reactions"), false);
   assert.equal(isTrackablePage("/adv/begin-the-adventure"), true);
   assert.equal(isTrackablePage("/deeper/the-gift-of-eternal-life"), true);
+});
+
+test("resume is offered at session start, not on later navigation or reload", () => {
+  session.clear();
+  saveRecentPage("/gf/a-heart-after-god");
+  assert.equal(takeSessionResumePage(), "/gf/a-heart-after-god");
+  saveRecentPage("/bible/John/3");
+  assert.equal(takeSessionResumePage(), null);
+  assert.equal(takeSessionResumePage(), null);
+  session.clear(); // New tab session; the saved reading position remains.
+  assert.equal(takeSessionResumePage(), "/bible/John/3");
+});
+
+test("an empty first session does not begin offering a banner mid-session", () => {
+  session.clear();
+  clearRecentPage();
+  assert.equal(takeSessionResumePage(), null);
+  saveRecentPage("/prayer");
+  assert.equal(takeSessionResumePage(), null);
 });

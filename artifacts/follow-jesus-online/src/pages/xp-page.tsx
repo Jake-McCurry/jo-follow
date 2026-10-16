@@ -3,7 +3,7 @@ import { Layout } from "@/components/layout";
 import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { PlayCircle, MessageCircle, Heart } from "lucide-react";
+import { PlayCircle, Heart } from "lucide-react";
 import NotFound from "@/pages/not-found";
 
 type XPType = "received" | "rededicated" | "believer" | "did-not-pray";
@@ -234,10 +234,9 @@ export function XPPage() {
         </div>}
 
         {/* Support CTA */}
-        <div className="bg-card border border-card-border text-foreground rounded-2xl p-8 md:p-12 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both shadow-sm">
-          <MessageCircle className="w-12 h-12 mx-auto mb-6 text-warm-700" />
-          <h2 className="text-3xl font-bold mb-4">{content.contactHeading ?? "We’re Here If You Need Anything"}</h2>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
+        <div className="mx-auto max-w-3xl bg-card border border-card-border text-foreground rounded-2xl p-8 md:p-10 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both shadow-sm">
+          <h2 className="text-2xl font-bold mb-4">{content.contactHeading ?? "We’re Here If You Need Anything"}</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto mb-8">
             {content.contactText}
           </p>
           <Button asChild size="lg" variant="warm" className="shadow-md">

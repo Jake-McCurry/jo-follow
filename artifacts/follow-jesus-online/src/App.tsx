@@ -12,6 +12,7 @@ import {
   Router as WouterRouter,
 } from 'wouter';
 import { Home } from '@/pages/home';
+import { ConnectWithGodPage } from '@/pages/connect-with-god';
 import { BibleLandingPage } from '@/pages/bible-landing';
 import { BibleReaderPage } from '@/pages/bible-reader';
 import { BibleSavedPage } from '@/pages/bible-saved';
@@ -84,6 +85,9 @@ function PageMetadata() {
     description = 'Watch how God sees you now and read the complete God’s Vision transcript.';
   } else if (pathname === '/xp-pages') {
     title = 'Where Did You Start? | Follow Jesus Online';
+  } else if (pathname === '/connect-with-god') {
+    title = 'Connect with God | Follow Jesus Online';
+    description = 'Explore prayer, Scripture and resources for walking with God throughout your day.';
   } else if (pathname === '/explore-articles') {
     title = 'Explore Articles | Follow Jesus Online';
     description = 'Resources and guides to help you understand your faith.';
@@ -218,6 +222,7 @@ function Router() {
           <RewatchPage videoId="psw_5rn9WFY" />
         </Route>
         <Route path="/message" component={MessagePage} />
+        <Route path="/connect-with-god" component={ConnectWithGodPage} />
         <Route path="/admin/reactions" component={AdminReactionsPage} />
         <Route path="/bible" component={BibleLandingPage} />
         <Route path="/bible/saved" component={BibleSavedPage} />

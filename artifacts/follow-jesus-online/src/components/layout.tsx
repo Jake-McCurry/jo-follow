@@ -1,23 +1,29 @@
-import { type ReactNode, useEffect, useState } from "react"
+import { type ReactNode, useEffect, useRef, useState } from "react"
 import { Link, useLocation } from "wouter"
 import { TopicMenuBar } from "@/components/topic-menu-bar"
 import { Button } from "@/components/ui/button"
-import { clearRecentPage, getRecentPage, isSamePage, saveRecentPage } from "@/hooks/use-recent-page"
+import { takeSessionResumePage, isSamePage, saveRecentPage } from "@/hooks/use-recent-page"
 import joLogo from "@/assets/jol-logo-white.png"
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [location] = useLocation()
-  const [recentPage, setRecentPage] = useState(getRecentPage)
+  const [recentPage, setRecentPage] = useState<string | null>(null)
+  const resumeChecked = useRef(false)
+  const initialLocation = useRef(location)
 
   useEffect(() => {
-    setRecentPage(getRecentPage())
+    if (!resumeChecked.current) {
+      resumeChecked.current = true
+      setRecentPage(takeSessionResumePage())
+    } else if (location !== initialLocation.current) {
+      setRecentPage(null)
+    }
     saveRecentPage(location)
   }, [location])
 
   const resumePage = recentPage && !isSamePage(recentPage, location) ? recentPage : null
   const dismissResume = () => {
-    clearRecentPage()
     setRecentPage(null)
   }
 
@@ -105,20 +111,15 @@ export function Layout({ children }: { children: ReactNode }) {
                 Read the NET Bible
               </Link>
               <Link
-                href="/bible/saved"
+                href="/knowing-god"
                 onClick={() => setIsMenuOpen(false)}
                 className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
-                Saved Bible Items
+                Knowing God
               </Link>
               <Link
-                href="/#connect-with-god"
-                onClick={() => {
-                  setIsMenuOpen(false)
-                  if (location.split("?")[0] === "/") {
-                    document.getElementById("connect-with-god")?.scrollIntoView()
-                  }
-                }}
+                href="/connect-with-god"
+                onClick={() => setIsMenuOpen(false)}
                 className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
                 Connect with God
@@ -128,7 +129,7 @@ export function Layout({ children }: { children: ReactNode }) {
                 onClick={() => setIsMenuOpen(false)}
                 className="border-b border-warm-200 px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-warm-50 hover:text-warm-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500"
               >
-                Send a Message
+                Questions &amp; Comments
               </Link>
               <Link
                 href="/xp-pages"
@@ -165,6 +166,10 @@ export function Layout({ children }: { children: ReactNode }) {
       <footer className="mt-12 border-t border-foreground/10 bg-foreground py-9 text-primary-foreground">
         <div className="mx-auto max-w-4xl px-6 text-center text-sm text-primary-foreground/80">
           <p>© {new Date().getFullYear()} JesusOnline Ministries. All rights reserved.</p>
+          <nav aria-label="Footer" className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-3">
+            <a href="https://jesusonlineministries.org/about-us" className="underline underline-offset-4 hover:text-white">About Us</a>
+            <Link href="/message" className="underline underline-offset-4 hover:text-white">Contact Us</Link>
+          </nav>
           <a
             href="https://jesusonlineministries.org/privacy-policy/"
             className="mt-3 inline-block underline underline-offset-4 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-foreground"
