@@ -22,3 +22,4 @@
 - [Experiencing God editorial](experiencing-god-editorial.md) — Use full document headings; defer specified series links until the Lord’s Prayer Guide and Because statements uploads.
 - [PDF download size](pdf-download-size.md) — Aim for PDFs under 2 MB where possible, preserving readability, text, links, and layout.
 - [Staging change log timing](staging-change-log.md) — The user pushes to staging; update JOLF Change log only after confirmation, never for local-only changes.
+- [Drive-only spreadsheet updates](drive-only-spreadsheet-updates.md) — Preserve current data and file identity when updating a simple Sheet through the Drive-only connection.
