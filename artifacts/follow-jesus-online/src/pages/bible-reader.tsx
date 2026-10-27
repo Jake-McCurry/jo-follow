@@ -202,16 +202,23 @@ export function BibleReaderPage() {
                   ))}
                 </SelectNative>
                 </div>
-                <div className="w-24">
-                <SelectNative
-                  value={version}
-                  onChange={(e) => setLocation(chapterHref(canonicalBookName, chapterParam, e.target.value as "NET" | "KJV"))}
-                  className="bg-white font-medium text-foreground"
-                  aria-label="Select Bible translation"
-                >
-                  <option value="NET">NET</option>
-                  <option value="KJV">KJV</option>
-                </SelectNative>
+                <div className="w-full sm:w-48">
+                  <p id="bible-translation-label" className="mb-1 text-xs font-bold uppercase tracking-[.15em] text-muted-foreground">Translation</p>
+                  <div role="group" aria-labelledby="bible-translation-label" className="flex rounded-md border border-[var(--color-border-control)] bg-white p-1">
+                    {(["NET", "KJV"] as const).map(value => (
+                      <button
+                        key={value}
+                        type="button"
+                        aria-pressed={version === value}
+                        onClick={() => {
+                          if (version !== value) setLocation(chapterHref(canonicalBookName, chapterParam, value))
+                        }}
+                        className={`min-h-11 flex-1 rounded border px-3 py-2 text-sm font-bold text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500 focus-visible:ring-offset-2 ${version === value ? "border-warm-500 bg-warm-100" : "border-transparent hover:bg-warm-50"}`}
+                      >
+                        {value}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
