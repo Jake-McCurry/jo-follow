@@ -21,9 +21,19 @@ test("Knowing God navigation stays in Follow, including all supplemental Scriptu
   assert.equal(knowingGodScriptureHref("Jude 20-23"), "/bible/Jude/1#verse-20");
   assert.equal(knowingGodScriptureHref("2 John 1-6", "/follow/"), "/follow/bible/2%20John/1#verse-1");
   assert.equal(knowingGodScriptureHref("3 John 1:12"), "/bible/3%20John/1#verse-12");
+  const concordance = await readFile(new URL("ConcordancePrototype.tsx", dir), "utf8");
+  const scriptureLinks = concordance.match(/<a\b[^>]*href=\{scriptureHref\([^]*?\)\}[^>]*>/g) ?? [];
+  assert.equal(scriptureLinks.length, 3, "Main passages and both supplemental reference formats are linked");
+  for (const link of scriptureLinks) {
+    assert.match(link, /target="_blank"/);
+    assert.match(link, /rel="noopener noreferrer"/);
+  }
   const index = await json("public/knowing-god/data/index.json");
   for (const name of new Set(index.topics.map((item) => item.payload))) {
     for (const topic of (await json(`public/knowing-god/data/${name}`)).topics) {
+      for (const passage of topic.passages) {
+        assert.match(knowingGodScriptureHref(passage.reference, "/follow/"), /^\/follow\/bible\/[^/]+\/\d+(?:#verse-\d+)?$/, passage.reference);
+      }
       for (const section of topic.additionalScripture) {
         for (const link of section.links) {
           for (const query of link.queries) {
