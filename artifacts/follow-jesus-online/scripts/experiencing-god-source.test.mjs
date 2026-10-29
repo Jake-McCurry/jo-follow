@@ -9,6 +9,8 @@ import { getGFBook } from "../src/data/go-further-library.ts";
 const root = path.resolve(import.meta.dirname, "..");
 const metadata = JSON.parse(readFileSync(path.join(root, "src/data/experiencing-god-articles.json"), "utf8"));
 const lordsMetadata = JSON.parse(readFileSync(path.join(root, "src/data/lords-prayer-articles.json"), "utf8"));
+const becauseMetadata = JSON.parse(readFileSync(path.join(root, "src/data/because-statements.json"), "utf8"));
+const resourceTarget = sourceId => [...lordsMetadata, ...becauseMetadata].find(item => item.prefix.trim() === sourceId);
 // Reuse the independent nested-DOCX text extractor, not the Vite parser being tested.
 const expected = JSON.parse(execFileSync("python3", [
   path.join(root, "scripts/prayer-source-extract.py"),
@@ -50,7 +52,7 @@ test("the overview links all seven Tips invitations to their corresponding publi
   }
 });
 
-test("uploaded Lord’s Prayer resources are linked while Because statements stay pending", () => {
+test("uploaded Lord’s Prayer and Because statements resources are linked", () => {
   assert.deepEqual(metadata.filter(item => item.pendingLinks).map(item =>
     [item.prefix, item.pendingLinks.length]), [["2.1.002", 4], ["2.1.004", 3], ["2.1.005", 1], ["2.1.006", 4], ["2.1.008", 4]]);
   for (const item of metadata) {
@@ -59,9 +61,9 @@ test("uploaded Lord’s Prayer resources are linked while Because statements sta
       assert.match(pending.sourceId, /^2\.(?:2|4\.30)\.\d{3}$/);
       const block = record.blocks.find(block => block.text === pending.label);
       assert.ok(block, `${item.prefix}: ${pending.label}`);
-      const target = lordsMetadata.find(item => item.prefix.trim() === pending.sourceId);
+      const target = resourceTarget(pending.sourceId);
       if (target) assert.deepEqual(block.links, [{ label: pending.label, href: target.href }]);
-      else assert.ok(!block.links?.length, "Because statements await their own upload");
+      else assert.fail(`Unresolved uploaded resource: ${pending.sourceId}`);
     }
   }
 });
@@ -75,7 +77,7 @@ test("Journey and Desert include the same four resources as Quiet Time without a
     assert.deepEqual(record.blocks.slice(-5), [
       { kind: "heading", text: item.appendedResourcesHeading },
       ...quietTime.pendingLinks.map(link => {
-        const target = lordsMetadata.find(item => item.prefix.trim() === link.sourceId);
+        const target = resourceTarget(link.sourceId);
         return { kind: "paragraph", text: link.label,
           ...(target ? { links: [{ label: link.label, href: target.href }] } : {}) };
       }),
@@ -89,7 +91,7 @@ test("source resource links are retained, same-site links stay local, and existi
     Object.entries(expected).find(([key]) => key.startsWith(item.prefix))[1].links
       .map(link => ({ ...link, href: link.href.replace(/^https:\/\/follow\.jesusonline\.com(?=\/)/i, "") })));
   const activatedLinks = metadata.flatMap(item => (item.pendingLinks ?? []).flatMap(resource => {
-    const target = lordsMetadata.find(item => item.prefix.trim() === resource.sourceId);
+    const target = resourceTarget(resource.sourceId);
     return target ? [{ label: resource.label, href: target.href }] : [];
   }));
   const ordered = links => [...links].sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));

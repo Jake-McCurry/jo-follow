@@ -36,19 +36,19 @@ export const CONNECT_WITH_GOD_RESOURCES: ConnectWithGodResource[] = [
     href: "/promises",
   },
   {
-    title: "Reflecting on God\u2019s Majesty",
+    title: "God\u2019s Majesty",
     description: "Because of who God is, I worship.",
-    href: "/gf/beholding-the-majesty-of-god",
+    href: "/because/gods-majesty",
   },
   {
-    title: "Reflecting on Your identity in Christ",
+    title: "Your Identity in Christ",
     description: "Because of who I am in Christ, I belong.",
-    href: "/gf/your-new-identity-in-christ",
+    href: "/because/your-identity-in-christ",
   },
   {
-    title: "Reflecting on the Work of the Spirit",
+    title: "The Work of the Holy Spirit",
     description: "Because of what the Spirit does, I walk.",
-    href: "/gf/walking-in-the-spirit",
+    href: "/because/the-work-of-the-holy-spirit",
   },
   {
     title: "Experiencing God 24/7",

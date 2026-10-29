@@ -15,6 +15,7 @@ import linkedArticles from './src/data/linked-articles.json';
 import prayerArticles from './src/data/prayer-articles.json';
 import experiencingGodArticles from './src/data/experiencing-god-articles.json';
 import lordsPrayerArticles from './src/data/lords-prayer-articles.json';
+import becauseStatements from './src/data/because-statements.json';
 
 const PRAYER_ARCHIVE = 'OneDrive_2026-10-14_1792010333357.zip';
 
@@ -506,7 +507,7 @@ function readExperiencingGodArticles(attachedAssetsDir: string, tempDir: string)
       }
     }
     for (const resource of metadata.pendingLinks ?? []) {
-      const target = lordsPrayerArticles.find(item => item.prefix.trim() === resource.sourceId);
+      const target = [...lordsPrayerArticles, ...becauseStatements].find(item => item.prefix.trim() === resource.sourceId);
       if (!target) continue;
       const matches = blocks.filter(block => block.text === resource.label);
       if (matches.length !== 1) throw new Error(`Missing or duplicate prayer resource: ${resource.label}`);
@@ -516,6 +517,28 @@ function readExperiencingGodArticles(attachedAssetsDir: string, tempDir: string)
       throw new Error('Experiencing God overview must link to all seven readings');
     }
     return { route: `/${metadata.slug}`, title: blocks[0].text, category: 'Experiencing God', blocks };
+  });
+}
+
+function readBecauseStatements(attachedAssetsDir: string, tempDir: string): ArticleRecord[] {
+  const archivePath = path.join(attachedAssetsDir, 'OneDrive_2026-10-29_(1)_1793306993730.zip');
+  const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
+    .split('\n').filter(entry => entry.endsWith('.docx'));
+  if (entries.length !== 3) throw new Error('Expected three Because statements documents');
+  return becauseStatements.map(metadata => {
+    const matches = entries.filter(entry => path.basename(entry).startsWith(`${metadata.prefix} `));
+    if (matches.length !== 1) throw new Error(`Missing Because statements source: ${metadata.prefix}`);
+    const blocks = readFollowArticle(archivePath, matches[0], tempDir, true);
+    if (!blocks.some(block => block.text === 'GO DEEPER')) throw new Error(`Missing eBook contents: ${metadata.prefix}`);
+    // The copied Word style on the Majesty introduction is a heading, but this
+    // full explanatory paragraph has the same role as the other two intros.
+    for (const block of blocks) {
+      if (block.text.startsWith('These Because statements are from ')) {
+        block.kind = 'paragraph';
+        delete block.headingLevel;
+      }
+    }
+    return { route: `/${metadata.slug}`, title: blocks[0].text, category: 'Because statements', blocks };
   });
 }
 
@@ -720,6 +743,7 @@ function buildArticleLibrary(): ArticleRecord[] {
       ...readPrayerArticles(attachedAssetsDir, tempDir),
       ...readLordsPrayerArticles(attachedAssetsDir, tempDir),
       ...readExperiencingGodArticles(attachedAssetsDir, tempDir),
+      ...readBecauseStatements(attachedAssetsDir, tempDir),
     ];
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });

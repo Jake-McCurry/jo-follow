@@ -122,6 +122,7 @@ function PageMetadata() {
     pathname.startsWith('/lords-prayer/') ||
     pathname === '/experiencing-god' ||
     pathname.startsWith('/experiencing-god/') ||
+    pathname.startsWith('/because/') ||
     pathname.startsWith('/adv/') ||
     pathname.startsWith('/deeper/') ||
     pathname.startsWith('/adv-') ||
@@ -237,6 +238,7 @@ function Router() {
         <Route path="/lords-prayer/:slug" component={ArticlePlaceholder} />
         <Route path="/experiencing-god" component={ArticlePlaceholder} />
         <Route path="/experiencing-god/:slug" component={ArticlePlaceholder} />
+        <Route path="/because/:slug" component={ArticlePlaceholder} />
         <Route path="/adv1" component={AdventureIndexPage} />
         <Route path="/adv/:slug" component={ArticlePlaceholder} />
         <Route path="/deeper/:slug" component={ArticlePlaceholder} />

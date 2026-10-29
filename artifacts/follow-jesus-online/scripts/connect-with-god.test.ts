@@ -26,9 +26,9 @@ test("Connect with God preserves all nine resource titles and descriptions", () 
     { title: "Read the Bible", description: "Open the Word. Meet the Father." },
     { title: "Knowing God / Topical Concordance", description: "A new view of the Father, one topic at a time." },
     { title: "God’s Promises for Hope", description: "When feelings fail, His promises still stand." },
-    { title: "Reflecting on God’s Majesty", description: "Because of who God is, I worship." },
-    { title: "Reflecting on Your identity in Christ", description: "Because of who I am in Christ, I belong." },
-    { title: "Reflecting on the Work of the Spirit", description: "Because of what the Spirit does, I walk." },
+    { title: "God’s Majesty", description: "Because of who God is, I worship." },
+    { title: "Your Identity in Christ", description: "Because of who I am in Christ, I belong." },
+    { title: "The Work of the Holy Spirit", description: "Because of what the Spirit does, I walk." },
     { title: "Experiencing God 24/7", description: "Practice His presence from first light to last thought." },
     { title: "Prayer Starters", description: "Begin the conversation." },
     { title: "The Lord’s Prayer Guide", description: "Pray as Jesus taught—one topic at a time." },
@@ -51,6 +51,11 @@ test("every menu and resource destination resolves to existing content", () => {
     if (href === "/prayer") {
       assert.ok(prayerArticles.some(article => article.href === href && article.order === 0));
       assert.ok(statSync(new URL("../../../attached_assets/OneDrive_2026-10-14_1792010333357.zip", import.meta.url)).size > 0);
+      continue;
+    }
+    if (href.startsWith("/because/")) {
+      const catalog = JSON.parse(readFileSync(new URL("../src/data/because-statements.json", import.meta.url), "utf8"));
+      assert.ok(catalog.some((article: { href: string }) => article.href === href));
       continue;
     }
     if (href === "/rewatch" || href === "/gf/" || href === "/knowing-god" || href === "/promises") continue;
