@@ -5,6 +5,7 @@ import faqReadingLinks from "./faq-reading-links.json";
 import prayerMetadata from "./prayer-articles.json";
 import experiencingGodMetadata from "./experiencing-god-articles.json";
 import lordsPrayerMetadata from "./lords-prayer-articles.json";
+import becauseMetadata from "./because-statements.json";
 import { applyBelieverResourceRevisions } from "./believer-resource-revisions";
 import { applyGuideMainFormatRevisions } from "./guide-main-format-revisions";
 import { applyGuideDeeperFormatRevisions } from "./guide-deeper-format-revisions";
@@ -17,6 +18,7 @@ import {
 import generatedContent from "virtual:article-content";
 
 export type ArticleGroup =
+  | "because"
   | "adventure"
   | "deeper"
   | "resources"
@@ -295,6 +297,17 @@ const experiencingGodRecords: Article[] = experiencingGodMetadata.map(metadata =
 });
 
 export const ARTICLE_LIBRARY = [
+  ...becauseMetadata.map(metadata => {
+    const source = generatedContent.find(record => record.route === `/${metadata.slug}` && record.category === "Because statements");
+    if (!source) throw new Error(`Missing Because statements article: ${metadata.prefix}`);
+    return {
+      slug: metadata.slug, title: source.title, group: "because" as const, order: metadata.order,
+      excerpt: source.blocks[2]?.text ?? "",
+      blocks: source.blocks.slice(1).map(block => ({
+        type: block.kind, text: block.text, headingLevel: block.headingLevel, links: block.links,
+      })),
+    };
+  }),
   ...(library.articles as Article[]).filter((article) => !article.retired &&
     !lordsPrayerMetadata.some(item => item.slug === article.slug)).map((article) => {
     const updated = updatedBySlug.get(article.slug);
@@ -372,6 +385,8 @@ export function getGuideArticleForDeeper(slug: string) {
 }
 
 export function getArticlePath(slug: string) {
+  const because = becauseMetadata.find(article => article.slug === slug);
+  if (because) return because.href;
   const lordsPrayer = lordsPrayerMetadata.find(article => article.slug === slug);
   if (lordsPrayer) return lordsPrayer.href;
   const experiencingGod = experiencingGodMetadata.find(article => article.slug === slug);
@@ -384,6 +399,8 @@ export function getArticlePath(slug: string) {
 }
 
 export function getArticleSlugFromPath(pathname: string) {
+  const because = becauseMetadata.find(article => article.href === pathname.replace(/\/$/, ""));
+  if (because) return because.slug;
   const segments = pathname.split("/").filter(Boolean);
   if (segments.length === 1 && segments[0] === "lords-prayer") return "deeper-the-lords-prayer-guide";
   if (segments.length === 2 && segments[0] === "lords-prayer") return `lords-prayer-${segments[1]}`;

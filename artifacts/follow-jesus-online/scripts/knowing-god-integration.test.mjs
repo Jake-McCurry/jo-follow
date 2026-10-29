@@ -95,5 +95,5 @@ test("the feature routes and menu/card links are registered without changing the
   const data = await readFile(new URL("src/data/connect-with-god.ts", root), "utf8");
   assert.match(data, /label: "Knowing God", href: "\/knowing-god"/);
   assert.match(data, /title: "Knowing God \/ Topical Concordance",[\s\S]*?href: "\/knowing-god"/);
-  assert.match(data, /title: "Reflecting on God(?:’|\\u2019)s Majesty",[\s\S]*?href: "\/gf\/beholding-the-majesty-of-god"/);
+  assert.match(data, /title: "God(?:’|\\u2019)s Majesty",[\s\S]*?href: "\/because\/gods-majesty"/);
 });

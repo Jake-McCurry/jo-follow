@@ -18,6 +18,8 @@ import { ArticleEndSection } from "@/components/article-end-section";
 import { PrayerGuideContent } from "@/components/prayer-guide-content";
 import linkedArticleMetadata from "@/data/linked-articles.json";
 import { splitScriptureText } from "@/lib/scripture-text";
+import becauseMetadata from "@/data/because-statements.json";
+import { BecauseBookContents } from "@/components/because-book-contents";
 
 const WEB_ADDRESS_PATTERN =
   /(https?:\/\/[^\s]+|(?:follow\.jesusonline\.com|bible\.com|equip\.jesusonline\.com|app\.jesusonline\.com)(?:\/[^\s]*)?)/g;
@@ -205,6 +207,7 @@ export function DefaultArticleBlockView({ block, titleLinks = false }: { block: 
 }
 
 function groupLabel(group: ArticleBlock["type"] | string) {
+  if (group === "because") return "Because Statements";
   if (group === "lords-prayer") return "The Lord’s Prayer Guide";
   if (group === "experiencing-god") return "Experiencing God 24/7";
   if (group === "prayer") return "Prayer Starters";
@@ -435,7 +438,9 @@ export function ArticlePlaceholder() {
     ? guideArticles.findIndex((item) => item.slug === mainGuideArticle.slug)
     : -1;
   const nextGuideArticle = mainGuideIndex >= 0 ? guideArticles[mainGuideIndex + 1] : undefined;
-  const blocks = article.blocks;
+  const because = becauseMetadata.find(item => item.slug === article.slug);
+  const footerIndex = because ? article.blocks.findIndex(block => block.text === "GO DEEPER") : -1;
+  const blocks = footerIndex >= 0 ? article.blocks.slice(0, footerIndex) : article.blocks;
   const isJourneyFaq = article.group === "received" || article.group === "rededicated";
   const introInContentBox = isJourneyFaq || article.group === "believer" ||
     isGuideOverview;
@@ -476,12 +481,12 @@ export function ArticlePlaceholder() {
       <main className="container mx-auto max-w-4xl px-5 py-8 sm:px-8 md:py-10">
         <div data-testid="article-utilities" className="mb-8 flex items-center justify-between gap-3">
           <Button asChild variant="ghost" className="-ml-2 h-auto min-h-11 min-w-0 max-w-full px-2 text-left text-sm font-medium text-muted-foreground hover:text-foreground">
-             <Link href={isLordsPrayer ? isLordsOverview ? "/#connect-with-god" : "/lords-prayer" : isExperiencingGod ? articleIndex === 0 ? "/#connect-with-god" : "/experiencing-god" : article.group === "prayer" ? articleIndex === 0 ? "/#connect-with-god" : "/prayer" : linkedSource ? getArticlePath(linkedSource.faqSlug) : "/explore-articles"}>
-               <ChevronLabel direction="left" text={isLordsPrayer ? isLordsOverview ? "Back to Connect with God" : "Back to The Lord’s Prayer Guide" : isExperiencingGod ? articleIndex === 0 ? "Back to Connect with God" : "Back to Experiencing God 24/7" : article.group === "prayer" ? articleIndex === 0 ? "Back to Connect with God" : "Back to Prayer Starters" : linkedSource ? "Back to question" : "Back to Articles"} />
+             <Link href={because ? "/connect-with-god" : isLordsPrayer ? isLordsOverview ? "/#connect-with-god" : "/lords-prayer" : isExperiencingGod ? articleIndex === 0 ? "/#connect-with-god" : "/experiencing-god" : article.group === "prayer" ? articleIndex === 0 ? "/#connect-with-god" : "/prayer" : linkedSource ? getArticlePath(linkedSource.faqSlug) : "/explore-articles"}>
+               <ChevronLabel direction="left" text={because ? "Back to Connect with God" : isLordsPrayer ? isLordsOverview ? "Back to Connect with God" : "Back to The Lord’s Prayer Guide" : isExperiencingGod ? articleIndex === 0 ? "Back to Connect with God" : "Back to Experiencing God 24/7" : article.group === "prayer" ? articleIndex === 0 ? "Back to Connect with God" : "Back to Prayer Starters" : linkedSource ? "Back to question" : "Back to Articles"} />
             </Link>
           </Button>
           <div className="ml-auto flex shrink-0 items-center gap-2">
-           {article.group !== "linked" && !isGuideOverview && (
+           {article.group !== "linked" && !because && !isGuideOverview && (
               <span className="text-xs text-muted-foreground">
                {articleIndex + 1} of {groupArticles.length}
              </span>
@@ -545,6 +550,8 @@ export function ArticlePlaceholder() {
             </div>
           </div>
           )}
+
+          {because && footerIndex >= 0 && <BecauseBookContents blocks={article.blocks.slice(footerIndex)} bookSlug={because.bookSlug} />}
 
           <ArticleEndSection
             articleSlug={article.slug}
