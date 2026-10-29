@@ -182,3 +182,17 @@ mtime_ms = 1792095576995
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/82de869f-4df9-4929-b6be-01383ebbc243/20d93f70-57c2-4073-b363-3d4af2ca9f17"
 storage_version_token = "1792095588534420"
 content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+[[outputs]]
+id = "2rM-1rJTG8Z62uKncUpuZ"
+uri = "file://generated-artifacts/alj-leader-kit/This%20Sunday%20Leader%20Kit%20-%20ALJ%20Guide%20-%20v.102126.pdf"
+type = "pdf"
+title = "ALJ Leader Kit — v.102126 (compressed)"
+description = "1.57 MB, reduced from 15.26 MB. All 18 pages, selectable text and 40 links preserved."
+logical_id = "93973fd6-8a4c-47d9-adbd-801db734ee9e"
+content_hash = "sha256:9e5423a189c4c3685800ae5fe44ae01ef5e5414882e42c8e998098a435b4188a"
+size = 1567297
+mtime_ms = 1793299992145
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/93973fd6-8a4c-47d9-adbd-801db734ee9e/c0c89bac-32fc-4d8d-83e8-a13e21d68618"
+storage_version_token = "1793300084477391"
+content_type = "application/pdf"

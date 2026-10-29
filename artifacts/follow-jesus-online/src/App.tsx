@@ -30,6 +30,7 @@ import { knowingGodIntroductions } from '@/data/knowingGodIntroductions';
 import { RewatchPage } from '@/pages/rewatch';
 import { MessagePage } from '@/pages/message';
 import { ArticlePlaceholder } from '@/pages/article-placeholder';
+import { AdventureIndexPage } from '@/pages/adv-index';
 import { AdminReactionsPage } from '@/pages/admin/reactions';
 import { getArticleBySlug, getArticlePath, getArticleSlugFromPath } from '@/data/article-library';
 import { getGFBook } from '@/data/go-further-library';
@@ -83,6 +84,9 @@ function PageMetadata() {
   } else if (pathname === '/videos/Gods-Vision') {
     title = 'God’s Vision | Follow Jesus Online';
     description = 'Watch how God sees you now and read the complete God’s Vision transcript.';
+  } else if (knowingGodPath === '/adv1') {
+    title = 'The Adventure of Living with Jesus | Follow Jesus Online';
+    description = 'Ten short guide chapters for your first steps with Jesus, from Begin the Adventure to Continuing with Jesus.';
   } else if (pathname === '/xp-pages') {
     title = 'Where Did You Start? | Follow Jesus Online';
   } else if (pathname === '/connect-with-god') {
@@ -233,6 +237,7 @@ function Router() {
         <Route path="/lords-prayer/:slug" component={ArticlePlaceholder} />
         <Route path="/experiencing-god" component={ArticlePlaceholder} />
         <Route path="/experiencing-god/:slug" component={ArticlePlaceholder} />
+        <Route path="/adv1" component={AdventureIndexPage} />
         <Route path="/adv/:slug" component={ArticlePlaceholder} />
         <Route path="/deeper/:slug" component={ArticlePlaceholder} />
         
