@@ -46,6 +46,11 @@ export function BibleLandingPage() {
           A trustworthy and clear translation to help you explore God's Word.
         </p>
 
+        <div className="max-w-xl mx-auto -mt-8 mb-1 text-left">
+          <Link href="/bible/resources" className="bible-resources-entry" data-testid="link-bible-resources">
+            <ChevronLabel text="See Bible Resources" />
+          </Link>
+        </div>
         <Card className="max-w-xl mx-auto mb-16 shadow-md border-card-border bg-card animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
           <CardContent className="p-6 md:p-8">
             <h2 className="text-xl font-bold mb-4 text-left text-foreground">Jump to a passage</h2>

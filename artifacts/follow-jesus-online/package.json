@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "prebuild": "pnpm run test:articles && pnpm run test:bible-study && pnpm run test:recent-page && pnpm run test:rewatch && pnpm run test:connect && pnpm run test:knowing-god && pnpm run test:promises",
+    "prebuild": "pnpm run test:articles && pnpm run test:bible-study && pnpm run test:recent-page && pnpm run test:rewatch && pnpm run test:connect && pnpm run test:knowing-god && pnpm run test:promises && pnpm run test:bible-resources",
+    "test:bible-resources": "node --import tsx --test scripts/bible-resources.test.ts",
     "build": "vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -85,5 +86,9 @@
     "vite": "catalog:",
     "wouter": "^3.3.5",
     "zod": "catalog:"
+  },
+  "dependencies": {
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
   }
 }

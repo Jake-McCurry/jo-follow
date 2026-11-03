@@ -25,4 +25,5 @@
 - [Staging change log timing](staging-change-log.md) — The user pushes to staging; update JOLF Change log only after confirmation, never for local-only changes.
 - [Drive-only spreadsheet updates](drive-only-spreadsheet-updates.md) — Preserve current data and file identity when updating a simple Sheet through the Drive-only connection.
 - [Reading interface rules](reading-interface-rules.md) — Session-start resume offers, four eBook downloads excluding Building Blocks, and safe multi-verse actions.
+- [Bible Resources editorial](bible-resources-editorial.md) — Equip is an import source, not a reader destination; retain teaching text and flag unavailable or inconsistent lessons.
 - [Browser jump verification](browser-jump-verification.md) — Confirm link activation and target viewport coordinates before treating an automated click miss as a scrolling bug.

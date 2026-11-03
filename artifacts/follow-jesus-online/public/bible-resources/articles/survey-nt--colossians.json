@@ -1,0 +1,23 @@
+{
+  "id": "survey-nt--colossians",
+  "title": "Philippians",
+  "listTitle": "Philippians",
+  "collectionId": "survey-nt",
+  "path": "/bible/resources/survey-nt/colossians",
+  "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/colossians",
+  "markdown": "### Coming Soon…\n\n_This New Testament survey was provided by Joshua Nations ( [JoshuaNations.org](https://joshuanations.org/))_",
+  "sourceMarkdown": "[Skip to main content](https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/colossians#main-content)\n\nNew Testament Survey\n\n# Philippians\n\n[Download PDF](https://equip.jesusonline.com/articles/93661-1-colossians.pdf)\n\n### Coming Soon…\n\n_This New Testament survey was provided by Joshua Nations ( [JoshuaNations.org](https://joshuanations.org/))_\n\n[Next Article\\\\\n\\\\\n**Colossians** \\\\\n\\\\\nContinue exploring New Testament Survey](https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/philippians)\n\n[Find this article on the JO App](https://app.jesusonline.com/post/93661-1-colossians)",
+  "issues": [
+    "The source collection labels this lesson “Philippians” but links it to the URL ending “colossians”. The original title, destination mapping and text are retained for review; this import does not silently swap the lessons."
+  ],
+  "pdf": {
+    "sourceUrl": "https://equip.jesusonline.com/articles/93661-1-colossians.pdf",
+    "status": "available",
+    "path": "/bible-resources/pdfs/survey-nt--colossians.pdf",
+    "sha256": "aa8e63de1d6faf600e468a5ae986ffc9c09b88a0d6c5fd58dd35178c65b4e03b",
+    "bytes": 110928
+  },
+  "sourceSha256": "fbabe4cb38e41627ad9c64fc4def64635ce02dc2ad6487815c9ff459e12f3454",
+  "contentSha256": "45470247b4453ebd85cb2d252ed21567bc949279baf65266a37aa7a6728116a5",
+  "importStatus": "coming-soon"
+}
