@@ -235,3 +235,146 @@
 [data-article-group="lords-prayer"] figure img {
   mix-blend-mode: multiply;
 }
+
+/* ---------- Bible Resources ---------- */
+.resources-page .back-link { display:inline-flex; align-items:center; min-height:44px; font-weight:600; color:var(--color-warm-700); }
+.resources-page .eyebrow { font-size:.72rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--color-warm-700); }
+.resource-title { font-family:var(--font-serif); font-weight:700; font-size:clamp(1.75rem,5vw,2.6rem); line-height:1.15; color:var(--color-navy); overflow-wrap:anywhere; }
+.resource-list { border-top:1px solid var(--color-warm-200); }
+.resource-row { border-bottom:1px solid var(--color-warm-200); }
+.resource-row--missing { display:flex; flex-direction:column; padding:.75rem .25rem; }
+.resource-row__link { display:flex; flex-direction:column; gap:.15rem; min-height:44px; padding:.85rem .5rem; border-radius:.5rem; transition:background-color .15s; }
+.resource-row__link:hover { background:var(--color-warm-50); }
+.resource-row__title { font-family:var(--font-serif); font-weight:700; font-size:1.15rem; color:var(--color-navy); }
+.resource-list--compact .resource-row__link { padding:.45rem .5rem; }
+.resource-list--compact .resource-row__title { font-size:1.02rem; }
+.resource-row__desc { font-size:.92rem; color:var(--color-muted-foreground); }
+.sublinks { margin:-.4rem 0 .6rem 1.1rem; }
+.sublinks a { display:inline-flex; align-items:center; min-height:44px; padding:0 .4rem; font-size:.95rem; font-weight:600; color:var(--color-warm-700); text-decoration:underline; text-underline-offset:4px; text-decoration-color:var(--color-warm-300); }
+.sublinks li + li { margin-top:-.6rem; }
+.promises-callout { display:flex; flex-direction:column; gap:.25rem; margin-bottom:1.5rem; padding:1rem 1.15rem; border-radius:.75rem; background:var(--color-warm-50); border:1px solid var(--color-warm-200); }
+.pdf-link { margin-top:.9rem; display:inline-flex; align-items:center; gap:.5rem; min-height:44px; padding:0 1rem; border-radius:.5rem; border:1px solid var(--color-warm-300); font-weight:600; color:var(--color-navy); }
+.pdf-link:hover { background:var(--color-warm-50); }
+
+.resource-jumps { margin-bottom:1.75rem; padding:.75rem 1rem; border-left:3px solid var(--color-warm-300); background:var(--color-warm-50); border-radius:0 .5rem .5rem 0; }
+.resource-jumps > p { font-size:.7rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--color-warm-700); }
+.resource-jumps ul { display:flex; flex-wrap:wrap; column-gap:1rem; }
+.resource-jumps a { display:inline-flex; align-items:center; min-height:44px; font-size:.9rem; font-weight:600; color:var(--color-navy); text-decoration:underline; text-decoration-color:var(--color-warm-300); text-underline-offset:4px; }
+
+.resource-prose { font-size:1.07rem; line-height:1.75; color:hsl(var(--foreground) / .92); overflow-wrap:anywhere; }
+.resource-prose p, .resource-prose ul, .resource-prose ol, .resource-prose blockquote, .resource-prose table { margin:0 0 1.05rem; }
+.resource-prose h2 { font-family:var(--font-serif); font-size:1.45rem; font-weight:700; color:var(--color-navy); line-height:1.25; margin:2rem 0 .75rem; scroll-margin-top:6rem; }
+.resource-prose h3 { font-family:var(--font-serif); font-size:1.2rem; font-weight:700; color:var(--color-navy); margin:1.5rem 0 .5rem; scroll-margin-top:6rem; }
+.resource-prose h4 { font-weight:700; margin:1.25rem 0 .4rem; }
+.resource-prose ul { list-style:disc; padding-left:1.4rem; }
+.resource-prose ol { list-style:decimal; padding-left:1.6rem; }
+.resource-prose li { margin:.3rem 0; padding-left:.2rem; }
+.resource-prose li > ul, .resource-prose li > ol { margin:.3rem 0 .3rem; }
+.resource-prose li::marker { color:var(--color-warm-700); font-weight:600; }
+.resource-prose blockquote { border-left:3px solid var(--color-warm-300); padding-left:1rem; font-style:italic; }
+.resource-prose table { display:block; overflow-x:auto; border-collapse:collapse; }
+.resource-prose td, .resource-prose th { border:1px solid var(--color-warm-200); padding:.4rem .6rem; }
+.resource-prose hr { border:0; border-top:1px solid var(--color-warm-200); margin:2rem 0; }
+.resource-link { color:var(--color-warm-700); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+.resource-prose--survey > section + section { border-top:1px solid var(--color-warm-200); margin-top:1.5rem; }
+.resource-prose--survey > section > h2:first-child { margin-top:1.5rem; }
+.resource-theme, .resource-theme-section { background:var(--color-warm-50); border:1px solid var(--color-warm-200); border-left:4px solid var(--color-warm-700); border-radius:.6rem; padding:.9rem 1.1rem; }
+.resource-theme-section { margin-bottom:1rem; }
+.resource-theme-section > h2:first-child { margin-top:0; }
+.resource-theme-section .resource-theme { border:0; padding:0; background:none; }
+.resource-note { font-size:.95rem; padding:.6rem .9rem; border-radius:.5rem; background:hsl(var(--blue-950) / .05); border-left:3px solid hsl(var(--blue-950) / .35); }
+.resource-prose--survey > section.resource-discussion { border:1px solid hsl(var(--blue-950) / .15); background:hsl(var(--blue-950) / .035); border-radius:.75rem; padding:.25rem 1.1rem .5rem; margin-top:2rem; }
+.resource-discussion h2 { margin-top:1rem !important; }
+.resource-discussion strong { font-weight:inherit; }
+.source-notice { display:flex; gap:.6rem; margin-top:2rem; padding:.75rem 1rem; font-size:.85rem; color:var(--color-muted-foreground); border:1px dashed var(--color-warm-300); border-radius:.5rem; }
+
+.scripture-link { color:var(--color-warm-700); font-weight:600; text-decoration:underline; text-decoration-color:var(--color-warm-300); text-underline-offset:3px; }
+.scripture-link:hover { color:var(--color-navy); }
+.scripture-toggle { display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; margin:-14px -10px -14px -6px; vertical-align:middle; color:var(--color-warm-700); border-radius:.4rem; }
+.scripture-toggle:focus-visible { outline:2px solid var(--color-warm-700); outline-offset:-8px; }
+@media (min-width:768px) and (hover:hover) and (pointer:fine) { .scripture-toggle { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); margin:0; } .scripture-toggle:focus-visible { position:static; width:44px; height:44px; clip:auto; margin:-14px -10px -14px -6px; } }
+
+.article-pager { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-top:2.5rem; padding-top:1.25rem; border-top:1px solid var(--color-warm-200); }
+.pager-link { display:flex; flex-direction:column; gap:.15rem; min-height:44px; padding:.6rem .75rem; border-radius:.6rem; border:1px solid var(--color-warm-200); color:var(--color-navy); font-weight:600; font-size:.95rem; min-width:0; }
+.pager-link:hover { background:var(--color-warm-50); }
+.pager-link--next { text-align:right; align-items:flex-end; }
+.pager-label { font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-muted-foreground); }
+.bible-resources-entry { display:inline-flex; align-items:center; min-height:44px; font-weight:600; font-size:.95rem; color:var(--color-warm-700); }
+@media (max-width:480px) { .article-pager { grid-template-columns:1fr; } .pager-link--next { text-align:left; align-items:flex-start; } }
+
+/* ---------- Survey of the Bible: designed reading ---------- */
+.survey-band { position:relative; overflow:hidden; background:var(--color-navy); color:var(--color-warm-50); }
+.survey-band::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.09;
+  background-image:repeating-linear-gradient(135deg, hsl(var(--warm-50)) 0 1px, transparent 1px 22px); }
+.survey-band::after { content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background:linear-gradient(90deg, var(--color-warm-700), hsl(var(--warm-300)) 60%, transparent); }
+.survey-band__inner { position:relative; max-width:46rem; margin:0 auto; padding:2.6rem 1.25rem 2.4rem; }
+.survey-band__eyebrow { font-size:.72rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:hsl(var(--warm-300)); }
+.survey-band__title { margin-top:.45rem; font-family:var(--font-serif); font-weight:700; font-size:clamp(2.1rem,6vw,3.25rem); line-height:1.08; overflow-wrap:anywhere; }
+.survey-band__subtitle { margin-top:.7rem; max-width:36rem; font-size:1.05rem; line-height:1.55; color:hsl(var(--warm-50) / .82); }
+@media (min-width:768px) { .survey-band__inner { padding:3.5rem 2rem 3.1rem; } }
+
+.survey-page { max-width:46rem; margin:0 auto; padding:1rem 1.25rem 3.5rem; }
+@media (min-width:768px) { .survey-page { padding:1.5rem 2rem 4.5rem; } }
+.survey-toolbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.5rem 1rem; margin-bottom:1.75rem; padding-bottom:.85rem; border-bottom:1px solid var(--color-warm-200); }
+.survey-toolbar .back-link { font-size:.92rem; }
+.pdf-link--compact { margin-top:0; min-height:44px; padding:0 .9rem; font-size:.88rem; border-color:hsl(var(--blue-950) / .35); background:hsl(var(--warm-50)); }
+.pdf-link--compact:hover { border-color:var(--color-navy); }
+
+/* Index: two testaments */
+.survey-testaments { display:grid; gap:1rem; }
+@media (min-width:640px) { .survey-testaments { grid-template-columns:1fr 1fr; } }
+.survey-testament { display:flex; flex-direction:column; gap:.35rem; height:100%; min-height:44px; padding:1.4rem 1.4rem 1.2rem; border-radius:.9rem; background:hsl(var(--warm-50)); border:1px solid var(--color-warm-200); border-top:4px solid var(--color-navy); transition:transform .2s ease, box-shadow .2s ease; }
+.survey-testament:hover { transform:translateY(-2px); box-shadow:0 10px 24px -14px hsl(var(--blue-950) / .45); }
+.survey-testament__label { font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--color-warm-700); }
+.survey-testament__title { font-family:var(--font-serif); font-size:1.45rem; font-weight:700; color:var(--color-navy); line-height:1.2; }
+.survey-testament__desc { font-size:.95rem; color:var(--color-muted-foreground); }
+.survey-testament__meta { margin-top:auto; padding-top:.6rem; display:inline-flex; align-items:center; font-weight:600; font-size:.9rem; color:var(--color-warm-700); }
+
+/* Testament directory: numbered book list */
+.survey-books { display:grid; column-gap:2rem; border-top:1px solid var(--color-warm-200); }
+@media (min-width:640px) { .survey-books { grid-template-columns:1fr 1fr; border-top:0; } .survey-books > li { border-top:1px solid var(--color-warm-200); } }
+.survey-books > li { border-bottom:1px solid var(--color-warm-200); margin-bottom:-1px; }
+.survey-book { display:flex; align-items:center; gap:.9rem; min-height:56px; padding:.6rem .4rem; border-radius:.4rem; transition:background-color .15s; }
+a.survey-book:hover { background:hsl(var(--warm-50)); }
+a.survey-book:hover .survey-book__chev { transform:translateX(3px); }
+.survey-book__num { flex:none; width:2rem; font-family:var(--font-serif); font-size:.95rem; font-weight:600; color:hsl(var(--warm-300)); font-variant-numeric:tabular-nums; }
+a.survey-book .survey-book__num { color:var(--color-warm-700); }
+.survey-book__title { flex:1; min-width:0; font-family:var(--font-serif); font-weight:700; font-size:1.08rem; color:var(--color-navy); }
+.survey-book__chev { transition:transform .2s ease; }
+.survey-book--soon .survey-book__title { color:var(--color-muted-foreground); font-weight:600; }
+.survey-book__status { flex:none; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.2rem .5rem; border-radius:999px; border:1px dashed var(--color-warm-300); color:var(--color-muted-foreground); }
+
+/* Article reading */
+.survey-article .resource-jumps { margin:0 0 2.25rem; padding:1.1rem 1.25rem .9rem; border:1px solid var(--color-warm-200); border-left:0; border-radius:.75rem; background:hsl(var(--warm-50)); }
+.survey-article .resource-jumps > p { margin-bottom:.35rem; }
+.survey-article .resource-jumps ul { display:grid; gap:0 1.5rem; counter-reset:jump; }
+@media (min-width:640px) { .survey-article .resource-jumps ul { grid-template-columns:1fr 1fr; } }
+.survey-article .resource-jumps li { border-top:1px solid hsl(var(--warm-200) / .7); }
+.survey-article .resource-jumps li:first-child { border-top:0; }
+@media (min-width:640px) { .survey-article .resource-jumps li:nth-child(2) { border-top:0; } }
+.survey-article .resource-jumps a { display:flex; width:100%; min-height:44px; padding:.3rem 0; font-size:.93rem; line-height:1.35; text-decoration:none; color:var(--color-navy); }
+.survey-article .resource-jumps a:hover { color:var(--color-warm-700); text-decoration:underline; text-decoration-color:var(--color-warm-300); }
+
+.survey-article .resource-prose { font-size:1.1rem; line-height:1.85; }
+.survey-article .resource-prose p { margin-bottom:1.2rem; }
+.survey-article .resource-prose--survey > section + section { border-top:0; margin-top:2.25rem; }
+.survey-article .resource-prose h2 { position:relative; margin:0 0 1rem; padding-top:1.1rem; font-size:clamp(1.3rem,3.4vw,1.6rem); line-height:1.25; }
+.survey-article .resource-prose h2::before { content:""; position:absolute; top:0; left:0; width:2.5rem; height:3px; border-radius:2px; background:var(--color-warm-700); }
+.survey-article .resource-prose ol { padding-left:0; list-style:none; counter-reset:item; margin:0 0 1.5rem; }
+.survey-article .resource-prose ol > li { counter-increment:item; position:relative; padding-left:2.6rem; margin:0 0 .85rem; }
+.survey-article .resource-prose ol > li::before { content:counter(item); position:absolute; left:0; top:.2em; width:1.75rem; height:1.75rem; display:flex; align-items:center; justify-content:center; border-radius:999px; background:hsl(var(--warm-50)); border:1px solid var(--color-warm-300); font-size:.8rem; font-weight:700; color:var(--color-warm-700); font-variant-numeric:tabular-nums; line-height:1; }
+.survey-article .resource-prose ol[start] > li::before { content:counter(item); }
+.survey-article .resource-prose li > p { margin:0 0 .6rem; }
+.survey-article .resource-prose li > p:last-child { margin-bottom:0; }
+.survey-article .resource-prose li > p + p { color:hsl(var(--foreground) / .85); }
+.survey-article .resource-prose ul { padding-left:1.4rem; }
+@media (max-width:480px) { .survey-article .resource-prose ol > li { padding-left:2.2rem; } .survey-article .resource-prose { font-size:1.04rem; } }
+
+.survey-article .resource-theme, .survey-article .resource-theme-section { padding:1.15rem 1.35rem; border-radius:.8rem; font-size:1.12rem; line-height:1.75; background:hsl(var(--warm-50)); border:1px solid var(--color-warm-200); border-left:4px solid var(--color-warm-700); margin-bottom:2rem; }
+.survey-article .resource-theme-section .resource-theme { margin:0; font-size:inherit; }
+.survey-article .resource-prose--survey > section.resource-discussion { margin-top:2.75rem; padding:1.5rem 1.4rem .75rem; border-radius:.9rem; border:1px solid hsl(var(--blue-950) / .14); background:hsl(var(--blue-950) / .035); }
+.survey-article .resource-discussion h2 { margin-top:0 !important; }
+.survey-article .resource-discussion ol > li::before { background:var(--color-navy); border-color:var(--color-navy); color:hsl(var(--warm-50)); }
+.survey-article .resource-prose > section:last-child p:last-child em { color:var(--color-muted-foreground); }
+.survey-pager { margin-top:3rem; }
+.survey-pager .pager-link { padding:.85rem 1rem; }

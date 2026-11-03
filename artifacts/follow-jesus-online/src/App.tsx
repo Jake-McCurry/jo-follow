@@ -16,6 +16,7 @@ import { ConnectWithGodPage } from '@/pages/connect-with-god';
 import { BibleLandingPage } from '@/pages/bible-landing';
 import { BibleReaderPage } from '@/pages/bible-reader';
 import { BibleSavedPage } from '@/pages/bible-saved';
+import { BibleResourcesMenuPage, BibleResourcesSurveyPage, BibleResourcesGospelsPage, BibleResourcesPathPage } from '@/pages/bible-resources';
 import { XPChooserPage } from '@/pages/xp-chooser';
 import { XPPage } from '@/pages/xp-page';
 import { ExploreArticlesPage } from '@/pages/explore-articles';
@@ -71,6 +72,14 @@ function PageMetadata() {
   } else if (pathname === '/bible/saved') {
     title = 'Saved Bible Items | Follow Jesus Online';
     description = 'Reopen your locally saved Bible bookmarks, highlights, and notes.';
+  } else if (pathname.replace(/\/$/, '') === '/bible/resources') {
+    title = 'Bible Resources | Follow Jesus Online';
+    description = 'Study methods, devotionals, God\u2019s promises, a survey of the Bible, and topical study tools.';
+  } else if (pathname.startsWith('/bible/resources/')) {
+    const slug = pathname.split('/').filter(Boolean).at(-1) ?? '';
+    const named = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+    title = `${named} | Bible Resources | Follow Jesus Online`;
+    description = 'A Bible study resource from Follow Jesus Online.';
   } else if (pathname.startsWith('/bible/')) {
     const routeReference = decodeURIComponent(pathname.replace(/^\/bible\//, '').replace('/', ' '));
     title = `${routeReference} NET Bible | Follow Jesus Online`;
@@ -231,6 +240,11 @@ function Router() {
         <Route path="/admin/reactions" component={AdminReactionsPage} />
         <Route path="/bible" component={BibleLandingPage} />
         <Route path="/bible/saved" component={BibleSavedPage} />
+        <Route path="/bible/resources" component={BibleResourcesMenuPage} />
+        <Route path="/bible/resources/survey" component={BibleResourcesSurveyPage} />
+        <Route path="/bible/resources/gospels" component={BibleResourcesGospelsPage} />
+        <Route path="/bible/resources/:collection" component={BibleResourcesPathPage} />
+        <Route path="/bible/resources/:collection/:article" component={BibleResourcesPathPage} />
         <Route path="/bible/:book/:chapter" component={BibleReaderPage} />
         <Route path="/prayer" component={ArticlePlaceholder} />
         <Route path="/prayer/:slug" component={ArticlePlaceholder} />

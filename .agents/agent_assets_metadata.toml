@@ -196,3 +196,17 @@ mtime_ms = 1793299992145
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/93973fd6-8a4c-47d9-adbd-801db734ee9e/c0c89bac-32fc-4d8d-83e8-a13e21d68618"
 storage_version_token = "1793300084477391"
 content_type = "application/pdf"
+
+[[outputs]]
+id = "fVfhcWkMuwODdTIK_sAeB"
+uri = "file://generated-artifacts/JOLF-Promises-of-God-Dataset.zip"
+type = "unspecified"
+title = "Promises of God — Complete Dataset"
+description = "Verified: 6 groups, 85 topics and 568 passage entries. Includes unmodified book.json, local installation instructions and a checksum manifest."
+logical_id = "0332e271-e01e-4f9c-8e25-da84930bd574"
+content_hash = "sha256:4b1ea32a8367b97adfa309513e73196c94fc0f41d452ac89302170b121c47f07"
+size = 56029
+mtime_ms = 1793736330554
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/0332e271-e01e-4f9c-8e25-da84930bd574/5c93db57-fb5c-443f-aa62-1b63b6aa7287"
+storage_version_token = "1793736337723416"
+content_type = "application/octet-stream"

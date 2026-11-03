@@ -1,4 +1,4 @@
-import { useRoute, useLocation, useSearch } from "wouter"
+import { Link, useRoute, useLocation, useSearch } from "wouter"
 import { Layout } from "@/components/layout"
 import { useListBibleBooks, useGetBiblePassage, getGetBiblePassageQueryKey } from "@workspace/api-client-react"
 import { SelectNative } from "@/components/ui/select-native"
@@ -168,6 +168,9 @@ export function BibleReaderPage() {
           </div>
 
           <div className="order-1 min-w-0 pb-32 lg:order-2 lg:pb-0">
+            <Link href="/bible/resources" className="bible-resources-entry -mt-3 mb-1" data-testid="link-bible-resources">
+              <ChevronLabel text="See Bible Resources" />
+            </Link>
             {/* Navigation Toolbar */}
             <div className="mb-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-card-border bg-card p-3 shadow-sm 2xl:flex-row sm:p-4">
               <div className="flex w-full flex-wrap items-center gap-2 2xl:w-auto">

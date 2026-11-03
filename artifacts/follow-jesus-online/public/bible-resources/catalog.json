@@ -1,0 +1,2438 @@
+{
+  "schemaVersion": 1,
+  "importedOn": "2026-11-03",
+  "supplementalPdfs": [
+    {
+      "sourceUrl": "https://jesusonline.com/pdf_c/jom/Gods_Promises_for_a_new_year.pdf",
+      "path": "/bible-resources/pdfs/gods-promises-for-a-new-year.pdf",
+      "sha256": "c16f1c207893da2db32e581563c43405c4ddcb38b5c6371e95236be2b9972cda",
+      "bytes": 2786364,
+      "note": "Original 73-page source eBook, unchanged; exceeds the preferred 2 MB target to honor source-PDF fidelity."
+    }
+  ],
+  "collections": [
+    {
+      "id": "study-methods",
+      "title": "Bible Study Methods",
+      "description": "Simple, proven methods for studying Scripture on your own.",
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/bible-study-methods",
+      "path": "/bible/resources/study-methods",
+      "items": [
+        {
+          "title": "Inductive Bible Study Method",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/bible-study-methods/inductive-bible-study",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/bsm/inductive-bible-study.pdf",
+          "status": "imported",
+          "path": "/bible/resources/study-methods/inductive-bible-study",
+          "id": "study-methods--inductive-bible-study",
+          "articleTitle": "Inductive Bible Study",
+          "pdfPath": "/bible-resources/pdfs/study-methods--inductive-bible-study.pdf"
+        },
+        {
+          "title": "S.O.A.P. Method",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/bible-study-methods/soap-method",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/bsm/soap-method.pdf",
+          "status": "imported",
+          "path": "/bible/resources/study-methods/soap-method",
+          "id": "study-methods--soap-method",
+          "articleTitle": "The S.O.A.P. Method",
+          "pdfPath": "/bible-resources/pdfs/study-methods--soap-method.pdf"
+        },
+        {
+          "title": "Topical/Thematic Bible Study Method",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/bible-study-methods/topical-bible-study",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/bsm/topical-bible-study.pdf",
+          "status": "imported",
+          "path": "/bible/resources/study-methods/topical-bible-study",
+          "id": "study-methods--topical-bible-study",
+          "articleTitle": "Topical & Thematic Bible Study",
+          "pdfPath": "/bible-resources/pdfs/study-methods--topical-bible-study.pdf"
+        },
+        {
+          "title": "R.E.C.A.P. Method",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/bible-study-methods/bible-recap",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/bsm/bible-recap.pdf",
+          "status": "imported",
+          "path": "/bible/resources/study-methods/bible-recap",
+          "id": "study-methods--bible-recap",
+          "articleTitle": "Bible R.E.C.A.P.",
+          "pdfPath": "/bible-resources/pdfs/study-methods--bible-recap.pdf"
+        }
+      ]
+    },
+    {
+      "id": "discover-jesus",
+      "title": "Discover Jesus in the Gospels",
+      "description": "Explore a fresh perspective on Jesus' teachings and life events.",
+      "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels",
+      "path": "/bible/resources/discover-jesus",
+      "items": [
+        {
+          "title": "The Humility of Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/the-humility-of-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-032-the-humility-of-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/the-humility-of-jesus",
+          "id": "discover-jesus--the-humility-of-jesus",
+          "articleTitle": "The Humility of Jesus",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--the-humility-of-jesus.pdf"
+        },
+        {
+          "title": "Finding Security and Comfort",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/finding-security-and-comfort",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-033-finding-security-and-comfort.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/finding-security-and-comfort",
+          "id": "discover-jesus--finding-security-and-comfort",
+          "articleTitle": "Finding Security and Comfort",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--finding-security-and-comfort.pdf"
+        },
+        {
+          "title": "Jesus Is Calling You",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/jesus-is-calling-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-034-jesus-is-calling-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/jesus-is-calling-you",
+          "id": "discover-jesus--jesus-is-calling-you",
+          "articleTitle": "Jesus Is Calling You",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--jesus-is-calling-you.pdf"
+        },
+        {
+          "title": "Just One Touch",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/just-one-touch",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-037-just-one-touch.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/just-one-touch",
+          "id": "discover-jesus--just-one-touch",
+          "articleTitle": "Just One Touch",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--just-one-touch.pdf"
+        },
+        {
+          "title": "No Obstacles",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/no-obstacles",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-038-no-obstacles.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/no-obstacles",
+          "id": "discover-jesus--no-obstacles",
+          "articleTitle": "No Obstacles",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--no-obstacles.pdf"
+        },
+        {
+          "title": "Desperate",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/desperate",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-039-desperate.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/desperate",
+          "id": "discover-jesus--desperate",
+          "articleTitle": "Desperate",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--desperate.pdf"
+        },
+        {
+          "title": "Jesus Has the Power",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/jesus-has-the-power",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-040-jesus-has-the-power.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/jesus-has-the-power",
+          "id": "discover-jesus--jesus-has-the-power",
+          "articleTitle": "Jesus Has the Power",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--jesus-has-the-power.pdf"
+        },
+        {
+          "title": "Let Others Know",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/let-others-know",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-041-let-others-know.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/let-others-know",
+          "id": "discover-jesus--let-others-know",
+          "articleTitle": "Let Others Know",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--let-others-know.pdf"
+        },
+        {
+          "title": "In the Right Place at the Right Time",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/in-the-right-place-at-the-right-time",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-044-in-the-right-place-at-the-right-time.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/in-the-right-place-at-the-right-time",
+          "id": "discover-jesus--in-the-right-place-at-the-right-time",
+          "articleTitle": "In the Right Place at the Right Time",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--in-the-right-place-at-the-right-time.pdf"
+        },
+        {
+          "title": "Living Water",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/living-water",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-045-living-water.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/living-water",
+          "id": "discover-jesus--living-water",
+          "articleTitle": "Living Water",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--living-water.pdf"
+        },
+        {
+          "title": "Are You Thirsty?",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/are-you-thirsty",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-046-are-you-thirsty.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/are-you-thirsty",
+          "id": "discover-jesus--are-you-thirsty",
+          "articleTitle": "Are You Thirsty?",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--are-you-thirsty.pdf"
+        },
+        {
+          "title": "Making Things Right",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/making-things-right",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-047-making-things-right.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/making-things-right",
+          "id": "discover-jesus--making-things-right",
+          "articleTitle": "Making Things Right",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--making-things-right.pdf"
+        },
+        {
+          "title": "Set Free",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/set-free",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-048-set-free.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/set-free",
+          "id": "discover-jesus--set-free",
+          "articleTitle": "Set Free",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--set-free.pdf"
+        },
+        {
+          "title": "You Matter to Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/you-matter-to-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-051-you-matter-to-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/you-matter-to-jesus",
+          "id": "discover-jesus--you-matter-to-jesus",
+          "articleTitle": "You Matter to Jesus!",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--you-matter-to-jesus.pdf"
+        },
+        {
+          "title": "Good News",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/good-news",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-052-good-news.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/good-news",
+          "id": "discover-jesus--good-news",
+          "articleTitle": "Good News",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--good-news.pdf"
+        },
+        {
+          "title": "Lord, Help Me",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/lord-help-me",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-053-lord-help-me.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/lord-help-me",
+          "id": "discover-jesus--lord-help-me",
+          "articleTitle": "Lord, Help Me!",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--lord-help-me.pdf"
+        },
+        {
+          "title": "In the Presence of Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/in-the-presence-of-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-054-in-the-presence-of-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/in-the-presence-of-jesus",
+          "id": "discover-jesus--in-the-presence-of-jesus",
+          "articleTitle": "In the Presence of Jesus",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--in-the-presence-of-jesus.pdf"
+        },
+        {
+          "title": "Priorities",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/priorities",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-055-priorities.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/priorities",
+          "id": "discover-jesus--priorities",
+          "articleTitle": "Priorities",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--priorities.pdf"
+        },
+        {
+          "title": "The Holiness of God",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/the-holiness-of-god",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-058-the-holiness-of-god.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/the-holiness-of-god",
+          "id": "discover-jesus--the-holiness-of-god",
+          "articleTitle": "The Holiness of God",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--the-holiness-of-god.pdf"
+        },
+        {
+          "title": "Thank You, Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/thank-you-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-059-thank-you-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/thank-you-jesus",
+          "id": "discover-jesus--thank-you-jesus",
+          "articleTitle": "Thank You, Jesus!",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--thank-you-jesus.pdf"
+        },
+        {
+          "title": "Jesus, Have Mercy on Me",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/jesus-have-mercy-on-me",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-060-jesus-have-mercy-on-me.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/jesus-have-mercy-on-me",
+          "id": "discover-jesus--jesus-have-mercy-on-me",
+          "articleTitle": "Jesus, Have Mercy on Me!",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--jesus-have-mercy-on-me.pdf"
+        },
+        {
+          "title": "What Do You Need from jesus?",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/what-do-you-need-from-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-061-what-do-you-need-from-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/what-do-you-need-from-jesus",
+          "id": "discover-jesus--what-do-you-need-from-jesus",
+          "articleTitle": "What Do You Need from Jesus?",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--what-do-you-need-from-jesus.pdf"
+        },
+        {
+          "title": "Praise to God",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/praise-to-god",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-062-praise-to-god.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/praise-to-god",
+          "id": "discover-jesus--praise-to-god",
+          "articleTitle": "Praise to God",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--praise-to-god.pdf"
+        },
+        {
+          "title": "We Have Hope When We Have Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/we-have-hope-when-we-have-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-065-we-have-hope-when-we-have-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/we-have-hope-when-we-have-jesus",
+          "id": "discover-jesus--we-have-hope-when-we-have-jesus",
+          "articleTitle": "We Have Hope When We Have Jesus",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--we-have-hope-when-we-have-jesus.pdf"
+        },
+        {
+          "title": "God's Faithfulness",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/gods-faithfulness",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-066-gods-faithfulness.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/gods-faithfulness",
+          "id": "discover-jesus--gods-faithfulness",
+          "articleTitle": "God’s Faithfulness",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--gods-faithfulness.pdf"
+        },
+        {
+          "title": "Jesus Knows Our Every Need",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/jesus-knows-our-every-need",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-067-jesus-knows-our-every-need.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/jesus-knows-our-every-need",
+          "id": "discover-jesus--jesus-knows-our-every-need",
+          "articleTitle": "Jesus Knows Our Every Need",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--jesus-knows-our-every-need.pdf"
+        },
+        {
+          "title": "Jesus Is King",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/jesus-is-king",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-068-jesus-is-king.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/jesus-is-king",
+          "id": "discover-jesus--jesus-is-king",
+          "articleTitle": "Jesus Is King!",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--jesus-is-king.pdf"
+        },
+        {
+          "title": "Trusting Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/trusting-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-069-trusting-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/trusting-jesus",
+          "id": "discover-jesus--trusting-jesus",
+          "articleTitle": "Trusting Jesus",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--trusting-jesus.pdf"
+        },
+        {
+          "title": "Follow Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/follow-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-072-follow-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/follow-jesus",
+          "id": "discover-jesus--follow-jesus",
+          "articleTitle": "Follow Jesus!",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--follow-jesus.pdf"
+        },
+        {
+          "title": "Beyond Our Imagination",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/discover-jesus-gospels/beyond-our-imagination",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22010-073-beyond-our-imagination.pdf",
+          "status": "imported",
+          "path": "/bible/resources/discover-jesus/beyond-our-imagination",
+          "id": "discover-jesus--beyond-our-imagination",
+          "articleTitle": "Beyond Our Imagination",
+          "pdfPath": "/bible-resources/pdfs/discover-jesus--beyond-our-imagination.pdf"
+        }
+      ]
+    },
+    {
+      "id": "hearing-god",
+      "title": "Hearing the Voice of God",
+      "description": "Experience the transforming power of hearing God's voice.",
+      "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god",
+      "path": "/bible/resources/hearing-god",
+      "items": [
+        {
+          "title": "Hearing What God Has to Say to You",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/hearing-what-god-has-to-say-to-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-0-hearing-what-god-has-to-say-to-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/hearing-what-god-has-to-say-to-you",
+          "id": "hearing-god--hearing-what-god-has-to-say-to-you",
+          "articleTitle": "Hearing What God Has to Say to You",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--hearing-what-god-has-to-say-to-you.pdf"
+        },
+        {
+          "title": "The Gifts of Light and Life",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-gifts-of-light-and-life",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-1-the-gifts-of-light-and-life.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-gifts-of-light-and-life",
+          "id": "hearing-god--the-gifts-of-light-and-life",
+          "articleTitle": "The Gifts of Light and Life",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-gifts-of-light-and-life.pdf"
+        },
+        {
+          "title": "Full of Grace and Truth",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/full-of-grace-and-truth",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-2-full-of-grace-and-truth.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/full-of-grace-and-truth",
+          "id": "hearing-god--full-of-grace-and-truth",
+          "articleTitle": "Full of Grace and Truth",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--full-of-grace-and-truth.pdf"
+        },
+        {
+          "title": "Who Are You?",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/who-are-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-3-who-are-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/who-are-you",
+          "id": "hearing-god--who-are-you",
+          "articleTitle": "Who Are You?",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--who-are-you.pdf"
+        },
+        {
+          "title": "The Spirit Remains",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-spirit-remains",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-4-the-spirit-remains.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-spirit-remains",
+          "id": "hearing-god--the-spirit-remains",
+          "articleTitle": "The Spirit Remains",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-spirit-remains.pdf"
+        },
+        {
+          "title": "What Are You Seeking?",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/what-are-you-seeking",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-5-what-are-you-seeking.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/what-are-you-seeking",
+          "id": "hearing-god--what-are-you-seeking",
+          "articleTitle": "What Are You Seeking?",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--what-are-you-seeking.pdf"
+        },
+        {
+          "title": "Follow Me",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/follow-me",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-6-follow-me.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/follow-me",
+          "id": "hearing-god--follow-me",
+          "articleTitle": "Follow Me",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--follow-me.pdf"
+        },
+        {
+          "title": "The Best Till Last",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-best-till-last",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-7-the-best-till-last.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-best-till-last",
+          "id": "hearing-god--the-best-till-last",
+          "articleTitle": "The Best Till Last",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-best-till-last.pdf"
+        },
+        {
+          "title": "Live on Purpose",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/live-on-purpose",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-8-live-on-purpose.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/live-on-purpose",
+          "id": "hearing-god--live-on-purpose",
+          "articleTitle": "Live on Purpose",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--live-on-purpose.pdf"
+        },
+        {
+          "title": "People Make Lousy Gods",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/people-make-lousy-gods",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22400-9-people-make-lousy-gods.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/people-make-lousy-gods",
+          "id": "hearing-god--people-make-lousy-gods",
+          "articleTitle": "People Make Lousy Gods",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--people-make-lousy-gods.pdf"
+        },
+        {
+          "title": "You Must Be Born Again",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/you-must-be-born-again",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-0-you-must-be-born-again.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/you-must-be-born-again",
+          "id": "hearing-god--you-must-be-born-again",
+          "articleTitle": "You Must Be Born Again",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--you-must-be-born-again.pdf"
+        },
+        {
+          "title": "God's Great Love",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/gods-great-love",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-1-gods-great-love.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/gods-great-love",
+          "id": "hearing-god--gods-great-love",
+          "articleTitle": "God’s Great Love",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--gods-great-love.pdf"
+        },
+        {
+          "title": "The Importance of Humility",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-importance-of-humility",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-2-the-importance-of-humility.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-importance-of-humility",
+          "id": "hearing-god--the-importance-of-humility",
+          "articleTitle": "The Importance of Humility",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-importance-of-humility.pdf"
+        },
+        {
+          "title": "Eternal Water",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/eternal-water",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-3-eternal-water.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/eternal-water",
+          "id": "hearing-god--eternal-water",
+          "articleTitle": "Eternal Water",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--eternal-water.pdf"
+        },
+        {
+          "title": "True Worshipers",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/true-worshipers",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-4-true-worshipers.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/true-worshipers",
+          "id": "hearing-god--true-worshipers",
+          "articleTitle": "True Worshipers",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--true-worshipers.pdf"
+        },
+        {
+          "title": "Lift Up Your Eyes",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/lift-up-your-eyes",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-5-lift-up-your-eyes.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/lift-up-your-eyes",
+          "id": "hearing-god--lift-up-your-eyes",
+          "articleTitle": "Lift Up Your Eyes",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--lift-up-your-eyes.pdf"
+        },
+        {
+          "title": "God's Love for Everyone",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/gods-love-for-everyone",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-6-gods-love-for-everyone.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/gods-love-for-everyone",
+          "id": "hearing-god--gods-love-for-everyone",
+          "articleTitle": "God’s Love for Everyone",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--gods-love-for-everyone.pdf"
+        },
+        {
+          "title": "Miracles Still Happen",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/miracles-still-happen",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-7-miracles-still-happen.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/miracles-still-happen",
+          "id": "hearing-god--miracles-still-happen",
+          "articleTitle": "Miracles Still Happen",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--miracles-still-happen.pdf"
+        },
+        {
+          "title": "Have Faith in God",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/have-faith-in-god",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-8-have-faith-in-god.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/have-faith-in-god",
+          "id": "hearing-god--have-faith-in-god",
+          "articleTitle": "Have Faith in God",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--have-faith-in-god.pdf"
+        },
+        {
+          "title": "Do you Want to Be Healed?",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/do-you-want-to-be-healed",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22401-9-do-you-want-to-be-healed.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/do-you-want-to-be-healed",
+          "id": "hearing-god--do-you-want-to-be-healed",
+          "articleTitle": "Do You Want to Be Healed?",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--do-you-want-to-be-healed.pdf"
+        },
+        {
+          "title": "The Proof of Faith",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-proof-of-faith",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-0-the-proof-of-faith.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-proof-of-faith",
+          "id": "hearing-god--the-proof-of-faith",
+          "articleTitle": "The Proof of Faith",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-proof-of-faith.pdf"
+        },
+        {
+          "title": "Audacious Claims",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/audacious-claims",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-1-audacious-claims.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/audacious-claims",
+          "id": "hearing-god--audacious-claims",
+          "articleTitle": "Audacious Claims",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--audacious-claims.pdf"
+        },
+        {
+          "title": "Honor Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/honor-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-2-honor-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/honor-jesus",
+          "id": "hearing-god--honor-jesus",
+          "articleTitle": "Honor Jesus",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--honor-jesus.pdf"
+        },
+        {
+          "title": "Total Dependence",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/total-dependence",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-3-total-dependence.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/total-dependence",
+          "id": "hearing-god--total-dependence",
+          "articleTitle": "Total Dependence",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--total-dependence.pdf"
+        },
+        {
+          "title": "Moses Writes About Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/moses-writes-about-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-4-moses-writes-about-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/moses-writes-about-jesus",
+          "id": "hearing-god--moses-writes-about-jesus",
+          "articleTitle": "Moses Writes About Jesus",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--moses-writes-about-jesus.pdf"
+        },
+        {
+          "title": "The Test of Faith",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-test-of-faith",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-5-the-test-of-faith.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-test-of-faith",
+          "id": "hearing-god--the-test-of-faith",
+          "articleTitle": "The Test of Faith",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-test-of-faith.pdf"
+        },
+        {
+          "title": "Who Is Jesus?",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/who-is-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-6-who-is-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/who-is-jesus",
+          "id": "hearing-god--who-is-jesus",
+          "articleTitle": "Who Is Jesus?",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--who-is-jesus.pdf"
+        },
+        {
+          "title": "Don't be Afraid",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/dont-be-afraid",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-7-dont-be-afraid.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/dont-be-afraid",
+          "id": "hearing-god--dont-be-afraid",
+          "articleTitle": "Don’t Be Afraid",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--dont-be-afraid.pdf"
+        },
+        {
+          "title": "Seek Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/seek-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-8-seek-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/seek-jesus",
+          "id": "hearing-god--seek-jesus",
+          "articleTitle": "Seek Jesus",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--seek-jesus.pdf"
+        },
+        {
+          "title": "The Work of Faith",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-work-of-faith",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22402-9-the-work-of-faith.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-work-of-faith",
+          "id": "hearing-god--the-work-of-faith",
+          "articleTitle": "The Work of Faith",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-work-of-faith.pdf"
+        },
+        {
+          "title": "Jesus Is the Bread of Life",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-is-the-bread-of-life",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-0-jesus-is-the-bread-of-life.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-is-the-bread-of-life",
+          "id": "hearing-god--jesus-is-the-bread-of-life",
+          "articleTitle": "Jesus Is the Bread of Life",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-is-the-bread-of-life.pdf"
+        },
+        {
+          "title": "Stop Grumbling",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/stop-grumbling",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-1-stop-grumbling.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/stop-grumbling",
+          "id": "hearing-god--stop-grumbling",
+          "articleTitle": "Stop Grumbling",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--stop-grumbling.pdf"
+        },
+        {
+          "title": "Ingesting Eternal Life",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/ingesting-eternal-life",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-2-ingesting-eternal-life.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/ingesting-eternal-life",
+          "id": "hearing-god--ingesting-eternal-life",
+          "articleTitle": "Ingesting Eternal Life",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--ingesting-eternal-life.pdf"
+        },
+        {
+          "title": "The Words of Eternal Life",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-words-of-eternal-life",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-3-the-words-of-eternal-life.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-words-of-eternal-life",
+          "id": "hearing-god--the-words-of-eternal-life",
+          "articleTitle": "The Words of Eternal Life",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-words-of-eternal-life.pdf"
+        },
+        {
+          "title": "Being A Servant",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/being-a-servant",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-4-being-a-servant.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/being-a-servant",
+          "id": "hearing-god--being-a-servant",
+          "articleTitle": "Being a Servant",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--being-a-servant.pdf"
+        },
+        {
+          "title": "Choose to Obey God's Will",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/choose-to-obey-gods-will",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-5-choose-to-obey-gods-will.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/choose-to-obey-gods-will",
+          "id": "hearing-god--choose-to-obey-gods-will",
+          "articleTitle": "Choose to Obey God’s Will",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--choose-to-obey-gods-will.pdf"
+        },
+        {
+          "title": "Jesus Knows the Father",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-knows-the-father",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-6-jesus-knows-the-father.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-knows-the-father",
+          "id": "hearing-god--jesus-knows-the-father",
+          "articleTitle": "Jesus Knows the Father",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-knows-the-father.pdf"
+        },
+        {
+          "title": "Your Eternal Home",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/your-eternal-home",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-7-your-eternal-home.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/your-eternal-home",
+          "id": "hearing-god--your-eternal-home",
+          "articleTitle": "Your Eternal Home",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--your-eternal-home.pdf"
+        },
+        {
+          "title": "Living Water",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/living-water",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-8-living-water.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/living-water",
+          "id": "hearing-god--living-water",
+          "articleTitle": "Living Water",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--living-water.pdf"
+        },
+        {
+          "title": "No One Has Ever Taught Like Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/no-one-has-ever-taught-like-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22403-9-no-one-has-ever-taught-like-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/no-one-has-ever-taught-like-jesus",
+          "id": "hearing-god--no-one-has-ever-taught-like-jesus",
+          "articleTitle": "No One Has Ever Taught Like Jesus",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--no-one-has-ever-taught-like-jesus.pdf"
+        },
+        {
+          "title": "Realize Your Sinfulness",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/realize-your-sinfulness",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-0-realize-your-sinfulness.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/realize-your-sinfulness",
+          "id": "hearing-god--realize-your-sinfulness",
+          "articleTitle": "Realize Your Sinfulness",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--realize-your-sinfulness.pdf"
+        },
+        {
+          "title": "Jesus Is Your Light",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-is-your-light",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-1-jesus-is-your-light.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-is-your-light",
+          "id": "hearing-god--jesus-is-your-light",
+          "articleTitle": "Jesus Is Your Light",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-is-your-light.pdf"
+        },
+        {
+          "title": "Desire God's Will",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/desire-gods-will",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-2-desire-gods-will.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/desire-gods-will",
+          "id": "hearing-god--desire-gods-will",
+          "articleTitle": "Desire God’s Will",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--desire-gods-will.pdf"
+        },
+        {
+          "title": "You Are Free!",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/you-are-free",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-3-you-are-free.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/you-are-free",
+          "id": "hearing-god--you-are-free",
+          "articleTitle": "You Are Free!",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--you-are-free.pdf"
+        },
+        {
+          "title": "Seek Truth",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/seek-truth",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-4-seek-truth.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/seek-truth",
+          "id": "hearing-god--seek-truth",
+          "articleTitle": "Seek Truth",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--seek-truth.pdf"
+        },
+        {
+          "title": "Jesus Is Your Provision Today",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-is-your-provision-today",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-5-jesus-is-your-provision-today.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-is-your-provision-today",
+          "id": "hearing-god--jesus-is-your-provision-today",
+          "articleTitle": "Jesus Is Your Provision Today",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-is-your-provision-today.pdf"
+        },
+        {
+          "title": "There's Purpose in Pain",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/theres-purpose-in-pain",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-6-theres-purpose-in-pain.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/theres-purpose-in-pain",
+          "id": "hearing-god--theres-purpose-in-pain",
+          "articleTitle": "There’s Purpose in Pain",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--theres-purpose-in-pain.pdf"
+        },
+        {
+          "title": "Simple Obedience",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/simple-obedience",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-7-simple-obedience.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/simple-obedience",
+          "id": "hearing-god--simple-obedience",
+          "articleTitle": "Simple Obedience",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--simple-obedience.pdf"
+        },
+        {
+          "title": "Obedience Flows from His Love",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/obedience-flows-from-his-love",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-8-obedience-flows-from-his-love.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/obedience-flows-from-his-love",
+          "id": "hearing-god--obedience-flows-from-his-love",
+          "articleTitle": "Obedience Flows from His Love",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--obedience-flows-from-his-love.pdf"
+        },
+        {
+          "title": "All Things Are Possible with God",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/all-things-are-possible-with-god",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22404-9-all-things-are-possible-with-god.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/all-things-are-possible-with-god",
+          "id": "hearing-god--all-things-are-possible-with-god",
+          "articleTitle": "All Things Are Possible with God",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--all-things-are-possible-with-god.pdf"
+        },
+        {
+          "title": "Remain Connected to Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/remain-connected-to-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-0-remain-connected-to-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/remain-connected-to-jesus",
+          "id": "hearing-god--remain-connected-to-jesus",
+          "articleTitle": "Remain Connected to Jesus",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--remain-connected-to-jesus.pdf"
+        },
+        {
+          "title": "Let Jesus Find You",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/let-jesus-find-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-1-let-jesus-find-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/let-jesus-find-you",
+          "id": "hearing-god--let-jesus-find-you",
+          "articleTitle": "Let Jesus Find You",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--let-jesus-find-you.pdf"
+        },
+        {
+          "title": "Jesus Is Your Sheperd",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-is-your-sheperd",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-2-jesus-is-your-sheperd.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-is-your-sheperd",
+          "id": "hearing-god--jesus-is-your-sheperd",
+          "articleTitle": "Jesus Is Your Shepherd",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-is-your-sheperd.pdf"
+        },
+        {
+          "title": "Jesus Died for You",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-died-for-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-3-jesus-died-for-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-died-for-you",
+          "id": "hearing-god--jesus-died-for-you",
+          "articleTitle": "Jesus Died for You",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-died-for-you.pdf"
+        },
+        {
+          "title": "The Charge to God",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-charge-to-god",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-4-the-charge-to-god.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-charge-to-god",
+          "id": "hearing-god--the-charge-to-god",
+          "articleTitle": "The Charge to God",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-charge-to-god.pdf"
+        },
+        {
+          "title": "You Can Hear Jesus' Voice",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/you-can-hear-jesus-voice",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-5-you-can-hear-jesus-voice.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/you-can-hear-jesus-voice",
+          "id": "hearing-god--you-can-hear-jesus-voice",
+          "articleTitle": "You Can Hear Jesus’ Voice",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--you-can-hear-jesus-voice.pdf"
+        },
+        {
+          "title": "Take the First Step",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/take-the-first-step",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-6-take-the-first-step.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/take-the-first-step",
+          "id": "hearing-god--take-the-first-step",
+          "articleTitle": "Take the First Step",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--take-the-first-step.pdf"
+        },
+        {
+          "title": "Let Jesus Guide You",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/let-jesus-guide-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-7-let-jesus-guide-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/let-jesus-guide-you",
+          "id": "hearing-god--let-jesus-guide-you",
+          "articleTitle": "Let Jesus Guide You",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--let-jesus-guide-you.pdf"
+        },
+        {
+          "title": "Give God All the Glory",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/give-god-all-the-glory",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-8-give-god-all-the-glory.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/give-god-all-the-glory",
+          "id": "hearing-god--give-god-all-the-glory",
+          "articleTitle": "Give God All the Glory",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--give-god-all-the-glory.pdf"
+        },
+        {
+          "title": "Walk in Jesus' Light",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/walk-in-jesus-light",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22405-9-walk-in-jesus-light.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/walk-in-jesus-light",
+          "id": "hearing-god--walk-in-jesus-light",
+          "articleTitle": "Walk in Jesus’ Light",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--walk-in-jesus-light.pdf"
+        },
+        {
+          "title": "You Will Never Die",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/you-will-never-die",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-0-you-will-never-die.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/you-will-never-die",
+          "id": "hearing-god--you-will-never-die",
+          "articleTitle": "You Will Never Die",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--you-will-never-die.pdf"
+        },
+        {
+          "title": "Tell Jesus Your Feelings",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/tell-jesus-your-feelings",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-1-tell-jesus-your-feelings.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/tell-jesus-your-feelings",
+          "id": "hearing-god--tell-jesus-your-feelings",
+          "articleTitle": "Tell Jesus Your Feelings",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--tell-jesus-your-feelings.pdf"
+        },
+        {
+          "title": "Your Eternal Destiny Is Secure",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/your-eternal-destiny-is-secure",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-2-your-eternal-destiny-is-secure.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/your-eternal-destiny-is-secure",
+          "id": "hearing-god--your-eternal-destiny-is-secure",
+          "articleTitle": "Your Eternal Destiny Is Secure",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--your-eternal-destiny-is-secure.pdf"
+        },
+        {
+          "title": "Go to Jesus with All Your Hurts",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/go-to-jesus-with-all-your-hurts",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-3-go-to-jesus-with-all-your-hurts.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/go-to-jesus-with-all-your-hurts",
+          "id": "hearing-god--go-to-jesus-with-all-your-hurts",
+          "articleTitle": "Go to Jesus with All Your Hurts",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--go-to-jesus-with-all-your-hurts.pdf"
+        },
+        {
+          "title": "Grieve with Hope",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/grieve-with-hope",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-4-grieve-with-hope.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/grieve-with-hope",
+          "id": "hearing-god--grieve-with-hope",
+          "articleTitle": "Grieve with Hope",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--grieve-with-hope.pdf"
+        },
+        {
+          "title": "Creating Something from Nothing",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/creating-something-from-nothing",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-5-creating-something-from-nothing.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/creating-something-from-nothing",
+          "id": "hearing-god--creating-something-from-nothing",
+          "articleTitle": "Creating Something from Nothing",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--creating-something-from-nothing.pdf"
+        },
+        {
+          "title": "Love the Church",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/love-the-church",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-6-love-the-church.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/love-the-church",
+          "id": "hearing-god--love-the-church",
+          "articleTitle": "Love the Church",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--love-the-church.pdf"
+        },
+        {
+          "title": "Seek Jesus First",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/seek-jesus-first",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-7-seek-jesus-first.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/seek-jesus-first",
+          "id": "hearing-god--seek-jesus-first",
+          "articleTitle": "Seek Jesus First",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--seek-jesus-first.pdf"
+        },
+        {
+          "title": "Serve the Poor",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/serve-the-poor",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-8-serve-the-poor.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/serve-the-poor",
+          "id": "hearing-god--serve-the-poor",
+          "articleTitle": "Serve the Poor",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--serve-the-poor.pdf"
+        },
+        {
+          "title": "You Are What You Think",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/you-are-what-you-think",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22406-9-you-are-what-you-think.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/you-are-what-you-think",
+          "id": "hearing-god--you-are-what-you-think",
+          "articleTitle": "You Are What You Think",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--you-are-what-you-think.pdf"
+        },
+        {
+          "title": "One Day You Will Understand",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/one-day-you-will-understand",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-0-one-day-you-will-understand.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/one-day-you-will-understand",
+          "id": "hearing-god--one-day-you-will-understand",
+          "articleTitle": "One Day You Will Understand",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--one-day-you-will-understand.pdf"
+        },
+        {
+          "title": "The Purpose of Brokenness",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-purpose-of-brokenness",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-1-the-purpose-of-brokenness.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-purpose-of-brokenness",
+          "id": "hearing-god--the-purpose-of-brokenness",
+          "articleTitle": "The Purpose of Brokenness",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-purpose-of-brokenness.pdf"
+        },
+        {
+          "title": "Jesus Draws You to Himself",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-draws-you-to-himself",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-2-jesus-draws-you-to-himself.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-draws-you-to-himself",
+          "id": "hearing-god--jesus-draws-you-to-himself",
+          "articleTitle": "Jesus Draws You to Himself",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-draws-you-to-himself.pdf"
+        },
+        {
+          "title": "Fear God, Not People",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/fear-god-not-people",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-3-fear-god-not-people.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/fear-god-not-people",
+          "id": "hearing-god--fear-god-not-people",
+          "articleTitle": "Fear God, Not People",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--fear-god-not-people.pdf"
+        },
+        {
+          "title": "You Are Forever Forgien",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/you-are-forever-forgien",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-4-you-are-forever-forgien.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/you-are-forever-forgien",
+          "id": "hearing-god--you-are-forever-forgien",
+          "articleTitle": "You Are Forever Forgiven",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--you-are-forever-forgien.pdf"
+        },
+        {
+          "title": "Called to Serve",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/called-to-serve",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-5-called-to-serve.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/called-to-serve",
+          "id": "hearing-god--called-to-serve",
+          "articleTitle": "Called to Serve",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--called-to-serve.pdf"
+        },
+        {
+          "title": "Daily Grace",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/daily-grace",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-6-daily-grace.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/daily-grace",
+          "id": "hearing-god--daily-grace",
+          "articleTitle": "Daily Grace",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--daily-grace.pdf"
+        },
+        {
+          "title": "Forgiving Those Who Hurt You",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/forgiving-those-who-hurt-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-7-forgiving-those-who-hurt-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/forgiving-those-who-hurt-you",
+          "id": "hearing-god--forgiving-those-who-hurt-you",
+          "articleTitle": "Forgiving Those Who Hurt You",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--forgiving-those-who-hurt-you.pdf"
+        },
+        {
+          "title": "The Importance of Love and Humility",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-importance-of-love-and-humility",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-8-the-importance-of-love-and-humility.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-importance-of-love-and-humility",
+          "id": "hearing-god--the-importance-of-love-and-humility",
+          "articleTitle": "The Importance of Love and Humility",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-importance-of-love-and-humility.pdf"
+        },
+        {
+          "title": "Love One Another",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/love-one-another",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22407-9-love-one-another.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/love-one-another",
+          "id": "hearing-god--love-one-another",
+          "articleTitle": "Love One Another",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--love-one-another.pdf"
+        },
+        {
+          "title": "Starting Over",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/starting-over",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-0-starting-over.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/starting-over",
+          "id": "hearing-god--starting-over",
+          "articleTitle": "Starting Over",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--starting-over.pdf"
+        },
+        {
+          "title": "Choose Faith",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/choose-faith",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-1-choose-faith.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/choose-faith",
+          "id": "hearing-god--choose-faith",
+          "articleTitle": "Choose Faith",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--choose-faith.pdf"
+        },
+        {
+          "title": "Greater Works",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/greater-works",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-2-greater-works.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/greater-works",
+          "id": "hearing-god--greater-works",
+          "articleTitle": "Greater Works",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--greater-works.pdf"
+        },
+        {
+          "title": "Another Helper",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/another-helper",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-3-another-helper.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/another-helper",
+          "id": "hearing-god--another-helper",
+          "articleTitle": "Another Helper",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--another-helper.pdf"
+        },
+        {
+          "title": "Your Heart: God's Home",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/your-heart-gods-home",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-4-your-heart-gods-home.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/your-heart-gods-home",
+          "id": "hearing-god--your-heart-gods-home",
+          "articleTitle": "Your Heart: God’s Home",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--your-heart-gods-home.pdf"
+        },
+        {
+          "title": "Read God's Word with Confidence",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/read-gods-word-with-confidence",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-5-read-gods-word-with-confidence.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/read-gods-word-with-confidence",
+          "id": "hearing-god--read-gods-word-with-confidence",
+          "articleTitle": "Read God’s Word with Confidence",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--read-gods-word-with-confidence.pdf"
+        },
+        {
+          "title": "The Gift of Peace",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-gift-of-peace",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-6-the-gift-of-peace.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-gift-of-peace",
+          "id": "hearing-god--the-gift-of-peace",
+          "articleTitle": "The Gift of Peace",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-gift-of-peace.pdf"
+        },
+        {
+          "title": "Created to Bear Fruit for God",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/created-to-bear-fruit-for-god",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-7-created-to-bear-fruit-for-god.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/created-to-bear-fruit-for-god",
+          "id": "hearing-god--created-to-bear-fruit-for-god",
+          "articleTitle": "Created to Bear Fruit for God",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--created-to-bear-fruit-for-god.pdf"
+        },
+        {
+          "title": "Jesus Is Your Friend",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-is-your-friend",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-8-jesus-is-your-friend.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-is-your-friend",
+          "id": "hearing-god--jesus-is-your-friend",
+          "articleTitle": "Jesus Is Your Friend",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-is-your-friend.pdf"
+        },
+        {
+          "title": "The Proof of Faithfulness",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-proof-of-faithfulness",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22408-9-the-proof-of-faithfulness.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-proof-of-faithfulness",
+          "id": "hearing-god--the-proof-of-faithfulness",
+          "articleTitle": "The Proof of Faithfulness",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-proof-of-faithfulness.pdf"
+        },
+        {
+          "title": "A Faithful Witness",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/a-faithful-witness",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-0-a-faithful-witness.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/a-faithful-witness",
+          "id": "hearing-god--a-faithful-witness",
+          "articleTitle": "A Faithful Witness",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--a-faithful-witness.pdf"
+        },
+        {
+          "title": "The Work of the Holy Spirit",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-work-of-the-holy-spirit",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-1-the-work-of-the-holy-spirit.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-work-of-the-holy-spirit",
+          "id": "hearing-god--the-work-of-the-holy-spirit",
+          "articleTitle": "The Work of the Holy Spirit",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-work-of-the-holy-spirit.pdf"
+        },
+        {
+          "title": "The Spirit of Truth",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-spirit-of-truth",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-2-the-spirit-of-truth.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-spirit-of-truth",
+          "id": "hearing-god--the-spirit-of-truth",
+          "articleTitle": "The Spirit of Truth",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-spirit-of-truth.pdf"
+        },
+        {
+          "title": "Your Sorrow Turned to Joy",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/your-sorrow-turned-to-joy",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-3-your-sorrow-turned-to-joy.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/your-sorrow-turned-to-joy",
+          "id": "hearing-god--your-sorrow-turned-to-joy",
+          "articleTitle": "Your Sorrow Turned to Joy",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--your-sorrow-turned-to-joy.pdf"
+        },
+        {
+          "title": "You Are An Overcomer",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/you-are-an-overcomer",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-4-you-are-an-overcomer.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/you-are-an-overcomer",
+          "id": "hearing-god--you-are-an-overcomer",
+          "articleTitle": "You Are An Overcomer",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--you-are-an-overcomer.pdf"
+        },
+        {
+          "title": "The Glory of Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-glory-of-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-5-the-glory-of-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-glory-of-jesus",
+          "id": "hearing-god--the-glory-of-jesus",
+          "articleTitle": "The Glory of Jesus",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-glory-of-jesus.pdf"
+        },
+        {
+          "title": "Jesus Is Praying for You",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-is-praying-for-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-6-jesus-is-praying-for-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-is-praying-for-you",
+          "id": "hearing-god--jesus-is-praying-for-you",
+          "articleTitle": "Jesus Is Praying for You",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-is-praying-for-you.pdf"
+        },
+        {
+          "title": "Jesus Prays A Specific Prayer for You",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-prays-a-specific-prayer-for-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-7-jesus-prays-a-specific-prayer-for-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-prays-a-specific-prayer-for-you",
+          "id": "hearing-god--jesus-prays-a-specific-prayer-for-you",
+          "articleTitle": "Jesus Prays A Specific Prayer for You",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-prays-a-specific-prayer-for-you.pdf"
+        },
+        {
+          "title": "A Purpose for God's Word",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/a-purpose-for-gods-word",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-8-a-purpose-for-gods-word.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/a-purpose-for-gods-word",
+          "id": "hearing-god--a-purpose-for-gods-word",
+          "articleTitle": "A Purpose for God’s Word",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--a-purpose-for-gods-word.pdf"
+        },
+        {
+          "title": "Pursue Unity",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/pursue-unity",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22409-9-pursue-unity.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/pursue-unity",
+          "id": "hearing-god--pursue-unity",
+          "articleTitle": "Pursue Unity",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--pursue-unity.pdf"
+        },
+        {
+          "title": "The Cup of God's Wrath",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-cup-of-gods-wrath",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-0-the-cup-of-gods-wrath.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-cup-of-gods-wrath",
+          "id": "hearing-god--the-cup-of-gods-wrath",
+          "articleTitle": "The Cup of God’s Wrath",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-cup-of-gods-wrath.pdf"
+        },
+        {
+          "title": "Be Strong and Courageous",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/be-strong-and-courageous",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-1-be-strong-and-courageous.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/be-strong-and-courageous",
+          "id": "hearing-god--be-strong-and-courageous",
+          "articleTitle": "Be Strong and Courageous",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--be-strong-and-courageous.pdf"
+        },
+        {
+          "title": "God's Plans Are Perfect",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/gods-plans-are-perfect",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-2-gods-plans-are-perfect.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/gods-plans-are-perfect",
+          "id": "hearing-god--gods-plans-are-perfect",
+          "articleTitle": "God’s Plans Are Perfect",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--gods-plans-are-perfect.pdf"
+        },
+        {
+          "title": "You Can Always Begin Again",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/you-can-always-begin-again",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-3-you-can-always-begin-again.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/you-can-always-begin-again",
+          "id": "hearing-god--you-can-always-begin-again",
+          "articleTitle": "You Can Always Begin Again",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--you-can-always-begin-again.pdf"
+        },
+        {
+          "title": "All Authority Comes from Jesus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/all-authority-comes-from-jesus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-4-all-authority-comes-from-jesus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/all-authority-comes-from-jesus",
+          "id": "hearing-god--all-authority-comes-from-jesus",
+          "articleTitle": "All Authority Comes from Jesus",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--all-authority-comes-from-jesus.pdf"
+        },
+        {
+          "title": "No Greater Love",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/no-greater-love",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-5-no-greater-love.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/no-greater-love",
+          "id": "hearing-god--no-greater-love",
+          "articleTitle": "No Greater Love",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--no-greater-love.pdf"
+        },
+        {
+          "title": "Honor Your Parents",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/honor-your-parents",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-6-honor-your-parents.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/honor-your-parents",
+          "id": "hearing-god--honor-your-parents",
+          "articleTitle": "Honor Your Parents",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--honor-your-parents.pdf"
+        },
+        {
+          "title": "It Is Finished",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/it-is-finished",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-7-it-is-finished.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/it-is-finished",
+          "id": "hearing-god--it-is-finished",
+          "articleTitle": "It Is Finished",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--it-is-finished.pdf"
+        },
+        {
+          "title": "Jesus Was Dead",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-was-dead",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-8-jesus-was-dead.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-was-dead",
+          "id": "hearing-god--jesus-was-dead",
+          "articleTitle": "Jesus Was Dead",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-was-dead.pdf"
+        },
+        {
+          "title": "The Body Is in the Tomb",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-body-is-in-the-tomb",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22410-9-the-body-is-in-the-tomb.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-body-is-in-the-tomb",
+          "id": "hearing-god--the-body-is-in-the-tomb",
+          "articleTitle": "The Body Is in the Tomb",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-body-is-in-the-tomb.pdf"
+        },
+        {
+          "title": "Who Moved the Stone?",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/who-moved-the-stone",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-0-who-moved-the-stone.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/who-moved-the-stone",
+          "id": "hearing-god--who-moved-the-stone",
+          "articleTitle": "Who Moved the Stone?",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--who-moved-the-stone.pdf"
+        },
+        {
+          "title": "Jesus' Resurrection Power Lives in You",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-resurrection-power-lives-in-you",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-1-jesus-resurrection-power-lives-in-you.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-resurrection-power-lives-in-you",
+          "id": "hearing-god--jesus-resurrection-power-lives-in-you",
+          "articleTitle": "Jesus’ Resurrection Power Lives in You",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-resurrection-power-lives-in-you.pdf"
+        },
+        {
+          "title": "The God of Angelic Armies",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-god-of-angelic-armies",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-2-the-god-of-angelic-armies.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-god-of-angelic-armies",
+          "id": "hearing-god--the-god-of-angelic-armies",
+          "articleTitle": "The God of Angelic Armies",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-god-of-angelic-armies.pdf"
+        },
+        {
+          "title": "God Is Your Loving Daddy",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/god-is-your-loving-daddy",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-3-god-is-your-loving-daddy.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/god-is-your-loving-daddy",
+          "id": "hearing-god--god-is-your-loving-daddy",
+          "articleTitle": "God Is Your Loving Daddy",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--god-is-your-loving-daddy.pdf"
+        },
+        {
+          "title": "Go into the Word",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/go-into-the-word",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-4-go-into-the-word.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/go-into-the-word",
+          "id": "hearing-god--go-into-the-word",
+          "articleTitle": "Go into the World",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--go-into-the-word.pdf"
+        },
+        {
+          "title": "Walk by Faith and Not by Sight",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/walk-by-faith-and-not-by-sight",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-5-walk-by-faith-and-not-by-sight.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/walk-by-faith-and-not-by-sight",
+          "id": "hearing-god--walk-by-faith-and-not-by-sight",
+          "articleTitle": "Walk by Faith and Not by Sight",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--walk-by-faith-and-not-by-sight.pdf"
+        },
+        {
+          "title": "God Oversees Your Nothings",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/god-oversees-your-nothings",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-6-god-oversees-your-nothings.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/god-oversees-your-nothings",
+          "id": "hearing-god--god-oversees-your-nothings",
+          "articleTitle": "God Oversees Your Nothings",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--god-oversees-your-nothings.pdf"
+        },
+        {
+          "title": "Don't Give Up",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/dont-give-up",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-7-dont-give-up.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/dont-give-up",
+          "id": "hearing-god--dont-give-up",
+          "articleTitle": "Don’t Give Up",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--dont-give-up.pdf"
+        },
+        {
+          "title": "The Two Faces of Grace",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/the-two-faces-of-grace",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-8-the-two-faces-of-grace.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/the-two-faces-of-grace",
+          "id": "hearing-god--the-two-faces-of-grace",
+          "articleTitle": "The Two Faces of Grace",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--the-two-faces-of-grace.pdf"
+        },
+        {
+          "title": "God's Purpose in Your Pain",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/gods-purpose-in-your-pain",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22411-9-gods-purpose-in-your-pain.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/gods-purpose-in-your-pain",
+          "id": "hearing-god--gods-purpose-in-your-pain",
+          "articleTitle": "God’s Purpose in Your Pain",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--gods-purpose-in-your-pain.pdf"
+        },
+        {
+          "title": "Total Obedience",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/total-obedience",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22412-0-total-obedience.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/total-obedience",
+          "id": "hearing-god--total-obedience",
+          "articleTitle": "Total Obedience",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--total-obedience.pdf"
+        },
+        {
+          "title": "Follow Me",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/follow-me",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22412-1-follow-me.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/follow-me",
+          "id": "hearing-god--follow-me",
+          "articleTitle": "Follow Me"
+        },
+        {
+          "title": "Jesus Will Return",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/jesus-will-return",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22412-2-jesus-will-return.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/jesus-will-return",
+          "id": "hearing-god--jesus-will-return",
+          "articleTitle": "Jesus Will Return",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--jesus-will-return.pdf"
+        },
+        {
+          "title": "Notes",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god/notes",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/22412-3-notes.pdf",
+          "status": "imported",
+          "path": "/bible/resources/hearing-god/notes",
+          "id": "hearing-god--notes",
+          "articleTitle": "Notes",
+          "pdfPath": "/bible-resources/pdfs/hearing-god--notes.pdf"
+        }
+      ]
+    },
+    {
+      "id": "survey-ot",
+      "title": "Old Testament Survey",
+      "description": "A book-by-book overview of the Old Testament.",
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot",
+      "path": "/bible/resources/survey-ot",
+      "items": [
+        {
+          "title": "Old Testament Introduction",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/old-tesatament-introduction",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-old-tesatament-introduction.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/old-tesatament-introduction",
+          "id": "survey-ot--old-tesatament-introduction",
+          "articleTitle": "Old Testament Introduction",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--old-tesatament-introduction.pdf"
+        },
+        {
+          "title": "Genesis",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/genesis",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-1-genesis.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/genesis",
+          "id": "survey-ot--genesis",
+          "articleTitle": "Genesis",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--genesis.pdf"
+        },
+        {
+          "title": "Exodus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/exodus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-2-exodus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/exodus",
+          "id": "survey-ot--exodus",
+          "articleTitle": "Exodus",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--exodus.pdf"
+        },
+        {
+          "title": "Leviticus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/leviticus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-3-leviticus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/leviticus",
+          "id": "survey-ot--leviticus",
+          "articleTitle": "Leviticus",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--leviticus.pdf"
+        },
+        {
+          "title": "Numbers",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/numbers",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-4-numbers.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/numbers",
+          "id": "survey-ot--numbers",
+          "articleTitle": "Numbers",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--numbers.pdf"
+        },
+        {
+          "title": "Deuteronomy",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/deuteronomy",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-5-deuteronomy.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/deuteronomy",
+          "id": "survey-ot--deuteronomy",
+          "articleTitle": "Deuteronomy",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--deuteronomy.pdf"
+        },
+        {
+          "title": "Joshua",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/joshua",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-6-joshua.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/joshua",
+          "id": "survey-ot--joshua",
+          "articleTitle": "Joshua",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--joshua.pdf"
+        },
+        {
+          "title": "Judges",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/judges",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-7-judges.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/judges",
+          "id": "survey-ot--judges",
+          "articleTitle": "Judges",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--judges.pdf"
+        },
+        {
+          "title": "Ruth",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/ruth",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-8-ruth.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/ruth",
+          "id": "survey-ot--ruth",
+          "articleTitle": "Ruth",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--ruth.pdf"
+        },
+        {
+          "title": "1 Samuel",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/1-samuel",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93651-9-1-samuel.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/1-samuel",
+          "id": "survey-ot--1-samuel",
+          "articleTitle": "1 Samuel",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--1-samuel.pdf"
+        },
+        {
+          "title": "2 Samuel",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/2-samuel",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93652-0-2-samuel.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/2-samuel",
+          "id": "survey-ot--2-samuel",
+          "articleTitle": "2 Samuel",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--2-samuel.pdf"
+        },
+        {
+          "title": "1 Kings",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/1-kings",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93652-1-1-kings.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/1-kings",
+          "id": "survey-ot--1-kings",
+          "articleTitle": "1 Kings",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--1-kings.pdf"
+        },
+        {
+          "title": "2 Kings",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/2-kings",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93652-2-2-kings.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/2-kings",
+          "id": "survey-ot--2-kings",
+          "articleTitle": "2 Kings",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--2-kings.pdf"
+        },
+        {
+          "title": "1 & 2 Chronicles",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/1-and-2-chronicles",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93652-3-1-&-2-chronicles.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/1-and-2-chronicles",
+          "id": "survey-ot--1-and-2-chronicles",
+          "articleTitle": "1 & 2 Chronicles",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--1-and-2-chronicles.pdf"
+        },
+        {
+          "title": "Ezra and Nehemiah",
+          "sourceUrl": null,
+          "pdfSourceUrl": null,
+          "status": "coming-soon",
+          "path": null,
+          "id": "survey-ot--coming-soon-14",
+          "issue": "The source owner confirmed this lesson is coming soon."
+        },
+        {
+          "title": "Esther",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/esther",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93652-5-esther.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/esther",
+          "id": "survey-ot--esther",
+          "articleTitle": "Esther",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--esther.pdf"
+        },
+        {
+          "title": "Job",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/job",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93652-6-job.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/job",
+          "id": "survey-ot--job",
+          "articleTitle": "Job",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--job.pdf"
+        },
+        {
+          "title": "Psalms",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/psalms",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93652-7-psalms.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/psalms",
+          "id": "survey-ot--psalms",
+          "articleTitle": "Psalms",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--psalms.pdf"
+        },
+        {
+          "title": "Proverbs",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/proverbs",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93652-8-proverbs.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/proverbs",
+          "id": "survey-ot--proverbs",
+          "articleTitle": "Proverbs",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--proverbs.pdf"
+        },
+        {
+          "title": "Ecclesiastes",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/ecclesiastes",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93652-9-ecclesiastes.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/ecclesiastes",
+          "id": "survey-ot--ecclesiastes",
+          "articleTitle": "Ecclesiastes",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--ecclesiastes.pdf"
+        },
+        {
+          "title": "Song of Songs",
+          "sourceUrl": null,
+          "pdfSourceUrl": null,
+          "status": "coming-soon",
+          "path": null,
+          "id": "survey-ot--coming-soon-20",
+          "issue": "The source owner confirmed this lesson is coming soon."
+        },
+        {
+          "title": "Isaiah",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/isaiah",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93653-1-isaiah.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/isaiah",
+          "id": "survey-ot--isaiah",
+          "articleTitle": "Isaiah",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--isaiah.pdf"
+        },
+        {
+          "title": "Jeremiah",
+          "sourceUrl": null,
+          "pdfSourceUrl": null,
+          "status": "coming-soon",
+          "path": null,
+          "id": "survey-ot--coming-soon-22",
+          "issue": "The source owner confirmed this lesson is coming soon."
+        },
+        {
+          "title": "Lamentations",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/lamentation",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93653-3-lamentation.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/lamentation",
+          "id": "survey-ot--lamentation",
+          "articleTitle": "Lamentations",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--lamentation.pdf"
+        },
+        {
+          "title": "Ezekiel",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/ezekiel",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93653-4-ezekiel.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/ezekiel",
+          "id": "survey-ot--ezekiel",
+          "articleTitle": "Ezekiel",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--ezekiel.pdf"
+        },
+        {
+          "title": "Daniel",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/daniel",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93653-5-daniel.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/daniel",
+          "id": "survey-ot--daniel",
+          "articleTitle": "Daniel",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--daniel.pdf"
+        },
+        {
+          "title": "Hosea",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/hosea",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93653-6-hosea.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/hosea",
+          "id": "survey-ot--hosea",
+          "articleTitle": "Hosea",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--hosea.pdf"
+        },
+        {
+          "title": "Joel",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/joel",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93653-7-joel.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/joel",
+          "id": "survey-ot--joel",
+          "articleTitle": "Joel",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--joel.pdf"
+        },
+        {
+          "title": "Amos",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/amos",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93653-8-amos.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/amos",
+          "id": "survey-ot--amos",
+          "articleTitle": "Amos",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--amos.pdf"
+        },
+        {
+          "title": "Obadiah",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/obadiah",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93653-9-obadiah.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/obadiah",
+          "id": "survey-ot--obadiah",
+          "articleTitle": "Obadiah",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--obadiah.pdf"
+        },
+        {
+          "title": "Jonah",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/jonah",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93654-0-jonah.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/jonah",
+          "id": "survey-ot--jonah",
+          "articleTitle": "Jonah",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--jonah.pdf"
+        },
+        {
+          "title": "Micah",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/micah",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93654-1-micah.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/micah",
+          "id": "survey-ot--micah",
+          "articleTitle": "Micah",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--micah.pdf"
+        },
+        {
+          "title": "Nahum",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/nahum",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93654-2-nahum.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/nahum",
+          "id": "survey-ot--nahum",
+          "articleTitle": "Nahum",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--nahum.pdf"
+        },
+        {
+          "title": "Habakkuk",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/habakkuk",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93654-3-habakkuk.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/habakkuk",
+          "id": "survey-ot--habakkuk",
+          "articleTitle": "Habakkuk",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--habakkuk.pdf"
+        },
+        {
+          "title": "Zephaniah",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/zephaniah",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93654-4-Zephaniah.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/zephaniah",
+          "id": "survey-ot--zephaniah",
+          "articleTitle": "Zephaniah",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--zephaniah.pdf"
+        },
+        {
+          "title": "Haggai",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/haggai",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93654-5-haggai.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/haggai",
+          "id": "survey-ot--haggai",
+          "articleTitle": "Haggai",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--haggai.pdf"
+        },
+        {
+          "title": "Zechariah",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/zechariah",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93654-6-Zechariah.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/zechariah",
+          "id": "survey-ot--zechariah",
+          "articleTitle": "Zechariah",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--zechariah.pdf"
+        },
+        {
+          "title": "Malachi",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot/malachi",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93654-7-malachi.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-ot/malachi",
+          "id": "survey-ot--malachi",
+          "articleTitle": "Malachi",
+          "pdfPath": "/bible-resources/pdfs/survey-ot--malachi.pdf"
+        }
+      ]
+    },
+    {
+      "id": "survey-nt",
+      "title": "New Testament Survey",
+      "description": "A book-by-book overview of the New Testament.",
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt",
+      "path": "/bible/resources/survey-nt",
+      "items": [
+        {
+          "title": "Matthew",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/matthew",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93660-1-matthew.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/matthew",
+          "id": "survey-nt--matthew",
+          "articleTitle": "Matthew",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--matthew.pdf"
+        },
+        {
+          "title": "Mark",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/mark",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93660-2-mark.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/mark",
+          "id": "survey-nt--mark",
+          "articleTitle": "Mark",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--mark.pdf"
+        },
+        {
+          "title": "Luke",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/luke",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93660-3-luke.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/luke",
+          "id": "survey-nt--luke",
+          "articleTitle": "Luke",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--luke.pdf"
+        },
+        {
+          "title": "John",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/john",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93660-4-john.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/john",
+          "id": "survey-nt--john",
+          "articleTitle": "John",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--john.pdf"
+        },
+        {
+          "title": "Acts",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/acts",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93660-5-acts.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/acts",
+          "id": "survey-nt--acts",
+          "articleTitle": "Acts",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--acts.pdf"
+        },
+        {
+          "title": "Romans",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/romans",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93660-6-romans.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/romans",
+          "id": "survey-nt--romans",
+          "articleTitle": "Romans",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--romans.pdf"
+        },
+        {
+          "title": "1 Corinthians",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/1-corinthians",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93660-7-1-corinthians.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/1-corinthians",
+          "id": "survey-nt--1-corinthians",
+          "articleTitle": "1 Corinthians",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--1-corinthians.pdf"
+        },
+        {
+          "title": "2 Corinthians",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/2-corinthians",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93660-8-2-corinthians.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/2-corinthians",
+          "id": "survey-nt--2-corinthians",
+          "articleTitle": "2 Corinthians",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--2-corinthians.pdf"
+        },
+        {
+          "title": "Galatians",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/galatians",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93660-9-galatians.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/galatians",
+          "id": "survey-nt--galatians",
+          "articleTitle": "Galatians",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--galatians.pdf"
+        },
+        {
+          "title": "Ephesians",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/epehsians",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-0-epehsians.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/epehsians",
+          "id": "survey-nt--epehsians",
+          "articleTitle": "Ephesians",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--epehsians.pdf"
+        },
+        {
+          "title": "Philippians",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/colossians",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-1-colossians.pdf",
+          "status": "coming-soon",
+          "path": null,
+          "id": "survey-nt--colossians",
+          "articleTitle": "Philippians",
+          "issue": "The source's Philippians lesson contains only Coming Soon.",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--colossians.pdf"
+        },
+        {
+          "title": "Colossians",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/philippians",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-2-philippians.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/philippians",
+          "id": "survey-nt--philippians",
+          "articleTitle": "Colossians",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--philippians.pdf"
+        },
+        {
+          "title": "1 Thessalonians",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/1-thessalonians",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-3--1-thessalonians.pdf",
+          "status": "blocked",
+          "path": null,
+          "id": "survey-nt--1-thessalonians",
+          "articleTitle": "2 Thessalonians",
+          "issue": "Source review needed: this link displays the 2 Thessalonians lesson, not 1 Thessalonians.",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--1-thessalonians.pdf"
+        },
+        {
+          "title": "2 Thessalonians",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/2-thessalonians",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-4-2-thessalonians.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/2-thessalonians",
+          "id": "survey-nt--2-thessalonians",
+          "articleTitle": "2 Thessalonians",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--2-thessalonians.pdf"
+        },
+        {
+          "title": "1 Timothy",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/1-timothy",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-5-1-timothy.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/1-timothy",
+          "id": "survey-nt--1-timothy",
+          "articleTitle": "1 Timothy",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--1-timothy.pdf"
+        },
+        {
+          "title": "2 Timothy",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/2-timothy",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-6-2-timothy.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/2-timothy",
+          "id": "survey-nt--2-timothy",
+          "articleTitle": "2 Timothy",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--2-timothy.pdf"
+        },
+        {
+          "title": "Titus",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/titus",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-7-titus.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/titus",
+          "id": "survey-nt--titus",
+          "articleTitle": "Titus",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--titus.pdf"
+        },
+        {
+          "title": "Philemon",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/philemon",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-8-philemon.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/philemon",
+          "id": "survey-nt--philemon",
+          "articleTitle": "Philemon",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--philemon.pdf"
+        },
+        {
+          "title": "Hebrews",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/hebrew",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93661-9-hebrew.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/hebrew",
+          "id": "survey-nt--hebrew",
+          "articleTitle": "Hebrews",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--hebrew.pdf"
+        },
+        {
+          "title": "James",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/james",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93662-0-james.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/james",
+          "id": "survey-nt--james",
+          "articleTitle": "James",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--james.pdf"
+        },
+        {
+          "title": "1 Peter",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/1-peter",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93662-1-1-peter.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/1-peter",
+          "id": "survey-nt--1-peter",
+          "articleTitle": "1 Peter",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--1-peter.pdf"
+        },
+        {
+          "title": "2 Peter",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/2-peter",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93662-2-2-peter.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/2-peter",
+          "id": "survey-nt--2-peter",
+          "articleTitle": "2 Peter",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--2-peter.pdf"
+        },
+        {
+          "title": "1 John",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/1-john",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93662-3-1-john.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/1-john",
+          "id": "survey-nt--1-john",
+          "articleTitle": "1 John",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--1-john.pdf"
+        },
+        {
+          "title": "2 John",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/2-john",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93662-4-2-john.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/2-john",
+          "id": "survey-nt--2-john",
+          "articleTitle": "2 John",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--2-john.pdf"
+        },
+        {
+          "title": "3 John",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/3-john",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93662-5-3-john.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/3-john",
+          "id": "survey-nt--3-john",
+          "articleTitle": "3 John",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--3-john.pdf"
+        },
+        {
+          "title": "Jude",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/jude",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93662-6-jude.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/jude",
+          "id": "survey-nt--jude",
+          "articleTitle": "Jude",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--jude.pdf"
+        },
+        {
+          "title": "Revelation",
+          "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/revelation",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/93662-7-revelation.pdf",
+          "status": "imported",
+          "path": "/bible/resources/survey-nt/revelation",
+          "id": "survey-nt--revelation",
+          "articleTitle": "Revelation",
+          "pdfPath": "/bible-resources/pdfs/survey-nt--revelation.pdf"
+        }
+      ]
+    },
+    {
+      "id": "promises-collection",
+      "title": "Bible Promises for Hope",
+      "description": "Anchor people in God's promises to maintain confident hope.",
+      "sourceUrl": "https://equip.jesusonline.com/categories/growth/bible-promises-hope",
+      "path": "/bible/resources/promises-collection",
+      "items": [
+        {
+          "title": "Hope in God's Promises",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/bible-promises-hope/hope-in-gods-promises",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/23251-hope-in-gods-promises.pdf",
+          "status": "imported",
+          "path": "/bible/resources/promises-collection/hope-in-gods-promises",
+          "id": "promises-collection--hope-in-gods-promises",
+          "articleTitle": "Hope in God’s Promises",
+          "pdfPath": "/bible-resources/pdfs/promises-collection--hope-in-gods-promises.pdf"
+        },
+        {
+          "title": "Promises Overview",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/bible-promises-hope/promises-overview",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/23252-promises-overview.pdf",
+          "status": "imported",
+          "path": "/bible/resources/promises-collection/promises-overview",
+          "id": "promises-collection--promises-overview",
+          "articleTitle": "Promises Overview",
+          "pdfPath": "/bible-resources/pdfs/promises-collection--promises-overview.pdf"
+        },
+        {
+          "title": "Promises for Your Situation",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/bible-promises-hope/promises-for-your-situation",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/23253-promises-for-your-situation.pdf",
+          "status": "imported",
+          "path": "/bible/resources/promises-collection/promises-for-your-situation",
+          "id": "promises-collection--promises-for-your-situation",
+          "articleTitle": "Promises for Your Situation",
+          "pdfPath": "/bible-resources/pdfs/promises-collection--promises-for-your-situation.pdf"
+        },
+        {
+          "title": "Promises for Your Feelings",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/bible-promises-hope/promises-for-your-feelings",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/23254-promises-for-your-feelings.pdf",
+          "status": "imported",
+          "path": "/bible/resources/promises-collection/promises-for-your-feelings",
+          "id": "promises-collection--promises-for-your-feelings",
+          "articleTitle": "Promises for Your Feelings",
+          "pdfPath": "/bible-resources/pdfs/promises-collection--promises-for-your-feelings.pdf"
+        },
+        {
+          "title": "Promises for Your Relationships",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/bible-promises-hope/promises-for-your-relationships",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/23255-promises-for-your-relationships.pdf",
+          "status": "imported",
+          "path": "/bible/resources/promises-collection/promises-for-your-relationships",
+          "id": "promises-collection--promises-for-your-relationships",
+          "articleTitle": "Promises for Your Relationships",
+          "pdfPath": "/bible-resources/pdfs/promises-collection--promises-for-your-relationships.pdf"
+        },
+        {
+          "title": "Promises for Your Identity",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/bible-promises-hope/promises-for-your-identity",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/23256-promises-for-your-identity.pdf",
+          "status": "imported",
+          "path": "/bible/resources/promises-collection/promises-for-your-identity",
+          "id": "promises-collection--promises-for-your-identity",
+          "articleTitle": "Promises for Your Identity",
+          "pdfPath": "/bible-resources/pdfs/promises-collection--promises-for-your-identity.pdf"
+        },
+        {
+          "title": "Promises for Your Future",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/bible-promises-hope/promises-for-your-future",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/23257-promises-for-your-future.pdf",
+          "status": "imported",
+          "path": "/bible/resources/promises-collection/promises-for-your-future",
+          "id": "promises-collection--promises-for-your-future",
+          "articleTitle": "Promises for Your Future",
+          "pdfPath": "/bible-resources/pdfs/promises-collection--promises-for-your-future.pdf"
+        },
+        {
+          "title": "Promises About God's Authority",
+          "sourceUrl": "https://equip.jesusonline.com/categories/growth/bible-promises-hope/promises-about-gods-authority",
+          "pdfSourceUrl": "https://equip.jesusonline.com/articles/23258-promises-about-gods-authority.pdf",
+          "status": "imported",
+          "path": "/bible/resources/promises-collection/promises-about-gods-authority",
+          "id": "promises-collection--promises-about-gods-authority",
+          "articleTitle": "Promises About God’s Character",
+          "pdfPath": "/bible-resources/pdfs/promises-collection--promises-about-gods-authority.pdf"
+        }
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "collectionId": "survey-ot",
+      "title": "Ezra and Nehemiah",
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot",
+      "localDestination": null,
+      "status": "coming-soon",
+      "note": "The source owner confirmed this lesson is coming soon."
+    },
+    {
+      "collectionId": "survey-ot",
+      "title": "Song of Songs",
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot",
+      "localDestination": null,
+      "status": "coming-soon",
+      "note": "The source owner confirmed this lesson is coming soon."
+    },
+    {
+      "collectionId": "survey-ot",
+      "title": "Jeremiah",
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-ot",
+      "localDestination": null,
+      "status": "coming-soon",
+      "note": "The source owner confirmed this lesson is coming soon."
+    },
+    {
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/colossians",
+      "localDestination": "/bible/resources/survey-nt/colossians",
+      "status": "imported-with-source-inconsistency",
+      "note": "The source collection labels this lesson “Philippians” but links it to the URL ending “colossians”. The original title, destination mapping and text are retained for review; this import does not silently swap the lessons."
+    },
+    {
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/colossians",
+      "localDestination": null,
+      "status": "coming-soon",
+      "note": "The source's Philippians lesson contains only Coming Soon."
+    },
+    {
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/philippians",
+      "localDestination": "/bible/resources/survey-nt/philippians",
+      "status": "imported-with-source-inconsistency",
+      "note": "The source collection labels this lesson “Colossians” but links it to the URL ending “philippians”. The original title, destination mapping and text are retained for review; this import does not silently swap the lessons."
+    },
+    {
+      "sourceUrl": "https://equip.jesusonline.com/categories/church/survey-of-the-bible-nt/1-thessalonians",
+      "localDestination": "/bible/resources/survey-nt/1-thessalonians",
+      "status": "imported-with-source-inconsistency",
+      "note": "Source collection lists “1 Thessalonians” but the article heading is “2 Thessalonians”. Retained both source labels without renaming the lesson. The source's 1 Thessalonians URL displays a 2 Thessalonians heading. The supplied body is retained without substituting or duplicating another lesson."
+    },
+    {
+      "sourceUrl": "https://equip.jesusonline.com/categories/growth/hearing-voice-god",
+      "localDestination": "/bible/resources/hearing-god",
+      "status": "source-duplicate-reused",
+      "note": "Follow Me appears twice in the source collection. Both list positions link to one local article; 124 source entries represent 123 unique articles."
+    }
+  ],
+  "permissions": [
+    "Original text and Scripture translation labels are retained.",
+    "Joshua Nations acknowledgments and attribution links are retained.",
+    "Third-party republication permissions must be confirmed by the project owner; public availability alone is not a license."
+  ]
+}
