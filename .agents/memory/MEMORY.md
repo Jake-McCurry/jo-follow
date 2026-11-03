@@ -1,4 +1,5 @@
 - [Portable pnpm overrides](portable-pnpm-overrides.md) — Keep Cloudflare-facing overrides minimal and validate the lockfile with Cloudflare's pnpm version.
+- [Uploaded build inputs](uploaded-build-inputs.md) — Uploaded files can be locally readable but globally Git-ignored; verify required source assets reach clean CI checkouts.
 - [Bible.org Worker TLS checks](bible-org-worker-tls.md) — Local workerd may reject Bible.org's certificate even when host HTTPS succeeds; verify passage fetches on staging.
 - [Article link validation](article-link-validation.md) — Cover every frontend entry point and keep reaction eligibility in sync with new content catalogs.
 - [Workspace test runner dependencies](workspace-test-runner-dependencies.md) — Node test loaders must be declared by the package that runs them, not assumed from another workspace package.
