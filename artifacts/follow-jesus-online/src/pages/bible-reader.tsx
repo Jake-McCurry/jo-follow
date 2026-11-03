@@ -171,7 +171,7 @@ export function BibleReaderPage() {
             {/* Navigation Toolbar */}
             <div className="mb-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-card-border bg-card p-3 shadow-sm 2xl:flex-row sm:p-4">
               <div className="flex w-full flex-wrap items-center gap-2 2xl:w-auto">
-                <div className="min-w-[130px] flex-1 sm:w-[180px] sm:flex-none">
+                <div className="min-w-[120px] flex-1 sm:w-[140px] sm:flex-none">
                 <SelectNative
                   value={canonicalBookName}
                   onChange={(e) => setLocation(chapterHref(e.target.value, 1))}
@@ -202,7 +202,7 @@ export function BibleReaderPage() {
                   ))}
                 </SelectNative>
                 </div>
-                <div className="w-full sm:w-48">
+                <div className="w-full sm:w-auto sm:min-w-[11rem]">
                   <p id="bible-translation-label" className="mb-1 text-xs font-bold uppercase tracking-[.15em] text-muted-foreground">Translation</p>
                   <div role="group" aria-labelledby="bible-translation-label" className="flex rounded-md border border-[var(--color-border-control)] bg-white p-1">
                     {(["NET", "KJV"] as const).map(value => (
@@ -213,7 +213,7 @@ export function BibleReaderPage() {
                         onClick={() => {
                           if (version !== value) setLocation(chapterHref(canonicalBookName, chapterParam, value))
                         }}
-                        className={`min-h-11 flex-1 rounded border px-3 py-2 text-sm font-bold text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500 focus-visible:ring-offset-2 ${version === value ? "border-warm-500 bg-warm-100" : "border-transparent hover:bg-warm-50"}`}
+                        className={`min-h-11 flex-1 whitespace-nowrap rounded border px-4 py-2 text-sm font-bold text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-500 focus-visible:ring-offset-2 ${version === value ? "border-warm-500 bg-warm-100" : "border-transparent hover:bg-warm-50"}`}
                       >
                         {value}
                       </button>

@@ -47,4 +47,27 @@ export const knowingGodIntroductions: KnowingGodIntroduction[] = [
       "Selected reflections on Scripture, knowing God, and the nature and character of the Almighty.",
     pdfPages: [19, 20],
   },
+  {
+    slug: "bible-memorization",
+    title: "Bible Memorization and Prayer",
+    eyebrow: "Appendix · Memory & Prayer",
+    description:
+      "The complete front-and-back memory card, seven instructions, example prayer, and 21 Salvation Verses for Memorization.",
+    pdfPages: [1131, 1133],
+  },
+  {
+    slug: "notes",
+    title: "Notes",
+    eyebrow: "Appendix · Source Notes",
+    description: "All six numbered source notes from Knowing God.",
+    pdfPages: [1129],
+  },
+  {
+    slug: "bibliography",
+    title: "Bibliography",
+    eyebrow: "Appendix · Further Study",
+    description:
+      "The original bibliography and Recommended Resources for Further Study.",
+    pdfPages: [1129],
+  },
 ];

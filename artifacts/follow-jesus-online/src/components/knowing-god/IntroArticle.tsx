@@ -1,10 +1,12 @@
 import { useMemo, useState } from "react";
 import { Link } from "wouter";
+import { ChevronsLeft } from "lucide-react";
 import { ChevronLabel } from "@/components/navigation-chevrons";
 import { knowingGodIntroductions, type KnowingGodIntroduction } from "@/data/knowingGodIntroductions";
 import { aboutAndDedication } from "@/data/knowing-god/introduction/about-and-dedication";
 import { foundationalScriptures } from "@/data/knowing-god/introduction/foundational-scriptures";
 import { devotionalGuideCategories, devotionalGuideIntroduction } from "@/data/knowing-god/introduction/devotional-guide";
+import { IntroAppendices } from "@/components/knowing-god/IntroAppendices";
 import { notableQuotations } from "@/data/knowing-god/introduction/notable-quotations";
 
 const hymnEmphasis = [
@@ -79,7 +81,7 @@ export function IntroArticle({ article, previous, next }: { article: KnowingGodI
   return (
     <div className="kg-intro-main">
       <nav className="kg-intro-breadcrumbs" aria-label="Breadcrumb">
-        <Link href="/knowing-god">Knowing God</Link>{" "}
+        <Link href="/knowing-god" aria-label="Back to Knowing God" className="inline-flex min-h-11 items-center gap-1"><ChevronsLeft size={18} aria-hidden="true" />Knowing God</Link>{" "}
         <span aria-hidden="true">/</span>{" "}
         <Link href="/knowing-god/introduction">Introductory Articles</Link>{" "}
         <span aria-hidden="true">/</span>{" "}
@@ -177,6 +179,8 @@ export function IntroArticle({ article, previous, next }: { article: KnowingGodI
         </article>
       )}
 
+      <IntroAppendices slug={article.slug} />
+
       <nav className="article-navigation" aria-label="Introductory article navigation">
         {previous ? (
           <Link href={`/knowing-god/introduction/${previous.slug}`}>
@@ -204,11 +208,11 @@ export function IntroIndex() {
   return (
     <div className="kg-intro-main">
       <nav className="kg-intro-breadcrumbs" aria-label="Breadcrumb">
-        <Link href="/knowing-god">Knowing God</Link> <span aria-hidden="true">/</span> Introductory Articles
+        <Link href="/knowing-god" aria-label="Back to Knowing God" className="inline-flex min-h-11 items-center gap-1"><ChevronsLeft size={18} aria-hidden="true" />Knowing God</Link> <span aria-hidden="true">/</span> Introductory Articles
       </nav>
       <p className="kg-intro-eyebrow">Begin Here</p>
       <h1 className="kg-intro-title">Introductory Articles</h1>
-      <p className="kg-intro-lede">Read the original material that precedes the Table of Contents, then continue into the Topical Bible.</p>
+      <p className="kg-intro-lede">Read the original introductory material and closing appendices, then continue into the Topical Bible.</p>
       <section className="intro-grid" aria-label="Knowing God introductory articles">
         {knowingGodIntroductions.map((article, index) => (
           <Link className="intro-card" href={`/knowing-god/introduction/${article.slug}`} key={article.slug}>

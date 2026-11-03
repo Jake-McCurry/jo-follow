@@ -57,7 +57,11 @@
 }
 .kg-root .kg-scroll {
   top: var(--kg-header-height, 120px);
-  max-height: calc(100dvh - var(--kg-header-height, 120px));
+}
+@media (min-width: 768px) {
+  .kg-root .kg-scroll {
+    max-height: calc(100dvh - var(--kg-header-height, 120px));
+  }
 }
 .kg-root .kg-local-return {
   background: var(--blue-950);
