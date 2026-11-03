@@ -48,3 +48,7 @@ Thumbs.db
 .cache/
 .local/
 /generated-artifacts/
+
+# Required by the Because statements content builder and source-parity tests.
+# Override the environment's blanket ignore for uploaded files.
+!attached_assets/OneDrive_2026-10-29_(1)_1793306993730.zip
