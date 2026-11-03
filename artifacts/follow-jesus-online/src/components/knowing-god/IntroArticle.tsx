@@ -6,6 +6,7 @@ import { knowingGodIntroductions, type KnowingGodIntroduction } from "@/data/kno
 import { aboutAndDedication } from "@/data/knowing-god/introduction/about-and-dedication";
 import { foundationalScriptures } from "@/data/knowing-god/introduction/foundational-scriptures";
 import { devotionalGuideCategories, devotionalGuideIntroduction } from "@/data/knowing-god/introduction/devotional-guide";
+import { IntroAppendices } from "@/components/knowing-god/IntroAppendices";
 import { notableQuotations } from "@/data/knowing-god/introduction/notable-quotations";
 
 const hymnEmphasis = [
@@ -178,6 +179,8 @@ export function IntroArticle({ article, previous, next }: { article: KnowingGodI
         </article>
       )}
 
+      <IntroAppendices slug={article.slug} />
+
       <nav className="article-navigation" aria-label="Introductory article navigation">
         {previous ? (
           <Link href={`/knowing-god/introduction/${previous.slug}`}>
@@ -209,7 +212,7 @@ export function IntroIndex() {
       </nav>
       <p className="kg-intro-eyebrow">Begin Here</p>
       <h1 className="kg-intro-title">Introductory Articles</h1>
-      <p className="kg-intro-lede">Read the original introductory material, then continue into the Topical Bible.</p>
+      <p className="kg-intro-lede">Read the original introductory material and closing appendices, then continue into the Topical Bible.</p>
       <section className="intro-grid" aria-label="Knowing God introductory articles">
         {knowingGodIntroductions.map((article, index) => (
           <Link className="intro-card" href={`/knowing-god/introduction/${article.slug}`} key={article.slug}>

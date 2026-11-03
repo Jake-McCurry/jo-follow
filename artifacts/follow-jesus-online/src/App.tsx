@@ -60,7 +60,7 @@ function PageMetadata() {
     description = 'Search and study topical Bible passages about the nature and character of God.';
   } else if (knowingGodPath === '/knowing-god/introduction') {
     title = 'Introductory Articles | Knowing God Topical Bible | Follow Jesus Online';
-    description = 'Read the original introductory material from Knowing God before exploring the Topical Bible.';
+    description = 'Read the original introductory material and closing appendices from Knowing God before exploring the Topical Bible.';
   } else if (knowingGodPath.startsWith('/knowing-god/introduction/')) {
     const intro = knowingGodIntroductions.find((item) => item.slug === knowingGodPath.split('/')[3]);
     title = `${intro?.title ?? 'Introduction'} | Knowing God Topical Bible | Follow Jesus Online`;
