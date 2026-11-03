@@ -64,6 +64,10 @@ function MdLink({ href = "", children }: { href?: string; children?: ReactNode }
 }
 
 const components: Components = {
+  ol: ({ children, start }) => {
+    const { survey } = useContext(MdContext);
+    return <ol start={start} style={survey ? { counterReset: `item ${(start ?? 1) - 1}` } : undefined}>{children}</ol>;
+  },
   p: ({ children }) => {
     const t = textOf(children).trim();
     const theme = /^(overall\s+)?(theme|overview|key theme)\b/i.test(t);

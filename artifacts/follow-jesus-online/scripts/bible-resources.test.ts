@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
-  buildLinkMap, canonicalBookFromTitle, normalizeSourceUrl, numericChapters,
+  buildLinkMap, canonicalBookFromTitle, indentListContinuations, normalizeSourceUrl, numericChapters,
   parseRef, preprocessSurveyMarkdown, readerHref, splitRefs,
 } from "../src/lib/bible-resources";
 
@@ -78,6 +78,7 @@ test("all original PDFs are local, complete and byte-verified; no production scr
     assert.equal(sha(readFileSync(new URL(`../public${pdf.path}`, import.meta.url))), pdf.sha256);
   }
   const ui = read("src/pages/bible-resources.tsx");
+  assert.match(ui, /<Row href="\/promises" title="Promises of God"/);
   assert.doesNotMatch(ui, /iframe|fetch\(["'`]https:\/\/equip/);
 });
 
@@ -131,4 +132,15 @@ test("survey display headings preserve wording while improving chapter ranges an
   assert.match(read("src/index.css"), /@media \(min-width:768px\) and \(hover:hover\) and \(pointer:fine\)/);
   assert.match(preview, /max-h-/);
   assert.doesNotMatch(preview, /verses\.length \? verses : data\.verses/);
+});
+
+test("survey continuation paragraphs remain within the correct numbered point", () => {
+  const intro = articles.find((a: any) => a.id === "survey-ot--old-tesatament-introduction");
+  assert.match(preprocessSurveyMarkdown(intro.markdown), /\n   The story begins with creation/);
+  assert.equal(indentListContinuations("10. First point.\n\nContinuation.\n11. Next point."),
+    "10. First point.\n\n    Continuation.\n11. Next point.");
+  const outline = "1. One.\n\nB. A separate heading.\n\n1. New list.";
+  assert.equal(indentListContinuations(outline), outline);
+  const prose = read("src/components/bible-resources/resource-markdown.tsx");
+  assert.match(prose, /counterReset: `item \$\{\(start \?\? 1\) - 1\}`/);
 });

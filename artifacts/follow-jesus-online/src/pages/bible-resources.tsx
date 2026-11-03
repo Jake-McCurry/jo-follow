@@ -2,7 +2,7 @@ import { useMemo, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { AlertCircle, Download, Info } from "lucide-react";
 import { Layout } from "@/components/layout";
-import { ChevronLabel } from "@/components/navigation-chevrons";
+import { ChevronLabel, NavigationChevrons } from "@/components/navigation-chevrons";
 import { ResourceMarkdown } from "@/components/bible-resources/resource-markdown";
 import {
   assetUrl, buildLinkMap, canonicalBookFromTitle, numericChapters, useResourceArticle, useResourceCatalog,
@@ -12,7 +12,31 @@ import {
 const SURVEY_IDS = ["survey-ot", "survey-nt"];
 const GOSPEL_IDS = ["discover-jesus", "hearing-god"];
 
-function Shell({ back, children }: { back: { href: string; label: string }; children: ReactNode }) {
+type Band = { eyebrow: string; title: string; subtitle?: string };
+
+function Shell({ back, band, actions, children }: { back: { href: string; label: string }; band?: Band; actions?: ReactNode; children: ReactNode }) {
+  if (band) {
+    return (
+      <Layout>
+        <div className="survey-band" data-testid="survey-band">
+          <div className="survey-band__inner">
+            <p className="survey-band__eyebrow">{band.eyebrow}</p>
+            <h1 className="survey-band__title">{band.title}</h1>
+            {band.subtitle && <p className="survey-band__subtitle">{band.subtitle}</p>}
+          </div>
+        </div>
+        <div className="resources-page survey-page">
+          <div className="survey-toolbar">
+            <Link href={back.href} className="back-link" data-testid="link-back">
+              <ChevronLabel text={back.label} direction="left" />
+            </Link>
+            {actions}
+          </div>
+          {children}
+        </div>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <div className="resources-page mx-auto w-full max-w-3xl px-5 py-6 sm:px-8 md:py-10">
@@ -59,8 +83,6 @@ function Row({ href, title, description, children, testId }: { href: string; tit
 }
 
 export function BibleResourcesMenuPage() {
-  const { data } = useResourceCatalog();
-  const promisesPath = data?.collections.find((c) => c.id === "promises-collection")?.path ?? "/bible/resources/promises-collection";
   return (
     <Shell back={{ href: "/bible", label: "Bible Reader" }}>
       <header className="mb-6 mt-5">
@@ -69,7 +91,7 @@ export function BibleResourcesMenuPage() {
       </header>
       <ul className="resource-list">
         <Row href="/knowing-god" title="Knowing God / Topical Bible" description="A biblical guide to the nature and character of God" testId="link-resource-knowing-god" />
-        <Row href={promisesPath} title="Promises of God" description="Discover promises for your situation, feelings, and relationships" testId="link-resource-promises" />
+        <Row href="/promises" title="Promises of God" description="Discover promises for your situation, feelings, and relationships" testId="link-resource-promises" />
         <Row href="/bible/resources/study-methods" title="Bible Study Methods" description="R.E.C.A.P. Method, Topical Study Method, Inductive Study Method" testId="link-resource-study-methods" />
         <Row href="/bible/resources/gospels" title="Gospel Devotionals" description="Discover Jesus in the Gospels and Hearing the Voice of God" testId="link-resource-gospels">
           <ul className="sublinks">
@@ -87,14 +109,35 @@ export function BibleResourcesMenuPage() {
 function GroupPage({ title, eyebrow, ids, testPrefix }: { title: string; eyebrow: string; ids: string[]; testPrefix: string }) {
   const { data, isLoading, error, refetch } = useResourceCatalog();
   const cols = ids.map((id) => data?.collections.find((c) => c.id === id)).filter(Boolean) as ResourceCollection[];
+  const isSurvey = testPrefix === "survey";
+  const body = isLoading ? <Skeleton /> : error ? <ErrorState message="We couldn't open the resource library." retry={() => refetch()} /> : isSurvey ? (
+    <ul className="survey-testaments">
+      {cols.map((c) => {
+        const available = c.items.filter((i) => i.status === "imported").length;
+        return (
+          <li key={c.id}>
+            <Link href={c.path} className="survey-testament" data-testid={`link-${testPrefix}-${c.id}`}>
+              <span className="survey-testament__label">{c.id === "survey-ot" ? "Old Testament" : "New Testament"}</span>
+              <span className="survey-testament__title">{c.title}</span>
+              {c.description && <span className="survey-testament__desc">{c.description}</span>}
+              <span className="survey-testament__meta">{available} lessons<NavigationChevrons className="ml-1" /></span>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  ) : (
+    <ul className="resource-list">
+      {cols.map((c) => <Row key={c.id} href={c.path} title={c.title} description={c.description || `${c.items.length} lessons`} testId={`link-${testPrefix}-${c.id}`} />)}
+    </ul>
+  );
+  if (isSurvey) {
+    return <Shell back={{ href: "/bible/resources", label: "Bible Resources" }} band={{ eyebrow, title, subtitle: "An overview of the books of the Bible, one lesson at a time." }}>{body}</Shell>;
+  }
   return (
     <Shell back={{ href: "/bible/resources", label: "Bible Resources" }}>
       <header className="mb-6 mt-5"><p className="eyebrow">{eyebrow}</p><h1 className="resource-title">{title}</h1></header>
-      {isLoading ? <Skeleton /> : error ? <ErrorState message="We couldn't open the resource library." retry={() => refetch()} /> : (
-        <ul className="resource-list">
-          {cols.map((c) => <Row key={c.id} href={c.path} title={c.title} description={c.description || `${c.items.length} lessons`} testId={`link-${testPrefix}-${c.id}`} />)}
-        </ul>
-      )}
+      {body}
     </Shell>
   );
 }
@@ -137,6 +180,36 @@ export function BibleResourcesPathPage() {
 
 function CollectionView({ collection }: { collection: ResourceCollection }) {
   const survey = collection.id.startsWith("survey");
+  if (survey) {
+    let n = 0;
+    return (
+      <Shell back={parentOf(collection)} band={{ eyebrow: "Survey of the Bible", title: collection.title, subtitle: collection.description || undefined }}>
+        <ol className="survey-books" data-testid="list-survey-books">
+          {collection.items.map((item, index) => {
+            const available = item.status === "imported" && !!item.path;
+            n += 1;
+            const num = String(n).padStart(2, "0");
+            return (
+              <li key={`${item.id}-${index}`}>
+                {available ? (
+                  <Link href={item.path!} className="survey-book" data-testid={`link-article-${item.id}`}>
+                    <span className="survey-book__num" aria-hidden>{num}</span>
+                    <span className="survey-book__title"><ChevronLabel text={item.title} /></span>
+                  </Link>
+                ) : (
+                  <div className="survey-book survey-book--soon" data-testid={`status-missing-${item.id}`}>
+                    <span className="survey-book__num" aria-hidden>{num}</span>
+                    <span className="survey-book__title">{item.title}</span>
+                    <span className="survey-book__status">{item.status === "coming-soon" ? "Coming soon" : item.status === "blocked" ? "Awaiting a source export" : "Not available from the source"}</span>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </Shell>
+    );
+  }
   return (
     <Shell back={parentOf(collection)}>
       <header className="mb-6 mt-5">
@@ -188,6 +261,37 @@ function ArticleView({ collection, index }: { collection: ResourceCollection; in
   const pdfPath = article.data?.pdf.status === "available" ? article.data.pdf.path ?? item.pdfPath : undefined;
   const issues = [...new Set([...(item.issue ? [item.issue] : []), ...(article.data?.issues ?? [])])];
 
+  const pdfAction = pdfPath ? (
+    <a href={assetUrl(pdfPath)} download className="pdf-link pdf-link--compact" data-testid="link-pdf">
+      <Download className="h-4 w-4" /> Download PDF
+    </a>
+  ) : undefined;
+  if (survey) {
+    const title = numericChapters(article.data?.title ?? item.title);
+    return (
+      <Shell back={{ href: collection.path, label: collection.title }} band={{ eyebrow: collection.title, title }} actions={pdfAction}>
+        {item.status !== "imported" ? (
+          <p className="text-muted-foreground">This article isn't available in the local library yet.</p>
+        ) : article.isLoading ? <Skeleton /> : article.error || !article.data ? (
+          <ErrorState message="We couldn't open this article." retry={() => article.refetch()} />
+        ) : (
+          <article className="survey-article" aria-label={title}>
+            <ResourceMarkdown markdown={article.data.markdown} book={book} links={links} survey />
+            {issues.length > 0 && (
+              <aside className="source-notice" data-testid="text-source-issues">
+                <Info className="mt-0.5 h-4 w-4 shrink-0" />
+                <div><p className="font-semibold">Source note</p><ul>{issues.map((t) => <li key={t}>{t}</li>)}</ul></div>
+              </aside>
+            )}
+          </article>
+        )}
+        <nav className="article-pager survey-pager" aria-label="Lesson navigation">
+          {prev ? <Link href={prev.path} className="pager-link" data-testid="link-prev"><span className="pager-label">Previous lesson</span><ChevronLabel text={prev.title} direction="left" /></Link> : <span />}
+          {next ? <Link href={next.path} className="pager-link pager-link--next" data-testid="link-next"><span className="pager-label">Next lesson</span><ChevronLabel text={next.title} /></Link> : <span />}
+        </nav>
+      </Shell>
+    );
+  }
   return (
     <Shell back={{ href: collection.path, label: collection.title }}>
       {item.status !== "imported" ? (

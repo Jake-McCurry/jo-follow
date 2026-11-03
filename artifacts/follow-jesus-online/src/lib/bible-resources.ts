@@ -197,6 +197,31 @@ export function numericChapters(text: string): string {
     }).replace(/\b(Chapter)\s+([A-Za-z]+)\b/g, (all, label, a) => { const x = word(a); return /^\d+$/.test(x) ? `${label} ${x}` : all; });
 }
 
+/**
+ * Presentation only: a plain paragraph sitting between numbered item N and item N+1 (an extraction
+ * spacing artefact) is indented so it renders inside item N. Words and order are unchanged.
+ */
+export function indentListContinuations(md: string): string {
+  const lines = md.split("\n");
+  const num = (l: string) => l.match(/^(\d{1,3})\.\s+\S/)?.[1];
+  let lastItem: number | null = null;
+  for (let i = 0; i < lines.length; i++) {
+    const n = num(lines[i]);
+    if (n) { lastItem = +n; continue; }
+    if (!lines[i].trim() || lastItem === null) continue;
+    if (/^(#|\s|[-*+]\s|>|_)/.test(lines[i])) { lastItem = null; continue; }
+    let j = i;
+    while (j < lines.length && lines[j].trim() && !num(lines[j])) j++;
+    const next = j < lines.length ? num(lines[j]) : undefined;
+    if (next && +next === lastItem + 1 && lines[i - 1] !== undefined && !lines[i - 1].trim()) {
+      const indentation = " ".repeat(String(lastItem).length + 2);
+      for (let k = i; k < j; k++) lines[k] = `${indentation}${lines[k]}`;
+      i = j - 1;
+    } else { lastItem = null; i = j - 1; }
+  }
+  return lines.join("\n");
+}
+
 const OUTLINE = /^(?:[IVX]{1,5}|[A-H])\.\s+\S/;
 /**
  * Heading style only (display layer; stored markdown is untouched).
@@ -205,7 +230,7 @@ const OUTLINE = /^(?:[IVX]{1,5}|[A-H])\.\s+\S/;
  * the heading keeps the outline label, the instruction follows as its own paragraph, all words in order.
  */
 export function preprocessSurveyMarkdown(md: string): string {
-  return md.split(/\n{2,}/).map((block) => {
+  return indentListContinuations(md).split(/\n{2,}/).map((block) => {
     const t = block.trim();
     if (t.includes("\n")) return block;
     const stripped = t.replace(/^\*\*(.+)\*\*$/, "$1").replace(/^__(.+)__$/, "$1");
