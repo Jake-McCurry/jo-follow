@@ -74,3 +74,9 @@ Lord’s Prayer Guide illustrated cards should blend into their surrounding warm
 **Why:** The user requested removing the white backing and confirmed the result with “good work.”
 
 **How to apply:** Preserve the colored artwork and text when displaying or replacing these illustrations; avoid reintroducing white frames or gaps around the colored panels.
+
+Use Playfair Display only for H1 headings across the entire site; all other text uses the main body font.
+
+**Why:** The user explicitly requested this sitewide rule, superseding earlier book-specific Georgia and Baskerville treatments.
+
+**How to apply:** Apply it to Knowing God, Promises, book contents, article subheadings, cards, and utilities as well as general pages. Preserve text, sizes, colors, and emphasis unless separately requested.

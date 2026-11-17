@@ -210,7 +210,6 @@ export function IntroIndex() {
       <nav className="kg-intro-breadcrumbs" aria-label="Breadcrumb">
         <Link href="/knowing-god" aria-label="Back to Knowing God" className="inline-flex min-h-11 items-center gap-1"><ChevronsLeft size={18} aria-hidden="true" />Knowing God</Link> <span aria-hidden="true">/</span> Introductory Articles
       </nav>
-      <p className="kg-intro-eyebrow">Begin Here</p>
       <h1 className="kg-intro-title">Introductory Articles</h1>
       <p className="kg-intro-lede">Read the original introductory material and closing appendices, then continue into the Topical Bible.</p>
       <section className="intro-grid" aria-label="Knowing God introductory articles">
