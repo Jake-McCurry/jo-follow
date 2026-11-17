@@ -60,7 +60,7 @@
    Body text, captions, forms, and navigation retain Source Sans 3. */
 .kg-warm-theme :is(h1, h2, h3, h4, h5, h6),
 .kg-warm-theme .book-title-card div b {
-  font-family: var(--font-knowing-god-heading) !important;
+  font-family: var(--font-knowing-god-heading);
   font-weight: 700 !important;
 }
 
@@ -81,7 +81,7 @@
    Topic headings and the rest of the book keep their existing typography. */
 .kg-book-intro { container-type: inline-size; }
 .kg-warm-theme .kg-book-intro .kg-cover-title {
-  font-family: "Knowing God Baskerville", Baskerville, Georgia, serif !important;
+  font-family: "Knowing God Baskerville", Baskerville, Georgia, serif;
   font-weight: 400 !important;
   font-variant-caps: small-caps;
   font-size: clamp(1.5rem, 9cqi, 3.75rem);

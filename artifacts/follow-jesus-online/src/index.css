@@ -230,6 +230,18 @@
   }
 }
 
+/* Sitewide typography policy, including imported reader themes and portals.
+   Important is intentional: component utilities and legacy inline font choices
+   must not reintroduce display fonts outside H1 headings. */
+body :not(h1, h1 *) {
+  font-family: var(--app-font-sans) !important;
+}
+
+body h1,
+body h1 * {
+  font-family: var(--app-font-serif) !important;
+}
+
 /* Hide the white backing baked into the guide illustrations without changing
    the original artwork or the surrounding page and card backgrounds. */
 [data-article-group="lords-prayer"] figure img {
