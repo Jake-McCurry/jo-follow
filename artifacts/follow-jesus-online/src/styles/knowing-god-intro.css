@@ -86,6 +86,9 @@
     font-size: clamp(1.35rem, 3vw, 1.8rem);
     font-weight: 600;
   }
+.kg-root .intro-card [data-navigation-chevron]{
+    color: var(--color-action-warm, #c45100);
+  }
 .kg-root .intro-card div > span{
     display: block;
     max-width: 680px;
