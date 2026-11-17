@@ -11,12 +11,12 @@ export interface ConnectWithGodResource {
 
 export const TOPIC_MENU_LINKS: TopicMenuLink[] = [
   { label: "Bible", href: "/bible/John/1" },
-  { label: "Prayer", href: "/prayer" },
-  { label: "Books", href: "/gf/" },
   { label: "Holy Spirit", href: "/gf/walking-in-the-spirit" },
-  { label: "Videos", href: "/rewatch" },
+  { label: "Prayer", href: "/prayer" },
   { label: "Promises", href: "/promises" },
   { label: "Knowing God", href: "/knowing-god" },
+  { label: "Books", href: "/gf/" },
+  { label: "Videos", href: "/rewatch" },
 ]
 
 export const CONNECT_WITH_GOD_RESOURCES: ConnectWithGodResource[] = [

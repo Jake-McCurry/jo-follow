@@ -17,7 +17,7 @@ const articles: PublishedArticle[] = [
 
 test("the topic menu includes every requested topic in document order", () => {
   assert.deepEqual(TOPIC_MENU_LINKS.map((item) => item.label), [
-    "Bible", "Prayer", "Books", "Holy Spirit", "Videos", "Promises", "Knowing God",
+    "Bible", "Holy Spirit", "Prayer", "Promises", "Knowing God", "Books", "Videos",
   ]);
 });
 
