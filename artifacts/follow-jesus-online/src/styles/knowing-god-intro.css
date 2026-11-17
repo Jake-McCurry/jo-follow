@@ -84,7 +84,11 @@
     color: var(--color-hero, #006BB3);
     font-family: var(--font-sans, 'Source Sans 3', system-ui, sans-serif);
     font-size: clamp(1.35rem, 3vw, 1.8rem);
-    font-weight: 600;
+    font-weight: 400 !important;
+  }
+.kg-root .intro-card [data-navigation-chevron]{
+    color: var(--color-action-warm, #c45100);
+    stroke-width: 1.25;
   }
 .kg-root .intro-card div > span{
     display: block;
