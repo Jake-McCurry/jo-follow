@@ -52,3 +52,9 @@ Thumbs.db
 # Required by the Because statements content builder and source-parity tests.
 # Override the environment's blanket ignore for uploaded files.
 !attached_assets/OneDrive_2026-10-29_(1)_1793306993730.zip
+
+# Required by the XP introduction source-parity tests.
+!attached_assets/You-Already-Belong-Introductory-Page_1795208475754.docx
+!attached_assets/Something-Real-Has-Begun-Introductory-Page_1795208476926.docx
+!attached_assets/Welcome-Back-Introductory-Page_1795208540915.docx
+!attached_assets/Know_Jesus_1795208486302.docx

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { PlayCircle, Heart } from "lucide-react";
 import NotFound from "@/pages/not-found";
+import { xpIntroductionHref } from "@/data/xp-next-steps";
 
 type XPType = "received" | "rededicated" | "believer" | "did-not-pray";
 
@@ -187,7 +188,7 @@ export function XPPage() {
               
               <div className="flex flex-col sm:flex-row gap-3 mb-4">
                 <Button asChild size="lg" variant="warm" className="text-base h-auto min-h-12 px-5 py-3 whitespace-normal text-center shadow-sm">
-                  <Link href="/adv/begin-the-adventure" data-testid="xp-guide-link">
+                  <Link href={xpIntroductionHref(type)!} data-testid="xp-guide-link">
                     {content.guideLabel ?? "Begin This Short Guide"}
                   </Link>
                 </Button>
