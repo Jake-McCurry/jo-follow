@@ -26,3 +26,9 @@ XP revisions should make the primary reading and listening links visible much ea
 **Why:** After reviewing the XP pages in a meeting, the user reported that no links appeared above the fold and supplied shorter replacement copy, explicitly asking to remove the book image.
 
 **How to apply:** Preserve the supplied replacement wording and the distinct page variants. Check the first viewport on mobile as well as desktop when changing XP spacing or introductory content; do not restore an image-heavy introduction ahead of the links.
+
+XP primary reading journeys should first offer the audience-specific ten-question introduction, rather than take visitors straight into Begin the Adventure.
+
+**Why:** After reviewing visitor behavior, the user found Begin the Adventure was not an engaging first destination from XP and approved distinct Received, Rededicated, and Believer introductions using the supplied documents.
+
+**How to apply:** Preserve each audience's opening and the shared ten-question sequence. Begin the Adventure remains the explicitly requested answer to question 1; question 10 leads to Getting to Know Jesus. This does not authorize replacing other existing Guide links or changing Did Not Pray.

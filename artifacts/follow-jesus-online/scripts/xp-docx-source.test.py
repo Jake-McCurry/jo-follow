@@ -33,7 +33,16 @@ class XPSourceTests(unittest.TestCase):
                 page_source = content_source.split(f'  "{page}": {{', 1)[1].split("\n  },", 1)[0]
                 for paragraph in paragraphs[1:]:
                     if paragraph.startswith("Link to:"):
-                        self.assertIn(paragraph.split("https://follow.jesusonline.com", 1)[1], SOURCE)
+                        destination = paragraph.split("https://follow.jesusonline.com", 1)[1]
+                        if destination == "/adv/begin-the-adventure" and page in (
+                            "received", "rededicated", "believer"
+                        ):
+                            # The approved top-ten introductions supersede only
+                            # this destination from the older XP documents.
+                            # xp-next-steps.test.ts verifies each actual mapping.
+                            self.assertIn('href={xpIntroductionHref(type)!}', SOURCE)
+                        else:
+                            self.assertIn(destination, SOURCE)
                     elif paragraph.startswith("Prefer to listen?"):
                         self.assertIn(paragraph, SOURCE)
                     else:

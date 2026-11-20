@@ -19,6 +19,8 @@ import { BibleSavedPage } from '@/pages/bible-saved';
 import { BibleResourcesMenuPage, BibleResourcesSurveyPage, BibleResourcesGospelsPage, BibleResourcesPathPage } from '@/pages/bible-resources';
 import { XPChooserPage } from '@/pages/xp-chooser';
 import { XPPage } from '@/pages/xp-page';
+import { XPIntroductionPage, KnowJesusPage } from '@/pages/xp-next-steps';
+import { getXPIntroduction, KNOW_JESUS } from '@/data/xp-next-steps';
 import { ExploreArticlesPage } from '@/pages/explore-articles';
 import { GoFurtherPage } from '@/pages/gf/index';
 import { GFBookPage } from '@/pages/gf/book';
@@ -87,6 +89,13 @@ function PageMetadata() {
   } else if (pathname === '/bible') {
     title = 'Read the NET Bible | Follow Jesus Online';
     description = 'Read the NET Bible online and explore Scripture.';
+  } else if (pathname.replace(/\/$/, '').toLowerCase() === '/xp/know-jesus') {
+    title = `${KNOW_JESUS.title} | Follow Jesus Online`;
+    description = KNOW_JESUS.introduction;
+  } else if (/^\/xp\/[^/]+\/top10\/?$/.test(pathname)) {
+    const introduction = getXPIntroduction(pathname.split('/')[2]);
+    title = `${introduction?.title ?? 'Next Steps'} | Follow Jesus Online`;
+    description = introduction?.paragraphs[0] ?? 'Find clear, steady next steps for walking with Jesus.';
   } else if (pathname.startsWith('/xp/')) {
     title = 'Next Steps | Follow Jesus Online';
     description = 'Find clear, steady next steps for walking with Jesus.';
@@ -219,6 +228,9 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/xp-pages" component={XPChooserPage} />
+        <Route path="/xp/:type/top10" component={XPIntroductionPage} />
+        <Route path="/xp/know-Jesus" component={KnowJesusPage} />
+        <Route path="/xp/know-jesus" component={KnowJesusPage} />
         <Route path="/xp/:type" component={XPPage} />
         <Route path="/explore-articles" component={ExploreArticlesPage} />
         <Route path="/gf" component={GoFurtherPage} />
