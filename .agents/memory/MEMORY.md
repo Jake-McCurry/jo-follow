@@ -21,6 +21,7 @@
 - [Development preview file boundaries](dev-preview-file-boundaries.md) — Vite's default pnpm workspace allowance can expose backend source; restrict browser-facing file access.
 - [Modal exit accessibility](modal-exit-accessibility.md) — Animated dialog exit can temporarily hide visible background content from accessibility queries.
 - [Experiencing God editorial](experiencing-god-editorial.md) — Use full document headings; defer specified series links until the Lord’s Prayer Guide and Because statements uploads.
+- [Lord’s Prayer mobile readability](lords-prayer-editorial.md) — Keep Scripture, Reflect, and A Prayer panels as live text; source narrative can have accidental heading styles.
 - [PDF download size](pdf-download-size.md) — Aim for PDFs under 2 MB where possible, preserving readability, text, links, and layout.
 - [Staging change log timing](staging-change-log.md) — The user pushes to staging; update JOLF Change log only after confirmation, never for local-only changes.
 - [Drive-only spreadsheet updates](drive-only-spreadsheet-updates.md) — Preserve current data and file identity when updating a simple Sheet through the Drive-only connection.

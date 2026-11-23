@@ -45,6 +45,9 @@ function MdLink({ href = "", children }: { href?: string; children?: ReactNode }
   const ctx = useContext(MdContext);
   const inner = <MdContext.Provider value={{ ...ctx, inLink: true }}>{children}</MdContext.Provider>;
   if (ctx.inLink) return <>{inner}</>;
+  if (href === "/bible/John/1") {
+    return <Link href={href} className="resource-link">{inner}</Link>;
+  }
   const mapped = ctx.links.get(normalizeSourceUrl(href));
   if (mapped) {
     return mapped.endsWith(".pdf")
@@ -80,7 +83,9 @@ const components: Components = {
   td: ({ children }) => <td><Enhanced>{children}</Enhanced></td>,
   blockquote: ({ children }) => <blockquote>{children}</blockquote>,
   a: ({ href, children }) => <MdLink href={href}>{children}</MdLink>,
-  img: () => null,
+  img: ({ src, alt }) => typeof src === "string" && /^\/bible-resources\/images\/[\w-]+\.png$/.test(src)
+    ? <img src={assetUrl(src)} alt={alt ?? ""} loading="lazy" style={{ maxWidth: "100%", height: "auto" }} />
+    : null,
 };
 
 function headingComponents(survey: boolean): Components {

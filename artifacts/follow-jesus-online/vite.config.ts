@@ -18,6 +18,7 @@ import lordsPrayerArticles from './src/data/lords-prayer-articles.json';
 import becauseStatements from './src/data/because-statements.json';
 
 const PRAYER_ARCHIVE = 'OneDrive_2026-10-14_1792010333357.zip';
+const LORDS_PRAYER_ARCHIVE = 'OneDrive_2026-11-23_(1)_1795469072483.zip';
 
 // Vite needs a port for dev/preview, but static production builds do not
 // receive one from CI providers such as Cloudflare Pages.
@@ -432,7 +433,8 @@ function readPrayerArticles(attachedAssetsDir: string, tempDir: string): Article
 }
 
 function readLordsPrayerArticles(attachedAssetsDir: string, tempDir: string): ArticleRecord[] {
-  const archivePath = path.join(attachedAssetsDir, PRAYER_ARCHIVE);
+  const archivePath = path.join(attachedAssetsDir, LORDS_PRAYER_ARCHIVE);
+  if (!fs.existsSync(archivePath)) throw new Error(`Required Lord’s Prayer articles ZIP is missing: ${archivePath}`);
   const entries = execFileSync('unzip', ['-Z1', archivePath], { encoding: 'utf8' })
     .split('\n').filter(entry => entry.endsWith('.docx') && path.basename(entry).startsWith('2.4.30.'));
   if (entries.length !== lordsPrayerArticles.length) throw new Error('Expected eleven Lord’s Prayer documents');
@@ -442,6 +444,18 @@ function readLordsPrayerArticles(attachedAssetsDir: string, tempDir: string): Ar
     const blocks = readFollowArticle(archivePath, matches[0], tempDir, true);
     if (blocks[0]?.text !== (metadata.sourceTitle ?? metadata.title) || blocks.length < 5) {
       throw new Error(`Lord’s Prayer title or body does not match: ${metadata.title}`);
+    }
+    // These source documents accidentally style their two opening body
+    // paragraphs as Heading2. Preserve every word, but restore body semantics.
+    if (['lords-prayer-worship', 'lords-prayer-dedication', 'lords-prayer-guidance'].includes(metadata.slug)) {
+      const introEnd = blocks.findIndex(block => block.text === 'Speak this first');
+      if (introEnd < 0) throw new Error(`Missing opening section boundary: ${metadata.title}`);
+      for (const block of blocks.slice(1, introEnd)) {
+        if (block.kind === 'heading' && block.text !== 'Section overview') {
+          block.kind = 'paragraph';
+          delete block.headingLevel;
+        }
+      }
     }
     let heading = metadata.title;
     for (const block of blocks) {

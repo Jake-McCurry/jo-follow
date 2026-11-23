@@ -16,6 +16,7 @@ import {
 } from "@/data/article-library";
 import { ArticleEndSection } from "@/components/article-end-section";
 import { PrayerGuideContent } from "@/components/prayer-guide-content";
+import { LordsPrayerContent } from "@/components/lords-prayer-content";
 import linkedArticleMetadata from "@/data/linked-articles.json";
 import { splitScriptureText } from "@/lib/scripture-text";
 import becauseMetadata from "@/data/because-statements.json";
@@ -519,6 +520,12 @@ export function ArticlePlaceholder() {
           {isGuideOverview ? (
             <PrayerGuideContent
               blocks={blocks}
+              renderSection={isLordsOverview ? sectionBlocks => (
+                <LordsPrayerContent
+                  blocks={sectionBlocks}
+                  renderBlock={(block, index) => <DefaultArticleBlockView key={index} block={block} titleLinks />}
+                />
+              ) : undefined}
               renderBlock={(block, index) => (
                 <DefaultArticleBlockView key={index} block={block} titleLinks />
               )}

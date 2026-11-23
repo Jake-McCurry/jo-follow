@@ -4,9 +4,10 @@ import type { ArticleBlock } from "@/data/article-library";
 interface PrayerGuideContentProps {
   blocks: ArticleBlock[];
   renderBlock: (block: ArticleBlock, index: number) => ReactNode;
+  renderSection?: (blocks: ArticleBlock[]) => ReactNode;
 }
 
-export function PrayerGuideContent({ blocks, renderBlock }: PrayerGuideContentProps) {
+export function PrayerGuideContent({ blocks, renderBlock, renderSection }: PrayerGuideContentProps) {
   const sections: { blocks: ArticleBlock[]; isArticle: boolean }[] = [];
 
   for (const block of blocks) {
@@ -33,7 +34,7 @@ export function PrayerGuideContent({ blocks, renderBlock }: PrayerGuideContentPr
               : "py-2"
           }`}
         >
-          {section.blocks.map(renderBlock)}
+          {renderSection ? renderSection(section.blocks) : section.blocks.map(renderBlock)}
         </section>
       ))}
     </div>
