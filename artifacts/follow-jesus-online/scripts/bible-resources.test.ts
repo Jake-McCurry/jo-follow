@@ -64,7 +64,7 @@ test("source gaps and inconsistent lessons are not passed off as completed or du
   assert.ok(catalog.issues.some((i: any) => i.sourceUrl.endsWith("/philippians")));
 });
 
-test("all original PDFs are local, complete and byte-verified; no production scraping is needed", () => {
+test("all article PDFs are local, complete and byte-verified; no production scraping is needed", () => {
   for (const article of articles) {
     assert.equal(article.pdf.status, "available", article.id);
     const bytes = readFileSync(new URL(`../public${article.pdf.path}`, import.meta.url));

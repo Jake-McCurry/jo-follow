@@ -13,6 +13,10 @@ const expected = JSON.parse(execFileSync("python3", [
   path.join(root, "scripts/prayer-source-extract.py"),
   path.resolve(root, "../../attached_assets/OneDrive_2026-10-14_1792010333357.zip"),
 ], { encoding: "utf8", maxBuffer: 4 * 1024 * 1024 }));
+const revisedLords = JSON.parse(execFileSync("python3", [
+  path.join(root, "scripts/prayer-source-extract.py"),
+  path.resolve(root, "../../attached_assets/OneDrive_2026-11-23_(1)_1795469072483.zip"),
+], { encoding: "utf8", maxBuffer: 4 * 1024 * 1024 }));
 const config = await loadConfigFromFile({ command: "build", mode: "production" }, path.join(root, "vite.config.ts"));
 const plugin = config.config.plugins.flat().find(item => item?.name === "jolf-article-content");
 assert.ok(plugin);
@@ -44,7 +48,7 @@ test("all ten prayer documents retain every source paragraph and all six origina
   assert.equal(imageCount, 6);
 });
 
-test("all eleven Lord’s Prayer documents retain their complete text and all 36 image appearances", () => {
+test("all eleven revised Lord’s Prayer documents retain every word as text, without text images", () => {
   const lords = records.filter(record => record.category === "Lords Prayer");
   assert.equal(lords.length, 11);
   let imageCount = 0;
@@ -53,16 +57,44 @@ test("all eleven Lord’s Prayer documents retain their complete text and all 36
     assert.ok(record, item.slug);
     assert.equal(record.title, item.title);
     assert.deepEqual(record.blocks.filter(block => block.kind !== "image").map(block => block.text),
-      expected[item.prefix].paragraphs, item.title);
+      revisedLords[item.prefix].paragraphs, item.title);
     assert.deepEqual(record.blocks.filter(block => block.kind === "image").map(block => {
       const asset = assets.find(asset => asset.fileName === `article-images/${block.src}`);
       assert.ok(asset, block.src);
       assert.ok(block.text.length > 20);
       imageCount++;
       return createHash("sha256").update(asset.source).digest("hex");
-    }), expected[item.prefix].images, item.title);
+    }), revisedLords[item.prefix].images, item.title);
   }
-  assert.equal(imageCount, 36);
+  assert.equal(imageCount, 0);
+});
+
+test("Worship, Dedication and Guidance introductions use paragraphs, not accidental source headings", () => {
+  for (const suffix of ["worship", "dedication", "guidance"]) {
+    const article = records.find(record => record.route === `/lords-prayer-${suffix}`);
+    const end = article.blocks.findIndex(block => block.text === "Speak this first");
+    const focus = article.blocks.findIndex(block => block.text.startsWith("Focus on "));
+    assert.ok(end > focus);
+    const opening = article.blocks.slice(focus + 1, end);
+    assert.equal(opening.length, 2);
+    assert.ok(opening.every(block => block.kind === "paragraph"), suffix);
+  }
+});
+
+test("overview preserves all 24 live-text panels and their eight local deeper-reading links", () => {
+  const overview = records.find(record => record.category === "Lords Prayer" && record.route === "/deeper-the-lords-prayer-guide");
+  for (const label of ["SCRIPTURE", "REFLECT", "A PRAYER"]) {
+    const panels = overview.blocks.filter(block => block.kind === "heading" && block.text === label);
+    assert.equal(panels.length, 8, label);
+    for (const panel of panels) {
+      const body = overview.blocks[overview.blocks.indexOf(panel) + 1];
+      assert.equal(body.kind, "paragraph");
+      assert.ok(body.text.length > 20);
+    }
+  }
+  const deeper = overview.blocks.flatMap(block => block.links ?? [])
+    .filter(link => link.label.startsWith("GO DEEPER"));
+  assert.deepEqual(deeper.map(link => link.href), lordsMetadata.filter(item => item.legacyPostId).map(item => item.href));
 });
 
 test("the Lord’s Prayer overview links all eight topics locally in roadmap order", () => {
