@@ -8,6 +8,8 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, type Plugin } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
+import { optimizedImagesPlugin } from './scripts/optimized-images';
+import { routePreloadsPlugin } from './scripts/route-preloads';
 import importedDeeperArticles from './src/data/imported-deeper-articles.json';
 import articleCatalog from './src/data/article-library.json';
 import { GO_FURTHER_BOOKS } from './src/data/go-further-library';
@@ -813,7 +815,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
+    optimizedImagesPlugin(import.meta.dirname, basePath, () => followImages),
     articleContentPlugin(),
+    routePreloadsPlugin(basePath),
     ...(process.env.NODE_ENV !== 'production' &&
     process.env.REPL_ID !== undefined
       ? [

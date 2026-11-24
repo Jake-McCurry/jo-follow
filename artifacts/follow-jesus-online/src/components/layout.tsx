@@ -6,7 +6,7 @@ import { takeSessionResumePage, isSamePage, saveRecentPage } from "@/hooks/use-r
 import joLogo from "@/assets/jol-logo-white.png"
 import { Languages } from "lucide-react"
 
-export function Layout({ children }: { children: ReactNode }) {
+export function Layout({ children, trackHistory = true }: { children: ReactNode; trackHistory?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [location] = useLocation()
   const [recentPage, setRecentPage] = useState<string | null>(null)
@@ -14,6 +14,8 @@ export function Layout({ children }: { children: ReactNode }) {
   const initialLocation = useRef(location)
 
   useEffect(() => {
+    // A temporary lazy-page placeholder must not consume the session's resume offer.
+    if (!trackHistory) return;
     if (!resumeChecked.current) {
       resumeChecked.current = true
       setRecentPage(takeSessionResumePage())
@@ -21,7 +23,7 @@ export function Layout({ children }: { children: ReactNode }) {
       setRecentPage(null)
     }
     saveRecentPage(location)
-  }, [location])
+  }, [location, trackHistory])
 
   const resumePage = recentPage && !isSamePage(recentPage, location) ? recentPage : null
   const dismissResume = () => {

@@ -134,12 +134,16 @@ export function DefaultArticleBlockView({ block, titleLinks = false }: { block: 
   if (block.type === "image" && block.src) {
     return (
       <figure className="my-8">
+        <picture>
+          {/\.png$/i.test(block.src) && <source type="image/webp" srcSet={`${import.meta.env.BASE_URL}article-images/${block.src}.webp`} />}
         <img
           src={`${import.meta.env.BASE_URL}article-images/${block.src}`}
           alt={block.text || "Illustration accompanying this article"}
           loading="lazy"
+          decoding="async"
           className="mx-auto h-auto max-w-full rounded-lg"
         />
+        </picture>
       </figure>
     );
   }

@@ -7,6 +7,7 @@ import { ConnectWithGodSection } from "@/components/connect-with-god-section";
 import { ShareButton } from "@/components/share-button";
 import { BookOpen, Search, HelpCircle, Compass, Download } from "lucide-react";
 import { ChevronLabel } from "@/components/navigation-chevrons";
+import optimizedImages from "virtual:optimized-images";
 
 const guideCoverUrl = `${import.meta.env.BASE_URL}guide-cover.png`;
 const homeHeroUrl = `${import.meta.env.BASE_URL}walking-with-jesus-hero-ankle-crop.jpg`;
@@ -23,6 +24,9 @@ export function Home() {
     <Layout>
       {/* Hero Section */}
       <section className="relative flex h-[240px] items-start overflow-hidden bg-[#003A66] text-white sm:h-[260px] md:h-[clamp(180px,20.833333vw,320px)]">
+        <picture>
+          {/* Object-cover needs roughly 735–795 image pixels across on the tall mobile crop, not just the viewport width. */}
+          <source type="image/webp" srcSet={optimizedImages.hero.map(image => `${image.src} ${image.width}w`).join(", ")} sizes="(max-width: 767px) 800px, 100vw" />
         <img
           src={homeHeroUrl}
           alt=""
@@ -30,6 +34,7 @@ export function Home() {
           fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover object-bottom"
         />
+        </picture>
         <div className="absolute inset-0 z-10 flex items-center">
           <div className="container relative px-5 sm:px-8 mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-8 duration-700" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.65)" }}>
             <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white text-balance leading-[1.1]">
@@ -62,7 +67,10 @@ export function Home() {
         <section className="relative overflow-hidden rounded-2xl bg-card p-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both md:p-10">
           <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
             <div className="shrink-0 flex items-center justify-center w-full md:w-48 mb-6 md:mb-0">
-              <img src={guideCoverUrl} alt="The Adventure of Living with Jesus Guide" className="w-full max-w-[200px] md:max-w-full rounded-xl shadow-lg border border-border/20 rotate-[-2deg] hover:rotate-0 transition-transform duration-500" />
+              <picture>
+                <source type="image/webp" srcSet={optimizedImages.cover.map(image => `${image.src} ${image.width}w`).join(", ")} sizes="(min-width: 768px) 240px, 200px" />
+                <img src={guideCoverUrl} alt="The Adventure of Living with Jesus Guide" width={392} height={507} loading="lazy" decoding="async" className="w-full max-w-[200px] md:max-w-full rounded-xl shadow-lg border border-border/20 rotate-[-2deg] hover:rotate-0 transition-transform duration-500" />
+              </picture>
             </div>
             <div className="flex-1 space-y-4 text-center md:text-left">
               <div className="inline-block px-3 py-1 bg-warm-accent/15 text-warm-accent text-xs font-bold uppercase tracking-wider rounded-full mb-2">

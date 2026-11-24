@@ -1,0 +1,22 @@
+# Vite and responsive-image filenames change whenever their bytes change.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/optimized-images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/follow-fonts.css
+  Cache-Control: no-cache
+
+# Imported illustrations keep their source filenames across editorial revisions.
+/article-images/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/index.html
+  Cache-Control: no-cache
+
+/
+  Cache-Control: no-cache
