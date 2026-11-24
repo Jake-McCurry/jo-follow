@@ -23,6 +23,17 @@ function referencePosition(reference: string): number[] {
   ];
 }
 
+/** Match whole book identities, including the source's Psalm and Roman aliases. */
+export function matchesBiblePassageFilters(reference: string, testament: string, book: string): boolean {
+  if (testament === "All Testaments" && book === "All books") return true;
+  const [index] = referencePosition(reference);
+  if (index === BIBLE_BOOKS.length) return false;
+  const matchesBook = book === "All books" || BIBLE_BOOKS[index] === book;
+  const matchesTestament = testament === "All Testaments" ||
+    (index < 39 ? "Old Testament" : "New Testament") === testament;
+  return matchesBook && matchesTestament;
+}
+
 /** Sort on the first cited verse, without altering the printed reference. */
 export function compareBibleReferences(a: string, b: string): number {
   const left = referencePosition(a), right = referencePosition(b);
