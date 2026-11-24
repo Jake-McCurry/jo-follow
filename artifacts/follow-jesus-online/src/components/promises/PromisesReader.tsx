@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AlertCircle, Bookmark, BookmarkCheck, Copy, Menu, Printer } from "lucide-react";
 import { ShareButton } from "@/components/share-button";
 import { pushTopicHash, subscribeToTopicHistory, topicIdFromHash } from "../knowing-god/topic-history.mjs";
-import { type Book, base, blockText, readSaved, writeSaved } from "./promises-data";
+import { type Book, base, blockText, readSaved, writeSaved, sortPromisePassages } from "./promises-data";
 import { PromiseBlocks } from "./PromiseBlocks";
 import { PromisesSidebar, type View } from "./PromisesSidebar";
 import { PromisesCopyright } from "./PromisesCopyright";
@@ -34,7 +34,9 @@ export function PromisesReader() {
 
   const topicIndex = useMemo(() => {
     const m = new Map<string, { topic: Book["groups"][0]["topics"][0]; group: Book["groups"][0] }>();
-    book?.groups.forEach(group => group.topics.forEach(topic => m.set(topic.id, { topic, group })));
+    book?.groups.forEach(group => group.topics.forEach(topic => m.set(topic.id, {
+      topic: { ...topic, blocks: sortPromisePassages(topic.blocks) }, group,
+    })));
     return m;
   }, [book]);
 

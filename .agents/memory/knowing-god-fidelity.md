@@ -13,7 +13,7 @@ All product navigation must stay within Follow. Knowing God must use Follow's ow
 
 **Why:** The user corrected navigation leaving the preview: “this whole project I'm having you create should stay within Follow.”
 
-**How to apply:** Use existing Follow routes for menus and related resources. Supplemental Scripture links must open Follow's Bible reader, not an outside Bible website. Preserve attribution wording without using it to navigate away. Do not infer permission to link to the original application from a replication source.
+**How to apply:** Use existing Follow routes for menus and related resources. Supplemental Scripture links must open Follow's Bible reader, not an outside Bible website. Preserve publisher attribution and NET's required linked quotation attribution; these are not reader destinations. Do not infer permission to link to the original application from a replication source.
 
 The shared header brand should be the JO symbol followed by “JO FOLLOW,” matching the EQUIP project's treatment rather than the JESUSONLINE wordmark.
 
@@ -21,11 +21,11 @@ The shared header brand should be the JO symbol followed by “JO FOLLOW,” mat
 
 **How to apply:** Keep this branding consistent across Follow's shared header, including Knowing God pages.
 
-Knowing God search results should load in the main window while someone is typing, not in the sidebar. Separate Topic results (title matches) from Scripture results, in that order. Scripture matching, displayed text, labels, and reader links must use only the currently selected NET or KJV translation, never both and never a silent KJV substitute for unavailable NET text. Keep Scripture matches in Bible book, chapter, and verse order.
+Knowing God search results should load in the main window while someone is typing, not in the sidebar. Keep topic-title matches first, original curated Knowing God passages second, and complete-Bible verse results separately afterward. Scripture matching, displayed text, labels, and reader links must use only the currently selected NET or KJV translation, never both and never a silent KJV substitute for unavailable NET text. Keep Scripture matches in Bible book, chapter, and verse order.
 
-**Why:** The user requested main-window, title-first results, then clarified that search must follow the translation toggle and reported KJV-only results as a bug.
+**Why:** The user requested main-window, title-first results, then clarified that search must follow the translation toggle and reported KJV-only results as a bug. The approved full-Bible search extends rather than replaces the original curated feature.
 
-**How to apply:** Keep live results in the primary reading area and all title hits ahead of Scripture hits. Search coverage should not depend on which topics the reader has already visited. Changing the translation must refresh the same query in that translation.
+**How to apply:** Keep live results in the primary reading area and all title hits ahead of Scripture hits. Search coverage should not depend on which topics the reader has already visited. Changing the translation must refresh the same query in that translation. Passage filters apply to both curated and full-Bible Scripture results, not title matches.
 
 Knowing God now uses All topics and Devotional Topics selection, with 649 substantive topics and 502 unique devotional topics. Retain all 124 cross-reference-only entries in the A–Z index without counting them as substantive topics.
 

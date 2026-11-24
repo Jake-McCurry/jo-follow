@@ -24,7 +24,7 @@ const normalized = (value: string) => value.trim().toLocaleLowerCase();
 const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/** Publisher attribution (required by the source), the only off-site link here. */
+/** Publisher attribution required by the source; product navigation stays local. */
 const publisherStoryUrl = "https://www.zmission.org/our-story.html";
 const scriptureHref = (reference: string) => knowingGodScriptureHref(reference, import.meta.env.BASE_URL);
 export function ConcordancePrototype() {
@@ -50,7 +50,7 @@ export function ConcordancePrototype() {
   const closeSearch = () => {
     setSearchOpen(false);
     setQuery("");
-    requestAnimationFrame(() => (isMobile() ? mobileSearchInput.current : searchToggle.current)?.focus({ preventScroll: true }));
+    requestAnimationFrame(() => (isMobile() ? mobileSearchInput.current : searchToggle.current ?? mobileSearchInput.current)?.focus({ preventScroll: true }));
   };
   useEffect(() => {
     if (!searchOpen || isMobile()) return;
@@ -280,7 +280,7 @@ export function ConcordancePrototype() {
   });
 
   const muted = "text-[var(--color-text-muted,#2E5A7A)]";
-  const pill = (active: boolean) => `kg-focus kg-sans whitespace-nowrap rounded font-bold ${active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "text-[var(--color-text-muted,#2E5A7A)] hover:bg-[var(--color-surface-soft,#E6F5FF)]"}`;
+  const pill = (active: boolean, wrap = false) => `kg-focus kg-sans ${wrap ? "whitespace-normal" : "whitespace-nowrap"} rounded font-bold ${active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "text-[var(--color-text-muted,#2E5A7A)] hover:bg-[var(--color-surface-soft,#E6F5FF)]"}`;
   const topicButton = (active: boolean) => `kg-focus flex min-h-11 w-full items-center justify-between gap-3 border-l-4 px-3 py-2 text-left text-base ${active ? "border-[var(--color-action-warm,#C45100)] bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)]" : "border-transparent text-[var(--color-text,#003A66)] hover:bg-[var(--color-surface,#FFFDFB)]"}`;
   const toolbarButton = "kg-focus kg-sans inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded px-1 text-xs font-bold text-[var(--color-text,#003A66)] hover:bg-[var(--color-surface-soft,#E6F5FF)] sm:px-2 sm:text-sm";
   const showMobileSidebar = view === "start" || isFiltering || searchOpen;
@@ -313,8 +313,8 @@ export function ConcordancePrototype() {
         <p id="kg-translation-label" className="kg-sans mb-1 text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">Translation</p>
         <div role="group" aria-labelledby="kg-translation-label" className="mb-4 flex rounded border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] p-1">{(["NET", "KJV"] as const).map(value => <button key={value} data-testid={`button-translation-${value}`} onClick={() => { setTranslation(value); localStorage.setItem("knowing-god-translation", value); }} aria-pressed={translation === value} className={`${pill(translation === value)} min-h-10 flex-1 px-2 text-sm`}>{value} Bible</button>)}</div>
         <div role="group" aria-label="Topic selection" className="mb-3 grid grid-cols-[.8fr_1.2fr] gap-1 rounded border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] p-1">
-          <button type="button" data-testid="button-mode-all" aria-pressed={mode === "all"} onClick={() => setMode("all")} className={`${pill(mode === "all")} min-h-10 px-1.5 text-[13px]`}>All topics <span className={`font-normal ${muted}`}>— {substantiveTotal || 649}</span></button>
-          <button type="button" data-testid="button-mode-devotional" aria-pressed={mode === "devotional"} onClick={() => setMode("devotional")} className={`${pill(mode === "devotional")} min-h-10 px-1.5 text-[13px]`}>Devotional Topics <span className={`font-normal ${muted}`}>— {devotionalTotal || 502}</span></button>
+          <button type="button" data-testid="button-mode-all" aria-pressed={mode === "all"} onClick={() => setMode("all")} className={`${pill(mode === "all", true)} min-h-10 min-w-0 px-1.5 py-1 text-[13px] leading-snug`}>All topics <span className={`inline-block whitespace-nowrap font-normal ${muted}`}>— {substantiveTotal || 649}</span></button>
+          <button type="button" data-testid="button-mode-devotional" aria-pressed={mode === "devotional"} onClick={() => setMode("devotional")} className={`${pill(mode === "devotional", true)} min-h-10 min-w-0 px-1.5 py-1 text-[13px] leading-snug`}>Devotional Topics <span className={`inline-block whitespace-nowrap font-normal ${muted}`}>— {devotionalTotal || 502}</span></button>
         </div>
         <button onClick={() => setFilterOpen(v => !v)} aria-expanded={filterOpen} data-testid="button-passage-filters" className="kg-focus kg-sans mb-2 flex min-h-11 w-full items-center justify-between border-y border-[var(--color-border-soft,#CCEBFF)] text-left text-xs font-semibold uppercase tracking-widest text-[var(--color-text,#003A66)]"><span className="flex gap-2"><SlidersHorizontal size={14}/>Passage filters</span><ChevronDown size={14} className={filterOpen ? "rotate-180" : ""}/></button>
         {filterOpen && <div className="kg-sans mb-3 space-y-3 border-b border-[var(--color-border-soft,#CCEBFF)] pb-3">
@@ -329,7 +329,7 @@ export function ConcordancePrototype() {
         {indexError && <div role="alert" className="kg-sans py-4 text-base text-[var(--color-action-warm,#C45100)]">{indexError}</div>}{!index && !indexError && <div role="status" className={`kg-sans space-y-2 py-3 ${muted}`}><span className="sr-only">Loading complete topical index…</span>{[0, 1, 2].map(i => <div key={i} className="h-7 animate-pulse rounded bg-[var(--color-surface,#FFFDFB)]" />)}</div>}
         {index && mode === "all" && <nav aria-label="Topical Bible topics A to Z">
           <div className="mb-2 flex items-baseline justify-between"><h2 className="kg-sans text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">A–Z index</h2><span className={`kg-sans text-xs ${muted}`} data-testid="text-topics-shown">{shownCount} of {substantiveTotal} shown</span></div>
-          <div className="grid grid-cols-9 gap-1">{alphabet.map(letter => { const has = scopedTopics.some(topic => topic.letter === letter); const active = !isFiltering && expandedLetter === letter; return <button key={letter} disabled={!has} onClick={() => browseLetter(letter)} aria-label={`Browse ${letter} topics`} aria-expanded={active} aria-controls="topic-letter-results" data-testid={`button-letter-${letter}`} className={`kg-focus kg-sans h-9 min-w-0 rounded text-sm font-bold md:h-8 md:text-xs ${!has ? "cursor-not-allowed border border-transparent text-[var(--color-border-control,#5B9BC4)]" : active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] text-[var(--color-text,#003A66)]"}`}>{letter}</button>; })}{desktopSearchToggle("h-8")}</div>
+          <div className="grid grid-cols-9 gap-1">{alphabet.map(letter => { const has = scopedTopics.some(topic => topic.letter === letter); const active = !isFiltering && expandedLetter === letter; return <button key={letter} disabled={!has} onClick={() => browseLetter(letter)} aria-label={`Browse ${letter} topics`} aria-expanded={active} aria-controls="topic-letter-results" data-testid={`button-letter-${letter}`} className={`kg-focus kg-sans h-9 min-w-0 rounded text-sm font-bold md:h-8 md:text-xs ${!has ? "cursor-not-allowed border border-transparent text-[var(--color-border-control,#5B9BC4)]" : active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] text-[var(--color-text,#003A66)]"}`}>{letter}</button>; })}</div>
           {sidebarSearch}
           <div id="topic-letter-results" data-topic-results className="mt-3">
             {(!isFiltering ? letterTopics : []).map(item => <button key={item.id} aria-pressed={selectedId === item.id && view === "topic"} data-testid={`button-topic-${item.id}`} onClick={() => openTopic(item)} className={topicButton(selectedId === item.id && view === "topic")}><span className={isSubstantive(item) ? "" : "italic"}>{item.title}</span><span className={`kg-sans text-xs ${muted}`}>{isSubstantive(item) ? item.passageCount : "see"}</span></button>)}

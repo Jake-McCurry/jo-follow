@@ -9,6 +9,12 @@ Display this feature as “God’s Promises for Hope,” even though the supplie
 
 **How to apply:** Follow the requested display title rather than automatically rebranding the feature from its source title page. Keep original quotation wording and printed translations intact; book imports do not authorize silent translation substitutions or textual corrections.
 
+Within every Promises topic, Scripture quotations must appear in biblical book, chapter, and verse order rather than the book's source sequence. Reference links must take readers to the cited verse, not merely the chapter heading.
+
+**Why:** The user explicitly requested biblical ordering within each category and positioning readers at the exact Scripture reference.
+
+**How to apply:** Treat the display order as an editorial requirement while preserving the supplied quotation text, printed references, translation labels, and source data. Copying and printing should follow the displayed order. For verse ranges, position the Bible reader at the first cited verse.
+
 Promises uses the approved shared light-page/subtle-cream-card palette, with a soft sage green sidebar (#E5EDDF). Keep its deep navy text and shared JO FOLLOW navigation.
 
 **Why:** The user requested the cream reading area, then replaced the earlier blue sidebar preference by explicitly approving the recommended soft sage green (#E5EDDF). This is an approved complementary extension; the supplied brand kit itself lists blue and orange, not a green.

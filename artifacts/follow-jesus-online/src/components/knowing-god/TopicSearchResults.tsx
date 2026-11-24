@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { scriptureResultHref } from "./knowing-god-ui";
 import type { ScriptureResult } from "./knowing-god-ui";
+import { FullBibleSearchResults } from "./FullBibleSearchResults";
 
 type SearchTopic = { id: string; title: string; passageCount: number; recordType: string };
 const BATCH = 20;
@@ -58,7 +59,7 @@ export function TopicSearchResults({
               </li>)}
             </ul>}
           <h3 className="kg-sans text-lg font-bold text-[var(--color-text,#003A66)]" data-testid="heading-scripture-results">
-            Scripture results <span className="font-normal text-sm text-[var(--color-text-muted,#2E5A7A)]">{scripture.length}{searchingContent ? "+" : ""}</span>
+            Knowing God passages <span className="font-normal text-sm text-[var(--color-text-muted,#2E5A7A)]">{scripture.length}{searchingContent ? "+" : ""}</span>
           </h3>
           {activeFilters.length > 0 && <div className={`${muted} mt-2 flex flex-wrap items-center gap-x-3 gap-y-1`} data-testid="text-scripture-search-filters">
             <p>Scripture filters: {activeFilters.join(" · ")}</p>
@@ -83,6 +84,7 @@ export function TopicSearchResults({
           {scripture.length > shown && <button type="button" onClick={() => setShown(n => n + BATCH)} data-testid="button-more-scripture-results"
             className="kg-focus kg-sans mt-4 min-h-11 rounded border border-[var(--color-border-control,#5B9BC4)] px-4 py-2 text-sm font-bold text-[var(--color-text,#003A66)] hover:bg-[var(--color-surface-soft,#E6F5FF)]">
             Show more Scripture results <span className="font-normal">({scripture.length - shown} more)</span></button>}
+          <FullBibleSearchResults query={query} translation={translation} testament={testament} book={book} />
         </>}
     </section>
   );
