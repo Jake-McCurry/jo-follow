@@ -267,7 +267,7 @@ export function ConcordancePrototype() {
   const searching = searchOpen || isFiltering;
   const isSaved = selected ? study.includes(selected.id) : false;
 
-  const mobileSearch = <div className="kg-no-print mt-3 md:hidden">
+  const sidebarSearch = <div className="kg-no-print mt-3 w-full min-w-0">
     <label htmlFor="topic-search-mobile" className="sr-only">Search Knowing God topics and KJV Scripture</label>
     <div className="relative">
       <Search className={`absolute left-3 top-1/2 -translate-y-1/2 ${muted}`} size={16} aria-hidden="true" />
@@ -302,14 +302,14 @@ export function ConcordancePrototype() {
         {index && mode === "all" && <nav aria-label="Topical Bible topics A to Z">
           <div className="mb-2 flex items-baseline justify-between"><h2 className="kg-sans text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">A–Z index</h2><span className={`kg-sans text-xs ${muted}`} data-testid="text-topics-shown">{shownCount} of {substantiveTotal} shown</span></div>
           <div className="grid grid-cols-9 gap-1">{alphabet.map(letter => { const has = scopedTopics.some(topic => topic.letter === letter); const active = !isFiltering && expandedLetter === letter; return <button key={letter} disabled={!has} onClick={() => browseLetter(letter)} aria-label={`Browse ${letter} topics`} aria-expanded={active} aria-controls="topic-letter-results" data-testid={`button-letter-${letter}`} className={`kg-focus kg-sans h-9 min-w-0 rounded text-sm font-bold md:h-8 md:text-xs ${!has ? "cursor-not-allowed border border-transparent text-[var(--color-border-control,#5B9BC4)]" : active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] text-[var(--color-text,#003A66)]"}`}>{letter}</button>; })}{desktopSearchToggle("h-8")}</div>
-          {mobileSearch}
+          {sidebarSearch}
           <div id="topic-letter-results" data-topic-results className="mt-3">
             {(!isFiltering ? letterTopics : []).map(item => <button key={item.id} aria-pressed={selectedId === item.id && view === "topic"} data-testid={`button-topic-${item.id}`} onClick={() => openTopic(item)} className={topicButton(selectedId === item.id && view === "topic")}><span className={isSubstantive(item) ? "" : "italic"}>{item.title}</span><span className={`kg-sans text-xs ${muted}`}>{isSubstantive(item) ? item.passageCount : "see"}</span></button>)}
           </div>
         </nav>}
         {index && mode === "devotional" && <nav aria-label="Devotional topics">
           <div className="mb-2 flex items-center justify-between gap-2"><h2 className="kg-sans text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">Devotional Guide</h2>{desktopSearchToggle("h-9 w-9")}</div>
-          {mobileSearch}
+          {sidebarSearch}
           {!isFiltering && <ul className="mt-3">{devotionalGroups.map(group => { const open = openGroups.has(group.key); return <li key={group.key}>
             <button type="button" onClick={() => toggleGroup(group.key)} aria-expanded={open} aria-controls={`devotional-${group.key}`} data-testid={`button-devotional-group-${group.key}`} className="kg-focus kg-sans flex min-h-11 w-full items-center gap-2 border-b border-[var(--color-border-soft,#CCEBFF)] text-left text-sm font-bold uppercase tracking-wide text-[var(--color-hero,#006BB3)]">
               {open ? <ChevronDown size={16} aria-hidden="true"/> : <ChevronRight size={16} aria-hidden="true"/>}{group.heading}<span className={`ml-auto text-xs font-normal normal-case ${muted}`}>{group.children.length}</span></button>
