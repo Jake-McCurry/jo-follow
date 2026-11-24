@@ -32,6 +32,7 @@ import { KnowingGodIntroductionIndexPage, KnowingGodIntroductionPage } from '@/p
 import { knowingGodIntroductions } from '@/data/knowingGodIntroductions';
 import { RewatchPage } from '@/pages/rewatch';
 import { MessagePage } from '@/pages/message';
+import { TranslatePage } from '@/pages/translate';
 import { ArticlePlaceholder } from '@/pages/article-placeholder';
 import { AdventureIndexPage } from '@/pages/adv-index';
 import { AdminReactionsPage } from '@/pages/admin/reactions';
@@ -58,7 +59,10 @@ function PageMetadata() {
   let description = 'Take your next step in following Jesus.';
 
   const knowingGodPath = pathname.replace(/\/$/, '');
-  if (knowingGodPath === '/knowing-god') {
+  if (knowingGodPath === '/translate') {
+    title = 'Translate · Follow Jesus Online';
+    description = 'Read Follow Jesus Online in your heart language. Step-by-step instructions for translating the site with Google Translate on Chrome, Safari, Android, and any browser.';
+  } else if (knowingGodPath === '/knowing-god') {
     title = 'Knowing God / Topical Bible Verses | Follow Jesus Online';
     description = 'Search and study topical Bible passages about the nature and character of God.';
   } else if (knowingGodPath === '/knowing-god/introduction') {
@@ -248,6 +252,7 @@ function Router() {
           <RewatchPage videoId="psw_5rn9WFY" />
         </Route>
         <Route path="/message" component={MessagePage} />
+        <Route path="/translate" component={TranslatePage} />
         <Route path="/connect-with-god" component={ConnectWithGodPage} />
         <Route path="/admin/reactions" component={AdminReactionsPage} />
         <Route path="/bible" component={BibleLandingPage} />
