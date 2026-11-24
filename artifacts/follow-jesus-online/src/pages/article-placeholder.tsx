@@ -1,5 +1,6 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useParams } from "wouter";
 import { BookOpen, HelpCircle, Quote } from "lucide-react";
 import { ChevronLabel } from "@/components/navigation-chevrons";
@@ -11,9 +12,12 @@ import {
   getArticlePath,
   getArticleSlugFromPath,
   getArticlesInGroup,
+  getLoadedArticle,
+  loadArticle,
+  type ArticleSummary,
   type ArticleBlock,
   type Article,
-} from "@/data/article-library";
+} from "@/data/article-catalog";
 import { ArticleEndSection } from "@/components/article-end-section";
 import { PrayerGuideContent } from "@/components/prayer-guide-content";
 import { LordsPrayerContent } from "@/components/lords-prayer-content";
@@ -348,7 +352,7 @@ function AdventureArticleView({
   articleHref,
 }: {
   article: Article;
-  groupArticles: Article[];
+  groupArticles: ArticleSummary[];
   articleIndex: number;
   articleHref: (slug: string) => string;
 }) {
@@ -378,7 +382,7 @@ function AdventureArticleView({
           <ArticleShareButton title={`${article.title} | Follow Jesus Online`} text={`Read “${article.title}” from Follow Jesus Online.`} />
           </div>
 
-          <article className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <article className="animate-in slide-in-from-bottom-4 duration-700">
             <header className="mb-12 text-center">
               <div className="flex items-center justify-center gap-4 mb-6">
                 <div className="h-px bg-warm-300 w-12 sm:w-24"></div>
@@ -424,8 +428,27 @@ export function ArticlePlaceholder() {
   const [location] = useLocation();
   const articleSlug = getArticleSlugFromPath(location.split("?")[0]) ?? params.slug ?? "";
 
-  const article = getArticleBySlug(articleSlug);
-  if (!article) return <NotFound />;
+  const summary = getArticleBySlug(articleSlug);
+  const { data: article, error, refetch } = useQuery({
+    queryKey: ["article-content", articleSlug],
+    queryFn: () => loadArticle(articleSlug),
+    initialData: () => getLoadedArticle(articleSlug),
+    enabled: Boolean(summary),
+    staleTime: Infinity,
+    retry: 1,
+  });
+  if (!summary) return <NotFound />;
+  if (!article) return (
+    <Layout trackHistory={false}>
+      <div className="container mx-auto max-w-3xl px-5 py-10" role={error ? "alert" : "status"}>
+        <p>{error ? "This article could not be loaded. Please try again." : "Loading article…"}</p>
+        {error && <div className="mt-4 flex flex-wrap gap-3">
+          <Button onClick={() => void refetch()}>Try again</Button>
+          <Button variant="outline" onClick={() => window.location.reload()}>Reload page</Button>
+        </div>}
+      </div>
+    </Layout>
+  );
 
   const isPrayerGuide = article.slug === "prayer-starter-guide";
   const isExperiencingGod = article.group === "experiencing-god";
@@ -500,7 +523,7 @@ export function ArticlePlaceholder() {
           </div>
         </div>
 
-        <article data-article-group={article.group} className="animate-in fade-in slide-in-from-bottom-6 duration-700">
+        <article data-article-group={article.group} className="animate-in slide-in-from-bottom-6 duration-700">
           <header className="mb-10">
             {!isGuideOverview && <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
               <BookOpen className="h-3.5 w-3.5" /> {groupLabel(article.group)}

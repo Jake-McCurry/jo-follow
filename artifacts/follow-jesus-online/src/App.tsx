@@ -81,7 +81,23 @@ export async function preloadInitialPage(pathname: string) {
     [/^\/admin\/reactions\/?$/, AdminReactionsPage],
     [/^\/(?:prayer|lords-prayer|experiencing-god|because|adv|deeper)(?:\/|$)|^\/(?:more-|adv-|deeper-)/, ArticlePlaceholder],
   ];
-  await pages.find(([pattern]) => pattern.test(path))?.[1].preload();
+  const page = pages.find(([pattern]) => pattern.test(path))?.[1];
+  if (page === ArticlePlaceholder) {
+    await Promise.all([
+      page.preload(),
+      import('@/data/article-catalog').then(async catalog => {
+        const slug = getArticleSlugFromPath(path) ?? '';
+        if (catalog.getArticleBySlug(slug)) await catalog.loadArticle(slug);
+      }),
+    ]);
+  } else if (page === BibleReaderPage) {
+    await Promise.all([
+      page.preload(),
+      import('@/pages/bible-reader').then(reader => reader.preloadBibleRoute(path, window.location.search, queryClient)),
+    ]);
+  } else {
+    await page?.preload();
+  }
 }
 
 const queryClient = new QueryClient({
@@ -105,7 +121,7 @@ function PageMetadata() {
     if (!isArticlePath) return;
     let active = true;
     // Metadata must not pull the complete article library into every visit.
-    import('@/data/article-library').then(({ getArticleBySlug }) => {
+    import('@/data/article-catalog').then(({ getArticleBySlug }) => {
       const article = getArticleBySlug(getArticleSlugFromPath(pathname) ?? '');
       if (active && article) setArticleMetadata({ path: pathname, title: article.title, excerpt: article.excerpt });
     }).catch(error => console.error('Article metadata could not be loaded', error));

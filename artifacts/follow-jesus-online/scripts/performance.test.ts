@@ -18,7 +18,7 @@ test("lazy pages do not pull the full article library into the entry point", () 
   assert.match(app, /const KnowingGodPage = lazy\(/);
   assert.match(app, /const PromisesPage = lazy\(/);
   assert.match(app, /const BibleReaderPage = lazy\(/);
-  assert.match(app, /import\('@\/data\/article-library'\)/);
+  assert.match(app, /import\('@\/data\/article-catalog'\)/);
   assert.doesNotMatch(app, /^import .*from ['"]@\/data\/article-library['"]/m);
   assert.match(app, /<Layout trackHistory=\{false\}>/);
   assert.match(read("src/components/layout.tsx"), /if \(!trackHistory\) return/);
@@ -34,6 +34,17 @@ test("the requested initial section renders without a second Suspense placeholde
   await Promise.all([Page.preload(), Page.preload()]);
   assert.equal(calls, 1);
   assert.equal(renderToStaticMarkup(createElement(Page, { title: "Real reading content" })), "<h1>Real reading content</h1>");
+});
+
+test("critical reading content is not initially hidden behind a fade", () => {
+  assert.doesNotMatch(read("src/components/layout.tsx"), /<main\b[^>]*className="[^"]*fade-in/);
+  assert.doesNotMatch(read("src/pages/article-placeholder.tsx"), /<article\b[^>]*className="[^"]*fade-in/);
+  assert.doesNotMatch(read("src/pages/bible-reader.tsx"), /<article\b[^>]*className="[^"]*fade-in/);
+  assert.match(read("src/App.tsx"), /reader\.preloadBibleRoute\(path, window\.location\.search, queryClient\)/);
+  assert.doesNotMatch(read("src/pages/home.tsx"), /max-w-4xl text-center animate-in fade-in/);
+  const xp = read("src/pages/xp-page.tsx");
+  assert.doesNotMatch(xp, /text-center mb-6 animate-in fade-in/);
+  assert.doesNotMatch(xp, /shadow-sm mb-8 animate-in fade-in/);
 });
 
 test("article navigation preserves canonical and legacy destinations", () => {
@@ -81,7 +92,7 @@ test("production entry stays below its compressed size budget", () => {
   const code = read(`dist/public${entry}`);
   assert.ok(gzipSync(code).length < 200_000, "Initial app code must stay below 200 KB gzip.");
   const assets = readdirSync(new URL("../dist/public/assets", import.meta.url));
-  assert.ok(assets.some(name => name.startsWith("article-library-")), "Article content has a separate on-demand chunk.");
+  assert.ok(!assets.some(name => name.startsWith("article-library-")), "The complete article library must not ship to readers.");
   assert.ok(assets.some(name => name.startsWith("bible-reader-")), "Bible reader has a separate on-demand chunk.");
 });
 
@@ -89,23 +100,38 @@ test("production preloads only the current route and keeps fonts local", () => {
   const html = read("dist/public/index.html");
   const script = html.match(/<script data-route-preloads>([\s\S]*?)<\/script>/)?.[1];
   assert.ok(script);
-  const requestsFor = (pathname: string) => {
-    const requests: string[] = [];
+  const linksFor = (pathname: string) => {
+    const requests: { href: string; rel: string; as?: string; imageSrcset?: string; imageSizes?: string }[] = [];
     runInNewContext(script, {
       location: { pathname },
       document: {
         createElement: () => ({}),
-        head: { appendChild: (link: { href: string }) => requests.push(link.href) },
+        head: { appendChild: (link: typeof requests[number]) => requests.push(link) },
       },
     });
     return requests;
   };
+  const requestsFor = (pathname: string) => linksFor(pathname).filter(link => link.rel === "modulepreload").map(link => link.href);
   assert.equal(requestsFor("/").length, 0, "Homepage must not fetch every section.");
+  const hero = linksFor("/").filter(link => link.as === "image");
+  assert.equal(hero.length, 1);
+  assert.match(hero[0].imageSrcset!, /hero-960-/);
+  assert.equal(hero[0].imageSizes, "(max-width: 767px) 800px, 100vw");
+  assert.equal(linksFor("/knowing-god").filter(link => link.as === "image").length, 0, "Do not preload the homepage hero on reading pages.");
   assert.ok(requestsFor("/xp/received").some(url => /xp-page-/.test(url)));
   assert.ok(requestsFor("/bible/John/3").some(url => /bible-reader-/.test(url)));
   assert.ok(requestsFor("/prayer/what-is-prayer").some(url => /article-placeholder-/.test(url)));
+  const bodyManifest = JSON.parse(script.match(/var a=(\[[\s\S]*\]);for\(var j=/)![1]) as string[][];
+  const bodyFiles = new Set(bodyManifest.map(entry => entry[2]));
+  assert.ok(bodyFiles.size > 50, "Every published article has a preload destination.");
+  const articleChunks = requestsFor("/prayer/what-is-prayer").filter(url => bodyFiles.has(url));
+  assert.equal(articleChunks.length, 1, "Fetch exactly one article body, not all article bodies.");
+  assert.match(articleChunks[0], /prayer-what-is-prayer/);
+  assert.equal(requestsFor("/more-believer-more-options").filter(url => bodyFiles.has(url)).length, 1);
+  assert.equal(requestsFor("/prayer/what-is-prayer/").filter(url => bodyFiles.has(url)).length, 1);
   assert.ok(!requestsFor("/knowing-god").some(url => /article-library-|bible-reader-/.test(url)));
   assert.ok(html.indexOf('charset="UTF-8"') < 1024, "Encoding declaration stays near the document start.");
+  assert.ok(html.indexOf('name="viewport"') < html.indexOf("<script data-route-preloads>"), "Select responsive images only after the mobile viewport is known.");
   assert.ok(!html.includes("fonts.googleapis.com"));
   const fonts = read("public/fonts/follow-fonts.css");
   assert.ok(fonts.includes("unicode-range:"));

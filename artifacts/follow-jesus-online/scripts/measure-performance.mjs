@@ -2,13 +2,14 @@ import { execFileSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const [label = "baseline", origin = "http://127.0.0.1:4179"] = process.argv.slice(2);
+const [label = "baseline", origin = "http://127.0.0.1:4179", pageFilter] = process.argv.slice(2);
 const output = path.resolve("../../generated-artifacts/performance", label);
 await mkdir(output, { recursive: true });
 const pages = [
   ["home", "/"], ["xp", "/xp/received"], ["bible", "/bible/John/3#verse-16"],
   ["knowing-god", "/knowing-god"], ["promises", "/promises"], ["article", "/prayer/what-is-prayer"],
-];
+].filter(([page]) => !pageFilter || pageFilter.split(",").includes(page));
+if (!pages.length) throw new Error(`No benchmark pages matched: ${pageFilter}`);
 const results = [];
 for (const preset of ["mobile", "desktop"]) {
   for (const [page, route] of pages) {

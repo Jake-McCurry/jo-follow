@@ -28,4 +28,4 @@
 - [Reading interface rules](reading-interface-rules.md) — Session-start resume offers, four eBook downloads excluding Building Blocks, and safe multi-verse actions.
 - [Bible Resources editorial](bible-resources-editorial.md) — Equip is an import source, not a reader destination; retain teaching text and flag unavailable or inconsistent lessons.
 - [Browser jump verification](browser-jump-verification.md) — Confirm link activation and target viewport coordinates before treating an automated click miss as a scrolling bug.
-- [Performance delivery safeguards](performance-delivery.md) — Verify route-level speed, preserve tracking and fonts, and size hero sources for the actual cover crop.
+- [Performance delivery safeguards](performance-delivery.md) — Keep primary text visible early; verify route speeds, preserve tracking/fonts, and size images for the actual crop.

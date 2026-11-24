@@ -9,6 +9,30 @@ Judge performance changes by page-level production-build measurements, not bundl
 
 **How to apply:** Measure representative reading routes as well as the homepage. Prepare only the initial route, keep later navigation lazy, and preserve the session-start resume offer. Do not describe a locally measured improvement as a live-site result before the user has published it.
 
+Keep primary reading text visible from the first content paint rather than fading it in from zero opacity.
+
+**Why:** Nested entrance fades on the main content and reading sections delayed meaningful text painting even after its code and fonts were available. Final screenshots looked unchanged and therefore did not reveal that loading delay.
+
+**How to apply:** Keep final typography and layout intact, and use non-hiding motion where appropriate. Check visibility of the actual reading content, not just the already-painted navigation.
+
+Split article delivery from the finalized editorial assembly, not directly from raw document paragraphs.
+
+**Why:** The approved pages include revision, formatting and link corrections that are not all present in the raw document exports. Moving delivery must not bypass those corrections.
+
+**How to apply:** Preserve the existing assembly transformations at build time, then compare complete rendered-content records and companion destinations against a pre-change snapshot.
+
+Place responsive image preloads after viewport metadata.
+
+**Why:** A preload evaluated before the mobile viewport declaration can select and cache an unnecessarily large desktop source, even when its responsive sizes match the eventual image.
+
+**How to apply:** Keep viewport metadata ahead of responsive preload evaluation and check the actual requested image, not just the declared source set.
+
+Keep exact-verse navigation when improving Bible loading stability.
+
+**Why:** Oversizing the loading placeholder moved the measured shift from the footer to a lower reading panel rather than solving it. Preparing the actual chapter in the existing query cache produced a stable initial view without removing the verse jump.
+
+**How to apply:** Use matching translation-specific query keys and freshness windows for preparation and reader hooks. Test a mounted observer reusing the cache, not just cached-data presence. Bound startup waiting, retain normal loading/error behavior, and verify both final verse position and measured layout shifts.
+
 Keep the approved fonts and their full language coverage. Do not remove analytics or recording merely to improve a score without the user's permission.
 
 **Why:** The user requested keeping everything while making the site faster; external tracking is a material part of its measured startup cost, but disabling it would change existing behavior.

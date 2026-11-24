@@ -15,7 +15,7 @@ import {
   redirectRetiredFaqReading,
   shouldAppendFaqRelatedLink,
 } from "./faq-content-revisions";
-import generatedContent from "virtual:article-content";
+import type { ArticleRecord } from "virtual:article-content";
 export { getArticlePath, getArticleSlugFromPath } from "./article-routing";
 
 export type ArticleGroup =
@@ -61,6 +61,9 @@ export type Article = {
   continuation?: ArticleContinuation;
 };
 
+// Build-time assembler only. Browser pages consume the lightweight catalog and
+// the selected article chunk, never these complete source archives.
+export function buildArticleLibrary(generatedContent: ArticleRecord[]): Article[] {
 const updatedBySlug = new Map(
   generatedContent
     .filter((record) => record.category === "ZIP Updated")
@@ -297,7 +300,7 @@ const experiencingGodRecords: Article[] = experiencingGodMetadata.map(metadata =
   };
 });
 
-export const ARTICLE_LIBRARY = [
+const ARTICLE_LIBRARY = [
   ...becauseMetadata.map(metadata => {
     const source = generatedContent.find(record => record.route === `/${metadata.slug}` && record.category === "Because statements");
     if (!source) throw new Error(`Missing Because statements article: ${metadata.prefix}`);
@@ -369,24 +372,12 @@ export const ARTICLE_LIBRARY = [
   ...experiencingGodRecords,
 ].map(applyGuideMainFormatRevisions).map(applyGuideDeeperFormatRevisions);
 
-export function getArticleBySlug(slug: string) {
-  return ARTICLE_LIBRARY.find((article) => article.slug === slug);
+return ARTICLE_LIBRARY;
 }
 
-export function getGuideArticleForDeeper(slug: string) {
-  const currentGuide = ARTICLE_LIBRARY.find(
-    (article) => article.group === "adventure" && article.relatedSlug === slug,
-  );
-  if (currentGuide) return currentGuide;
-
+export function getOriginalGuideSlugForDeeper(slug: string) {
   const originalGuide = (library.articles as Article[]).find(
     (article) => article.group === "adventure" && article.relatedSlug === slug,
   );
-  return originalGuide ? getArticleBySlug(originalGuide.slug) : undefined;
-}
-
-export function getArticlesInGroup(group: ArticleGroup) {
-  return ARTICLE_LIBRARY
-    .filter((article) => article.group === group)
-    .sort((a, b) => a.order - b.order);
+  return originalGuide?.slug;
 }

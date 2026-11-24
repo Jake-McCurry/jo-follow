@@ -162,7 +162,7 @@ export function XPPage() {
       <div data-testid="xp-page" className="container mx-auto max-w-4xl px-5 py-6 sm:px-8 md:py-8">
         
         {/* Header Section */}
-        <div className="text-center mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="text-center mb-6 animate-in slide-in-from-bottom-4 duration-700">
           <div className="w-16 h-1 bg-warm-accent mx-auto rounded-full mb-4"></div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             {content.title}
@@ -179,7 +179,7 @@ export function XPPage() {
         </div>
 
         {/* Main Content Area */}
-        {hasGuide && <div className="bg-card border border-card-border rounded-2xl p-5 sm:p-6 shadow-sm mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
+        {hasGuide && <div className="bg-card border border-card-border rounded-2xl p-5 sm:p-6 shadow-sm mb-8 animate-in slide-in-from-bottom-8 duration-700 delay-150 fill-mode-both">
             <div>
               {content.guideHeading && <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-3">{content.guideHeading}</h2>}
               {guideParagraphs.map((paragraph, index) => (

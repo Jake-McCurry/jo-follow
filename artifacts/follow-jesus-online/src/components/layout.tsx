@@ -173,7 +173,7 @@ export function Layout({ children, trackHistory = true }: { children: ReactNode;
         </div>
       )}
 
-      <main id="main-content" className="flex-1 w-full animate-in fade-in duration-500">
+      <main id="main-content" className="flex-1 w-full">
         {children}
       </main>
 

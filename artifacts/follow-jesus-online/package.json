@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test:performance": "node --import tsx --test scripts/performance.test.ts",
+    "test:performance": "node --import tsx --test scripts/performance.test.ts scripts/article-delivery.test.ts scripts/bible-route-preload.test.ts",
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "prebuild": "pnpm run test:articles && pnpm run test:bible-study && pnpm run test:recent-page && pnpm run test:rewatch && pnpm run test:connect && pnpm run test:knowing-god && pnpm run test:promises && pnpm run test:bible-resources",
     "test:bible-resources": "python3 scripts/study-methods-source.test.py && node --import tsx --test scripts/bible-resources.test.ts",

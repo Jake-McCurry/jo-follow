@@ -1,6 +1,6 @@
 import { Link, useRoute, useLocation, useSearch } from "wouter"
 import { Layout } from "@/components/layout"
-import { useListBibleBooks, useGetBiblePassage, getGetBiblePassageQueryKey } from "@workspace/api-client-react"
+import { useListBibleBooks, useGetBiblePassage, getGetBiblePassageQueryKey, getListBibleBooksQueryKey } from "@workspace/api-client-react"
 import { SelectNative } from "@/components/ui/select-native"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,6 +13,8 @@ import { getVerseKey, type HighlightColor, type StudyVerse, useBibleStudy } from
 import { cn } from "@/lib/utils"
 import { toggleSelectedVerse } from "@/lib/bible-verse-selection"
 import { scrollToBibleVerse, verseNumbersFromHash } from "@/lib/bible-verse-navigation"
+import { BIBLE_QUERY_STALE_MS, preloadBibleRoute } from "@/lib/bible-route-preload"
+export { preloadBibleRoute }
 
 const hashEvents = ["hashchange", "popstate", "pushState", "replaceState"]
 function subscribeToHash(onChange: () => void) {
@@ -50,12 +52,12 @@ export function BibleReaderPage() {
   const parsedChapter = Number.parseInt(params?.chapter || "1", 10)
   const chapterParam = Number.isSafeInteger(parsedChapter) && parsedChapter > 0 ? parsedChapter : 1
 
-  const { data: books, isLoading: isBooksLoading } = useListBibleBooks()
+  const { data: books, isLoading: isBooksLoading } = useListBibleBooks({ query: { queryKey: getListBibleBooksQueryKey(), staleTime: BIBLE_QUERY_STALE_MS } })
   
   const passageQuery = `${bookParam} ${chapterParam}`
   const { data: passage, isLoading: isPassageLoading, error: passageError } = useGetBiblePassage(
     { passage: passageQuery, version },
-    { query: { enabled: match && !!bookParam && !!chapterParam, queryKey: getGetBiblePassageQueryKey({ passage: passageQuery, version }) } }
+    { query: { enabled: match && !!bookParam && !!chapterParam, queryKey: getGetBiblePassageQueryKey({ passage: passageQuery, version }), staleTime: BIBLE_QUERY_STALE_MS } }
   )
 
   const currentBook = useMemo(() => {
@@ -276,7 +278,7 @@ export function BibleReaderPage() {
                   <Button variant="outline" onClick={() => window.location.reload()}>Try Again</Button>
                 </div>
               ) : passage ? (
-                <article className="animate-in fade-in duration-500">
+                <article>
                   <h1 className="mb-4 text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                     {passage.reference}
                   </h1>
