@@ -6,12 +6,20 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Loader2, AlertCircle, Search } from "lucide-react"
 import { ChevronLabel } from "@/components/navigation-chevrons"
-import { useState, useMemo, useEffect, FormEvent } from "react"
+import { useState, useMemo, useEffect, useSyncExternalStore, FormEvent } from "react"
 import { BibleStudyTools } from "@/components/bible-study-tools"
 import { BibleRecap } from "@/components/bible-recap"
 import { getVerseKey, type HighlightColor, type StudyVerse, useBibleStudy } from "@/hooks/use-bible-study"
 import { cn } from "@/lib/utils"
 import { toggleSelectedVerse } from "@/lib/bible-verse-selection"
+import { scrollToBibleVerse, verseNumbersFromHash } from "@/lib/bible-verse-navigation"
+
+const hashEvents = ["hashchange", "popstate", "pushState", "replaceState"]
+function subscribeToHash(onChange: () => void) {
+  hashEvents.forEach(event => window.addEventListener(event, onChange))
+  return () => hashEvents.forEach(event => window.removeEventListener(event, onChange))
+}
+const readHash = () => window.location.hash
 
 const verseHighlightClasses: Record<HighlightColor, string> = {
   yellow: "bg-amber-200/80",
@@ -25,6 +33,7 @@ export function BibleReaderPage() {
   const [match, params] = useRoute("/bible/:book/:chapter")
   const [, setLocation] = useLocation()
   const search = useSearch()
+  const hash = useSyncExternalStore(subscribeToHash, readHash, () => "")
   const [selectedVerses, setSelectedVerses] = useState<StudyVerse[]>([])
   const selectedVerse = selectedVerses[0] ?? null
   const study = useBibleStudy()
@@ -75,18 +84,31 @@ export function BibleReaderPage() {
   }, [canonicalBookName, chapterParam, match, passage?.reference, study.setLastRead])
 
   useEffect(() => {
-    if (!passage || !/^#verses?-/.test(window.location.hash)) return
-    const verseNumbers = new Set(window.location.hash.replace(/^#verses?-/, "").split(",").map(Number))
+    if (!passage || isPassageLoading) return
+    const verseNumbers = new Set(verseNumbersFromHash(hash))
     const verses: StudyVerse[] = passage.verses.filter(item => verseNumbers.has(item.verse)).map(verse => ({
       id: getVerseKey(verse.bookName, verse.chapter, verse.verse),
       bookName: verse.bookName, chapter: verse.chapter, verse: verse.verse, text: verse.text, version,
     }))
     if (!verses.length) return
     setSelectedVerses(verses)
-    window.requestAnimationFrame(() => {
-      document.getElementById(`verse-${verses[0].verse}`)?.scrollIntoView({ behavior: "smooth", block: "center" })
-    })
-  }, [passage, version])
+    let cancelled = false
+    let frame = 0
+    // Native anchors run before asynchronously fetched verses exist. Wait for
+    // the rendered text and web fonts so the final verse position is accurate.
+    const positionVerse = () => {
+      if (cancelled) return
+      frame = window.requestAnimationFrame(() => {
+        if (!cancelled) scrollToBibleVerse(verses[0].verse)
+      })
+    }
+    positionVerse()
+    void document.fonts?.ready.then(positionVerse)
+    return () => {
+      cancelled = true
+      window.cancelAnimationFrame(frame)
+    }
+  }, [passage, isPassageLoading, version, hash, bookParam, chapterParam])
 
   // Search state
   const [searchInput, setSearchInput] = useState("")
@@ -97,12 +119,12 @@ export function BibleReaderPage() {
     
     // Parse input to jump to book and chapter
     const str = searchInput.trim()
-    const match = str.match(/^((?:[1-3]\s+)?[A-Za-z\s]+)\s+(\d+)(?:\s*:\s*\d+(?:-\d+)?)?$/)
+    const match = str.match(/^((?:[1-3]\s+)?[A-Za-z\s]+)\s+(\d+)(?:\s*:\s*(\d+)(?:-\d+)?)?$/)
     
     if (match) {
       const b = match[1].trim()
       const c = match[2].trim()
-      setLocation(chapterHref(b, Number(c)))
+      setLocation(`${chapterHref(b, Number(c))}${match[3] ? `#verse-${Number(match[3])}` : ""}`)
       setSearchInput("")
     } else {
       // Fallback: assume they just typed a book name
