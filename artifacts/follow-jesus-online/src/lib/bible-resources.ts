@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { splitScriptureText } from "@/lib/scripture-text";
 import verseBounds from "@/data/bible-verse-counts.json";
+import { BIBLE_BOOKS } from "./bible-order";
+export { BIBLE_BOOKS } from "./bible-order";
 
 export type ResourceItem = {
   id: string;
@@ -105,16 +107,6 @@ export function buildLinkMap(catalog: ResourceCatalog | undefined): Map<string, 
     "/bible-resources/pdfs/gods-promises-for-a-new-year.pdf");
   return map;
 }
-
-export const BIBLE_BOOKS = [
-  "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",
-  "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs",
-  "Ecclesiastes", "Song of Solomon", "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel",
-  "Amos", "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi",
-  "Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians", "2 Corinthians", "Galatians", "Ephesians",
-  "Philippians", "Colossians", "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus", "Philemon",
-  "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John", "Jude", "Revelation",
-];
 
 /** Only an exact canonical book title (survey lessons) supplies context for bare chapter:verse references. */
 export function canonicalBookFromTitle(title: string, collectionId: string): string | null {

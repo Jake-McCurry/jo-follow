@@ -31,3 +31,17 @@ test("KJV links and unique see-also targets", () => {
   assert.equal(kjvScriptureHref("John 3:16"), "/bible/John/3?version=KJV#verse-16");
   assert.deepEqual(uniqueSeeAlsoTargets([{ targetIds: ["a", "b"] }, { targetIds: ["b", "c"] }]), ["a", "b", "c"]);
 });
+
+test("Scripture results follow Bible book order, then numeric chapter and verse, before pagination", () => {
+  const expected = [
+    "Genesis 1:1", "Genesis 2:3", "Genesis 2:10", "Genesis 10:1",
+    "II Samuel 5:6-7", "2 Kings 1:1", "II Chronicles 6:5-6",
+    "Psalm 23:4", "Matthew 1:1", "John 3:2", "John 3:16-18",
+    "1 Corinthians 1:1", "2 Corinthians 1:1", "2 John 5", "Jude 24", "Revelation 22:21",
+  ];
+  const topics = [...expected].reverse().map((reference, i) => ({
+    id: `topic-${i}`, passages: [{ reference, text: "matching text" }],
+  }));
+  assert.deepEqual(searchScripturePassages(topics, "matching").map(p => p.reference), expected);
+  assert.deepEqual(topics[0].passages[0].reference, expected.at(-1), "source order is not mutated");
+});

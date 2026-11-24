@@ -1,6 +1,7 @@
 import { devotionalGuideCategories } from "../../data/knowing-god/introduction/devotional-guide.ts";
 import { devotionalTopicKey } from "./devotional-topics.ts";
 import { knowingGodScriptureHref } from "./scripture-link.ts";
+import { compareBibleReferences } from "../../lib/bible-order.ts";
 
 type IndexTopic = { id: string; title: string; recordType: string };
 
@@ -66,7 +67,7 @@ export function searchScripturePassages(
       merged.set(key, { reference: passage.reference, text: passage.text, excerpt: scriptureExcerpt(passage.text, query), topicIds: [topic.id] });
     }
   }
-  return [...merged.values()];
+  return [...merged.values()].sort((a, b) => compareBibleReferences(a.reference, b.reference));
 }
 
 /** Scripture search results are KJV text, so they open the KJV reader. */

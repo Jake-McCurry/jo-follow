@@ -55,7 +55,7 @@ export function TopicSearchResults({
           <h3 className="kg-sans text-lg font-bold text-[var(--color-text,#003A66)]" data-testid="heading-scripture-results">
             Scripture results <span className="font-normal text-sm text-[var(--color-text-muted,#2E5A7A)]">{scripture.length}{searchingContent ? "+" : ""}</span>
           </h3>
-          <p className={`${muted} mt-1`}>Searches the original KJV text of every topic. Links open the KJV passage.</p>
+          <p className={`${muted} mt-1`}>Searches the original KJV text of every topic. Results are in Bible book, chapter, and verse order. Links open the KJV passage.</p>
           {searchingContent && <p role="status" className={`${muted} mt-2`}>Searching all topics…</p>}
           {contentError && <p role="alert" className="kg-sans mt-2 text-sm text-[var(--color-action-warm,#C45100)]">
             Some topics could not be searched; partial results are shown.{" "}
