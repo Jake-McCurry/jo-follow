@@ -17,12 +17,12 @@ export function BibleLandingPage() {
     if (!searchInput.trim()) return;
     
     const str = searchInput.trim();
-    const match = str.match(/^((?:[1-3]\s+)?[A-Za-z\s]+)\s+(\d+)(?:\s*:\s*\d+(?:-\d+)?)?$/);
+    const match = str.match(/^((?:[1-3]\s+)?[A-Za-z\s]+)\s+(\d+)(?:\s*:\s*(\d+)(?:-\d+)?)?$/);
     
     if (match) {
       const b = match[1].trim();
       const c = match[2].trim();
-      setLocation(`/bible/${encodeURIComponent(b)}/${c}`);
+      setLocation(`/bible/${encodeURIComponent(b)}/${c}${match[3] ? `#verse-${Number(match[3])}` : ""}`);
     } else {
       const fallbackMatch = str.match(/^((?:[1-3]\s+)?[A-Za-z\s]+)$/);
       if (fallbackMatch) {

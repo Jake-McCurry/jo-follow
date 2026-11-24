@@ -13,7 +13,7 @@ All product navigation must stay within Follow. Knowing God must use Follow's ow
 
 **Why:** The user corrected navigation leaving the preview: “this whole project I'm having you create should stay within Follow.”
 
-**How to apply:** Use existing Follow routes for menus and related resources. Supplemental Scripture links must open Follow's Bible reader, not an outside Bible website. Preserve attribution wording without using it to navigate away. Do not infer permission to link to the original application from a replication source.
+**How to apply:** Use existing Follow routes for menus and related resources. Supplemental Scripture links must open Follow's Bible reader, not an outside Bible website. Preserve publisher attribution and NET's required linked quotation attribution; these are not reader destinations. Do not infer permission to link to the original application from a replication source.
 
 The shared header brand should be the JO symbol followed by “JO FOLLOW,” matching the EQUIP project's treatment rather than the JESUSONLINE wordmark.
 
@@ -21,14 +21,14 @@ The shared header brand should be the JO symbol followed by “JO FOLLOW,” mat
 
 **How to apply:** Keep this branding consistent across Follow's shared header, including Knowing God pages.
 
-Knowing God search results should load in the main window while someone is typing, not in the sidebar. Separate Topic results (title matches) from Scripture results (deduplicated original KJV text matches), in that order. Label the KJV search explicitly and open its results in Follow's KJV reader.
+Knowing God search results should load in the main window while someone is typing, not in the sidebar. Keep topic-title matches first, original curated Knowing God passages second, and complete-Bible verse results separately afterward. Scripture matching, displayed text, labels, and reader links must use only the currently selected NET or KJV translation, never both and never a silent KJV substitute for unavailable NET text. Keep Scripture matches in Bible book, chapter, and verse order.
 
-**Why:** The user requested main-window results, then asked to apply the same title-first search behavior as Promises.
+**Why:** The user requested main-window, title-first results, then clarified that search must follow the translation toggle and reported KJV-only results as a bug. The approved full-Bible search extends rather than replaces the original curated feature. The later EQUIP checklist requires a single sidebar field, scoped curated results, and 25-at-a-time “Show more.”
 
-**How to apply:** Keep live results in the primary reading area and all title hits ahead of Scripture hits. Search coverage should not depend on which topics the reader has already visited.
+**How to apply:** Keep one sidebar input and live results in the primary reading area, with a mobile results shortcut that does not change topic-history hashes. Search coverage should not depend on previously visited topics. All Topics/Devotional Topics scopes constrain titles and curated Scripture; full-Bible results remain a separate complete-Bible search. Curated results load in batches of 25; full-Bible pages retain 20. Reset pagination on scope changes. Passage filters apply to both Scripture sections, not title matches. Preserve NET notes beside matching quotations, but never search the notes as Scripture. Both topic and search-result Bible links must follow the selected translation.
 
 Knowing God now uses All topics and Devotional Topics selection, with 649 substantive topics and 502 unique devotional topics. Retain all 124 cross-reference-only entries in the A–Z index without counting them as substantive topics.
 
 **Why:** The user's November 2026 Knowing God specification explicitly supersedes the earlier request to remove topic selection.
 
-**How to apply:** Preserve the PDF Devotional Guide's group order and repeated memberships without duplicating articles. On mobile show the index in normal page flow and always show full-width search immediately below A–Z; desktop may use the disclosure after Z. Print belongs in the compact topic toolbar, not the landing page. These rules replace the earlier bottom icon-only utilities design.
+**How to apply:** Preserve the PDF Devotional Guide's group order and repeated memberships without duplicating articles. On mobile show the index in normal page flow. Always show full-width search immediately below A–Z on both mobile and desktop, as the user subsequently clarified. Print belongs in the compact topic toolbar, not the landing page. These rules replace the earlier bottom icon-only utilities design.

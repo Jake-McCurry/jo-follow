@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
-import type { ReactNode } from "react";
-import { kjvScriptureHref } from "./knowing-god-ui";
+import { scriptureResultHref } from "./knowing-god-ui";
 import type { ScriptureResult } from "./knowing-god-ui";
+import { FullBibleSearchResults } from "./FullBibleSearchResults";
 
 type SearchTopic = { id: string; title: string; passageCount: number; recordType: string };
-const BATCH = 20;
+const BATCH = 25;
 
 export function TopicSearchResults({
-  query, topics, scripture, topicTitle, loading, error, searchingContent, contentError, onRetry, onSelect, onClear, searchControl,
+  query, translation, scope, testament, book, onClearPassageFilters, topics, scripture, topicTitle, loading, error, searchingContent, contentError, onRetry, onSelect, onClear,
 }: {
   query: string;
+  translation: "NET" | "KJV";
+  scope: "all" | "devotional";
+  testament: string;
+  book: string;
+  onClearPassageFilters: () => void;
   topics: SearchTopic[];
   scripture: ScriptureResult[];
   topicTitle: (id: string) => string | undefined;
@@ -20,17 +25,16 @@ export function TopicSearchResults({
   onRetry: () => void;
   onSelect: (id: string) => void;
   onClear: () => void;
-  searchControl?: ReactNode;
 }) {
   const [shown, setShown] = useState(BATCH);
-  useEffect(() => setShown(BATCH), [query]);
+  useEffect(() => setShown(BATCH), [query, scope, translation, testament, book]);
+  const activeFilters = [testament !== "All Testaments" ? testament : "", book !== "All books" ? book : ""].filter(Boolean);
   const q = query.trim();
   const muted = "kg-sans text-sm text-[var(--color-text-muted,#2E5A7A)]";
 
   return (
     <section id="topic-search-results" className="kg-reading order-3 min-w-0 max-w-[920px] px-5 py-5 md:order-none md:px-10 md:py-8 lg:px-14"
       aria-labelledby="topic-search-heading" data-testid="panel-topic-search-results" data-search-complete={!loading && !searchingContent && !contentError}>
-      {searchControl}
       <div className="mb-4 flex flex-wrap items-baseline justify-between gap-3">
         <h2 id="topic-search-heading" className="text-2xl text-[var(--color-hero,#006BB3)] md:text-3xl">{q ? "Search results" : "Search Knowing God"}</h2>
         {q && <button type="button" onClick={onClear} data-testid="button-clear-topic-search"
@@ -55,18 +59,23 @@ export function TopicSearchResults({
           <h3 className="kg-sans text-lg font-bold text-[var(--color-text,#003A66)]" data-testid="heading-scripture-results">
             Scripture results <span className="font-normal text-sm text-[var(--color-text-muted,#2E5A7A)]">{scripture.length}{searchingContent ? "+" : ""}</span>
           </h3>
-          <p className={`${muted} mt-1`}>Searches the original KJV text of every topic. Links open the KJV passage.</p>
+          {activeFilters.length > 0 && <div className={`${muted} mt-2 flex flex-wrap items-center gap-x-3 gap-y-1`} data-testid="text-scripture-search-filters">
+            <p>Scripture filters: {activeFilters.join(" · ")}</p>
+            <button type="button" onClick={onClearPassageFilters} className="kg-focus min-h-11 underline underline-offset-2">Clear passage filters</button>
+          </div>}
+          <p className={`${muted} mt-1`}>Searches the curated {translation} passages in {scope === "devotional" ? "Devotional Topics" : "All Topics"}. Results are in Bible book, chapter, and verse order. Links open the {translation} passage.</p>
           {searchingContent && <p role="status" className={`${muted} mt-2`}>Searching all topics…</p>}
           {contentError && <p role="alert" className="kg-sans mt-2 text-sm text-[var(--color-action-warm,#C45100)]">
-            Some topics could not be searched; partial results are shown.{" "}
+            Some topic or {translation} text could not be loaded; partial results are shown.{" "}
             <button type="button" onClick={onRetry} data-testid="button-retry-topic-search" className="kg-focus min-h-11 font-bold underline">Retry search</button>
           </p>}
-          {!searchingContent && scripture.length === 0 && <p className={`${muted} mt-2`}>No KJV passages contain “{q}”.</p>}
+          {!searchingContent && !contentError && scripture.length === 0 && <p className={`${muted} mt-2`}>No {translation} passages contain “{q}”{activeFilters.length ? " within the selected passage filters" : ""}.</p>}
           <ol className="mt-2">
             {scripture.slice(0, shown).map(result => <li key={`${result.reference}-${result.topicIds.join(",")}`} className="border-b border-[var(--color-border-soft,#CCEBFF)] py-3">
-              <a href={kjvScriptureHref(result.reference, import.meta.env.BASE_URL)} target="_blank" rel="noopener noreferrer" data-testid={`link-scripture-result-${result.reference}`}
-                className="kg-focus kg-sans font-bold text-[var(--color-hero,#006BB3)] underline underline-offset-2">{result.reference} <span className="text-xs font-normal">KJV</span><span className="sr-only"> (opens KJV Bible in a new tab)</span></a>
+              <a href={scriptureResultHref(result.reference, translation, import.meta.env.BASE_URL)} target="_blank" rel="noopener noreferrer" data-testid={`link-scripture-result-${result.reference}`}
+                className="kg-focus kg-sans font-bold text-[var(--color-hero,#006BB3)] underline underline-offset-2">{result.reference} <span className="text-xs font-normal">{translation}</span><span className="sr-only"> (opens {translation} Bible in a new tab)</span></a>
               <p className="mt-1 text-base leading-relaxed text-[var(--color-text,#003A66)]">{result.excerpt}</p>
+              {result.note && <p className={`${muted} mt-2 border-l-2 border-[var(--color-border-soft,#CCEBFF)] pl-3`}><strong>Translation note:</strong> {result.note}</p>}
               <p className={`${muted} mt-1 text-xs`}>In: {result.topicIds.map((id, i) => <span key={id}>
                 <button type="button" onClick={() => onSelect(id)} className="kg-focus underline underline-offset-2">{topicTitle(id) ?? id}</button>{i < result.topicIds.length - 1 ? ", " : ""}</span>)}</p>
             </li>)}
@@ -74,6 +83,7 @@ export function TopicSearchResults({
           {scripture.length > shown && <button type="button" onClick={() => setShown(n => n + BATCH)} data-testid="button-more-scripture-results"
             className="kg-focus kg-sans mt-4 min-h-11 rounded border border-[var(--color-border-control,#5B9BC4)] px-4 py-2 text-sm font-bold text-[var(--color-text,#003A66)] hover:bg-[var(--color-surface-soft,#E6F5FF)]">
             Show more Scripture results <span className="font-normal">({scripture.length - shown} more)</span></button>}
+          <FullBibleSearchResults query={query} translation={translation} testament={testament} book={book} scope={scope} />
         </>}
     </section>
   );

@@ -1,6 +1,7 @@
 import { devotionalGuideCategories } from "../../data/knowing-god/introduction/devotional-guide.ts";
 import { devotionalTopicKey } from "./devotional-topics.ts";
 import { knowingGodScriptureHref } from "./scripture-link.ts";
+import { compareBibleReferences, normalizeBibleReference } from "../../lib/bible-order.ts";
 
 type IndexTopic = { id: string; title: string; recordType: string };
 
@@ -35,6 +36,12 @@ export function buildDevotionalHierarchy(topics: IndexTopic[]): DevotionalGroup[
 export const uniqueDevotionalCount = (groups: DevotionalGroup[]) =>
   new Set(groups.flatMap(group => group.children.map(child => child.topicId).filter(Boolean))).size;
 
+export function scopeKnowingGodTopics<T extends IndexTopic>(topics: T[], mode: "all" | "devotional", groups: DevotionalGroup[]): T[] {
+  if (mode === "all") return topics;
+  const ids = new Set(groups.flatMap(group => group.children.flatMap(child => child.topicId ? [child.topicId] : [])));
+  return topics.filter(topic => ids.has(topic.id));
+}
+
 const fold = (value: string) => value.normalize("NFKC").replace(/[‘’]/g, "'").replace(/[–—]/g, "-").toLocaleLowerCase();
 
 /** A short excerpt around the first match, with ellipses where trimmed. */
@@ -47,34 +54,42 @@ export function scriptureExcerpt(text: string, query: string, radius = 70): stri
   return `${start > 0 ? "…" : ""}${clean.slice(start, end).trim()}${end < clean.length ? "…" : ""}`;
 }
 
-export type ScriptureResult = { reference: string; text: string; excerpt: string; topicIds: string[] };
+export type ScriptureResult = { reference: string; text: string; excerpt: string; topicIds: string[]; note?: string };
 
-/** KJV passage-text search; identical passages under several topics merge into one result. */
+/** Search only the selected text; missing NET passages never fall back to KJV. */
 export function searchScripturePassages(
   topics: { id: string; passages: { reference: string; text: string }[] }[],
   query: string,
+  translation: "NET" | "KJV" = "KJV",
+  netText: ReadonlyMap<string, string> = new Map(),
+  netNotes: ReadonlyMap<string, string> = new Map(),
 ): ScriptureResult[] {
   const q = fold(query.trim());
   if (!q) return [];
   const merged = new Map<string, ScriptureResult>();
   for (const topic of topics) {
     for (const passage of topic.passages) {
-      if (!fold(passage.text).includes(q)) continue;
-      const key = `${passage.reference.trim()}\u0000${passage.text.replace(/\s+/g, " ").trim()}`;
+      const text = translation === "NET" ? netText.get(passage.reference) : passage.text;
+      if (!text || !fold(text).includes(q)) continue;
+      const key = `${normalizeBibleReference(passage.reference)}\u0000${text.replace(/\s+/g, " ").trim()}`;
       const found = merged.get(key);
       if (found) { if (!found.topicIds.includes(topic.id)) found.topicIds.push(topic.id); continue; }
-      merged.set(key, { reference: passage.reference, text: passage.text, excerpt: scriptureExcerpt(passage.text, query), topicIds: [topic.id] });
+      merged.set(key, { reference: passage.reference, text, excerpt: scriptureExcerpt(text, query), topicIds: [topic.id],
+        ...(translation === "NET" && netNotes.has(passage.reference) ? { note: netNotes.get(passage.reference) } : {}),
+      });
     }
   }
-  return [...merged.values()];
+  return [...merged.values()].sort((a, b) => compareBibleReferences(a.reference, b.reference));
 }
 
-/** Scripture search results are KJV text, so they open the KJV reader. */
-export function kjvScriptureHref(reference: string, baseUrl = "/"): string {
+/** Search result links use the same translation as their displayed text. */
+export function scriptureResultHref(reference: string, translation: "NET" | "KJV", baseUrl = "/"): string {
   const href = knowingGodScriptureHref(reference, baseUrl);
   const [path, hash] = href.split("#");
-  return `${path}?version=KJV${hash ? `#${hash}` : ""}`;
+  return `${path}?version=${translation}${hash ? `#${hash}` : ""}`;
 }
+
+export const kjvScriptureHref = (reference: string, baseUrl = "/") => scriptureResultHref(reference, "KJV", baseUrl);
 
 /** Flatten "See also" groups to unique destinations in source order. */
 export function uniqueSeeAlsoTargets(related: { targetIds: string[] }[]): string[] {

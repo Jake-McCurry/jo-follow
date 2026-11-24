@@ -5,9 +5,9 @@ import { AlertCircle, Bookmark, BookmarkCheck, Check, ChevronDown, ChevronRight,
 import { fetchNetPassages, netCache, netNotes } from "./bible-api";
 import { formatSourcePassage } from "./passage-format";
 import { topicTitleSearchRank } from "./topic-search";
-import { knowingGodScriptureHref } from "./scripture-link";
+import { matchesBiblePassageFilters } from "../../lib/bible-order";
 import { pushTopicHash, subscribeToTopicHistory, topicIdFromHash } from "./topic-history.mjs";
-import { buildDevotionalHierarchy, countSubstantive, isSubstantive, searchScripturePassages, uniqueDevotionalCount, uniqueSeeAlsoTargets } from "./knowing-god-ui";
+import { buildDevotionalHierarchy, countSubstantive, isSubstantive, scopeKnowingGodTopics, scriptureResultHref, searchScripturePassages, uniqueDevotionalCount, uniqueSeeAlsoTargets } from "./knowing-god-ui";
 
 type Passage = { reference: string; text: string };
 
@@ -19,14 +19,12 @@ const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i
 const ntBooks = ["Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians", "2 Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians", "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus", "Philemon", "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John", "Jude", "Revelation"];
 const books = ["All books", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon", "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi", ...ntBooks];
 const base = (path: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "")}${path}`;
-const testamentFor = (ref: string) => ntBooks.some(book => ref.startsWith(book)) ? "New Testament" : "Old Testament";
 const normalized = (value: string) => value.trim().toLocaleLowerCase();
 const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/** Publisher attribution (required by the source), the only off-site link here. */
+/** Publisher attribution required by the source; product navigation stays local. */
 const publisherStoryUrl = "https://www.zmission.org/our-story.html";
-const scriptureHref = (reference: string) => knowingGodScriptureHref(reference, import.meta.env.BASE_URL);
 export function ConcordancePrototype() {
   const [index, setIndex] = useState<Index | null>(null);
   const [indexError, setIndexError] = useState("");
@@ -38,41 +36,34 @@ export function ConcordancePrototype() {
   const [mode, setMode] = useState<"all" | "devotional">("all");
   const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
   const [query, setQuery] = useState(""); const [testament, setTestament] = useState("All Testaments"); const [book, setBook] = useState("All books");
-  const [searchOpen, setSearchOpen] = useState(false);
-  const searchInput = useRef<HTMLInputElement>(null);
   const mobileSearchInput = useRef<HTMLInputElement>(null);
-  const searchToggle = useRef<HTMLButtonElement>(null);
   const studyHeading = useRef<HTMLHeadingElement>(null);
   const isFiltering = Boolean(query.trim());
   const [searchRetry, setSearchRetry] = useState(0);
   const [filterOpen, setFilterOpen] = useState(false);
   const [savedNotice, setSavedNotice] = useState(false);
   const closeSearch = () => {
-    setSearchOpen(false);
     setQuery("");
-    requestAnimationFrame(() => (isMobile() ? mobileSearchInput.current : searchToggle.current)?.focus({ preventScroll: true }));
+    requestAnimationFrame(() => mobileSearchInput.current?.focus({ preventScroll: true }));
   };
-  useEffect(() => {
-    if (!searchOpen || isMobile()) return;
-    searchInput.current?.focus({ preventScroll: true });
-  }, [searchOpen]);
   const readerShell = useRef<HTMLDivElement>(null);
   const [study, setStudy] = useState<string[]>([]); const [studyLoaded, setStudyLoaded] = useState(false); const [copied, setCopied] = useState(""); const [copyError, setCopyError] = useState("");
   const [translation, setTranslation] = useState<"NET" | "KJV">("NET"); const [translationLoaded, setTranslationLoaded] = useState(false);
-  const [netLoading, setNetLoading] = useState(false); const [netError, setNetError] = useState(false); const [, setNetTick] = useState(0);
+  const scriptureHref = (reference: string) => scriptureResultHref(reference, translation, import.meta.env.BASE_URL);
+  const [netLoading, setNetLoading] = useState(false); const [netError, setNetError] = useState(false); const [netTick, setNetTick] = useState(0);
+  const [netSearchError, setNetSearchError] = useState(false);
   const [netRetry, setNetRetry] = useState(0);
   const [expandedLetter, setExpandedLetter] = useState("A");
   const browseLetter = (letter: string) => {
-    setSearchOpen(false);
     setQuery("");
     if (!query.trim() && expandedLetter === letter) { setExpandedLetter(""); return; }
     setExpandedLetter(letter);
     loadLetter(letter).catch(() => undefined);
   };
   useEffect(() => {
-    document.documentElement.dataset.knowingGodView = isFiltering || searchOpen ? "search" : view;
+    document.documentElement.dataset.knowingGodView = isFiltering ? "search" : view;
     return () => { delete document.documentElement.dataset.knowingGodView; };
-  }, [view, isFiltering, searchOpen]);
+  }, [view, isFiltering]);
 
   const loadLetter = (letter: string) => {
     if (payloads[letter]) return Promise.resolve(payloads[letter]);
@@ -89,20 +80,17 @@ export function ConcordancePrototype() {
     loading.current.set(letter, request); return request;
   };
   const applyTopic = (item: TopicIndex) => {
-    setSearchOpen(false);
     setQuery("");
     setSelectedId(item.id); setExpandedLetter(item.letter); setView("topic");
     loadLetter(item.letter).catch(() => undefined);
   };
   const openTopic = (item: TopicIndex) => {
-    setSearchOpen(false);
     setQuery("");
     if (selectedId === item.id && view === "topic") return;
     applyTopic(item);
     pushTopicHash(window, item.id);
   };
   const openStart = () => {
-    setSearchOpen(false);
     setQuery("");
     setView("start");
     if (window.location.hash) {
@@ -150,10 +138,12 @@ export function ConcordancePrototype() {
 
   const selectedIndex = index?.topics.find(topic => topic.id === selectedId);
   const selected = selectedIndex ? payloads[selectedIndex.letter]?.find(topic => topic.id === selectedId) : undefined;
-  const scopedTopics = useMemo(() => index?.topics || [], [index]);
-  const substantiveTotal = useMemo(() => countSubstantive(scopedTopics), [scopedTopics]);
-  const devotionalGroups = useMemo(() => buildDevotionalHierarchy(scopedTopics), [scopedTopics]);
+  const allTopics = useMemo(() => index?.topics || [], [index]);
+  const substantiveTotal = useMemo(() => countSubstantive(allTopics), [allTopics]);
+  const devotionalGroups = useMemo(() => buildDevotionalHierarchy(allTopics), [allTopics]);
   const devotionalTotal = useMemo(() => uniqueDevotionalCount(devotionalGroups), [devotionalGroups]);
+  const scopedTopics = useMemo(() => scopeKnowingGodTopics(allTopics, mode, devotionalGroups), [allTopics, mode, devotionalGroups]);
+  const scopedTopicIds = useMemo(() => new Set(scopedTopics.map(topic => topic.id)), [scopedTopics]);
   const searchLetters = useMemo(() => [...new Set(scopedTopics.map(item => item.letter))], [scopedTopics]);
   useEffect(() => {
     if (!isFiltering) return;
@@ -169,8 +159,28 @@ export function ConcordancePrototype() {
     void Promise.all(Array.from({ length: 3 }, worker));
     return () => { active = false; };
   }, [searchLetters, isFiltering, searchRetry]);
-  const searchingContent = isFiltering && searchLetters.some(letter => !payloads[letter] && !payloadError[letter]);
-  const searchContentError = isFiltering && searchLetters.some(letter => !payloads[letter] && payloadError[letter]);
+  const loadedSearchTopics = useMemo(() => alphabet.flatMap(letter => payloads[letter] || [])
+    .filter(topic => scopedTopicIds.has(topic.id)), [payloads, scopedTopicIds]);
+  useEffect(() => {
+    setNetSearchError(false);
+    if (!isFiltering || translation !== "NET" || !loadedSearchTopics.length) return;
+    const controller = new AbortController();
+    let active = true;
+    const references = loadedSearchTopics.flatMap(topic => topic.passages.map(p => p.reference));
+    void fetchNetPassages(references, 3, controller.signal).then(ok => {
+      if (!active) return;
+      setNetSearchError(!ok);
+      setNetTick(value => value + 1);
+    });
+    return () => { active = false; controller.abort(); };
+  }, [loadedSearchTopics, isFiltering, translation, searchRetry]);
+  const missingSearchNet = translation === "NET" && loadedSearchTopics.some(topic => topic.passages.some(p => !netCache.has(p.reference)));
+  const searchingContent = isFiltering && (
+    searchLetters.some(letter => !payloads[letter] && !payloadError[letter]) || (missingSearchNet && !netSearchError)
+  );
+  const searchContentError = isFiltering && (
+    searchLetters.some(letter => !payloads[letter] && payloadError[letter]) || (translation === "NET" && netSearchError)
+  );
   const retrySearch = () => {
     setPayloadError(previous => {
       const next = { ...previous };
@@ -189,14 +199,14 @@ export function ConcordancePrototype() {
   }, [scopedTopics, query]);
   const scriptureMatches = useMemo(() => {
     if (!query.trim()) return [];
-    const loaded = alphabet.flatMap(letter => payloads[letter] || []);
-    return searchScripturePassages(loaded, query);
-  }, [payloads, query]);
+    return searchScripturePassages(loadedSearchTopics, query, translation, netCache, netNotes)
+      .filter(result => matchesBiblePassageFilters(result.reference, testament, book));
+  }, [loadedSearchTopics, query, translation, netTick, testament, book]);
   const letterTopics = scopedTopics.filter(item => item.letter === expandedLetter);
   const shownCount = isFiltering ? countSubstantive(topicMatches) : countSubstantive(letterTopics);
-  const visiblePassages = selected?.passages.filter(p => (testament === "All Testaments" || testamentFor(p.reference) === testament) && (book === "All books" || p.reference.startsWith(book))) || [];
+  const visiblePassages = selected?.passages.filter(p => matchesBiblePassageFilters(p.reference, testament, book)) || [];
   useEffect(() => {
-    if (searchOpen || isFiltering || view !== "topic" || !selected) return;
+    if (isFiltering || view !== "topic" || !selected) return;
     const reading = readerShell.current?.querySelector<HTMLElement>(".kg-reading");
     if (!reading || !isMobile()) return;
     reading.tabIndex = -1;
@@ -204,7 +214,7 @@ export function ConcordancePrototype() {
     reading.focus({ preventScroll: true });
     const headerHeight = document.querySelector("[data-site-header]")?.getBoundingClientRect().height ?? 0;
     window.scrollTo({ top: Math.max(0, window.scrollY + reading.getBoundingClientRect().top - headerHeight - 8), behavior: "instant" });
-  }, [view, selectedId, selected, isFiltering, searchOpen]);
+  }, [view, selectedId, selected, isFiltering]);
   useEffect(() => {
     if (isFiltering || view !== "topic" || !translationLoaded || translation !== "NET" || !selected) return;
     const controller = new AbortController();
@@ -260,27 +270,33 @@ export function ConcordancePrototype() {
   });
 
   const muted = "text-[var(--color-text-muted,#2E5A7A)]";
-  const pill = (active: boolean) => `kg-focus kg-sans whitespace-nowrap rounded font-bold ${active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "text-[var(--color-text-muted,#2E5A7A)] hover:bg-[var(--color-surface-soft,#E6F5FF)]"}`;
+  const pill = (active: boolean, wrap = false) => `kg-focus kg-sans ${wrap ? "whitespace-normal" : "whitespace-nowrap"} rounded font-bold ${active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "text-[var(--color-text-muted,#2E5A7A)] hover:bg-[var(--color-surface-soft,#E6F5FF)]"}`;
   const topicButton = (active: boolean) => `kg-focus flex min-h-11 w-full items-center justify-between gap-3 border-l-4 px-3 py-2 text-left text-base ${active ? "border-[var(--color-action-warm,#C45100)] bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)]" : "border-transparent text-[var(--color-text,#003A66)] hover:bg-[var(--color-surface,#FFFDFB)]"}`;
   const toolbarButton = "kg-focus kg-sans inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded px-1 text-xs font-bold text-[var(--color-text,#003A66)] hover:bg-[var(--color-surface-soft,#E6F5FF)] sm:px-2 sm:text-sm";
-  const showMobileSidebar = view === "start" || isFiltering || searchOpen;
-  const searching = searchOpen || isFiltering;
+  const showMobileSidebar = view === "start" || isFiltering;
+  const searching = isFiltering;
   const isSaved = selected ? study.includes(selected.id) : false;
 
-  const mobileSearch = <div className="kg-no-print mt-3 md:hidden">
-    <label htmlFor="topic-search-mobile" className="sr-only">Search Knowing God topics and KJV Scripture</label>
+  const jumpToSearchResults = () => {
+    const results = readerShell.current?.querySelector<HTMLElement>("#topic-search-results");
+    if (!results) return;
+    results.tabIndex = -1;
+    results.focus({ preventScroll: true });
+    const headerBottom = document.querySelector("[data-site-header]")?.getBoundingClientRect().bottom ?? 0;
+    window.scrollTo({ top: Math.max(0, window.scrollY + results.getBoundingClientRect().top - headerBottom - 8), behavior: "instant" });
+  };
+  const sidebarSearch = <div className="kg-no-print mt-3 w-full min-w-0">
+    <label htmlFor="topic-search-mobile" className="sr-only">Search Knowing God topics and {translation} Scripture</label>
     <div className="relative">
       <Search className={`absolute left-3 top-1/2 -translate-y-1/2 ${muted}`} size={16} aria-hidden="true" />
-      <input ref={mobileSearchInput} id="topic-search-mobile" data-testid="input-topic-search-mobile" type="search" value={query} onChange={e => setQuery(e.target.value)}
+      <input ref={mobileSearchInput} id="topic-search-mobile" data-testid="input-topic-search-mobile" type="search" aria-controls="topic-search-results" value={query} onChange={e => setQuery(e.target.value)}
         onKeyDown={e => { if (e.key === "Escape") { e.preventDefault(); closeSearch(); } }} placeholder="Search topics and Scripture"
         className="kg-focus h-11 w-full rounded border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] pl-9 pr-11 text-base text-[var(--color-text,#003A66)]" />
       {query && <button type="button" onClick={closeSearch} aria-label="Clear search" data-testid="button-clear-topic-search-mobile"
         className="kg-focus absolute right-0 top-0 flex h-11 w-11 items-center justify-center"><X size={18} aria-hidden="true" /></button>}
     </div>
+    {isFiltering && <button type="button" onClick={jumpToSearchResults} data-testid="button-view-search-results" className="kg-focus mt-2 min-h-11 w-full rounded border border-[var(--color-border-control,#5B9BC4)] px-3 text-sm font-bold md:hidden">View search results</button>}
   </div>;
-  const desktopSearchToggle = (className: string) => <button ref={searchToggle} type="button" onClick={() => setSearchOpen(true)} aria-label="Search Knowing God" title="Search"
-    aria-expanded={searching} aria-controls="topic-search-results" data-testid="button-open-topic-search"
-    className={`kg-focus hidden items-center justify-center rounded border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] md:flex ${className}`}><Search size={14} aria-hidden="true" /></button>;
 
   return <div className="flex flex-col min-h-[100dvh] text-[var(--color-text,#003A66)]" style={{ background: "var(--color-surface, #FFFDFB)", fontFamily: "var(--font-sans, 'Source Sans 3', system-ui, sans-serif)" }}>
     <style>{`.kg-sans{font-family:var(--font-sans, 'Source Sans 3', system-ui, sans-serif)}.kg-focus:focus-visible{outline:3px solid var(--color-focus,#0095FF);outline-offset:2px}.kg-scroll::-webkit-scrollbar{width:6px}.kg-scroll::-webkit-scrollbar-thumb{background:var(--color-border-control,#5B9BC4);border-radius:8px}@media print{.kg-no-print,[data-site-header],header,nav,footer{display:none!important}.kg-reading{max-width:none!important;padding:0!important}.kg-shell{display:block!important}}@media (prefers-reduced-motion: reduce){.kg-toast{transition:none!important}}`}</style>
@@ -293,23 +309,31 @@ export function ConcordancePrototype() {
         <p id="kg-translation-label" className="kg-sans mb-1 text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">Translation</p>
         <div role="group" aria-labelledby="kg-translation-label" className="mb-4 flex rounded border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] p-1">{(["NET", "KJV"] as const).map(value => <button key={value} data-testid={`button-translation-${value}`} onClick={() => { setTranslation(value); localStorage.setItem("knowing-god-translation", value); }} aria-pressed={translation === value} className={`${pill(translation === value)} min-h-10 flex-1 px-2 text-sm`}>{value} Bible</button>)}</div>
         <div role="group" aria-label="Topic selection" className="mb-3 grid grid-cols-[.8fr_1.2fr] gap-1 rounded border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] p-1">
-          <button type="button" data-testid="button-mode-all" aria-pressed={mode === "all"} onClick={() => setMode("all")} className={`${pill(mode === "all")} min-h-10 px-1.5 text-[13px]`}>All topics <span className={`font-normal ${muted}`}>— {substantiveTotal || 649}</span></button>
-          <button type="button" data-testid="button-mode-devotional" aria-pressed={mode === "devotional"} onClick={() => setMode("devotional")} className={`${pill(mode === "devotional")} min-h-10 px-1.5 text-[13px]`}>Devotional Topics <span className={`font-normal ${muted}`}>— {devotionalTotal || 502}</span></button>
+          <button type="button" data-testid="button-mode-all" aria-pressed={mode === "all"} onClick={() => setMode("all")} className={`${pill(mode === "all", true)} min-h-10 min-w-0 px-1.5 py-1 text-[13px] leading-snug`}>All topics <span className={`inline-block whitespace-nowrap font-normal ${muted}`}>— {substantiveTotal || 649}</span></button>
+          <button type="button" data-testid="button-mode-devotional" aria-pressed={mode === "devotional"} onClick={() => setMode("devotional")} className={`${pill(mode === "devotional", true)} min-h-10 min-w-0 px-1.5 py-1 text-[13px] leading-snug`}>Devotional Topics <span className={`inline-block whitespace-nowrap font-normal ${muted}`}>— {devotionalTotal || 502}</span></button>
         </div>
         <button onClick={() => setFilterOpen(v => !v)} aria-expanded={filterOpen} data-testid="button-passage-filters" className="kg-focus kg-sans mb-2 flex min-h-11 w-full items-center justify-between border-y border-[var(--color-border-soft,#CCEBFF)] text-left text-xs font-semibold uppercase tracking-widest text-[var(--color-text,#003A66)]"><span className="flex gap-2"><SlidersHorizontal size={14}/>Passage filters</span><ChevronDown size={14} className={filterOpen ? "rotate-180" : ""}/></button>
-        {filterOpen && <div className="kg-sans mb-3 space-y-3 border-b border-[var(--color-border-soft,#CCEBFF)] pb-3"><label className="block text-sm font-semibold">Testament<select value={testament} onChange={e => setTestament(e.target.value)} className="mt-1 w-full border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] p-2 text-base"><option>All Testaments</option><option>Old Testament</option><option>New Testament</option></select></label><label className="block text-sm font-semibold">Bible book<select value={book} onChange={e => setBook(e.target.value)} className="mt-1 w-full border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] p-2 text-base">{books.map(value => <option key={value}>{value}</option>)}</select></label></div>}
+        {filterOpen && <div className="kg-sans mb-3 space-y-3 border-b border-[var(--color-border-soft,#CCEBFF)] pb-3">
+          <label className="block text-sm font-semibold">Testament<select value={testament} onChange={e => {
+            const next = e.target.value;
+            setTestament(next);
+            if (book !== "All books" && !matchesBiblePassageFilters(`${book} 1:1`, next, "All books")) setBook("All books");
+          }} className="mt-1 w-full border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] p-2 text-base"><option>All Testaments</option><option>Old Testament</option><option>New Testament</option></select></label>
+          <label className="block text-sm font-semibold">Bible book<select value={book} onChange={e => setBook(e.target.value)} className="mt-1 w-full border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] p-2 text-base">{books.filter(value => value === "All books" || matchesBiblePassageFilters(`${value} 1:1`, testament, "All books")).map(value => <option key={value}>{value}</option>)}</select></label>
+          <p className={`text-sm ${muted}`}>Applies to Scripture search results and the open topic. Topic-title matches are unchanged.</p>
+        </div>}
         {indexError && <div role="alert" className="kg-sans py-4 text-base text-[var(--color-action-warm,#C45100)]">{indexError}</div>}{!index && !indexError && <div role="status" className={`kg-sans space-y-2 py-3 ${muted}`}><span className="sr-only">Loading complete topical index…</span>{[0, 1, 2].map(i => <div key={i} className="h-7 animate-pulse rounded bg-[var(--color-surface,#FFFDFB)]" />)}</div>}
         {index && mode === "all" && <nav aria-label="Topical Bible topics A to Z">
           <div className="mb-2 flex items-baseline justify-between"><h2 className="kg-sans text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">A–Z index</h2><span className={`kg-sans text-xs ${muted}`} data-testid="text-topics-shown">{shownCount} of {substantiveTotal} shown</span></div>
-          <div className="grid grid-cols-9 gap-1">{alphabet.map(letter => { const has = scopedTopics.some(topic => topic.letter === letter); const active = !isFiltering && expandedLetter === letter; return <button key={letter} disabled={!has} onClick={() => browseLetter(letter)} aria-label={`Browse ${letter} topics`} aria-expanded={active} aria-controls="topic-letter-results" data-testid={`button-letter-${letter}`} className={`kg-focus kg-sans h-9 min-w-0 rounded text-sm font-bold md:h-8 md:text-xs ${!has ? "cursor-not-allowed border border-transparent text-[var(--color-border-control,#5B9BC4)]" : active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] text-[var(--color-text,#003A66)]"}`}>{letter}</button>; })}{desktopSearchToggle("h-8")}</div>
-          {mobileSearch}
+          <div className="grid grid-cols-9 gap-1">{alphabet.map(letter => { const has = scopedTopics.some(topic => topic.letter === letter); const active = !isFiltering && expandedLetter === letter; return <button key={letter} disabled={!has} onClick={() => browseLetter(letter)} aria-label={`Browse ${letter} topics`} aria-expanded={active} aria-controls="topic-letter-results" data-testid={`button-letter-${letter}`} className={`kg-focus kg-sans h-9 min-w-0 rounded text-sm font-bold md:h-8 md:text-xs ${!has ? "cursor-not-allowed border border-transparent text-[var(--color-border-control,#5B9BC4)]" : active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] text-[var(--color-text,#003A66)]"}`}>{letter}</button>; })}</div>
+          {sidebarSearch}
           <div id="topic-letter-results" data-topic-results className="mt-3">
             {(!isFiltering ? letterTopics : []).map(item => <button key={item.id} aria-pressed={selectedId === item.id && view === "topic"} data-testid={`button-topic-${item.id}`} onClick={() => openTopic(item)} className={topicButton(selectedId === item.id && view === "topic")}><span className={isSubstantive(item) ? "" : "italic"}>{item.title}</span><span className={`kg-sans text-xs ${muted}`}>{isSubstantive(item) ? item.passageCount : "see"}</span></button>)}
           </div>
         </nav>}
         {index && mode === "devotional" && <nav aria-label="Devotional topics">
-          <div className="mb-2 flex items-center justify-between gap-2"><h2 className="kg-sans text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">Devotional Guide</h2>{desktopSearchToggle("h-9 w-9")}</div>
-          {mobileSearch}
+          <div className="mb-2 flex items-center justify-between gap-2"><h2 className="kg-sans text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">Devotional Guide</h2></div>
+          {sidebarSearch}
           {!isFiltering && <ul className="mt-3">{devotionalGroups.map(group => { const open = openGroups.has(group.key); return <li key={group.key}>
             <button type="button" onClick={() => toggleGroup(group.key)} aria-expanded={open} aria-controls={`devotional-${group.key}`} data-testid={`button-devotional-group-${group.key}`} className="kg-focus kg-sans flex min-h-11 w-full items-center gap-2 border-b border-[var(--color-border-soft,#CCEBFF)] text-left text-sm font-bold uppercase tracking-wide text-[var(--color-hero,#006BB3)]">
               {open ? <ChevronDown size={16} aria-hidden="true"/> : <ChevronRight size={16} aria-hidden="true"/>}{group.heading}<span className={`ml-auto text-xs font-normal normal-case ${muted}`}>{group.children.length}</span></button>
@@ -320,21 +344,14 @@ export function ConcordancePrototype() {
           </li>; })}</ul>}
         </nav>}
       </div></aside>
-      {searching ? <TopicSearchResults query={query} topics={topicMatches} scripture={scriptureMatches} topicTitle={id => topicById(id)?.title} loading={!index && !indexError} error={indexError} searchingContent={searchingContent} contentError={searchContentError} onRetry={retrySearch} onClear={() => { setQuery(""); searchInput.current?.focus(); }} onSelect={id => { const target = topicById(id); if (target) openTopic(target); }}
-        searchControl={<div className="kg-no-print mb-5 hidden md:block">
-          <label className="kg-sans mb-2 block text-sm font-bold" htmlFor="topic-search">Search topic titles and KJV Scripture text</label>
-          <div className="flex items-center gap-2">
-            <div className="relative min-w-0 flex-1"><Search className={`absolute left-3 top-3 ${muted}`} size={16} aria-hidden="true" /><input ref={searchInput} id="topic-search" data-testid="input-topic-search" type="search" aria-controls="topic-search-results" value={query} onChange={e => setQuery(e.target.value)} onKeyDown={e => { if (e.key === "Escape") { e.preventDefault(); closeSearch(); } }} placeholder="Search topics and Scripture" className="kg-focus w-full border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] py-2.5 pl-9 pr-3 text-base text-[var(--color-text,#003A66)]" /></div>
-            <button type="button" onClick={closeSearch} aria-label="Close search" title="Close search" data-testid="button-close-topic-search" className="kg-focus flex h-11 w-11 shrink-0 items-center justify-center rounded hover:bg-[var(--color-surface-soft,#E6F5FF)]"><X size={18} aria-hidden="true" /></button>
-          </div>
-        </div>} /> : view === "start" ? <section className="kg-reading kg-book-intro order-1 min-w-0 max-w-[920px] px-4 pb-4 pt-5 md:order-none md:px-10 md:py-10 lg:px-14">
+      {searching ? <TopicSearchResults query={query} translation={translation} scope={mode} testament={testament} book={book} onClearPassageFilters={() => { setTestament("All Testaments"); setBook("All books"); }} topics={topicMatches} scripture={scriptureMatches} topicTitle={id => topicById(id)?.title} loading={!index && !indexError} error={indexError} searchingContent={searchingContent} contentError={searchContentError} onRetry={retrySearch} onClear={closeSearch} onSelect={id => { const target = topicById(id); if (target) openTopic(target); }} /> : view === "start" ? <section className="kg-reading kg-book-intro order-1 min-w-0 max-w-[920px] px-4 pb-4 pt-5 md:order-none md:px-10 md:py-10 lg:px-14">
         <h1 data-testid="heading-knowing-god" className="whitespace-nowrap text-[clamp(1.3rem,6.6vw,3rem)] font-bold leading-tight text-[var(--color-hero,#006BB3)]" style={{ fontFamily: "var(--font-display, 'Playfair Display', serif)" }}>Knowing God Topical Bible</h1>
         <p className="mt-2 text-base leading-relaxed text-[var(--color-text,#003A66)] md:text-lg" data-testid="text-knowing-god-summary">{substantiveTotal || 649} topics and {(index?.counts.passageCount ?? 13535).toLocaleString()} curated passages on the Nature and Character of the Almighty.</p>
         <div className="kg-sans mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">
           <a href={publisherStoryUrl} target="_blank" rel="noopener noreferrer" data-testid="link-zinzendorf" className={`kg-focus inline-flex min-h-11 items-center underline underline-offset-2 ${muted}`}>© 2026 by Zinzendorf Mission</a>
           <a href={base("/knowing-god/introduction")} data-testid="link-introductory-articles" className="kg-focus inline-flex min-h-11 items-center gap-1 font-bold text-[var(--color-hero,#006BB3)] underline underline-offset-2 hover:text-[var(--color-structure,#003A66)]">See Introductory Articles <ChevronRight size={14} aria-hidden="true"/></a>
         </div>
-        <p className={`kg-sans mt-4 hidden text-base md:block ${muted}`}>Choose a letter or a devotional heading at left, or search topic titles and KJV Scripture.</p>
+        <p className={`kg-sans mt-4 hidden text-base md:block ${muted}`}>Choose a letter or a devotional heading at left, or search topic titles and {translation} Scripture.</p>
       </section> :
       <section className="kg-reading order-1 min-w-0 max-w-[920px] px-4 py-4 md:order-none md:px-10 md:py-7 lg:px-14">{!selectedIndex ? <div role="status" className={`kg-sans py-16 text-center text-base ${muted}`}>Loading selected topic…</div> : !selected ? <div className={`kg-sans py-16 text-center text-base ${muted}`}>{payloadError[selectedIndex.letter] ? <div role="alert" className="text-[var(--color-action-warm,#C45100)]">{payloadError[selectedIndex.letter]} <button className="kg-focus min-h-11 underline" onClick={() => loadLetter(selectedIndex.letter).catch(() => undefined)}>Try again</button></div> : <div role="status" className="space-y-3"><span className="sr-only">Loading {selectedIndex.letter} topics…</span>{[0, 1, 2, 3].map(i => <div key={i} className="h-16 animate-pulse rounded bg-[var(--color-surface-soft,#E6F5FF)]" />)}</div>}</div> : <>
         <nav aria-label="Breadcrumb" className={`kg-no-print kg-sans flex items-center gap-1 text-sm ${muted}`}>

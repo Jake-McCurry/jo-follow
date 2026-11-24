@@ -2,7 +2,9 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { knowingGodScriptureHref } from "../src/components/knowing-god/scripture-link.ts";
-import { blockText, printedTranslations, searchTopics } from "../src/components/promises/promises-data.ts";
+import { blockText, printedTranslations, searchTopics, scriptureHref, sortPromisePassages } from "../src/components/promises/promises-data.ts";
+import { compareBibleReferences, matchesBiblePassageFilters } from "../src/lib/bible-order.ts";
+import { verseNumbersFromHash } from "../src/lib/bible-verse-navigation.ts";
 
 const root = new URL("../", import.meta.url);
 const text = path => readFile(new URL(path, root), "utf8");
@@ -63,8 +65,12 @@ test("every Scripture reference links into Follow, with supplied verse spacing a
   ])];
   for (const block of blocks) {
     if (block.kind !== "passage") continue;
-    const href = knowingGodScriptureHref(block.bibleReference ?? block.reference, "/follow/");
-    assert.match(href, /^\/follow\/bible\/[^/]+\/\d+(?:#verse-\d+)?$/);
+    const reference = block.bibleReference ?? block.reference;
+    const href = scriptureHref(reference, "/follow/");
+    assert.match(href, /^\/follow\/bible\/[^/]+\/\d+#verse-\d+$/);
+    const firstVerse = Number(reference.match(/:\s*(\d+)/)?.[1]);
+    assert.deepEqual(verseNumbersFromHash(new URL(href, "https://example.test").hash), [firstVerse],
+      `${reference}: the reader must receive the exact first cited verse`);
     assert.doesNotMatch(href, /\/Corinthians\//);
   }
   assert.equal(knowingGodScriptureHref("Romans 10: 9–10", "/follow/"), "/follow/bible/Romans/10#verse-9");
@@ -76,6 +82,54 @@ test("every Scripture reference links into Follow, with supplied verse spacing a
   }
   const page = await text("src/pages/promises/index.tsx");
   assert.match(page, /<KnowingGodShell warmWrapper>/);
+});
+
+test("every category lists its complete passages in canonical book, chapter and verse order without changing source data", async () => {
+  const book = JSON.parse(await text("public/promises/book.json"));
+  const original = JSON.stringify(book);
+  let checked = 0, reordered = 0;
+  for (const group of book.groups) for (const topic of group.topics) {
+    const ordered = sortPromisePassages(topic.blocks);
+    assert.equal(ordered.length, topic.blocks.length);
+    assert.deepEqual(new Set(ordered), new Set(topic.blocks), "keep original quotation objects and metadata");
+    const passages = ordered.filter(b => b.kind === "passage");
+    for (let i = 0; i < passages.length; i++) {
+      const ref = passages[i].bibleReference ?? passages[i].reference;
+      assert.ok(matchesBiblePassageFilters(ref, "Old Testament", "All books") ||
+        matchesBiblePassageFilters(ref, "New Testament", "All books"), `${ref}: recognized canonical book`);
+      if (i) assert.ok(compareBibleReferences(passages[i - 1].bibleReference ?? passages[i - 1].reference, ref) <= 0, topic.title);
+      checked++;
+    }
+    if (ordered.some((block, i) => block !== topic.blocks[i])) reordered++;
+    const copied = blockText(ordered);
+    assert.ok(copied.indexOf(passages[0].text) <= copied.indexOf(passages.at(-1).text), "copy order follows display order");
+  }
+  assert.equal(checked, book.counts.passages);
+  assert.ok(reordered > 0);
+  assert.equal(JSON.stringify(book), original, "never rewrite the source corpus");
+  const reader = await text("src/components/promises/PromisesReader.tsx");
+  assert.match(reader, /topic: \{ \.\.\.topic, blocks: sortPromisePassages\(topic\.blocks\) \}/);
+});
+
+test("passage sorting is numeric, uses corrected citations, and preserves narrative boundaries and equal-citation order", () => {
+  const passage = (reference, bibleReference) => ({ kind: "passage", reference, bibleReference, text: reference, sourceParagraphs: [] });
+  const heading = { kind: "heading", text: "Next section" };
+  const same = passage("John 3:16");
+  const blocks = [
+    passage("John 3:16"), passage("John 3:2"), passage("Corinthians 2:12", "1 Corinthians 2:12"),
+    passage("Psalm 100:1"), passage("Psalm 23:1"), same, heading, passage("Revelation 21:4"), passage("Genesis 1:1"),
+  ];
+  const sorted = sortPromisePassages(blocks);
+  assert.deepEqual(sorted.map(b => b.reference ?? b.text), [
+    "Psalm 23:1", "Psalm 100:1", "John 3:2", "John 3:16", "John 3:16", "Corinthians 2:12",
+    "Next section", "Genesis 1:1", "Revelation 21:4",
+  ]);
+  assert.equal(sorted[4], same);
+  assert.equal(sorted[6], heading);
+  assert.equal(scriptureHref("Psalm 33:20–22"), "/bible/Psalms/33#verse-20");
+  assert.equal(scriptureHref("Romans 10: 9–10", "/follow/"), "/follow/bible/Romans/10#verse-9");
+  assert.equal(scriptureHref("Jude 20–23"), "/bible/Jude/1#verse-20");
+  assert.equal(scriptureHref(), null);
 });
 
 test("fear title matches come before content matches without dropping any results", async () => {

@@ -13,7 +13,10 @@ test("Knowing God navigation stays in Follow, including all supplemental Scriptu
   for (const name of files) {
     const source = await readFile(new URL(name, dir), "utf8");
     assert.doesNotMatch(source, /equip\.jesusonline\.com|biblegateway\.com/, name);
-    assert.doesNotMatch(source, /href\s*=\s*["'](?:https?:|mailto:)/, name);
+    for (const [, href] of source.matchAll(/href\s*=\s*["']((?:https?:|mailto:)[^"']+)["']/g)) {
+      assert.ok(name === "FullBibleSearchResults.tsx" && ["https://netbible.org/", "https://netbible.com"].includes(href),
+        `${name}: only the NET license's required attribution links may leave Follow; found ${href}`);
+    }
   }
   const shell = await readFile(new URL("KnowingGodShell.tsx", dir), "utf8");
   assert.match(shell, /<Layout>/);

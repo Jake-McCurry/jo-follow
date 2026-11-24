@@ -4,6 +4,7 @@ import { TopicMenuBar } from "@/components/topic-menu-bar"
 import { Button } from "@/components/ui/button"
 import { takeSessionResumePage, isSamePage, saveRecentPage } from "@/hooks/use-recent-page"
 import joLogo from "@/assets/jol-logo-white.png"
+import { Languages } from "lucide-react"
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -51,6 +52,16 @@ export function Layout({ children }: { children: ReactNode }) {
             />
             <span className="font-sans text-xl font-bold tracking-wide text-white">JO FOLLOW</span>
           </Link>
+          <div className="flex items-center gap-3 sm:gap-5">
+          <Link
+            href="/translate"
+            aria-label="Translate this page — instructions"
+            title="Translate this page"
+            onClick={() => setIsMenuOpen(false)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded text-white transition-colors hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            <Languages className="h-6 w-6" aria-hidden="true" />
+          </Link>
           <button
             type="button"
             onClick={() => setIsMenuOpen((open) => !open)}
@@ -66,6 +77,7 @@ export function Layout({ children }: { children: ReactNode }) {
               <span className={`block h-0.5 w-6 rounded-full bg-white transition-all duration-200 origin-center ${isMenuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
             </div>
           </button>
+          </div>
         </div>
         <TopicMenuBar />
         {isMenuOpen && (
@@ -169,6 +181,7 @@ export function Layout({ children }: { children: ReactNode }) {
           <nav aria-label="Footer" className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-3">
             <a href="https://jesusonlineministries.org/about-us" className="underline underline-offset-4 hover:text-white">About Us</a>
             <Link href="/message" className="underline underline-offset-4 hover:text-white">Contact Us</Link>
+            <Link href="/translate" className="underline underline-offset-4 hover:text-white">Translate</Link>
           </nav>
           <a
             href="https://jesusonlineministries.org/privacy-policy/"

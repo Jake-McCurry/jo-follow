@@ -1,4 +1,5 @@
 import { knowingGodScriptureHref } from "../knowing-god/scripture-link";
+import { compareBibleReferences } from "../../lib/bible-order";
 
 export type Block = { kind: "heading" | "paragraph" | "passage"; text: string; sourceParagraphs: number[]; reference?: string; bibleReference?: string; referenceNote?: string; translation?: string };
 export type Topic = { id: string; title: string; blocks: Block[] };
@@ -11,9 +12,27 @@ export const printedTranslations = (book: Book): string[] => [...new Set([
 ].flatMap(block => block.translation ? [block.translation] : []))].sort();
 export const base = (path: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "")}${path}`;
 
-export const scriptureHref = (reference?: string): string | null => {
+export const scriptureHref = (reference?: string, baseUrl = "/"): string | null => {
   if (!reference) return null;
-  try { return knowingGodScriptureHref(reference, import.meta.env.BASE_URL); } catch { return null; }
+  try { return knowingGodScriptureHref(reference, baseUrl); } catch { return null; }
+};
+
+/** Preserve narrative boundaries and source text while ordering each passage list. */
+export const sortPromisePassages = (blocks: readonly Block[]): Block[] => {
+  const ordered: Block[] = [];
+  let passages: Block[] = [];
+  const flush = () => {
+    ordered.push(...passages.sort((a, b) => compareBibleReferences(
+      a.bibleReference ?? a.reference ?? "", b.bibleReference ?? b.reference ?? "",
+    )));
+    passages = [];
+  };
+  for (const block of blocks) {
+    if (block.kind === "passage") passages.push(block);
+    else { flush(); ordered.push(block); }
+  }
+  flush();
+  return ordered;
 };
 
 export const readSaved = (): { ids: string[]; error: string } => {

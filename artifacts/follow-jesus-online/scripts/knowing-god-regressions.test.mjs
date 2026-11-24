@@ -12,7 +12,7 @@ import {
 
 const dataDirectory = new URL("../public/knowing-god/data/", import.meta.url);
 
-test("Knowing God shows topic selection with counts, always-visible mobile search, and toolbar print only", async () => {
+test("Knowing God shows full-width search below A–Z on mobile and desktop, counts, and toolbar print only", async () => {
   const reader = await readFile(new URL("../src/components/knowing-god/ConcordancePrototype.tsx", import.meta.url), "utf8");
   const sidebar = reader.match(/<aside data-testid="knowing-god-sidebar"[\s\S]*?<\/aside>/)?.[0];
   assert.ok(sidebar);
@@ -20,11 +20,28 @@ test("Knowing God shows topic selection with counts, always-visible mobile searc
   assert.match(sidebar, /All topics <span[^>]*>— \{substantiveTotal/);
   assert.match(sidebar, /Devotional Topics <span[^>]*>— \{devotionalTotal/);
   assert.doesNotMatch(sidebar, /<Printer |Topics &amp; filters/);
-  assert.match(reader, /const mobileSearch = <div className="kg-no-print mt-3 md:hidden">[\s\S]*input-topic-search-mobile/);
-  assert.match(sidebar, /<\/button>; \}\)\}\{desktopSearchToggle\("h-8"\)\}<\/div>\s*\{mobileSearch\}/);
+  assert.match(reader, /const sidebarSearch = <div className="kg-no-print mt-3 w-full min-w-0">[\s\S]*input-topic-search-mobile/);
+  assert.match(sidebar, /<\/button>; \}\)\}<\/div>\s*\{sidebarSearch\}/);
+  const alphabeticalIndex = sidebar.match(/aria-label="Topical Bible topics A to Z"[\s\S]*?<\/nav>/)?.[0];
+  assert.doesNotMatch(alphabeticalIndex, /desktopSearchToggle/);
+  assert.match(reader, /wrap \? "whitespace-normal" : "whitespace-nowrap"/);
+  for (const mode of ["all", "devotional"]) {
+    const button = sidebar.match(new RegExp(`data-testid="button-mode-${mode}"[^]*?<\\/button>`))?.[0];
+    assert.ok(button);
+    assert.match(button, /min-w-0/);
+    assert.match(button, /pill\(mode === "[^"]+", true\)/);
+    assert.match(button, /inline-block whitespace-nowrap font-normal/);
+  }
   assert.match(reader, /data-testid="button-print-topic"/);
   assert.doesNotMatch(reader, /Browse the topics|A topical study|Scripture passages <span/);
-  assert.match(reader, /searchControl=\{<div[\s\S]*ref=\{searchInput\}[\s\S]*aria-label="Close search"/);
+  assert.doesNotMatch(reader, /searchControl=|ref=\{searchInput\}|desktopSearchToggle/);
+  assert.equal((reader.match(/type="search"/g) || []).length, 1);
+  assert.match(reader, /onClick=\{jumpToSearchResults\} data-testid="button-view-search-results"/);
+  const jump = reader.match(/const jumpToSearchResults = \(\) => \{[\s\S]*?\n  \};/)?.[0];
+  assert.ok(jump);
+  assert.match(jump, /focus\(\{ preventScroll: true \}\)/);
+  assert.match(jump, /window.scrollTo/);
+  assert.doesNotMatch(jump, /location|history|pushTopicHash/);
 });
 
 test("reader title search accepts devotional punctuation variants without loading content", () => {
