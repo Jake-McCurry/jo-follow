@@ -10,11 +10,30 @@ export const BIBLE_BOOKS = [
 
 const bookOrder = new Map(BIBLE_BOOKS.map((book, index) => [book.toLowerCase(), index]));
 
+/** Canonical identities only; callers retain the original printed citation. */
+export function normalizeBibleBookName(value: string): string {
+  const name = value.trim().replace(/\./g, "").replace(/\s+/g, " ")
+    .replace(/^III\s+/i, "3 ").replace(/^II\s+/i, "2 ").replace(/^I\s+/i, "1 ");
+  const aliases: Record<string, string> = {
+    psalm: "Psalms", ps: "Psalms", psa: "Psalms",
+    "song of songs": "Song of Solomon", canticles: "Song of Solomon",
+    revelations: "Revelation",
+    // The source import lost the leading 1 in two citations; this matches its
+    // existing, source-verified NET correction, not a new Scripture substitution.
+    kings: "1 Kings",
+  };
+  return aliases[name.toLowerCase()] ?? BIBLE_BOOKS[bookOrder.get(name.toLowerCase()) ?? -1] ?? name;
+}
+
+export function normalizeBibleReference(reference: string): string {
+  return reference.trim().replace(/^(.+?)(\s+\d)/, (_, name: string, rest: string) => `${normalizeBibleBookName(name)}${rest}`)
+    .replace(/\s*:\s*/g, ":").replace(/[–—]/g, "-").replace(/\s+/g, " ");
+}
+
 function referencePosition(reference: string): number[] {
-  const match = reference.trim().match(/^(.+?)\s+(\d+)(?::(\d+))?/);
+  const match = normalizeBibleReference(reference).match(/^(.+?)\s+(\d+)(?::(\d+))?/);
   if (!match) return [BIBLE_BOOKS.length, 0, 0];
-  const book = match[1].replace(/^III\s+/i, "3 ").replace(/^II\s+/i, "2 ").replace(/^I\s+/i, "1 ")
-    .replace(/^Psalm$/i, "Psalms").toLowerCase();
+  const book = match[1].toLowerCase();
   const singleChapter = ["obadiah", "philemon", "2 john", "3 john", "jude"].includes(book);
   return [
     bookOrder.get(book) ?? BIBLE_BOOKS.length,

@@ -5,10 +5,9 @@ import { AlertCircle, Bookmark, BookmarkCheck, Check, ChevronDown, ChevronRight,
 import { fetchNetPassages, netCache, netNotes } from "./bible-api";
 import { formatSourcePassage } from "./passage-format";
 import { topicTitleSearchRank } from "./topic-search";
-import { knowingGodScriptureHref } from "./scripture-link";
 import { matchesBiblePassageFilters } from "../../lib/bible-order";
 import { pushTopicHash, subscribeToTopicHistory, topicIdFromHash } from "./topic-history.mjs";
-import { buildDevotionalHierarchy, countSubstantive, isSubstantive, searchScripturePassages, uniqueDevotionalCount, uniqueSeeAlsoTargets } from "./knowing-god-ui";
+import { buildDevotionalHierarchy, countSubstantive, isSubstantive, scopeKnowingGodTopics, scriptureResultHref, searchScripturePassages, uniqueDevotionalCount, uniqueSeeAlsoTargets } from "./knowing-god-ui";
 
 type Passage = { reference: string; text: string };
 
@@ -26,7 +25,6 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 
 /** Publisher attribution required by the source; product navigation stays local. */
 const publisherStoryUrl = "https://www.zmission.org/our-story.html";
-const scriptureHref = (reference: string) => knowingGodScriptureHref(reference, import.meta.env.BASE_URL);
 export function ConcordancePrototype() {
   const [index, setIndex] = useState<Index | null>(null);
   const [indexError, setIndexError] = useState("");
@@ -38,42 +36,34 @@ export function ConcordancePrototype() {
   const [mode, setMode] = useState<"all" | "devotional">("all");
   const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
   const [query, setQuery] = useState(""); const [testament, setTestament] = useState("All Testaments"); const [book, setBook] = useState("All books");
-  const [searchOpen, setSearchOpen] = useState(false);
-  const searchInput = useRef<HTMLInputElement>(null);
   const mobileSearchInput = useRef<HTMLInputElement>(null);
-  const searchToggle = useRef<HTMLButtonElement>(null);
   const studyHeading = useRef<HTMLHeadingElement>(null);
   const isFiltering = Boolean(query.trim());
   const [searchRetry, setSearchRetry] = useState(0);
   const [filterOpen, setFilterOpen] = useState(false);
   const [savedNotice, setSavedNotice] = useState(false);
   const closeSearch = () => {
-    setSearchOpen(false);
     setQuery("");
-    requestAnimationFrame(() => (isMobile() ? mobileSearchInput.current : searchToggle.current ?? mobileSearchInput.current)?.focus({ preventScroll: true }));
+    requestAnimationFrame(() => mobileSearchInput.current?.focus({ preventScroll: true }));
   };
-  useEffect(() => {
-    if (!searchOpen || isMobile()) return;
-    searchInput.current?.focus({ preventScroll: true });
-  }, [searchOpen]);
   const readerShell = useRef<HTMLDivElement>(null);
   const [study, setStudy] = useState<string[]>([]); const [studyLoaded, setStudyLoaded] = useState(false); const [copied, setCopied] = useState(""); const [copyError, setCopyError] = useState("");
   const [translation, setTranslation] = useState<"NET" | "KJV">("NET"); const [translationLoaded, setTranslationLoaded] = useState(false);
+  const scriptureHref = (reference: string) => scriptureResultHref(reference, translation, import.meta.env.BASE_URL);
   const [netLoading, setNetLoading] = useState(false); const [netError, setNetError] = useState(false); const [netTick, setNetTick] = useState(0);
   const [netSearchError, setNetSearchError] = useState(false);
   const [netRetry, setNetRetry] = useState(0);
   const [expandedLetter, setExpandedLetter] = useState("A");
   const browseLetter = (letter: string) => {
-    setSearchOpen(false);
     setQuery("");
     if (!query.trim() && expandedLetter === letter) { setExpandedLetter(""); return; }
     setExpandedLetter(letter);
     loadLetter(letter).catch(() => undefined);
   };
   useEffect(() => {
-    document.documentElement.dataset.knowingGodView = isFiltering || searchOpen ? "search" : view;
+    document.documentElement.dataset.knowingGodView = isFiltering ? "search" : view;
     return () => { delete document.documentElement.dataset.knowingGodView; };
-  }, [view, isFiltering, searchOpen]);
+  }, [view, isFiltering]);
 
   const loadLetter = (letter: string) => {
     if (payloads[letter]) return Promise.resolve(payloads[letter]);
@@ -90,20 +80,17 @@ export function ConcordancePrototype() {
     loading.current.set(letter, request); return request;
   };
   const applyTopic = (item: TopicIndex) => {
-    setSearchOpen(false);
     setQuery("");
     setSelectedId(item.id); setExpandedLetter(item.letter); setView("topic");
     loadLetter(item.letter).catch(() => undefined);
   };
   const openTopic = (item: TopicIndex) => {
-    setSearchOpen(false);
     setQuery("");
     if (selectedId === item.id && view === "topic") return;
     applyTopic(item);
     pushTopicHash(window, item.id);
   };
   const openStart = () => {
-    setSearchOpen(false);
     setQuery("");
     setView("start");
     if (window.location.hash) {
@@ -151,10 +138,12 @@ export function ConcordancePrototype() {
 
   const selectedIndex = index?.topics.find(topic => topic.id === selectedId);
   const selected = selectedIndex ? payloads[selectedIndex.letter]?.find(topic => topic.id === selectedId) : undefined;
-  const scopedTopics = useMemo(() => index?.topics || [], [index]);
-  const substantiveTotal = useMemo(() => countSubstantive(scopedTopics), [scopedTopics]);
-  const devotionalGroups = useMemo(() => buildDevotionalHierarchy(scopedTopics), [scopedTopics]);
+  const allTopics = useMemo(() => index?.topics || [], [index]);
+  const substantiveTotal = useMemo(() => countSubstantive(allTopics), [allTopics]);
+  const devotionalGroups = useMemo(() => buildDevotionalHierarchy(allTopics), [allTopics]);
   const devotionalTotal = useMemo(() => uniqueDevotionalCount(devotionalGroups), [devotionalGroups]);
+  const scopedTopics = useMemo(() => scopeKnowingGodTopics(allTopics, mode, devotionalGroups), [allTopics, mode, devotionalGroups]);
+  const scopedTopicIds = useMemo(() => new Set(scopedTopics.map(topic => topic.id)), [scopedTopics]);
   const searchLetters = useMemo(() => [...new Set(scopedTopics.map(item => item.letter))], [scopedTopics]);
   useEffect(() => {
     if (!isFiltering) return;
@@ -170,7 +159,8 @@ export function ConcordancePrototype() {
     void Promise.all(Array.from({ length: 3 }, worker));
     return () => { active = false; };
   }, [searchLetters, isFiltering, searchRetry]);
-  const loadedSearchTopics = useMemo(() => alphabet.flatMap(letter => payloads[letter] || []), [payloads]);
+  const loadedSearchTopics = useMemo(() => alphabet.flatMap(letter => payloads[letter] || [])
+    .filter(topic => scopedTopicIds.has(topic.id)), [payloads, scopedTopicIds]);
   useEffect(() => {
     setNetSearchError(false);
     if (!isFiltering || translation !== "NET" || !loadedSearchTopics.length) return;
@@ -209,14 +199,14 @@ export function ConcordancePrototype() {
   }, [scopedTopics, query]);
   const scriptureMatches = useMemo(() => {
     if (!query.trim()) return [];
-    return searchScripturePassages(loadedSearchTopics, query, translation, netCache)
+    return searchScripturePassages(loadedSearchTopics, query, translation, netCache, netNotes)
       .filter(result => matchesBiblePassageFilters(result.reference, testament, book));
   }, [loadedSearchTopics, query, translation, netTick, testament, book]);
   const letterTopics = scopedTopics.filter(item => item.letter === expandedLetter);
   const shownCount = isFiltering ? countSubstantive(topicMatches) : countSubstantive(letterTopics);
   const visiblePassages = selected?.passages.filter(p => matchesBiblePassageFilters(p.reference, testament, book)) || [];
   useEffect(() => {
-    if (searchOpen || isFiltering || view !== "topic" || !selected) return;
+    if (isFiltering || view !== "topic" || !selected) return;
     const reading = readerShell.current?.querySelector<HTMLElement>(".kg-reading");
     if (!reading || !isMobile()) return;
     reading.tabIndex = -1;
@@ -224,7 +214,7 @@ export function ConcordancePrototype() {
     reading.focus({ preventScroll: true });
     const headerHeight = document.querySelector("[data-site-header]")?.getBoundingClientRect().height ?? 0;
     window.scrollTo({ top: Math.max(0, window.scrollY + reading.getBoundingClientRect().top - headerHeight - 8), behavior: "instant" });
-  }, [view, selectedId, selected, isFiltering, searchOpen]);
+  }, [view, selectedId, selected, isFiltering]);
   useEffect(() => {
     if (isFiltering || view !== "topic" || !translationLoaded || translation !== "NET" || !selected) return;
     const controller = new AbortController();
@@ -283,24 +273,30 @@ export function ConcordancePrototype() {
   const pill = (active: boolean, wrap = false) => `kg-focus kg-sans ${wrap ? "whitespace-normal" : "whitespace-nowrap"} rounded font-bold ${active ? "bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)] shadow-[inset_0_0_0_1px_var(--color-action-warm,#C45100)]" : "text-[var(--color-text-muted,#2E5A7A)] hover:bg-[var(--color-surface-soft,#E6F5FF)]"}`;
   const topicButton = (active: boolean) => `kg-focus flex min-h-11 w-full items-center justify-between gap-3 border-l-4 px-3 py-2 text-left text-base ${active ? "border-[var(--color-action-warm,#C45100)] bg-[var(--color-selected-warm,#FFEADB)] text-[var(--color-text,#003A66)]" : "border-transparent text-[var(--color-text,#003A66)] hover:bg-[var(--color-surface,#FFFDFB)]"}`;
   const toolbarButton = "kg-focus kg-sans inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded px-1 text-xs font-bold text-[var(--color-text,#003A66)] hover:bg-[var(--color-surface-soft,#E6F5FF)] sm:px-2 sm:text-sm";
-  const showMobileSidebar = view === "start" || isFiltering || searchOpen;
-  const searching = searchOpen || isFiltering;
+  const showMobileSidebar = view === "start" || isFiltering;
+  const searching = isFiltering;
   const isSaved = selected ? study.includes(selected.id) : false;
 
+  const jumpToSearchResults = () => {
+    const results = readerShell.current?.querySelector<HTMLElement>("#topic-search-results");
+    if (!results) return;
+    results.tabIndex = -1;
+    results.focus({ preventScroll: true });
+    const headerBottom = document.querySelector("[data-site-header]")?.getBoundingClientRect().bottom ?? 0;
+    window.scrollTo({ top: Math.max(0, window.scrollY + results.getBoundingClientRect().top - headerBottom - 8), behavior: "instant" });
+  };
   const sidebarSearch = <div className="kg-no-print mt-3 w-full min-w-0">
     <label htmlFor="topic-search-mobile" className="sr-only">Search Knowing God topics and {translation} Scripture</label>
     <div className="relative">
       <Search className={`absolute left-3 top-1/2 -translate-y-1/2 ${muted}`} size={16} aria-hidden="true" />
-      <input ref={mobileSearchInput} id="topic-search-mobile" data-testid="input-topic-search-mobile" type="search" value={query} onChange={e => setQuery(e.target.value)}
+      <input ref={mobileSearchInput} id="topic-search-mobile" data-testid="input-topic-search-mobile" type="search" aria-controls="topic-search-results" value={query} onChange={e => setQuery(e.target.value)}
         onKeyDown={e => { if (e.key === "Escape") { e.preventDefault(); closeSearch(); } }} placeholder="Search topics and Scripture"
         className="kg-focus h-11 w-full rounded border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] pl-9 pr-11 text-base text-[var(--color-text,#003A66)]" />
       {query && <button type="button" onClick={closeSearch} aria-label="Clear search" data-testid="button-clear-topic-search-mobile"
         className="kg-focus absolute right-0 top-0 flex h-11 w-11 items-center justify-center"><X size={18} aria-hidden="true" /></button>}
     </div>
+    {isFiltering && <button type="button" onClick={jumpToSearchResults} data-testid="button-view-search-results" className="kg-focus mt-2 min-h-11 w-full rounded border border-[var(--color-border-control,#5B9BC4)] px-3 text-sm font-bold md:hidden">View search results</button>}
   </div>;
-  const desktopSearchToggle = (className: string) => <button ref={searchToggle} type="button" onClick={() => setSearchOpen(true)} aria-label="Search Knowing God" title="Search"
-    aria-expanded={searching} aria-controls="topic-search-results" data-testid="button-open-topic-search"
-    className={`kg-focus hidden items-center justify-center rounded border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] md:flex ${className}`}><Search size={14} aria-hidden="true" /></button>;
 
   return <div className="flex flex-col min-h-[100dvh] text-[var(--color-text,#003A66)]" style={{ background: "var(--color-surface, #FFFDFB)", fontFamily: "var(--font-sans, 'Source Sans 3', system-ui, sans-serif)" }}>
     <style>{`.kg-sans{font-family:var(--font-sans, 'Source Sans 3', system-ui, sans-serif)}.kg-focus:focus-visible{outline:3px solid var(--color-focus,#0095FF);outline-offset:2px}.kg-scroll::-webkit-scrollbar{width:6px}.kg-scroll::-webkit-scrollbar-thumb{background:var(--color-border-control,#5B9BC4);border-radius:8px}@media print{.kg-no-print,[data-site-header],header,nav,footer{display:none!important}.kg-reading{max-width:none!important;padding:0!important}.kg-shell{display:block!important}}@media (prefers-reduced-motion: reduce){.kg-toast{transition:none!important}}`}</style>
@@ -336,7 +332,7 @@ export function ConcordancePrototype() {
           </div>
         </nav>}
         {index && mode === "devotional" && <nav aria-label="Devotional topics">
-          <div className="mb-2 flex items-center justify-between gap-2"><h2 className="kg-sans text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">Devotional Guide</h2>{desktopSearchToggle("h-9 w-9")}</div>
+          <div className="mb-2 flex items-center justify-between gap-2"><h2 className="kg-sans text-xs font-bold uppercase tracking-[.2em] text-[var(--color-action-warm,#C45100)]">Devotional Guide</h2></div>
           {sidebarSearch}
           {!isFiltering && <ul className="mt-3">{devotionalGroups.map(group => { const open = openGroups.has(group.key); return <li key={group.key}>
             <button type="button" onClick={() => toggleGroup(group.key)} aria-expanded={open} aria-controls={`devotional-${group.key}`} data-testid={`button-devotional-group-${group.key}`} className="kg-focus kg-sans flex min-h-11 w-full items-center gap-2 border-b border-[var(--color-border-soft,#CCEBFF)] text-left text-sm font-bold uppercase tracking-wide text-[var(--color-hero,#006BB3)]">
@@ -348,14 +344,7 @@ export function ConcordancePrototype() {
           </li>; })}</ul>}
         </nav>}
       </div></aside>
-      {searching ? <TopicSearchResults query={query} translation={translation} testament={testament} book={book} onClearPassageFilters={() => { setTestament("All Testaments"); setBook("All books"); }} topics={topicMatches} scripture={scriptureMatches} topicTitle={id => topicById(id)?.title} loading={!index && !indexError} error={indexError} searchingContent={searchingContent} contentError={searchContentError} onRetry={retrySearch} onClear={() => { setQuery(""); searchInput.current?.focus(); }} onSelect={id => { const target = topicById(id); if (target) openTopic(target); }}
-        searchControl={<div className="kg-no-print mb-5 hidden md:block">
-          <label className="kg-sans mb-2 block text-sm font-bold" htmlFor="topic-search">Search topic titles and {translation} Scripture text</label>
-          <div className="flex items-center gap-2">
-            <div className="relative min-w-0 flex-1"><Search className={`absolute left-3 top-3 ${muted}`} size={16} aria-hidden="true" /><input ref={searchInput} id="topic-search" data-testid="input-topic-search" type="search" aria-controls="topic-search-results" value={query} onChange={e => setQuery(e.target.value)} onKeyDown={e => { if (e.key === "Escape") { e.preventDefault(); closeSearch(); } }} placeholder="Search topics and Scripture" className="kg-focus w-full border border-[var(--color-border-control,#5B9BC4)] bg-[var(--color-surface,#FFFDFB)] py-2.5 pl-9 pr-3 text-base text-[var(--color-text,#003A66)]" /></div>
-            <button type="button" onClick={closeSearch} aria-label="Close search" title="Close search" data-testid="button-close-topic-search" className="kg-focus flex h-11 w-11 shrink-0 items-center justify-center rounded hover:bg-[var(--color-surface-soft,#E6F5FF)]"><X size={18} aria-hidden="true" /></button>
-          </div>
-        </div>} /> : view === "start" ? <section className="kg-reading kg-book-intro order-1 min-w-0 max-w-[920px] px-4 pb-4 pt-5 md:order-none md:px-10 md:py-10 lg:px-14">
+      {searching ? <TopicSearchResults query={query} translation={translation} scope={mode} testament={testament} book={book} onClearPassageFilters={() => { setTestament("All Testaments"); setBook("All books"); }} topics={topicMatches} scripture={scriptureMatches} topicTitle={id => topicById(id)?.title} loading={!index && !indexError} error={indexError} searchingContent={searchingContent} contentError={searchContentError} onRetry={retrySearch} onClear={closeSearch} onSelect={id => { const target = topicById(id); if (target) openTopic(target); }} /> : view === "start" ? <section className="kg-reading kg-book-intro order-1 min-w-0 max-w-[920px] px-4 pb-4 pt-5 md:order-none md:px-10 md:py-10 lg:px-14">
         <h1 data-testid="heading-knowing-god" className="whitespace-nowrap text-[clamp(1.3rem,6.6vw,3rem)] font-bold leading-tight text-[var(--color-hero,#006BB3)]" style={{ fontFamily: "var(--font-display, 'Playfair Display', serif)" }}>Knowing God Topical Bible</h1>
         <p className="mt-2 text-base leading-relaxed text-[var(--color-text,#003A66)] md:text-lg" data-testid="text-knowing-god-summary">{substantiveTotal || 649} topics and {(index?.counts.passageCount ?? 13535).toLocaleString()} curated passages on the Nature and Character of the Almighty.</p>
         <div className="kg-sans mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">

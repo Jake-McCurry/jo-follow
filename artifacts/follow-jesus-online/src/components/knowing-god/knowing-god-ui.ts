@@ -1,7 +1,7 @@
 import { devotionalGuideCategories } from "../../data/knowing-god/introduction/devotional-guide.ts";
 import { devotionalTopicKey } from "./devotional-topics.ts";
 import { knowingGodScriptureHref } from "./scripture-link.ts";
-import { compareBibleReferences } from "../../lib/bible-order.ts";
+import { compareBibleReferences, normalizeBibleReference } from "../../lib/bible-order.ts";
 
 type IndexTopic = { id: string; title: string; recordType: string };
 
@@ -36,6 +36,12 @@ export function buildDevotionalHierarchy(topics: IndexTopic[]): DevotionalGroup[
 export const uniqueDevotionalCount = (groups: DevotionalGroup[]) =>
   new Set(groups.flatMap(group => group.children.map(child => child.topicId).filter(Boolean))).size;
 
+export function scopeKnowingGodTopics<T extends IndexTopic>(topics: T[], mode: "all" | "devotional", groups: DevotionalGroup[]): T[] {
+  if (mode === "all") return topics;
+  const ids = new Set(groups.flatMap(group => group.children.flatMap(child => child.topicId ? [child.topicId] : [])));
+  return topics.filter(topic => ids.has(topic.id));
+}
+
 const fold = (value: string) => value.normalize("NFKC").replace(/[‘’]/g, "'").replace(/[–—]/g, "-").toLocaleLowerCase();
 
 /** A short excerpt around the first match, with ellipses where trimmed. */
@@ -48,7 +54,7 @@ export function scriptureExcerpt(text: string, query: string, radius = 70): stri
   return `${start > 0 ? "…" : ""}${clean.slice(start, end).trim()}${end < clean.length ? "…" : ""}`;
 }
 
-export type ScriptureResult = { reference: string; text: string; excerpt: string; topicIds: string[] };
+export type ScriptureResult = { reference: string; text: string; excerpt: string; topicIds: string[]; note?: string };
 
 /** Search only the selected text; missing NET passages never fall back to KJV. */
 export function searchScripturePassages(
@@ -56,6 +62,7 @@ export function searchScripturePassages(
   query: string,
   translation: "NET" | "KJV" = "KJV",
   netText: ReadonlyMap<string, string> = new Map(),
+  netNotes: ReadonlyMap<string, string> = new Map(),
 ): ScriptureResult[] {
   const q = fold(query.trim());
   if (!q) return [];
@@ -64,10 +71,12 @@ export function searchScripturePassages(
     for (const passage of topic.passages) {
       const text = translation === "NET" ? netText.get(passage.reference) : passage.text;
       if (!text || !fold(text).includes(q)) continue;
-      const key = `${passage.reference.trim()}\u0000${text.replace(/\s+/g, " ").trim()}`;
+      const key = `${normalizeBibleReference(passage.reference)}\u0000${text.replace(/\s+/g, " ").trim()}`;
       const found = merged.get(key);
       if (found) { if (!found.topicIds.includes(topic.id)) found.topicIds.push(topic.id); continue; }
-      merged.set(key, { reference: passage.reference, text, excerpt: scriptureExcerpt(text, query), topicIds: [topic.id] });
+      merged.set(key, { reference: passage.reference, text, excerpt: scriptureExcerpt(text, query), topicIds: [topic.id],
+        ...(translation === "NET" && netNotes.has(passage.reference) ? { note: netNotes.get(passage.reference) } : {}),
+      });
     }
   }
   return [...merged.values()].sort((a, b) => compareBibleReferences(a.reference, b.reference));

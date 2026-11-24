@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { normalizeBibleSearch, type BibleSearchResponse, type BibleTranslation } from "../lib/full-bible-search";
 
-export function useFullBibleSearch(query: string, version: BibleTranslation, testament: string, book: string) {
+export function useFullBibleSearch(query: string, version: BibleTranslation, testament: string, book: string, topicScope = "all") {
   const worker = useRef<Worker | null>(null);
   const sequence = useRef(0);
-  const scope = JSON.stringify([query, version, testament, book]);
+  const scope = JSON.stringify([query, version, testament, book, topicScope]);
   const [paging, setPaging] = useState({ scope, page: 1 });
   const page = paging.scope === scope ? paging.page : 1;
   const [retry, setRetry] = useState(0);

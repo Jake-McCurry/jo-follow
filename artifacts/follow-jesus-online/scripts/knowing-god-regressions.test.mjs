@@ -34,7 +34,14 @@ test("Knowing God shows full-width search below A–Z on mobile and desktop, cou
   }
   assert.match(reader, /data-testid="button-print-topic"/);
   assert.doesNotMatch(reader, /Browse the topics|A topical study|Scripture passages <span/);
-  assert.match(reader, /searchControl=\{<div[\s\S]*ref=\{searchInput\}[\s\S]*aria-label="Close search"/);
+  assert.doesNotMatch(reader, /searchControl=|ref=\{searchInput\}|desktopSearchToggle/);
+  assert.equal((reader.match(/type="search"/g) || []).length, 1);
+  assert.match(reader, /onClick=\{jumpToSearchResults\} data-testid="button-view-search-results"/);
+  const jump = reader.match(/const jumpToSearchResults = \(\) => \{[\s\S]*?\n  \};/)?.[0];
+  assert.ok(jump);
+  assert.match(jump, /focus\(\{ preventScroll: true \}\)/);
+  assert.match(jump, /window.scrollTo/);
+  assert.doesNotMatch(jump, /location|history|pushTopicHash/);
 });
 
 test("reader title search accepts devotional punctuation variants without loading content", () => {

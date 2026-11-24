@@ -4,10 +4,10 @@ import { normalizeBibleSearch, BIBLE_SEARCH_PAGE_SIZE, type BibleTranslation } f
 import { scriptureResultHref } from "./knowing-god-ui";
 import { ChevronLabel } from "../navigation-chevrons";
 
-export function FullBibleSearchResults({ query, translation, testament, book }: {
-  query: string; translation: BibleTranslation; testament: string; book: string;
+export function FullBibleSearchResults({ query, translation, testament, book, scope }: {
+  query: string; translation: BibleTranslation; testament: string; book: string; scope: "all" | "devotional";
 }) {
-  const { response, setPage, retry } = useFullBibleSearch(query, translation, testament, book);
+  const { response, setPage, retry } = useFullBibleSearch(query, translation, testament, book, scope);
   const heading = useRef<HTMLHeadingElement>(null);
   const pending = !response || response.status === "loading";
   const button = "kg-focus inline-flex min-h-11 items-center rounded border border-[var(--color-border-control,#5B9BC4)] px-3 py-2 text-sm font-bold disabled:opacity-40";

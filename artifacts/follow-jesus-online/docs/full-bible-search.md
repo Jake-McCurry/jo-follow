@@ -4,7 +4,10 @@ The existing NET/KJV toggle selects one search corpus at a time. Results retain
 three sections: Knowing God topic titles, curated Knowing God passages, and
 complete-Bible verse results. Testament/book filters constrain both Scripture
 sections, not topic-title matches. Full-Bible results use 20-item Previous/Next
-pages; the curated section retains its existing Show more behavior.
+pages; the curated section uses Show more in batches of 25. All Topics versus
+Devotional Topics scopes constrain title and curated-passage matches, not the
+separate full-Bible corpus. Changing scope resets both result paginations while
+retaining loaded Bible data.
 
 ## Provenance and rights
 
