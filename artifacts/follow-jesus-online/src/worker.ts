@@ -22,12 +22,11 @@ const API_HEADERS = {
 } as const;
 
 function json(data: unknown, status = 200, extraHeaders?: HeadersInit): Response {
+  const headers = new Headers(API_HEADERS);
+  new Headers(extraHeaders).forEach((value, key) => headers.set(key, value));
   return Response.json(data, {
     status,
-    headers: {
-      ...API_HEADERS,
-      ...Object.fromEntries(new Headers(extraHeaders)),
-    },
+    headers,
   });
 }
 
@@ -45,7 +44,7 @@ async function handleBibleApi(request: Request, url: URL): Promise<Response> {
   }
 
   if (url.pathname === "/api/bible/books") {
-    return json(BIBLE_BOOKS);
+    return json(BIBLE_BOOKS, 200, { "Cache-Control": "public, max-age=86400" });
   }
 
   if (url.pathname === "/api/bible/passage") {
@@ -62,7 +61,11 @@ async function handleBibleApi(request: Request, url: URL): Promise<Response> {
     }
 
     try {
-      return json(await getBiblePassage(reference, version));
+      // Scripture responses are public and keyed by reference AND translation.
+      // Failures below remain no-store, so a temporary outage is never cached.
+      return json(await getBiblePassage(reference, version), 200, {
+        "Cache-Control": "public, max-age=300, s-maxage=3600",
+      });
     } catch (error) {
       if (error instanceof BibleServiceError) {
         console.warn("Bible passage request could not be completed", {

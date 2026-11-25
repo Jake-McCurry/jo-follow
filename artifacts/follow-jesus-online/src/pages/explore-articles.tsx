@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
-import { getArticlesInGroup } from "@/data/article-library";
+import { getArticlesInGroup } from "@/data/article-catalog";
 
 const ARTICLES = [
   {

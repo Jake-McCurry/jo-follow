@@ -210,3 +210,17 @@ mtime_ms = 1793736330554
 storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/0332e271-e01e-4f9c-8e25-da84930bd574/5c93db57-fb5c-443f-aa62-1b63b6aa7287"
 storage_version_token = "1793736337723416"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "qCc7Wo9oOwcfpEQkBdIyR"
+uri = "file://artifacts/follow-jesus-online/docs/performance.md"
+type = "text"
+title = "Updated website speed report"
+description = "Measured live baseline, controlled before-and-after results, preserved features, verification and remaining limitations."
+logical_id = "f580ad8e-bf55-48a6-b832-f009e015484a"
+content_hash = "sha256:c65a74629f1139a09859bc13a57e8ae6786f43667ab0e6970dc6bb1c861019a4"
+size = 11652
+mtime_ms = 1795564543615
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:6fa902a4-8cfa-49d9-8b44-37f6391f931d/f580ad8e-bf55-48a6-b832-f009e015484a/f96ee961-eb68-4ed5-820a-349a14c4a761"
+storage_version_token = "1795564574994206"
+content_type = "text/markdown"

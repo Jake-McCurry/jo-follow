@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Layout } from "@/components/layout";
 import { ChevronLabel } from "@/components/navigation-chevrons";
-import { getArticlePath, getArticlesInGroup } from "@/data/article-library";
+import { getArticlePath, getArticlesInGroup } from "@/data/article-catalog";
 
 const chapters = getArticlesInGroup("adventure");
 const pdfHref = `${import.meta.env.BASE_URL}adventure-guide.pdf`;

@@ -10,7 +10,7 @@ import {
   getGetReactionAdminSessionQueryKey,
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { getArticleBySlug, getArticlePath } from "@/data/article-library";
+import { getArticleBySlug, getArticlePath } from "@/data/article-catalog";
 import { Link } from "wouter";
 
 function errorStatus(error: unknown) {

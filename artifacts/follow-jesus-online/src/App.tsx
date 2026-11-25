@@ -1,4 +1,5 @@
-import { type ReactNode, useEffect, useLayoutEffect } from 'react';
+import { type ReactNode, Suspense, useEffect, useLayoutEffect, useState } from 'react';
+import { lazyPage as lazy } from '@/lib/lazy-page';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
@@ -12,32 +13,92 @@ import {
   Router as WouterRouter,
 } from 'wouter';
 import { Home } from '@/pages/home';
-import { ConnectWithGodPage } from '@/pages/connect-with-god';
-import { BibleLandingPage } from '@/pages/bible-landing';
-import { BibleReaderPage } from '@/pages/bible-reader';
-import { BibleSavedPage } from '@/pages/bible-saved';
-import { BibleResourcesMenuPage, BibleResourcesSurveyPage, BibleResourcesGospelsPage, BibleResourcesPathPage } from '@/pages/bible-resources';
-import { XPChooserPage } from '@/pages/xp-chooser';
-import { XPPage } from '@/pages/xp-page';
-import { XPIntroductionPage, KnowJesusPage } from '@/pages/xp-next-steps';
 import { getXPIntroduction, KNOW_JESUS } from '@/data/xp-next-steps';
-import { ExploreArticlesPage } from '@/pages/explore-articles';
-import { GoFurtherPage } from '@/pages/gf/index';
-import { GFBookPage } from '@/pages/gf/book';
-import { GFReadingPage } from '@/pages/gf/reading';
-import { HeartAfterGodIntroPage } from '@/pages/gf/heart-after-god-intro';
-import { KnowingGodPage } from '@/pages/knowing-god/index';
-import { PromisesPage } from '@/pages/promises/index';
-import { KnowingGodIntroductionIndexPage, KnowingGodIntroductionPage } from '@/pages/knowing-god/introduction';
 import { knowingGodIntroductions } from '@/data/knowingGodIntroductions';
-import { RewatchPage } from '@/pages/rewatch';
-import { MessagePage } from '@/pages/message';
-import { TranslatePage } from '@/pages/translate';
-import { ArticlePlaceholder } from '@/pages/article-placeholder';
-import { AdventureIndexPage } from '@/pages/adv-index';
-import { AdminReactionsPage } from '@/pages/admin/reactions';
-import { getArticleBySlug, getArticlePath, getArticleSlugFromPath } from '@/data/article-library';
+import { getArticlePath, getArticleSlugFromPath } from '@/data/article-routing';
 import { getGFBook } from '@/data/go-further-library';
+import { Layout } from '@/components/layout';
+
+// Keep the homepage immediate; load all other reading surfaces on demand.
+const ConnectWithGodPage = lazy(() => import('@/pages/connect-with-god').then(m => ({ default: m.ConnectWithGodPage })));
+const BibleLandingPage = lazy(() => import('@/pages/bible-landing').then(m => ({ default: m.BibleLandingPage })));
+const BibleReaderPage = lazy(() => import('@/pages/bible-reader').then(m => ({ default: m.BibleReaderPage })));
+const BibleSavedPage = lazy(() => import('@/pages/bible-saved').then(m => ({ default: m.BibleSavedPage })));
+const BibleResourcesMenuPage = lazy(() => import('@/pages/bible-resources').then(m => ({ default: m.BibleResourcesMenuPage })));
+const BibleResourcesSurveyPage = lazy(() => import('@/pages/bible-resources').then(m => ({ default: m.BibleResourcesSurveyPage })));
+const BibleResourcesGospelsPage = lazy(() => import('@/pages/bible-resources').then(m => ({ default: m.BibleResourcesGospelsPage })));
+const BibleResourcesPathPage = lazy(() => import('@/pages/bible-resources').then(m => ({ default: m.BibleResourcesPathPage })));
+const XPChooserPage = lazy(() => import('@/pages/xp-chooser').then(m => ({ default: m.XPChooserPage })));
+const XPPage = lazy(() => import('@/pages/xp-page').then(m => ({ default: m.XPPage })));
+const XPIntroductionPage = lazy(() => import('@/pages/xp-next-steps').then(m => ({ default: m.XPIntroductionPage })));
+const KnowJesusPage = lazy(() => import('@/pages/xp-next-steps').then(m => ({ default: m.KnowJesusPage })));
+const ExploreArticlesPage = lazy(() => import('@/pages/explore-articles').then(m => ({ default: m.ExploreArticlesPage })));
+const GoFurtherPage = lazy(() => import('@/pages/gf/index').then(m => ({ default: m.GoFurtherPage })));
+const GFBookPage = lazy(() => import('@/pages/gf/book').then(m => ({ default: m.GFBookPage })));
+const GFReadingPage = lazy(() => import('@/pages/gf/reading').then(m => ({ default: m.GFReadingPage })));
+const HeartAfterGodIntroPage = lazy(() => import('@/pages/gf/heart-after-god-intro').then(m => ({ default: m.HeartAfterGodIntroPage })));
+const KnowingGodPage = lazy(() => import('@/pages/knowing-god/index').then(m => ({ default: m.KnowingGodPage })));
+const PromisesPage = lazy(() => import('@/pages/promises/index').then(m => ({ default: m.PromisesPage })));
+const KnowingGodIntroductionIndexPage = lazy(() => import('@/pages/knowing-god/introduction').then(m => ({ default: m.KnowingGodIntroductionIndexPage })));
+const KnowingGodIntroductionPage = lazy(() => import('@/pages/knowing-god/introduction').then(m => ({ default: m.KnowingGodIntroductionPage })));
+const RewatchPage = lazy(() => import('@/pages/rewatch').then(m => ({ default: m.RewatchPage })));
+const MessagePage = lazy(() => import('@/pages/message').then(m => ({ default: m.MessagePage })));
+const TranslatePage = lazy(() => import('@/pages/translate').then(m => ({ default: m.TranslatePage })));
+const ArticlePlaceholder = lazy(() => import('@/pages/article-placeholder').then(m => ({ default: m.ArticlePlaceholder })));
+const AdventureIndexPage = lazy(() => import('@/pages/adv-index').then(m => ({ default: m.AdventureIndexPage })));
+const AdminReactionsPage = lazy(() => import('@/pages/admin/reactions').then(m => ({ default: m.AdminReactionsPage })));
+
+/** Avoid painting and replacing a temporary Layout on the first visit. */
+export async function preloadInitialPage(pathname: string) {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const path = base && pathname.startsWith(`${base}/`) ? pathname.slice(base.length) : pathname;
+  const pages: [RegExp, { preload: () => Promise<unknown> }][] = [
+    [/^\/xp-pages\/?$/, XPChooserPage],
+    [/^\/xp\/know-[Jj]esus\/?$/, KnowJesusPage],
+    [/^\/xp\/[^/]+\/top10\/?$/, XPIntroductionPage],
+    [/^\/xp\//, XPPage],
+    [/^\/knowing-god\/introduction\/[^/]+/, KnowingGodIntroductionPage],
+    [/^\/knowing-god\/introduction\/?$/, KnowingGodIntroductionIndexPage],
+    [/^\/knowing-god/, KnowingGodPage],
+    [/^\/promises/, PromisesPage],
+    [/^\/bible\/saved/, BibleSavedPage],
+    [/^\/bible\/resources\/survey\/?$/, BibleResourcesSurveyPage],
+    [/^\/bible\/resources\/gospels\/?$/, BibleResourcesGospelsPage],
+    [/^\/bible\/resources\/[^/]+/, BibleResourcesPathPage],
+    [/^\/bible\/resources\/?$/, BibleResourcesMenuPage],
+    [/^\/bible\/[^/]+\/[^/]+/, BibleReaderPage],
+    [/^\/bible\/?$/, BibleLandingPage],
+    [/^\/gf\/a-heart-after-god\/the-restless-heart/, HeartAfterGodIntroPage],
+    [/^\/gf\/[^/]+\/[^/]+/, GFReadingPage],
+    [/^\/gf\/[^/]+\/?$/, GFBookPage],
+    [/^\/gf\/?$/, GoFurtherPage],
+    [/^\/(?:videos|rewatch|rewatch-video)(?:\/|$)/, RewatchPage],
+    [/^\/connect-with-god\/?$/, ConnectWithGodPage],
+    [/^\/message\/?$/, MessagePage],
+    [/^\/translate\/?$/, TranslatePage],
+    [/^\/explore-articles\/?$/, ExploreArticlesPage],
+    [/^\/adv1\/?$/, AdventureIndexPage],
+    [/^\/admin\/reactions\/?$/, AdminReactionsPage],
+    [/^\/(?:prayer|lords-prayer|experiencing-god|because|adv|deeper)(?:\/|$)|^\/(?:more-|adv-|deeper-)/, ArticlePlaceholder],
+  ];
+  const page = pages.find(([pattern]) => pattern.test(path))?.[1];
+  if (page === ArticlePlaceholder) {
+    await Promise.all([
+      page.preload(),
+      import('@/data/article-catalog').then(async catalog => {
+        const slug = getArticleSlugFromPath(path) ?? '';
+        if (catalog.getArticleBySlug(slug)) await catalog.loadArticle(slug);
+      }),
+    ]);
+  } else if (page === BibleReaderPage) {
+    await Promise.all([
+      page.preload(),
+      import('@/pages/bible-reader').then(reader => reader.preloadBibleRoute(path, window.location.search, queryClient)),
+    ]);
+  } else {
+    await page?.preload();
+  }
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -53,6 +114,19 @@ const siteUrl = import.meta.env.VITE_PUBLIC_SITE_URL ?? 'https://follow.jesusonl
 function PageMetadata() {
   const [location] = useLocation();
   const pathname = location.split('?')[0];
+  const [articleMetadata, setArticleMetadata] = useState<{ path: string; title: string; excerpt: string } | null>(null);
+  const isArticlePath = /^\/(?:prayer|lords-prayer|experiencing-god|because|adv|deeper)(?:\/|$)|^\/(?:adv-|deeper-|more-)/.test(pathname);
+
+  useEffect(() => {
+    if (!isArticlePath) return;
+    let active = true;
+    // Metadata must not pull the complete article library into every visit.
+    import('@/data/article-catalog').then(({ getArticleBySlug }) => {
+      const article = getArticleBySlug(getArticleSlugFromPath(pathname) ?? '');
+      if (active && article) setArticleMetadata({ path: pathname, title: article.title, excerpt: article.excerpt });
+    }).catch(error => console.error('Article metadata could not be loaded', error));
+    return () => { active = false; };
+  }, [isArticlePath, pathname]);
   
   // Extract robust page titles for routing
   let title = 'Follow Jesus Online';
@@ -151,7 +225,7 @@ function PageMetadata() {
     pathname.startsWith('/deeper-') ||
     pathname.startsWith('/more-')
   ) {
-    const article = getArticleBySlug(getArticleSlugFromPath(pathname) ?? '');
+    const article = articleMetadata?.path === pathname ? articleMetadata : null;
     if (article) {
       title = `${article.title} | Follow Jesus Online`;
       description = article.excerpt;
@@ -193,11 +267,11 @@ function PageMetadata() {
       ? '/rewatch'
       : pathname === '/gf'
         ? '/gf/'
-        : articleSlug && getArticleBySlug(articleSlug)
+        : isArticlePath && articleSlug
           ? getArticlePath(articleSlug)
           : pathname;
     canonical?.setAttribute('href', `${siteUrl}${canonicalPath}`);
-  }, [description, pathname, title]);
+  }, [description, isArticlePath, pathname, title]);
 
   return null;
 }
@@ -229,6 +303,7 @@ function Router() {
     <RoutedErrorBoundary>
       <PageMetadata />
       <ScrollToTopOnNavigation />
+      <Suspense fallback={<Layout trackHistory={false}><div className="mx-auto max-w-4xl px-6 py-12" role="status">Loading page…</div></Layout>}>
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/xp-pages" component={XPChooserPage} />
@@ -278,6 +353,7 @@ function Router() {
         
         <Route component={NotFound} />
       </Switch>
+      </Suspense>
     </RoutedErrorBoundary>
   );
 }
